@@ -1,0 +1,26 @@
+name: feed-sync
+on:
+  schedule:
+    - cron: '*/15 * * * *'   # incrementale: PVP aggiorna → noi entro 15 minuti
+    - cron: '0 1 * * *'      # notturno: ricostruzione completa (scadute fuori)
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: sync (incrementale di default)
+        run: node scripts/sync-feed.js
+        env:
+          MODE: inc
+      - name: commit e push
+        run: |
+          git config user.name "Sam CARe"
+          git config user.email "sam@careauctions.co"
+          git add feed/
+          if git diff --cached --quiet; then echo "nessuna variazione"; else git commit -m "Feed sync automatico $(date -u +%FT%TZ)"; git push; fi

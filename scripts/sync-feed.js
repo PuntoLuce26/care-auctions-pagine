@@ -1,0 +1,127 @@
+// scripts/sync-feed.js — sincronizzazione automatica del feed (GitHub Actions, costo 0, niente Mac)
+// MODE=inc (ogni 15 min): raccoglie le prime 40 pagine PVP (le più recenti) e aggiunge i lotti nuovi al feed.
+// MODE=full (ogni notte 01:00 UTC): raccolta completa PVP e ricostruzione del feed (nuove dentro, scadute fuori).
+const fs = require('fs');
+const path = require('path');
+const https = require('https');
+
+const MODE = process.env.MODE || 'inc';
+const PAGINE = MODE === 'full' ? 99999 : 40;
+const SIZE = 100;
+
+const PROV = {
+  TORINO:'Piemonte',VERCELLI:'Piemonte',NOVARA:'Piemonte',CUNEO:'Piemonte',ASTI:'Piemonte',ALESSANDRIA:'Piemonte',BIELLA:'Piemonte','VERBANO-CUSIO-OSSOLA':'Piemonte',VERBANIA:'Piemonte',
+  AOSTA:'Valle d Aosta','VALLE D AOSTA':'Valle d Aosta',
+  MILANO:'Lombardia','MONZA E DELLA BRIANZA':'Lombardia','MONZA BRIANZA':'Lombardia',COMO:'Lombardia',VARESE:'Lombardia',LECCO:'Lombardia',SONDRIO:'Lombardia',BERGAMO:'Lombardia',BRESCIA:'Lombardia',PAVIA:'Lombardia',CREMONA:'Lombardia',MANTOVA:'Lombardia',LODI:'Lombardia',
+  TRENTO:'Trentino-Alto Adige',BOLZANO:'Trentino-Alto Adige',BOZEN:'Trentino-Alto Adige',
+  VENEZIA:'Veneto',VERONA:'Veneto',VICENZA:'Veneto',PADOVA:'Veneto',TREVISO:'Veneto',BELLUNO:'Veneto',ROVIGO:'Veneto',
+  UDINE:'Friuli-Venezia Giulia',TRIESTE:'Friuli-Venezia Giulia',GORIZIA:'Friuli-Venezia Giulia',PORDENONE:'Friuli-Venezia Giulia',
+  GENOVA:'Liguria',IMPERIA:'Liguria',SAVONA:'Liguria','LA SPEZIA':'Liguria',
+  BOLOGNA:'Emilia-Romagna',MODENA:'Emilia-Romagna','REGGIO EMILIA':'Emilia-Romagna',"REGGIO NELL'EMILIA":'Emilia-Romagna',PARMA:'Emilia-Romagna',PIACENZA:'Emilia-Romagna',FERRARA:'Emilia-Romagna',RAVENNA:'Emilia-Romagna','FORLI-CESENA':'Emilia-Romagna',RIMINI:'Emilia-Romagna',
+  FIRENZE:'Toscana',PISA:'Toscana',LIVORNO:'Toscana',LUCCA:'Toscana','MASSA-CARRARA':'Toscana',PISTOIA:'Toscana',PRATO:'Toscana',SIENA:'Toscana',GROSSETO:'Toscana',AREZZO:'Toscana',
+  PERUGIA:'Umbria',TERNI:'Umbria',
+  ANCONA:'Marche','PESARO E URBINO':'Marche','PESARO-URBINO':'Marche',MACERATA:'Marche',FERMO:'Marche','ASCOLI PICENO':'Marche',
+  ROMA:'Lazio',FROSINONE:'Lazio',LATINA:'Lazio',RIETI:'Lazio',VITERBO:'Lazio',
+  "L'AQUILA":'Abruzzo',LAQUILA:'Abruzzo',PESCARA:'Abruzzo',CHIETI:'Abruzzo',TERAMO:'Abruzzo',
+  CAMPOBASSO:'Molise',ISERNIA:'Molise',
+  NAPOLI:'Campania',SALERNO:'Campania',AVELLINO:'Campania',BENEVENTO:'Campania',CASERTA:'Campania',
+  BARI:'Puglia',LECCE:'Puglia',BRINDISI:'Puglia',TARANTO:'Puglia',FOGGIA:'Puglia','BARLETTA-ANDRIA-TRANI':'Puglia',
+  POTENZA:'Basilicata',MATERA:'Basilicata',
+  CATANZARO:'Calabria',COSENZA:'Calabria',CROTONE:'Calabria','REGGIO CALABRIA':'Calabria','REGGIO DI CALABRIA':'Calabria','VIBO VALENTIA':'Calabria',
+  PALERMO:'Sicilia',CATANIA:'Sicilia',MESSINA:'Sicilia',SIRACUSA:'Sicilia',RAGUSA:'Sicilia',AGRIGENTO:'Sicilia',TRAPANI:'Sicilia',CALTANISSETTA:'Sicilia',ENNA:'Sicilia',
+  CAGLIARI:'Sardegna',SASSARI:'Sardegna',NUORO:'Sardegna',ORISTANO:'Sardegna','SUD SARDEGNA':'Sardegna','CARBONIA-IGLESIAS':'Sardegna','MEDIO CAMPIDANO':'Sardegna',OGLIASTRA:'Sardegna'
+};
+const SLUG_REG = {'Emilia-Romagna':'emilia-romagna','Friuli-Venezia Giulia':'friuli-venezia-giulia','Trentino-Alto Adige':'trentino-alto-adige','Valle d Aosta':'valle-d-aosta'};
+const slug = r => SLUG_REG[r] || r.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+const norm = s => String(s||'').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/['\u2019]/g,"'").trim();
+const regioneDi = p => PROV[norm(p)] || PROV[norm(p).replace(/'/g,'')] || 'Italia';
+
+function get(url){return new Promise(res=>{const u=new URL(url);const r=https.request({host:u.hostname,path:u.pathname+u.search,method:'POST',headers:{'Content-Type':'application/json','User-Agent':'Mozilla/5.0 (compatible; careauctions-feed/1.0)','Accept':'application/json'}},x=>{let t='';x.on('data',c=>t+=c);x.on('end',()=>res({s:x.statusCode,t}));});r.on('error',()=>res({s:0,t:''}));r.setTimeout(30000,()=>{r.destroy();res({s:0,t:''});});r.write('{}');r.end();});}
+const dormi = ms => new Promise(s=>setTimeout(s,ms));
+
+function mappa(x){
+  const prov=(x.indirizzo&&x.indirizzo.provincia)||''; const citta=(x.indirizzo&&x.indirizzo.citta)||'';
+  const base=Number(x.prezzoBaseAsta)||0; const minima=Number(x.offertaMinima)||0;
+  let sconto=base>0?Math.round((1-minima/base)*100):0; if(sconto<0)sconto=0; if(sconto>99)sconto=99;
+  const disp=Array.isArray(x.disponibilita)?x.disponibilita.join(','):String(x.disponibilita||'');
+  return { id:String(x.id), tipo:String(x.tipoLotto||'').indexOf('IMMOBIL')>=0?'IMMOBILIARE':'MOBILIARE',
+    pubblicazione:x.dataPubblicazione||'', titolo:((x.categoriaBene&&x.categoriaBene[0])||String(x.categoriaLotto||''))+' · '+citta+' ('+prov+')',
+    prezzoBase:base, minima, scontoPct:sconto, dataAsta:x.dataVendita||'', regione:regioneDi(prov), citta,
+    tribunale:x.tribunale||'', occupazione:/OCCUP/.test(disp)?'OCCUPATO':'LIBERO',
+    link:'https://pvp.giustizia.it/pvp/it/detail_annuncio.page?idAnnuncio='+x.id, foto:x.immagineCover||x.immagine||'',
+    descrizione:String(x.descLotto||'').slice(0,500) };
+}
+
+(async()=>{
+  console.log('sync-feed MODE='+MODE);
+  const pagine=[];
+  if(MODE==='full'){
+    const p0=await get('https://pvp.giustizia.it/ric-496b258c-986a1b71/ric-ms/ricerca/vendite?page=0&size='+SIZE+'&language=it&sort=dataOraVendita%2Cdesc');
+    let tot=0; try{ tot=JSON.parse(p0.t).body.totalElements||0; }catch(e){}
+    console.log('totalElements:',tot);
+    for(let p=0;p<Math.ceil(tot/SIZE);p++) pagine.push(p);
+  } else {
+    for(let p=0;p<PAGINE;p++) pagine.push(p);
+  }
+  const lotti=[]; const visti=new Set();
+  for(let i=0;i<pagine.length;i+=2){
+    const [a,b]=await Promise.all([get('https://pvp.giustizia.it/ric-496b258c-986a1b71/ric-ms/ricerca/vendite?page='+pagine[i]+'&size='+SIZE+'&language=it&sort=dataOraVendita%2Cdesc'), pagine[i+1]!==undefined?get('https://pvp.giustizia.it/ric-496b258c-986a1b71/ric-ms/ricerca/vendite?page='+pagine[i+1]+'&size='+SIZE+'&language=it&sort=dataOraVendita%2Cdesc'):Promise.resolve({s:0,t:''})]);
+    for(const r of [a,b]){ if(r.s===200){ try{ const j=JSON.parse(r.t); if(j.body&&Array.isArray(j.body.content)) for(const x of j.body.content){ if(x&&x.id!=null&&!visti.has(String(x.id))){ visti.add(String(x.id)); const tL=String(x.tipoLotto||''); if(tL==='IMMOBILI'||tL==='MOBILI') lotti.push(mappa(x)); } } }catch(e){} } }
+    await dormi(200);
+    if(lotti.length&&lotti.length%2000===0) console.log('raccolti:',lotti.length);
+  }
+  console.log('lotti raccolti (questo giro):',lotti.length);
+
+  const FEED=path.join(__dirname,'..','feed');
+  const indice=JSON.parse(fs.readFileSync(path.join(FEED,'indice.json'),'utf8'));
+  const esistenti=new Set();
+  for(const r of Object.keys(indice.regioni)){
+    for(const f of [...(indice.regioni[r].filesImm||[]),...(indice.regioni[r].filesMob||[])]){ try{ const j=JSON.parse(fs.readFileSync(path.join(FEED,f),'utf8')); for(const x of j) esistenti.add(String(x.id)); }catch(e){} }
+  }
+  let nuovi=0;
+  const daAggiungere={};
+  for(const a of lotti){ if(!esistenti.has(a.id)){ (daAggiungere[a.regione]=daAggiungere[a.regione]||{imm:[],mob:[]})[a.tipo==='IMMOBILIARE'?'imm':'mob'].push(a); nuovi++; } }
+  console.log('nuovi da inserire:',nuovi);
+
+  if(MODE==='full'){
+    // ricostruzione completa (come pvp-feed.js): i file vengono riscritti con TUTTI i lotti raccolti
+    const perReg={};
+    for(const a of lotti) (perReg[a.regione]=perReg[a.regione]||{imm:[],mob:[]})[a.tipo==='IMMOBILIARE'?'imm':'mob'].push(a);
+    for(const f of fs.readdirSync(FEED)) if(f.endsWith('.json')&&f!=='indice.json'&&f!=='indice-completo.json'&&f!=='ore-aste.json') fs.unlinkSync(path.join(FEED,f));
+    indice.totali=lotti.length; indice.immobiliari=0; indice.mobiliari=0; indice.regioni={};
+    for(const [r,g] of Object.entries(perReg)){
+      const s=slug(r); const filesImm=[],filesMob=[];
+      const chunk=(arr,pref,files)=>{ const N=Math.ceil(arr.length/4000)||1;
+        if(N===1){ files.push(pref+'.json'); fs.writeFileSync(path.join(FEED,pref+'.json'),JSON.stringify(arr)); return; }
+        for(let i=0;i<N;i++){ const nome=pref+'-'+(i+1)+'.json'; files.push(nome); fs.writeFileSync(path.join(FEED,nome),JSON.stringify(arr.slice(i*4000,(i+1)*4000))); } };
+      chunk(g.imm,s+'-imm',filesImm); chunk(g.mob,s+'-mob',filesMob);
+      indice.immobiliari+=g.imm.length; indice.mobiliari+=g.mob.length;
+      indice.regioni[r]={totale:g.imm.length+g.mob.length,immobiliari:g.imm.length,mobiliari:g.mob.length,filesImm,filesMob};
+    }
+  } else {
+    // incrementale: append dei nuovi nelle regioni + re-chunk
+    for(const [r,g] of Object.entries(daAggiungere)){
+      const s=slug(r);
+      for(const [tipo,arr] of [['imm',g.imm],['mob',g.mob]]){
+        if(!arr.length) continue;
+        const reg=indice.regioni[r]||{filesImm:[],filesMob:[]};
+        const files=tipo==='imm'?reg.filesImm:reg.filesMob;
+        let contenuto=[];
+        for(const f of files){ try{ contenuto.push(...JSON.parse(fs.readFileSync(path.join(FEED,f),'utf8'))); }catch(e){} }
+        for(const f of files){ try{ fs.unlinkSync(path.join(FEED,f)); }catch(e){} }
+        contenuto.push(...arr);
+        const pref=s+'-'+tipo; const nuoviFiles=[]; const N=Math.ceil(contenuto.length/4000)||1;
+        if(N===1){ nuoviFiles.push(pref+'.json'); fs.writeFileSync(path.join(FEED,pref+'.json'),JSON.stringify(contenuto)); }
+        else for(let i=0;i<N;i++){ const nome=pref+'-'+(i+1)+'.json'; nuoviFiles.push(nome); fs.writeFileSync(path.join(FEED,nome),JSON.stringify(contenuto.slice(i*4000,(i+1)*4000))); }
+        if(tipo==='imm') indice.regioni[r].filesImm=nuoviFiles; else indice.regioni[r].filesMob=nuoviFiles;
+        const im=(indice.regioni[r].immobiliari||0)+(tipo==='imm'?arr.length:0);
+        const mb=(indice.regioni[r].mobiliari||0)+(tipo==='mob'?arr.length:0);
+        indice.regioni[r].immobiliari=im; indice.regioni[r].mobiliari=mb; indice.regioni[r].totale=im+mb;
+        indice.immobiliari+=(tipo==='imm'?arr.length:0); indice.mobiliari+=(tipo==='mob'?arr.length:0);
+      }
+    }
+    indice.totali=esistenti.size+nuovi;
+  }
+  fs.writeFileSync(path.join(FEED,'indice.json'),JSON.stringify(indice));
+  console.log('indice aggiornato: totali',indice.totali,'(nuovi inseriti:',nuovi+')');
+})().catch(e=>{ console.error('FATALE',e); process.exit(1); });
