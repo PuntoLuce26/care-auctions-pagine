@@ -63,10 +63,10 @@ function mappa(x){
   } else {
     for(let p=0;p<PAGINE;p++) pagine.push(p);
   }
-  const lotti=[]; const visti=new Set();
+  const lotti=[]; const visti=new Set(); const esitiAcc={aggiudicate:0,deserte:0,sospese:0,nonPubblicato:0};
   for(let i=0;i<pagine.length;i+=2){
     const [a,b]=await Promise.all([get('https://pvp.giustizia.it/ric-496b258c-986a1b71/ric-ms/ricerca/vendite?page='+pagine[i]+'&size='+SIZE+'&language=it&sort=dataOraVendita%2Cdesc'), pagine[i+1]!==undefined?get('https://pvp.giustizia.it/ric-496b258c-986a1b71/ric-ms/ricerca/vendite?page='+pagine[i+1]+'&size='+SIZE+'&language=it&sort=dataOraVendita%2Cdesc'):Promise.resolve({s:0,t:''})]);
-    for(const r of [a,b]){ if(r.s===200){ try{ const j=JSON.parse(r.t); if(j.body&&Array.isArray(j.body.content)) for(const x of j.body.content){ if(x&&x.id!=null&&!visti.has(String(x.id))){ visti.add(String(x.id)); const tL=String(x.tipoLotto||''); if(tL==='IMMOBILI'||tL==='MOBILI') lotti.push(mappa(x)); } } }catch(e){} } }
+    for(const r of [a,b]){ if(r.s===200){ try{ const j=JSON.parse(r.t); if(j.body&&Array.isArray(j.body.content)) for(const x of j.body.content){ if(x&&x.id!=null&&!visti.has(String(x.id))){ visti.add(String(x.id)); const tL=String(x.tipoLotto||''); if(tL==='IMMOBILI'||tL==='MOBILI') lotti.push(mappa(x)); const es=String(x.esito||''); if(es==='AGGIU')esitiAcc.aggiudicate++; else if(es==='ASDES')esitiAcc.deserte++; else if(es==='SOSPE')esitiAcc.sospese++; else esitiAcc.nonPubblicato++; } } }catch(e){} } }
     await dormi(200);
     if(lotti.length&&lotti.length%2000===0) console.log('raccolti:',lotti.length);
   }
