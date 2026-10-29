@@ -30,7 +30,7 @@ function get(url) {
 function parse(html, url) {
   const testo = html.replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&euro;|&#8364;/gi, '€').replace(/\s+/g, ' ');
   const id = (url.match(/-(\d+)$/) || [])[1] || '';
-  const venduto = /Venduto/i.test(testo);
+  const venduto = /Stato\s+dell\u0027?inserzione[^.]{0,50}Venduto/i.test(testo) || /Stato[^.:]{0,30}:\s*Venduto/i.test(testo);
   let prezzo = null;
   const m = testo.match(/Prezzo\s+aggiudicazione[^€]{0,60}€\s*([\d.,]+)/i) || testo.match(/Prezzo\s+di\s+aggiudicazione[^€]{0,60}€\s*([\d.,]+)/i);
   if (m) prezzo = m[1].replace(/\./g, '').replace(',', '.');
