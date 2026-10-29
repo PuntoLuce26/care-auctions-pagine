@@ -126,4 +126,48 @@ function mappa(x){
   }
   fs.writeFileSync(path.join(FEED,'indice.json'),JSON.stringify(indice));
   console.log('indice aggiornato: totali',indice.totali,'(nuovi inseriti:',nuovi+')');
+  // INDICE-COMPLETO (statistiche vive per il CARe Index: totali, prezzi medi, sconti, bande)
+  try {
+    const tutti=[];
+    for(const r of Object.keys(indice.regioni)){
+      for(const f of [...(indice.regioni[r].filesImm||[]),...(indice.regioni[r].filesMob||[])]){ try{ tutti.push(...JSON.parse(fs.readFileSync(path.join(FEED,f),'utf8'))); }catch(e){} }
+    }
+    const med=(arr)=>arr.length?{prezzo:Math.round(arr.reduce((s,a)=>s+(a.prezzoBase||0),0)/arr.length),sconto:Math.round(arr.reduce((s,a)=>s+(a.scontoPct||0),0)/arr.length)}:{prezzo:0,sconto:0};
+    const imm=tutti.filter(a=>a.tipo==='IMMOBILIARE'); const mob=tutti.filter(a=>a.tipo!=='IMMOBILIARE');
+    const mi=med(imm), mm=med(mob);
+    const bande={'fino_25k':0,'25_50k':0,'50_100k':0,'100_200k':0,'oltre_200k':0};
+    for(const a of imm){ const b=a.prezzoBase||0; if(b<=25000)bande['fino_25k']++; else if(b<=50000)bande['25_50k']++; else if(b<=100000)bande['50_100k']++; else if(b<=200000)bande['100_200k']++; else bande['oltre_200k']++; }
+    const perRegione={};
+    for(const r of Object.keys(indice.regioni)){
+      const arr=tutti.filter(a=>a.regione===r); const m=med(arr);
+      perRegione[r]={lotti:arr.length,prezzoMedio:m.prezzo,scontoMedio:m.sconto};
+    }
+    const completo={ data:new Date().toISOString().slice(0,10), totaleLotti:tutti.length,
+      settori:{ immobiliare:{lotti:imm.length,prezzoMedio:mi.prezzo,scontoMedio:mi.sconto,categorie:{IMMOBILIARE:imm.length}},
+                mobiliare:{lotti:mob.length,prezzoMedio:mm.prezzo,scontoMedio:mm.sconto,categorie:{MOBILIARE:mob.length}} },
+      bandePrezzo:bande, perRegione };
+    fs.writeFileSync(path.join(FEED,'indice-completo.json'),JSON.stringify(completo));
+    console.log('indice-completo aggiornato: totaleLotti',tutti.length,'prezzoMedio imm',mi.prezzo,'scontoMedio',mi.sconto);
+  } catch(e){ console.log('indice-completo: errore',e.message); }
+
+  try {
+    let esitiFinali = esitiAcc;
+    if (MODE !== 'full') { try { const prec = JSON.parse(fs.readFileSync(path.join(FEED, 'statistiche.json'), 'utf8')); if (prec && prec.esiti) esitiFinali = prec.esiti; } catch (ePrev) {} }
+    const ic = JSON.parse(fs.readFileSync(path.join(FEED, 'indice-completo.json'), 'utf8'));
+    fs.writeFileSync(path.join(FEED, 'statistiche.json'), JSON.stringify({ generato: new Date().toISOString().slice(0, 10), totale: ic.totaleLotti, prezzoMedioImm: ic.settori.immobiliare.prezzoMedio, scontoMedioImm: ic.settori.immobiliare.scontoMedio, bandePrezzo: ic.bandePrezzo, esiti: esitiFinali, nota: 'statistiche vive dal giro automatico — nessun numero inventato' }));
+    console.log('statistiche.json sempre aggiornato');
+  } catch (eS) { console.log('statistiche: errore', eS.message); }
+  if(MODE==='full'){
+    try {
+      const candidates = ['https://model-office-pvp.giustizia.it/ve-3f723b85-986a1b71/ve-ms/vendite/esiti?page=0&size=100','https://model-office-pvp.giustizia.it/ve-3f723b85-986a1b71/ve-ms/esiti?page=0&size=100'];
+      let aggiudicazioni = null;
+      for (const u of candidates) {
+        const r = await fetch(u, { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; careauctions-feed/1.0)', 'Accept': 'application/json' } });
+        if (r.ok) { const j = await r.json(); const arr = j && (j.body || j.content || j); if (Array.isArray(arr) && arr.length) { aggiudicazioni = arr; break; } }
+      }
+      if (aggiudicazioni) fs.writeFileSync(path.join(FEED, 'aggiudicazioni.json'), JSON.stringify(aggiudicazioni.slice(0, 2000)));
+      console.log('esiti/prezzi aggiudicazione:', aggiudicazioni ? 'TROVATI (' + aggiudicazioni.length + ')' : 'non disponibili stasera — riprovo ogni notte');
+    } catch (eE) { console.log('esiti: errore', eE.message); }
+  }
+
 })().catch(e=>{ console.error('FATALE',e); process.exit(1); });
