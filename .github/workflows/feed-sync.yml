@@ -22,6 +22,8 @@ jobs:
           MODE=$MODE node scripts/sync-feed.js
           if [ "$MODE" = "full" ]; then
             node scripts/ivg-aggiudicazioni.js || echo "IVG: raccolta non riuscita stasera"
+            node scripts/fallco-aggiudicazioni.js || echo "FALLCO: raccolta non riuscita stasera"
+            node -e "const fs=require('fs');try{const j=JSON.parse(fs.readFileSync('/tmp/aggiudicazioni-fallco.json','utf8'));const v=j.voci||[];const out=v.map(x=>({id:String(x.id),descrizione:(x.descrizione||'').slice(0,140),prezzo:x.prezzo_numero,prezzo_label:x.prezzo_label||'',termina:(x.termine||'').slice(0,10),ivg:x.ivg||'',tribunale:x.tribunale||'',fonte:'fallcoaste'}));fs.writeFileSync('feed/aggiudicazioni.json',JSON.stringify(out));console.log('aggiudicazioni.json:',out.length);}catch(e){console.log('FALLCO: nessun dato');}"
             node -e "const fs=require('fs');try{const j=JSON.parse(fs.readFileSync('/tmp/aggiudicazioni-ivg.json','utf8'));const v=j.filter(x=>x.venduto&&x.prezzo).map(x=>({id:x.id,titolo:x.titolo,prezzo:x.prezzo,url:x.url,fonte:'ivg'}));fs.writeFileSync('feed/aggiudicazioni.json',JSON.stringify(v));console.log('aggiudicazioni.json:',v.length);}catch(e){console.log('IVG: nessun dato da pubblicare');}"
           fi
       - name: commit e push
