@@ -84,7 +84,13 @@ function mappa(x){
   }
   let nuovi=0;
   const daAggiungere={};
-  for(const a of lotti){ if(!esistenti.has(a.id)){ (daAggiungere[a.regione]=daAggiungere[a.regione]||{imm:[],mob:[]})[a.tipo==='IMMOBILIARE'?'imm':'mob'].push(a); nuovi++; } }
+  const esitiCambiati={};
+  for(const a of lotti){
+    if(!esistenti.has(a.id)){ (daAggiungere[a.regione]=daAggiungere[a.regione]||{imm:[],mob:[]})[a.tipo==='IMMOBILIARE'?'imm':'mob'].push(a); nuovi++; }
+    else if(a.esito && a.esito!==undefined) esitiCambiati[a.id]=a.esito;
+  }
+  let esitiAggiornati=0;
+  if(Object.keys(esitiCambiati).length){ for(const [r,g] of Object.entries(indice.regioni||{})){ const files=[...(g.filesImm||[]),...(g.filesMob||[])]; let toc=0; for(const f of files){ try{ const arr=JSON.parse(fs.readFileSync(path.join(FEED,f),'utf8')); let camb=0; for(const x of arr){ if(esitiCambiati[x.id]!==undefined && (x.esito||'')!==esitiCambiati[x.id]){ x.esito=esitiCambiati[x.id]; camb++; } } if(camb){ fs.writeFileSync(path.join(FEED,f),JSON.stringify(arr)); toc+=camb; } }catch(e){} } if(toc){ esitiAggiornati+=toc; } } console.log('esiti aggiornati in questo giro:',esitiAggiornati); }
   console.log('nuovi da inserire:',nuovi);
   if (esistenti.size === 0 && lotti.length < 300000) { console.log('ABORT: base feed vuota (' + esistenti.size + ' esistenti, ' + lotti.length + ' raccolti) — serve il ripristino completo'); process.exit(2); }
   if (lotti.length === 0) { console.log('ABORT: nessun lotto raccolto in questo giro — nessuna scrittura'); process.exit(0); }
