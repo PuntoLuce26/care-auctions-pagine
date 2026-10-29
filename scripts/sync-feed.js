@@ -101,6 +101,7 @@ function mappa(x){
   } else {
     // incrementale: append dei nuovi nelle regioni + re-chunk
     for(const [r,g] of Object.entries(daAggiungere)){
+      indice.regioni[r]=indice.regioni[r]||{filesImm:[],filesMob:[],immobiliari:0,mobiliari:0,totale:0};
       const s=slug(r);
       for(const [tipo,arr] of [['imm',g.imm],['mob',g.mob]]){
         if(!arr.length) continue;
