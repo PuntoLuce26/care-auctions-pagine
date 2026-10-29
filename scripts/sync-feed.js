@@ -84,6 +84,7 @@ function mappa(x){
   const daAggiungere={};
   for(const a of lotti){ if(!esistenti.has(a.id)){ (daAggiungere[a.regione]=daAggiungere[a.regione]||{imm:[],mob:[]})[a.tipo==='IMMOBILIARE'?'imm':'mob'].push(a); nuovi++; } }
   console.log('nuovi da inserire:',nuovi);
+  if (esistenti.size === 0 && lotti.length < 300000) { console.log('ABORT: base feed vuota (' + esistenti.size + ' esistenti, ' + lotti.length + ' raccolti) — serve il ripristino completo'); process.exit(2); }
   if (lotti.length === 0) { console.log('ABORT: nessun lotto raccolto in questo giro — nessuna scrittura'); process.exit(0); }
 
   if(MODE==='full'){
