@@ -49,6 +49,7 @@ function mappa(x){
     prezzoBase:base, minima, scontoPct:sconto, dataAsta:x.dataVendita||'', regione:regioneDi(prov), citta,
     tribunale:x.tribunale||'', occupazione:/OCCUP/.test(disp)?'OCCUPATO':'LIBERO',
     link:'https://pvp.giustizia.it/pvp/it/detail_annuncio.page?idAnnuncio='+x.id, foto:x.immagineCover||x.immagine||'',
+    documenti:[{tipo:'pagina ufficiale',url:'https://pvp.giustizia.it/pvp/it/detail_annuncio.page?idAnnuncio='+x.id}],
     descrizione:String(x.descLotto||'').slice(0,500) };
 }
 
