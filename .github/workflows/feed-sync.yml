@@ -1,8 +1,8 @@
 name: feed-sync
 on:
   schedule:
-    - cron: '*/15 * * * *'   # incrementale: PVP aggiorna → noi entro 15 minuti
-    - cron: '0 1 * * *'      # notturno: ricostruzione completa (scadute fuori)
+    - cron: '*/15 * * * *'   # incrementale
+    - cron: '0 1 * * *'      # notturna completa + prezzi IVG
   workflow_dispatch:
 permissions:
   contents: write
@@ -14,13 +14,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: sync (incrementale di default)
-        run: node scripts/sync-feed.js
-        env:
-          MODE: inc
+      - name: sync (inc ogni 15 min, full + IVG all'01:00 UTC)
+        run: |
+          H=$(date -u +%H)
+          if [ "$H" = "01" ]; then MODE=full; else MODE=inc; fi
+          echo "MODE=$MODE"
+          MODE=$MODE node scripts/sync-feed.js
+          if [ "$MODE" = "full" ]; then
+            node scripts/ivg-aggiudicazioni.js || echo "IVG: raccolta non riuscita stasera"
+            node -e "const fs=require('fs');try{const j=JSON.parse(fs.readFileSync('/tmp/aggiudicazioni-ivg.json','utf8'));const v=j.filter(x=>x.venduto&&x.prezzo).map(x=>({id:x.id,titolo:x.titolo,prezzo:x.prezzo,url:x.url,fonte:'ivg'}));fs.writeFileSync('feed/aggiudicazioni.json',JSON.stringify(v));console.log('aggiudicazioni.json:',v.length);}catch(e){console.log('IVG: nessun dato da pubblicare');}"
+          fi
       - name: commit e push
         run: |
           git config user.name "Sam CARe"
           git config user.email "sam@careauctions.co"
           git add feed/
-          if git diff --cached --quiet; then echo "nessuna variazione"; else git commit -m "Feed sync automatico $(date -u +%FT%TZ)"; git push; fi
+          if git diff --cached --quiet; then echo "nessuna variazione"; else git commit -m "Feed sync $MODE $(date -u +%FT%TZ)"; git push; fi
