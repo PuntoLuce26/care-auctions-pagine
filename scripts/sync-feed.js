@@ -77,8 +77,10 @@ function mappa(x){
   const FEED=path.join(__dirname,'..','feed');
   const indice=JSON.parse(fs.readFileSync(path.join(FEED,'indice.json'),'utf8'));
   const esistenti=new Set();
+  const nuoviIds=new Set();
   for(const r of Object.keys(indice.regioni)){
     for(const f of [...(indice.regioni[r].filesImm||[]),...(indice.regioni[r].filesMob||[])]){ try{ const j=JSON.parse(fs.readFileSync(path.join(FEED,f),'utf8')); for(const x of j) esistenti.add(String(x.id)); }catch(e){} }
+  for(const a of lotti) nuoviIds.add(String(a.id));
   }
   let nuovi=0;
   const daAggiungere={};
@@ -126,7 +128,10 @@ function mappa(x){
         indice.immobiliari+=(tipo==='imm'?arr.length:0); indice.mobiliari+=(tipo==='mob'?arr.length:0);
       }
     }
-    indice.totali=esistenti.size+nuovi;
+    // monitoraggio retention PVP: quanti lotti spariscono a ogni giro completo
+  const rimossi = [...esistenti].filter(id => !nuoviIds.has(id)).length;
+  console.log('rimossi da PVP in questo giro completo:', rimossi);
+  indice.totali=esistenti.size+nuovi;
   }
   fs.writeFileSync(path.join(FEED,'indice.json'),JSON.stringify(indice));
   console.log('indice aggiornato: totali',indice.totali,'(nuovi inseriti:',nuovi+')');
