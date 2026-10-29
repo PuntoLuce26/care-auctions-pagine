@@ -168,8 +168,25 @@ function mappa(x){
   try {
     let esitiFinali = esitiAcc;
     if (MODE !== 'full') { try { const prec = JSON.parse(fs.readFileSync(path.join(FEED, 'statistiche.json'), 'utf8')); if (prec && prec.esiti) esitiFinali = prec.esiti; } catch (ePrev) {} }
+    // PERDATA-5.836: conta le aste per dataAsta (passate / oggi / prossime)
+    let passate = 0, future = 0, oggi = 0, prossimi30 = 0, prossimi90 = 0;
+    try {
+      const oggiS = new Date().toISOString().slice(0, 10);
+      const t30 = new Date(Date.now() + 30 * 86400000).toISOString().slice(0, 10);
+      const t90 = new Date(Date.now() + 90 * 86400000).toISOString().slice(0, 10);
+      for (const r of Object.keys(indice.regioni)) {
+        for (const f of [...(indice.regioni[r].filesImm || []), ...(indice.regioni[r].filesMob || [])]) {
+          try { for (const x of JSON.parse(fs.readFileSync(path.join(FEED, f), 'utf8'))) {
+            const d = String(x.dataAsta || '').slice(0, 10);
+            if (!d) continue;
+            if (d < oggiS) passate++; else if (d === oggiS) oggi++; else { future++; if (d <= t30) prossimi30++; if (d <= t90) prossimi90++; }
+          } } catch (eX) {}
+        }
+      }
+    } catch (eP) {}
+    const perData = { passate, future, oggi, prossimi30, prossimi90, totale: passate + future + oggi };
     const ic = JSON.parse(fs.readFileSync(path.join(FEED, 'indice-completo.json'), 'utf8'));
-    fs.writeFileSync(path.join(FEED, 'statistiche.json'), JSON.stringify({ generato: new Date().toISOString().slice(0, 10), totale: ic.totaleLotti, prezzoMedioImm: ic.settori.immobiliare.prezzoMedio, scontoMedioImm: ic.settori.immobiliare.scontoMedio, bandePrezzo: ic.bandePrezzo, esiti: esitiFinali, nota: 'statistiche vive dal giro automatico — nessun numero inventato' }));
+    fs.writeFileSync(path.join(FEED, 'statistiche.json'), JSON.stringify({ generato: new Date().toISOString().slice(0, 10), totale: ic.totaleLotti, prezzoMedioImm: ic.settori.immobiliare.prezzoMedio, scontoMedioImm: ic.settori.immobiliare.scontoMedio, bandePrezzo: ic.bandePrezzo, esiti: esitiFinali, perData, nota: 'statistiche vive dal giro automatico — nessun numero inventato' }));
     console.log('statistiche.json sempre aggiornato');
   } catch (eS) { console.log('statistiche: errore', eS.message); }
   if(MODE==='full'){
