@@ -31,4 +31,12 @@ jobs:
           git config user.name "Sam CARe"
           git config user.email "sam@careauctions.co"
           git add feed/
-          if git diff --cached --quiet; then echo "nessuna variazione"; else git commit -m "Feed sync $MODE $(date -u +%FT%TZ)"; git push; fi
+          if git diff --cached --quiet; then echo "nessuna variazione"; else
+            git commit -m "Feed sync $MODE $(date -u +%FT%TZ)"
+            # race-safe 5.838: il Mac e il cloud scrivono sullo stesso repo → pull con rebase + retry
+            for i in 1 2 3 4 5; do
+              git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null
+              if git push; then break; fi
+              sleep 4
+            done
+          fi
