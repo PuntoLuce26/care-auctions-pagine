@@ -1,7 +1,7 @@
 name: foto-sync
 on:
   schedule:
-    - cron: '17 */6 * * *'
+    - cron: '*/15 * * * *'
   workflow_dispatch:
 
 jobs:

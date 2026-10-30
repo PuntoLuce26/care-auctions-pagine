@@ -102,7 +102,7 @@ async function raccogliPeriziePVP() {
   let catalogo = [];
   try { catalogo = JSON.parse(fs.readFileSync(path.join(FEED2, 'foto-procedure.json'), 'utf8')); } catch (e) {}
   const mappa = {}; for (const x of catalogo) mappa[String(x.id)] = x;
-  const daFare = [...ids].filter(id => { const c = mappa[id]; return !c || !c.perizia || c.perizia.length === 0; }).slice(0, 120);
+  const daFare = [...ids].filter(id => { const c = mappa[id]; return !c || !c.perizia || c.perizia.length === 0; }).slice(0, Number(process.env.PVP_CAP || 200));
   console.log('PVP perizie da raccogliere questo giro:', daFare.length);
   let aggiunte = 0;
   for (let i = 0; i < daFare.length; i += 5) {
