@@ -1,0 +1,32 @@
+name: foto-sync
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  foto:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: estrai foto e perizie (incrementale)
+        run: node scripts/foto-procedure-cloud.js
+      - name: commit e push (race-safe)
+        run: |
+          git config user.name "CARe Cloud"
+          git config user.email "cloud@careauctions.co"
+          git add feed/foto-procedure.json
+          if git diff --cached --quiet; then echo "nessuna variazione"; else
+            git commit -m "foto-procedure cloud: aggiornamento automatico ($(date -u +%FT%TZ))"
+            for i in 1 2 3 4 5; do
+              git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null
+              if git push; then break; fi
+              sleep 4
+            done
+          fi
