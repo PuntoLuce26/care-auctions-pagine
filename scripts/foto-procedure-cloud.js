@@ -88,4 +88,43 @@ function get(url) {
   const tutti = Object.values(esistenti);
   fs.writeFileSync(OUT, JSON.stringify(tutti));
   console.log('FINE giro cloud: catalogo totale', tutti.length, 'lotti | nuovi con foto:', nuovi.length);
+
+// PVP-PERIZIE-5.879: le perizie ufficiali del PVP per ogni lotto (ve-ms + resource-pvp)
+async function raccogliPeriziePVP() {
+  const FEED2 = path.join(process.cwd(), 'feed');
+  const indice = JSON.parse(fs.readFileSync(path.join(FEED2, 'indice.json'), 'utf8'));
+  const ids = new Set();
+  for (const r of Object.keys(indice.regioni || {})) {
+    for (const f of [...(indice.regioni[r].filesImm || []), ...(indice.regioni[r].filesMob || [])]) {
+      try { for (const x of JSON.parse(fs.readFileSync(path.join(FEED2, f), 'utf8'))) { if (x && x.id) ids.add(String(x.id)); } } catch (e) {}
+    }
+  }
+  let catalogo = [];
+  try { catalogo = JSON.parse(fs.readFileSync(path.join(FEED2, 'foto-procedure.json'), 'utf8')); } catch (e) {}
+  const mappa = {}; for (const x of catalogo) mappa[String(x.id)] = x;
+  const daFare = [...ids].filter(id => { const c = mappa[id]; return !c || !c.perizia || c.perizia.length === 0; }).slice(0, 120);
+  console.log('PVP perizie da raccogliere questo giro:', daFare.length);
+  let aggiunte = 0;
+  for (let i = 0; i < daFare.length; i += 5) {
+    await Promise.all(daFare.slice(i, i + 5).map(async (id) => {
+      try {
+        const d = await get('https://pvp.giustizia.it/ve-3f723b85-986a1b71/ve-ms/vendite/' + id);
+        if (d.s !== 200) return;
+        const j = JSON.parse(d.t);
+        const allegati = (j.body && j.body.allegati) || [];
+        const per = allegati.filter(a => String(a.codiceTipoAllegato || '').match(/PERIZ|FOTO|IMGBE/));
+        if (!per.length) return;
+        const urls = per.map(a => 'https://resource-pvp.giustizia.it' + (a.linkAllegato || ''));
+        const rec = mappa[id] || { id, url: 'https://pvp.giustizia.it/pvp/it/detail_annuncio.page?idAnnuncio=' + id, foto: [] };
+        rec.perizia = urls.slice(0, 3);
+        mappa[id] = rec; aggiunte++;
+      } catch (e) {}
+    }));
+    if ((i + 5) % 50 === 0) console.log('perizie:', i + 5, '/', daFare.length, '| con perizia:', aggiunte);
+    await new Promise(s => setTimeout(s, 200));
+  }
+  fs.writeFileSync(path.join(FEED2, 'foto-procedure.json'), JSON.stringify(Object.values(mappa)));
+  console.log('FINE perizie PVP: aggiunte', aggiunte, '| catalogo totale', Object.keys(mappa).length);
+}
+raccogliPeriziePVP();
 })();
