@@ -194,6 +194,28 @@ function mappa(x){
     storico.push({ data: oggiD, totale: ic.totaleLotti, prezzoMedio: Math.round(ic.settori.immobiliare.prezzoMedio || 0), scontoMedio: Math.round(ic.settori.immobiliare.scontoMedio || 0) });
     storico = storico.slice(-120);
     fs.writeFileSync(path.join(FEED, 'andamento-prezzi.json'), JSON.stringify({ generato: new Date().toISOString(), giorni: storico }));
+    // PARTECIPAZIONE-5.856: archivio giornaliero degli esiti (aggiudicate/deserte/sospese) per l andamento della partecipazione
+    let partG = [];
+    try { partG = (JSON.parse(fs.readFileSync(path.join(FEED, 'andamento-partecipazione.json'), 'utf8')) || {}).giorni || []; } catch (eP1) {}
+    const partM = {}; for (const g of partG) { if (g && g.data) partM[g.data] = g; }
+    let precPart = null;
+    try {
+      for (const r of Object.keys(indice.regioni)) {
+        for (const f of [...(indice.regioni[r].filesImm || []), ...(indice.regioni[r].filesMob || [])]) {
+          try { for (const x of JSON.parse(fs.readFileSync(path.join(FEED, f), 'utf8'))) {
+            const d = String(x.dataAsta || '').slice(0, 10);
+            if (!/^20\d\d-\d\d-\d\d$/.test(d) || d < '2018-01-01' || d > '2035-12-31') continue;
+            const e = String(x.esito || '');
+            if (!partM[d]) partM[d] = { data: d, aggiudicate: 0, deserte: 0, sospese: 0, totale: 0 };
+            partM[d].totale++;
+            if (e === 'AGGIU') partM[d].aggiudicate++; else if (e === 'ASDES') partM[d].deserte++; else if (e === 'SOSPE') partM[d].sospese++;
+          } } catch (eP2) {}
+        }
+      }
+      partG = Object.values(partM).sort((a, b) => a.data < b.data ? -1 : 1).slice(-120);
+      fs.writeFileSync(path.join(FEED, 'andamento-partecipazione.json'), JSON.stringify({ generato: new Date().toISOString(), giorni: partG }));
+      precPart = partG.length;
+    } catch (eP3) { precPart = null; }
     const ic = JSON.parse(fs.readFileSync(path.join(FEED, 'indice-completo.json'), 'utf8'));
     fs.writeFileSync(path.join(FEED, 'statistiche.json'), JSON.stringify({ generato: new Date().toISOString().slice(0, 10), totale: ic.totaleLotti, prezzoMedioImm: ic.settori.immobiliare.prezzoMedio, scontoMedioImm: ic.settori.immobiliare.scontoMedio, bandePrezzo: ic.bandePrezzo, esiti: esitiFinali, perData, nota: 'statistiche vive dal giro automatico — nessun numero inventato' }));
     console.log('statistiche.json sempre aggiornato');
