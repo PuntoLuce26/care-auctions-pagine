@@ -33,9 +33,11 @@ function get(url) {
   console.log('catalogo attuale:', Object.keys(esistenti).length, 'lotti');
 
   // 2) le URL dei lotti dai sitemap degli aggregatori (fallcoaste + astagiudiziaria + ivg regionali)
-  const siti = ['https://www.fallcoaste.it/sitemap.xml', 'https://www.astagiudiziaria.com/sitemap.xml'];
+  // 5.877: TUTTI i siti della famiglia astagiudiziaria (le perizie pubbliche degli IVG) — mai portali che vietano il prelievo (5.872)
+  const siti = ['https://www.fallcoaste.it/sitemap.xml', 'https://www.astagiudiziaria.com/sitemap.xml', 'https://www.ivgtreviso.it/sitemap.xml', 'https://www.ivgudine.it/sitemap.xml', 'https://www.ivgvicenza.it/sitemap.xml', 'https://www.ivgverona.it/sitemap.xml', 'https://www.ivgbrescia.it/sitemap.xml', 'https://www.ivgbergamo.it/sitemap.xml', 'https://www.ivgcomo.it/sitemap.xml', 'https://www.ivgpadova.it/sitemap.xml', 'https://www.ivgvenezia.it/sitemap.xml'];
+  const sitiR = siti.map(s => s.replace('https://www.','https://'));
   const urls = new Set();
-  for (const s of siti) {
+  for (const s of sitiR) {
     try {
       const r = await get(s);
       const uu = [...new Set([...r.t.matchAll(/<loc>([^<]+\/inserzioni\/[^<]+)<\/loc>/g)].map(m => m[1]))];
