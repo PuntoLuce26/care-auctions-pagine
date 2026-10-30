@@ -186,6 +186,14 @@ function mappa(x){
       }
     } catch (eP) {}
     const perData = { passate, future, oggi, prossimi30, prossimi90, totale: passate + future + oggi };
+    // STORICO-5.852: l archivio giornaliero del prezzo medio (per il grafico CAReIndex)
+    let storico = [];
+    try { storico = (JSON.parse(fs.readFileSync(path.join(FEED, 'andamento-prezzi.json'), 'utf8')) || {}).giorni || []; } catch (eS) {}
+    const oggiD = new Date().toISOString().slice(0, 10);
+    storico = storico.filter(x => x && x.data && x.data !== oggiD);
+    storico.push({ data: oggiD, totale: ic.totaleLotti, prezzoMedio: Math.round(ic.settori.immobiliare.prezzoMedio || 0), scontoMedio: Math.round(ic.settori.immobiliare.scontoMedio || 0) });
+    storico = storico.slice(-120);
+    fs.writeFileSync(path.join(FEED, 'andamento-prezzi.json'), JSON.stringify({ generato: new Date().toISOString(), giorni: storico }));
     const ic = JSON.parse(fs.readFileSync(path.join(FEED, 'indice-completo.json'), 'utf8'));
     fs.writeFileSync(path.join(FEED, 'statistiche.json'), JSON.stringify({ generato: new Date().toISOString().slice(0, 10), totale: ic.totaleLotti, prezzoMedioImm: ic.settori.immobiliare.prezzoMedio, scontoMedioImm: ic.settori.immobiliare.scontoMedio, bandePrezzo: ic.bandePrezzo, esiti: esitiFinali, perData, nota: 'statistiche vive dal giro automatico — nessun numero inventato' }));
     console.log('statistiche.json sempre aggiornato');
