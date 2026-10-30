@@ -192,7 +192,7 @@ function mappa(x){
     const oggiD = new Date().toISOString().slice(0, 10);
     storico = storico.filter(x => x && x.data && x.data !== oggiD);
     storico.push({ data: oggiD, totale: ic.totaleLotti, prezzoMedio: Math.round(ic.settori.immobiliare.prezzoMedio || 0), scontoMedio: Math.round(ic.settori.immobiliare.scontoMedio || 0) });
-    storico = storico.slice(-120);
+    storico = storico.slice(-730); // 5.860: 2 anni di storia, per sempre
     fs.writeFileSync(path.join(FEED, 'andamento-prezzi.json'), JSON.stringify({ generato: new Date().toISOString(), giorni: storico }));
     // PARTECIPAZIONE-5.856: archivio giornaliero degli esiti (aggiudicate/deserte/sospese) per l andamento della partecipazione
     let partG = [];
@@ -212,7 +212,7 @@ function mappa(x){
           } } catch (eP2) {}
         }
       }
-      partG = Object.values(partM).sort((a, b) => a.data < b.data ? -1 : 1).slice(-120);
+      partG = Object.values(partM).sort((a, b) => a.data < b.data ? -1 : 1).slice(-730); // 5.860
       fs.writeFileSync(path.join(FEED, 'andamento-partecipazione.json'), JSON.stringify({ generato: new Date().toISOString(), giorni: partG }));
       precPart = partG.length;
     } catch (eP3) { precPart = null; }
