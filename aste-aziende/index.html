@@ -27,6 +27,8 @@ h1{font-size:clamp(30px,4.2vw,50px);line-height:1.08;letter-spacing:-.02em;margi
 .filters{position:sticky;top:0;z-index:5;background:rgba(244,241,234,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;margin-top:26px}
 .frow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 input,select{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-height:42px}
+input[type=checkbox]{flex:0 0 auto;width:18px;height:18px;min-width:0;min-height:0;padding:0;accent-color:var(--ink);cursor:pointer}
+label.chk{cursor:pointer}
 input{flex:1 1 260px;min-width:200px}select{flex:0 1 190px}
 .chk{display:flex;align-items:center;gap:7px;font-size:13.5px;color:var(--muted);white-space:nowrap}
 .count{font-size:13px;color:var(--muted);margin:16px 0 0}
@@ -120,7 +122,7 @@ input{flex:1 1 260px;min-width:200px}select{flex:0 1 190px}
   }
   function stat(v,l){return '<div class="stat"><div class="n">'+v+'</div><div class="l">'+l+'</div></div>'}
   fetch('/dati/aste-aziende.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('feed');return r.json()}).then(function(d){
-    META=d.meta||{}; TUTTI=d.lotti||[];
+    META=d.meta||{}; TUTTI=d.lotti||[]; var _visti={}; TUTTI=TUTTI.filter(function(x){var k=String(x.id||''); if(!k||_visti[k]) return false; _visti[k]=1; return true;});
     stats.innerHTML=stat(n(META.totale),'lotti totali')+stat(n(META.attive),'attivi')+stat(eur(META.valoreAttive),'valore base attivo')+stat(n(META.tribunali),'tribunali');
     var regs={}; TUTTI.forEach(function(x){if(x.regione)regs[x.regione]=1});
     var sel=document.getElementById('regione'); Object.keys(regs).sort().forEach(function(r){var o=document.createElement('option');o.value=r;o.textContent=r;sel.appendChild(o)});
