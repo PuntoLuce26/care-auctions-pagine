@@ -29,12 +29,22 @@ jobs:
           const d=JSON.parse(fs.readFileSync(p,'utf8')); const n=(d.lotti||[]).length;
           console.log('lotti: '+n+' · dichiarato PVP: '+(d.meta&&d.meta.dichiaratoPVP));
           if(n<120){ console.log('::error::dataset dimezzato ('+n+') — non committo'); process.exit(1); }
+          // linea sorella: crediti fiscali (stessa fonte, dataset separato)
+          const pf='feed/crediti-fiscali.json';
+          if(!fs.existsSync(pf)){ console.log('::error::crediti-fiscali.json assente'); process.exit(1); }
+          const f=JSON.parse(fs.readFileSync(pf,'utf8')); const nf=(f.lotti||[]).length;
+          console.log('crediti fiscali: '+nf+' · fiscali nel PVP: '+(f.meta&&f.meta.fiscaliNelPvp));
+          // soglia più bassa: i fiscali sono la classe più stabile del PVP (~386)
+          if(nf<200){ console.log('::error::fiscali dimezzati ('+nf+') — non committo'); process.exit(1); }
+          const rotti=(f.lotti||[]).filter(x=>x.importo!=null&&!x.importoTipo).length;
+          if(rotti>0){ console.log('::error::'+rotti+' fiscali con importo senza metodo'); process.exit(1); }
           NODE
       - name: commit e push
         run: |
           git config user.name "Sam CARe"
           git config user.email "sam@careauctions.co"
-          git add feed/npl.json feed/npl-statistiche.json
+          git add feed/npl.json feed/npl-statistiche.json \
+                  feed/crediti-fiscali.json feed/crediti-fiscali-statistiche.json
           if git diff --cached --quiet; then echo "nessuna variazione"; else
             git commit -m "NPL's sync $(date -u +%FT%TZ)"
             for i in 1 2 3 4 5; do

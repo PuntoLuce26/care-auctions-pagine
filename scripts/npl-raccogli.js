@@ -39,6 +39,9 @@ const https = require('https');
 const OUT_DIR = process.env.NPL_OUT_DIR || path.join(__dirname, '..', 'feed');
 const OUT_DATASET = path.join(OUT_DIR, 'npl.json');
 const OUT_STAT = path.join(OUT_DIR, 'npl-statistiche.json');
+// linea sorella: crediti fiscali/d'imposta (stessa fonte, stessi campi, dataset separato)
+const OUT_FISCALI = path.join(OUT_DIR, 'crediti-fiscali.json');
+const OUT_FISCALI_STAT = path.join(OUT_DIR, 'crediti-fiscali-statistiche.json');
 
 const PREFISSI_NOTI = ['ric-496b258c-986a1b71'];
 const SIZE = 100;
@@ -135,6 +138,21 @@ function classifica(x, desc) {
   return { tipo: 'credito' };
 }
 
+// ---- sotto-tipo dei crediti fiscali (solo per la linea sorella, dal testo del bando) ----
+// Ordine delle regole = priorità: il primo che combacia vince. Se nessuno combacia: 'fiscale-generico'.
+const SOTTOTIPI_FISCALI = [
+  ['bonus-edilizi-superbonus', /superbonus|ecobonus|sismabonus|bonus\s+ediliz|110\s*%/i],
+  ['iva', /credit[oi]\s+(?:i\.?\s?v\.?\s?a\.?|di\s+iva)|rimborso\s+iva|iva\s+(?:a\s+credito|di\s+credito)/i],
+  ['ires-irap', /\bIRES\b|\bIRAP\b/i],
+  ['tributario-erario', /tributar|erario|riscossione|agenzia\s+delle\s+entrate/i],
+  ['credito-d-imposta', /credit[oi]\s+d['\u2019]?\s?imposta|bonus\s+fiscali/i],
+  ['fiscale-generico', /fiscal/i]
+];
+function sottotipoFiscale(desc) {
+  for (const [nome, re] of SOTTOTIPI_FISCALI) if (re.test(String(desc || ''))) return nome;
+  return 'fiscale-generico';
+}
+
 // ---- valore nominale: SOLO se scritto nel bando pubblico ----
 const RE_NOMINALE = [
   /valore\s+nominale\s+(?:complessivo\s+)?(?:pari\s+a\s+|di\s+cui\s+|di\s+)?(?:circa\s+)?€?\s*([\d][\d.\s]*\d(?:,\d{1,2})?)/i,
@@ -180,38 +198,53 @@ function statoDi(x, oggi) {
   return 'conclusa-esito-non-pubblicato';
 }
 
-function normalizza(x, oggi) {
-  const desc = String(x.descLotto || '').replace(/\s+/g, ' ').trim();
-  const cls = classifica(x, desc);
-  if (!cls.tipo) return { scartato: cls.escluso };
+// costruttore unico della riga normalizzata: usato sia dalla linea NPL sia da quella fiscale.
+// L'ordine dei campi è quello già pubblicato dal cloud: non va cambiato.
+function rigaNormalizzata(x, oggi, desc, tipo, sottotipo) {
   const ind = x.indirizzo || {};
   const prov = String(ind.provincia || '');
   const vn = valoreNominale(desc);
   const base = Number(x.prezzoBaseAsta) || null;
-  return {
-    lotto: {
-      id: 'pvp-' + x.id,
-      fonte: 'PVP',
-      fonteUrl: 'https://pvp.giustizia.it/pvp/it/detail_annuncio.page?idAnnuncio=' + x.id,
-      tipo: cls.tipo,
-      categoria: (x.categoriaBene && x.categoriaBene[0]) || '',
-      importo: vn.valore,
-      importoTipo: vn.metodo,
-      prezzoBase: base,
-      regione: regioneDi(prov) || null,
-      provincia: prov || null,
-      comune: ind.citta || null,
-      tribunale: x.tribunale ? String(x.tribunale).replace(/^Tribunale di\s*/i, '').trim() : null,
-      veicolo: veicoloDi(desc),
-      data: x.dataVendita || null,
-      ora: String(x.orarioVendita || '').slice(0, 5) || null,
-      stato: statoDi(x, oggi),
-      descrizione: desc.slice(0, 260),
-      url: 'https://pvp.giustizia.it/pvp/it/detail_annuncio.page?idAnnuncio=' + x.id,
-      licenza: LICENZA_PVP,
-      aggiornato: oggi
-    }
+  const r = {
+    id: 'pvp-' + x.id,
+    fonte: 'PVP',
+    fonteUrl: 'https://pvp.giustizia.it/pvp/it/detail_annuncio.page?idAnnuncio=' + x.id,
+    tipo,
+    categoria: (x.categoriaBene && x.categoriaBene[0]) || '',
+    importo: vn.valore,
+    importoTipo: vn.metodo,
+    prezzoBase: base,
+    regione: regioneDi(prov) || null,
+    provincia: prov || null,
+    comune: ind.citta || null,
+    tribunale: x.tribunale ? String(x.tribunale).replace(/^Tribunale di\s*/i, '').trim() : null,
+    veicolo: veicoloDi(desc),
+    data: x.dataVendita || null,
+    ora: String(x.orarioVendita || '').slice(0, 5) || null,
+    stato: statoDi(x, oggi),
+    descrizione: desc.slice(0, 260),
+    url: 'https://pvp.giustizia.it/pvp/it/detail_annuncio.page?idAnnuncio=' + x.id,
+    licenza: LICENZA_PVP,
+    aggiornato: oggi
   };
+  if (sottotipo) r.sottotipo = sottotipo;
+  return r;
+}
+
+function normalizza(x, oggi) {
+  const desc = String(x.descLotto || '').replace(/\s+/g, ' ').trim();
+  const cls = classifica(x, desc);
+  // i crediti fiscali non entrano nella linea NPL ma non si buttano: vanno nella linea sorella
+  if (cls.escluso === 'credito-fiscale') {
+    const cat = (x.categoriaBene && x.categoriaBene[0]) || '';
+    // un credito fiscale è un credito: quote/aziende/denaro restano fuori e vengono solo contati.
+    // NB: restano comunque nel conteggio meta.esclusi['credito-fiscale'] per non cambiare
+    // i numeri già pubblicati dal cloud (389 = 386 crediti + 3 non-credito).
+    if (!/CREDIT/.test(cat)) return { scartato: 'credito-fiscale', fiscaleScartato: true };
+    return { fiscale: rigaNormalizzata(x, oggi, desc, 'credito-fiscale', sottotipoFiscale(desc)) };
+  }
+  if (!cls.tipo) return { scartato: cls.escluso };
+  return { lotto: rigaNormalizzata(x, oggi, desc, cls.tipo, null) };
 }
 
 // ---- statistiche ----
@@ -263,13 +296,25 @@ function conta(arr, f) {
     console.log('grezzo salvato in grezzi/');
   }
 
-  const lotti = []; const esclusi = {};
+  const lotti = []; const fiscali = []; const esclusi = {};
+  let fiscaliScartati = 0;
   for (const x of raw) {
     const n = normalizza(x, oggi);
-    if (n.scartato) { esclusi[n.scartato] = (esclusi[n.scartato] || 0) + 1; continue; }
+    if (n.scartato) {
+      esclusi[n.scartato] = (esclusi[n.scartato] || 0) + 1;
+      if (n.fiscaleScartato) fiscaliScartati++;
+      continue;
+    }
+    if (n.fiscale) {
+      // restano FUORI dalla linea NPL: il conteggio in meta.esclusi non deve cambiare (389)
+      esclusi['credito-fiscale'] = (esclusi['credito-fiscale'] || 0) + 1;
+      fiscali.push(n.fiscale);
+      continue;
+    }
     lotti.push(n.lotto);
   }
   lotti.sort((a, b) => String(b.data || '').localeCompare(String(a.data || '')));
+  fiscali.sort((a, b) => String(b.data || '').localeCompare(String(a.data || '')));
 
   const perTipo = conta(lotti, x => x.tipo);
   const perRegione = conta(lotti, x => x.regione || null);
@@ -318,6 +363,65 @@ function conta(arr, f) {
   fs.writeFileSync(OUT_DATASET, JSON.stringify({ meta, lotti }, null, 0));
   fs.writeFileSync(OUT_STAT, JSON.stringify({ meta, perRegione, perProvincia }, null, 1));
 
+  // ---------- linea sorella: CREDITI FISCALI ----------
+  // Stessi campi normalizzati della linea NPL + sottotipo. Sono crediti verso lo Stato:
+  // non sono NPL, ma sono un mercato reale e vanno pubblicati separati, mai mescolati.
+  const fiscPerSottotipo = conta(fiscali, x => x.sottotipo);
+  const fiscPerRegione = conta(fiscali, x => x.regione || null);
+  const fiscPerProvincia = conta(fiscali, x => x.provincia || null);
+  const fiscPerStato = conta(fiscali, x => x.stato);
+  const fiscConImporto = fiscali.filter(x => x.importo).length;
+  const fiscConRegione = fiscali.filter(x => x.regione).length;
+  const fiscConTribunale = fiscali.filter(x => x.tribunale).length;
+  const fiscSommaBase = fiscali.reduce((s, x) => s + (x.prezzoBase || 0), 0);
+  const fiscSommaNominale = fiscali.reduce((s, x) => s + (x.importo || 0), 0);
+  const fiscDate = fiscali.map(x => x.data).filter(Boolean).sort();
+
+  const metaFiscali = {
+    titolo: 'Crediti fiscali',
+    sottotitolo: 'Crediti d\'imposta e tributari ceduti nelle procedure concorsuali (dati veri dal PVP)',
+    generatoIl: new Date().toISOString(),
+    aggiornato: oggi,
+    fonte: 'PVP — Portale delle Vendite Pubbliche, Ministero della Giustizia (pvp.giustizia.it)',
+    query: 'tipoLotto=VALORI-CREDITI (filtro locale: crediti fiscali)',
+    licenza: LICENZA_PVP,
+    metodo: 'Crediti fiscali = lotti con categoria credito il cui bando cita credito d\'imposta, ' +
+            'superbonus/bonus edilizi, IVA, IRES/IRAP, crediti tributari o erario. ' +
+            'Il sottotipo è letto dal testo pubblico del bando con regole dichiarate e ordinate; ' +
+            'se nessuna regola combacia il lotto resta "fiscale-generico". ' +
+            'Valore nominale solo se scritto nel bando. Nessun importo stimato.',
+    totale: fiscali.length,
+    dichiaratoPVP: raw.length,
+    // 389 = tutti i lotti classificati fiscali nel PVP; 3 non sono crediti (quote/aziende/denaro)
+    // e restano fuori da questo dataset, contati qui sotto e in meta.esclusi della linea NPL.
+    fiscaliNelPvp: fiscali.length + fiscaliScartati,
+    esclusi: fiscaliScartati ? { 'categoria-non-credito': fiscaliScartati } : {},
+    perSottotipo: fiscPerSottotipo,
+    perStato: fiscPerStato,
+    fasceImportoNominale: conta(fiscali, x => fasciaDi(x.importo)),
+    fascePrezzoBase: conta(fiscali, x => fasciaDi(x.prezzoBase)),
+    copertura: {
+      importo: { con: fiscConImporto, su: fiscali.length, pct: +(100 * fiscConImporto / (fiscali.length || 1)).toFixed(1) },
+      regione: { con: fiscConRegione, su: fiscali.length, pct: +(100 * fiscConRegione / (fiscali.length || 1)).toFixed(1) },
+      tribunale: { con: fiscConTribunale, su: fiscali.length, pct: +(100 * fiscConTribunale / (fiscali.length || 1)).toFixed(1) }
+    },
+    regioni: Object.keys(fiscPerRegione).length,
+    province: Object.keys(fiscPerProvincia).length,
+    sommaPrezzoBase: Math.round(fiscSommaBase),
+    sommaValoreNominaleDichiarato: Math.round(fiscSommaNominale),
+    freschezza: {
+      ultimaRaccolta: oggi,
+      dataLottoPiuRecente: fiscDate[fiscDate.length - 1] || null,
+      dataLottoPiuVecchio: fiscDate[0] || null
+    },
+    nota: 'Questi lotti NON sono NPL: il debitore è lo Stato, non un privato inadempiente. ' +
+          'Restano separati dal dataset npl.json per non gonfiare la linea NPL. ' +
+          'Prezzo base = base d\'asta, NON il valore nominale del credito.'
+  };
+
+  fs.writeFileSync(OUT_FISCALI, JSON.stringify({ meta: metaFiscali, lotti: fiscali }, null, 0));
+  fs.writeFileSync(OUT_FISCALI_STAT, JSON.stringify({ meta: metaFiscali, perRegione: fiscPerRegione, perProvincia: fiscPerProvincia }, null, 1));
+
   console.log('\nSCRITTO ' + OUT_DATASET);
   console.log('lotti: ' + lotti.length + ' · esclusi: ' + JSON.stringify(esclusi));
   console.log('per tipo: ' + JSON.stringify(perTipo));
@@ -325,4 +429,10 @@ function conta(arr, f) {
   console.log('regioni: ' + meta.regioni + ' · province: ' + meta.province);
   console.log('copertura importo ' + meta.copertura.importo.pct + '% · regione ' + meta.copertura.regione.pct + '% · tribunale ' + meta.copertura.tribunale.pct + '%');
   console.log('somma prezzi base: € ' + meta.sommaPrezzoBase.toLocaleString('it-IT'));
+
+  console.log('\nSCRITTO ' + OUT_FISCALI);
+  console.log('crediti fiscali: ' + fiscali.length + ' · scartati (non-credito): ' + fiscaliScartati);
+  console.log('per sottotipo: ' + JSON.stringify(fiscPerSottotipo));
+  console.log('copertura importo ' + metaFiscali.copertura.importo.pct + '% · regione ' + metaFiscali.copertura.regione.pct + '% · tribunale ' + metaFiscali.copertura.tribunale.pct + '%');
+  console.log('somma valore nominale dichiarato: € ' + metaFiscali.sommaValoreNominaleDichiarato.toLocaleString('it-IT'));
 })().catch(e => { console.error('FATALE', e); process.exit(1); });
