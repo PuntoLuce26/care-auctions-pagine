@@ -1,0 +1,30 @@
+name: icarewall
+# 5.940 — backup dell'iCAReWall: ogni ora chiede al worker di pubblicare un pensiero nuovo.
+# Il worker decide (4 ore minime, dedupe): se non è ora risponde "saltato" senza errori.
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: icarewall
+  cancel-in-progress: false
+jobs:
+  pubblica:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Pubblica un pensiero nuovo
+        env:
+          REGIA_KEY: ${{ secrets.REGIA_KEY }}
+        run: |
+          set -u
+          if [ -z "$REGIA_KEY" ]; then echo "::error::secret REGIA_KEY mancante"; exit 1; fi
+          BODY=$(printf '{"azione":"icarewall-pubblica","chiave":"%s","forza":false}' "$REGIA_KEY")
+          OUT=$(curl -sS -m 60 -w '\n%{http_code}' -X POST https://icare-ai.misty-mode-1cbc.workers.dev -H 'Content-Type: application/json' -A 'Mozilla/5.0 (gh-actions)' -d "$BODY")
+          CODE=$(printf '%s' "$OUT" | tail -n1)
+          JSON=$(printf '%s' "$OUT" | sed '$d')
+          echo "risposta: $JSON"
+          if [ "$CODE" != "200" ]; then echo "::error::HTTP $CODE"; exit 1; fi
+          if printf '%s' "$JSON" | grep -q '"errore"'; then echo "::error::il worker ha risposto con errore"; exit 1; fi
