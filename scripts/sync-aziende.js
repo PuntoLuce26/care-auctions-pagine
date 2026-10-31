@@ -183,6 +183,13 @@ function mappa(x) {
     nota: 'Solo lotti pubblicati sul PVP con tipo AZIENDE, VALORI-CREDITI e ALTRO. Nessun numero inventato: i campi mancanti non si mostrano.'
   };
 
+  // RETE DI SICUREZZA: se la raccolta è parziale non sovrascrivo un feed sano (mai dati dimezzati)
+  let precedente = 0;
+  try { precedente = Number(JSON.parse(fs.readFileSync(path.join(OUT, 'aste-aziende.json'), 'utf8')).meta.totale) || 0; } catch (e) {}
+  if (precedente > 1000 && tutti.length < precedente * 0.6) {
+    console.error('RACCOLTA PARZIALE: ' + tutti.length + ' lotti contro i ' + precedente + ' del feed attuale — NON sovrascrivo nulla');
+    process.exit(1);
+  }
   fs.mkdirSync(OUT, { recursive: true });
   fs.writeFileSync(path.join(OUT, 'aste-aziende.json'), JSON.stringify({ meta, lotti: attive }));
   fs.writeFileSync(path.join(OUT, 'aste-aziende-archivio.json'), JSON.stringify({ meta, lotti: archivio }));
