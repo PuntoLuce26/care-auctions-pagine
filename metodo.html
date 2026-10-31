@@ -170,6 +170,15 @@ td.metodo{color:#37455f}
       document.querySelectorAll('[data-n="esiti"]').forEach(function (e) { e.textContent = Number(n.aggiudicazioni || 0).toLocaleString('it-IT'); });
       document.querySelectorAll('[data-n="tribunali"]').forEach(function (e) { e.textContent = Number(n.tribunaliEsiti || 0).toLocaleString('it-IT'); });
       if (j.meta && j.meta.versione) document.querySelectorAll('[data-ver-any]').forEach(function (e) { e.textContent = j.meta.versione; });
+      if (j.meta) {
+        var el = document.getElementById('versione'); if (el && j.meta.versione) el.textContent = j.meta.versione;
+        var ef = document.getElementById('fresco'), es = document.getElementById('fresco-sub');
+        if (ef && j.meta.generato) {
+          var d = new Date(j.meta.generato), min = Math.max(0, Math.round((Date.now() - d.getTime()) / 60000));
+          ef.textContent = daMinuti(min);
+          if (es) es.textContent = j.meta.generato.replace('T', ' ').slice(0, 16) + ' UTC · calcolato dai timestamp del feed';
+        }
+      }
     }).catch(function () {});
     carica('andamento-esiti.json').then(function (j) {
       var e = (j && j.esiti) || {};
