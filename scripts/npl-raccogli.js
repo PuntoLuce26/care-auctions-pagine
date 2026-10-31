@@ -284,7 +284,7 @@ function conta(arr, f) {
   const sommaBase = lotti.reduce((s, x) => s + (x.prezzoBase || 0), 0);
 
   const meta = {
-    titolo: 'NPL's — crediti in sofferenza e crediti in procedura (dati veri dal PVP)',
+    titolo: "NPL's — crediti in sofferenza e crediti in procedura (dati veri dal PVP)",
     generatoIl: new Date().toISOString(),
     aggiornato: oggi,
     fonte: 'PVP — Portale delle Vendite Pubbliche, Ministero della Giustizia (pvp.giustizia.it)',
