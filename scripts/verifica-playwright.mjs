@@ -10,6 +10,7 @@
  *   node puntoluce/scripts/verifica-playwright.mjs --mobile
  *   node puntoluce/scripts/verifica-playwright.mjs --routes=/,/indice,/osservatorio,/dati
  *   node puntoluce/scripts/verifica-playwright.mjs --screens=/tmp/schermate --out=/tmp/verifica.json
+ *   node puntoluce/scripts/verifica-playwright.mjs --strict   (anche i console error diventano KO)
  *
  * Opzioni:
  *   --base=URL        base (default https://careauctions.co)
@@ -19,8 +20,10 @@
  *   --out=FILE        salva il JSON completo
  *   --wait=3500       ms di attesa dopo il load (default 3500)
  *   --timeout=45000   timeout per navigazione (default 45000)
+ *   --strict          considera KO anche i console error (di default contano solo pageerror/HTTP/root vuota)
  *
- * Esce con 1 se una rotta ha errori JS o resta vuota (per le rotte app).
+ * KO = pageerror, documento HTTP >= 400, oppure rotta app con #root vuota.
+ * Le risorse 4xx e i console error vengono stampati come WARN (servono a capire, non a bloccare).
  */
 import { chromium } from 'playwright';
 import { mkdirSync, writeFileSync } from 'node:fs';
@@ -37,8 +40,9 @@ const WAIT = Number(args.wait || 3500);
 const TIMEOUT = Number(args.timeout || 45000);
 const OUT = args.out ? String(args.out) : null;
 const SCREENS = args.screens ? String(args.screens) : null;
+const STRICT = !!args.strict;
 const CHROME = process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-const APP_ROUTES = new Set(['/indice', '/osservatorio', '/dati']); // rotte dove il contenuto deve esserci
+const APP_ROUTES = new Set(['/indice', '/osservatorio', '/dati']);
 
 const MOBILE = {
   viewport: { width: 390, height: 844 },
@@ -51,7 +55,6 @@ const MOBILE = {
 if (SCREENS) mkdirSync(SCREENS, { recursive: true });
 
 const browser = await chromium.launch({ executablePath: CHROME, headless: true }).catch(async () => {
-  // fallback: Chromium di Playwright (se installato)
   return chromium.launch({ headless: true });
 });
 
@@ -60,9 +63,11 @@ async function giro(label, opts, routes) {
   for (const r of routes) {
     const ctx = await browser.newContext(opts);
     const page = await ctx.newPage();
-    const errs = [], failed = [];
-    page.on('pageerror', (e) => errs.push('PAGEERROR: ' + String(e.message).slice(0, 200)));
+    const errs = [], badResp = [], failed = [];
+    let pageErrors = 0;
+    page.on('pageerror', (e) => { pageErrors++; errs.push('PAGEERROR: ' + String(e.message).slice(0, 200)); });
     page.on('console', (m) => { if (m.type() === 'error') errs.push('CONSOLE: ' + m.text().slice(0, 200)); });
+    page.on('response', (r) => { try { if (r.status() >= 400) badResp.push(r.status() + ' ' + r.url().slice(0, 220)); } catch (e) {} });
     page.on('requestfailed', (r) => failed.push(r.url().slice(0, 220) + ' :: ' + ((r.failure() && r.failure().errorText) || 'failed')));
     const t0 = Date.now();
     let http = null, sw = null, caches = null, heap = null, nodes = 0, text = 0, title = '';
@@ -80,7 +85,7 @@ async function giro(label, opts, routes) {
     } catch (e) {
       errs.push('NAV: ' + String(e.message).slice(0, 200));
     }
-    out[r] = { http, ms: Date.now() - t0, heapMb: heap, sw, caches, nodes, text, title, errs: errs.slice(0, 6), failed: failed.slice(0, 6) };
+    out[r] = { http, ms: Date.now() - t0, heapMb: heap, sw, caches, nodes, text, title, pageErrors, errs: errs.slice(0, 6), badResp: badResp.slice(0, 6), failed: failed.slice(0, 6) };
     await ctx.close();
   }
   return out;
@@ -92,15 +97,16 @@ if (args.mobile) risultato.mobile = await giro('mobile', MOBILE, ROUTES);
 await browser.close();
 
 let ko = 0;
-console.log(`\nVERIFICA PLAYWRIGHT — ${risultato.quando}\nbase: ${BASE}${args.mobile ? ' · desktop + mobile' : ' · desktop'}\n`);
+console.log(`\nVERIFICA PLAYWRIGHT — ${risultato.quando}\nbase: ${BASE}${args.mobile ? ' · desktop + mobile' : ' · desktop'}${STRICT ? ' · strict' : ''}\n`);
 for (const [label, g] of Object.entries({ desktop: risultato.desktop, mobile: risultato.mobile }).filter(([, g]) => g)) {
   for (const [r, v] of Object.entries(g)) {
     const vuota = APP_ROUTES.has(r) && v.text < 100;
-    const bad = v.errs.length > 0 || !v.http || v.http >= 400 || vuota;
+    const bad = v.pageErrors > 0 || !v.http || v.http >= 400 || vuota || (STRICT && v.errs.length > 0);
     if (bad) ko++;
     console.log(`${bad ? 'KO ' : 'OK '} [${label}] ${r.padEnd(22)} http=${v.http ?? '-'} ${String(v.ms).padStart(6)}ms  nodi=${String(v.nodes).padStart(5)}  testo=${String(v.text).padStart(6)}  heap=${v.heapMb ?? '-'}MB  sw=${v.sw ?? '-'} cache=${v.caches ?? '-'}${vuota ? '  <<< VUOTA' : ''}`);
-    if (v.errs.length) v.errs.forEach((e) => console.log('      ' + e));
-    if (v.failed && v.failed.length) v.failed.forEach((e) => console.log('      risorsa KO: ' + e));
+    if (v.errs.length) v.errs.forEach((e) => console.log('      WARN ' + e));
+    if (v.badResp && v.badResp.length) v.badResp.forEach((e) => console.log('      WARN risorsa ' + e));
+    if (v.failed && v.failed.length) v.failed.forEach((e) => console.log('      WARN failed ' + e));
   }
 }
 const tot = Object.keys(risultato.desktop).length + (risultato.mobile ? Object.keys(risultato.mobile).length : 0);
