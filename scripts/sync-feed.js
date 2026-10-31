@@ -255,7 +255,8 @@ async function main(){
       fs.writeFileSync(path.join(FEED, 'andamento-partecipazione.json'), JSON.stringify({ generato: new Date().toISOString(), giorni: partG }));
       precPart = partG.length;
     } catch (eP3) { precPart = null; }
-    fs.writeFileSync(path.join(FEED, 'statistiche.json'), JSON.stringify({ generato: new Date().toISOString().slice(0, 10), totale: ic.totaleLotti, prezzoMedioImm: ic.settori.immobiliare.prezzoMedio, scontoMedioImm: ic.settori.immobiliare.scontoMedio, bandePrezzo: ic.bandePrezzo, esiti: esitiFinali, perData, nota: 'statistiche vive dal giro automatico — nessun numero inventato' }));
+    // 5.914: "aggiornato" ISO con l'ora esatta — il guardiano calcola le ore di stallo da qui (2 ore = fermo).
+    fs.writeFileSync(path.join(FEED, 'statistiche.json'), JSON.stringify({ generato: new Date().toISOString().slice(0, 10), aggiornato: new Date().toISOString(), totale: ic.totaleLotti, prezzoMedioImm: ic.settori.immobiliare.prezzoMedio, scontoMedioImm: ic.settori.immobiliare.scontoMedio, bandePrezzo: ic.bandePrezzo, esiti: esitiFinali, perData, nota: 'statistiche vive dal giro automatico — nessun numero inventato' }));
     console.log('statistiche.json sempre aggiornato');
   } catch (eS) { console.log('statistiche: errore', eS.message); }
   if(MODE==='full'){
