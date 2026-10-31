@@ -1,0 +1,30 @@
+name: guardiano
+# 5.941 — backup del guardiano: ogni 15 minuti chiede al worker di controllare feed/sito/build.
+# Se il worker risponde ok:false o errore, il job fallisce e GitHub manda la mail.
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: guardiano
+  cancel-in-progress: false
+jobs:
+  controllo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Guardiano
+        env:
+          REGIA_KEY: ${{ secrets.REGIA_KEY }}
+        run: |
+          set -u
+          if [ -z "$REGIA_KEY" ]; then echo "::error::secret REGIA_KEY mancante"; exit 1; fi
+          BODY=$(printf '{"azione":"guardiano-test","chiave":"%s"}' "$REGIA_KEY")
+          OUT=$(curl -sS -m 60 -w '\n%{http_code}' -X POST https://icare-ai.misty-mode-1cbc.workers.dev -H 'Content-Type: application/json' -A 'Mozilla/5.0 (gh-actions)' -d "$BODY")
+          CODE=$(printf '%s' "$OUT" | tail -n1)
+          JSON=$(printf '%s' "$OUT" | sed '$d')
+          echo "risposta: $JSON"
+          if [ "$CODE" != "200" ]; then echo "::error::HTTP $CODE"; exit 1; fi
+          printf '%s' "$JSON" | python3 -c "import json,sys; d=json.load(sys.stdin); print('ok' if d.get('ok') else 'KO'); raise SystemExit(0 if d.get('ok') else 1)" || { echo "::error::guardiano ha trovato problemi"; exit 1; }
