@@ -1,0 +1,32 @@
+name: aziende-sync
+# 5.902 — aste di aziende, quote societarie e crediti: raccolta dedicata e indipendente
+# (non aspetta il sync grande: così un giro lento del feed non blocca questo)
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  aziende:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: raccolta aziende (gentile, con rete di sicurezza)
+        run: node scripts/sync-aziende.js || echo "AZIENDE: raccolta non riuscita (il feed resta intatto)"
+      - name: commit e push
+        run: |
+          git config user.name "Sam CARe"
+          git config user.email "sam@careauctions.co"
+          git add feed/aste-aziende.json feed/aste-aziende-archivio.json
+          if git diff --cached --quiet; then echo "nessuna variazione"; else
+            git commit -m "Aziende sync $(date -u +%FT%TZ)"
+            for i in 1 2 3 4 5; do
+              git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null
+              if git push; then break; fi
+              sleep 4
+            done
+          fi
