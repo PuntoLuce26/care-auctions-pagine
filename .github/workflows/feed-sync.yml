@@ -22,6 +22,7 @@ jobs:
           MODE=$MODE node scripts/sync-feed.js
           node scripts/dati-indice.js || echo "indice dati: non aggiornato"
           node scripts/statistiche-mercato.js || echo "statistiche mercato: non aggiornate in questo giro"
+          node scripts/idmap-sitemap.js || echo "idmap/citymap/sitemap: non rigenerati in questo giro"
           if [ "$MODE" = "full" ]; then
             node scripts/ivg-aggiudicazioni.js || echo "IVG: raccolta non riuscita stasera"
             node scripts/fallco-aggiudicazioni.js || echo "FALLCO: raccolta non riuscita stasera"
@@ -32,7 +33,7 @@ jobs:
         run: |
           git config user.name "Sam CARe"
           git config user.email "sam@careauctions.co"
-          git add feed/
+          git add feed/ sitemap-aste-*.xml
           if git diff --cached --quiet; then echo "nessuna variazione"; else
             git commit -m "Feed sync $MODE $(date -u +%FT%TZ)"
             # race-safe 5.838: il Mac e il cloud scrivono sullo stesso repo → pull con rebase + retry
