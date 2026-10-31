@@ -1,7 +1,7 @@
 name: feed-sync
 on:
   schedule:
-    - cron: '*/15 * * * *'   # incrementale
+    - cron: '*/5 * * * *'   # incrementale
     - cron: '0 1 * * *'      # notturna completa + prezzi IVG
   workflow_dispatch:
 permissions:
