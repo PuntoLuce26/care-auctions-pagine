@@ -20,6 +20,7 @@ jobs:
           if [ "$H" = "01" ]; then MODE=full; else MODE=inc; fi
           echo "MODE=$MODE"
           MODE=$MODE node scripts/sync-feed.js
+          node scripts/sync-aziende.js || echo "AZIENDE: raccolta non riuscita"
           if [ "$MODE" = "full" ]; then
             node scripts/ivg-aggiudicazioni.js || echo "IVG: raccolta non riuscita stasera"
             node scripts/fallco-aggiudicazioni.js || echo "FALLCO: raccolta non riuscita stasera"

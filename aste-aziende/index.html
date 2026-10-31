@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aste di aziende, quote societarie e crediti — CARe Auctions</title>
+<meta name="description" content="Le aste giudiziarie di aziende, rami d'azienda, quote societarie e crediti in tutta Italia: dati veri dal PVP, prezzo base, tribunale e data dell'asta. fonte PVP - Portale delle Vendite Pubbliche Giustizia - Ministero della Giustizia.">
+<link rel="canonical" href="https://careauctions.co/aste-aziende">
+<meta name="robots" content="index,follow">
+<meta property="og:title" content="Aste di aziende, quote societarie e crediti — CARe Auctions">
+<meta property="og:description" content="Aziende, rami d'azienda, quote societarie e crediti all'asta in Italia. Dati veri dal PVP, fonte citata, nessun numero inventato.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://careauctions.co/aste-aziende">
+<style>
+:root{--cream:#F4F1EA;--navy:#0F1E3A;--gold:#D4A84B;--soft:#E8E2D6}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--navy);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;line-height:1.55}
+a{color:var(--navy)}
+header.top{background:var(--navy);color:var(--cream);padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+header.top .m{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+header.top nav a{color:var(--cream);text-decoration:none;font-size:13.5px;margin-left:16px;opacity:.9}
+header.top nav a:hover{color:var(--gold)}
+main{max-width:1080px;margin:0 auto;padding:26px 18px 40px}
+h1{font-size:clamp(26px,4.4vw,40px);line-height:1.15;margin:6px 0 10px;letter-spacing:-.02em;font-weight:650}
+.lead{font-size:17px;color:#3C4A65;max-width:760px;margin:0 0 22px}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0 0 26px}
+.kpi div{background:#fff;border:1px solid var(--soft);border-radius:12px;padding:14px 16px}
+.kpi .n{font-size:23px;font-weight:650;letter-spacing:-.02em}
+.kpi .t{font-size:11.5px;text-transform:uppercase;letter-spacing:.12em;color:#6B7690;margin-top:3px}
+.filtri{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;background:#fff;border:1px solid var(--soft);border-radius:12px;padding:14px;margin-bottom:18px}
+.filtri label{display:block;font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;color:#6B7690;font-weight:600;margin-bottom:4px}
+select,input[type=search]{font:inherit;color:var(--navy);background:#FBF9F4;border:1px solid #D9D2C2;border-radius:9px;padding:10px 12px;min-height:44px;min-width:150px}
+input[type=search]{min-width:220px}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--soft);border-radius:12px;overflow:hidden;font-size:14.5px}
+th,td{text-align:left;padding:11px 12px;border-bottom:1px solid #EFE9DD;vertical-align:top}
+th{background:#FBF9F4;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#6B7690}
+tr:last-child td{border-bottom:0}
+.tit{font-weight:600}
+.sotto{font-size:12.5px;color:#6B7690;margin-top:2px}
+.prezzo{font-weight:650;white-space:nowrap}
+.sconto{display:inline-block;background:#E4F1EA;color:#1F6146;border-radius:999px;padding:2px 9px;font-size:12px;font-weight:600}
+.tipo{display:inline-block;border-radius:999px;padding:2px 9px;font-size:11.5px;font-weight:600;background:#EDE7DA;color:#5A4A22;white-space:nowrap}
+.tipo.AZIENDE{background:#E7EDF7;color:#2A4370}
+.tipo.CREDITI{background:#F3E9F5;color:#5B3570}
+.tipo.ALTRO{background:#F4EFE2;color:#6A5726}
+.btn{display:inline-block;border-radius:999px;padding:9px 16px;background:var(--navy);color:var(--cream);text-decoration:none;font-size:13.5px;font-weight:600;white-space:nowrap}
+.btn.oro{background:var(--gold);color:var(--navy)}
+.pager{display:flex;gap:8px;align-items:center;justify-content:center;margin:20px 0}
+.pager button{font:inherit;border:1px solid #CFC7B6;background:#fff;border-radius:999px;padding:9px 16px;min-height:42px;cursor:pointer;color:var(--navy)}
+.pager button:disabled{opacity:.45;cursor:default}
+.pager span{font-size:13.5px;color:#6B7690}
+.nota{background:#fff;border:1px solid var(--soft);border-radius:12px;padding:18px;margin-top:28px;font-size:14px;color:#37455F}
+.nota h2{font-size:15px;text-transform:uppercase;letter-spacing:.12em;color:#5A6780;margin:0 0 8px}
+.invito{margin:34px 0 8px;text-align:center}
+.invito p{font-size:20px;margin:0 0 14px;letter-spacing:-.01em}
+.invito a.btn{padding:13px 26px;font-size:15px}
+footer{text-align:center;color:#7A839A;font-size:12.5px;padding:26px 18px 46px}
+footer a{color:var(--navy)}
+.caricando{padding:26px;text-align:center;color:#6B7690}
+@media(max-width:720px){.tab-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}table{min-width:640px}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="m">CARe Auctions · aste di aziende</div>
+  <nav><a href="https://careauctions.co/">Home</a><a href="https://careauctions.co/aste">Aste immobiliari</a><a href="https://careauctions.co/osservatorio">oCARe</a><a href="https://careauctions.co/icare">iCARe</a></nav>
+</header>
+<main>
+  <h1>Aste di aziende, quote societarie e crediti</h1>
+  <p class="lead">Il tribunale non vende solo case: vende aziende, rami d'azienda, quote societarie e crediti. Qui ci sono tutti i lotti pubblicati sul PVP, con il prezzo base, il tribunale e la data dell'asta — dati veri, fonte in chiaro, nessun numero inventato.</p>
+
+  <div class="kpi" id="kpi">
+    <div><div class="n" id="k-attive">—</div><div class="t">aste in corso e future</div></div>
+    <div><div class="n" id="k-valore">—</div><div class="t">valore base complessivo</div></div>
+    <div><div class="n" id="k-tribunali">—</div><div class="t">tribunali</div></div>
+    <div><div class="n" id="k-regioni">—</div><div class="t">regioni</div></div>
+    <div><div class="n" id="k-totale">—</div><div class="t">lotti censiti (anche passati)</div></div>
+  </div>
+
+  <div class="filtri">
+    <div><label for="f-tipo">Tipo</label><select id="f-tipo"><option value="">Tutti</option><option value="AZIENDE">Aziende</option><option value="CREDITI">Crediti</option><option value="ALTRO">Altro</option></select></div>
+    <div><label for="f-regione">Regione</label><select id="f-regione"><option value="">Tutte</option></select></div>
+    <div><label for="f-cerca">Cerca</label><input type="search" id="f-cerca" placeholder="città, categoria, tribunale…"></div>
+    <div><label for="f-vista">Mostra</label><select id="f-vista"><option value="attive">Aste in corso e future</option><option value="archivio">Archivio (aste concluse)</option></select></div>
+  </div>
+
+  <div class="tab-wrap" id="tabella"><div class="caricando">Carico i dati veri dal PVP…</div></div>
+  <div class="pager" id="pager" hidden><button id="b-pre" type="button">← Precedente</button><span id="p-info"></span><button id="b-post" type="button">Successiva →</button></div>
+
+  <div class="nota">
+    <h2>Metodo e fonte</h2>
+    <p>I dati sono raccolti ogni 15 minuti dal <strong>PVP — Portale delle Vendite Pubbliche</strong> del Ministero della Giustizia (fonte PVP - Portale delle Vendite Pubbliche Giustizia - Ministero della Giustizia) con i filtri ufficiali AZIENDE, VALORI-CREDITI e ALTRO. Il prezzo mostrato è il prezzo base dell'asta pubblicato dal tribunale; il risparmio è calcolato sulla differenza tra prezzo base e offerta minima, quando l'offerta minima è pubblicata. I campi che la fonte non pubblica non si mostrano: non inventiamo nulla. Ogni lotto ha il link alla sua pagina ufficiale sul PVP.</p>
+    <p>Le aste di aziende richiedono attenzione in più rispetto a un immobile: si acquista un complesso (beni, contratti, rapporti) e la perizia va letta per intero. iCARe studia il caso con te e ti dice cosa guardare prima di offrire.</p>
+  </div>
+
+  <div class="invito">
+    <p>Questa è casa tua. Entra.</p>
+    <a class="btn oro" href="https://careauctions.co/icare">Conosci iCARe →</a>
+  </div>
+</main>
+<footer>
+  CARe Auctions — careauctions.co · PuntoLuce Srls · dati <a href="https://pvp.giustizia.it" target="_blank" rel="noopener">PVP — Portale delle Vendite Pubbliche Giustizia — Ministero della Giustizia</a>
+</footer>
+<script>
+(function(){
+  'use strict';
+  var FONTI = {
+    attive: ['/dati/aste-aziende.json', 'https://puntoluce26.github.io/care-auctions-pagine/feed/aste-aziende.json'],
+    archivio: ['/dati/aste-aziende-archivio.json', 'https://puntoluce26.github.io/care-auctions-pagine/feed/aste-aziende-archivio.json']
+  };
+  var cache = {};
+  var stato = { vista:'attive', tipo:'', regione:'', cerca:'', pagina:0, perPagina:30 };
+
+  function $(id){ return document.getElementById(id); }
+  function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  function migliaia(s){ return s.replace(/\B(?=(\d{3})+(?!\d))/g,'.'); }
+  function num(n){ var v=Number(n); if(!isFinite(v)) return '—'; return (v<0?'-':'')+migliaia(String(Math.round(Math.abs(v)))); }
+  function eur(n){ var v=Number(n); if(!isFinite(v)||v===0) return '—'; if(v>=1e9) return (v/1e9).toLocaleString('it-IT',{maximumFractionDigits:2})+' mld €'; if(v>=1e6) return (v/1e6).toLocaleString('it-IT',{maximumFractionDigits:1})+' mln €'; return (v/1000).toLocaleString('it-IT',{maximumFractionDigits:0})+' mila €'; }
+
+  function caricaFonti( chiave, i ){
+    i = i || 0;
+    var lista = FONTI[chiave];
+    if(i >= lista.length){ return Promise.reject(new Error('dati non disponibili')); }
+    return fetch(lista[i], {credentials:'omit'}).then(function(r){
+      if(!r.ok) throw new Error('stato ' + r.status);
+      return r.json();
+    }).catch(function(){ return caricaFonti(chiave, i+1); });
+  }
+
+  function carica(){
+    if(cache[stato.vista]){ disegna(); return; }
+    $('tabella').innerHTML = '<div class="caricando">Carico i dati veri dal PVP…</div>';
+    caricaFonti(stato.vista).then(function(j){
+      cache[stato.vista] = j;
+      disegna();
+    }).catch(function(e){
+      $('tabella').innerHTML = '<div class="caricando">Dati non disponibili in questo momento (' + esc(e.message) + '). Riprova tra poco.</div>';
+    });
+  }
+
+  function aggiornaKpi(){
+    var j = cache.attive;
+    if(!j || !j.meta) return;
+    var m = j.meta;
+    $('k-attive').textContent = num(m.attive);
+    $('k-valore').textContent = eur(m.valoreAttive);
+    $('k-tribunali').textContent = num(m.tribunali);
+    $('k-regioni').textContent = num(m.regioni);
+    $('k-totale').textContent = num(m.totale);
+  }
+
+  function popolaRegioni(){
+    var j = cache.attive;
+    if(!j) return;
+    var sel = $('f-regione');
+    var regioni = {};
+    (j.lotti || []).forEach(function(x){ if(x.regione) regioni[x.regione] = 1; });
+    var attuale = sel.value;
+    sel.innerHTML = '<option value="">Tutte</option>' + Object.keys(regioni).sort().map(function(r){ return '<option value="'+esc(r)+'">'+esc(r)+'</option>'; }).join('');
+    sel.value = attuale;
+  }
+
+  function filtra(){
+    var j = cache[stato.vista];
+    var lotti = (j && j.lotti) || [];
+    var q = stato.cerca.toLowerCase().trim();
+    return lotti.filter(function(x){
+      if(stato.tipo && x.tipo !== stato.tipo) return false;
+      if(stato.regione && x.regione !== stato.regione) return false;
+      if(q){
+        var testo = (x.titolo+' '+(x.descrizione||'')+' '+(x.tribunale||'')+' '+(x.cat||'')+' '+(x.citta||'')+' '+(x.provincia||'')).toLowerCase();
+        if(testo.indexOf(q) === -1) return false;
+      }
+      return true;
+    });
+  }
+
+  function riga(x){
+    var data = x.dataAsta ? String(x.dataAsta).split('-').reverse().join('/') : '—';
+    var descr = x.descrizione ? '<div class="sotto">' + esc(x.descrizione.slice(0,140)) + (x.descrizione.length>140?'…':'') + '</div>' : '';
+    var sconto = x.scontoPct > 0 ? ' <span class="sconto">−' + x.scontoPct + '%</span>' : '';
+    return '<tr>' +
+      '<td><span class="tipo ' + esc(x.tipo) + '">' + esc(x.tipo === 'AZIENDE' ? 'Azienda' : (x.tipo === 'CREDITI' ? 'Crediti' : 'Altro')) + '</span></td>' +
+      '<td><div class="tit">' + esc(x.titolo || x.cat || 'Lotto') + '</div>' + descr + '</td>' +
+      '<td><div class="prezzo">' + (x.prezzoBase ? Number(x.prezzoBase).toLocaleString('it-IT',{maximumFractionDigits:0}) + ' €' : '—') + sconto + '</div><div class="sotto">' + esc(x.tribunale || '') + '</div></td>' +
+      '<td style="white-space:nowrap">' + data + (x.oraAsta ? '<div class="sotto">' + esc(x.oraAsta) + '</div>' : '') + '</td>' +
+      '<td><a class="btn" href="' + esc(x.link) + '" target="_blank" rel="noopener">PVP →</a></td>' +
+    '</tr>';
+  }
+
+  function disegna(){
+    aggiornaKpi();
+    popolaRegioni();
+    var lotti = filtra();
+    var perPagina = stato.perPagina;
+    var pagine = Math.max(1, Math.ceil(lotti.length / perPagina));
+    if(stato.pagina >= pagine) stato.pagina = pagine - 1;
+    var dal = stato.pagina * perPagina;
+    var pagina = lotti.slice(dal, dal + perPagina);
+    if(!lotti.length){
+      $('tabella').innerHTML = '<div class="caricando">Nessun lotto con questi filtri. Prova ad allargare la ricerca.</div>';
+      $('pager').hidden = true;
+      return;
+    }
+    var thead = '<table><thead><tr><th>Tipo</th><th>Lotto</th><th>Prezzo base</th><th>Data asta</th><th></th></tr></thead><tbody>';
+    $('tabella').innerHTML = thead + pagina.map(riga).join('') + '</tbody></table>';
+    $('pager').hidden = false;
+    $('p-info').textContent = 'Pagina ' + (stato.pagina+1) + ' di ' + pagine + ' · ' + lotti.length.toLocaleString('it-IT') + ' lotti';
+    $('b-pre').disabled = stato.pagina === 0;
+    $('b-post').disabled = stato.pagina >= pagine - 1;
+  }
+
+  $('f-tipo').addEventListener('change', function(){ stato.tipo = this.value; stato.pagina = 0; disegna(); });
+  $('f-regione').addEventListener('change', function(){ stato.regione = this.value; stato.pagina = 0; disegna(); });
+  $('f-vista').addEventListener('change', function(){ stato.vista = this.value; stato.pagina = 0; stato.tipo=''; stato.regione=''; stato.cerca=''; $('f-tipo').value=''; $('f-regione').value=''; $('f-cerca').value=''; carica(); });
+  var timer = null;
+  $('f-cerca').addEventListener('input', function(){ var v = this.value; clearTimeout(timer); timer = setTimeout(function(){ stato.cerca = v; stato.pagina = 0; disegna(); }, 220); });
+  $('b-pre').addEventListener('click', function(){ if(stato.pagina>0){ stato.pagina--; disegna(); window.scrollTo({top:220,behavior:'smooth'}); } });
+  $('b-post').addEventListener('click', function(){ stato.pagina++; disegna(); window.scrollTo({top:220,behavior:'smooth'}); });
+
+  carica();
+})();
+</script>
+</body>
+</html>
