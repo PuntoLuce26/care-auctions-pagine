@@ -1,0 +1,44 @@
+name: ocr-perizie
+# 5.931 — OCR incrementale delle perizie (mq) per lo Sconto Reale Certificato.
+# Cloud, costo 0: 80 perizie per giro, ogni 30 minuti. Stato e risultati nel repo.
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: ocr-perizie
+  cancel-in-progress: false
+jobs:
+  ocr:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Strumenti OCR
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq poppler-utils tesseract-ocr tesseract-ocr-ita
+      - name: OCR incrementale
+        run: node scripts/ocr-perizie.js
+        env:
+          OCR_N: "80"
+      - name: Commit e push
+        shell: bash
+        run: |
+          git config user.name "CARe Cloud"
+          git config user.email "cloud@careauctions.co"
+          git add feed/perizie-ocr.json feed/ocr-stato.json
+          if git diff --cached --quiet; then echo "nessuna variazione"; exit 0; fi
+          git commit -m "ocr perizie: aggiornamento automatico ($(date -u +%FT%TZ))"
+          ok=0
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null
+            if git push; then ok=1; break; fi
+            sleep 4
+          done
+          if [ "$ok" != "1" ]; then echo "::error::push fallito"; exit 1; fi
