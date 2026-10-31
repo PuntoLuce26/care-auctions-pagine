@@ -1,0 +1,49 @@
+name: verifica-playwright
+# 5.929 — verifica ogni 30 min: rotte, errori JS, SW/cache, heap + TUTTE le 20 lingue del sito.
+# Se trova KO il job fallisce e GitHub manda la mail. Nessun secret, costo 0.
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: verifica-playwright
+  cancel-in-progress: false
+jobs:
+  verifica:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Cache Playwright
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: pw-${{ runner.os }}-1.63.0
+      - name: Installa Playwright
+        run: |
+          npm i playwright@1.63.0 --no-save
+          npx playwright install --with-deps chromium
+      - name: Rotte e stabilità (Playwright)
+        run: node scripts/verifica-playwright.mjs --wait=2500 --out=/tmp/verifica.json
+      - name: Lingue — tutte le 20 del sito
+        shell: bash
+        run: |
+          set -u
+          fail=0
+          UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36"
+          for pair in it:it en:en de:de es:es fr:fr ja:ja ru:ru zh:zh-Hans pt:pt nl:nl pl:pl ar:ar hi:hi ko:ko uk:uk vi:vi ro:ro tl:fil el:el sv:sv; do
+            lang="${pair%%:*}"; hre="${pair##*:}"
+            url="https://careauctions.co/asta-procedura/$lang/asta-1327178.html"
+            code=$(curl -s -o /tmp/l.html -w "%{http_code}" -m 25 -A "$UA" "$url" || echo 000)
+            if [ "$code" != "200" ] || ! grep -q "hreflang=\"$hre\"" /tmp/l.html; then
+              echo "::error::lingua $lang KO (HTTP $code) — $url"; fail=1
+            else
+              echo "OK $lang"
+            fi
+          done
+          exit "$fail"
