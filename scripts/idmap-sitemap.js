@@ -17,7 +17,12 @@ const DRY = process.argv.includes('--dry');
 const indice = JSON.parse(fs.readFileSync(path.join(FEED, 'indice.json'), 'utf8'));
 const live = new Map();      // id -> file
 const cityFiles = new Map(); // citta(lower) -> Set(file)
-let nLotti = 0, nFile = 0;
+const cityCount = new Map(); // slug citta -> numero lotti
+const cityNome = new Map();  // slug citta -> nome leggibile
+const provCount = new Map(); // slug provincia -> numero lotti (provincia letta da titolo "(Provincia)" finale)
+const provNome = new Map();
+const slugify = (s) => String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+let nLotti = 0, nFile = 0, nProvTitolo = 0;
 
 for (const meta of Object.values(indice.regioni || {})) {
   for (const f of [...(meta.filesImm || []), ...(meta.filesMob || [])]) {
@@ -30,11 +35,23 @@ for (const meta of Object.values(indice.regioni || {})) {
       const id = String(x.id);
       if (!live.has(id)) { live.set(id, f); nLotti++; }
       const c = String(x.citta || '').toLowerCase().trim();
-      if (c) { if (!cityFiles.has(c)) cityFiles.set(c, new Set()); cityFiles.get(c).add(f); }
+      if (c) {
+        if (!cityFiles.has(c)) cityFiles.set(c, new Set());
+        cityFiles.get(c).add(f);
+        const cs = slugify(c);
+        if (cs) { cityCount.set(cs, (cityCount.get(cs) || 0) + 1); if (!cityNome.has(cs)) cityNome.set(cs, String(x.citta).trim()); }
+      }
+      const mp = /\(([^()]+)\)\s*$/.exec(String(x.titolo || ''));
+      if (mp && mp[1] && slugify(mp[1])) {
+        nProvTitolo++;
+        const ps = slugify(mp[1]);
+        provCount.set(ps, (provCount.get(ps) || 0) + 1);
+        if (!provNome.has(ps)) provNome.set(ps, mp[1].trim());
+      }
     }
   }
 }
-console.log('lotti vivi:', nLotti, 'file letti:', nFile);
+console.log('lotti vivi:', nLotti, 'file letti:', nFile, '| provincia dal titolo:', nProvTitolo);
 
 // sitemap attuali: quanti id, quanti fuori dal feed
 const smIds = new Set();
@@ -69,6 +86,16 @@ const cmDir = path.join(FEED, 'citymap');
 fs.mkdirSync(cmDir, { recursive: true });
 cshard.forEach((m, n) => fs.writeFileSync(path.join(cmDir, 'citymap-' + n + '.json'), JSON.stringify(m)));
 console.log('citymap: 13 shard,', cityFiles.size, 'citta');
+
+// --- seo-slugs.json: whitelist + numeri veri per le pagine SEO dinamiche dell'edge
+// (edge/worker.js: /case-asta-<slug> = citta, /aste-<slug> = provincia o regione; slug sconosciuto = 404)
+const regioni = {};
+for (const [r, meta] of Object.entries(indice.regioni || {})) { const s = slugify(r); if (s) regioni[s] = { n: meta.totale || 0, nome: r }; }
+const seo = { generato: new Date().toISOString(), citta: {}, province: {}, regioni };
+for (const [s, n] of cityCount) seo.citta[s] = { n, nome: cityNome.get(s) };
+for (const [s, n] of provCount) seo.province[s] = { n, nome: provNome.get(s) };
+fs.writeFileSync(path.join(FEED, 'seo-slugs.json'), JSON.stringify(seo));
+console.log('seo-slugs.json:', Object.keys(seo.citta).length, 'citta,', Object.keys(seo.province).length, 'province,', Object.keys(seo.regioni).length, 'regioni');
 
 // --- sitemap 10000 per file
 const ids = [...live.keys()].sort((a, b) => Number(a) - Number(b));
