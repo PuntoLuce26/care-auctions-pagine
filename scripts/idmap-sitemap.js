@@ -150,26 +150,26 @@ const monitor = {
 fs.writeFileSync(path.join(FEED, 'esiti-monitor.json'), JSON.stringify(monitor));
 console.log('esiti-monitor.json:', esiti.length, 'esiti,', tribNomi.length, 'tribunali,', giorniOut.length, 'giorni |', monitor.copertura.dal, '->', monitor.copertura.al, '| esclusi:', JSON.stringify(esclusi));
 
-// --- sitemap 10000 per file
+// --- sitemap MULTILINGUA DINAMICHE: il repo resta leggero (niente 6,4M di URL).
+// L'edge genera al volo /sitemap-aste-<lang>-<n>.xml (10.000 URL) e /sitemap-aste-<lang>-index.xml.
+// Qui produciamo solo gli id in shard da 10.000 (~70 KB l'uno) + un meta di 1 KB.
 const ids = [...live.keys()].sort((a, b) => Number(a) - Number(b));
 const CH = 10000, nCh = Math.max(1, Math.ceil(ids.length / CH));
-for (const lang of ['it', 'en']) {
-  for (let i = 0; i < Math.max(nCh, 33); i++) {
-    const p = path.join(ROOT, 'sitemap-aste-' + lang + '-' + i + '.xml');
-    let body;
-    if (i < nCh) {
-      const part = ids.slice(i * CH, (i + 1) * CH);
-      body = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-        part.map(id => '  <url><loc>https://careauctions.co/asta-procedura/' + lang + '/asta-' + id + '.html</loc></url>').join('\n') + '\n</urlset>\n';
-    } else {
-      if (!fs.existsSync(p)) continue;
-      body = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n</urlset>\n';
-    }
-    fs.writeFileSync(p, body);
-  }
+const idsDir = path.join(FEED, 'aste-ids');
+fs.mkdirSync(idsDir, { recursive: true });
+for (let i = 0; i < nCh; i++) {
+  const part = ids.slice(i * CH, (i + 1) * CH).map(Number);
+  fs.writeFileSync(path.join(idsDir, 'shard-' + i + '.json'), JSON.stringify(part));
 }
-let idx = '<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
-for (const lang of ['it', 'en']) for (let i = 0; i < nCh; i++) idx += '  <sitemap><loc>https://careauctions.co/sitemap-aste-' + lang + '-' + i + '.xml</loc></sitemap>\n';
-idx += '</sitemapindex>\n';
-fs.writeFileSync(path.join(ROOT, 'sitemap-aste-index.xml'), idx);
-console.log('sitemap:', nCh, 'file per lingua,', ids.length, 'URL per lingua');
+for (const f of fs.readdirSync(idsDir)) { const m = /^shard-(\d+)\.json$/.exec(f); if (m && Number(m[1]) >= nCh) fs.unlinkSync(path.join(idsDir, f)); }
+const LINGUE = ['it', 'en', 'de', 'es', 'fr', 'ja', 'ru', 'zh', 'pt', 'nl', 'pl', 'ar', 'hi', 'ko', 'uk', 'vi', 'ro', 'tl', 'el', 'sv'];
+const metaSitemap = {
+  generato: new Date().toISOString(),
+  totale: ids.length,
+  perShard: CH,
+  shard: nCh,
+  lingue: LINGUE,
+  nota: 'URL generati al volo dall\'edge da feed/aste-ids: nessun file di URL nel repo.'
+};
+fs.writeFileSync(path.join(FEED, 'sitemap-meta.json'), JSON.stringify(metaSitemap));
+console.log('sitemap dinamiche:', nCh, 'shard da', CH, '|', ids.length, 'id |', LINGUE.length, 'lingue |', (ids.length * LINGUE.length).toLocaleString('it-IT'), 'URL servibili senza file nel repo');

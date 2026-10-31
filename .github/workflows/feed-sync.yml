@@ -33,7 +33,7 @@ jobs:
         run: |
           git config user.name "Sam CARe"
           git config user.email "sam@careauctions.co"
-          git add feed/ sitemap-aste-*.xml
+          git add feed/
           if git diff --cached --quiet; then echo "nessuna variazione"; else
             git commit -m "Feed sync $MODE $(date -u +%FT%TZ)"
             # race-safe 5.838: il Mac e il cloud scrivono sullo stesso repo → pull con rebase + retry
