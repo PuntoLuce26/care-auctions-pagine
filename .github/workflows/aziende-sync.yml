@@ -1,9 +1,7 @@
 name: aziende-sync
-# 5.902 — aste di aziende, quote societarie e crediti: raccolta dedicata e indipendente
-# (non aspetta il sync grande: così un giro lento del feed non blocca questo)
 on:
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: "*/30 * * * *"
   workflow_dispatch:
 permissions:
   contents: write
@@ -14,8 +12,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
-      - name: raccolta aziende (gentile, con rete di sicurezza)
+          node-version: "22"
+      - name: raccolta aziende
         run: node scripts/sync-aziende.js || echo "AZIENDE: raccolta non riuscita (il feed resta intatto)"
       - name: commit e push
         run: |
