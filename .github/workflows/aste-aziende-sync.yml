@@ -14,7 +14,8 @@ jobs:
         with:
           node-version: "22"
       - name: raccolta aziende
-        run: node scripts/sync-aziende.js || echo "AZIENDE: raccolta non riuscita (il feed resta intatto)"
+        run: |
+          node scripts/sync-aziende.js || echo "AZIENDE: raccolta non riuscita (il feed resta intatto)"
       - name: commit e push
         run: |
           git config user.name "Sam CARe"
