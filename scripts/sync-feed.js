@@ -167,8 +167,16 @@ function mappa(x){
   } catch(e){ console.log('indice-completo: errore',e.message); }
 
   try {
+    // FIX 31/10: ic va letto SUBITO (era usato prima della dichiarazione: TDZ → statistiche e andamenti fermi al giorno prima)
+    const ic = JSON.parse(fs.readFileSync(path.join(FEED, 'indice-completo.json'), 'utf8'));
     let esitiFinali = esitiAcc;
-    if (MODE !== 'full') { try { const prec = JSON.parse(fs.readFileSync(path.join(FEED, 'statistiche.json'), 'utf8')); if (prec && prec.esiti) esitiFinali = prec.esiti; } catch (ePrev) {} }
+    if (MODE !== 'full') {
+      try { const canone = JSON.parse(fs.readFileSync(path.join(FEED, 'andamento-esiti.json'), 'utf8')); if (canone && canone.esiti && Number(canone.esiti.aggiudicate) > 0) esitiFinali = canone.esiti; } catch (eCan) {}
+      try { const prec = JSON.parse(fs.readFileSync(path.join(FEED, 'statistiche.json'), 'utf8')); if ((!esitiFinali || !Number(esitiFinali.aggiudicate)) && prec && prec.esiti) esitiFinali = prec.esiti; } catch (ePrev) {}
+    } else if (esitiAcc && Number(esitiAcc.aggiudicate) > 0) {
+      // giro completo: gli esiti contati sono la verità del giorno → aggiorna il file canonico
+      fs.writeFileSync(path.join(FEED, 'andamento-esiti.json'), JSON.stringify({ generato: new Date().toISOString(), esiti: esitiAcc, nota: 'esiti reali delle aste italiane — nessun numero inventato' }));
+    }
     // PERDATA-5.836: conta le aste per dataAsta (passate / oggi / prossime)
     let passate = 0, future = 0, oggi = 0, prossimi30 = 0, prossimi90 = 0;
     try {
@@ -212,11 +220,12 @@ function mappa(x){
           } } catch (eP2) {}
         }
       }
-      partG = Object.values(partM).sort((a, b) => a.data < b.data ? -1 : 1).slice(-730); // 5.860
+      const oggiPart = new Date().toISOString().slice(0, 10);
+      partG = Object.values(partM).filter(g => g.data <= oggiPart).sort((a, b) => a.data < b.data ? -1 : 1).slice(-730); // 5.860
+      // via i giorni futuri: la storia resta, il futuro non è un esito
       fs.writeFileSync(path.join(FEED, 'andamento-partecipazione.json'), JSON.stringify({ generato: new Date().toISOString(), giorni: partG }));
       precPart = partG.length;
     } catch (eP3) { precPart = null; }
-    const ic = JSON.parse(fs.readFileSync(path.join(FEED, 'indice-completo.json'), 'utf8'));
     fs.writeFileSync(path.join(FEED, 'statistiche.json'), JSON.stringify({ generato: new Date().toISOString().slice(0, 10), totale: ic.totaleLotti, prezzoMedioImm: ic.settori.immobiliare.prezzoMedio, scontoMedioImm: ic.settori.immobiliare.scontoMedio, bandePrezzo: ic.bandePrezzo, esiti: esitiFinali, perData, nota: 'statistiche vive dal giro automatico — nessun numero inventato' }));
     console.log('statistiche.json sempre aggiornato');
   } catch (eS) { console.log('statistiche: errore', eS.message); }
