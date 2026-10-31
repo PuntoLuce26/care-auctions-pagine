@@ -40,7 +40,7 @@ jobs:
           check "https://careauctions.co/osservatorio" 3000
           check "https://careauctions.co/dati" 3000
           check "https://careauctions.co/torre-di-controllo" 2000
-          check "https://puntoluce26.github.io/care-auctions-pagine/feed/statistiche.json" 500
+          check "https://puntoluce26.github.io/care-auctions-pagine/feed/statistiche.json" 200
           check "https://puntoluce26.github.io/care-auctions-pagine/feed/esiti-monitor.json" 500
           check "https://puntoluce26.github.io/care-auctions-pagine/feed/npl.json" 1000
           echo "--- allineamento build ---"
