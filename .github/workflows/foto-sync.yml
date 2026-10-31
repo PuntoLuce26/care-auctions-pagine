@@ -1,4 +1,6 @@
 name: foto-sync
+permissions:
+  contents: write
 on:
   schedule:
     - cron: '*/15 * * * *'
@@ -24,9 +26,11 @@ jobs:
           git add feed/foto-procedure.json
           if git diff --cached --quiet; then echo "nessuna variazione"; else
             git commit -m "foto-procedure cloud: aggiornamento automatico ($(date -u +%FT%TZ))"
+            ok=0
             for i in 1 2 3 4 5; do
               git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null
-              if git push; then break; fi
+              if git push; then ok=1; break; fi
               sleep 4
             done
+            if [ "$ok" != "1" ]; then echo "::error::push fallito (permessi contents:write?)"; exit 1; fi
           fi
