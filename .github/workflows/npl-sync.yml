@@ -1,0 +1,44 @@
+name: npl-sync
+# 5.926 — NPL's: dataset crediti in sofferenza/procedura dal PVP, aggiornamento giornaliero.
+on:
+  schedule:
+    - cron: "20 4 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: npl-sync
+  cancel-in-progress: false
+jobs:
+  npl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: raccolta NPL's dal PVP
+        run: node scripts/npl-raccogli.js || echo "NPL: raccolta non riuscita (dataset intatto)"
+      - name: controllo qualità
+        run: |
+          node - <<'NODE'
+          const fs=require('fs'); const p='feed/npl.json';
+          if(!fs.existsSync(p)){ console.log('::error::npl.json assente'); process.exit(1); }
+          const d=JSON.parse(fs.readFileSync(p,'utf8')); const n=(d.lotti||[]).length;
+          console.log('lotti: '+n+' · dichiarato PVP: '+(d.meta&&d.meta.dichiaratoPVP));
+          if(n<120){ console.log('::error::dataset dimezzato ('+n+') — non committo'); process.exit(1); }
+          NODE
+      - name: commit e push
+        run: |
+          git config user.name "Sam CARe"
+          git config user.email "sam@careauctions.co"
+          git add feed/npl.json feed/npl-statistiche.json
+          if git diff --cached --quiet; then echo "nessuna variazione"; else
+            git commit -m "NPL's sync $(date -u +%FT%TZ)"
+            for i in 1 2 3 4 5; do
+              git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null
+              if git push; then break; fi
+              sleep 4
+            done
+          fi
