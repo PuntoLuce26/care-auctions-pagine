@@ -114,6 +114,7 @@ function mappa(x) {
     regione: regioneDi(prov),
     tribunale: String(x.tribunale || ''),
     esito: String(x.esito || ''),
+    esitoEtichetta: ({ AGGIU: 'Aggiudicata', ASDES: 'Non aggiudicata', SOSPE: 'Sospesa' })[String(x.esito || '')] || '',
     link: 'https://pvp.giustizia.it/pvp/it/detail_annuncio.page?idAnnuncio=' + x.id
   };
 }

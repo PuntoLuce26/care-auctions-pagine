@@ -179,10 +179,11 @@ footer a{color:var(--navy)}
     var data = x.dataAsta ? String(x.dataAsta).split('-').reverse().join('/') : '—';
     var descr = x.descrizione ? '<div class="sotto">' + esc(x.descrizione.slice(0,140)) + (x.descrizione.length>140?'…':'') + '</div>' : '';
     var sconto = x.scontoPct > 0 ? ' <span class="sconto">−' + x.scontoPct + '%</span>' : '';
+    var esito = x.esitoEtichetta ? ' <span class="sconto" style="background:' + (x.esito === 'AGGIU' ? '#E4F1EA' : '#F6E4E2') + ';color:' + (x.esito === 'AGGIU' ? '#1F6146' : '#8A332B') + '">' + esc(x.esitoEtichetta) + '</span>' : '';
     return '<tr>' +
       '<td><span class="tipo ' + esc(x.tipo) + '">' + esc(x.tipo === 'AZIENDE' ? 'Azienda' : (x.tipo === 'CREDITI' ? 'Crediti' : 'Altro')) + '</span></td>' +
       '<td><div class="tit">' + esc(x.titolo || x.cat || 'Lotto') + '</div>' + descr + '</td>' +
-      '<td><div class="prezzo">' + (x.prezzoBase ? Number(x.prezzoBase).toLocaleString('it-IT',{maximumFractionDigits:0}) + ' €' : '—') + sconto + '</div><div class="sotto">' + esc(x.tribunale || '') + '</div></td>' +
+      '<td><div class="prezzo">' + (x.prezzoBase ? Number(x.prezzoBase).toLocaleString('it-IT',{maximumFractionDigits:0}) + ' €' : '—') + sconto + esito + '</div><div class="sotto">' + esc(x.tribunale || '') + '</div></td>' +
       '<td style="white-space:nowrap">' + data + (x.oraAsta ? '<div class="sotto">' + esc(x.oraAsta) + '</div>' : '') + '</td>' +
       '<td><a class="btn" href="' + esc(x.link) + '" target="_blank" rel="noopener">PVP →</a></td>' +
     '</tr>';
