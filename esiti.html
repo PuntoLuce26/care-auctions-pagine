@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monitor degli esiti delle aste — aggiudicazioni dal vivo | CARe Auctions</title>
+<meta name="description" content="Monitor degli esiti delle aste giudiziarie italiane dal vivo: aggiudicazioni, incasso, prezzo medio per giorno, settimana, mese e anno, filtrabili per tribunale e regione. Dati reali dal PVP del Ministero della Giustizia, aggiornati ogni 15 minuti.">
+<link rel="canonical" href="https://careauctions.co/esiti">
+<link rel="alternate" hreflang="it" href="https://careauctions.co/esiti">
+<link rel="alternate" hreflang="x-default" href="https://careauctions.co/esiti">
+<meta property="og:title" content="Monitor degli esiti delle aste — CARe Auctions">
+<meta property="og:description" content="Le aggiudicazioni vere, con il prezzo reale, giorno per giorno. Fonte: PVP — Ministero della Giustizia.">
+<meta property="og:url" content="https://careauctions.co/esiti">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Dataset","name":"Monitor degli esiti delle aste giudiziarie italiane","description":"Esiti delle vendite aggiudicate pubblicate dal PVP — Portale delle Vendite Pubbliche del Ministero della Giustizia: data di vendita, tribunale, prezzo finale di aggiudicazione. Aggiornato ogni 15 minuti.","url":"https://careauctions.co/esiti","creator":{"@type":"Organization","name":"CARe Auctions","url":"https://careauctions.co"},"isAccessibleForFree":true,"temporalCoverage":"2026-09-29/2026-10-28","keywords":["aste giudiziarie","aggiudicazioni","prezzi reali","tribunali","PVP"]}
+</script>
+<style>
+body{margin:0;background:#F4F1EA;color:#0F1E3A;font-family:-apple-system,system-ui,sans-serif;line-height:1.6}
+.top{background:#0F1E3A;color:#F4F1EA;padding:14px 18px;font-weight:600}
+.wrap{max-width:1080px;margin:30px auto;padding:0 18px}
+h1{font-size:31px;line-height:1.15;margin:8px 0 8px}
+h2{color:#A8811F;margin-top:34px;font-size:19px}
+.lead{font-size:17.5px;color:#3C4A65;margin:0 0 6px}
+.nav{font-size:13px;margin:14px 0 0}
+.nav a{color:#0F1E3A;margin-right:14px;text-decoration:none;border-bottom:1px solid #D4A84B}
+.ctrl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:20px 0 8px}
+.seg{display:inline-flex;border:1px solid #D9CFB6;border-radius:10px;overflow:hidden;background:#fff}
+.seg button{appearance:none;border:0;background:transparent;padding:9px 16px;font-size:13.5px;font-weight:600;color:#3C4A65;cursor:pointer;font-family:inherit}
+.seg button.on{background:#0F1E3A;color:#F4F1EA}
+input[type=date],select{padding:8px 10px;border:1px solid #D9CFB6;border-radius:10px;background:#fff;color:#0F1E3A;font-size:13.5px;font-family:inherit}
+.step{padding:8px 13px;border:1px solid #D9CFB6;border-radius:10px;background:#fff;color:#0F1E3A;font-size:14px;cursor:pointer;font-family:inherit}
+.badge{display:inline-block;font-size:12px;color:#4A5871;background:#EFE9DA;border-radius:999px;padding:4px 11px;margin:6px 0 2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:16px}
+.card{border:1px solid #E3D9C0;border-radius:14px;padding:15px 17px;background:#fff}
+.card .num{font-size:25px;font-weight:650;letter-spacing:-.02em}
+.card .lab{font-size:11px;text-transform:uppercase;letter-spacing:.11em;color:#6B7690;margin:2px 0 5px}
+.card .sub{font-size:12px;color:#7A839A}
+.chart{display:flex;align-items:flex-end;gap:4px;height:150px;margin-top:12px;padding:12px;background:#fff;border:1px solid #E3D9C0;border-radius:12px;overflow-x:auto}
+.bar{flex:1 1 0;min-width:7px;background:#D4A84B;border-radius:3px 3px 0 0;position:relative}
+.bar span{position:absolute;top:-17px;left:50%;transform:translateX(-50%);font-size:9.5px;color:#6B7690;white-space:nowrap}
+.assex{display:flex;gap:4px;padding:0 12px;font-size:9.5px;color:#7A839A;margin-top:4px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;background:#fff;border:1px solid #E3D9C0;border-radius:12px;overflow:hidden;margin-top:10px}
+th,td{padding:8px 10px;border-bottom:1px solid #EFE7D2;text-align:left}
+th{font-size:10.5px;text-transform:uppercase;letter-spacing:.09em;color:#6B7690}
+td.n,th.n{text-align:right}
+.nota{font-size:12.5px;color:#5A6A85;margin-top:22px;border-top:1px solid #E3D9C0;padding-top:12px}
+.vuoto{font-size:14px;color:#6B7690;padding:14px;background:#fff;border:1px dashed #D9CFB6;border-radius:10px;margin-top:10px}
+.fonte{font-size:12px;color:#7A839A}
+@media(max-width:640px){h1{font-size:25px}.seg button{padding:8px 11px}}
+</style>
+</head>
+<body>
+<div class="top">CARe Auctions — il primo HUB immobiliare al mondo · careauctions.co</div>
+<div class="wrap">
+<nav class="nav"><a href="/esiti">Monitor esiti</a><a href="/dati">I dati</a><a href="/osservatorio">oCARe</a><a href="/aste-aziende">Aste di aziende</a><a href="/aste-citta-roma">Aste per città</a></nav>
+<h1>Monitor degli esiti delle aste</h1>
+<p class="lead">Le aggiudicazioni vere, giorno per giorno: quante, per quanto, in quali tribunali. Nessun numero stimato: ogni riga viene da un atto pubblicato.</p>
+<span class="badge" id="badge">caricamento…</span>
+
+<div class="ctrl">
+  <div class="seg" id="modi">
+    <button data-m="g" class="on">Giorno</button><button data-m="s">Settimana</button><button data-m="m">Mese</button><button data-m="a">Anno</button>
+  </div>
+  <input type="date" id="rif" aria-label="Data di riferimento">
+  <button class="step" id="prev" aria-label="Periodo precedente">‹</button>
+  <button class="step" id="next" aria-label="Periodo successivo">›</button>
+  <select id="trib" aria-label="Filtra per tribunale"><option value="">Tutti i tribunali</option></select>
+  <select id="reg" aria-label="Filtra per regione"><option value="">Tutte le regioni</option></select>
+</div>
+<div class="fonte" id="periodo"></div>
+
+<div class="grid" id="kpi"></div>
+
+<h2>Andamento del periodo</h2>
+<div class="chart" id="chart"></div>
+<div class="assex" id="assex"></div>
+
+<h2>Per tribunale</h2>
+<table><thead><tr><th>Tribunale</th><th>Regione</th><th class="n">Esiti</th><th class="n">Incasso</th><th class="n">Prezzo medio</th></tr></thead><tbody id="tab"></tbody></table>
+<div class="vuoto" id="vuoto" style="display:none">Nessun esito pubblicato in questo periodo con questi filtri. Cambia periodo o togli i filtri.</div>
+
+<p class="nota"><strong>Fonte e metodo.</strong> Gli esiti sono letti dal <em>PVP — Portale delle Vendite Pubbliche del Ministero della Giustizia</em>: solo le vendite aggiudicate con prezzo finale pubblicato (2.871 lotti nell'archivio attuale), con data di vendita e tribunale. I lotti con solo prezzo base, o senza data, sono esclusi e non entrano in nessuna cifra. Aggiornamento automatico ogni 15 minuti; la pagina legge il file <code>esiti-monitor.json</code> con cache-buster e mostra l'ora dell'ultimo aggiornamento. La regione del tribunale è ricavata dalla provincia dell'immobile nel feed vivo. Nessun dato è stimato o interpolato: dove il dato non c'è, la cifra non si mostra.</p>
+</div>
+
+<script>
+(function () {
+  var URL_DATI = 'https://puntoluce26.github.io/care-auctions-pagine/feed/esiti-monitor.json';
+  var D = null, modo = 'g', ref = null, fTrib = '', fReg = '';
+  var ed = document.getElementById.bind(document);
+  var fmtEuro = function (n) { return '\u20AC ' + Math.round(n).toLocaleString('it-IT'); };
+  var fmtData = function (iso) { var p = iso.split('-'); return p[2] + '/' + p[1] + '/' + p[0]; };
+
+  function parseISO(s) { var p = s.split('-'); return new Date(Date.UTC(+p[0], +p[1] - 1, +p[2])); }
+  function iso(d) { return d.toISOString().slice(0, 10); }
+  function addDays(d, n) { var x = new Date(d.getTime()); x.setUTCDate(x.getUTCDate() + n); return x; }
+
+  function intervallo() {
+    var d = parseISO(ref), a, b;
+    if (modo === 'g') { a = d; b = d; }
+    else if (modo === 's') { var wd = (d.getUTCDay() + 6) % 7; a = addDays(d, -wd); b = addDays(a, 6); }
+    else if (modo === 'm') { a = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), 1)); b = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 0)); }
+    else { a = new Date(Date.UTC(d.getUTCFullYear(), 0, 1)); b = new Date(Date.UTC(d.getUTCFullYear(), 11, 31)); }
+    return [iso(a), iso(b)];
+  }
+
+  function regioneDi(trib) {
+    if (!D) return null;
+    var i = D.tribunali.findIndex(function (t) { return t[0] === trib; });
+    return i >= 0 ? D.tribunali[i][1] : null;
+  }
+
+  function calcola() {
+    var r = intervallo(), out = { esiti: 0, incasso: 0, trib: new Set(), giorni: [] };
+    var perGiorno = {};
+    D.giorni.forEach(function (g) {
+      var data = g[0];
+      if (data < r[0] || data > r[1]) return;
+      g[1].forEach(function (c) {
+        var nome = c[0] >= 0 ? D.tribunali[c[0]][0] : 'Non indicato';
+        if (fTrib && nome !== fTrib) return;
+        if (fReg && regioneDi(nome) !== fReg) return;
+        out.esiti += c[1]; out.incasso += c[2]; out.trib.add(nome);
+        if (!perGiorno[data]) perGiorno[data] = 0;
+        perGiorno[data] += c[1];
+      });
+    });
+    out.perGiorno = perGiorno;
+    return out;
+  }
+
+  function barre(perGiorno) {
+    var ch = ed('chart'), ax = ed('assex');
+    ch.innerHTML = ''; ax.innerHTML = '';
+    var chiavi = Object.keys(perGiorno).sort();
+    if (!chiavi.length) { ch.innerHTML = '<div style="font-size:13px;color:#6B7690">Nessun esito nel periodo.</div>'; return; }
+    var max = 0;
+    chiavi.forEach(function (k) { if (perGiorno[k] > max) max = perGiorno[k]; });
+    chiavi.slice(-60).forEach(function (k) {
+      var d = document.createElement('div');
+      d.className = 'bar';
+      d.style.height = Math.max(3, Math.round(perGiorno[k] / max * 130)) + 'px';
+      d.title = fmtData(k) + ': ' + perGiorno[k] + ' esiti';
+      if (chiavi.length <= 14) { var s = document.createElement('span'); s.textContent = perGiorno[k]; d.appendChild(s); }
+      ch.appendChild(d);
+    });
+    ax.textContent = chiavi.length + ' giorni con esiti · ' + fmtData(chiavi[0]) + ' \u2192 ' + fmtData(chiavi[chiavi.length - 1]);
+  }
+
+  function rendi() {
+    var r = intervallo(), c = calcola(), k = ed('kpi');
+    ed('periodo').textContent = 'Periodo: ' + fmtData(r[0]) + (r[0] === r[1] ? '' : ' \u2192 ' + fmtData(r[1]));
+    var medio = c.esiti ? c.incasso / c.esiti : 0;
+    var cards = [
+      ['Esiti pubblicati', c.esiti.toLocaleString('it-IT'), c.esiti === 1 ? '1 aggiudicazione' : 'aggiudicazioni con prezzo finale'],
+      ['Incasso del periodo', c.esiti ? fmtEuro(c.incasso) : '\u2014', 'somma dei prezzi finali'],
+      ['Prezzo medio', c.esiti ? fmtEuro(medio) : '\u2014', 'media delle aggiudicazioni'],
+      ['Tribunali coinvolti', c.trib.size, c.trib.size === 1 ? 'tribunale' : 'tribunali']
+    ];
+    k.innerHTML = cards.map(function (x) { return '<div class="card"><div class="lab">' + x[0] + '</div><div class="num">' + x[1] + '</div><div class="sub">' + x[2] + '</div></div>'; }).join('');
+    barre(c.perGiorno);
+    // tabella per tribunale
+    var righe = {};
+    D.giorni.forEach(function (g) {
+      if (g[0] < r[0] || g[0] > r[1]) return;
+      g[1].forEach(function (cell) {
+        var nome = cell[0] >= 0 ? D.tribunali[cell[0]][0] : 'Non indicato';
+        if (fTrib && nome !== fTrib) return;
+        if (fReg && regioneDi(nome) !== fReg) return;
+        if (!righe[nome]) righe[nome] = [0, 0];
+        righe[nome][0] += cell[1]; righe[nome][1] += cell[2];
+      });
+    });
+    var lista = Object.keys(righe).map(function (n) { return [n, righe[n][0], righe[n][1]]; }).sort(function (a, b) { return b[2] - a[2]; });
+    ed('tab').innerHTML = lista.slice(0, 25).map(function (x) {
+      return '<tr><td>' + x[0] + '</td><td>' + (regioneDi(x[0]) || '\u2014') + '</td><td class="n">' + x[1] + '</td><td class="n">' + fmtEuro(x[2]) + '</td><td class="n">' + fmtEuro(x[2] / x[1]) + '</td></tr>';
+    }).join('') || '<tr><td colspan="5">Nessun dato nel periodo.</td></tr>';
+    ed('vuoto').style.display = c.esiti ? 'none' : 'block';
+  }
+
+  function avvia() {
+    if (!D) return;
+    ref = ref || D.copertura.al || iso(new Date());
+    ed('rif').value = ref;
+    ed('rif').min = D.copertura.dal || ''; ed('rif').max = D.copertura.al || '';
+    ed('badge').textContent = 'aggiornato alle ' + new Date(D.generato).toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' }) + ' \u00b7 archivio dal ' + fmtData(D.copertura.dal) + ' al ' + fmtData(D.copertura.al);
+    var st = ed('trib');
+    D.tribunali.forEach(function (t) { var o = document.createElement('option'); o.value = t[0]; o.textContent = t[0]; st.appendChild(o); });
+    var sr = ed('reg');
+    D.regioni.forEach(function (r) { var o = document.createElement('option'); o.value = r; o.textContent = r; sr.appendChild(o); });
+    st.onchange = function () { fTrib = st.value; rendi(); };
+    sr.onchange = function () { fReg = sr.value; rendi(); };
+    ed('rif').onchange = function () { if (this.value) { ref = this.value; rendi(); } };
+    document.querySelectorAll('#modi button').forEach(function (bt) {
+      bt.onclick = function () {
+        document.querySelectorAll('#modi button').forEach(function (b) { b.classList.remove('on'); });
+        bt.classList.add('on'); modo = bt.dataset.m; rendi();
+      };
+    });
+    ed('prev').onclick = function () { ref = passo(-1); ed('rif').value = ref; rendi(); };
+    ed('next').onclick = function () { ref = passo(1); ed('rif').value = ref; rendi(); };
+    rendi();
+  }
+
+  function passo(dir) {
+    var d = parseISO(ref);
+    if (modo === 'g') d = addDays(d, dir);
+    else if (modo === 's') d = addDays(d, 7 * dir);
+    else if (modo === 'm') d = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + dir, 1));
+    else d = new Date(Date.UTC(d.getUTCFullYear() + dir, 0, 1));
+    var s = iso(d);
+    if (D && D.copertura.dal && s < D.copertura.dal) return D.copertura.dal;
+    if (D && D.copertura.al && s > D.copertura.al) return D.copertura.al;
+    return s;
+  }
+
+  fetch(URL_DATI + '?cb=' + Date.now(), { cache: 'no-store' })
+    .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function (j) { D = j; avvia(); })
+    .catch(function (e) {
+      ed('badge').textContent = 'dati non disponibili in questo momento (' + e.message + ')';
+      ed('kpi').innerHTML = '<div class="card"><div class="lab">Stato</div><div class="num">\u2014</div><div class="sub">il file degli esiti non si \u00e8 caricato: riprova tra poco</div></div>';
+    });
+})();
+</script>
+</body>
+</html>

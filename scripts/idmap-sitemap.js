@@ -22,6 +22,8 @@ const cityNome = new Map();  // slug citta -> nome leggibile
 const provCount = new Map(); // slug provincia -> numero lotti (provincia letta da titolo "(Provincia)" finale)
 const provNome = new Map();
 const slugify = (s) => String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+const tribVotes = new Map(); // TRIBUNALE -> {PROVINCIA: n} — per il monitor esiti
+const provVotes = new Map(); // PROVINCIA  -> {Regione: n}  — per il monitor esiti
 let nLotti = 0, nFile = 0, nProvTitolo = 0;
 
 for (const meta of Object.values(indice.regioni || {})) {
@@ -48,6 +50,12 @@ for (const meta of Object.values(indice.regioni || {})) {
         provCount.set(ps, (provCount.get(ps) || 0) + 1);
         if (!provNome.has(ps)) provNome.set(ps, mp[1].trim());
       }
+      // voti provincia -> regione (dal file regionale) e tribunale -> provincia (dal titolo)
+      const provUp = mp && mp[1] ? mp[1].trim().toUpperCase() : '';
+      const reg = String(x.regione || '').trim();
+      if (provUp && reg) { if (!provVotes.has(provUp)) provVotes.set(provUp, {}); const v = provVotes.get(provUp); v[reg] = (v[reg] || 0) + 1; }
+      const trib = String(x.tribunale || '').replace(/^\s*Tribunale di /i, '').split(' - ')[0].trim().toUpperCase();
+      if (trib && provUp) { if (!tribVotes.has(trib)) tribVotes.set(trib, {}); const t = tribVotes.get(trib); t[provUp] = (t[provUp] || 0) + 1; }
     }
   }
 }
@@ -96,6 +104,51 @@ for (const [s, n] of cityCount) seo.citta[s] = { n, nome: cityNome.get(s) };
 for (const [s, n] of provCount) seo.province[s] = { n, nome: provNome.get(s) };
 fs.writeFileSync(path.join(FEED, 'seo-slugs.json'), JSON.stringify(seo));
 console.log('seo-slugs.json:', Object.keys(seo.citta).length, 'citta,', Object.keys(seo.province).length, 'province,', Object.keys(seo.regioni).length, 'regioni');
+
+// --- esiti-monitor.json: esiti VERI con prezzo finale di aggiudicazione, aggregati per giorno x tribunale.
+// Fonte: feed/aggiudicazioni.json (vendite aggiudicate del PVP, raccolte da Fallco).
+// Regione dei tribunali ricavata dal feed vivo: provincia nel titolo -> regione (voto di maggioranza).
+const provReg = {};
+for (const [prov, v] of provVotes) { const best = Object.entries(v).sort((a, b) => b[1] - a[1])[0]; if (best) provReg[prov] = best[0]; }
+const tribReg = {};
+for (const [trib, v] of tribVotes) { const best = Object.entries(v).sort((a, b) => b[1] - a[1])[0]; if (best && provReg[best[0]]) tribReg[trib] = provReg[best[0]]; }
+let aggiud = [];
+try { aggiud = JSON.parse(fs.readFileSync(path.join(FEED, 'aggiudicazioni.json'), 'utf8')); } catch (e) { console.error('aggiudicazioni:', e.message); }
+const esiti = []; const esclusi = { prezzoBase: 0, senzaData: 0, senzaPrezzo: 0, altreFonti: 0 };
+for (const x of aggiud) {
+  if (!x || x.fonte !== 'fallcoaste') { esclusi.altreFonti++; continue; }
+  if (!/Miglior offerta/i.test(String(x.prezzo_label || ''))) { esclusi.prezzoBase++; continue; }
+  const m = /^(\d{2})\/(\d{2})\/(\d{2,4})/.exec(String(x.termina || ''));
+  if (!m) { esclusi.senzaData++; continue; }
+  const anno = m[3].length === 2 ? '20' + m[3] : m[3];
+  const prezzo = Math.round(Number(x.prezzo) || 0);
+  if (prezzo <= 0) { esclusi.senzaPrezzo++; continue; }
+  const trib = String(x.tribunale || '').replace(/^\s*Tribunale di /i, '').split(' - ')[0].trim().toUpperCase();
+  esiti.push([anno + '-' + m[2] + '-' + m[1], trib, prezzo]);
+}
+const tribNomi = [...new Set(esiti.map(e => e[1]).filter(Boolean))].sort();
+const tribIdx = new Map(tribNomi.map((t, i) => [t, i]));
+const perGiorno = new Map();
+for (const [d, t, p] of esiti) {
+  if (!perGiorno.has(d)) perGiorno.set(d, new Map());
+  const md = perGiorno.get(d), k = t ? tribIdx.get(t) : -1;
+  const c = md.get(k) || [0, 0]; c[0]++; c[1] += p; md.set(k, c);
+}
+const giorniOut = [...perGiorno.keys()].sort().map(d => [d, [...perGiorno.get(d).entries()].map(([k, c]) => [k, c[0], c[1]])]);
+const dateEsiti = esiti.map(e => e[0]).sort();
+const regioniEsiti = [...new Set(tribNomi.map(t => tribReg[t]).filter(Boolean))].sort();
+const monitor = {
+  generato: new Date().toISOString(),
+  fonte: 'PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia): vendite aggiudicate',
+  nota: 'Conteggio solo dei lotti con prezzo finale di aggiudicazione pubblicato. I lotti con solo prezzo base, o senza data, sono esclusi e dichiarati in esclusi.',
+  copertura: { dal: dateEsiti[0] || null, al: dateEsiti[dateEsiti.length - 1] || null, giorni: giorniOut.length, esiti: esiti.length, tribunali: tribNomi.length, tribunaliSenzaRegione: tribNomi.filter(t => !tribReg[t]).length },
+  regioni: regioniEsiti,
+  tribunali: tribNomi.map(t => [t, tribReg[t] || null]),
+  esclusi,
+  giorni: giorniOut
+};
+fs.writeFileSync(path.join(FEED, 'esiti-monitor.json'), JSON.stringify(monitor));
+console.log('esiti-monitor.json:', esiti.length, 'esiti,', tribNomi.length, 'tribunali,', giorniOut.length, 'giorni |', monitor.copertura.dal, '->', monitor.copertura.al, '| esclusi:', JSON.stringify(esclusi));
 
 // --- sitemap 10000 per file
 const ids = [...live.keys()].sort((a, b) => Number(a) - Number(b));
