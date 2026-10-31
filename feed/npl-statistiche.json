@@ -1,0 +1,127 @@
+{
+ "meta": {
+  "titolo": "NPL's — crediti in sofferenza e crediti in procedura (dati veri dal PVP)",
+  "generatoIl": "2026-10-31T14:04:34.062Z",
+  "aggiornato": "2026-10-31",
+  "fonte": "PVP — Portale delle Vendite Pubbliche, Ministero della Giustizia (pvp.giustizia.it)",
+  "query": "tipoLotto=VALORI-CREDITI",
+  "licenza": "Dati pubblici del PVP (Portale delle Vendite Pubbliche, Ministero della Giustizia). Riuso consentito per finalità informative con citazione della fonte; nessun dato personale oltre a quanto già pubblico nel bando.",
+  "metodo": "Classificazione conservativa dal testo pubblico del bando: NPL/sofferenza solo se dichiarati; crediti fiscali e titoli/quote esclusi (classi diverse, non NPL). Valore nominale solo se scritto nel bando.",
+  "totale": 255,
+  "dichiaratoPVP": 1116,
+  "esclusi": {
+   "titoli-e-quote": 450,
+   "credito-fiscale": 389,
+   "non-credito": 22
+  },
+  "copertura": {
+   "importo": {
+    "con": 45,
+    "su": 255,
+    "pct": 17.6
+   },
+   "regione": {
+    "con": 188,
+    "su": 255,
+    "pct": 73.7
+   },
+   "tribunale": {
+    "con": 253,
+    "su": 255,
+    "pct": 99.2
+   }
+  },
+  "perTipo": {
+   "credito": 251,
+   "NPL": 4
+  },
+  "perStato": {
+   "conclusa-esito-non-pubblicato": 212,
+   "in-programma": 22,
+   "deserta": 19,
+   "aggiudicata": 2
+  },
+  "fasceImportoNominale": {
+   "fino-10k": 13,
+   "10k-50k": 10,
+   "oltre-1M": 9,
+   "250k-1M": 9,
+   "50k-250k": 4
+  },
+  "fascePrezzoBase": {
+   "10k-50k": 81,
+   "fino-10k": 67,
+   "50k-250k": 32,
+   "250k-1M": 29,
+   "oltre-1M": 25
+  },
+  "regioni": 16,
+  "province": 39,
+  "sommaPrezzoBase": 380778861,
+  "freschezza": {
+   "ultimaRaccolta": "2026-10-31",
+   "dataLottoPiuRecente": "2026-12-31",
+   "dataLottoPiuVecchio": "2024-01-12"
+  },
+  "nota": "Nessun numero inventato: i campi mancanti restano null e non vanno mostrati. Prezzo base = base d'asta del bando, NON il valore nominale del credito."
+ },
+ "perRegione": {
+  "Lazio": 59,
+  "Sicilia": 33,
+  "Toscana": 18,
+  "Lombardia": 16,
+  "Calabria": 14,
+  "Emilia-Romagna": 11,
+  "Piemonte": 10,
+  "Veneto": 7,
+  "Sardegna": 7,
+  "Marche": 3,
+  "Liguria": 2,
+  "Basilicata": 2,
+  "Umbria": 2,
+  "Puglia": 2,
+  "Abruzzo": 1,
+  "Campania": 1
+ },
+ "perProvincia": {
+  "Roma": 58,
+  "Palermo": 29,
+  "Milano": 11,
+  "Bologna": 10,
+  "Pistoia": 8,
+  "Cosenza": 7,
+  "Torino": 7,
+  "Sassari": 5,
+  "Catanzaro": 4,
+  "Enna": 4,
+  "Lucca": 4,
+  "Firenze": 3,
+  "Vibo Valentia": 3,
+  "Cuneo": 3,
+  "Treviso": 2,
+  "Macerata": 2,
+  "Genova": 2,
+  "Rovigo": 2,
+  "Bergamo": 2,
+  "Terni": 2,
+  "Bari": 2,
+  "L'Aquila": 1,
+  "Padova": 1,
+  "Como": 1,
+  "Modena": 1,
+  "Caserta": 1,
+  "Viterbo": 1,
+  "Cagliari": 1,
+  "Brescia": 1,
+  "Nuoro": 1,
+  "Vicenza": 1,
+  "Varese": 1,
+  "Pisa": 1,
+  "Verona": 1,
+  "Prato": 1,
+  "Ancona": 1,
+  "Potenza": 1,
+  "Arezzo": 1,
+  "Matera": 1
+ }
+}
