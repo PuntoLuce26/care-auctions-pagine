@@ -199,6 +199,18 @@ td.n,th.n{text-align:right}
     });
     ed('prev').onclick = function () { ref = passo(-1); ed('rif').value = ref; rendi(); };
     ed('next').onclick = function () { ref = passo(1); ed('rif').value = ref; rendi(); };
+    // parametri condivisibili e verificabili: ?periodo=g|s|m|a&data=YYYY-MM-DD&trib=&reg=
+    try {
+      var q = new URLSearchParams(location.search);
+      var qm = q.get('periodo');
+      if (qm && qm.length === 1 && 'gsma'.indexOf(qm) >= 0) {
+        modo = qm;
+        document.querySelectorAll('#modi button').forEach(function (b) { b.classList.toggle('on', b.dataset.m === qm); });
+      }
+      var qd = q.get('data'); if (qd && /^\d{4}-\d{2}-\d{2}$/.test(qd)) { ref = qd; ed('rif').value = ref; }
+      var qt = q.get('trib'); if (qt) { fTrib = qt; ed('trib').value = qt; }
+      var qr = q.get('reg'); if (qr) { fReg = qr; ed('reg').value = qr; }
+    } catch (e) {}
     rendi();
   }
 
