@@ -19,7 +19,8 @@ jobs:
         with:
           node-version: "22"
       - name: raccolta NPL's dal PVP
-        run: node scripts/npl-raccogli.js || echo "NPL: raccolta non riuscita (dataset intatto)"
+        run: |
+          node scripts/npl-raccogli.js || echo "NPL raccolta non riuscita (dataset intatto)"
       - name: controllo qualità
         run: |
           node - <<'NODE'
