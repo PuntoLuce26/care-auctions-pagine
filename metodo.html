@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Metodo e copertura dei dati — CAReIndex | CARe Auctions</title>
+<meta name="description" content="Metodo e copertura di ogni numero pubblicato da CARe Auctions: come si calcola, quanti lotti e tribunali copre, quanto è fresco, versione (CAReIndex), provenienza (PVP Ministero della Giustizia, OMI Agenzia delle Entrate) e cosa è stimato.">
+<link rel="canonical" href="https://puntoluce26.github.io/care-auctions-pagine/metodo.html">
+<link rel="alternate" hreflang="it" href="https://puntoluce26.github.io/care-auctions-pagine/metodo.html">
+<link rel="alternate" hreflang="x-default" href="https://puntoluce26.github.io/care-auctions-pagine/metodo.html">
+<meta property="og:title" content="Metodo e copertura dei dati — CAReIndex | CARe Auctions">
+<meta property="og:description" content="Ogni numero con il suo metodo, la sua copertura e la sua data. Nessuna stima.">
+<style>
+body{margin:0;background:#F4F1EA;color:#0F1E3A;font-family:-apple-system,system-ui,sans-serif;line-height:1.6}
+.top{background:#0F1E3A;color:#F4F1EA;padding:14px 18px;font-weight:600}
+.wrap{max-width:1080px;margin:32px auto;padding:0 18px}
+h1{font-size:31px;line-height:1.15;margin:8px 0 10px}
+h2{color:#A8811F;margin-top:34px;font-size:19px}
+.lead{font-size:17.5px;color:#3C4A65;margin:0 0 8px}
+.nav{font-size:13px;margin:14px 0 0}
+.nav a{color:#0F1E3A;margin-right:14px;text-decoration:none;border-bottom:1px solid #D4A84B}
+.cert{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:20px 0 6px}
+.card{border:1px solid #E3D9C0;border-radius:14px;padding:15px 17px;background:#fff}
+.card .num{font-size:23px;font-weight:650;letter-spacing:-.02em}
+.card .lab{font-size:11px;text-transform:uppercase;letter-spacing:.11em;color:#6B7690;margin:2px 0 5px}
+.card .sub{font-size:12px;color:#7A839A}
+table{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border:1px solid #E3D9C0;border-radius:12px;overflow:hidden;margin-top:10px}
+th,td{padding:9px 10px;border-bottom:1px solid #EFE7D2;text-align:left;vertical-align:top}
+th{font-size:10.5px;text-transform:uppercase;letter-spacing:.09em;color:#6B7690;background:#FBF8F1}
+td.metodo{color:#37455f}
+.badge{display:inline-block;font-size:11.5px;border-radius:999px;padding:2px 9px;background:#EFE9DA;color:#4A5871;white-space:nowrap}
+.badge.ok{background:#E4F1EA;color:#1F6146}
+.badge.attesa{background:#F6EEDC;color:#7A5C12}
+.ver{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;color:#0F1E3A}
+.nota{font-size:12.5px;color:#5A6A85;margin-top:22px;border-top:1px solid #E3D9C0;padding-top:12px}
+.src{font-size:12px;color:#7A839A}
+.stimato-no{color:#1F6146;font-weight:600}
+@media(max-width:640px){h1{font-size:24px}table{display:block;overflow-x:auto;white-space:nowrap}}
+</style>
+</head>
+<body>
+<div class="top">CARe Auctions — il primo HUB immobiliare al mondo · careauctions.co</div>
+<div class="wrap">
+<nav class="nav"><a href="https://careauctions.co/dati">I dati</a><a href="https://careauctions.co/esiti">Monitor esiti</a><a href="https://careauctions.co/osservatorio">oCARe</a><a href="metodo.html">Metodo e copertura</a></nav>
+<h1>Metodo e copertura dei dati</h1>
+<p class="lead">Ogni numero che pubblichiamo dichiara <strong>come</strong> si calcola, <strong>quanto</strong> copre, <strong>quando</strong> è stato aggiornato, con <strong>quale versione</strong> e da <strong>quale fonte</strong>. E dice anche cosa <em>non</em> è un dato: oggi nessun indicatore è stimato.</p>
+
+<div class="cert">
+  <div class="card"><div class="lab">Versione</div><div class="num ver" id="versione">CAReIndex —</div><div class="sub">anno-settimana ISO del dato più fresco</div></div>
+  <div class="card"><div class="lab">Dato più fresco</div><div class="num" id="fresco">—</div><div class="sub" id="fresco-sub">calcolato dai timestamp del feed</div></div>
+  <div class="card"><div class="lab">Fonti</div><div class="num" style="font-size:16px">PVP · OMI</div><div class="sub">Ministero della Giustizia · Agenzia delle Entrate</div></div>
+  <div class="card"><div class="lab">Stimato</div><div class="num stimato-no">Nulla</div><div class="sub">nessun numero interpolato o inventato</div></div>
+</div>
+
+<h2>Indicatori pubblicati: metodo, copertura, freschezza</h2>
+<table id="tabella">
+<thead><tr><th>Indicatore</th><th>Metodo di calcolo</th><th>Copertura</th><th>Freschezza</th><th>Versione</th><th>Provenienza</th><th>Stimato</th></tr></thead>
+<tbody>
+<tr data-json="dati-indice.json" data-campo="meta.generato">
+<td><strong>Lotti all'asta</strong></td>
+<td class="metodo">Conteggio diretto dei lotti presenti nel feed vivo (nessuna deduzione).</td>
+<td>21/21 regioni italiane · <span data-n="lotti">322.806</span> lotti; tribunali e comuni letti dal campo del PVP. <span class="src">Manca: i lotti che il PVP non pubblica nel giorno.</span></td>
+<td><span class="badge" data-badge>—</span></td>
+<td class="ver" data-ver>—</td>
+<td class="src">PVP — Ministero della Giustizia</td>
+<td class="stimato-no">No</td>
+</tr>
+<tr data-json="esiti-monitor.json" data-campo="generato">
+<td><strong>Aggiudicazioni con prezzo finale</strong></td>
+<td class="metodo">Solo le vendite aggiudicate con prezzo finale pubblicato; nessun prezzo ricostruito.</td>
+<td><span data-n="esiti">2.871</span> aggiudicazioni · <span data-n="tribunali">92</span> tribunali · giorni con esiti: 29/09→28/10/2026. <span class="src">Esclusi: 274 lotti con solo prezzo base e 13.626 record senza prezzo finale.</span></td>
+<td><span class="badge" data-badge>—</span></td>
+<td class="ver" data-ver>—</td>
+<td class="src">PVP — vendite aggiudicate</td>
+<td class="stimato-no">No</td>
+</tr>
+<tr data-json="andamento-esiti.json" data-campo="generato">
+<td><strong>Esiti delle aste</strong></td>
+<td class="metodo">Conteggio degli stati dichiarati dal PVP per ogni lotto (aggiudicata, deserta, sospesa).</td>
+<td>Stato su tutti i lotti del feed: <span data-n="agg">2.183</span> aggiudicate, <span data-n="des">29.268</span> deserte, <span data-n="sos">684</span> sospese, 294.765 non pubblicate. <span class="src">Manca: lo stato dei lotti non ancora pubblicati.</span></td>
+<td><span class="badge" data-badge>—</span></td>
+<td class="ver" data-ver>—</td>
+<td class="src">PVP — Ministero della Giustizia</td>
+<td class="stimato-no">No</td>
+</tr>
+<tr data-json="statistiche-mercato.json" data-campo="meta.generato">
+<td><strong>Sconto medio (prezzo base vs offerta minima)</strong></td>
+<td class="metodo">Mediana del ribasso tra prezzo base e offerta minima pubblicati sul medesimo lotto; non è un prezzo di aggiudicazione.</td>
+<td>Lotti con prezzo base e offerta minima entrambi pubblicati; copertura dichiarata nel file (<span data-n="sm-lotti">—</span> lotti). <span class="src">Manca: i lotti senza offerta minima.</span></td>
+<td><span class="badge" data-badge>—</span></td>
+<td class="ver" data-ver>—</td>
+<td class="src">Nostro calcolo su dati PVP</td>
+<td class="stimato-no">No</td>
+</tr>
+<tr data-json="dati-indice.json" data-campo="meta.generato" data-fonte-secondaria="confronto-mercato.json">
+<td><strong>Valori di mercato OMI</strong></td>
+<td class="metodo">Quotazioni OMI come pubblicate; il confronto con il prezzo d'asta è un rapporto tra due dati pubblici.</td>
+<td>Comuni con quotazioni OMI disponibili; valori mai ridistribuiti, solo metriche aggregate. <span class="src">Manca: i comuni senza quotazione OMI.</span></td>
+<td><span class="badge" data-badge>—</span></td>
+<td class="ver" data-ver>—</td>
+<td class="src">Agenzia delle Entrate — OMI</td>
+<td class="stimato-no">No</td>
+</tr>
+<tr data-json="andamento-prezzi.json" data-campo="generato">
+<td><strong>Prezzo medio giornaliero (CAReIndex)</strong></td>
+<td class="metodo">Media dei prezzi base dei lotti letti nel giorno: indicatore di mercato, non prezzo di vendita.</td>
+<td>Solo i giorni in cui il giro automatico ha letto il feed. <span class="src">Manca: i giorni senza lettura.</span></td>
+<td><span class="badge" data-badge>—</span></td>
+<td class="ver" data-ver>—</td>
+<td class="src">Nostro calcolo su dati PVP</td>
+<td class="stimato-no">Indicatore</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Report mensile certificato</h2>
+<p class="lead">Ogni mese pubblichiamo un report versionato con i numeri del periodo, la copertura e la data di riferimento. <a href="report-2026-10.html">Apri il report di ottobre 2026 →</a></p>
+
+<h2>Come leggerlo (e come citarlo)</h2>
+<p class="lead">Versione <span class="ver" data-ver-any>CAReIndex</span>: identifica un insieme esatto di dati e di codice. Quando citi un numero, cita la versione e la data: chiunque può rifare il calcolo dal file pubblico. La freschezza è calcolata dal timestamp del feed, mai scritta a mano: se il dato è vecchio, il badge lo dice.</p>
+<p class="nota"><strong>Provenienza.</strong> PVP — Portale delle Vendite Pubbliche, Ministero della Giustizia (lotti, aggiudicazioni, esiti, perizie); Agenzia delle Entrate — OMI (quotazioni di mercato). I dataset completi in formato aperto sono disponibili per giornalisti, banche e ricercatori: <a href="mailto:info@careauctions.co">info@careauctions.co</a>.<br><strong>Cosa è stimato:</strong> nessun numero pubblicato in questa pagina. Gli indicatori dichiaratamente derivati (sconto, prezzo medio, CAReIndex) sono rapporti tra dati pubblici e sono etichettati come tali.</p>
+</div>
+
+<script>
+(function () {
+  var BASE = 'https://puntoluce26.github.io/care-auctions-pagine/feed/';
+  var cache = {};
+  function carica(file) {
+    if (!cache[file]) cache[file] = fetch(BASE + file + '?cb=' + Date.now(), { cache: 'no-store' }).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+    return cache[file];
+  }
+  function leggiCampo(obj, path) { return path.split('.').reduce(function (o, k) { return o == null ? null : o[k]; }, obj); }
+  function settimanaISO(d) {
+    var t = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
+    var dn = (t.getUTCDay() + 6) % 7; t.setUTCDate(t.getUTCDate() - dn + 3);
+    var g = new Date(Date.UTC(t.getUTCFullYear(), 0, 4)); var gd = (g.getUTCDay() + 6) % 7; g.setUTCDate(g.getUTCDate() - gd + 3);
+    return t.getUTCFullYear() + '-W' + String(1 + Math.round((t - g) / (7 * 86400000))).padStart(2, '0');
+  }
+  function daMinuti(min) {
+    if (min < 1) return 'adesso';
+    if (min < 60) return min + ' min fa';
+    var h = Math.floor(min / 60), d = Math.floor(h / 24);
+    if (d >= 1) return d + (d === 1 ? ' giorno fa' : ' giorni fa');
+    return h + ' h fa';
+  }
+  function aggiorna() {
+    var righe = document.querySelectorAll('#tabella tbody tr');
+    var piuFresco = null;
+    righe.forEach(function (tr) {
+      var file = tr.getAttribute('data-json'), campo = tr.getAttribute('data-campo');
+      var badge = tr.querySelector('[data-badge]');
+      carica(file).then(function (j) {
+        var iso = leggiCampo(j, campo);
+        if (!iso) throw new Error('campo assente');
+        var d = new Date(iso);
+        var min = Math.max(0, Math.round((Date.now() - d.getTime()) / 60000));
+        if (!piuFresco || d > piuFresco) piuFresco = d;
+        badge.textContent = 'aggiornato ' + daMinuti(min) + ' · ' + d.toISOString().slice(0, 16).replace('T', ' ');
+        badge.className = 'badge ' + (min <= 20 ? 'ok' : 'attesa');
+        badge.title = 'Timestamp del feed: ' + iso;
+        var ver = tr.querySelector('[data-ver]');
+        if (ver) ver.textContent = 'CAReIndex ' + settimanaISO(d);
+      }).catch(function (e) {
+        if (badge) { badge.textContent = 'in aggiornamento'; badge.className = 'badge attesa'; badge.title = e.message; }
+      });
+    });
+    carica('dati-indice.json').then(function (j) {
+      var n = j.meta && j.meta.parametri ? j.meta.parametri : {};
+      document.querySelectorAll('[data-n="lotti"]').forEach(function (e) { e.textContent = Number(n.lotti || 0).toLocaleString('it-IT'); });
+      document.querySelectorAll('[data-n="esiti"]').forEach(function (e) { e.textContent = Number(n.aggiudicazioni || 0).toLocaleString('it-IT'); });
+      document.querySelectorAll('[data-n="tribunali"]').forEach(function (e) { e.textContent = Number(n.tribunaliEsiti || 0).toLocaleString('it-IT'); });
+      if (j.meta && j.meta.versione) document.querySelectorAll('[data-ver-any]').forEach(function (e) { e.textContent = j.meta.versione; });
+    }).catch(function () {});
+    carica('andamento-esiti.json').then(function (j) {
+      var e = (j && j.esiti) || {};
+      document.querySelectorAll('[data-n="agg"]').forEach(function (x) { x.textContent = Number(e.aggiudicate || 0).toLocaleString('it-IT'); });
+      document.querySelectorAll('[data-n="des"]').forEach(function (x) { x.textContent = Number(e.deserte || 0).toLocaleString('it-IT'); });
+      document.querySelectorAll('[data-n="sos"]').forEach(function (x) { x.textContent = Number(e.sospese || 0).toLocaleString('it-IT'); });
+    }).catch(function () {});
+    carica('statistiche-mercato.json').then(function (j) {
+      var l = (j && j.lotti && j.lotti.totale) || null;
+      document.querySelectorAll('[data-n="sm-lotti"]').forEach(function (e) { e.textContent = l ? Number(l).toLocaleString('it-IT') : '—'; });
+    }).catch(function () {});
+  }
+  aggiorna();
+  setInterval(aggiorna, 60000);
+})();
+</script>
+</body>
+</html>

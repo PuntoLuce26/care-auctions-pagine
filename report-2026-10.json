@@ -1,0 +1,220 @@
+{
+ "versione": "CAReIndex 2026-W44",
+ "mese": "2026-10",
+ "etichetta": "ottobre 2026",
+ "dataRiferimento": "2026-10-28",
+ "generato": "2026-10-31T08:08:17.108Z",
+ "fonte": "PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia) · Agenzia delle Entrate — OMI",
+ "metodo": "Aggiudicazioni: solo vendite aggiudicate con prezzo finale pubblicato, sommate per data di vendita; nessun prezzo ricostruito. Sconto: mediana del ribasso tra prezzo base e offerta minima pubblicati sul medesimo lotto. Esiti: stati dichiarati dal PVP.",
+ "stimato": "nulla: ogni numero è un conteggio o un rapporto tra dati pubblicati",
+ "copertura": {
+  "esitiNelMese": 2544,
+  "tribunaliNelMese": 92,
+  "giorniConEsiti": 26,
+  "tribunaliTotaliArchivio": 92,
+  "coperturaArchivio": {
+   "dal": "2026-09-29",
+   "al": "2026-10-28",
+   "giorni": 28
+  },
+  "esclusi": {
+   "prezzoBase": 274,
+   "senzaData": 0,
+   "senzaPrezzo": 0,
+   "altreFonti": 13626
+  },
+  "lottiAttivi": 322806,
+  "esitiMercato": {
+   "aggiudicate": 2183,
+   "deserte": 29268,
+   "sospese": 684,
+   "nonPubblicato": 294765
+  },
+  "scontoMedioNazionale": {
+   "medio": 20.2,
+   "mediano": 25,
+   "lotti": 302883
+  }
+ },
+ "kpi": {
+  "aggiudicazioni": 2544,
+  "incasso": 46246449,
+  "prezzoMedio": 18179,
+  "tribunali": 92
+ },
+ "settimane": {
+  "2026-W40": 392,
+  "2026-W41": 404,
+  "2026-W42": 487,
+  "2026-W43": 711,
+  "2026-W44": 550
+ },
+ "topTribunali": [
+  {
+   "tribunale": "MILANO",
+   "esiti": 142,
+   "incasso": 12557157,
+   "medio": 88431
+  },
+  {
+   "tribunale": "SIENA",
+   "esiti": 33,
+   "incasso": 10873291,
+   "medio": 329494
+  },
+  {
+   "tribunale": "ROMA",
+   "esiti": 159,
+   "incasso": 4945238,
+   "medio": 31102
+  },
+  {
+   "tribunale": "BUSTO ARSIZIO",
+   "esiti": 146,
+   "incasso": 2908712,
+   "medio": 19923
+  },
+  {
+   "tribunale": "BRESCIA",
+   "esiti": 32,
+   "incasso": 2002167,
+   "medio": 62568
+  },
+  {
+   "tribunale": "CREMONA",
+   "esiti": 75,
+   "incasso": 1525140,
+   "medio": 20335
+  },
+  {
+   "tribunale": "SIRACUSA",
+   "esiti": 9,
+   "incasso": 1336460,
+   "medio": 148496
+  },
+  {
+   "tribunale": "BERGAMO",
+   "esiti": 33,
+   "incasso": 1077350,
+   "medio": 32647
+  },
+  {
+   "tribunale": "TORINO",
+   "esiti": 227,
+   "incasso": 865261,
+   "medio": 3812
+  },
+  {
+   "tribunale": "MODENA",
+   "esiti": 103,
+   "incasso": 768921,
+   "medio": 7465
+  }
+ ],
+ "giorni": [
+  {
+   "giorno": "2026-10-01",
+   "esiti": 88
+  },
+  {
+   "giorno": "2026-10-02",
+   "esiti": 303
+  },
+  {
+   "giorno": "2026-10-03",
+   "esiti": 1
+  },
+  {
+   "giorno": "2026-10-05",
+   "esiti": 43
+  },
+  {
+   "giorno": "2026-10-06",
+   "esiti": 66
+  },
+  {
+   "giorno": "2026-10-07",
+   "esiti": 80
+  },
+  {
+   "giorno": "2026-10-08",
+   "esiti": 102
+  },
+  {
+   "giorno": "2026-10-09",
+   "esiti": 107
+  },
+  {
+   "giorno": "2026-10-10",
+   "esiti": 5
+  },
+  {
+   "giorno": "2026-10-11",
+   "esiti": 1
+  },
+  {
+   "giorno": "2026-10-12",
+   "esiti": 51
+  },
+  {
+   "giorno": "2026-10-13",
+   "esiti": 21
+  },
+  {
+   "giorno": "2026-10-14",
+   "esiti": 63
+  },
+  {
+   "giorno": "2026-10-15",
+   "esiti": 125
+  },
+  {
+   "giorno": "2026-10-16",
+   "esiti": 223
+  },
+  {
+   "giorno": "2026-10-17",
+   "esiti": 4
+  },
+  {
+   "giorno": "2026-10-19",
+   "esiti": 101
+  },
+  {
+   "giorno": "2026-10-20",
+   "esiti": 40
+  },
+  {
+   "giorno": "2026-10-21",
+   "esiti": 254
+  },
+  {
+   "giorno": "2026-10-22",
+   "esiti": 133
+  },
+  {
+   "giorno": "2026-10-23",
+   "esiti": 168
+  },
+  {
+   "giorno": "2026-10-24",
+   "esiti": 14
+  },
+  {
+   "giorno": "2026-10-25",
+   "esiti": 1
+  },
+  {
+   "giorno": "2026-10-26",
+   "esiti": 79
+  },
+  {
+   "giorno": "2026-10-27",
+   "esiti": 232
+  },
+  {
+   "giorno": "2026-10-28",
+   "esiti": 239
+  }
+ ]
+}
