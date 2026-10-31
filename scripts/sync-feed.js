@@ -39,21 +39,50 @@ const regioneDi = p => PROV[norm(p)] || PROV[norm(p).replace(/'/g,'')] || 'Itali
 function get(url){return new Promise(res=>{const u=new URL(url);const r=https.request({host:u.hostname,path:u.pathname+u.search,method:'POST',headers:{'Content-Type':'application/json','User-Agent':'Mozilla/5.0 (compatible; careauctions-feed/1.0)','Accept':'application/json'}},x=>{let t='';x.on('data',c=>t+=c);x.on('end',()=>res({s:x.statusCode,t}));});r.on('error',()=>res({s:0,t:''}));r.setTimeout(30000,()=>{r.destroy();res({s:0,t:''});});r.write('{}');r.end();});}
 const dormi = ms => new Promise(s=>setTimeout(s,ms));
 
+// MAPPER-5.9xx: i 15 campi storici restano identici (l'app li legge così); in coda ai campi
+// arrivano i campi di mercato che il PVP espone già e che prima buttavamo via. Nomi brevi,
+// e la chiave viene scritta SOLO se il dato esiste davvero (niente zeri o stringhe vuote inventate).
 function mappa(x){
   const prov=(x.indirizzo&&x.indirizzo.provincia)||''; const citta=(x.indirizzo&&x.indirizzo.citta)||'';
   const base=Number(x.prezzoBaseAsta)||0; const minima=Number(x.offertaMinima)||0;
   let sconto=base>0?Math.round((1-minima/base)*100):0; if(sconto<0)sconto=0; if(sconto>99)sconto=99;
   const disp=Array.isArray(x.disponibilita)?x.disponibilita.join(','):String(x.disponibilita||'');
-  return { id:String(x.id), tipo:String(x.tipoLotto||'').indexOf('IMMOBIL')>=0?'IMMOBILIARE':'MOBILIARE',
+  const o = { id:String(x.id), tipo:String(x.tipoLotto||'').indexOf('IMMOBIL')>=0?'IMMOBILIARE':'MOBILIARE',
     pubblicazione:x.dataPubblicazione||'', titolo:((x.categoriaBene&&x.categoriaBene[0])||String(x.categoriaLotto||''))+' · '+citta+' ('+prov+')',
     prezzoBase:base, minima, scontoPct:sconto, dataAsta:x.dataVendita||'', regione:regioneDi(prov), citta,
     tribunale:x.tribunale||'', occupazione:/OCCUP/.test(disp)?'OCCUPATO':'LIBERO',
     link:'https://pvp.giustizia.it/pvp/it/detail_annuncio.page?idAnnuncio='+x.id, foto:x.immagineCover||x.immagine||'',
     documenti:[{tipo:'pagina ufficiale',url:'https://pvp.giustizia.it/pvp/it/detail_annuncio.page?idAnnuncio='+x.id}],
     descrizione:String(x.descLotto||'').slice(0,500) };
+  // --- campi di mercato (nostri, per le statistiche) ---
+  // cat: tutte le categorie bene (di solito una) separate da | — es. "APPARTAMENTO|BOX_AUTORIMESSA"
+  const cat=(Array.isArray(x.categoriaBene)?x.categoriaBene:[x.categoriaBene]).filter(v=>v!=null&&v!=='').map(String);
+  if(cat.length) o.cat=cat.join('|');
+  // proc: identificativo della procedura esecutiva/concorsuale (numero interno PVP, non il numero di ruolo)
+  if(x.procedura!=null&&x.procedura!=='') o.proc=String(x.procedura);
+  // num: numero del lotto dentro la procedura (es. "4")
+  if(x.numeroLotto!=null&&x.numeroLotto!=='') o.num=String(x.numeroLotto);
+  // rialzo: rialzo minimo d'asta in euro, come lo pubblica il PVP
+  const ri=Number(x.rialzoMinimo); if(x.rialzoMinimo!=null&&x.rialzoMinimo!==''&&isFinite(ri)) o.rialzo=ri;
+  // disp: disponibilità (stato di occupazione) senza i doppioni che il PVP ripete — es. "LIBER" / "OCCUP"
+  const dispU=[...new Set((Array.isArray(x.disponibilita)?x.disponibilita:[x.disponibilita]).filter(v=>v!=null&&v!=='').map(String))];
+  if(dispU.length) o.disp=dispU.join('|');
+  // ora: orario di vendita HH:MM (serve alla distribuzione per ora)
+  if(x.orarioVendita) o.ora=String(x.orarioVendita).slice(0,5);
+  // esito: AGGIU / ASDES / SOSPE / DESER ... solo se il PVP lo pubblica (spesso è null)
+  if(x.esito) o.esito=String(x.esito);
+  // lat/lon: coordinate dell'immobile (dedotte dalla toponomastica, non dal catasto)
+  const co=x.indirizzo&&x.indirizzo.coordinate;
+  if(co&&co.latitudine!=null&&co.longitudine!=null){
+    const la=Number(co.latitudine), lo=Number(co.longitudine);
+    if(isFinite(la)&&isFinite(lo)&&la!==0&&lo!==0){ o.lat=Number(la.toFixed(5)); o.lon=Number(lo.toFixed(5)); }
+  }
+  return o;
 }
 
-(async()=>{
+// il corpo resta identico: è solo incapsulato in main() così statistiche-mercato.js può
+// riusare lo STESSO mappa() invece di duplicarne una copia che poi diverge.
+async function main(){
   console.log('sync-feed MODE='+MODE);
   const pagine=[];
   let totAtteso=0; // totAtteso-tdz-fix 5.844: dichiarata prima dell uso nel blocco full
@@ -242,4 +271,7 @@ function mappa(x){
     } catch (eE) { console.log('esiti: errore', eE.message); }
   }
 
-})().catch(e=>{ console.error('FATALE',e); process.exit(1); });
+}
+
+if (require.main === module) main().catch(e=>{ console.error('FATALE',e); process.exit(1); });
+module.exports = { mappa };

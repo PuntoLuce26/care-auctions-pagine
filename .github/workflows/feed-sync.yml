@@ -21,6 +21,7 @@ jobs:
           echo "MODE=$MODE"
           MODE=$MODE node scripts/sync-feed.js
           node scripts/dati-indice.js || echo "indice dati: non aggiornato"
+          node scripts/statistiche-mercato.js || echo "statistiche mercato: non aggiornate in questo giro"
           if [ "$MODE" = "full" ]; then
             node scripts/ivg-aggiudicazioni.js || echo "IVG: raccolta non riuscita stasera"
             node scripts/fallco-aggiudicazioni.js || echo "FALLCO: raccolta non riuscita stasera"
