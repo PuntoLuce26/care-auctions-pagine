@@ -97,7 +97,7 @@ input{flex:1 1 260px;min-width:200px}select{flex:0 1 190px}
     var tipo=document.getElementById('tipo').value, reg=document.getElementById('regione').value;
     var solo=document.getElementById('soloAttive').checked, ord=document.getElementById('ordine').value;
     filtrati=TUTTI.filter(function(x){
-      if(solo && !(x.attiva || x.stato==='in-programma' || x.attiva===true)) return false;
+      if(solo && x.attiva===false) return false;
       if(tipo && String(x.tipo)!==tipo) return false;
       if(reg && String(x.regione||'')!==reg) return false;
       if(q){var t=[x.titolo,x.comune,x.provincia,x.tribunale,x.cat].filter(Boolean).join(' ').toLowerCase(); if(t.indexOf(q)<0) return false;}
