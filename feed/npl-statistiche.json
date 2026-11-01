@@ -1,42 +1,42 @@
 {
  "meta": {
   "titolo": "NPL's — crediti in sofferenza e crediti in procedura (dati veri dal PVP)",
-  "generatoIl": "2026-10-31T15:32:19.017Z",
-  "aggiornato": "2026-10-31",
+  "generatoIl": "2026-11-01T05:09:25.296Z",
+  "aggiornato": "2026-11-01",
   "fonte": "PVP — Portale delle Vendite Pubbliche, Ministero della Giustizia (pvp.giustizia.it)",
   "query": "tipoLotto=VALORI-CREDITI",
   "licenza": "Dati pubblici del PVP (Portale delle Vendite Pubbliche, Ministero della Giustizia). Riuso consentito per finalità informative con citazione della fonte; nessun dato personale oltre a quanto già pubblico nel bando.",
   "metodo": "Classificazione conservativa dal testo pubblico del bando: NPL/sofferenza solo se dichiarati; crediti fiscali e titoli/quote esclusi (classi diverse, non NPL). Valore nominale solo se scritto nel bando.",
-  "totale": 255,
-  "dichiaratoPVP": 1116,
+  "totale": 253,
+  "dichiaratoPVP": 1113,
   "esclusi": {
-   "titoli-e-quote": 450,
+   "titoli-e-quote": 449,
    "credito-fiscale": 389,
    "non-credito": 22
   },
   "copertura": {
    "importo": {
     "con": 45,
-    "su": 255,
-    "pct": 17.6
+    "su": 253,
+    "pct": 17.8
    },
    "regione": {
-    "con": 188,
-    "su": 255,
-    "pct": 73.7
+    "con": 186,
+    "su": 253,
+    "pct": 73.5
    },
    "tribunale": {
-    "con": 253,
-    "su": 255,
+    "con": 251,
+    "su": 253,
     "pct": 99.2
    }
   },
   "perTipo": {
-   "credito": 251,
+   "credito": 249,
    "NPL": 4
   },
   "perStato": {
-   "conclusa-esito-non-pubblicato": 212,
+   "conclusa-esito-non-pubblicato": 210,
    "in-programma": 22,
    "deserta": 19,
    "aggiudicata": 2
@@ -53,20 +53,20 @@
    "fino-10k": 67,
    "50k-250k": 32,
    "250k-1M": 29,
-   "oltre-1M": 25
+   "oltre-1M": 23
   },
   "regioni": 16,
   "province": 39,
-  "sommaPrezzoBase": 380778861,
+  "sommaPrezzoBase": 377399534,
   "freschezza": {
-   "ultimaRaccolta": "2026-10-31",
+   "ultimaRaccolta": "2026-11-01",
    "dataLottoPiuRecente": "2026-12-31",
    "dataLottoPiuVecchio": "2024-01-12"
   },
   "nota": "Nessun numero inventato: i campi mancanti restano null e non vanno mostrati. Prezzo base = base d'asta del bando, NON il valore nominale del credito."
  },
  "perRegione": {
-  "Lazio": 59,
+  "Lazio": 57,
   "Sicilia": 33,
   "Toscana": 18,
   "Lombardia": 16,
@@ -84,7 +84,7 @@
   "Campania": 1
  },
  "perProvincia": {
-  "Roma": 58,
+  "Roma": 56,
   "Palermo": 29,
   "Milano": 11,
   "Bologna": 10,
