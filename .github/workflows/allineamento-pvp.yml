@@ -1,0 +1,50 @@
+name: allineamento PVP
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: write
+concurrency:
+  group: allineamento-pvp
+  cancel-in-progress: false
+jobs:
+  verifica:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Confronta PVP e nostro archivio
+        id: c
+        run: |
+          set -u
+          PVP=$(curl -s -m 40 -X POST "https://pvp.giustizia.it/ric-496b258c-986a1b71/ric-ms/ricerca/vendite?page=0&size=1&language=it&sort=dataOraVendita%2Cdesc" -H 'content-type: application/json' -H 'User-Agent: Mozilla/5.0 (Macintosh) Chrome/120' -d '{}' | python3 -c "import json,sys;print(json.load(sys.stdin).get('body',{}).get('totalElements',''))")
+          NOSTRO=$(python3 -c "import json;print(json.load(open('feed/indice.json')).get('totali',0))")
+          echo "PVP=$PVP nostro=$NOSTRO"
+          DELTA=$(( ${PVP:-0} - ${NOSTRO:-0} ))
+          python3 - "$PVP" "$NOSTRO" "$DELTA" <<'PY2'
+          import json,sys,datetime
+          pvp=int(sys.argv[1] or 0); nostro=int(sys.argv[2] or 0); delta=int(sys.argv[3] or 0)
+          json.dump({"quando":datetime.datetime.utcnow().isoformat()+"Z","pvp":pvp,"nostro":nostro,"delta":delta,"allineato":delta==0}, open("feed/allineamento.json","w"), ensure_ascii=False)
+          print(f"delta={delta}")
+          PY2
+          echo "delta=$DELTA" >> $GITHUB_OUTPUT
+          echo "pvp=$PVP" >> $GITHUB_OUTPUT
+          echo "### Allineamento PVP" >> $GITHUB_STEP_SUMMARY
+          echo "PVP: $PVP — nostro: $NOSTRO — delta: $DELTA" >> $GITHUB_STEP_SUMMARY
+          if [ "$DELTA" != "0" ]; then
+            echo "::warning::DISALLINEATI di $DELTA annunci rispetto a PVP"
+            curl -s -m 30 -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json"               "https://api.github.com/repos/PuntoLuce26/care-auctions-pagine/actions/workflows/feed-sync.yml/dispatches"               -d '{"ref":"main"}'
+          fi
+      - name: Commit stato allineamento
+        run: |
+          git config user.name "Sam CARe"; git config user.email "sam@careauctions.co"
+          git add feed/allineamento.json
+          if git diff --cached --quiet; then echo "nessuna variazione"; else
+            git commit -m "allineamento PVP $(date -u +%FT%TZ) delta=${{ steps.c.outputs.delta }}"
+            git pull -q --rebase origin main || true
+            git push || (sleep 5; git push)
+          fi
+      - name: Esci in errore se disallineati
+        if: steps.c.outputs.delta != '0'
+        run: exit 1
