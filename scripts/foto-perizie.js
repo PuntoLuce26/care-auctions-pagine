@@ -289,8 +289,7 @@ async function lavoraPdf(voce, id, nIniziale, maxFoto) {
     }
   }
 
-  const destinazione = path.join(CARTELLA, id);
-  fs.mkdirSync(destinazione, { recursive: true });
+  const destinazione = path.join(CARTELLA, id); // creata solo alla prima foto accettata
 
   const scelti = [];
   const scartati = [];
@@ -350,6 +349,7 @@ async function lavoraPdf(voce, id, nIniziale, maxFoto) {
       const voceCand = dellaPagina[Math.min(i, dellaPagina.length - 1)] || dellaPagina[0];
       const dst = path.join(destinazione, n + '.webp');
       try {
+        fs.mkdirSync(destinazione, { recursive: true });
         convertiWebp(f, dst, voceCand ? voceCand.w : MIN_W);
       } catch (e) {
         try { fs.unlinkSync(dst); } catch (e2) {}
