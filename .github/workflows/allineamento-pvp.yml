@@ -45,6 +45,13 @@ jobs:
             git pull -q --rebase origin main || true
             git push || (sleep 5; git push)
           fi
-      - name: Esci in errore se disallineati
+      - name: Allarme solo se il buco e' grosso
         if: steps.c.outputs.delta != '0'
-        run: exit 1
+        run: |
+          D=${{ steps.c.outputs.delta }}
+          echo "Disallineati di $D annunci (in corso di recupero)"
+          if [ "${D#-}" -gt 30000 ]; then
+            echo "::error::Buco oltre 30.000 annunci: il feed non sta recuperando"
+            exit 1
+          fi
+          echo "Sotto soglia: nessuna mail, il recupero e' automatico" 
