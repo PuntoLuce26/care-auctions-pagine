@@ -33,14 +33,24 @@ jobs:
       - name: Lingue — tutte le 20 del sito
         shell: bash
         run: |
+          # 5.953 — il vecchio controllo cercava hreflang sulle pagine lotto, che ora non
+          # ci sono piu' per scelta SEO (le varianti non tradotte sono noindex). Ora si verifica
+          # che la pagina esista davvero: HTML 200, <html lang> giusto, titolo presente,
+          # niente "asta non trovata". L'id e' preso dagli shard veri, non piu' hardcoded.
           set -u
           fail=0
           UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36"
-          for pair in it:it en:en de:de es:es fr:fr ja:ja ru:ru zh:zh-Hans pt:pt nl:nl pl:pl ar:ar hi:hi ko:ko uk:uk vi:vi ro:ro tl:fil el:el sv:sv; do
-            lang="${pair%%:*}"; hre="${pair##*:}"
-            url="https://careauctions.co/asta-procedura/$lang/asta-1327178.html"
+          ID=$(curl -fsS -m 25 "https://puntoluce26.github.io/care-auctions-pagine/feed/aste-ids/shard-0.json" | tr -d '[]"' | cut -d, -f1)
+          if [ -z "${ID:-}" ]; then echo "::error::nessun id lotto disponibile"; exit 1; fi
+          echo "lotto di prova: $ID"
+          for pair in it:it en:en de:de es:es fr:fr ja:ja ru:ru zh:zh pt:pt nl:nl pl:pl ar:ar hi:hi ko:ko uk:uk vi:vi ro:ro tl:tl el:el sv:sv; do
+            lang="${pair%%:*}"
+            url="https://careauctions.co/asta-procedura/$lang/asta-$ID.html"
             code=$(curl -s -o /tmp/l.html -w "%{http_code}" -m 25 -A "$UA" "$url" || echo 000)
-            if [ "$code" != "200" ] || ! grep -q "hreflang=\"$hre\"" /tmp/l.html; then
+            if [ "$code" != "200" ] \
+               || ! grep -q "<html lang=\"$lang\"" /tmp/l.html \
+               || ! grep -q "<title>" /tmp/l.html \
+               || grep -qi "asta non trovata" /tmp/l.html; then
               echo "::error::lingua $lang KO (HTTP $code) — $url"; fail=1
             else
               echo "OK $lang"
