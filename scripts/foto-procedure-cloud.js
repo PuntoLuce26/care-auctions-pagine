@@ -11,7 +11,7 @@ const https = require('https');
 
 const FEED = path.join(process.cwd(), 'feed');
 const OUT = path.join(FEED, 'foto-procedure.json');
-const MAX_DETTAGLI = 400; // per giro: il runner resta sano
+const MAX_DETTAGLI = 800; // per giro: il runner resta sano
 
 function get(url) {
   return new Promise(res => {
@@ -102,7 +102,7 @@ async function raccogliPeriziePVP() {
   let catalogo = [];
   try { catalogo = JSON.parse(fs.readFileSync(path.join(FEED2, 'foto-procedure.json'), 'utf8')); } catch (e) {}
   const mappa = {}; for (const x of catalogo) mappa[String(x.id)] = x;
-  const daFare = [...ids].filter(id => { const c = mappa[id]; return !c || !c.perizia || c.perizia.length === 0; }).slice(0, Number(process.env.PVP_CAP || 200));
+  const daFare = [...ids].filter(id => { const c = mappa[id]; return !c || !c.perizia || c.perizia.length === 0; }).slice(0, Number(process.env.PVP_CAP || 400));
   console.log('PVP perizie da raccogliere questo giro:', daFare.length);
   let aggiunte = 0;
   for (let i = 0; i < daFare.length; i += 5) {
