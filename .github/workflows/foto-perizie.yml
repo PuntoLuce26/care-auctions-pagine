@@ -1,6 +1,8 @@
 name: foto-perizie
 # Estrae le FOTO REALI dai PDF delle perizie e le pubblica in foto/<id>/<n>.webp.
-# Costo zero: tutto dentro GitHub Actions (poppler-utils + webp), nessun server.
+# Costo zero: tutto dentro GitHub Actions (poppler-utils + webp + imagemagick), nessun server.
+# Filtro: dimensioni in pixel (pdfimages -list) + contenuto (ImageMagick) per buttare
+# pagine di testo, planimetrie, timbri e loghi che passerebbero il solo filtro sul peso.
 # Input: feed/perizie-ocr.json — Output: foto/ + feed/foto-ricavate.json
 on:
   schedule:
@@ -29,12 +31,13 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Strumenti (poppler-utils + webp)
+      - name: Strumenti (poppler-utils + webp + imagemagick)
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y -qq poppler-utils webp
+          sudo apt-get install -y -qq poppler-utils webp imagemagick
           pdfimages -v 2>&1 | head -2
           cwebp -version
+          identify -version | head -2
 
       - name: Estrai le foto dalle perizie
         env:

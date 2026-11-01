@@ -6,11 +6,15 @@
 // Stato : feed/foto-perizie-stato.json ({fatti, falliti, ultimoGiro})
 // Output: foto/<id>/<n>.webp  (n = 1..3)  +  feed/foto-ricavate.json
 //
-// Filtro che scarta loghi/timbri/planimetrie vettoriali:
-//   - pdfimages -list per le dimensioni in PIXEL prima di estrarre (affidabile)
-//   - butta < 400x300 px e file estratto < 20 KB
-//   - butta le immagini 1-bit bianco/nero (scansioni di testo, mai foto)
-//   - massimo 3 foto per lotto, larghezza max 900 px, WebP q78
+// Filtro in due stadi:
+//   1) pdfimages -list (dimensioni in PIXEL prima di estrarre): butta < 400x300 px,
+//      le immagini 1-bit bianco/nero (scansioni di testo) e i formati non-foto.
+//   2) contenuto (ImageMagick identify/convert), perche' dimensione e peso da soli
+//      NON bastano: nei PDF veri passano pagine di testo, planimetrie, timbri, loghi.
+//      Scarta: fogli quasi bianchi (media > 0.93), immagini quasi nere (media < 0.05),
+//      troppo bianco (pixel > 88% di luminanza oltre il 55%), immagini piatte
+//      (stddev < 0.055) e pochi colori (< 1500) — con deroga per le foto in bianco e nero.
+//   Poi: massimo 3 foto per lotto, larghezza max 900 px, WebP q78.
 //
 // Zero dipendenze: solo fs/path/crypto/child_process + fetch nativo (Node 22).
 
@@ -38,6 +42,13 @@ const MIN_H = 300; // butta le immagini < 300 px di altezza
 const LARGHEZZA = 900; // larghezza massima finale
 const QUALITA = 78;
 const MAX_PAGINE = 6; // pagine estratte al massimo per PDF
+// analisi del contenuto (ImageMagick): butta pagine di testo, planimetrie, timbri, loghi
+const BIANCO_MAX = Number(process.env.FOTO_BIANCO_MAX || 0.55); // frazione di pixel quasi-bianchi
+const STDDEV_MIN = Number(process.env.FOTO_STDDEV_MIN || 0.055); // contrasto: sotto e' un'immagine piatta
+const COLORI_MIN = Number(process.env.FOTO_COLORI_MIN || 1500); // colori distinti
+const MEDIA_MAX = 0.93; // foglio quasi bianco
+const MEDIA_MIN = 0.05; // immagine quasi nera
+const ANALISI = process.env.FOTO_ANALISI !== '0'; // 0 = solo filtro dimensioni (per diagnosi)
 const TENTATIVI = 3; // tentativi per PDF prima di dichiararlo fallito
 const TMP = '/tmp';
 
@@ -145,6 +156,50 @@ function estraiPagina(pdf, pagina, dir, modo) {
   return files;
 }
 
+// Statistiche del contenuto con ImageMagick: distingue una FOTO da un documento.
+function analizza(src) {
+  const st = { colori: 0, media: 0, stddev: 0, bianco: 1, ok: true, motivo: '' };
+  let k = 0;
+  try {
+    const kout = execFileSync('identify', ['-format', '%k', src + '[0]'], { encoding: 'utf8', maxBuffer: 4194304, timeout: 60000 });
+    k = Number(String(kout).trim()) || 0;
+  } catch (e) {
+    st.ok = false;
+    st.motivo = 'identify: ' + String((e && e.stderr) || (e && e.message) || e).slice(0, 60);
+    return st;
+  }
+  st.colori = k;
+  try {
+    const t = String(
+      execFileSync('convert', [src + '[0]', '-colorspace', 'gray', '-resize', '320x320', '-format', '%[fx:mean] %[fx:standard_deviation]', 'info:'], {
+        encoding: 'utf8', maxBuffer: 4194304, timeout: 60000,
+      })
+    ).trim().split(/\s+/);
+    st.media = Number(t[0]) || 0;
+    st.stddev = Number(t[1]) || 0;
+    const b = String(
+      execFileSync('convert', [src + '[0]', '-colorspace', 'gray', '-resize', '320x320', '-threshold', '88%', '-format', '%[fx:mean]', 'info:'], {
+        encoding: 'utf8', maxBuffer: 4194304, timeout: 60000,
+      })
+    ).trim();
+    st.bianco = Number(b) || 0;
+  } catch (e) {
+    st.ok = false;
+    st.motivo = 'convert: ' + String((e && e.stderr) || (e && e.message) || e).slice(0, 60);
+    return st;
+  }
+
+  // regole: quali immagini NON sono foto
+  if (st.media > MEDIA_MAX) st.motivo = 'foglio quasi bianco (media ' + st.media.toFixed(2) + ')';
+  else if (st.media < MEDIA_MIN) st.motivo = 'immagine quasi nera (media ' + st.media.toFixed(2) + ')';
+  else if (st.bianco > BIANCO_MAX) st.motivo = 'troppo bianco: documento/planimetria/timbro (' + Math.round(st.bianco * 100) + '%)';
+  else if (st.stddev < STDDEV_MIN) st.motivo = 'immagine piatta (stddev ' + st.stddev.toFixed(3) + ')';
+  else if (st.colori < COLORI_MIN && !(st.bianco < 0.30 && st.stddev > 0.12)) st.motivo = 'pochi colori: logo/timbro/scansione bn (' + st.colori + ')';
+  else st.motivo = '';
+  st.ok = !st.motivo;
+  return st;
+}
+
 function convertiWebp(src, dst, w) {
   const args = ['-quiet', '-q', String(QUALITA)];
   if (w > LARGHEZZA) args.push('-resize', String(LARGHEZZA), '0');
@@ -204,8 +259,9 @@ async function lavoraPdf(voce, id, nIniziale, maxFoto) {
     return { n: 0, motivo: 'nessuna immagine >= ' + MIN_W + 'x' + MIN_H + ' px (' + immagini.length + ' immagini nel PDF)', vuoto: true };
   }
 
-  // le più grandi prima; al massimo MAX_PAGINE pagine distinte
+  // le più grandi prima; al massimo MAX_PAGINE pagine distinte (max 24 candidate analizzate)
   candidati.sort((a, b) => b.w * b.h - a.w * a.h);
+  if (candidati.length > 24) candidati.length = 24;
   const pagine = [];
   for (const c of candidati) {
     if (!pagine.includes(c.pagina)) {
@@ -218,6 +274,8 @@ async function lavoraPdf(voce, id, nIniziale, maxFoto) {
   fs.mkdirSync(destinazione, { recursive: true });
 
   const scelti = [];
+  const scartati = [];
+  let haIM = ANALISI; // ImageMagick disponibile?
   const visti = new Set();
   let n = nIniziale;
 
@@ -255,6 +313,21 @@ async function lavoraPdf(voce, id, nIniziale, maxFoto) {
       if (visti.has(h)) continue; // stessa foto ripetuta in piu' pagine
       visti.add(h);
 
+      // analisi del contenuto: e' una foto o un documento?
+      let anal = null;
+      if (haIM) {
+        anal = analizza(f);
+        if (!anal.ok) {
+          if (anal.motivo.startsWith('identify') || anal.motivo.startsWith('convert')) {
+            haIM = false; // strumento rotto: si prosegue col solo filtro dimensioni
+            anal = null;
+          } else {
+            scartati.push(path.basename(f) + ': ' + anal.motivo);
+            continue;
+          }
+        }
+      }
+
       const voceCand = dellaPagina[Math.min(i, dellaPagina.length - 1)] || dellaPagina[0];
       const dst = path.join(destinazione, n + '.webp');
       try {
@@ -263,7 +336,18 @@ async function lavoraPdf(voce, id, nIniziale, maxFoto) {
         try { fs.unlinkSync(dst); } catch (e2) {}
         continue;
       }
-      scelti.push({ n, file: dst, da: path.basename(f), px: (voceCand ? voceCand.w + 'x' + voceCand.h : '?'), kb: Math.round(st.size / 1024) });
+      let kbWebp = 0;
+      try { kbWebp = Math.round(fs.statSync(dst).size / 1024); } catch (e) {}
+      scelti.push({
+        n,
+        file: dst,
+        da: path.basename(f),
+        px: voceCand ? voceCand.w + 'x' + voceCand.h : '?',
+        kb: Math.round(st.size / 1024),
+        kbWebp,
+        colori: anal ? anal.colori : -1,
+        bianco: anal ? Math.round(anal.bianco * 100) : -1,
+      });
       n++;
     }
   }
@@ -271,9 +355,14 @@ async function lavoraPdf(voce, id, nIniziale, maxFoto) {
   pulisci(dir);
 
   if (!scelti.length) {
-    return { n: 0, motivo: 'nessuna foto utile (' + candidati.length + ' candidate, tutte < 20 KB o non convertibili)', vuoto: true, pesoPdf };
+    return {
+      n: 0,
+      motivo: 'nessuna foto utile (' + candidati.length + ' candidate scartate' + (scartati.length ? ': ' + scartati.slice(0, 2).join('; ') : '') + ')',
+      vuoto: true,
+      pesoPdf,
+    };
   }
-  return { n: scelti.length, scelti, pesoPdf };
+  return { n: scelti.length, scelti, scartati, pesoPdf };
 }
 
 function pulisci(dir) {
@@ -285,6 +374,17 @@ function pulisci(dir) {
 // ------------------------------------------------------------------ main ----
 (async () => {
   // strumenti: se mancano in locale si esce con un messaggio chiaro (la CI li installa)
+  // ImageMagick e' opzionale: se manca si continua col solo filtro dimensioni
+  let haImageMagick = true;
+  for (const bin of ['identify', 'convert']) {
+    try {
+      execFileSync(bin, ['-version'], { stdio: 'ignore', timeout: 20000 });
+    } catch (e) {
+      haImageMagick = false;
+    }
+  }
+  if (!haImageMagick) console.log('::warning::ImageMagick assente: filtro solo su dimensioni (rischio documenti/timbri pubblicati come foto).');
+
   for (const bin of ['pdfimages', 'cwebp']) {
     try {
       execFileSync(bin, bin === 'cwebp' ? ['-version'] : ['-v'], { stdio: 'ignore', timeout: 20000 });
@@ -408,7 +508,7 @@ function pulisci(dir) {
 
       log(
         '[' + (i + 1) + '/' + giro.length + '] ' + voce.id + ' ' + esito.n + ' foto' +
-          ' — ' + esito.scelti.map((s) => s.n + ':' + s.px + '/' + s.kb + 'K').join(' ') +
+          ' — ' + esito.scelti.map((s) => s.n + ':' + s.px + '/' + s.kb + 'K->' + s.kbWebp + 'K k' + s.colori + ' w' + s.bianco + '%').join(' ') +
           ' (' + durata + 's)'
       );
     }
