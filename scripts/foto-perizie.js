@@ -12,8 +12,9 @@
 //   2) contenuto (ImageMagick identify/convert), perche' dimensione e peso da soli
 //      NON bastano: nei PDF veri passano pagine di testo, planimetrie, timbri, loghi.
 //      Scarta: fogli quasi bianchi (media > 0.93), immagini quasi nere (media < 0.05),
-//      troppo bianco (pixel > 88% di luminanza oltre il 55%), immagini piatte
-//      (stddev < 0.055) e pochi colori (< 1500) — con deroga per le foto in bianco e nero.
+//      troppo bianco (pixel > 88% di luminanza oltre il 40%), immagini piatte
+//      (stddev < 0.055), fondo dominante (> 72%: loghi, timbri, firme, planimetrie)
+//      e pochi colori (< 1500) — con deroga per le foto in bianco e nero.
 //   Poi: massimo 3 foto per lotto, larghezza max 900 px, WebP q78.
 //
 // Zero dipendenze: solo fs/path/crypto/child_process + fetch nativo (Node 22).
@@ -43,7 +44,8 @@ const LARGHEZZA = 900; // larghezza massima finale
 const QUALITA = 78;
 const MAX_PAGINE = 6; // pagine estratte al massimo per PDF
 // analisi del contenuto (ImageMagick): butta pagine di testo, planimetrie, timbri, loghi
-const BIANCO_MAX = Number(process.env.FOTO_BIANCO_MAX || 0.55); // frazione di pixel quasi-bianchi
+const BIANCO_MAX = Number(process.env.FOTO_BIANCO_MAX || 0.40); // frazione di pixel quasi-bianchi
+const DOMINANTE_MAX = Number(process.env.FOTO_DOMINANTE_MAX || 0.72); // quota del colore piu' diffuso
 const STDDEV_MIN = Number(process.env.FOTO_STDDEV_MIN || 0.055); // contrasto: sotto e' un'immagine piatta
 const COLORI_MIN = Number(process.env.FOTO_COLORI_MIN || 1500); // colori distinti
 const MEDIA_MAX = 0.93; // foglio quasi bianco
@@ -158,7 +160,7 @@ function estraiPagina(pdf, pagina, dir, modo) {
 
 // Statistiche del contenuto con ImageMagick: distingue una FOTO da un documento.
 function analizza(src) {
-  const st = { colori: 0, media: 0, stddev: 0, bianco: 1, ok: true, motivo: '' };
+  const st = { colori: 0, media: 0, stddev: 0, bianco: 1, dominante: 0, ok: true, motivo: '' };
   let k = 0;
   try {
     const kout = execFileSync('identify', ['-format', '%k', src + '[0]'], { encoding: 'utf8', maxBuffer: 4194304, timeout: 60000 });
@@ -183,6 +185,22 @@ function analizza(src) {
       })
     ).trim();
     st.bianco = Number(b) || 0;
+    // colore dominante: loghi, timbri, firme e planimetrie hanno un fondo che copre quasi tutto
+    const hist = String(
+      execFileSync('convert', [src + '[0]', '-resize', '160x160', '-colors', '8', '-format', '%c', 'histogram:info:'], {
+        encoding: 'utf8', maxBuffer: 4194304, timeout: 60000,
+      })
+    );
+    let tot = 0;
+    let massimo = 0;
+    for (const riga of hist.split('\n')) {
+      const m = riga.match(/^\s*(\d+):\s/);
+      if (!m) continue;
+      const n = Number(m[1]);
+      tot += n;
+      if (n > massimo) massimo = n;
+    }
+    st.dominante = tot ? massimo / tot : 1;
   } catch (e) {
     st.ok = false;
     st.motivo = 'convert: ' + String((e && e.stderr) || (e && e.message) || e).slice(0, 60);
@@ -194,6 +212,7 @@ function analizza(src) {
   else if (st.media < MEDIA_MIN) st.motivo = 'immagine quasi nera (media ' + st.media.toFixed(2) + ')';
   else if (st.bianco > BIANCO_MAX) st.motivo = 'troppo bianco: documento/planimetria/timbro (' + Math.round(st.bianco * 100) + '%)';
   else if (st.stddev < STDDEV_MIN) st.motivo = 'immagine piatta (stddev ' + st.stddev.toFixed(3) + ')';
+  else if (st.dominante > DOMINANTE_MAX) st.motivo = 'fondo dominante: logo/timbro/firma/planimetria (' + Math.round(st.dominante * 100) + '%)';
   else if (st.colori < COLORI_MIN && !(st.bianco < 0.30 && st.stddev > 0.12)) st.motivo = 'pochi colori: logo/timbro/scansione bn (' + st.colori + ')';
   else st.motivo = '';
   st.ok = !st.motivo;
@@ -347,6 +366,7 @@ async function lavoraPdf(voce, id, nIniziale, maxFoto) {
         kbWebp,
         colori: anal ? anal.colori : -1,
         bianco: anal ? Math.round(anal.bianco * 100) : -1,
+        dominante: anal ? Math.round(anal.dominante * 100) : -1,
       });
       n++;
     }
@@ -508,7 +528,7 @@ function pulisci(dir) {
 
       log(
         '[' + (i + 1) + '/' + giro.length + '] ' + voce.id + ' ' + esito.n + ' foto' +
-          ' — ' + esito.scelti.map((s) => s.n + ':' + s.px + '/' + s.kb + 'K->' + s.kbWebp + 'K k' + s.colori + ' w' + s.bianco + '%').join(' ') +
+          ' — ' + esito.scelti.map((s) => s.n + ':' + s.px + '/' + s.kb + 'K->' + s.kbWebp + 'K k' + s.colori + ' w' + s.bianco + '% d' + s.dominante + '%').join(' ') +
           ' (' + durata + 's)'
       );
     }
