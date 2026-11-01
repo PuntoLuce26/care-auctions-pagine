@@ -198,3 +198,30 @@ const metaSitemap = {
 };
 fs.writeFileSync(path.join(FEED, 'sitemap-meta.json'), JSON.stringify(metaSitemap));
 console.log('sitemap dinamiche:', nCh, 'shard da', CH, '|', ids.length, 'id |', LINGUE.length, 'lingue |', (ids.length * LINGUE.length).toLocaleString('it-IT'), 'URL servibili senza file nel repo');
+
+// --- IndexNow (Bing, Yandex, Seznam): comunicazione diretta degli URL, 10.000 al giorno a rotazione.
+// Google non usa IndexNow (per Google contano la sitemap e GSC): questo e' il canale degli altri motori.
+// La chiave vive nell'edge: https://careauctions.co/<KEY>.txt
+(async function () {
+  const KEY = 'b2c9e4a7f3d15e6b8a0c4d2f6e8a1c3d';
+  const fileStato = path.join(FEED, 'indexnow.json');
+  let stato = {};
+  try { stato = JSON.parse(fs.readFileSync(fileStato, 'utf8')); } catch (e) {}
+  const oggi = new Date().toISOString().slice(0, 10);
+  if (stato.giorno === oggi) { console.log('IndexNow: gia inviato oggi —', stato.inviati, 'URL'); return; }
+  const perId = [...ids].sort((a, b) => Number(b) - Number(a));
+  const urls = perId.map((id) => 'https://careauctions.co/asta-procedura/it/asta-' + id + '.html');
+  const start = Math.min(Number(stato.prossimo || 0), Math.max(0, urls.length - 1));
+  const batch = urls.slice(start, start + 10000);
+  let ok = false;
+  try {
+    const r = await fetch('https://api.indexnow.org/indexnow', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ host: 'careauctions.co', key: KEY, keyLocation: 'https://careauctions.co/' + KEY + '.txt', urlList: batch })
+    });
+    ok = r.ok || r.status === 202 || r.status === 200;
+    console.log('IndexNow:', batch.length, 'URL (da', start, 'di', urls.length, ') — risposta', r.status);
+  } catch (e) { console.log('IndexNow: errore', e.message); }
+  try { fs.writeFileSync(fileStato, JSON.stringify({ giorno: oggi, inviati: ok ? batch.length : 0, prossimo: (start + batch.length) % Math.max(1, urls.length), quando: new Date().toISOString() })); } catch (e) {}
+})();
