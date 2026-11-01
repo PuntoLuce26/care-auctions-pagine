@@ -18,6 +18,7 @@ const indice = JSON.parse(fs.readFileSync(path.join(FEED, 'indice.json'), 'utf8'
 const live = new Map();      // id -> file
 const info = new Map();      // id -> {d: dataAsta, p: pubblicazione} per il lastmod del sitemap
 const cityFiles = new Map(); // citta(lower) -> Set(file)
+const cityLots = new Map();  // slug citta -> [{i,t,p,d}] lotti (per gli hub e i link interni)
 const cityCount = new Map(); // slug citta -> numero lotti
 const cityNome = new Map();  // slug citta -> nome leggibile
 const provCount = new Map(); // slug provincia -> numero lotti (provincia letta da titolo "(Provincia)" finale)
@@ -43,7 +44,12 @@ for (const meta of Object.values(indice.regioni || {})) {
         if (!cityFiles.has(c)) cityFiles.set(c, new Set());
         cityFiles.get(c).add(f);
         const cs = slugify(c);
-        if (cs) { cityCount.set(cs, (cityCount.get(cs) || 0) + 1); if (!cityNome.has(cs)) cityNome.set(cs, String(x.citta).trim()); }
+        if (cs) {
+          cityCount.set(cs, (cityCount.get(cs) || 0) + 1);
+          if (!cityNome.has(cs)) cityNome.set(cs, String(x.citta).trim());
+          if (!cityLots.has(cs)) cityLots.set(cs, []);
+          cityLots.get(cs).push({ i: String(id), t: String(x.titolo || '').slice(0, 70), p: Math.round(Number(x.prezzoBase) || 0), d: String(x.dataAsta || '').slice(0, 10) });
+        }
       }
       const mp = /\(([^()]+)\)\s*$/.exec(String(x.titolo || ''));
       if (mp && mp[1] && slugify(mp[1])) {
@@ -174,6 +180,37 @@ for (const id of live.keys()) {
 ids.sort((a, b) => Number(a) - Number(b));
 console.log('sitemap: lotti attivi/recenti', ids.length, '| scaduti esclusi', nScaduti, '| senza data (tenuti)', nSenzaData);
 const CH = 10000, nCh = Math.max(1, Math.ceil(ids.length / CH));
+
+// --- HUB CITTA (link interni veri): per ogni citta con almeno 10 lotti attivi, i 12 piu vicini nel tempo.
+// L'edge li rende come elenco di link nelle pagine /case-asta-<citta>: senza link interni Google
+// non scopre le pagine lotto (oggi arrivano solo dalla sitemap) e gli hub restano pagine "porta" vuote.
+const cittaOut = {};
+for (const [cs, arr] of cityLots) {
+  const attivi = arr.filter((x) => {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(x.d)) return true;
+    const t = Date.parse(x.d + 'T00:00:00Z');
+    return isNaN(t) ? true : t >= LIMITE_MS;
+  });
+  if (attivi.length < 10) continue;
+  attivi.sort((a, b) => String(a.d).localeCompare(String(b.d)));
+  cittaOut[cs] = attivi.slice(0, 12);
+}
+try { fs.writeFileSync(path.join(FEED, 'citta-top.json'), JSON.stringify({ generato: new Date().toISOString(), citta: cittaOut })); } catch (e) { console.log('citta-top: non scritto', e.message); }
+console.log('citta-top.json:', Object.keys(cittaOut).length, 'citta con almeno 10 lotti attivi');
+
+// --- sitemap-locali.xml rigenerata (la vecchia era ferma al 25/10 e conteneva varianti /en-us duplicate)
+const SEO_LANG = ['it', 'en', 'es', 'de', 'fr', 'ca'];
+const regDaProv = new Set();
+for (const m of provVotes.values()) for (const r of Object.keys(m)) regDaProv.add(slugify(r));
+const righeLoc = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'];
+const oggiS = new Date().toISOString().slice(0, 10);
+const addU = (u) => { righeLoc.push('<url><loc>https://careauctions.co' + u + '</loc><lastmod>' + oggiS + '</lastmod></url>'); };
+for (const cs of Object.keys(cittaOut)) for (const lg of SEO_LANG) addU('/case-asta-' + cs + (lg === 'it' ? '' : '/' + lg));
+for (const ps of provCount.keys()) for (const lg of SEO_LANG) addU('/aste-' + ps + (lg === 'it' ? '' : '/' + lg));
+for (const rs of regDaProv) if (rs) for (const lg of SEO_LANG) addU('/aste-' + rs + (lg === 'it' ? '' : '/' + lg));
+righeLoc.push('</urlset>');
+try { fs.writeFileSync(path.join(ROOT, 'sitemap-locali.xml'), righeLoc.join('\n')); } catch (e) { console.log('sitemap-locali: non scritta', e.message); }
+console.log('sitemap-locali.xml:', righeLoc.length - 3, 'URL (citta+province+regioni x', SEO_LANG.length, 'lingue)');
 const idsDir = path.join(FEED, 'aste-ids');
 fs.mkdirSync(idsDir, { recursive: true });
 for (let i = 0; i < nCh; i++) {
