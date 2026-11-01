@@ -46,6 +46,8 @@ const MAX_PAGINE = 6; // pagine estratte al massimo per PDF
 // analisi del contenuto (ImageMagick): butta pagine di testo, planimetrie, timbri, loghi
 const BIANCO_MAX = Number(process.env.FOTO_BIANCO_MAX || 0.40); // frazione di pixel quasi-bianchi
 const DOMINANTE_MAX = Number(process.env.FOTO_DOMINANTE_MAX || 0.72); // quota del colore piu' diffuso
+const PAROLE_MAX = Number(process.env.FOTO_PAROLE_MAX || 12); // parole OCR: sopra = documento
+const SATURAZIONE_MIN = Number(process.env.FOTO_SAT_MIN || 0.06); // carta grigia/bianca
 const STDDEV_MIN = Number(process.env.FOTO_STDDEV_MIN || 0.055); // contrasto: sotto e' un'immagine piatta
 const COLORI_MIN = Number(process.env.FOTO_COLORI_MIN || 1500); // colori distinti
 const MEDIA_MAX = 0.93; // foglio quasi bianco
@@ -57,6 +59,7 @@ const TMP = '/tmp';
 const UA =
   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36';
 
+let TESS_OK = true; // tesseract disponibile (verificato all'avvio)
 const ora = () => new Date().toISOString();
 const log = (...a) => console.log(...a);
 
@@ -160,7 +163,7 @@ function estraiPagina(pdf, pagina, dir, modo) {
 
 // Statistiche del contenuto con ImageMagick: distingue una FOTO da un documento.
 function analizza(src) {
-  const st = { colori: 0, media: 0, stddev: 0, bianco: 1, dominante: 0, ok: true, motivo: '' };
+  const st = { colori: 0, media: 0, stddev: 0, bianco: 1, dominante: 0, saturazione: 1, parole: -1, ok: true, motivo: '' };
   let k = 0;
   try {
     const kout = execFileSync('identify', ['-format', '%k', src + '[0]'], { encoding: 'utf8', maxBuffer: 4194304, timeout: 60000 });
@@ -201,6 +204,14 @@ function analizza(src) {
       if (n > massimo) massimo = n;
     }
     st.dominante = tot ? massimo / tot : 1;
+    // saturazione media: la carta (documenti, planimetrie) e' grigia
+    const sat = String(
+      execFileSync('convert', [src + '[0]', '-colorspace', 'HSL', '-channel', 'g', '-separate', '-resize', '160x160', '-format', '%[fx:mean]', 'info:'], {
+        encoding: 'utf8', maxBuffer: 4194304, timeout: 60000,
+      })
+    ).trim();
+    st.saturazione = Number(sat);
+    if (!Number.isFinite(st.saturazione)) st.saturazione = 1;
   } catch (e) {
     st.ok = false;
     st.motivo = 'convert: ' + String((e && e.stderr) || (e && e.message) || e).slice(0, 60);
@@ -214,6 +225,8 @@ function analizza(src) {
   else if (st.stddev < STDDEV_MIN) st.motivo = 'immagine piatta (stddev ' + st.stddev.toFixed(3) + ')';
   else if (st.dominante > DOMINANTE_MAX) st.motivo = 'fondo dominante: logo/timbro/firma/planimetria (' + Math.round(st.dominante * 100) + '%)';
   else if (st.colori < COLORI_MIN && !(st.bianco < 0.30 && st.stddev > 0.12)) st.motivo = 'pochi colori: logo/timbro/scansione bn (' + st.colori + ')';
+  else if (st.parole > PAROLE_MAX) st.motivo = 'immagine piena di testo: documento/planimetria (' + st.parole + ' parole)';
+  else if (st.saturazione < SATURAZIONE_MIN && st.media > 0.60) st.motivo = 'carta/foglio grigio: documento/planimetria (sat ' + st.saturazione.toFixed(3) + ')';
   else st.motivo = '';
   st.ok = !st.motivo;
   return st;
@@ -294,6 +307,7 @@ async function lavoraPdf(voce, id, nIniziale, maxFoto) {
   const scelti = [];
   const scartati = [];
   let haIM = ANALISI; // ImageMagick disponibile?
+  let haTesseract = TESS_OK; // tesseract disponibile?
   const visti = new Set();
   let n = nIniziale;
 
@@ -335,6 +349,21 @@ async function lavoraPdf(voce, id, nIniziale, maxFoto) {
       let anal = null;
       if (haIM) {
         anal = analizza(f);
+        if (anal.ok && haTesseract && anal.parole < 0) {
+          // OCR: una foto di un edificio non ha testo, una pagina o una planimetria si'
+          try {
+            const txt = execFileSync('tesseract', [f, 'stdout', '-l', 'ita'], {
+              encoding: 'utf8', maxBuffer: 8 * 1024 * 1024, timeout: 120000, stdio: ['ignore', 'pipe', 'ignore'],
+            });
+            anal.parole = String(txt || '').split(/\s+/).filter((w) => w.length > 2 && /[a-z]/i.test(w)).length;
+            if (anal.parole > PAROLE_MAX) {
+              anal.ok = false;
+              anal.motivo = 'immagine piena di testo: documento/planimetria (' + anal.parole + ' parole)';
+            }
+          } catch (e) {
+            haTesseract = false;
+          }
+        }
         if (!anal.ok) {
           if (anal.motivo.startsWith('identify') || anal.motivo.startsWith('convert')) {
             haIM = false; // strumento rotto: si prosegue col solo filtro dimensioni
@@ -367,6 +396,8 @@ async function lavoraPdf(voce, id, nIniziale, maxFoto) {
         colori: anal ? anal.colori : -1,
         bianco: anal ? Math.round(anal.bianco * 100) : -1,
         dominante: anal ? Math.round(anal.dominante * 100) : -1,
+        saturazione: anal ? Number((anal.saturazione || 0).toFixed(2)) : -1,
+        parole: anal ? anal.parole : -1,
       });
       n++;
     }
@@ -403,6 +434,15 @@ function pulisci(dir) {
       haImageMagick = false;
     }
   }
+  let haTess = true;
+  try {
+    execFileSync('tesseract', ['--version'], { stdio: 'ignore', timeout: 20000 });
+  } catch (e) {
+    haTess = false;
+    TESS_OK = false;
+    console.log('::warning::tesseract assente: filtro testo (documenti fotografati) disattivato.');
+  }
+
   if (!haImageMagick) console.log('::warning::ImageMagick assente: filtro solo su dimensioni (rischio documenti/timbri pubblicati come foto).');
 
   for (const bin of ['pdfimages', 'cwebp']) {
@@ -528,7 +568,7 @@ function pulisci(dir) {
 
       log(
         '[' + (i + 1) + '/' + giro.length + '] ' + voce.id + ' ' + esito.n + ' foto' +
-          ' — ' + esito.scelti.map((s) => s.n + ':' + s.px + '/' + s.kb + 'K->' + s.kbWebp + 'K k' + s.colori + ' w' + s.bianco + '% d' + s.dominante + '%').join(' ') +
+          ' — ' + esito.scelti.map((s) => s.n + ':' + s.px + '/' + s.kb + 'K->' + s.kbWebp + 'K k' + s.colori + ' w' + s.bianco + '% d' + s.dominante + '% s' + s.saturazione + '/' + s.parole + 'w').join(' ') +
           ' (' + durata + 's)'
       );
     }
