@@ -1,0 +1,77 @@
+name: quadro
+# IL QUADRO in cloud: il report di stato del progetto si genera e si aggiorna da solo.
+# Sostituisce il QUADRO scritto a mano dal Mac — nessun Mac acceso, nessuna sessione AI.
+# Ogni 6 ore: legge worker icare-ai, feed GitHub Pages, API GitHub e sito, poi committa
+# dossier/QUADRO-<YYYY-MM-DD-HH>.md e lo allega come artifact.
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'   # 00:00, 06:00, 12:00, 18:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# un solo QUADRO alla volta: se il giro precedente è ancora in corso si aspetta la coda,
+# altrimenti due run scriverebbero lo stesso report e si scontrerebbero sul push.
+concurrency:
+  group: quadro
+  cancel-in-progress: false
+
+jobs:
+  quadro:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: controlla lo script
+        run: node --check scripts/quadro.js
+
+      - name: genera il QUADRO
+        env:
+          # il token serve solo a leggere la size di feed/foto-procedure.json e gli ultimi run
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # conteggio esatto lotti/foto: di default non si scaricano i 16 MB del feed foto
+          QUADRO_FOTO_ESATTO: '0'
+        run: node scripts/quadro.js
+
+      - name: mostra il report nel log
+        run: |
+          F=$(ls -t dossier/QUADRO-*.md | head -1)
+          echo "report: $F"
+          head -40 "$F"
+
+      - name: commit e push (race-safe)
+        run: |
+          git config user.name "Sam CARe"
+          git config user.email "sam@careauctions.co"
+          git add dossier/
+          if git diff --cached --quiet; then
+            echo "nessuna variazione: il QUADRO di questa ora esiste già"
+            exit 0
+          fi
+          git commit -m "QUADRO automatico $(date -u +%FT%TZ)"
+          # race-safe come feed-sync: il Mac e le altre Action scrivono sullo stesso repo
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null
+            if git push; then echo "push ok al tentativo $i"; exit 0; fi
+            sleep 4
+          done
+          echo "push fallito dopo 5 tentativi" >&2
+          exit 1
+
+      - name: allega il report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: quadro-report-${{ github.run_id }}
+          path: dossier/QUADRO-*.md
+          if-no-files-found: warn
+          retention-days: 30
