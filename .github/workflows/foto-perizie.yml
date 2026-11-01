@@ -1,0 +1,70 @@
+name: foto-perizie
+# Estrae le FOTO REALI dai PDF delle perizie e le pubblica in foto/<id>/<n>.webp.
+# Costo zero: tutto dentro GitHub Actions (poppler-utils + webp), nessun server.
+# Input: feed/perizie-ocr.json — Output: foto/ + feed/foto-ricavate.json
+on:
+  schedule:
+    - cron: "17 */6 * * *" # ogni 6 ore (minuto 17 per non accavallarsi agli altri cron)
+  workflow_dispatch:
+    inputs:
+      max:
+        description: "PDF da lavorare in questo giro"
+        required: false
+        default: "60"
+permissions:
+  contents: write
+concurrency:
+  group: foto-perizie
+  cancel-in-progress: false
+jobs:
+  foto:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Strumenti (poppler-utils + webp)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq poppler-utils webp
+          pdfimages -v 2>&1 | head -2
+          cwebp -version
+
+      - name: Estrai le foto dalle perizie
+        env:
+          FOTO_N: ${{ github.event.inputs.max || '60' }}
+        run: |
+          echo "PDF per giro: $FOTO_N"
+          node scripts/foto-perizie.js
+
+      - name: Riepilogo
+        if: always()
+        run: |
+          echo "webp in repo: $(find foto -name '*.webp' 2>/dev/null | wc -l)"
+          echo "lotti con foto: $(find foto -mindepth 1 -maxdepth 1 -type d 2>/dev/null | wc -l)"
+          du -sh foto 2>/dev/null || true
+          node -e "try{const a=require('./feed/foto-ricavate.json');console.log('feed foto-ricavate:',a.length,'lotti,',a.reduce((n,x)=>n+(x.foto||[]).length,0),'foto')}catch(e){console.log('feed foto-ricavate: assente')}"
+
+      - name: Commit e push (race-safe)
+        if: always()
+        shell: bash
+        run: |
+          git config user.name "CARe Cloud"
+          git config user.email "cloud@careauctions.co"
+          git add -A feed/foto-ricavate.json feed/foto-perizie-stato.json 2>/dev/null || true
+          if [ -d foto ]; then git add foto 2>/dev/null || true; fi
+          if git diff --cached --quiet; then echo "nessuna variazione"; exit 0; fi
+          git commit -m "foto perizie: estrazione automatica ($(date -u +%FT%TZ))"
+          ok=0
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null
+            if git push; then ok=1; break; fi
+            sleep 4
+          done
+          if [ "$ok" != "1" ]; then echo "::error::push fallito (permessi contents:write?)"; exit 1; fi
