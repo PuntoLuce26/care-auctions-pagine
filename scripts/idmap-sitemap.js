@@ -16,6 +16,7 @@ const DRY = process.argv.includes('--dry');
 
 const indice = JSON.parse(fs.readFileSync(path.join(FEED, 'indice.json'), 'utf8'));
 const live = new Map();      // id -> file
+const info = new Map();      // id -> {d: dataAsta, p: pubblicazione} per il lastmod del sitemap
 const cityFiles = new Map(); // citta(lower) -> Set(file)
 const cityCount = new Map(); // slug citta -> numero lotti
 const cityNome = new Map();  // slug citta -> nome leggibile
@@ -36,6 +37,7 @@ for (const meta of Object.values(indice.regioni || {})) {
       if (!x || x.id == null) continue;
       const id = String(x.id);
       if (!live.has(id)) { live.set(id, f); nLotti++; }
+      if (!info.has(id)) info.set(id, { d: String(x.dataAsta || '').slice(0, 10), p: String(x.pubblicazione || '').slice(0, 10) });
       const c = String(x.citta || '').toLowerCase().trim();
       if (c) {
         if (!cityFiles.has(c)) cityFiles.set(c, new Set());
@@ -153,12 +155,33 @@ console.log('esiti-monitor.json:', esiti.length, 'esiti,', tribNomi.length, 'tri
 // --- sitemap MULTILINGUA DINAMICHE: il repo resta leggero (niente 6,4M di URL).
 // L'edge genera al volo /sitemap-aste-<lang>-<n>.xml (10.000 URL) e /sitemap-aste-<lang>-index.xml.
 // Qui produciamo solo gli id in shard da 10.000 (~70 KB l'uno) + un meta di 1 KB.
-const ids = [...live.keys()].sort((a, b) => Number(a) - Number(b));
+// 5.950 — SITEMAP DA DIETA: solo lotti attivi o appena conclusi (dataAsta >= oggi-45gg), ognuno col suo lastmod.
+// I lotti scaduti (nel feed dal 2019) restano navigabili ma fuori dal sitemap: erano 6,4M di URL
+// (322.815 lotti x 20 lingue) che Google respingeva in blocco ("scansionate, non indicizzate").
+const LIMITE_MS = Date.now() - 45 * 86400000;
+const ids = [];
+let nScaduti = 0, nSenzaData = 0;
+for (const id of live.keys()) {
+  const i = info.get(id) || {};
+  const d = i.d || '';
+  let ok = true;
+  if (/^\d{4}-\d{2}-\d{2}$/.test(d)) {
+    const t = Date.parse(d + 'T00:00:00Z');
+    if (!isNaN(t)) ok = t >= LIMITE_MS;
+  } else nSenzaData++;
+  if (ok) ids.push(id); else nScaduti++;
+}
+ids.sort((a, b) => Number(a) - Number(b));
+console.log('sitemap: lotti attivi/recenti', ids.length, '| scaduti esclusi', nScaduti, '| senza data (tenuti)', nSenzaData);
 const CH = 10000, nCh = Math.max(1, Math.ceil(ids.length / CH));
 const idsDir = path.join(FEED, 'aste-ids');
 fs.mkdirSync(idsDir, { recursive: true });
 for (let i = 0; i < nCh; i++) {
-  const part = ids.slice(i * CH, (i + 1) * CH).map(Number);
+  const part = ids.slice(i * CH, (i + 1) * CH).map((id) => {
+    const i2 = info.get(id) || {};
+    const lm = String(i2.p || i2.d || '').slice(0, 10);
+    return lm ? [Number(id), lm] : Number(id);
+  });
   fs.writeFileSync(path.join(idsDir, 'shard-' + i + '.json'), JSON.stringify(part));
 }
 for (const f of fs.readdirSync(idsDir)) { const m = /^shard-(\d+)\.json$/.exec(f); if (m && Number(m[1]) >= nCh) fs.unlinkSync(path.join(idsDir, f)); }
@@ -168,7 +191,9 @@ const metaSitemap = {
   totale: ids.length,
   perShard: CH,
   shard: nCh,
-  lingue: LINGUE,
+  lingue: ['it'],
+  lingueNote: 'sitemap solo italiano finche le descrizioni dei lotti non sono tradotte; le altre lingue restano vive per gli umani con noindex',
+  soloAttivi: true,
   nota: 'URL generati al volo dall\'edge da feed/aste-ids: nessun file di URL nel repo.'
 };
 fs.writeFileSync(path.join(FEED, 'sitemap-meta.json'), JSON.stringify(metaSitemap));
