@@ -36,8 +36,19 @@ const slug = r => SLUG_REG[r] || r.toLowerCase().normalize('NFD').replace(/[\u03
 const norm = s => String(s||'').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/['\u2019]/g,"'").trim();
 const regioneDi = p => PROV[norm(p)] || PROV[norm(p).replace(/'/g,'')] || 'Italia';
 
-function get(url){return new Promise(res=>{const u=new URL(url);const r=https.request({host:u.hostname,path:u.pathname+u.search,method:'POST',headers:{'Content-Type':'application/json','User-Agent':'Mozilla/5.0 (compatible; careauctions-feed/1.0)','Accept':'application/json'}},x=>{let t='';x.on('data',c=>t+=c);x.on('end',()=>res({s:x.statusCode,t}));});r.on('error',()=>res({s:0,t:''}));r.setTimeout(30000,()=>{r.destroy();res({s:0,t:''});});r.write('{}');r.end();});}
+function get1(url){return new Promise(res=>{const u=new URL(url);const r=https.request({host:u.hostname,path:u.pathname+u.search,method:'POST',headers:{'Content-Type':'application/json','User-Agent':'Mozilla/5.0 (compatible; careauctions-feed/1.0)','Accept':'application/json'}},x=>{let t='';x.on('data',c=>t+=c);x.on('end',()=>res({s:x.statusCode,t}));});r.on('error',()=>res({s:0,t:''}));r.setTimeout(30000,()=>{r.destroy();res({s:0,t:''});});r.write('{}');r.end();});}
 const dormi = ms => new Promise(s=>setTimeout(s,ms));
+
+// 5.971 — RETRY DI RETE: una pagina che fallisce non si salta piu' in silenzio
+// (era la causa dei ~4.300 lotti mancanti: alcune delle 3.264 pagine tornavano errore).
+async function get(url){
+  for (let k = 0; k < 4; k++) {
+    const r = await get1(url);
+    if (r && r.s === 200) return r;
+    await dormi(500 * (k + 1));
+  }
+  return { s: 0, t: '' };
+}
 
 // MAPPER-5.9xx: i 15 campi storici restano identici (l'app li legge così); in coda ai campi
 // arrivano i campi di mercato che il PVP espone già e che prima buttavamo via. Nomi brevi,
