@@ -2,14 +2,14 @@
  "meta": {
   "titolo": "Crediti fiscali",
   "sottotitolo": "Crediti d'imposta e tributari ceduti nelle procedure concorsuali (dati veri dal PVP)",
-  "generatoIl": "2026-11-01T05:09:25.298Z",
-  "aggiornato": "2026-11-01",
+  "generatoIl": "2026-11-02T05:22:38.069Z",
+  "aggiornato": "2026-11-02",
   "fonte": "PVP — Portale delle Vendite Pubbliche, Ministero della Giustizia (pvp.giustizia.it)",
   "query": "tipoLotto=VALORI-CREDITI (filtro locale: crediti fiscali)",
   "licenza": "Dati pubblici del PVP (Portale delle Vendite Pubbliche, Ministero della Giustizia). Riuso consentito per finalità informative con citazione della fonte; nessun dato personale oltre a quanto già pubblico nel bando.",
   "metodo": "Crediti fiscali = lotti con categoria credito il cui bando cita credito d'imposta, superbonus/bonus edilizi, IVA, IRES/IRAP, crediti tributari o erario. Il sottotipo è letto dal testo pubblico del bando con regole dichiarate e ordinate; se nessuna regola combacia il lotto resta \"fiscale-generico\". Valore nominale solo se scritto nel bando. Nessun importo stimato.",
   "totale": 386,
-  "dichiaratoPVP": 1113,
+  "dichiaratoPVP": 1106,
   "fiscaliNelPvp": 389,
   "esclusi": {
    "categoria-non-credito": 3
@@ -23,8 +23,8 @@
    "ires-irap": 10
   },
   "perStato": {
-   "conclusa-esito-non-pubblicato": 299,
-   "in-programma": 58,
+   "conclusa-esito-non-pubblicato": 300,
+   "in-programma": 57,
    "deserta": 22,
    "aggiudicata": 5,
    "sospesa": 2
@@ -65,7 +65,7 @@
   "sommaPrezzoBase": 72396686,
   "sommaValoreNominaleDichiarato": 28920525,
   "freschezza": {
-   "ultimaRaccolta": "2026-11-01",
+   "ultimaRaccolta": "2026-11-02",
    "dataLottoPiuRecente": "2026-12-15",
    "dataLottoPiuVecchio": "2024-01-09"
   },
