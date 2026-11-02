@@ -4,6 +4,11 @@ on:
     - cron: '*/5 * * * *'   # incrementale
     - cron: '0 1 * * *'      # notturna completa + prezzi IVG
   workflow_dispatch:
+    inputs:
+      mode:
+        description: 'inc (incrementale) oppure full (raccolta completa)'
+        required: false
+        default: 'inc'
 permissions:
   contents: write
 jobs:
@@ -17,7 +22,7 @@ jobs:
       - name: sync (inc ogni 15 min, full + IVG all'01:00 UTC)
         run: |
           H=$(date -u +%H)
-          if [ "$H" = "01" ]; then MODE=full; else MODE=inc; fi
+          if [ "${{ github.event.inputs.mode }}" = "full" ] || [ "$H" = "01" ]; then MODE=full; else MODE=inc; fi
           echo "MODE=$MODE"
           MODE=$MODE node scripts/sync-feed.js
           node scripts/dati-indice.js || echo "indice dati: non aggiornato"
