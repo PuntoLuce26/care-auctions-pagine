@@ -458,7 +458,23 @@ function pulisci(dir) {
     console.error('::error::' + IN + ' mancante');
     process.exit(1);
   }
-  const feed = JSON.parse(fs.readFileSync(IN, 'utf8'));
+  let feed = [];
+  try { const f0 = JSON.parse(fs.readFileSync(IN, 'utf8')); if (Array.isArray(f0)) feed = f0; } catch (e) { feed = []; }
+  // 5.981 — CATALOGO ALLARGATO: oltre alle perizie gia' OCR'd (724) si prendono TUTTI i PDF
+  // del catalogo foto-procedure.json (13.632 link su 9.183 lotti). Cosi' le foto non
+  // dipendono piu' dal passaggio OCR e il catalogo passa da 724 a 9.183 lotti.
+  try {
+    const cat = JSON.parse(fs.readFileSync('feed/foto-procedure.json', 'utf8'));
+    let agg = 0;
+    if (Array.isArray(cat)) for (const l of cat) for (const u of ((l && l.perizia) || [])) {
+      const s2 = String(u || '');
+      if (!/^https?:/i.test(s2)) continue;
+      if (!/\.pdf(\?|$)/i.test(s2)) continue;
+      feed.push({ id: l.id, url: s2 });
+      agg++;
+    }
+    console.log('catalogo: ' + agg + ' PDF aggiunti da foto-procedure.json');
+  } catch (e) { console.error('catalogo non letto: ' + String(e && e.message || e).slice(0, 60)); }
   if (!Array.isArray(feed) || !feed.length) {
     console.error('::error::' + IN + ' vuoto o non e\' un array');
     process.exit(1);
