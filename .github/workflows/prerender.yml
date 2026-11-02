@@ -1,0 +1,75 @@
+name: prerender
+# 5.989 — PAGINE PRONTE SEMPRE FRESCHE, IN CLOUD, SENZA MAC.
+# Emergent non puo' rigenerarle (la loro macchina non ha Chrome). Qui invece Chrome c'e':
+# si apre il sito con un browser vero, si salva l'HTML renderizzato delle 12 rotte e lo si
+# committa in prerender/<rotta>.html. L'edge serve questi file (freschi, ogni giorno).
+on:
+  schedule:
+    - cron: "40 3 * * *" # ogni giorno alle 03:40 UTC (04:40 in Italia)
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: prerender
+  cancel-in-progress: false
+jobs:
+  snap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Playwright
+        run: |
+          npm i -D playwright@1.47.2 --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Cattura le pagine pronte
+        run: |
+          mkdir -p prerender
+          node - <<'JS'
+          const { chromium } = require('playwright');
+          const fs = require('fs');
+          const ROTTE = [['/', 'index'], ['/ca-re-index','ca-re-index'], ['/osservatorio','osservatorio'],
+            ['/esiti','esiti'], ['/andamento-prezzi','andamento-prezzi'], ['/metodo','metodo'],
+            ['/icommunity','icommunity'], ['/mappa-prezzi','mappa-prezzi'], ['/indice','indice'],
+            ['/aste-aziende','aste-aziende'], ['/idati','idati'], ['/icarewall','icarewall']];
+          (async () => {
+            const b = await chromium.launch({ headless: true });
+            let ok = 0;
+            for (const [rotta, slug] of ROTTE) {
+              const ctx = await b.newContext({ viewport: { width: 1440, height: 900 }, locale: 'it-IT' });
+              const p = await ctx.newPage();
+              try {
+                await p.goto('https://careauctions.co' + rotta, { waitUntil: 'load', timeout: 45000 });
+                await p.waitForTimeout(5000);
+                const html = await p.evaluate(() => '<!DOCTYPE html>\n' + document.documentElement.outerHTML);
+                const sez = await p.evaluate(() => document.querySelectorAll('section').length);
+                if (html.length > 20000 && sez > 0) {
+                  fs.writeFileSync('prerender/' + slug + '.html', html);
+                  console.log(slug, 'ok', html.length, 'byte,', sez, 'sezioni');
+                  ok++;
+                } else console.log(slug, 'SCARTATO', html.length, 'byte', sez, 'sezioni');
+              } catch (e) { console.log(slug, 'errore', String(e.message).slice(0, 60)); }
+              await ctx.close();
+            }
+            await b.close();
+            fs.writeFileSync('prerender/_ok', String(ok));
+            if (ok < 6) process.exit(1);
+          })();
+          JS
+      - name: Commit e push
+        shell: bash
+        run: |
+          git config user.name "CARe Cloud"
+          git config user.email "cloud@careauctions.co"
+          git add prerender
+          if git diff --cached --quiet; then echo "nessuna variazione"; exit 0; fi
+          git commit -m "prerender: pagine pronte rigenerate ($(date -u +%FT%TZ))"
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null
+            if git push; then exit 0; fi
+            sleep 4
+          done
+          echo "::error::push fallito"; exit 1
