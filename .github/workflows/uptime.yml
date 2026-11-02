@@ -45,10 +45,10 @@ jobs:
           check "https://puntoluce26.github.io/care-auctions-pagine/feed/npl.json" 1000
           echo "--- allineamento build ---"
           h1=$(curl -s -m 25 -A "$UA" "https://careauctions.co/" | grep -o 'main\.[a-f0-9]*\.js' | head -1 || true)
-          h2=$(curl -s -m 25 -A "$UA" "https://careauctions-app.misty-mode-1cbc.workers.dev/" | grep -o 'main\.[a-f0-9]*\.js' | head -1 || true)
-          echo "sito=$h1  app-host=$h2"
+          h2=$(curl -s -m 25 -A "$UA" "https://care-aste.emergent.host/" | grep -o 'main\.[a-f0-9]*\.js' | head -1 || true)
+          echo "sito=$h1  origine=$h2"
           if [ -z "$h1" ] || [ "$h1" != "$h2" ]; then
-            echo "::error::build non allineata tra sito e app-host"; fail=1
+            echo "::error::build non allineata tra sito e origine app"; fail=1
           fi
           exit "$fail"
       - name: Freschezza feed (max 3 ore)
