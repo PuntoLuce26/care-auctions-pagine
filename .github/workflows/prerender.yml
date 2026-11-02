@@ -1,7 +1,7 @@
 name: prerender
 # 5.989 — PAGINE PRONTE SEMPRE FRESCHE, IN CLOUD, SENZA MAC.
 # Emergent non puo' rigenerarle (la loro macchina non ha Chrome). Qui invece Chrome c'e':
-# si apre il sito con un browser vero, si salva l'HTML renderizzato delle 12 rotte e lo si
+# si apre l ORIGINE (non il nostro dominio, che serve gli snapshot: sarebbe un circolo vizioso) con un browser vero, si salva l'HTML renderizzato delle 12 rotte e lo si
 # committa in prerender/<rotta>.html. L'edge serve questi file (freschi, ogni giorno).
 on:
   schedule:
@@ -42,7 +42,7 @@ jobs:
               const ctx = await b.newContext({ viewport: { width: 1440, height: 900 }, locale: 'it-IT' });
               const p = await ctx.newPage();
               try {
-                await p.goto('https://careauctions.co' + rotta, { waitUntil: 'load', timeout: 45000 });
+                await p.goto('https://care-aste.emergent.host' + rotta, { waitUntil: 'load', timeout: 45000 });
                 await p.waitForTimeout(5000);
                 const html = await p.evaluate(() => '<!DOCTYPE html>\n' + document.documentElement.outerHTML);
                 const sez = await p.evaluate(() => document.querySelectorAll('section').length);
