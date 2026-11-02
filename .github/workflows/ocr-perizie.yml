@@ -26,7 +26,7 @@ jobs:
       - name: OCR incrementale
         run: node scripts/ocr-perizie.js
         env:
-          OCR_N: "200"
+          OCR_N: "800"
       - name: Commit e push
         shell: bash
         run: |
