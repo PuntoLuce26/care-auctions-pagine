@@ -13,7 +13,7 @@ on:
       max:
         description: "PDF da lavorare in questo giro"
         required: false
-        default: "400"
+        default: "1200"
 permissions:
   contents: write
 concurrency:
@@ -22,11 +22,7 @@ concurrency:
 jobs:
   foto:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        shard: [0, 1, 2, 3, 4, 5, 6, 7]
-    timeout-minutes: 90
+    timeout-minutes: 180
     steps:
       - uses: actions/checkout@v4
         with:
@@ -47,9 +43,7 @@ jobs:
 
       - name: Estrai le foto dalle perizie
         env:
-          FOTO_N: ${{ github.event.inputs.max || '400' }}
-          FOTO_SHARD: ${{ matrix.shard }}
-          FOTO_SHARDS: '8'
+          FOTO_N: ${{ github.event.inputs.max || '1200' }}
         run: |
           echo "PDF per giro: $FOTO_N"
           node scripts/foto-perizie.js
