@@ -498,6 +498,9 @@ function pulisci(dir) {
   const perId = new Map(ricavate.map((x) => [String(x.id), x]));
 
   // coda: un elemento per PDF non ancora fatto
+  const SHARD = Math.max(0, Number(process.env.FOTO_SHARD || 0));
+  const SHARDS = Math.max(1, Number(process.env.FOTO_SHARDS || 1));
+  let shardSeq = 0;
   const coda = [];
   const vistiOra = new Set();
   for (const voce of feed) {
@@ -506,6 +509,8 @@ function pulisci(dir) {
     const key = id + '|' + String(voce.url).slice(-24);
     if (vistiOra.has(key)) continue;
     vistiOra.add(key);
+    // 5.985 — PARALLELO: ogni runner prende una fetta della coda (SHARDS runner in parallelo).
+    if (SHARDS > 1) { shardSeq++; if ((shardSeq % SHARDS) !== SHARD) continue; }
     if (stato.fatti[key]) continue;
     const fall = stato.falliti[key];
     if (fall && Number(fall.volte || 0) >= TENTATIVI) continue; // rinunciato
