@@ -13,7 +13,7 @@ on:
       max:
         description: "PDF da lavorare in questo giro"
         required: false
-        default: "240"
+        default: "400"
 permissions:
   contents: write
 concurrency:
@@ -43,7 +43,7 @@ jobs:
 
       - name: Estrai le foto dalle perizie
         env:
-          FOTO_N: ${{ github.event.inputs.max || '60' }}
+          FOTO_N: ${{ github.event.inputs.max || '400' }}
         run: |
           echo "PDF per giro: $FOTO_N"
           node scripts/foto-perizie.js
