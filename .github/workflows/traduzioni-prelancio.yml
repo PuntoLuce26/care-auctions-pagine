@@ -1,0 +1,57 @@
+name: traduzioni-prelancio
+# 6.000 — PRE-RISCALDAMENTO TRADUZIONI: ogni notte accoda le descrizioni dei lotti che
+# scadono prima (dataAsta piu' vicina) in 5 lingue. La coda e FIFO, quindi l'ordine di
+# accodamento E la priorita: chi sta per comprare trova la pagina gia' tradotta.
+on:
+  schedule:
+    - cron: "10 3 * * *"
+  workflow_dispatch:
+    inputs:
+      lotti:
+        description: "quanti lotti"
+        required: false
+        default: "500"
+permissions:
+  contents: read
+jobs:
+  prelancio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Scegli i lotti in scadenza e accodali
+        env:
+          REGIA_KEY: ${{ secrets.REGIA_KEY }}
+          LOTTI: ${{ github.event.inputs.lotti || '500' }}
+        run: |
+          node - <<'JS'
+          const BASE = 'https://puntoluce26.github.io/care-auctions-pagine/feed/';
+          const MAX = Number(process.env.LOTTI || 500);
+          (async () => {
+            const idx = await (await fetch(BASE + 'indice.json')).json();
+            const oggi = new Date().toISOString().slice(0, 10);
+            const fra = new Date(Date.now() + 21 * 86400000).toISOString().slice(0, 10);
+            const lotti = [];
+            for (const [reg, meta] of Object.entries(idx.regioni || {})) {
+              for (const f of [...(meta.filesImm || []), ...(meta.filesMob || [])]) {
+                try {
+                  const arr = await (await fetch(BASE + f)).json();
+                  for (const x of arr) {
+                    const d = String(x.dataAsta || '').slice(0, 10);
+                    if (d >= oggi && d <= fra && String(x.descrizione || '').trim().length >= 40) lotti.push({ id: String(x.id), d });
+                  }
+                } catch (e) {}
+                if (lotti.length > 40000) break;
+              }
+            }
+            lotti.sort((a, b) => a.d < b.d ? -1 : a.d > b.d ? 1 : 0);
+            const ids = lotti.slice(0, MAX).map(x => x.id);
+            console.log('lotti in scadenza trovati:', lotti.length, '| accodo i primi', ids.length, '| dal', lotti[0] && lotti[0].d);
+            const r = await fetch('https://icare-ai.misty-mode-1cbc.workers.dev', {
+              method: 'POST', headers: { 'content-type': 'application/json' },
+              body: JSON.stringify({ azione: 'traduzioni-prelancio', chiave: process.env.REGIA_KEY, ids, lingue: ['en', 'de', 'fr', 'es', 'ar'] })
+            });
+            const j = await r.json();
+            console.log('esito:', JSON.stringify(j).slice(0, 200));
+            if (!j.ok) process.exit(1);
+          })();
+          JS
