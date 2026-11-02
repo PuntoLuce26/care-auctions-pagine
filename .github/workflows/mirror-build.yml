@@ -67,7 +67,6 @@ jobs:
           compatibility_date = "2025-01-01"
           [assets]
           directory = "./sito"
-          binding = "ASSETS"
           TOML
           cd mirror && npx --yes wrangler@3 deploy
       - name: Verifica
