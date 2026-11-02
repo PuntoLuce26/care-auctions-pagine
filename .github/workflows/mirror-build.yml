@@ -1,0 +1,77 @@
+name: mirror-build
+# 5.994 — MIRROR DELLA BUILD EMERGENT NEL NOSTRO APP-HOST, IN CLOUD.
+# Scarica la build pubblicata dall'origine (HTML + JS + chunk + CSS + immagini) e la mette
+# nel nostro worker Cloudflare "careauctions-app-2". Quando il mirror e' verificato,
+# il proxy dell'edge puo' puntare li' e non dipendiamo piu' dall'origine Emergent.
+on:
+  schedule:
+    - cron: "25 */6 * * *"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: mirror-build
+  cancel-in-progress: false
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Scarica la build
+        run: |
+          node - <<'JS'
+          const fs = require('fs');
+          const path = require('path');
+          const ORIG = 'https://care-aste.emergent.host';
+          const OUT = 'mirror/sito';
+          fs.mkdirSync(OUT, { recursive: true });
+          const visti = new Set(); const coda = ['/'];
+          let salvati = 0, byte = 0;
+          const salva = async (u) => {
+            const pulito = u.split('#')[0];
+            if (visti.has(pulito)) return; visti.add(pulito);
+            if (!pulito.startsWith('/') || pulito.startsWith('//')) return;
+            const r = await fetch(ORIG + pulito);
+            if (!r.ok) { console.log('miss', r.status, pulito); return; }
+            const buf = Buffer.from(await r.arrayBuffer());
+            const dest = path.join(OUT, pulito === '/' ? 'index.html' : pulito);
+            fs.mkdirSync(path.dirname(dest), { recursive: true });
+            fs.writeFileSync(dest, buf);
+            salvati++; byte += buf.length;
+            const ct = r.headers.get('content-type') || '';
+            if (ct.includes('text/html') || ct.includes('javascript')) {
+              const testo = buf.toString('utf8');
+              for (const m of testo.matchAll(/(?:src|href)="(\/[^"?#]+)"/g)) coda.push(m[1]);
+              for (const m of testo.matchAll(/["'](\/static\/[a-zA-Z0-9._-]+\.(?:js|css))["']/g)) coda.push(m[1]);
+              for (const m of testo.matchAll(/(?:static\/js\/|static\/css\/)([a-zA-Z0-9._-]+\.chunk\.(?:js|css))/g)) coda.push('/static/js/' + m[1]);
+            }
+          };
+          (async () => {
+            while (coda.length) { const lotto = coda.splice(0, 12); await Promise.all(lotto.map(u => salva(u).catch(e => console.log('err', u, e.message.slice(0,40))))); }
+            fs.writeFileSync('mirror/_stats.json', JSON.stringify({ salvati, byte, quando: new Date().toISOString() }));
+            console.log('file salvati:', salvati, '| MB:', (byte/1048576).toFixed(1));
+            if (salvati < 30) process.exit(1);
+          })();
+          JS
+      - name: Pubblica sul nostro app-host di riserva
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          cat > mirror/wrangler.toml <<'TOML'
+          name = "careauctions-app-2"
+          compatibility_date = "2025-01-01"
+          [assets]
+          directory = "./sito"
+          binding = "ASSETS"
+          TOML
+          cd mirror && npx --yes wrangler@3 deploy 2>&1 | tail -5
+      - name: Verifica
+        run: |
+          sleep 10
+          code=$(curl -s -o ver.html -w "%{http_code}" https://careauctions-app-2.misty-mode-1cbc.workers.dev/)
+          echo "app-host di riserva: $code $(wc -c < ver.html) byte"
+          grep -o 'main\.[a-f0-9]*\.js' ver.html | head -1 || true
