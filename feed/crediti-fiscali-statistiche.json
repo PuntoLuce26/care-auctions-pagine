@@ -2,20 +2,20 @@
  "meta": {
   "titolo": "Crediti fiscali",
   "sottotitolo": "Crediti d'imposta e tributari ceduti nelle procedure concorsuali (dati veri dal PVP)",
-  "generatoIl": "2026-11-02T05:22:38.069Z",
-  "aggiornato": "2026-11-02",
+  "generatoIl": "2026-11-03T05:15:39.518Z",
+  "aggiornato": "2026-11-03",
   "fonte": "PVP — Portale delle Vendite Pubbliche, Ministero della Giustizia (pvp.giustizia.it)",
   "query": "tipoLotto=VALORI-CREDITI (filtro locale: crediti fiscali)",
   "licenza": "Dati pubblici del PVP (Portale delle Vendite Pubbliche, Ministero della Giustizia). Riuso consentito per finalità informative con citazione della fonte; nessun dato personale oltre a quanto già pubblico nel bando.",
   "metodo": "Crediti fiscali = lotti con categoria credito il cui bando cita credito d'imposta, superbonus/bonus edilizi, IVA, IRES/IRAP, crediti tributari o erario. Il sottotipo è letto dal testo pubblico del bando con regole dichiarate e ordinate; se nessuna regola combacia il lotto resta \"fiscale-generico\". Valore nominale solo se scritto nel bando. Nessun importo stimato.",
-  "totale": 386,
-  "dichiaratoPVP": 1106,
-  "fiscaliNelPvp": 389,
+  "totale": 379,
+  "dichiaratoPVP": 1099,
+  "fiscaliNelPvp": 382,
   "esclusi": {
    "categoria-non-credito": 3
   },
   "perSottotipo": {
-   "bonus-edilizi-superbonus": 149,
+   "bonus-edilizi-superbonus": 142,
    "iva": 129,
    "fiscale-generico": 64,
    "credito-d-imposta": 20,
@@ -23,8 +23,8 @@
    "ires-irap": 10
   },
   "perStato": {
-   "conclusa-esito-non-pubblicato": 300,
-   "in-programma": 57,
+   "conclusa-esito-non-pubblicato": 294,
+   "in-programma": 56,
    "deserta": 22,
    "aggiudicata": 5,
    "sospesa": 2
@@ -38,34 +38,34 @@
   },
   "fascePrezzoBase": {
    "10k-50k": 146,
-   "50k-250k": 84,
    "fino-10k": 79,
+   "50k-250k": 76,
    "250k-1M": 45,
    "oltre-1M": 17
   },
   "copertura": {
    "importo": {
     "con": 88,
-    "su": 386,
-    "pct": 22.8
+    "su": 379,
+    "pct": 23.2
    },
    "regione": {
     "con": 251,
-    "su": 386,
-    "pct": 65
+    "su": 379,
+    "pct": 66.2
    },
    "tribunale": {
-    "con": 382,
-    "su": 386,
-    "pct": 99
+    "con": 375,
+    "su": 379,
+    "pct": 98.9
    }
   },
-  "regioni": 16,
-  "province": 50,
-  "sommaPrezzoBase": 72396686,
+  "regioni": 17,
+  "province": 51,
+  "sommaPrezzoBase": 71010342,
   "sommaValoreNominaleDichiarato": 28920525,
   "freschezza": {
-   "ultimaRaccolta": "2026-11-02",
+   "ultimaRaccolta": "2026-11-03",
    "dataLottoPiuRecente": "2026-12-15",
    "dataLottoPiuVecchio": "2024-01-09"
   },
@@ -74,7 +74,7 @@
  "perRegione": {
   "Lombardia": 43,
   "Sicilia": 41,
-  "Lazio": 39,
+  "Lazio": 38,
   "Emilia-Romagna": 32,
   "Toscana": 31,
   "Veneto": 25,
@@ -85,13 +85,14 @@
   "Sardegna": 4,
   "Liguria": 3,
   "Umbria": 2,
+  "Marche": 1,
   "Friuli-Venezia Giulia": 1,
   "Abruzzo": 1,
   "Molise": 1
  },
  "perProvincia": {
   "Palermo": 38,
-  "Roma": 34,
+  "Roma": 33,
   "Milano": 27,
   "Massa-Carrara": 11,
   "Modena": 11,
@@ -121,6 +122,7 @@
   "Torino": 2,
   "Belluno": 2,
   "Benevento": 2,
+  "Ancona": 1,
   "Messina": 1,
   "Pordenone": 1,
   "Foggia": 1,
