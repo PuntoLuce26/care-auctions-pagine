@@ -34,7 +34,7 @@ const args = Object.fromEntries(process.argv.slice(2).map((a) => {
 }));
 
 const BASE = String(args.base || 'https://careauctions.co').replace(/\/$/, '');
-const ROUTES = String(args.routes || '/,/indice,/osservatorio,/dati,/mappa-prezzi,/torre-di-controllo')
+const ROUTES = String(args.routes || '/,/indice,/osservatorio,/dati,/mappa-prezzi')
   .split(',').map((s) => s.trim()).filter(Boolean);
 const WAIT = Number(args.wait || 3500);
 const TIMEOUT = Number(args.timeout || 45000);
