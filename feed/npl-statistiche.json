@@ -1,43 +1,43 @@
 {
  "meta": {
   "titolo": "NPL's — crediti in sofferenza e crediti in procedura (dati veri dal PVP)",
-  "generatoIl": "2026-11-04T05:20:20.178Z",
-  "aggiornato": "2026-11-04",
+  "generatoIl": "2026-11-05T05:21:05.808Z",
+  "aggiornato": "2026-11-05",
   "fonte": "PVP — Portale delle Vendite Pubbliche, Ministero della Giustizia (pvp.giustizia.it)",
   "query": "tipoLotto=VALORI-CREDITI",
   "licenza": "Dati pubblici del PVP (Portale delle Vendite Pubbliche, Ministero della Giustizia). Riuso consentito per finalità informative con citazione della fonte; nessun dato personale oltre a quanto già pubblico nel bando.",
   "metodo": "Classificazione conservativa dal testo pubblico del bando: NPL/sofferenza solo se dichiarati; crediti fiscali e titoli/quote esclusi (classi diverse, non NPL). Valore nominale solo se scritto nel bando.",
-  "totale": 260,
-  "dichiaratoPVP": 1118,
+  "totale": 261,
+  "dichiaratoPVP": 1132,
   "esclusi": {
    "titoli-e-quote": 443,
-   "credito-fiscale": 393,
+   "credito-fiscale": 406,
    "non-credito": 22
   },
   "copertura": {
    "importo": {
     "con": 45,
-    "su": 260,
-    "pct": 17.3
+    "su": 261,
+    "pct": 17.2
    },
    "regione": {
     "con": 193,
-    "su": 260,
-    "pct": 74.2
+    "su": 261,
+    "pct": 73.9
    },
    "tribunale": {
-    "con": 258,
-    "su": 260,
+    "con": 259,
+    "su": 261,
     "pct": 99.2
    }
   },
   "perTipo": {
-   "credito": 256,
+   "credito": 257,
    "NPL": 4
   },
   "perStato": {
    "conclusa-esito-non-pubblicato": 210,
-   "in-programma": 29,
+   "in-programma": 30,
    "deserta": 19,
    "aggiudicata": 2
   },
@@ -50,16 +50,16 @@
   },
   "fascePrezzoBase": {
    "10k-50k": 85,
-   "fino-10k": 70,
+   "fino-10k": 71,
    "50k-250k": 32,
    "250k-1M": 29,
    "oltre-1M": 23
   },
   "regioni": 16,
   "province": 39,
-  "sommaPrezzoBase": 377477782,
+  "sommaPrezzoBase": 377481282,
   "freschezza": {
-   "ultimaRaccolta": "2026-11-04",
+   "ultimaRaccolta": "2026-11-05",
    "dataLottoPiuRecente": "2026-12-31",
    "dataLottoPiuVecchio": "2024-01-12"
   },
