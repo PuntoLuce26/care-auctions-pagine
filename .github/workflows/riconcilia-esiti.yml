@@ -1,0 +1,41 @@
+name: riconcilia-esiti
+# 6/11/2026 — Riconciliazione degli esiti delle aste.
+# feed/aggiudicazioni.json contiene le vendite fatte scaricate dai portali, ma NON sono solo
+# immobili: ~10% case, ~23% beni mobili (auto, PC, quadri). Gli ID collidono, quindi si scrive
+# esito=AGGIU SOLO quando il prezzo dell'archivio e' plausibile rispetto al prezzo base
+# (rapporto 0,35-3). Meglio poche migliaia di esiti certi che 16.000 falsi.
+on:
+  schedule:
+    - cron: '40 2 * * *'    # ogni notte dopo il feed
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: riconcilia-esiti
+  cancel-in-progress: false
+
+jobs:
+  riconcilia:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Riconcilia gli esiti certi
+        run: node scripts/riconcilia-esiti.mjs feed
+      - name: Pubblica
+        run: |
+          git config user.name "CARe bot"
+          git config user.email "bot@careauctions.co"
+          git add feed/
+          if git diff --staged --quiet; then echo "niente da pubblicare"; exit 0; fi
+          git commit -m "esiti: riconciliazione $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash && git push && break
+            echo "tentativo $i fallito, riprovo"; sleep 5
+          done
