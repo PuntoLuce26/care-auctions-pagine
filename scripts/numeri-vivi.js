@@ -24,7 +24,6 @@ pagine['care-index'] = {
   numeri: {
     lotti: n(stat.totale, 'lotti', 'scripts/sync-feed.js → feed/statistiche.json', stat.aggiornato || null, OK),
     prezzoMedioImm: n(stat.prezzoMedioImm, '€', 'scripts/sync-feed.js → feed/statistiche.json (media dei prezzi base)', stat.aggiornato || null, OK),
-    scartoBaseMinima: n(stat.scontoMedioImm, '%', 'scripts/sync-feed.js → feed/statistiche.json (media di scontoPct)', stat.aggiornato || null, OK, { nota: 'scarto prezzo base → offerta minima (pavimento legale 25%), non è uno sconto di mercato' }),
     bande: n(indice.bandePrezzo || null, 'fasce', 'scripts/sync-feed.js → feed/indice-completo.json', indice.data || null, OK),
   },
 };
@@ -33,7 +32,7 @@ pagine['osservatorio'] = {
   numeri: {
     lotti: n(stat.totale, 'lotti', 'scripts/sync-feed.js → feed/statistiche.json', stat.aggiornato || null, OK),
     lottiComparabiliOmi: n((confronto.nazionale || {}).lotti, 'lotti', 'scripts/statistiche-mercato.js → feed/confronto-mercato.json', (confronto.meta || {}).generatoIl || null, OK, { copertura: ((confronto.meta || {}).copertura || {}) }),
-    scontoOmiMediano: n((confronto.nazionale || {}).scontoMedianoPct, '%', 'scripts/statistiche-mercato.js → feed/confronto-mercato.json (mediana, solo lotti con mq e OMI)', (confronto.meta || {}).generatoIl || null, OK, { nota: 'sconto di mercato = 1 − (prezzo base/mq) / valore OMI; P25 ' + ((confronto.nazionale || {}).scontoP25Pct) + '% · P75 ' + ((confronto.nazionale || {}).scontoP75Pct) + '%' }),
+    scontoOmiMediano: n((confronto.nazionale || {}).scontoMedianoPct, '%', 'scripts/statistiche-mercato.js → feed/confronto-mercato.json (mediana, solo lotti con mq e OMI)', (confronto.meta || {}).generatoIl || null, OK, { nota: 'sconto di mercato = 1 − (prezzo base/mq) / valore OMI; mediana su ' + ((confronto.meta || {}).copertura || {}).lottiConMq + ' lotti confrontabili in ' + ((confronto.meta || {}).copertura || {}).comuniPubblicati + ' comuni; P25 ' + ((confronto.nazionale || {}).scontoP25Pct) + '% · P75 ' + ((confronto.nazionale || {}).scontoP75Pct) + '%' }),
     fotoPerizie: n((leggi('dati-indice.json') || {}).dataset ? ((leggi('dati-indice.json').dataset.find(d => d.id === 'foto') || {}).valore) : null, 'lotti', 'foto-perizie → feed/foto-procedure.json', null, VER, { nota: 'la data di rilevazione delle foto non è pubblicata: va dichiarata prima di mostrare il numero' }),
   },
 };
