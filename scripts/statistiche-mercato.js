@@ -207,7 +207,7 @@ const out = {
     finestraEsiti: { da: esitiDa, a: esitiA, lottiConEsito: esitiLotti },
     copertura: Object.fromEntries(CAMPI.map(c => [c, pct(copertura[c] || 0, lotti)])),
     metodo: {
-      sconto: 'sconto % = 1 − (offerta minima / prezzo base d\'asta). Lotti con prezzo base > 0 e minima > 0 e minima ≤ base. Medio e mediano per tribunale; gruppi sotto ' + MIN_GRUPPO + ' lotti esclusi.',
+      scartoBaseMinima: 'scarto base→minima % = 1 − (offerta minima / prezzo base d\'asta); è il pavimento legale dell offerta (25%), NON uno sconto di mercato. Lotti con prezzo base > 0 e minima > 0 e minima ≤ base. Medio e mediano per tribunale; gruppi sotto ' + MIN_GRUPPO + ' lotti esclusi.',
       desertione: 'tasso di desertione = aste deserte / (aste aggiudicate + aste deserte), calcolato SOLO sui lotti in cui il PVP pubblica l\'esito (AGGIU/ASDES/SOSPE). Il PVP pubblica gli esiti solo per le aste recenti: la finestra è dichiarata in meta.finestraEsiti. Le sospese sono contate a parte e non entrano nel denominatore.',
       tempoPubblicazioneAsta: 'giorni tra dataPubblicazione e data vendita. Esclusi i lotti con date mancanti, invertite, oltre 10 anni o con anni implausibili (il PVP contiene refusi tipo 3019 al posto di 2019): restano solo date 2010-2035 e differenze 0-3650 giorni.',
       rialzo: 'rialzo minimo pubblicato dal PVP, in euro e in % sul prezzo base d\'asta.',
@@ -231,7 +231,7 @@ const out = {
     fileLetti, fileRotti
   },
 
-  sconto: {
+  scartoBaseMinima: {
     nazionale: statRicca(scontoNaz),
     perTribunale: perTribunaleDaArray(scontoTrib, statBase)
   },
@@ -305,7 +305,7 @@ const out = {
 fs.writeFileSync(OUT, JSON.stringify(out));
 console.log('statistiche-mercato.json scritto:', OUT);
 console.log('  lotti:', lotti, '| immobiliari', immobiliari, '| mobiliari', mobiliari);
-console.log('  sconto nazionale: medio', out.sconto.nazionale.medio, '% mediano', out.sconto.nazionale.mediano, '%');
+console.log('  scarto base→minima nazionale: medio', out.scartoBaseMinima.nazionale.medio, '% mediano', out.scartoBaseMinima.nazionale.mediano, '%');
 console.log('  tempo pubblicazione→asta: mediano', out.tempoPubblicazioneAsta.nazionaleGiorni.mediano, 'giorni');
 console.log('  desertione: lotti con esito', esitiLotti, '→ deserte', esitiNaz.deserte, 'aggiudicate', esitiNaz.aggiudicate);
 console.log('  rialzo: copertura', out.rialzo.copertura, '%');
