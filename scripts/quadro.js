@@ -134,7 +134,7 @@ const MESI = ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'lug
 
 // ─── raccolta dati ───────────────────────────────────────────────────────────
 
-const FEED = [['statistiche', 'statistiche.json'], ['indice', 'indice.json'],
+const FEED = [['statistiche', 'statistiche.json'], ['confronto', 'confronto-mercato.json'], ['indice', 'indice.json'],
   ['npl', 'npl.json'], ['crediti', 'crediti-fiscali.json'],
   ['sitemapMeta', 'sitemap-meta.json'], ['indexnow', 'indexnow.json'],
   ['perizieOcr', 'perizie-ocr.json'], ['ocrStato', 'ocr-stato.json']];
@@ -283,7 +283,9 @@ function costruisci(d) {
   const r0 = [];
   r0.push(`**Aste**: **${int(s.totale)}** in archivio (${txt(s.aggiornato ? ts(s.aggiornato) : null)}), `
     + `di cui **${int(idx.immobiliari)}** immobiliari e **${int(idx.mobiliari)}** mobiliari.`);
-  r0.push(`**Prezzi**: prezzo medio immobiliare **${eur(s.prezzoMedioImm)}**, sconto medio **${pct(s.scontoMedioImm)}**; `
+  const omiC = (d.confronto && d.confronto.nazionale) || {};
+  const omiCop = (d.confronto && d.confronto.meta && d.confronto.meta.copertura) || {};
+  r0.push(`**Prezzi**: prezzo medio immobiliare **${eur(s.prezzoMedioImm)}**, sconto mediano vs OMI **${pct(omiC.scontoMedianoPct)}** su ${int(omiCop.lottiConMq)} lotti confrontabili in ${int(omiCop.comuniPubblicati)} comuni; `
     + `esiti registrati: ${int(esiti.aggiudicate)} aggiudicate · ${int(esiti.deserte)} deserte · ${int(esiti.sospese)} sospese.`);
   r0.push(`**Oltre le aste**: **${int(npl)}** NPL's, **${int(crediti)}** crediti fiscali, OMI **${int(omi && omi.comuni)} comuni / `
     + `${int(omi && omi.zone)} zone** su ${int(omi && omi.province)} province (${txt(omi && omi.semestre)}).`);
@@ -300,7 +302,7 @@ function costruisci(d) {
     ['Immobiliari', `**${int(idx.immobiliari)}**`, 'indice.json'],
     ['Mobiliari', `**${int(idx.mobiliari)}**`, 'indice.json'],
     ['Prezzo medio immobiliare', `**${eur(s.prezzoMedioImm)}**`, 'statistiche.json'],
-    ['Sconto medio immobiliare', `**${pct(s.scontoMedioImm)}**`, 'statistiche.json'],
+    ['Sconto mediano vs OMI', `**${pct(omiC.scontoMedianoPct)}**`, `confronto-mercato.json (${int(omiCop.lottiConMq)} lotti · ${int(omiCop.comuniPubblicati)} comuni)`],
     ['Esiti', `${int(esiti.aggiudicate)} agg. · ${int(esiti.deserte)} des. · ${int(esiti.sospese)} sosp.`, 'statistiche.json'],
     ['NPL\'s', `**${int(npl)}**`, `npl.json (${txt(d.npl && d.npl.meta && d.npl.meta.aggiornato)})`],
     ['Crediti fiscali', `**${int(crediti)}**`, `crediti-fiscali.json (${txt(d.crediti && d.crediti.meta && d.crediti.meta.aggiornato)})`],
