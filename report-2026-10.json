@@ -3,7 +3,7 @@
  "mese": "2026-10",
  "etichetta": "ottobre 2026",
  "dataRiferimento": "2026-10-28",
- "generato": "2026-11-05T02:55:43.447Z",
+ "generato": "2026-11-06T02:44:27.951Z",
  "fonte": "PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia) · Agenzia delle Entrate — OMI",
  "metodo": "Aggiudicazioni: solo vendite aggiudicate con prezzo finale pubblicato, sommate per data di vendita; nessun prezzo ricostruito. Sconto: mediana del ribasso tra prezzo base e offerta minima pubblicati sul medesimo lotto. Esiti: stati dichiarati dal PVP.",
  "stimato": "nulla: ogni numero è un conteggio o un rapporto tra dati pubblicati",
@@ -23,7 +23,7 @@
    "senzaPrezzo": 0,
    "altreFonti": 13626
   },
-  "lottiAttivi": 323692,
+  "lottiAttivi": 323937,
   "esitiMercato": {
    "aggiudicate": 2183,
    "deserte": 29268,
@@ -33,7 +33,7 @@
   "scontoMedioNazionale": {
    "medio": 20.2,
    "mediano": 25,
-   "lotti": 303754
+   "lotti": 303993
   }
  },
  "kpi": {
