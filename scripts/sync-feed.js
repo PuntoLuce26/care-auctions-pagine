@@ -4,6 +4,8 @@
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
+const { fileDaCancellare, scegliEsiti } = require('./feed-regole');
+const { ricalcolaPartecipazione } = require('./andamento-partecipazione');
 
 const MODE = process.env.MODE || 'inc';
 const PAGINE = MODE === 'full' ? 99999 : 40;
@@ -141,7 +143,12 @@ async function main(){
     // ricostruzione completa (come pvp-feed.js): i file vengono riscritti con TUTTI i lotti raccolti
     const perReg={};
     for(const a of lotti) (perReg[a.regione]=perReg[a.regione]||{imm:[],mob:[]})[a.tipo==='IMMOBILIARE'?'imm':'mob'].push(a);
-    for(const f of fs.readdirSync(FEED)) if(f.endsWith('.json')&&f!=='indice.json'&&f!=='indice-completo.json'&&f!=='ore-aste.json'&&f!=='esiti-ritirati.json') fs.unlinkSync(path.join(FEED,f));
+    // B — 6/11/2026: la ricostruzione completa rigenera i file di regione dal PVP, ma NON
+    // cancella la storia: andamento-esiti.json e' una rilevazione datata (non si ricalcola),
+    // andamento-prezzi.json e andamento-partecipazione.json sono serie storiche. Se li
+    // cancellasse, il giorno che il full completa perderemmo la memoria del progetto.
+    // L'elenco protetto sta in scripts/feed-regole.js (PROTETTI_FEED).
+    for(const f of fileDaCancellare(FEED)) fs.unlinkSync(path.join(FEED,f));
     indice.totali=lotti.length; indice.immobiliari=0; indice.mobiliari=0; indice.regioni={};
     for(const [r,g] of Object.entries(perReg)){
       const s=slug(r); const filesImm=[],filesMob=[];
@@ -215,11 +222,32 @@ async function main(){
   try {
     // FIX 31/10: ic va letto SUBITO (era usato prima della dichiarazione: TDZ → statistiche e andamenti fermi al giorno prima)
     const ic = JSON.parse(fs.readFileSync(path.join(FEED, 'indice-completo.json'), 'utf8'));
-    let esitiFinali = esitiAcc;
-    if (MODE !== 'full') {
-      try { const canone = JSON.parse(fs.readFileSync(path.join(FEED, 'andamento-esiti.json'), 'utf8')); if (canone && canone.esiti && Number(canone.esiti.aggiudicate) > 0) esitiFinali = canone.esiti; } catch (eCan) {}
-      try { const prec = JSON.parse(fs.readFileSync(path.join(FEED, 'statistiche.json'), 'utf8')); if ((!esitiFinali || !Number(esitiFinali.aggiudicate)) && prec && prec.esiti) esitiFinali = prec.esiti; } catch (ePrev) {}
-    } else if (esitiAcc && Number(esitiAcc.aggiudicate) > 0) {
+    // C — 6/11/2026: si pubblica solo una misura VIVA e DATATA. Se la rilevazione degli esiti
+    // (feed/andamento-esiti.json) e' piu' vecchia di 7 giorni NON si ricopia: esiti:null con il
+    // motivo. I numeri della vecchia rilevazione restano in esitiUltimaRilevazione, con la data
+    // e la riserva, cosi' il sito puo' dire "fonte in verifica" invece di fingere un dato vivo.
+    // (Prima, riga 220, il 2.183 del 30/10 veniva ricopiato a ogni run: sembrava aggiornato.)
+    let canoneEsiti = null;
+    try { canoneEsiti = JSON.parse(fs.readFileSync(path.join(FEED, 'andamento-esiti.json'), 'utf8')); } catch (eCan) {}
+    const sceltaEsiti = scegliEsiti({ modo: MODE, esitiAcc, canone: canoneEsiti });
+    const esitiFinali = sceltaEsiti.esiti;
+    const esitiMotivo = sceltaEsiti.motivo || null;
+    let esitiUltimaRilevazione = null;
+    if (sceltaEsiti.rilevazione) {
+      const r = sceltaEsiti.rilevazione;
+      const verificati = (Number(r.aggiudicate) || 0) + (Number(r.deserte) || 0) + (Number(r.sospese) || 0);
+      const lotti = ic.totaleLotti || 0;
+      const pct = lotti ? Math.round((verificati / lotti) * 1000) / 10 : null;
+      const [aa, mm, gg] = String(r.data || '').split('-');
+      const dataIt = (gg && mm && aa) ? (gg + '/' + mm + '/' + aa) : String(r.data || '?');
+      esitiUltimaRilevazione = {
+        data: r.data, aggiudicate: r.aggiudicate, deserte: r.deserte, sospese: r.sospese,
+        verificati, lotti, percentuale: pct, stato: 'fonte in verifica',
+        nota: 'esiti verificati: ' + verificati.toLocaleString('it-IT') + ' su ' + lotti.toLocaleString('it-IT') +
+          ' lotti (' + String(pct).replace('.', ',') + '%) — rilevazione del ' + dataIt + ', fonte in verifica'
+      };
+    }
+    if (MODE === 'full' && sceltaEsiti.scriviCanone) {
       // giro completo: gli esiti contati sono la verità del giorno → aggiorna il file canonico
       fs.writeFileSync(path.join(FEED, 'andamento-esiti.json'), JSON.stringify({ generato: new Date().toISOString(), esiti: esitiAcc, nota: 'esiti reali delle aste italiane — nessun numero inventato' }));
     }
@@ -248,32 +276,17 @@ async function main(){
     storico.push({ data: oggiD, totale: ic.totaleLotti, prezzoMedio: Math.round(ic.settori.immobiliare.prezzoMedio || 0), scontoMedio: Math.round(ic.settori.immobiliare.scontoMedio || 0) });
     storico = storico.slice(-730); // 5.860: 2 anni di storia, per sempre
     fs.writeFileSync(path.join(FEED, 'andamento-prezzi.json'), JSON.stringify({ generato: new Date().toISOString(), giorni: storico }));
-    // PARTECIPAZIONE-5.856: archivio giornaliero degli esiti (aggiudicate/deserte/sospese) per l andamento della partecipazione
-    let partG = [];
-    try { partG = (JSON.parse(fs.readFileSync(path.join(FEED, 'andamento-partecipazione.json'), 'utf8')) || {}).giorni || []; } catch (eP1) {}
-    const partM = {}; for (const g of partG) { if (g && g.data) partM[g.data] = g; }
-    let precPart = null;
-    try {
-      for (const r of Object.keys(indice.regioni)) {
-        for (const f of [...(indice.regioni[r].filesImm || []), ...(indice.regioni[r].filesMob || [])]) {
-          try { for (const x of JSON.parse(fs.readFileSync(path.join(FEED, f), 'utf8'))) {
-            const d = String(x.dataAsta || '').slice(0, 10);
-            if (!/^20\d\d-\d\d-\d\d$/.test(d) || d < '2018-01-01' || d > '2035-12-31') continue;
-            const e = String(x.esito || '');
-            if (!partM[d]) partM[d] = { data: d, aggiudicate: 0, deserte: 0, sospese: 0, totale: 0 };
-            partM[d].totale++;
-            if (e === 'AGGIU') partM[d].aggiudicate++; else if (e === 'ASDES') partM[d].deserte++; else if (e === 'SOSPE') partM[d].sospese++;
-          } } catch (eP2) {}
-        }
-      }
-      const oggiPart = new Date().toISOString().slice(0, 10);
-      partG = Object.values(partM).filter(g => g.data <= oggiPart).sort((a, b) => a.data < b.data ? -1 : 1).slice(-730); // 5.860
-      // via i giorni futuri: la storia resta, il futuro non è un esito
-      fs.writeFileSync(path.join(FEED, 'andamento-partecipazione.json'), JSON.stringify({ generato: new Date().toISOString(), giorni: partG }));
-      precPart = partG.length;
-    } catch (eP3) { precPart = null; }
+    // A — 6/11/2026: la partecipazione si RICALCOLA da zero dai lotti di ogni giorno
+    // (scripts/andamento-partecipazione.js). Prima si partiva dai giorni gia' in archivio e si
+    // incrementava: a ogni run (~3-5 min) si riaggiungeva il catalogo intero, fino a una somma
+    // di ~177 milioni, ~542 volte i 324k lotti. Un giorno senza lotti resta vuoto: mai stimato.
+    try { ricalcolaPartecipazione(FEED, indice, { log: console.log }); }
+    catch (eP3) { console.log('partecipazione: errore', eP3.message); }
     // 5.914: "aggiornato" ISO con l'ora esatta — il guardiano calcola le ore di stallo da qui (2 ore = fermo).
-    fs.writeFileSync(path.join(FEED, 'statistiche.json'), JSON.stringify({ generato: new Date().toISOString().slice(0, 10), aggiornato: new Date().toISOString(), totale: ic.totaleLotti, prezzoMedioImm: ic.settori.immobiliare.prezzoMedio, scontoMedioImm: ic.settori.immobiliare.scontoMedio, bandePrezzo: ic.bandePrezzo, esiti: esitiFinali, perData, nota: 'statistiche vive dal giro automatico — nessun numero inventato' }));
+    const statOut = { generato: new Date().toISOString().slice(0, 10), aggiornato: new Date().toISOString(), totale: ic.totaleLotti, prezzoMedioImm: ic.settori.immobiliare.prezzoMedio, scontoMedioImm: ic.settori.immobiliare.scontoMedio, bandePrezzo: ic.bandePrezzo, esiti: esitiFinali, perData, nota: 'statistiche vive dal giro automatico — nessun numero inventato' };
+    if (esitiMotivo) statOut.esitiMotivo = esitiMotivo;
+    if (esitiUltimaRilevazione) statOut.esitiUltimaRilevazione = esitiUltimaRilevazione;
+    fs.writeFileSync(path.join(FEED, 'statistiche.json'), JSON.stringify(statOut));
     console.log('statistiche.json sempre aggiornato');
   } catch (eS) { console.log('statistiche: errore', eS.message); }
   if(MODE==='full'){
