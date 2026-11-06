@@ -64,7 +64,7 @@ const giorniOrdinati = [...perGiorno.entries()].sort((a, b) => a[0] < b[0] ? -1 
 const settimane = {};
 for (const g of giorniOrdinati) { const s = settimanaISO(new Date(g.giorno + 'T12:00:00Z')); settimane[s] = (settimane[s] || 0) + g.esiti; }
 
-const sn = (mercato && mercato.sconto && mercato.sconto.nazionale) || null;
+const sn = (mercato && mercato.scartoBaseMinima && mercato.scartoBaseMinima.nazionale) || null;
 const rap = {
   versione,
   mese,
@@ -83,7 +83,7 @@ const rap = {
     esclusi: monitor.esclusi || {},
     lottiAttivi: indice.totali || stat.totale || 0,
     esitiMercato: esiti.esiti || {},
-    scontoMedioNazionale: sn ? { medio: sn.medio, mediano: sn.mediano, lotti: sn.lotti } : null
+    scartoBaseMinimaNazionale: sn ? { medio: sn.medio, mediano: sn.mediano, lotti: sn.lotti } : null
   },
   kpi: { aggiudicazioni: n, incasso: Math.round(incasso), prezzoMedio: Math.round(medio), tribunali: perTrib.size },
   settimane,
@@ -110,7 +110,7 @@ const html = '<!DOCTYPE html><html lang="it"><head><meta charset="utf-8"><meta n
 '<div class="card"><div class="lab">Tribunali</div><div class="num">' + num(perTrib.size) + '</div><div class="sub">con almeno un esito nel mese</div></div></div>' +
 '<h2>Copertura</h2><p class="lead">' + num(n) + ' aggiudicazioni su <strong>' + num(perTrib.size) + ' tribunali</strong> e <strong>' + giorniOrdinati.length + ' giorni</strong> con esiti. Archivio esiti disponibile: ' + (monitor.copertura.dal || '—') + ' → ' + (monitor.copertura.al || '—') + ' (' + num(monitor.copertura.giorni) + ' giorni, ' + num(monitor.copertura.esiti) + ' aggiudicazioni su ' + num(monitor.copertura.tribunali) + ' tribunali). Lotti attivi nel feed: ' + num(rap.copertura.lottiAttivi) + '.</p>' +
 '<p class="lead">Esclusi e dichiarati: ' + num(rap.copertura.esclusi.prezzoBase || 0) + ' lotti con solo prezzo base, ' + num(rap.copertura.esclusi.senzaData || 0) + ' senza data, ' + num(rap.copertura.esclusi.altreFonti || 0) + ' record di altre fonti senza prezzo finale.</p>' +
-'<h2>Mercato (stato del feed)</h2><p class="lead">Aggiudicate ' + num(es.aggiudicate) + ' · deserte ' + num(es.deserte) + ' · sospese ' + num(es.sospese) + ' · non pubblicate ' + num(es.nonPubblicato) + (sn ? (' · sconto medio nazionale (prezzo base vs offerta minima) ' + (Math.round(sn.medio * 10) / 10) + '% su ' + num(sn.lotti) + ' lotti') : '') + '.</p>' +
+'<h2>Mercato (stato del feed)</h2><p class="lead">Aggiudicate ' + num(es.aggiudicate) + ' · deserte ' + num(es.deserte) + ' · sospese ' + num(es.sospese) + ' · non pubblicate ' + num(es.nonPubblicato) + (sn ? (' · scarto base→minima (prezzo base vs offerta minima) ' + (Math.round(sn.medio * 10) / 10) + '% su ' + num(sn.lotti) + ' lotti') : '') + '.</p>' +
 '<h2>Top tribunali del mese</h2><table><tr><th>Tribunale</th><th class="n">Esiti</th><th class="n">Incasso</th><th class="n">Prezzo medio</th></tr>' + righeTrib + '</table>' +
 '<h2>Andamento per settimana ISO</h2><table><tr><th>Settimana</th><th class="n">Aggiudicazioni</th></tr>' + righeSett + '</table>' +
 '<h2>Giorni con esiti</h2><table><tr><th>Giorno</th><th class="n">Aggiudicazioni</th></tr>' + righeGiorni + '</table>' +
