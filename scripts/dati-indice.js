@@ -40,7 +40,12 @@ const aggiud = leggi('aggiudicazioni.json') || [];
 const aziende = leggi('aste-aziende.json') || {};
 const confronto = leggi('confronto-mercato.json') || {};
 const mercato = leggi('statistiche-mercato.json') || null;
-const esiti = leggi('andamento-esiti.json') || {};
+const esitiCanone = leggi('andamento-esiti.json') || {};
+// 6.051 — gli esiti si dichiarano, non si ricopiano: la fonte è statistiche.json (che sa se la
+// rilevazione è viva). Se è ferma, la card NON mostra il numero: mostra motivo + nota con la data.
+const esitiRil = stat.esitiUltimaRilevazione || null;
+const esitiVivo = (stat.esiti && stat.esiti.aggiudicate != null) ? stat.esiti : null;
+const dataItRil = (esitiRil && esitiRil.data) ? String(esitiRil.data).split('-').reverse().join('/') : null;
 const prezzi = leggi('andamento-prezzi.json') || {};
 const monitor = leggi('esiti-monitor.json') || null;
 let fotoLotti = 0, fotoFile = 0;
@@ -59,7 +64,17 @@ const coperturaAste = 'copertura: ' + (conta(indiceFeed.regioni || {}) ? regione
 const dataset = [
   { id: 'aste', nome: 'Aste giudiziarie italiane', valore: totaleLotti, unita: 'lotti', aggiornato: fresco(indice.data || stat.generato), fonte: 'PVP — Ministero della Giustizia · ' + coperturaAste + ' · metodo: conteggio diretto dei lotti pubblicati, nessuna stima · ' + VERSIONE, descrizione: 'Tutti i lotti pubblicati sul Portale delle Vendite Pubbliche: prezzo base, offerta minima, data, tribunale, regione. Nessun campo dedotto: se il PVP non lo pubblica, non c è.', link: '/aste' },
   { id: 'aggiudicazioni', nome: 'Prezzi reali di aggiudicazione', valore: conta(aggiud), unita: 'aggiudicazioni', aggiornato: fresco(aggiornatoAggiudicazioni(aggiud)), fonte: 'PVP (vendite aggiudicate, raccolta Fallco) · copertura: solo lotti con prezzo finale pubblicato; esclusi i lotti con solo prezzo base · metodo: prezzo finale come pubblicato, nessuna stima · ' + VERSIONE, descrizione: 'I prezzi veri a cui le aste si sono chiuse: la base del CAReIndex e dello sconto reale. I lotti senza prezzo finale sono esclusi e dichiarati.', link: '/ca-re-index' },
-  { id: 'esiti', nome: 'Esiti delle aste', valore: (esiti.esiti && esiti.esiti.aggiudicate) || 0, unita: 'aggiudicate', aggiornato: fresco(esiti.generato), fonte: 'PVP · copertura: stato dichiarato dal PVP per ogni lotto (aggiudicata, deserta, sospesa, non pubblicato) · metodo: conteggio degli stati, nessuna stima · ' + VERSIONE, descrizione: 'Aggiudicate, deserte, sospese: il polso della domanda, giorno per giorno. Il monitor navigabile è su /esiti.', link: '/esiti' },
+  { id: 'esiti', nome: 'Esiti delle aste',
+    valore: esitiVivo ? Number(esitiVivo.aggiudicate) : null,
+    unita: 'aggiudicate',
+    stato: esitiVivo ? 'ok' : 'in-verifica',
+    nota: esitiVivo ? null : ((esitiRil && esitiRil.nota) || stat.esitiMotivo || 'rilevazione ferma: fonte in verifica'),
+    aggiornato: esitiVivo ? fresco(stat.aggiornato || esitiCanone.generato) : (dataItRil ? ('rilevazione del ' + dataItRil) : 'in verifica'),
+    fonte: esitiVivo
+      ? 'PVP · copertura: stato dichiarato per ogni lotto · metodo: conteggio degli stati, nessuna stima · rilevazione del ' + (dataItRil || 'n/d') + ' · ' + VERSIONE
+      : 'PVP · ' + ((esitiRil && esitiRil.nota) || 'fonte in verifica') + ' · ' + VERSIONE,
+    descrizione: 'Aggiudicate, deserte, sospese: il polso della domanda. Il monitor navigabile è su /esiti.',
+    link: '/esiti' },
   { id: 'foto', nome: 'Foto e perizie delle procedure', valore: fotoLotti, unita: 'lotti', aggiornato: fresco(null), fonte: 'Perizie pubbliche (atti del tribunale) · copertura: i lotti per cui la perizia pubblica almeno un file · metodo: link diretto all atto, nessuna elaborazione · ' + VERSIONE, descrizione: fotoFile + ' file (foto e documenti) con la provenienza in fondo a ogni documento.', link: '/osservatorio' },
   { id: 'aziende', nome: 'Aste di aziende, quote e crediti', valore: (aziende.meta && aziende.meta.totale) || 0, unita: 'lotti', aggiornato: fresco((aziende.meta && aziende.meta.dataRaccolta) || null), fonte: 'PVP · copertura: rami d azienda, quote e crediti all asta · metodo: conteggio e somma dei valori base pubblicati · ' + VERSIONE, descrizione: 'Rami d azienda, quote societarie e crediti all asta, con il valore base dichiarato dal PVP.', link: '/aste-aziende' },
   { id: 'omi', nome: 'Valori di mercato OMI', valore: (confronto.meta && confronto.meta.copertura && confronto.meta.copertura.comuniPubblicati) || 0, unita: 'comuni', aggiornato: fresco((confronto.meta && confronto.meta.generatoIl) || null), fonte: 'Agenzia delle Entrate — OMI · copertura: comuni con quotazioni OMI disponibili · metodo: valori OMI come pubblicati; il confronto con il prezzo d asta è un rapporto tra due dati pubblici, mai una stima · ' + VERSIONE, descrizione: 'Il confronto tra prezzo d asta e valore di mercato: ' + ((confronto.nazionale && confronto.nazionale.lotti) || 0) + ' lotti comparabili.', link: '/osservatorio' },
