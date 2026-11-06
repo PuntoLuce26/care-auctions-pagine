@@ -141,7 +141,7 @@ async function main(){
     // ricostruzione completa (come pvp-feed.js): i file vengono riscritti con TUTTI i lotti raccolti
     const perReg={};
     for(const a of lotti) (perReg[a.regione]=perReg[a.regione]||{imm:[],mob:[]})[a.tipo==='IMMOBILIARE'?'imm':'mob'].push(a);
-    for(const f of fs.readdirSync(FEED)) if(f.endsWith('.json')&&f!=='indice.json'&&f!=='indice-completo.json'&&f!=='ore-aste.json') fs.unlinkSync(path.join(FEED,f));
+    for(const f of fs.readdirSync(FEED)) if(f.endsWith('.json')&&f!=='indice.json'&&f!=='indice-completo.json'&&f!=='ore-aste.json'&&f!=='esiti-ritirati.json') fs.unlinkSync(path.join(FEED,f));
     indice.totali=lotti.length; indice.immobiliari=0; indice.mobiliari=0; indice.regioni={};
     for(const [r,g] of Object.entries(perReg)){
       const s=slug(r); const filesImm=[],filesMob=[];
@@ -182,6 +182,12 @@ async function main(){
   }
   fs.writeFileSync(path.join(FEED,'indice.json'),JSON.stringify(indice));
   console.log('indice aggiornato: totali',indice.totali,'(nuovi inseriti:',nuovi+')');
+  // ESITI RITIRATI — C, 6/11/2026: toglie gli esiti scritti su un incrocio per id non valido
+  // (id di portale, non idAnnuncio del PVP). Registro: feed/esiti-ritirati.json. Passata unica,
+  // dopo la scrittura dei file di regione e PRIMA dei contatori, cosi' non tornano nemmeno
+  // dopo una ricostruzione completa. Il registro resta (non viene cancellato dal full).
+  try { require('./esiti-ritirati').applicaEsitiRitirati(FEED, indice, console.log); }
+  catch (e) { console.log('esiti ritirati: errore', e.message); }
   // INDICE-COMPLETO (statistiche vive per il CARe Index: totali, prezzi medi, sconti, bande)
   try {
     const tutti=[];
