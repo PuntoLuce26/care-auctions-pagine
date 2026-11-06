@@ -103,17 +103,8 @@ if (!SOLO_PROVA) {
   const prezzi = {};
   for (const l of (globalThis.__prezzi||[])) prezzi[l.id]=l.prezzo;
   try { fs.writeFileSync(path.join(FEED,'prezzi-aggiudicazione.json'), JSON.stringify(prezzi)); } catch(e) {}
-  try {
-    const st = legg('statistiche.json');
-    const note = st.esiti || {};
-    st.esiti = {
-      aggiudicate: conta.AGGIU, deserte: conta.ASDES + conta.DESER, sospese: conta.SOSPE,
-      nonPubblicato: note.nonPubblicato,
-    };
-    st.esitiAggiornati = '2026-11-06';
-    st.esitiFonte = 'riconciliazione archivio aggiudicazioni';
-    scriv('statistiche.json', st);
-    console.log('\n statistiche.json aggiornato:', JSON.stringify(st.esiti));
+  // NON si toccano gli esiti di statistiche.json: li calcola il feed-sync dal PVP.
+  // Questo script aggiunge solo gli esiti riconciliati e li annota a parte.
   } catch (e) { console.log(' statistiche non aggiornate:', e.message); }
   fs.writeFileSync(path.join(FEED, 'esiti-riconciliazione.json'), JSON.stringify({
     quando: new Date().toISOString(), riconciliati, gia, orfani: orfani.size, conteggi: conta }, null, 1));
