@@ -26,6 +26,7 @@ jobs:
           echo "MODE=$MODE"
           MODE=$MODE node scripts/sync-feed.js
           node scripts/dati-indice.js || echo "indice dati: non aggiornato"
+          node scripts/numeri-vivi.js || echo "numeri vivi: non rigenerati in questo giro"
           node scripts/statistiche-mercato.js || echo "statistiche mercato: non aggiornate in questo giro"
           node scripts/idmap-sitemap.js || echo "idmap/citymap/sitemap: non rigenerati in questo giro"
           # 5.915: report mensile certificato, una volta al giorno (ore 02 UTC)
