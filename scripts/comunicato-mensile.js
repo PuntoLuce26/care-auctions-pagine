@@ -18,10 +18,12 @@ const eur = (v) => (v == null ? 'non disponibile' : Number(v).toLocaleString('it
 (async () => {
   const mese = process.env.MESE || new Date().toISOString().slice(0, 7);
   const base = 'https://puntoluce26.github.io/care-auctions-pagine/feed/';
-  const [stats, indice, esiti, aziende] = await Promise.all([
+  const [stats, indice, esiti, aziende, confronto] = await Promise.all([
     get(base + 'statistiche.json'), get(base + 'indice-completo.json'),
-    get(base + 'esiti-monitor.json'), get(base + 'aste-aziende.json')
+    get(base + 'esiti-monitor.json'), get(base + 'aste-aziende.json'),
+    get(base + 'confronto-mercato.json')
   ]);
+  const conf = (confronto && confronto.meta && confronto.meta.copertura) ? confronto : null;
   const imm = (indice && indice.settori && indice.settori.immobiliare) || {};
   const mob = (indice && indice.settori && indice.settori.mobiliare) || {};
   const e = (esiti && (esiti.copertura || esiti.esiti)) || {};
@@ -34,7 +36,9 @@ const eur = (v) => (v == null ? 'non disponibile' : Number(v).toLocaleString('it
     ['Immobiliari', n(imm.lotti)],
     ['Mobiliari', n(mob.lotti)],
     ['Prezzo medio immobiliare', eur(imm.prezzoMedio)],
-    ['Sconto medio immobiliare', imm.scontoMedio != null ? imm.scontoMedio + '%' : 'non disponibile'],
+    ['Sconto mediano vs OMI', (conf && conf.nazionale && conf.nazionale.scontoMedianoPct != null && conf.meta.copertura.lottiConMq)
+      ? (String(conf.nazionale.scontoMedianoPct).replace('.', ',') + '% su ' + conf.meta.copertura.lottiConMq + ' lotti confrontabili in ' + conf.meta.copertura.comuniPubblicati + ' comuni')
+      : 'non disponibile'],
     ['Aggiudicazioni monitorate', n(agg)],
     ['Importo aggiudicato', eur(importo)],
     ['Aste di aziende e crediti', n(az.totale)],
