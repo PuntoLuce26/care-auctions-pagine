@@ -7,7 +7,7 @@
 
 | Pagina | Numero (misurato al 6/11 18:40Z) | Fonte esatta | Rilevazione | Stato |
 |---|---|---|---|---|
-| **CAReIndex** `/ca-re-index` | 324.121 lotti · prezzo medio immobiliare **165.893 €** · sconto medio base→minima **24%** · bande 72.671 / 53.895 / 65.168 / 44.087 / 37.815 | `feed/indice-completo.json` (settori, bande) + `feed/statistiche.json` (`prezzoMedioImm`, `scontoMedioImm`), scritti da `scripts/sync-feed.js` | **2026-11-06T18:40Z** (ogni ~3-5 min) | **ok** |
+| **CAReIndex** `/ca-re-index` | 324.121 lotti · prezzo medio immobiliare **165.893 €** · scarto base→minima **24%** (pavimento legale 25%, mediato con i fallimenti — non è uno sconto di mercato; in pagina non compare) · bande 72.671 / 53.895 / 65.168 / 44.087 / 37.815 | `feed/indice-completo.json` (settori, bande) + `feed/statistiche.json` (`prezzoMedioImm`, `scontoMedioImm`), scritti da `scripts/sync-feed.js` | **2026-11-06T18:40Z** (ogni ~3-5 min) | **ok** |
 | **Osservatorio** `/osservatorio` | 324.121 lotti · confronto OMI: **5.427 lotti** comparabili (3,8% dei 141.580 residenziali) su **22 comuni** · sconto mediano **43,6%** (P25 12,2% · P75 63,8%) · foto/perizie **9.183 lotti** (205.427 file) | `feed/confronto-mercato.json` (OMI, semestre 1° 2026) + `feed/foto-procedure.json` (`foto-perizie`) + `feed/statistiche.json` | OMI **31/10/2026T04:14Z** · foto **in aggiornamento** (nessuna data) · lotti 6/11 18:40Z | **parziale**: OMI fermo al 31/10 e solo 22 comuni con confronto pubblicato su 4.325 censiti; foto senza data |
 | **iDati** `/idati` | 9 dataset: aste 324.121 (6/11) · aggiudicazioni 16.771 (28/10) · esiti 2.183 (30/10) · foto 9.183 (in aggiornamento) · aziende 4.391 (6/11) · OMI 22 comuni (31/10) · prezzi 10 giorni (6/11) · metodo 8 indicatori · report 2.871 (6/11 18:36) | `feed/dati-indice.json`, generato da `scripts/dati-indice.js` nello stesso giro (legge statistiche, indice-completo, indice, aggiudicazioni, aziende, confronto-mercato, andamento-esiti, esiti-monitor) | 6/11 18:40Z (il file) · le date interne sono quelle della riga sopra | **misto**: ok aste/prezzi/aziende/metodo; parziale foto e OMI; **fonte in verifica** aggiudicazioni ed esiti |
 | **Aggiudicazioni** `/aggiudicazioni` | **16.771** «prezzi reali di aggiudicazione» — di cui 3.145 fallcoaste (con data e tribunale), 13.574 anivg (senza data né tribunale), 52 notarili Verona (id sintetici `vr-2026-*`) | `feed/aggiudicazioni.json` (3.337.207 byte), scritto dal Mac il 29/10. Oggi nessun giro lo rigenera: il full lo riscriverebbe dal PVP esiti (401) o dagli script fallco/ivg | ultima `termina` **28/10/2026** · file fermo dal 29/10 | **fonte in verifica**: tre fonti non omogenee; gli id non sono gli `idAnnuncio` del PVP (1.233 presenti su 16.771, 0 con tribunale coerente) → non collegabili ai lotti |
@@ -32,3 +32,10 @@
 Per ogni card: (1) il numero della pagina si trova identico nel file indicato; (2) la data mostrata
 è la data di quel file (non «oggi»); (3) se lo stato è «fonte in verifica», la frase di riserva è
 visibile accanto al numero. Un numero che non supera uno dei tre controlli non va in pagina.
+
+
+## Divieti espliciti (6/11/2026, Gianluca)
+- I **16.771** non si chiamano mai «prezzi reali collegati alle aste»: sono voci d'archivio di tre fonti non omogenee (3.145 fallcoaste con data e tribunale, 13.574 anivg senza metadati, 52 notarili), non collegabili ai lotti del PVP.
+- **Mai attribuire all'Agenzia delle Entrate** un numero che non viene dall'OMI. Lo scarto prezzo base → offerta minima non è OMI.
+- Lo **scarto base→minima non si mostra come sconto**: in pagina non compare; nei file interni si chiama `scartoBaseMinima`.
+- Lo **sconto di mercato è solo quello OMI** (mediana), e va sempre con la copertura accanto: lotti confrontabili e comuni.
