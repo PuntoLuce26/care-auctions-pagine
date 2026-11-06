@@ -34,7 +34,7 @@ jobs:
           const ROTTE = [['/', 'index'], ['/ca-re-index','ca-re-index'], ['/osservatorio','osservatorio'],
             ['/esiti','esiti'], ['/andamento-prezzi','andamento-prezzi'], ['/metodo','metodo'],
             ['/icommunity','icommunity'], ['/mappa-prezzi','mappa-prezzi'], ['/indice','indice'],
-            ['/aste-aziende','aste-aziende'], ['/idati','idati'], ['/icarewall','icarewall']];
+            ['/aste-aziende','aste-aziende'], ['/idati','idati'], ['/icarewall','icarewall'], ['/aggiudicazioni','aggiudicazioni']];
           (async () => {
             const b = await chromium.launch({ headless: true });
             let ok = 0;
