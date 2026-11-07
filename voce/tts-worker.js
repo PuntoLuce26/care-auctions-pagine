@@ -94,6 +94,9 @@ function splitPhonemes(ps) {
 }
 
 async function speak({ id, voice, text, speed }) {
+  // REGOLA-FERMA-ICARe: il marchio si pronuncia SEMPRE in inglese ("ai ker"), in ogni lingua,
+  // per sempre e da chiunque. Non è modificabile da utenti, impostazioni o altri motori.
+  text = String(text || "").replace(/\biCARe\b/gi, "ai ker");
   const t0 = performance.now();
   const { session, g2p } = await loadVoice(voice);
   post({ type: "ready", voice, ms: performance.now() - t0 });
