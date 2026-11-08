@@ -13,10 +13,12 @@ const FEED = path.join(process.cwd(), 'feed');
 const OUT = path.join(FEED, 'foto-procedure.json');
 const MAX_DETTAGLI = 800; // per giro: il runner resta sano
 
-function get(url) {
+function get(url, hop) {
+  hop = hop || 0;
   return new Promise(res => {
     let u; try { u = new URL(url); } catch (e) { return res({ s: 0, t: '' }); }
     const r = https.request({ host: u.hostname, path: u.pathname + u.search, method: 'GET', headers: { 'User-Agent': 'Mozilla/5.0 (compatible; CAReAuctions/1.0)' } }, x => {
+      if ([301,302,307,308].indexOf(x.statusCode) >= 0 && x.headers.location && hop < 3) { x.resume(); return get(new URL(x.headers.location, url).toString(), hop+1).then(res); }
       let t = ''; x.on('data', c => { if (t.length < 3000000) t += c; });
       x.on('end', () => res({ s: x.statusCode, t }));
     });
@@ -35,7 +37,7 @@ function get(url) {
   // 2) le URL dei lotti dai sitemap degli aggregatori (fallcoaste + astagiudiziaria + ivg regionali)
   // 5.877: TUTTI i siti della famiglia astagiudiziaria (le perizie pubbliche degli IVG) — mai portali che vietano il prelievo (5.872)
   const siti = ['https://www.fallcoaste.it/sitemap.xml', 'https://www.astagiudiziaria.com/sitemap.xml', 'https://www.ivgtreviso.it/sitemap.xml', 'https://www.ivgudine.it/sitemap.xml', 'https://www.ivgvicenza.it/sitemap.xml', 'https://www.ivgverona.it/sitemap.xml', 'https://www.ivgbrescia.it/sitemap.xml', 'https://www.ivgbergamo.it/sitemap.xml', 'https://www.ivgcomo.it/sitemap.xml', 'https://www.ivgpadova.it/sitemap.xml', 'https://www.ivgvenezia.it/sitemap.xml'];
-  const sitiR = siti.map(s => s.replace('https://www.','https://'));
+  const sitiR = siti; // 8/11: l'apex redirige a www e il redirect non era seguito -> 0 URL
   const urls = new Set();
   for (const s of sitiR) {
     try {
