@@ -1,5 +1,5 @@
 name: warm-pages
-# 5.9 — mantiene calde le pagine SSR (hub, tribunali, lotti) cosi' i bot le ricevono in ~1s
+# 5.9 — scalda l'APP (SSR) e poi l'EDGE, cosi' i bot ricevono le pagine complete in ~1s
 on:
   schedule:
     - cron: '*/45 * * * *'
@@ -10,12 +10,12 @@ jobs:
   warm:
     runs-on: ubuntu-latest
     steps:
-      - name: Warm top hub and court pages
+      - name: Warm the app SSR (long timeout) and the edge (bot)
         run: |
           UA='Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
           COURTS='milano roma torino napoli bari firenze bologna palermo catania genova venezia verona padova brescia bergamo modena parma prato livorno cagliari'
-          CITIES='milano roma torino napoli bari firenze bologna palermo catania genova venezia verona padova brescia bergamo modena parma prato livorno cagliari'
-          for c in $COURTS; do curl -s -o /dev/null -m 120 -A "$UA" "https://careauctions.co/aste-tribunale/it/$c.html"; done
-          for c in $CITIES; do curl -s -o /dev/null -m 60 -A "$UA" "https://careauctions.co/case-asta-$c"; done
-          curl -s -o /dev/null -m 60 -A "$UA" "https://careauctions.co/mondo/it/italia.html"
-          curl -s -o /dev/null -m 60 -A "$UA" "https://careauctions.co/quanto-costa-casa-a-milano"
+          CITIES='milano roma torino napoli bari firenze bologna palermo catania genova'
+          for c in $COURTS; do curl -s -o /dev/null -m 120 "https://care-aste.emergent.host/api/pagine/aste-tribunale/it/$c.html"; done
+          for c in $CITIES; do curl -s -o /dev/null -m 90 "https://care-aste.emergent.host/api/pagine/case-asta-$c"; done
+          for c in $COURTS; do curl -s -o /dev/null -m 40 -A "$UA" "https://careauctions.co/aste-tribunale/it/$c.html"; done
+          for c in $CITIES; do curl -s -o /dev/null -m 40 -A "$UA" "https://careauctions.co/case-asta-$c"; done
