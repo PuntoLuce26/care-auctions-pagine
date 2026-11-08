@@ -58,11 +58,11 @@ async function get(url){
 function mappa(x){
   const prov=(x.indirizzo&&x.indirizzo.provincia)||''; const citta=(x.indirizzo&&x.indirizzo.citta)||'';
   const base=Number(x.prezzoBaseAsta)||0; const minima=Number(x.offertaMinima)||0;
-  let sconto=base>0?Math.round((1-minima/base)*100):0; if(sconto<0)sconto=0; if(sconto>99)sconto=99;
+  let scartoBaseMinima=base>0?Math.round((1-minima/base)*100):0; if(scartoBaseMinima<0)scartoBaseMinima=0; if(scartoBaseMinima>99)scartoBaseMinima=99;
   const disp=Array.isArray(x.disponibilita)?x.disponibilita.join(','):String(x.disponibilita||'');
   const o = { id:String(x.id), tipo:String(x.tipoLotto||'').indexOf('IMMOBIL')>=0?'IMMOBILIARE':'MOBILIARE',
     pubblicazione:x.dataPubblicazione||'', titolo:((x.categoriaBene&&x.categoriaBene[0])||String(x.categoriaLotto||''))+' · '+citta+' ('+prov+')',
-    prezzoBase:base, minima, scontoPct:sconto, dataAsta:x.dataVendita||'', regione:regioneDi(prov), citta,
+    prezzoBase:base, minima, scontoPct:scartoBaseMinima, scartoBaseMinimaPct:scartoBaseMinima, dataAsta:x.dataVendita||'', regione:regioneDi(prov), citta,
     tribunale:x.tribunale||'', occupazione:/OCCUP/.test(disp)?'OCCUPATO':'LIBERO',
     link:'https://pvp.giustizia.it/pvp/it/detail_annuncio.page?idAnnuncio='+x.id, foto:x.immagineCover||x.immagine||'',
     documenti:[{tipo:'pagina ufficiale',url:'https://pvp.giustizia.it/pvp/it/detail_annuncio.page?idAnnuncio='+x.id}],
@@ -201,7 +201,7 @@ async function main(){
     for(const r of Object.keys(indice.regioni)){
       for(const f of [...(indice.regioni[r].filesImm||[]),...(indice.regioni[r].filesMob||[])]){ try{ tutti.push(...JSON.parse(fs.readFileSync(path.join(FEED,f),'utf8'))); }catch(e){} }
     }
-    const med=(arr)=>arr.length?{prezzo:Math.round(arr.reduce((s,a)=>s+(a.prezzoBase||0),0)/arr.length),sconto:Math.round(arr.reduce((s,a)=>s+(a.scontoPct||0),0)/arr.length)}:{prezzo:0,sconto:0};
+    const med=(arr)=>arr.length?{prezzo:Math.round(arr.reduce((s,a)=>s+(a.prezzoBase||0),0)/arr.length),scartoBaseMinima:Math.round(arr.reduce((s,a)=>s+(a.scartoBaseMinimaPct!=null?a.scartoBaseMinimaPct:(a.scontoPct||0)),0)/arr.length)}:{prezzo:0,scartoBaseMinima:0};
     const imm=tutti.filter(a=>a.tipo==='IMMOBILIARE'); const mob=tutti.filter(a=>a.tipo!=='IMMOBILIARE');
     const mi=med(imm), mm=med(mob);
     const bande={'fino_25k':0,'25_50k':0,'50_100k':0,'100_200k':0,'oltre_200k':0};
@@ -209,14 +209,14 @@ async function main(){
     const perRegione={};
     for(const r of Object.keys(indice.regioni)){
       const arr=tutti.filter(a=>a.regione===r); const m=med(arr);
-      perRegione[r]={lotti:arr.length,prezzoMedio:m.prezzo,scontoMedio:m.sconto};
+      perRegione[r]={lotti:arr.length,prezzoMedio:m.prezzo,scartoBaseMinimaMedio:m.scartoBaseMinima};
     }
     const completo={ data:new Date().toISOString().slice(0,10), totaleLotti:tutti.length,
-      settori:{ immobiliare:{lotti:imm.length,prezzoMedio:mi.prezzo,scontoMedio:mi.sconto,categorie:{IMMOBILIARE:imm.length}},
-                mobiliare:{lotti:mob.length,prezzoMedio:mm.prezzo,scontoMedio:mm.sconto,categorie:{MOBILIARE:mob.length}} },
+      settori:{ immobiliare:{lotti:imm.length,prezzoMedio:mi.prezzo,scartoBaseMinimaMedio:mi.scartoBaseMinima,categorie:{IMMOBILIARE:imm.length}},
+                mobiliare:{lotti:mob.length,prezzoMedio:mm.prezzo,scartoBaseMinimaMedio:mm.scartoBaseMinima,categorie:{MOBILIARE:mob.length}} },
       bandePrezzo:bande, perRegione };
     fs.writeFileSync(path.join(FEED,'indice-completo.json'),JSON.stringify(completo));
-    console.log('indice-completo aggiornato: totaleLotti',tutti.length,'prezzoMedio imm',mi.prezzo,'scontoMedio',mi.sconto);
+    console.log('indice-completo aggiornato: totaleLotti',tutti.length,'prezzoMedio imm',mi.prezzo,'scartoBaseMinimaMedio',mi.scartoBaseMinima);
   } catch(e){ console.log('indice-completo: errore',e.message); }
 
   try {
@@ -273,7 +273,7 @@ async function main(){
     try { storico = (JSON.parse(fs.readFileSync(path.join(FEED, 'andamento-prezzi.json'), 'utf8')) || {}).giorni || []; } catch (eS) {}
     const oggiD = new Date().toISOString().slice(0, 10);
     storico = storico.filter(x => x && x.data && x.data !== oggiD);
-    storico.push({ data: oggiD, totale: ic.totaleLotti, prezzoMedio: Math.round(ic.settori.immobiliare.prezzoMedio || 0), scontoMedio: Math.round(ic.settori.immobiliare.scontoMedio || 0) });
+    storico.push({ data: oggiD, totale: ic.totaleLotti, prezzoMedio: Math.round(ic.settori.immobiliare.prezzoMedio || 0), scartoBaseMinimaMedio: Math.round(ic.settori.immobiliare.scartoBaseMinimaMedio || 0) });
     storico = storico.slice(-730); // 5.860: 2 anni di storia, per sempre
     fs.writeFileSync(path.join(FEED, 'andamento-prezzi.json'), JSON.stringify({ generato: new Date().toISOString(), giorni: storico }));
     // A — 6/11/2026: la partecipazione si RICALCOLA da zero dai lotti di ogni giorno
@@ -283,7 +283,7 @@ async function main(){
     try { ricalcolaPartecipazione(FEED, indice, { log: console.log }); }
     catch (eP3) { console.log('partecipazione: errore', eP3.message); }
     // 5.914: "aggiornato" ISO con l'ora esatta — il guardiano calcola le ore di stallo da qui (2 ore = fermo).
-    const statOut = { generato: new Date().toISOString().slice(0, 10), aggiornato: new Date().toISOString(), totale: ic.totaleLotti, prezzoMedioImm: ic.settori.immobiliare.prezzoMedio, scontoMedioImm: ic.settori.immobiliare.scontoMedio, bandePrezzo: ic.bandePrezzo, esiti: esitiFinali, perData, nota: 'statistiche vive dal giro automatico — nessun numero inventato' };
+    const statOut = { generato: new Date().toISOString().slice(0, 10), aggiornato: new Date().toISOString(), totale: ic.totaleLotti, prezzoMedioImm: ic.settori.immobiliare.prezzoMedio, scartoBaseMinimaMedioImm: ic.settori.immobiliare.scartoBaseMinimaMedio, bandePrezzo: ic.bandePrezzo, esiti: esitiFinali, perData, nota: 'statistiche vive dal giro automatico — nessun numero inventato' };
     if (esitiMotivo) statOut.esitiMotivo = esitiMotivo;
     if (esitiUltimaRilevazione) statOut.esitiUltimaRilevazione = esitiUltimaRilevazione;
     fs.writeFileSync(path.join(FEED, 'statistiche.json'), JSON.stringify(statOut));
