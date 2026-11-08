@@ -36,7 +36,7 @@ jobs:
             ['/icommunity','icommunity'], ['/mappa-prezzi','mappa-prezzi'], ['/indice','indice'],
             ['/aste-aziende','aste-aziende'], ['/idati','idati'], ['/icarewall','icarewall'], ['/aggiudicazioni','aggiudicazioni'],
             ['/patto-semplice','patto-semplice'], ['/api-dati','api-dati'], ['/capitali','capitali'],
-            ['/case-modulari','case-modulari'], ['/catalunya','catalunya']];
+            ['/case-modulari','case-modulari'], ['/catalunya','catalunya'], ['/pratica-ca-re','pratica-ca-re']];
           (async () => {
             const b = await chromium.launch({ headless: true });
             let ok = 0;
