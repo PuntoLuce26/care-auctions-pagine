@@ -1,17 +1,17 @@
 {
  "meta": {
   "titolo": "NPL's — crediti in sofferenza e crediti in procedura (dati veri dal PVP)",
-  "generatoIl": "2026-11-09T05:43:05.352Z",
+  "generatoIl": "2026-11-09T13:03:01.477Z",
   "aggiornato": "2026-11-09",
   "fonte": "PVP — Portale delle Vendite Pubbliche, Ministero della Giustizia (pvp.giustizia.it)",
   "query": "tipoLotto=VALORI-CREDITI",
   "licenza": "Dati pubblici del PVP (Portale delle Vendite Pubbliche, Ministero della Giustizia). Riuso consentito per finalità informative con citazione della fonte; nessun dato personale oltre a quanto già pubblico nel bando.",
   "metodo": "Classificazione conservativa dal testo pubblico del bando: NPL/sofferenza solo se dichiarati; crediti fiscali e titoli/quote esclusi (classi diverse, non NPL). Valore nominale solo se scritto nel bando.",
   "totale": 258,
-  "dichiaratoPVP": 1125,
+  "dichiaratoPVP": 1128,
   "esclusi": {
-   "titoli-e-quote": 444,
-   "credito-fiscale": 401,
+   "titoli-e-quote": 445,
+   "credito-fiscale": 403,
    "non-credito": 22
   },
   "copertura": {
