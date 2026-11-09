@@ -1,0 +1,146 @@
+{
+ "meta": {
+  "titolo": "Crediti fiscali",
+  "sottotitolo": "Crediti d'imposta e tributari ceduti nelle procedure concorsuali (dati veri dal PVP)",
+  "generatoIl": "2026-11-09T05:43:05.353Z",
+  "aggiornato": "2026-11-09",
+  "fonte": "PVP — Portale delle Vendite Pubbliche, Ministero della Giustizia (pvp.giustizia.it)",
+  "query": "tipoLotto=VALORI-CREDITI (filtro locale: crediti fiscali)",
+  "licenza": "Dati pubblici del PVP (Portale delle Vendite Pubbliche, Ministero della Giustizia). Riuso consentito per finalità informative con citazione della fonte; nessun dato personale oltre a quanto già pubblico nel bando.",
+  "metodo": "Crediti fiscali = lotti con categoria credito il cui bando cita credito d'imposta, superbonus/bonus edilizi, IVA, IRES/IRAP, crediti tributari o erario. Il sottotipo è letto dal testo pubblico del bando con regole dichiarate e ordinate; se nessuna regola combacia il lotto resta \"fiscale-generico\". Valore nominale solo se scritto nel bando. Nessun importo stimato.",
+  "totale": 398,
+  "dichiaratoPVP": 1125,
+  "fiscaliNelPvp": 401,
+  "esclusi": {
+   "categoria-non-credito": 3
+  },
+  "perSottotipo": {
+   "bonus-edilizi-superbonus": 153,
+   "iva": 125,
+   "fiscale-generico": 76,
+   "credito-d-imposta": 20,
+   "tributario-erario": 14,
+   "ires-irap": 10
+  },
+  "perStato": {
+   "conclusa-esito-non-pubblicato": 299,
+   "in-programma": 68,
+   "deserta": 22,
+   "aggiudicata": 6,
+   "sospesa": 3
+  },
+  "fasceImportoNominale": {
+   "10k-50k": 34,
+   "50k-250k": 21,
+   "fino-10k": 19,
+   "250k-1M": 12,
+   "oltre-1M": 8
+  },
+  "fascePrezzoBase": {
+   "10k-50k": 162,
+   "fino-10k": 83,
+   "50k-250k": 78,
+   "250k-1M": 43,
+   "oltre-1M": 16
+  },
+  "copertura": {
+   "importo": {
+    "con": 94,
+    "su": 398,
+    "pct": 23.6
+   },
+   "regione": {
+    "con": 253,
+    "su": 398,
+    "pct": 63.6
+   },
+   "tribunale": {
+    "con": 394,
+    "su": 398,
+    "pct": 99
+   }
+  },
+  "regioni": 17,
+  "province": 51,
+  "sommaPrezzoBase": 69711108,
+  "sommaValoreNominaleDichiarato": 29338740,
+  "freschezza": {
+   "ultimaRaccolta": "2026-11-09",
+   "dataLottoPiuRecente": "2026-12-18",
+   "dataLottoPiuVecchio": "2024-01-09"
+  },
+  "nota": "Questi lotti NON sono NPL: il debitore è lo Stato, non un privato inadempiente. Restano separati dal dataset npl.json per non gonfiare la linea NPL. Prezzo base = base d'asta, NON il valore nominale del credito."
+ },
+ "perRegione": {
+  "Lombardia": 42,
+  "Sicilia": 41,
+  "Lazio": 38,
+  "Toscana": 31,
+  "Emilia-Romagna": 30,
+  "Veneto": 25,
+  "Campania": 12,
+  "Calabria": 12,
+  "Puglia": 5,
+  "Piemonte": 4,
+  "Sardegna": 4,
+  "Liguria": 3,
+  "Umbria": 2,
+  "Marche": 1,
+  "Friuli-Venezia Giulia": 1,
+  "Abruzzo": 1,
+  "Molise": 1
+ },
+ "perProvincia": {
+  "Palermo": 38,
+  "Roma": 33,
+  "Milano": 27,
+  "Massa-Carrara": 11,
+  "Modena": 11,
+  "Padova": 10,
+  "Ravenna": 10,
+  "Pistoia": 9,
+  "Catanzaro": 9,
+  "Bolzano/Bozen": 9,
+  "Verona": 6,
+  "Avellino": 5,
+  "Firenze": 5,
+  "Napoli": 5,
+  "Treviso": 4,
+  "Monza e della Brianza": 4,
+  "Latina": 4,
+  "Bari": 4,
+  "Brescia": 4,
+  "Bergamo": 4,
+  "Cagliari": 4,
+  "Bologna": 4,
+  "Cosenza": 3,
+  "Siena": 3,
+  "Genova": 3,
+  "Reggio Emilia": 2,
+  "Venezia": 2,
+  "Terni": 2,
+  "Torino": 2,
+  "Belluno": 2,
+  "Rimini": 2,
+  "Benevento": 2,
+  "Ancona": 1,
+  "Messina": 1,
+  "Pordenone": 1,
+  "Foggia": 1,
+  "Alessandria": 1,
+  "L'Aquila": 1,
+  "Forlì-Cesena": 1,
+  "Cremona": 1,
+  "Frosinone": 1,
+  "Lucca": 1,
+  "Lecco": 1,
+  "Catania": 1,
+  "Cuneo": 1,
+  "Vicenza": 1,
+  "Arezzo": 1,
+  "Pisa": 1,
+  "Campobasso": 1,
+  "Varese": 1,
+  "Siracusa": 1
+ }
+}
