@@ -300,7 +300,13 @@ async function main(){
         const r = await fetch(u, { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; careauctions-feed/1.0)', 'Accept': 'application/json' } });
         if (r.ok) { const j = await r.json(); const arr = j && (j.body || j.content || j); if (Array.isArray(arr) && arr.length) { aggiudicazioni = arr; break; } }
       }
-      if (aggiudicazioni) fs.writeFileSync(path.join(FEED, 'aggiudicazioni.json'), JSON.stringify(aggiudicazioni.slice(0, 2000)));
+      // 9/11/2026 - non si sovrascrive piu' l'archivio dei prezzi (era la terza penna sullo
+      // stesso foglio: sync-feed, fallco, IVG). Si UNISCE per fonte|id: scripts/aggiudicazioni-merge.js.
+      if (aggiudicazioni) {
+        const { mergeRecords } = require('./aggiudicazioni-merge');
+        const voci = aggiudicazioni.slice(0, 2000).map(a => (a && a.fonte ? a : Object.assign({ fonte: 'pvp' }, a)));
+        mergeRecords(path.join(FEED, 'aggiudicazioni.json'), voci, { log: console.log });
+      }
       console.log('esiti/prezzi aggiudicazione:', aggiudicazioni ? 'TROVATI (' + aggiudicazioni.length + ')' : 'non disponibili stasera — riprovo ogni notte');
     } catch (eE) { console.log('esiti: errore', eE.message); }
   }
