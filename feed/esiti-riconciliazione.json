@@ -1,0 +1,12 @@
+{
+ "quando": "2026-11-06T06:03:00.926Z",
+ "riconciliati": 114,
+ "gia": 0,
+ "orfani": 15538,
+ "conteggi": {
+  "AGGIU": 114,
+  "ASDES": 0,
+  "SOSPE": 9,
+  "DESER": 0
+ }
+}
