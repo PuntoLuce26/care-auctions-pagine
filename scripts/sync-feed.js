@@ -148,7 +148,10 @@ async function main(){
     // andamento-prezzi.json e andamento-partecipazione.json sono serie storiche. Se li
     // cancellasse, il giorno che il full completa perderemmo la memoria del progetto.
     // L'elenco protetto sta in scripts/feed-regole.js (PROTETTI_FEED).
-    for(const f of fileDaCancellare(FEED)) fs.unlinkSync(path.join(FEED,f));
+    // 9/11/2026 — si cancella SOLO cio' che l'indice vecchio elenca: i file di regione
+    // che stiamo per riscrivere. Prima era "tutto tranne i protetti" e il full delle
+    // 01:58 ha portato via 39 file, compresi 10 feed di altri workflow (404 per ore).
+    for(const f of fileDaCancellare(FEED, indice)) fs.unlinkSync(path.join(FEED,f));
     indice.totali=lotti.length; indice.immobiliari=0; indice.mobiliari=0; indice.regioni={};
     for(const [r,g] of Object.entries(perReg)){
       const s=slug(r); const filesImm=[],filesMob=[];
