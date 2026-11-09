@@ -32,11 +32,45 @@ const PROTETTI_FEED = new Set([
   'ocr-stato.json',            // workflow ocr-perizie
   'indexnow.json',             // workflow indexnow-daily
   'ilive.json',                // elenco opere iLive, non generato da sync-feed
+  // 9/11 — seconda ondata: altri file che il full delle 01:58 ha cancellato e che
+  // NESSUN workflow ricostruisce (sono stati 404 per ore). Mai piu' nel mirino.
+  'confronto-mercato.json',     // statistiche-mercato.js (confronto OMI)
+  'prezzi-aggiudicazione.json',
+  'esiti-riconciliazione.json',
+  'foto-ricavate.json',         // foto-sync
+  'foto-perizie-stato.json',    // foto-perizie
+  'visite-rum.json',            // raccolta RUM Cloudflare
+  'italia-imm.json',            // aggregati nazionali (script del Mac)
+  'italia-mob.json',
+  'emozioni91.json',
+  'pagine91.json',
 ]);
 
+// Nomi dei file di regione elencati in un indice (quelli che il full riscrive).
+function fileDaIndice(indice) {
+  const out = new Set();
+  const regioni = (indice && indice.regioni) || {};
+  for (const r of Object.keys(regioni)) {
+    const g = regioni[r] || {};
+    for (const f of [...(g.filesImm || []), ...(g.filesMob || [])]) if (f) out.add(f);
+  }
+  return out;
+}
+
 // Elenco dei .json di feed/ che la ricostruzione completa puo' cancellare.
-function fileDaCancellare(dir, protetti = PROTETTI_FEED) {
-  return fs.readdirSync(dir).filter(f => f.endsWith('.json') && !protetti.has(f));
+// 9/11/2026 — SECONDA STRETTA (dopo il 404 di npl.json): non si cancella piu'
+// "tutto tranne i protetti" ma SOLO i file elencati nell'indice vecchio, cioe'
+// quelli che il full riscrive davvero con i lotti appena raccolti.
+// Il full delle 01:58 ha passato unlink a 39 file: oltre ai file di regione sono
+// spariti 10 feed nati da altri workflow o da script del Mac (confronto-mercato,
+// prezzi-aggiudicazione, visite-rum, foto-ricavate, italia-imm/mob...) che nessuno
+// rigenera -> 404 per ore. Senza indice non si cancella niente: meglio un file
+// vecchio che un 404.
+function fileDaCancellare(dir, indiceVecchio, protetti = PROTETTI_FEED) {
+  if (indiceVecchio instanceof Set) { protetti = indiceVecchio; indiceVecchio = null; }
+  const elenco = fileDaIndice(indiceVecchio);
+  if (!elenco.size) return [];
+  return fs.readdirSync(dir).filter(f => f.endsWith('.json') && !protetti.has(f) && elenco.has(f));
 }
 
 // Conta le righe "misurate" di un blocco esiti (nonPubblicato NON conta: e' l'assenza).
@@ -85,7 +119,7 @@ function scegliEsiti({ modo, esitiAcc, canone, sogliaGiorni = SOGLIA_GIORNI, ade
   return { esiti: null, motivo: 'nessuna rilevazione degli esiti disponibile', scriviCanone: false, rilevazione: null };
 }
 
-module.exports = { PROTETTI_FEED, SOGLIA_GIORNI, fileDaCancellare, scegliEsiti, conteggioVivo };
+module.exports = { PROTETTI_FEED, SOGLIA_GIORNI, fileDaCancellare, fileDaIndice, scegliEsiti, conteggioVivo };
 
 if (require.main === module) {
   // prova rapida: stampare la decisione con i dati veri di feed/
