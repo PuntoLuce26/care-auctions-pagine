@@ -44,6 +44,12 @@ const PROTETTI_FEED = new Set([
   'italia-mob.json',
   'emozioni91.json',
   'pagine91.json',
+  // 9/11/2026 - l'archivio dei prezzi di aggiudicazione: 16.771 voci, 298.835.634 EUR.
+  // Il full delle 01:58Z lo ha azzerato (l'ultimo scrittore del giro, IVG, ha scritto un
+  // array vuoto) e NESSUN workflow lo ricostruisce da zero: ripristinato dal commit 9357e842.
+  // Da oggi si scrive solo per merge (scripts/aggiudicazioni-merge.js) e non si cancella.
+  'aggiudicazioni.json',
+  'esiti-monitor.json',          // riepilogo esiti rigenerato dal sync, non si cancella
 ]);
 
 // Nomi dei file di regione elencati in un indice (quelli che il full riscrive).
