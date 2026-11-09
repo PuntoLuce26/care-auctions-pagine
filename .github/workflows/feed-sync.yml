@@ -1,14 +1,11 @@
 name: feed-sync
 on:
   schedule:
-    # 9/11/2026 - da */5 a */15: misurato sul campo che il deploy di GitHub Pages
-    # impiega 130-240 s a pubblicare i 567 MB del repo. Con un commit ogni 2-5 minuti
-    # quasi ogni build veniva CANCELLATA dalla successiva (ultima ora: 5 riuscite su 30)
-    # e il sito restava fermo all'ultima build buona — il 9/11 il ripristino di
-    # feed/aggiudicazioni.json e' rimasto invisibile per 10 minuti per questo.
-    # Con un commit ogni 15 minuti la build ha il tempo di finire: meglio dati freschi
-    # ogni quarto d'ora e pubblicati, che dati ogni 5 minuti e mai online.
-    - cron: '*/15 * * * *'   # incrementale
+    # 9/11/2026 - la cadenza dichiarata conta poco: e' la sentinella del worker che
+    # dispatcha questo workflow ogni ~3 minuti. Il freno vero sta nel passo di commit
+    # (max un commit ogni 5 minuti), perche' il deploy di GitHub Pages dura 130-240 s
+    # e ogni commit nuovo cancellava la build in corso (5 riuscite su 30 in un'ora).
+    - cron: '*/5 * * * *'   # incrementale
     - cron: '0 1 * * *'      # notturna completa + prezzi IVG
   workflow_dispatch:
     inputs:
@@ -18,6 +15,10 @@ on:
         default: 'inc'
 permissions:
   contents: write
+# 9/11/2026 - un giro alla volta: due raccolte in parallelo si sovrascrivevano i file
+concurrency:
+  group: feed-sync
+  cancel-in-progress: false
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -52,6 +53,22 @@ jobs:
         run: |
           git config user.name "Sam CARe"
           git config user.email "sam@careauctions.co"
+          # 9/11/2026 - FRENO SUL COMMIT. Il deploy di GitHub Pages impiega 130-240 s e
+          # ogni commit nuovo CANCELLA la build in corso: la sentinella del worker
+          # dispatcha feed-sync ogni ~3 minuti, quindi il sito restava fermo all'ultima
+          # build buona (misurato: 5 build riuscite su 30 in un'ora, e il ripristino dei
+          # prezzi di aggiudicazione e' rimasto invisibile per 10 minuti).
+          # Qui si committa al massimo ogni 5 minuti; il giro full notturno committa sempre.
+          # Non si perde niente: il giro successivo rilegge il feed e riaggiunge i lotti.
+          if [ "$MODE" != "full" ]; then
+            ULTIMO=$(git log -1 --format=%ct)
+            ADESSO=$(date +%s)
+            ATTESO=$((ADESSO - ULTIMO))
+            if [ "$ATTESO" -lt 300 ]; then
+              echo "commit saltato: ultimo commit ${ATTESO}s fa (soglia 300s) — lascio finire il deploy Pages"
+              exit 0
+            fi
+          fi
           git add feed/ sitemap-locali.xml report-*.html report-*.json
           if git diff --cached --quiet; then echo "nessuna variazione"; else
             git commit -m "Feed sync $MODE $(date -u +%FT%TZ)"
