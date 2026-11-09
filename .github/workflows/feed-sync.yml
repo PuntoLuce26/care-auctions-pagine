@@ -1,7 +1,14 @@
 name: feed-sync
 on:
   schedule:
-    - cron: '*/5 * * * *'   # incrementale
+    # 9/11/2026 - da */5 a */15: misurato sul campo che il deploy di GitHub Pages
+    # impiega 130-240 s a pubblicare i 567 MB del repo. Con un commit ogni 2-5 minuti
+    # quasi ogni build veniva CANCELLATA dalla successiva (ultima ora: 5 riuscite su 30)
+    # e il sito restava fermo all'ultima build buona — il 9/11 il ripristino di
+    # feed/aggiudicazioni.json e' rimasto invisibile per 10 minuti per questo.
+    # Con un commit ogni 15 minuti la build ha il tempo di finire: meglio dati freschi
+    # ogni quarto d'ora e pubblicati, che dati ogni 5 minuti e mai online.
+    - cron: '*/15 * * * *'   # incrementale
     - cron: '0 1 * * *'      # notturna completa + prezzi IVG
   workflow_dispatch:
     inputs:
