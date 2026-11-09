@@ -24,6 +24,14 @@ const PROTETTI_FEED = new Set([
   'andamento-esiti.json',       // rilevazione datata: se sparisce, si perde la data
   'andamento-prezzi.json',      // serie storica del prezzo medio
   'andamento-partecipazione.json', // serie storica della partecipazione
+  // 9/11 — file generati da ALTRI workflow: il full rebuild li cancellava e restavano 404
+  // finché il loro workflow non rigirava (npl.json è stato 404 per ore il 9/11).
+  'npl.json',                 // workflow npl-sync
+  'foto-procedure.json',       // workflow foto-sync
+  'perizie-ocr.json',          // workflow ocr-perizie
+  'ocr-stato.json',            // workflow ocr-perizie
+  'indexnow.json',             // workflow indexnow-daily
+  'ilive.json',                // elenco opere iLive, non generato da sync-feed
 ]);
 
 // Elenco dei .json di feed/ che la ricostruzione completa puo' cancellare.
