@@ -1,0 +1,47 @@
+name: prerender-guardiano
+# 5.991 — gli snapshot che leggono i crawler devono citare i bundle della build VIVA.
+# Emergent pubblica piu' volte al giorno: ogni publish cambia gli hash di main.js/main.css
+# e lascia gli snapshot prerender/ fermi alla build precedente, con bundle che rispondono 404.
+# Questo guardiano confronta ogni 15 minuti l'hash servito dall'ORIGINE con quello citato
+# nello snapshot del repo e, se sono diversi, rilancia prerender.yml da solo.
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: write
+concurrency:
+  group: prerender-guardiano
+  cancel-in-progress: false
+jobs:
+  controllo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Confronta origine Emergent e snapshot prerender
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          CB=$(date +%s)
+          ORIG=$(curl -sS -m 30 -A 'Mozilla/5.0 (compatibile; guardiano CARe)' "https://care-aste.emergent.host/?cb=$CB" | grep -o -m1 'main\.[a-f0-9]*\.js' || true)
+          SNAP=$(curl -sS -m 30 "https://raw.githubusercontent.com/$REPO/main/prerender/idati.html?cb=$CB" | grep -o -m1 'main\.[a-f0-9]*\.js' || true)
+          echo "origine:  ${ORIG:-<vuoto>}"
+          echo "snapshot: ${SNAP:-<vuoto>}"
+          if [ -z "$ORIG" ] || [ -z "$SNAP" ]; then
+            echo "::error::hash non leggibile (origine=${ORIG:-vuoto} snapshot=${SNAP:-vuoto})"
+            exit 1
+          fi
+          if [ "$ORIG" = "$SNAP" ]; then
+            echo "allineati: nulla da fare"
+            exit 0
+          fi
+          echo "disallineati: rilancio prerender.yml"
+          curl -sS -m 30 -X POST \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/$REPO/actions/workflows/404415738/dispatches" \
+            -d '{"ref":"main"}' \
+            -w "dispatch HTTP %{http_code}\n"
