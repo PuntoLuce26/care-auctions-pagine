@@ -1,0 +1,48 @@
+{
+ "versione": "CAReIndex 2026-W46",
+ "mese": "2026-11",
+ "etichetta": "novembre 2026",
+ "dataRiferimento": "2026-11-09",
+ "generato": "2026-11-09T02:13:45.383Z",
+ "fonte": "PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia) · Agenzia delle Entrate — OMI",
+ "metodo": "Aggiudicazioni: solo vendite aggiudicate con prezzo finale pubblicato, sommate per data di vendita; nessun prezzo ricostruito. Sconto: mediana del ribasso tra prezzo base e offerta minima pubblicati sul medesimo lotto. Esiti: stati dichiarati dal PVP.",
+ "stimato": "nulla: ogni numero è un conteggio o un rapporto tra dati pubblicati",
+ "copertura": {
+  "esitiNelMese": 0,
+  "tribunaliNelMese": 0,
+  "giorniConEsiti": 0,
+  "tribunaliTotaliArchivio": 0,
+  "coperturaArchivio": {
+   "dal": null,
+   "al": null,
+   "giorni": 0
+  },
+  "esclusi": {
+   "prezzoBase": 0,
+   "senzaData": 0,
+   "senzaPrezzo": 0,
+   "altreFonti": 0
+  },
+  "lottiAttivi": 321237,
+  "esitiMercato": {
+   "aggiudicate": 1953,
+   "deserte": 28452,
+   "sospese": 759,
+   "nonPubblicato": 294411
+  },
+  "scartoBaseMinimaNazionale": {
+   "medio": 20.2,
+   "mediano": 25,
+   "lotti": 301335
+  }
+ },
+ "kpi": {
+  "aggiudicazioni": 0,
+  "incasso": 0,
+  "prezzoMedio": 0,
+  "tribunali": 0
+ },
+ "settimane": {},
+ "topTribunali": [],
+ "giorni": []
+}
