@@ -12,7 +12,7 @@ GitHub Actions, nel repo pubblico `PuntoLuce26/care-auctions-pagine` (workflow `
 - **Ogni 30 minuti** (schedule).
 - **A ogni push** che tocca `qa/**`, `scripts/verifica-playwright.mjs`, `.github/workflows/qa.yml` o `prerender/**` (quindi dopo ogni pubblicazione Emergent che rigenera gli snapshot).
 - **A mano**: `gh workflow run qa.yml` oppure dalla tab Actions.
-- **Repository dispatch** `emergent-published` o `qa-run` (pronto per un trigger dal worker/guardiano).
+- **Repository dispatch** `emergent-published` o `qa-run`: il workflow `prerender` lo invia dopo ogni pubblicazione Emergent (il guardiano lancia `prerender` quando il build cambia).
 - **Dopo un nostro deploy edge**: usare `qa/trigger.sh` (o il comando `curl` in fondo).
 
 ## Cosa controlla

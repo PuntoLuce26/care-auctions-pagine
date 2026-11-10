@@ -77,7 +77,7 @@ async function fillForms(page, collected) {
         } else if (type === 'checkbox' || type === 'radio' || type === 'file' || type === 'hidden') {
           continue;
         } else if (tag === 'TEXTAREA' || SAFE_FIELD.includes(type)) {
-          await f.fill(type === 'email' ? QA_EMAIL : (type === 'number' || type === 'date' ? '' : QA_TEXT), { timeout: 1500 }).catch(() => {});
+          await f.fill(type === 'email' ? QA_EMAIL : (type === 'date' ? '2026-12-01' : (type === 'number' ? '1' : QA_TEXT)), { timeout: 1500 }).catch(() => {});
           collected.forms.filled++;
         }
       }
@@ -312,7 +312,7 @@ export async function runCrawl() {
     const ownBad = (p.badResponses || []).filter(b => b.status >= 400 && sameOrigin(b.url, BASE) && !/favicon/.test(b.url));
     if (ownBad.length) add({ severity: 'high', type: 'risorsa_4xx', route: p.route, viewport: p.viewport, message: ownBad.slice(0, 3).map(b => b.status + ' ' + b.url).join(' | ') });
     if (p.images?.realBroken?.length) add({ severity: 'high', type: 'immagine_rotta', route: p.route, viewport: p.viewport, message: p.images.realBroken.slice(0, 4).map(i => i.src).join(' | '), suggestion: 'Verificare che i file esistano nel deploy e che il percorso non cambi dopo una pubblicazione.' });
-    if (p.forms?.invalid?.length) add({ severity: 'medium', type: 'form_invalid', route: p.route, viewport: p.viewport, message: 'campi richiesti vuoti: ' + p.forms.invalid.slice(0, 6).join(', '), suggestion: 'Compilare i campi obbligatori o renderli facoltativi; verificare il messaggio di errore.' });
+    if (p.forms?.invalid?.length) add({ severity: 'low', type: 'form_invalid', route: p.route, viewport: p.viewport, message: 'campi obbligatori non compilati dal QA (atteso per consenso/date): ' + p.forms.invalid.slice(0, 6).join(', '), suggestion: 'Verificare che il form sia compilabile e che i campi obbligatori abbiano un messaggio chiaro.' });
     if (p.clickErrors?.length) add({ severity: 'high', type: 'click_error', route: p.route, viewport: p.viewport, message: p.clickErrors[0] });
     if (p.loadMs > 9000) add({ severity: 'medium', type: 'lento', route: p.route, viewport: p.viewport, message: `caricamento ${Math.round(p.loadMs / 1000)} s` });
     if (!p.canonical) add({ severity: 'medium', type: 'canonical_mancante', route: p.route, viewport: p.viewport, message: 'link canonical assente' });

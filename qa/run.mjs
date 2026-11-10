@@ -71,10 +71,10 @@ lines.push('');
 
 lines.push('## Pagine (crawl)');
 lines.push('');
-lines.push('| Pagina | Viewport | HTTP | Testo | Immagini rotte | Errori JS | Console | Link |');
-lines.push('|---|---|---|---|---|---|---|---|');
+lines.push('| Pagina | Viewport | HTTP | Testo | Immagini rotte | Errori JS | Console | Form | Click |');
+lines.push('|---|---|---|---|---|---|---|---|---|');
 for (const r of report.routes) {
-  lines.push(`| ${escMd(r.route)} | ${r.viewport} | ${r.http ?? '—'} | ${r.text ?? 0} | ${r.images?.realBroken?.length || 0} | ${r.pageErrors?.length || 0} | ${r.consoleErrors?.length || 0} | ${r.clicked ?? 0} click |`);
+  lines.push(`| ${escMd(r.route)} | ${r.viewport} | ${r.http ?? '—'} | ${r.text ?? 0} | ${r.images?.realBroken?.length || 0} | ${r.pageErrors?.length || 0} | ${r.consoleErrors?.length || 0} | ${r.forms?.filled ?? 0} campi | ${r.clicked ?? 0} |`);
 }
 lines.push('');
 
