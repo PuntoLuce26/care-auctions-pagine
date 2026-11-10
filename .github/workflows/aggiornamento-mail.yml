@@ -1,0 +1,48 @@
+name: aggiornamento-mail
+# Digest del QA Orchestra ogni 3 ore, indipendente dal Mac.
+# Con i secret Gmail manda l'email; senza secret pubblica il report su una issue
+# giornaliera (GitHub la recapita per email). Zero costo.
+on:
+  schedule:
+    - cron: "0 */3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: aggiornamento-mail
+  cancel-in-progress: false
+
+jobs:
+  invia:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Componi e invia
+        env:
+          GMAIL_CLIENT_ID: ${{ secrets.GMAIL_CLIENT_ID }}
+          GMAIL_CLIENT_SECRET: ${{ secrets.GMAIL_CLIENT_SECRET }}
+          GMAIL_REFRESH_TOKEN: ${{ secrets.GMAIL_REFRESH_TOKEN }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+        run: node scripts/aggiornamento-mail.js | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Riepilogo nel run
+        if: always()
+        run: cat /tmp/aggiornamento.txt >> "$GITHUB_STEP_SUMMARY" || true
+      - name: Recapito su issue (se non c'è l'email)
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TITLE="[QA] Aggiornamento $(date -u +%Y-%m-%d)"
+          NUM=$(gh issue list --state open --search "$TITLE in:title" --json number,title --jq ".[] | select(.title==\"$TITLE\") | .number" | head -1)
+          if [ -n "$NUM" ]; then
+            gh issue comment "$NUM" --body-file /tmp/aggiornamento.txt
+          else
+            gh issue create --title "$TITLE" --body-file /tmp/aggiornamento.txt
+          fi
