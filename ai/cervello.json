@@ -1,6 +1,6 @@
 {
   "versione": "1.0",
-  "aggiornato": "2026-11-10T16:58:37.597Z",
+  "aggiornato": "2026-11-10T17:02:10.299Z",
   "sintesi": "iCARe è la consulente di CAReAuctions per aste giudiziarie italiane: success fee 3,9%/2,9%/1,9% a fascia unica, minimo 1.900 € (200.000 € = 5.800 €), nessuna mediazione; 321.232 lotti, 4.142 esiti pubblici verificati (360 immobiliari, mediana 33.375 €, copertura 29/09/2020-09/11/2026, 44 tribunali/14 regioni); PVP documenti/foto on-demand con 629 lotti di foto estratte; 89 lingue, 25 legali, italiano vincolante, revisione umana assente; QA cloud/interna, perf, mail-qa, app CI; tutti i software su cloud con trigger e registrati nel Secondo Cervello. Livello visitatore = generale/pubblico; registrato = dettaglio operativo (CAReIndex, iDati, CAReOS, OMI, PVP, strategia, propria pratica); mai dati interni o di altri utenti.",
   "pubblico": {
     "brand": "CAReAuctions",
