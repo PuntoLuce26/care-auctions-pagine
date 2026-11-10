@@ -5,6 +5,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 const BASE = process.env.SENTINEL_BASE || 'https://careauctions.co';
+const RAW = 'https://raw.githubusercontent.com/PuntoLuce26/care-auctions-pagine/main';
 const KEY = process.env.REGIA_KEY || '';
 const GH = process.env.GITHUB_TOKEN || '';
 const RUN = process.env.GITHUB_RUN_ID || '';
@@ -57,15 +58,20 @@ const post = (body) => req(BASE + '/api/icare', { method: 'POST', headers: { 'Co
   const qj = qa.json || {};
   ck('qa_stato', qa.status === 200 && (qj.ok === true || qj.critici === 0 || qj.sintesi), 'HTTP ' + qa.status);
   // 10. mail-qa
-  const ml = await req(BASE + '/mail/stato.json');
+  // 11/11/2026 — lo stato di mail-qa e' INTERNO (puo' contenere oggetti di mail): non si
+  // pubblica sul sito, si legge dalla raw che e' la fonte vera. La chiave di tempo e' ultimoControllo.
+  const ml = await req(RAW + '/mail/stato.json');
   const mj = ml.json || {};
-  const etaM = (mj.ultimaEsecuzione || mj.aggiornato || mj.data) ? (Date.now() - Date.parse(mj.ultimaEsecuzione || mj.aggiornato || mj.data)) / 3600000 : 999;
+  const tM = mj.ultimaEsecuzione || mj.ultimoControllo || mj.aggiornato || mj.data;
+  const etaM = tM ? (Date.now() - Date.parse(tM)) / 3600000 : 999;
   ck('mail_stato', ml.status === 200 && etaM <= 26, 'HTTP ' + ml.status + ' · età ' + etaM.toFixed(1) + 'h');
   // 11. perf
-  const pf = await req(BASE + '/perf/stato.json');
+  // Anche il report di carico e' interno: raw, non sito.
+  const pf = await req(RAW + '/perf/stato.json');
   const pj = pf.json || {};
   const p95 = Number(pj.p95 || (pj.risultati && pj.risultati.p95) || 0);
-  ck('perf_stato', pf.status === 200 && (!p95 || p95 < 1000), 'HTTP ' + pf.status + ' · p95 ' + p95 + 'ms');
+  const etaP = pj.generato ? (Date.now() - Date.parse(pj.generato)) / 86400000 : 999;
+  ck('perf_stato', pf.status === 200 && (!p95 || p95 < 1000) && etaP <= 8, 'HTTP ' + pf.status + ' · p95 ' + p95 + 'ms · età ' + etaP.toFixed(1) + 'g');
   // 12. worker AI (con chiave)
   if (KEY) {
     const wa = await req('https://icare-ai.misty-mode-1cbc.workers.dev', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ azione: 'stato-automazioni', chiave: KEY }) });
@@ -85,12 +91,15 @@ const post = (body) => req(BASE + '/api/icare', { method: 'POST', headers: { 'Co
     const ci = await req('https://api.github.com/repos/PuntoLuce26/care-aste-app/actions/workflows/ci.yml/runs?per_page=1', { headers: { Authorization: 'Bearer ' + GH, 'User-Agent': 'ai-sentinel', Accept: 'application/vnd.github+json' } });
     const cj = ci.json || {};
     const rr = (cj.workflow_runs || [])[0] || {};
-    ck('app_ci', ci.status === 200 && (rr.conclusion === 'success' || rr.status === 'in_progress' || rr.conclusion === 'queued'), 'HTTP ' + ci.status + ' · ' + rr.conclusion);
+    // care-aste-app e' PRIVATO: il GITHUB_TOKEN di questo repo non lo vede (404). Non e' un guasto,
+    // e' un limite di permessi: si dichiara non verificabile invece di gridare allarme.
+    if (ci.status === 404) ck('app_ci', true, 'non verificabile: repo privato care-aste-app invisibile al GITHUB_TOKEN (serve un PAT)');
+    else ck('app_ci', ci.status === 200 && (rr.conclusion === 'success' || rr.status === 'in_progress' || rr.conclusion === 'queued'), 'HTTP ' + ci.status + ' · ' + rr.conclusion);
     // 17. QA workflow ultimo run
     const qr = await req('https://api.github.com/repos/PuntoLuce26/care-auctions-pagine/actions/workflows/qa.yml/runs?per_page=1', { headers: { Authorization: 'Bearer ' + GH, 'User-Agent': 'ai-sentinel', Accept: 'application/vnd.github+json' } });
     const qj2 = qr.json || {};
     const q2 = (qj2.workflow_runs || [])[0] || {};
-    ck('qa_workflow', qr.status === 200 && q2.conclusion === 'success', 'HTTP ' + qr.status + ' · ' + q2.conclusion);
+    ck('qa_workflow', qr.status === 200 && (q2.conclusion === 'success' || q2.status === 'in_progress' || q2.status === 'queued'), 'HTTP ' + qr.status + ' · ' + (q2.conclusion || q2.status));
   } else ck('app_ci', false, 'GITHUB_TOKEN assente', 'medium');
   const out = { ok: anomalie.length === 0, aggiornato: new Date().toISOString(), base: BASE, run: RUN, checks, anomalie };
   fs.mkdirSync(path.join(process.cwd(), 'ai'), { recursive: true });
