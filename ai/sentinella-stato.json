@@ -1,8 +1,8 @@
 {
-  "ok": false,
-  "aggiornato": "2026-11-10T23:14:07.140Z",
+  "ok": true,
+  "aggiornato": "2026-11-10T23:16:38.158Z",
   "base": "https://careauctions.co",
-  "run": "42921389229",
+  "run": "42921755127",
   "checks": [
     {
       "id": "icare_success_fee",
@@ -46,8 +46,8 @@
     },
     {
       "id": "qa_stato",
-      "ok": false,
-      "det": "HTTP 200"
+      "ok": true,
+      "det": "HTTP 200 · 0C/0A · 1.3h"
     },
     {
       "id": "mail_stato",
@@ -87,14 +87,8 @@
     {
       "id": "qa_workflow",
       "ok": true,
-      "det": "HTTP 200 · success"
+      "det": "HTTP 200 · in_progress"
     }
   ],
-  "anomalie": [
-    {
-      "componente": "ai",
-      "gravita": "high",
-      "oggetto": "qa_stato: HTTP 200"
-    }
-  ]
+  "anomalie": []
 }
