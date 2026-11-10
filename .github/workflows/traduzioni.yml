@@ -1,0 +1,48 @@
+name: traduzioni
+# Traduzioni del sito a costo zero: Workers AI m2m100 (free tier), niente API a pagamento.
+# Fonte: i18n/_source-it.json; target: i18n/<lang>.json servito dall'edge via raw GitHub.
+on:
+  schedule:
+    - cron: "30 2 * * *"
+  workflow_dispatch:
+    inputs:
+      only:
+        description: "Lingue separate da virgola (vuoto = tutte)"
+        required: false
+        default: ""
+permissions:
+  contents: write
+concurrency:
+  group: traduzioni
+  cancel-in-progress: false
+jobs:
+  traduci:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Traduci (Workers AI m2m100, costo 0)
+        env:
+          REGIA_KEY: ${{ secrets.REGIA_KEY }}
+          ONLY: ${{ github.event.inputs.only }}
+          MAX_MINUTES: "300"
+        run: node scripts/traduzioni.js
+      - name: Commit e push
+        shell: bash
+        run: |
+          git config user.name "CARe Cloud"
+          git config user.email "cloud@careauctions.co"
+          git add i18n
+          if git diff --cached --quiet; then echo "nessuna variazione"; exit 0; fi
+          git commit -m "i18n: traduzioni automatiche ($(date -u +%FT%TZ))"
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null
+            if git push; then exit 0; fi
+            sleep 4
+          done
+          exit 1
