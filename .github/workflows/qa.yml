@@ -6,7 +6,7 @@ on:
     - cron: "*/30 * * * *"
   workflow_dispatch:
   repository_dispatch:
-    types: [emergent-published, qa-run]
+    types: [emergent-published, qa-run, email-alert]
   push:
     paths:
       - "qa/**"
@@ -18,7 +18,7 @@ permissions:
   contents: write
   pull-requests: write
   issues: write
-  actions: read
+  actions: write
 
 concurrency:
   group: qa
@@ -110,3 +110,10 @@ jobs:
       - name: Quality gate (rosso solo per i critici)
         if: always()
         run: node qa/gate.mjs
+
+      - name: Allarme mail -> triage
+        if: github.event_name == 'repository_dispatch' && github.event.action == 'email-alert'
+        env:
+          ALERT_JSON: ${{ toJSON(github.event.client_payload) }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node qa/alert.mjs
