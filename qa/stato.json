@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-10T23:20:23.757Z",
-  "runId": "42921645957",
-  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42921645957",
+  "generatedAt": "2026-11-10T23:59:23.597Z",
+  "runId": "42927089519",
+  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42927089519",
   "base": "https://careauctions.co",
-  "durationSec": 199,
+  "durationSec": 216,
   "build": {
     "sito": "main.685e7a77.js",
     "origine": "main.685e7a77.js"
@@ -12,18 +12,10 @@
     "critical": 0,
     "high": 0,
     "medium": 0,
-    "low": 4,
-    "total": 4
+    "low": 3,
+    "total": 3
   },
   "issues": [
-    {
-      "severity": "low",
-      "type": "form_invalid",
-      "route": "/osservatorio",
-      "viewport": "desktop",
-      "message": "campi obbligatori non compilati dal QA (atteso per consenso/date): INPUT",
-      "suggestion": "Verificare che il form sia compilabile e che i campi obbligatori abbiano un messaggio chiaro."
-    },
     {
       "severity": "low",
       "type": "form_invalid",
@@ -54,7 +46,7 @@
       "route": "/",
       "viewport": "desktop",
       "http": 200,
-      "text": 21567,
+      "text": 21408,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -65,7 +57,7 @@
       "route": "/aste",
       "viewport": "desktop",
       "http": 200,
-      "text": 22228,
+      "text": 22890,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -87,7 +79,7 @@
       "route": "/osservatorio",
       "viewport": "desktop",
       "http": 200,
-      "text": 4565,
+      "text": 7822,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -241,7 +233,7 @@
       "route": "/stato",
       "viewport": "desktop",
       "http": 200,
-      "text": 769,
+      "text": 768,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -408,9 +400,9 @@
   "feed": {
     "statistiche": {
       "status": 200,
-      "aggiornato": "2026-11-10T23:02:19.863Z",
+      "aggiornato": "2026-11-10T23:52:09.819Z",
       "totale": 321291,
-      "ageHours": 0.3
+      "ageHours": 0.1
     },
     "aggiudicazioni": {
       "status": 200,
@@ -427,49 +419,49 @@
         "name": "stato",
         "ok": true,
         "status": 200,
-        "ms": 1604,
+        "ms": 1709,
         "detail": "tabella popolata"
       },
       {
         "name": "feed statistiche",
         "ok": true,
         "status": 200,
-        "ms": 135,
-        "detail": "totale 321291 · 0.3 h fa"
+        "ms": 85,
+        "detail": "totale 321291 · 0.1 h fa"
       },
       {
         "name": "feed aggiudicazioni",
         "ok": true,
         "status": 200,
-        "ms": 587,
+        "ms": 507,
         "detail": "18115 record"
       },
       {
         "name": "origine Emergent",
         "ok": true,
         "status": 200,
-        "ms": 162,
+        "ms": 330,
         "detail": "main.685e7a77.js"
       },
       {
         "name": "chat iCARe",
         "ok": true,
         "status": 200,
-        "ms": 377,
+        "ms": 435,
         "detail": "{\"ok\":true,\"risposta\":\"Ciao, sono **iCARe**, la consulente immobiliare di CARe …"
       },
       {
         "name": "iCAReWall API",
         "ok": true,
         "status": 200,
-        "ms": 390,
+        "ms": 409,
         "detail": "15437 byte"
       },
       {
         "name": "voce TTS",
         "ok": true,
         "status": 200,
-        "ms": 24,
+        "ms": 169,
         "detail": "6482 byte"
       }
     ],
