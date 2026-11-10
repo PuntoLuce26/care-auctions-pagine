@@ -23,7 +23,25 @@ jobs:
           node-version: "22"
       - name: Raccogli i prezzi pubblici (FallcoAste)
         run: node scripts/fallco-aggiudicazioni.js
+      # 10/11/2026 (turno posta/allarmi) — il run delle 20:21Z è rimasto 50+ minuti su
+      # questo passo: /tmp è effimero sul runner, quindi la cache del crawl non esisteva e
+      # ogni giro ricrawlava tutte le 7.315 inserzioni. Con la cache la cartella resta fra
+      # un run e l'altro; il budget (AGG_IVG_BUDGET_MIN) chiude il giro invece di correre
+      # fino al timeout del job, e continue-on-error lascia comunque normalizzare i feed.
+      - name: Cache prezzi IVG (incrementale fra un giro e l'altro)
+        uses: actions/cache@v4
+        with:
+          path: /tmp/aggiudicazioni-ivg
+          key: ivg-aggiudicazioni-${{ github.run_id }}
+          restore-keys: |
+            ivg-aggiudicazioni-
       - name: Raccogli i prezzi pubblici (AstaGiudiziaria/IVG)
+        timeout-minutes: 25
+        continue-on-error: true
+        env:
+          AGG_IVG_DIR: /tmp/aggiudicazioni-ivg
+          AGG_IVG_OUT: /tmp/aggiudicazioni-ivg.json
+          AGG_IVG_BUDGET_MIN: "20"
         run: node scripts/ivg-aggiudicazioni.js
       - name: Normalizza, calcola indici e aggiorna i feed
         run: node scripts/esiti-sync.js
