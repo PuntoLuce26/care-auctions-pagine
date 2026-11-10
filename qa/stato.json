@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-10T21:22:09.744Z",
-  "runId": "42903486515",
-  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42903486515",
+  "generatedAt": "2026-11-10T21:59:34.771Z",
+  "runId": "42909474895",
+  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42909474895",
   "base": "https://careauctions.co",
-  "durationSec": 217,
+  "durationSec": 200,
   "build": {
     "sito": "main.685e7a77.js",
     "origine": "main.685e7a77.js"
@@ -12,8 +12,8 @@
     "critical": 0,
     "high": 0,
     "medium": 0,
-    "low": 3,
-    "total": 3
+    "low": 4,
+    "total": 4
   },
   "issues": [
     {
@@ -30,6 +30,14 @@
       "route": "/mappa-prezzi",
       "viewport": "desktop",
       "message": "campi obbligatori non compilati dal QA (atteso per consenso/date): INPUT",
+      "suggestion": "Verificare che il form sia compilabile e che i campi obbligatori abbiano un messaggio chiaro."
+    },
+    {
+      "severity": "low",
+      "type": "form_invalid",
+      "route": "/",
+      "viewport": "mobile",
+      "message": "campi obbligatori non compilati dal QA (atteso per consenso/date): INPUT, INPUT",
       "suggestion": "Verificare che il form sia compilabile e che i campi obbligatori abbiano un messaggio chiaro."
     },
     {
@@ -57,7 +65,7 @@
       "route": "/aste",
       "viewport": "desktop",
       "http": 200,
-      "text": 22890,
+      "text": 22319,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -79,7 +87,7 @@
       "route": "/osservatorio",
       "viewport": "desktop",
       "http": 200,
-      "text": 5869,
+      "text": 7837,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -178,7 +186,7 @@
       "route": "/compra-ora",
       "viewport": "desktop",
       "http": 200,
-      "text": 22175,
+      "text": 9039,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -233,7 +241,7 @@
       "route": "/stato",
       "viewport": "desktop",
       "http": 200,
-      "text": 768,
+      "text": 765,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -244,18 +252,18 @@
       "route": "/",
       "viewport": "mobile",
       "http": 200,
-      "text": 21479,
+      "text": 20147,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
       "formsFilled": 6,
-      "clicks": 3
+      "clicks": 0
     },
     {
       "route": "/aste",
       "viewport": "mobile",
       "http": 200,
-      "text": 22311,
+      "text": 22870,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -402,7 +410,7 @@
       "status": 200,
       "aggiornato": "2026-11-10T20:46:32.474Z",
       "totale": 321290,
-      "ageHours": 0.6
+      "ageHours": 1.2
     },
     "aggiudicazioni": {
       "status": 200,
@@ -419,49 +427,49 @@
         "name": "stato",
         "ok": true,
         "status": 200,
-        "ms": 1319,
+        "ms": 1486,
         "detail": "tabella popolata"
       },
       {
         "name": "feed statistiche",
         "ok": true,
         "status": 200,
-        "ms": 79,
-        "detail": "totale 321290 · 0.6 h fa"
+        "ms": 42,
+        "detail": "totale 321290 · 1.2 h fa"
       },
       {
         "name": "feed aggiudicazioni",
         "ok": true,
         "status": 200,
-        "ms": 272,
+        "ms": 368,
         "detail": "18115 record"
       },
       {
         "name": "origine Emergent",
         "ok": true,
         "status": 200,
-        "ms": 570,
+        "ms": 207,
         "detail": "main.685e7a77.js"
       },
       {
         "name": "chat iCARe",
         "ok": true,
         "status": 200,
-        "ms": 368,
+        "ms": 405,
         "detail": "{\"ok\":true,\"risposta\":\"Ciao, sono **iCARe**, la consulente immobiliare di CARe …"
       },
       {
         "name": "iCAReWall API",
         "ok": true,
         "status": 200,
-        "ms": 423,
+        "ms": 301,
         "detail": "15531 byte"
       },
       {
         "name": "voce TTS",
         "ok": true,
         "status": 200,
-        "ms": 62,
+        "ms": 56,
         "detail": "6482 byte"
       }
     ],
