@@ -1,0 +1,38 @@
+name: ai-education
+# Educa le AI (knowledge base/llms) e verifica l'indicizzazione ogni giorno.
+on:
+  schedule:
+    - cron: "10 4 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: ai-education
+  cancel-in-progress: false
+jobs:
+  educa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Genera knowledge, llms e verifica AI/indexing
+        run: node scripts/ai-education.js
+      - name: Commit e push
+        shell: bash
+        run: |
+          git config user.name "CARe Cloud"
+          git config user.email "cloud@careauctions.co"
+          git add ai
+          if git diff --cached --quiet; then echo "nessuna variazione"; exit 0; fi
+          git commit -m "ai: education e indicizzazione ($(date -u +%FT%TZ))"
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null
+            if git push; then exit 0; fi
+            sleep 4
+          done
+          exit 1
