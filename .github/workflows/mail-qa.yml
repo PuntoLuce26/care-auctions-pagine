@@ -1,0 +1,40 @@
+name: mail-qa
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: write
+  issues: write
+concurrency:
+  group: mail-qa
+  cancel-in-progress: false
+jobs:
+  mail:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Leggi mail e lancia il QA
+        env:
+          GMAIL_CREDENTIALS: ${{ secrets.GMAIL_CREDENTIALS }}
+          GMAIL_TOKEN: ${{ secrets.GMAIL_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/mail-qa.js
+      - name: Commit stato mail
+        if: always()
+        shell: bash
+        run: |
+          git config user.name "CARe Cloud"
+          git config user.email "cloud@careauctions.co"
+          git add mail
+          if git diff --cached --quiet; then echo "nessuna variazione"; exit 0; fi
+          git commit -m "mail-qa: stato ($(date -u +%FT%TZ))"
+          for i in 1 2 3 4 5; do git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null; if git push; then exit 0; fi; sleep 4; done
+          exit 1
