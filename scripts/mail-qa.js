@@ -13,6 +13,10 @@ const done = new Set(st.processati || []);
 const Q = '(to:info@careauctions.co OR deliveredto:info@careauctions.co OR to:info@puntoluce26.com OR deliveredto:info@puntoluce26.com) newer_than:2d';
 const ERR = /run failed|failed|failure|errore|error|exception|critical|\u26a0|qualcosa non va|not working|down|500|502|503|504|timeout|build and deployment|deploy|pages build|guardiano|sospeso|suspended|payment failed|rifiutato|insoluto|scadenza|dns|ssl|dmarc|spf|bounce|postmaster|credits|quota/i;
 const IGNORE = /nuovo pagamento|newsletter|offers|what.s new|share ai skills|test intestazioni|richiesta di visita|pagamento da|nuovo pagamento|fattura|ricevuta|ordine/i;
+/* Le mail che le NOSTRE automazioni mandano a info@ dicendo "tutto ok" non sono allarmi:
+   senza questo filtro il digest notturno diventa un allarme critico e rilancia il QA in loop. */
+const SELF_OK = /^info@(puntoluce26\.com|careauctions\.co)$/i;
+const SELF_OK_SUBJ = /qa tutto ok|prova patch|\(0 problemi\)|nessun problema/i;
 function comp(from, sub, txt) {
   const t = (from + ' ' + sub + ' ' + txt).toLowerCase();
   if (/pages build|build and deployment|deploy pages/.test(t)) return 'pages';
@@ -53,11 +57,18 @@ function bodyText(p) {
     const d = await gget(at, 'https://gmail.googleapis.com/gmail/v1/users/me/messages/' + m.id + '?format=full');
     const h = {}; for (const x of (d.payload && d.payload.headers) || []) h[x.name.toLowerCase()] = x.value;
     const testo = ((h.subject || '') + ' ' + (h.from || '') + ' ' + (d.snippet || '') + ' ' + bodyText(d.payload)).slice(0, 4000);
+    const fromAddr = ((h.from || '').match(/<([^>]+)>/) || [null, h.from || ''])[1].trim();
+    if (SELF_OK.test(fromAddr) && SELF_OK_SUBJ.test((h.subject || '') + ' ' + (d.snippet || ''))) { done.add(m.id); continue; }
     if (IGNORE.test(testo) || !ERR.test(testo)) { done.add(m.id); continue; }
     const c = comp(h.from || '', h.subject || '', testo);
     const s = sev(c, testo);
     const link = (testo.match(/https?:\/\/[^\s"'<>]+/) || [])[0] || '';
-    nuovi.push({ id: m.id, data: new Date(Number(d.internalDate)).toISOString(), da: (h.from || '').slice(0, 160), oggetto: (h.subject || '').slice(0, 200), a: (h.to || h['delivered-to'] || '').slice(0, 160), componente: c, gravita: s, link: link.slice(0, 300) });
+    /* mail/stato.json e la issue [QA] finiscono in un repo PUBBLICO: il soggetto di una mail
+       non-GitHub puo' contenere nomi di clienti, importi, conti o link di pagamento.
+       Si pubblica solo l'allarme (componente + gravita'), mai il testo della mail. */
+    const daGithub = /(^|@)github\.com$/i.test(fromAddr) || /\[PuntoLuce26\//.test(h.subject || '');
+    const oggetto = daGithub ? (h.subject || '').slice(0, 200) : '[oggetto riservato · ' + c + ']';
+    nuovi.push({ id: m.id, data: new Date(Number(d.internalDate)).toISOString(), da: daGithub ? (h.from || '').slice(0, 160) : ('mittente riservato · ' + c), oggetto, a: (h.to || h['delivered-to'] || '').slice(0, 160), componente: c, gravita: s, link: daGithub ? link.slice(0, 300) : '' });
     done.add(m.id);
   }
   const qaAlerts = nuovi.filter(x => x.gravita !== 'bassa');
@@ -71,3 +82,4 @@ function bodyText(p) {
   fs.writeFileSync(STATE, JSON.stringify(out, null, 2));
   console.log(JSON.stringify({ nuove: nuovi.length, alert: qaAlerts.length, qa: qaEsito, componenti: qaAlerts.map(x => x.componente) }));
 })().catch(e => { console.error('MAIL-QA ERRORE', e.message); process.exit(1); });
+
