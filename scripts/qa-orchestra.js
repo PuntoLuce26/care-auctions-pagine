@@ -10,9 +10,9 @@ const UA = { 'User-Agent': 'CARe-QA-Orchestra' };
 const out = [];
 let KO = 0, WARN = 0;
 
-function add(nome, ok, dettaglio, gravita = 'alta') {
-  if (!ok) { if (gravita === 'alta') KO++; else WARN++; }
-  out.push({ nome, ok: !!ok, dettaglio, gravita });
+function add(nome, ok, dettaglio, gravita = 'alta', skip = false) {
+  if (!ok && !skip) { if (gravita === 'alta') KO++; else WARN++; }
+  out.push({ nome, ok: !!ok, dettaglio, gravita, skip: !!skip });
 }
 async function get(url, opt = {}) {
   const t = Date.now();
@@ -108,9 +108,10 @@ const tsa = (u) => u + (u.includes('?') ? '&' : '?') + 'ts=' + Date.now();
     ]) {
       try {
         const r = await fetch('https://api.github.com/repos/' + repo + '/actions/workflows/' + wf + '/runs?per_page=1', { headers: H });
+        if (!r.ok) { add('run ' + nome, true, 'non verificabile (HTTP ' + r.status + ', il token del workflow vede solo questo repo)', 'bassa', true); continue; }
         const j = await r.json();
         const run = (j.workflow_runs || [])[0];
-        add('run ' + nome, !!run && run.conclusion === 'success', run ? run.conclusion + ' · ' + run.created_at : 'mai eseguito', run ? 'media' : 'bassa');
+        add('run ' + nome, !!run && run.conclusion === 'success', run ? run.conclusion + ' · ' + run.created_at : 'mai eseguito', 'bassa', !run);
       } catch (e) { add('run ' + nome, false, e.message, 'bassa'); }
     }
   }
@@ -121,14 +122,15 @@ const tsa = (u) => u + (u.includes('?') ? '&' : '?') + 'ts=' + Date.now();
   const ora = new Date().toISOString();
   const okTot = KO === 0;
   const esito = okTot ? (WARN === 0 ? 'TUTTO OK' : 'OK CON AVVISI') : 'PROBLEMI';
-  const sintesi = out.length + ' controlli · ' + out.filter((c) => !c.ok).length + ' non passati (' + KO + ' gravi, ' + WARN + ' avvisi)';
+  const fatti = out.filter((c) => !c.skip);
+  const sintesi = fatti.length + ' controlli eseguiti · ' + fatti.filter((c) => !c.ok).length + ' non passati (' + KO + ' gravi, ' + WARN + ' avvisi) · ' + out.filter((c) => c.skip).length + ' non verificabili';
 
   fs.mkdirSync('qa', { recursive: true });
   fs.writeFileSync('qa/orchestra.json', JSON.stringify({ generato: ora, esito, sintesi, sito, origine, qaRun: qa.json && qa.json.runId, controlli: out }, null, 2));
   const md = ['# QA Orchestra — ' + ora, '',
     '**Esito: ' + esito + '** · ' + sintesi, '',
     '| Controllo | Esito | Dettaglio |', '|---|---|---|',
-    ...out.map((c) => '| ' + c.nome + ' | ' + (c.ok ? 'ok' : '**KO**') + ' | ' + String(c.dettaglio).replace(/\|/g, '/') + ' |'), ''].join('\n');
+    ...out.map((c) => '| ' + c.nome + ' | ' + (c.skip ? 'n/v' : (c.ok ? 'ok' : '**KO**')) + ' | ' + String(c.dettaglio).replace(/\|/g, '/') + ' |'), ''].join('\n');
   fs.writeFileSync('qa/orchestra.md', md);
   console.log(md);
   if (!okTot) process.exitCode = 1;
