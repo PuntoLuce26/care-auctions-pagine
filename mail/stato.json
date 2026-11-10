@@ -1,30 +1,9 @@
 {
-  "ultimoControllo": "2026-11-10T21:54:02.717Z",
+  "ultimoControllo": "2026-11-10T22:28:15.758Z",
   "ultimoQa": "2026-11-10T21:54:02.717Z",
-  "qaEsito": "QA dispatch HTTP 204",
-  "nuoveMail": 2,
-  "allarmi": [
-    {
-      "id": "1a1c75ff6f423de1",
-      "data": "2026-11-10T21:31:57.000Z",
-      "da": "info@puntoluce26.com",
-      "oggetto": "CARe — notte 10/11/2026: ATTENZIONE (0 problemi)",
-      "a": "info@puntoluce26.com",
-      "componente": "feed",
-      "gravita": "critica",
-      "link": "https://careauctions.co/"
-    },
-    {
-      "id": "1a1c748c642d0ed9",
-      "data": "2026-11-10T21:06:33.000Z",
-      "da": "Cloudflare <noreply@notify.cloudflare.com>",
-      "oggetto": "[Confirmation] careauctions.it is active (Free plan)",
-      "a": "info@puntoluce26.com",
-      "componente": "edge",
-      "gravita": "critica",
-      "link": "https://dash.cloudflare.com/d5d20864ee7f83c32c9eeb5fcbda6edb/careauctions.it?utm_source=cfps&utm_medium=email&utm_campaign=zone_authed"
-    }
-  ],
+  "qaEsito": "nessun allarme nuovo",
+  "nuoveMail": 0,
+  "allarmi": [],
   "processati": [
     "1a1c636ae4a6b5a9",
     "1a1c634c8df2049e",
