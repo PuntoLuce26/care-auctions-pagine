@@ -75,3 +75,14 @@ jobs:
             sleep 4
           done
           echo "::error::push fallito"; exit 1
+
+
+      - name: QA dopo la pubblicazione
+        if: always()
+        run: |
+          curl -sS -X POST \
+            -H "Authorization: Bearer ${{ github.token }}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/dispatches" \
+            -d '{"event_type":"emergent-published"}' -o /tmp/qa-dispatch.json -w "QA dispatch HTTP %{http_code}\n"
+          head -c 200 /tmp/qa-dispatch.json || true
