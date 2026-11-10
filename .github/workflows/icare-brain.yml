@@ -1,0 +1,34 @@
+name: iCARe brain
+on:
+  schedule:
+    - cron: '30 4 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: icare-brain
+  cancel-in-progress: false
+jobs:
+  brain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Genera ai/cervello.json (feed + Secondo Cervello)
+        run: node scripts/icare-brain.js
+        env:
+          SECOND_BRAIN_TOKEN: ${{ secrets.SECOND_BRAIN_TOKEN }}
+      - name: Commit cervello
+        run: |
+          git config user.name 'CARe iCARe'
+          git config user.email 'icare@careauctions.co'
+          git add ai/cervello.json
+          if git diff --cached --quiet; then echo 'nessuna modifica'; else git commit -m 'iCARe brain: aggiornamento cloud'; fi
+          for i in 1 2 3; do git pull --rebase && git push && break || sleep 5; done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: icare-brain
+          path: ai/cervello.json
