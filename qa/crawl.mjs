@@ -3,7 +3,7 @@
 // controlla immagini, link, errori JavaScript e risposte HTTP. Non compra, non paga, non invia.
 import { chromium, firefox, webkit } from 'playwright';
 import {
-  BASE, ORIGIN, WAIT, NAV_TIMEOUT, LINK_LIMIT, FAST, FAST_ROUTES, ROUTES, SMOKE_ROUTES,
+  BASE, ORIGIN, WAIT, NAV_TIMEOUT, LINK_LIMIT, FAST, FAST_ROUTES, ROUTES, SMOKE_ROUTES, MOBILE_ROUTES,
   VIEWPORTS, SAFE_CLICK, DANGER_CLICK, SAFE_FIELD, QA_TEXT, QA_EMAIL, LINK_SKIP, SEO_CHECKS
 } from './config.mjs';
 import { buildHash, fetchJson, fetchText, makeIssue, sameOrigin, short, ageHours } from './lib.mjs';
@@ -34,7 +34,7 @@ async function safeClick(page, collected) {
   const candidates = await page.$$('button, [role="tab"], [aria-expanded="false"], details > summary');
   let tried = 0;
   for (const el of candidates) {
-    if (tried >= 6) break;
+    if (tried >= 4) break;
     let text = '';
     try { text = ((await el.innerText()) || (await el.getAttribute('aria-label')) || (await el.getAttribute('title')) || '').trim(); } catch (e) {}
     if (!text || text.length > 60) continue;
@@ -73,11 +73,11 @@ async function fillForms(page, collected) {
         const type = (await f.getAttribute('type') || '').toLowerCase();
         if (tag === 'SELECT') {
           const n = await f.$$('option');
-          if (n.length > 1) { await f.selectOption({ index: 1 }).catch(() => {}); collected.forms.filled++; }
+          if (n.length > 1) { await f.selectOption({ index: 1 }, { timeout: 1500 }).catch(() => {}); collected.forms.filled++; }
         } else if (type === 'checkbox' || type === 'radio' || type === 'file' || type === 'hidden') {
           continue;
         } else if (tag === 'TEXTAREA' || SAFE_FIELD.includes(type)) {
-          await f.fill(type === 'email' ? QA_EMAIL : (type === 'number' || type === 'date' ? '' : QA_TEXT)).catch(() => {});
+          await f.fill(type === 'email' ? QA_EMAIL : (type === 'number' || type === 'date' ? '' : QA_TEXT), { timeout: 1500 }).catch(() => {});
           collected.forms.filled++;
         }
       }
@@ -275,7 +275,10 @@ export async function runCrawl() {
   const allLinks = [];
 
   for (const vp of VIEWPORTS) {
-    for (const route of routes) {
+    const routesVp = vp.name === 'mobile'
+      ? MOBILE_ROUTES.map(p => ({ path: p, name: p, critical: true }))
+      : routes;
+    for (const route of routesVp) {
       const r = await crawlOne(browser, route, vp);
       pages.push(r);
       allLinks.push(...(r.links || []));

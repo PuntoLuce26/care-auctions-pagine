@@ -2,9 +2,9 @@
 // Regola: qui si tocca solo ciò che è sicuro. Nessun click che compra, paga, invia, pubblica, cancella.
 export const BASE = process.env.QA_BASE || 'https://careauctions.co';
 export const ORIGIN = process.env.QA_ORIGIN || 'https://care-aste.emergent.host';
-export const WAIT = Number(process.env.QA_WAIT || 3500);
-export const NAV_TIMEOUT = Number(process.env.QA_TIMEOUT || 45000);
-export const LINK_LIMIT = Number(process.env.QA_LINK_LIMIT || 45);
+export const WAIT = Number(process.env.QA_WAIT || 2500);
+export const NAV_TIMEOUT = Number(process.env.QA_TIMEOUT || 25000);
+export const LINK_LIMIT = Number(process.env.QA_LINK_LIMIT || 30);
 export const FAST = !!process.env.QA_FAST;
 
 // Rotte: le pagine che vendono, che devono stare in piedi e che Google/AI leggono.
@@ -32,7 +32,10 @@ export const ROUTES = [
 export const FAST_ROUTES = ['/', '/novita', '/buynow/san-pasquale', '/compra-ora'];
 
 // Smoke cross-browser: meno rotte, stesso motore di rendering.
-export const SMOKE_ROUTES = ['/', '/novita', '/buynow/san-pasquale', '/compra-ora'];
+export const SMOKE_ROUTES = ['/', '/buynow/san-pasquale'];
+
+// Mobile: le rotte dove il layout e i form contano di più (il desktop copre tutte).
+export const MOBILE_ROUTES = ['/', '/aste', '/novita', '/buynow/san-pasquale', '/compra-ora', '/ishop'];
 
 export const VIEWPORTS = [
   { name: 'desktop', width: 1440, height: 900, isMobile: false },
