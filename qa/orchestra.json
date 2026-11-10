@@ -1,7 +1,7 @@
 {
-  "generato": "2026-11-10T20:12:43.407Z",
+  "generato": "2026-11-10T20:15:24.292Z",
   "esito": "TUTTO OK",
-  "sintesi": "28 controlli eseguiti · 0 non passati (0 gravi, 0 avvisi) · 3 non verificabili",
+  "sintesi": "29 controlli eseguiti · 0 non passati (0 gravi, 0 avvisi) · 2 non verificabili",
   "sito": "main.685e7a77.js",
   "origine": "main.685e7a77.js",
   "qaRun": "42882410720",
@@ -9,35 +9,35 @@
     {
       "nome": "sito /",
       "ok": true,
-      "dettaglio": "HTTP 200 · 1508 ms",
+      "dettaglio": "HTTP 200 · 969 ms",
       "gravita": "alta",
       "skip": false
     },
     {
       "nome": "sito /idati",
       "ok": true,
-      "dettaglio": "HTTP 200 · 791 ms",
+      "dettaglio": "HTTP 200 · 704 ms",
       "gravita": "alta",
       "skip": false
     },
     {
       "nome": "sito /osservatorio",
       "ok": true,
-      "dettaglio": "HTTP 200 · 159 ms",
+      "dettaglio": "HTTP 200 · 288 ms",
       "gravita": "alta",
       "skip": false
     },
     {
       "nome": "sito /aggiudicazioni",
       "ok": true,
-      "dettaglio": "HTTP 200 · 486 ms",
+      "dettaglio": "HTTP 200 · 498 ms",
       "gravita": "alta",
       "skip": false
     },
     {
       "nome": "sito /ilive",
       "ok": true,
-      "dettaglio": "HTTP 200 · 480 ms",
+      "dettaglio": "HTTP 200 · 380 ms",
       "gravita": "alta",
       "skip": false
     },
@@ -70,9 +70,16 @@
       "skip": false
     },
     {
+      "nome": "registrazione QA (audit interno)",
+      "ok": true,
+      "dettaglio": "registrato · 0 h fa · run 42882410720",
+      "gravita": "media",
+      "skip": false
+    },
+    {
       "nome": "feed statistiche",
       "ok": true,
-      "dettaglio": "321290 lotti · 0.2 h fa",
+      "dettaglio": "321290 lotti · 0.3 h fa",
       "gravita": "alta",
       "skip": false
     },
@@ -100,21 +107,21 @@
     {
       "nome": "AI/SEO /llms.txt",
       "ok": true,
-      "dettaglio": "HTTP 200 · 261 ms",
+      "dettaglio": "HTTP 200 · 164 ms",
       "gravita": "media",
       "skip": false
     },
     {
       "nome": "AI/SEO /robots.txt",
       "ok": true,
-      "dettaglio": "HTTP 200 · 36 ms",
+      "dettaglio": "HTTP 200 · 72 ms",
       "gravita": "media",
       "skip": false
     },
     {
       "nome": "AI/SEO /sitemap.xml",
       "ok": true,
-      "dettaglio": "HTTP 200 · 178 ms",
+      "dettaglio": "HTTP 200 · 131 ms",
       "gravita": "media",
       "skip": false
     },
@@ -169,24 +176,17 @@
     },
     {
       "nome": "run QA cloud",
-      "ok": true,
-      "dettaglio": "success · 2026-11-10T19:09:23Z",
-      "gravita": "bassa",
-      "skip": false
-    },
-    {
-      "nome": "run QA → Secondo Cervello",
-      "ok": true,
-      "dettaglio": "serve QA_PAT (repo privato non leggibile col token del workflow)",
+      "ok": false,
+      "dettaglio": "in corso · 2026-11-10T20:13:55Z",
       "gravita": "bassa",
       "skip": true
     },
     {
       "nome": "run feed-sync",
-      "ok": false,
-      "dettaglio": "in corso · 2026-11-10T20:12:38Z",
+      "ok": true,
+      "dettaglio": "success · 2026-11-10T20:12:38Z",
       "gravita": "bassa",
-      "skip": true
+      "skip": false
     },
     {
       "nome": "run traduzioni",
