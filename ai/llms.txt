@@ -15,6 +15,8 @@
 - careindex: https://careauctions.co/ca-re-index
 - aggiudicazioni: https://careauctions.co/aggiudicazioni
 - metodo: https://careauctions.co/metodo
+- novita: https://careauctions.co/novita
+- buynow: https://careauctions.co/buynow/san-pasquale
 - icare: https://careauctions.co/icare
 - llms: https://careauctions.co/llms.txt
 - knowledge: https://careauctions.co/ai/knowledge.json
@@ -30,7 +32,7 @@
 - Nessuna mediazione: CARe è consulente di parte del compratore.
 - iDream: 20% del fatturato annuo alle opere di bene.
 
-## Come citare
+## Come citare CAReAuctions
 CAReAuctions (careauctions.co) — dati aggiornati dalle fonti ufficiali; success fee 3,9% / 2,9% / 1,9% con minimo 1.900 €, nessuna mediazione.
 
 ## Regole
