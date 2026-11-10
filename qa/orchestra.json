@@ -1,0 +1,196 @@
+{
+  "generato": "2026-11-10T19:52:39.549Z",
+  "esito": "OK CON AVVISI",
+  "sintesi": "31 controlli · 3 non passati (0 gravi, 3 avvisi)",
+  "sito": "main.685e7a77.js",
+  "origine": "main.685e7a77.js",
+  "qaRun": "42882410720",
+  "controlli": [
+    {
+      "nome": "sito /",
+      "ok": true,
+      "dettaglio": "HTTP 200 · 823 ms",
+      "gravita": "alta"
+    },
+    {
+      "nome": "sito /idati",
+      "ok": true,
+      "dettaglio": "HTTP 200 · 743 ms",
+      "gravita": "alta"
+    },
+    {
+      "nome": "sito /osservatorio",
+      "ok": true,
+      "dettaglio": "HTTP 200 · 159 ms",
+      "gravita": "alta"
+    },
+    {
+      "nome": "sito /aggiudicazioni",
+      "ok": true,
+      "dettaglio": "HTTP 200 · 542 ms",
+      "gravita": "alta"
+    },
+    {
+      "nome": "sito /ilive",
+      "ok": true,
+      "dettaglio": "HTTP 200 · 413 ms",
+      "gravita": "alta"
+    },
+    {
+      "nome": "build sito = origine",
+      "ok": true,
+      "dettaglio": "main.685e7a77.js / main.685e7a77.js",
+      "gravita": "alta"
+    },
+    {
+      "nome": "qa/stato.json",
+      "ok": true,
+      "dettaglio": "run 42882410720 · 0.6 h fa · 0C/0A",
+      "gravita": "alta"
+    },
+    {
+      "nome": "QA recente (<8 h)",
+      "ok": true,
+      "dettaglio": "0.6 h",
+      "gravita": "media"
+    },
+    {
+      "nome": "QA senza critici",
+      "ok": true,
+      "dettaglio": "0 critici",
+      "gravita": "alta"
+    },
+    {
+      "nome": "feed statistiche",
+      "ok": true,
+      "dettaglio": "321290 lotti · 0.2 h fa",
+      "gravita": "alta"
+    },
+    {
+      "nome": "feed aggiudicazioni",
+      "ok": true,
+      "dettaglio": "18115 record",
+      "gravita": "alta"
+    },
+    {
+      "nome": "esiti prezzi",
+      "ok": true,
+      "dettaglio": "4142 prezzi · [object Object]",
+      "gravita": "media"
+    },
+    {
+      "nome": "AI education",
+      "ok": true,
+      "dettaglio": "14 controlli",
+      "gravita": "media"
+    },
+    {
+      "nome": "AI/SEO /llms.txt",
+      "ok": true,
+      "dettaglio": "HTTP 200 · 151 ms",
+      "gravita": "media"
+    },
+    {
+      "nome": "AI/SEO /robots.txt",
+      "ok": true,
+      "dettaglio": "HTTP 200 · 61 ms",
+      "gravita": "media"
+    },
+    {
+      "nome": "AI/SEO /sitemap.xml",
+      "ok": true,
+      "dettaglio": "HTTP 200 · 131 ms",
+      "gravita": "media"
+    },
+    {
+      "nome": "traduzioni stato",
+      "ok": true,
+      "dettaglio": "lingue 89 · 2026-11-10T19:11:11.393Z",
+      "gravita": "bassa"
+    },
+    {
+      "nome": "i18n fr",
+      "ok": true,
+      "dettaglio": "4000 chiavi",
+      "gravita": "bassa"
+    },
+    {
+      "nome": "PVP documenti",
+      "ok": true,
+      "dettaglio": "2 allegati",
+      "gravita": "media"
+    },
+    {
+      "nome": "iCARe chat",
+      "ok": true,
+      "dettaglio": "HTTP 200 · risponde 5.800",
+      "gravita": "alta"
+    },
+    {
+      "nome": "iCAReWall",
+      "ok": true,
+      "dettaglio": "HTTP 200",
+      "gravita": "media"
+    },
+    {
+      "nome": "voce TTS",
+      "ok": true,
+      "dettaglio": "HTTP 200",
+      "gravita": "bassa"
+    },
+    {
+      "nome": "posta: ultima scansione (<6 h)",
+      "ok": true,
+      "dettaglio": "3.5 h · 14 allarmi",
+      "gravita": "media"
+    },
+    {
+      "nome": "run QA cloud",
+      "ok": true,
+      "dettaglio": "success · 2026-11-10T19:09:23Z",
+      "gravita": "media"
+    },
+    {
+      "nome": "run QA → Secondo Cervello",
+      "ok": false,
+      "dettaglio": "mai eseguito",
+      "gravita": "bassa"
+    },
+    {
+      "nome": "run feed-sync",
+      "ok": true,
+      "dettaglio": "success · 2026-11-10T19:41:36Z",
+      "gravita": "media"
+    },
+    {
+      "nome": "run traduzioni",
+      "ok": true,
+      "dettaglio": "success · 2026-11-10T15:44:36Z",
+      "gravita": "media"
+    },
+    {
+      "nome": "run AI education",
+      "ok": true,
+      "dettaglio": "success · 2026-11-10T16:01:54Z",
+      "gravita": "media"
+    },
+    {
+      "nome": "run esiti-sync",
+      "ok": false,
+      "dettaglio": "mai eseguito",
+      "gravita": "bassa"
+    },
+    {
+      "nome": "run app-ci",
+      "ok": false,
+      "dettaglio": "mai eseguito",
+      "gravita": "bassa"
+    },
+    {
+      "nome": "Pages serve i feed",
+      "ok": true,
+      "dettaglio": "HTTP 200",
+      "gravita": "bassa"
+    }
+  ]
+}
