@@ -115,11 +115,12 @@ jobs:
         if: github.event_name == 'repository_dispatch' && github.event.action == 'email-alert'
         env:
           ALERT_JSON: ${{ toJSON(github.event.client_payload) }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node qa/alert.mjs
+
       - name: Allarme AI -> triage
         if: github.event_name == 'repository_dispatch' && github.event.action == 'ai-alert'
         env:
           AI_ALERT_JSON: ${{ toJSON(github.event.client_payload) }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: node qa/alert.mjs
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node qa/alert.mjs
