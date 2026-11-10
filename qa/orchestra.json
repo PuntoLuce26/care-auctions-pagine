@@ -1,5 +1,5 @@
 {
-  "generato": "2026-11-10T19:55:22.139Z",
+  "generato": "2026-11-10T20:12:43.407Z",
   "esito": "TUTTO OK",
   "sintesi": "28 controlli eseguiti · 0 non passati (0 gravi, 0 avvisi) · 3 non verificabili",
   "sito": "main.685e7a77.js",
@@ -9,35 +9,35 @@
     {
       "nome": "sito /",
       "ok": true,
-      "dettaglio": "HTTP 200 · 940 ms",
+      "dettaglio": "HTTP 200 · 1508 ms",
       "gravita": "alta",
       "skip": false
     },
     {
       "nome": "sito /idati",
       "ok": true,
-      "dettaglio": "HTTP 200 · 649 ms",
+      "dettaglio": "HTTP 200 · 791 ms",
       "gravita": "alta",
       "skip": false
     },
     {
       "nome": "sito /osservatorio",
       "ok": true,
-      "dettaglio": "HTTP 200 · 287 ms",
+      "dettaglio": "HTTP 200 · 159 ms",
       "gravita": "alta",
       "skip": false
     },
     {
       "nome": "sito /aggiudicazioni",
       "ok": true,
-      "dettaglio": "HTTP 200 · 549 ms",
+      "dettaglio": "HTTP 200 · 486 ms",
       "gravita": "alta",
       "skip": false
     },
     {
       "nome": "sito /ilive",
       "ok": true,
-      "dettaglio": "HTTP 200 · 369 ms",
+      "dettaglio": "HTTP 200 · 480 ms",
       "gravita": "alta",
       "skip": false
     },
@@ -51,14 +51,14 @@
     {
       "nome": "qa/stato.json",
       "ok": true,
-      "dettaglio": "run 42882410720 · 0.7 h fa · 0C/0A",
+      "dettaglio": "run 42882410720 · 1 h fa · 0C/0A",
       "gravita": "alta",
       "skip": false
     },
     {
       "nome": "QA recente (<8 h)",
       "ok": true,
-      "dettaglio": "0.7 h",
+      "dettaglio": "1 h",
       "gravita": "media",
       "skip": false
     },
@@ -100,21 +100,21 @@
     {
       "nome": "AI/SEO /llms.txt",
       "ok": true,
-      "dettaglio": "HTTP 200 · 45 ms",
+      "dettaglio": "HTTP 200 · 261 ms",
       "gravita": "media",
       "skip": false
     },
     {
       "nome": "AI/SEO /robots.txt",
       "ok": true,
-      "dettaglio": "HTTP 200 · 20 ms",
+      "dettaglio": "HTTP 200 · 36 ms",
       "gravita": "media",
       "skip": false
     },
     {
       "nome": "AI/SEO /sitemap.xml",
       "ok": true,
-      "dettaglio": "HTTP 200 · 37 ms",
+      "dettaglio": "HTTP 200 · 178 ms",
       "gravita": "media",
       "skip": false
     },
@@ -163,7 +163,7 @@
     {
       "nome": "posta: ultima scansione (<6 h)",
       "ok": true,
-      "dettaglio": "3.5 h · 14 allarmi",
+      "dettaglio": "3.8 h · 14 allarmi",
       "gravita": "media",
       "skip": false
     },
@@ -177,16 +177,16 @@
     {
       "nome": "run QA → Secondo Cervello",
       "ok": true,
-      "dettaglio": "non verificabile (HTTP 404, il token del workflow vede solo questo repo)",
+      "dettaglio": "serve QA_PAT (repo privato non leggibile col token del workflow)",
       "gravita": "bassa",
       "skip": true
     },
     {
       "nome": "run feed-sync",
-      "ok": true,
-      "dettaglio": "success · 2026-11-10T19:41:36Z",
+      "ok": false,
+      "dettaglio": "in corso · 2026-11-10T20:12:38Z",
       "gravita": "bassa",
-      "skip": false
+      "skip": true
     },
     {
       "nome": "run traduzioni",
@@ -205,16 +205,16 @@
     {
       "nome": "run esiti-sync",
       "ok": false,
-      "dettaglio": "mai eseguito",
+      "dettaglio": "in corso · 2026-11-10T20:10:39Z",
       "gravita": "bassa",
       "skip": true
     },
     {
-      "nome": "run app-ci",
+      "nome": "app Emergent /idati",
       "ok": true,
-      "dettaglio": "non verificabile (HTTP 404, il token del workflow vede solo questo repo)",
-      "gravita": "bassa",
-      "skip": true
+      "dettaglio": "HTTP 200 · main.685e7a77.js",
+      "gravita": "alta",
+      "skip": false
     },
     {
       "nome": "Pages serve i feed",
