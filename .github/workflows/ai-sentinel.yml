@@ -1,0 +1,39 @@
+name: ai-sentinel
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+  issues: write
+  actions: write
+concurrency:
+  group: ai-sentinel
+  cancel-in-progress: false
+jobs:
+  sentinel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Controlla AI e cervelli
+        env:
+          REGIA_KEY: ${{ secrets.REGIA_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/ai-sentinel.js
+      - name: Salva stato
+        if: always()
+        run: |
+          git config user.name "CARe AI Sentinel"
+          git config user.email "cloud@careauctions.co"
+          git add ai/sentinella-stato.json
+          if git diff --cached --quiet; then echo "nessuna modifica"; else git commit -m "AI Sentinel: stato $(date -u +%FT%TZ)"; fi
+          for i in 1 2 3; do git pull --rebase && git push && break || sleep 5; done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ai-sentinella-stato
+          path: ai/sentinella-stato.json
