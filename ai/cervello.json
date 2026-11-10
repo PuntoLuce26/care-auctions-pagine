@@ -1,0 +1,106 @@
+{
+  "versione": "1.0",
+  "aggiornato": "2026-11-10T16:58:37.597Z",
+  "sintesi": "iCARe è la consulente di CAReAuctions per aste giudiziarie italiane: success fee 3,9%/2,9%/1,9% a fascia unica, minimo 1.900 € (200.000 € = 5.800 €), nessuna mediazione; 321.232 lotti, 4.142 esiti pubblici verificati (360 immobiliari, mediana 33.375 €, copertura 29/09/2020-09/11/2026, 44 tribunali/14 regioni); PVP documenti/foto on-demand con 629 lotti di foto estratte; 89 lingue, 25 legali, italiano vincolante, revisione umana assente; QA cloud/interna, perf, mail-qa, app CI; tutti i software su cloud con trigger e registrati nel Secondo Cervello. Livello visitatore = generale/pubblico; registrato = dettaglio operativo (CAReIndex, iDati, CAReOS, OMI, PVP, strategia, propria pratica); mai dati interni o di altri utenti.",
+  "pubblico": {
+    "brand": "CAReAuctions",
+    "sito": "https://careauctions.co",
+    "servizio": "consulente di parte per aste giudiziarie italiane; non mediazione, non provvigioni",
+    "success_fee": {
+      "fino_150000": "3,9%",
+      "da_150001_a_300000": "2,9%",
+      "oltre_300000": "1,9%",
+      "minimo": 1900,
+      "fascia": "unica sull'intero prezzo",
+      "pagamento": "entro 24 ore dall'aggiudicazione",
+      "esempi": {
+        "100000": 3900,
+        "200000": 5800,
+        "400000": 7600
+      }
+    },
+    "dati": {
+      "lotti_banca_dati": 321243,
+      "esiti_verificati": 4142,
+      "esiti_immobiliari": 360,
+      "mediana_esiti_immobiliari": 33375,
+      "copertura": "[object Object]",
+      "tribunali": 44,
+      "regioni": 14,
+      "pvp_esiti_pubblici": 401,
+      "nota": "PVP pubblico non espone i prezzi finali; copertura sempre dichiarata"
+    },
+    "pvp": {
+      "documenti": "/api/pvp-documenti/<id>",
+      "immagini": "/api/pvp-img?u=",
+      "foto_estratte": 629,
+      "nota": "perizia e documenti linkati, foto con lightbox/zoom",
+      "fonte": "PVP/IVG"
+    },
+    "lingue": {
+      "totale": 89,
+      "legali_top": 25,
+      "vincolante": "italiano",
+      "revisione_umana": false,
+      "nota": "traduzioni per cortesia, non parere legale"
+    },
+    "qa": {
+      "cloud": "0 critici/alti/medi",
+      "interna": "0/0/0/0",
+      "perf_p95": "<1s",
+      "mail_qa": "ogni 10 min",
+      "app_ci": "verde",
+      "foto": "verificata"
+    },
+    "software": [
+      "PVP documenti/foto (edge)",
+      "QA cloud (Actions)",
+      "QA interna (complemento locale dichiarato)",
+      "traduzioni (Actions+worker+edge)",
+      "AI education/indexing (Actions+edge)",
+      "esiti/prezzi (Actions)",
+      "mail-qa",
+      "perf-qa",
+      "app CI",
+      "foto backfill"
+    ],
+    "limiti": [
+      "nessuna revisione legale umana",
+      "pagine legali solo IT/EN nei corpi completi",
+      "success fee stantia in parte delle traduzioni (audit 10/11)",
+      "PVP non espone i prezzi finali"
+    ]
+  },
+  "registrati": {
+    "livello": "dettaglio operativo",
+    "metodo": [
+      "CAReIndex",
+      "iDati",
+      "CAReOS",
+      "OMI",
+      "PVP documenti/foto",
+      "strategia sul lotto",
+      "propria pratica/dossier"
+    ],
+    "nota": "il care_token è un segnale di livello, non un'autorizzazione: i dati personali richiedono sessione verificata; mai dati di altri utenti",
+    "pratica": "dalla propria area; la chat mostra la pratica solo con email/sessione dell'utente"
+  },
+  "esclusi": [
+    "cassa",
+    "saldo",
+    "burn",
+    "segreti",
+    "chiavi/token",
+    "dati di altri utenti",
+    "legale vincolante non italiano"
+  ],
+  "fonti": [
+    "https://careauctions.co",
+    "https://puntoluce26.github.io/care-auctions-pagine/feed/statistiche.json",
+    "https://puntoluce26.github.io/care-auctions-pagine/feed/esiti-statistiche.json",
+    "https://puntoluce26.github.io/care-auctions-pagine/feed/foto-ricavate.json",
+    "PVP ufficiale",
+    "https://github.com/PuntoLuce26/second-brain (parte pubblica/registrata)"
+  ],
+  "hash": ""
+}
