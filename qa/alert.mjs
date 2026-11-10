@@ -23,6 +23,6 @@ const api = async (u, opt = {}) => { const r = await fetch('https://api.github.c
     azioni.push({ componente: a.componente, gravita: a.gravita, oggetto: a.oggetto, azione: z });
   }
   const body = '## Allarmi mail ricevuti dal QA\n\n' + alerts.map((a, i) => `${i + 1}. **${a.gravita}** · ${a.componente} · ${a.oggetto}\n   da ${a.da} · ${a.data}${a.link ? ' · ' + a.link : ''}`).join('\n') + '\n\n## Azioni\n\n' + azioni.map(a => `- ${a.componente}: ${a.azione}`).join('\n') + '\n\nQA run: https://github.com/' + REPO + '/actions/runs/' + RUN;
-  const r = await api('/repos/' + REPO + '/issues', { method: 'POST', body: JSON.stringify({ title: '[QA] Allarme mail: ' + alerts.length + ' segnalazioni', body, labels: ['qa', 'alert'] }) });
+  const r = alerts.length ? await api('/repos/' + REPO + '/issues', { method: 'POST', body: JSON.stringify({ title: '[QA] Allarme mail: ' + alerts.length + ' segnalazioni', body, labels: ['qa', 'alert'] }) }) : { status: 'nessuna issue (se non ci sono allarmi non si apre una issue)' };
   console.log(JSON.stringify({ alerts: alerts.length, azioni, issue: r.status }));
 })().catch(e => { console.error('QA ALERT ERRORE', e.message); process.exit(1); });
