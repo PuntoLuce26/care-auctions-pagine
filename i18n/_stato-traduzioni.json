@@ -1,5 +1,5 @@
 {
-  "data": "2026-11-10T15:42:24.880Z",
+  "data": "2026-11-10T19:11:11.393Z",
   "lingue": {
     "fr": {
       "forzate": {
@@ -8,6 +8,798 @@
       },
       "tradotte": 70,
       "ultima": "2026-11-10T15:42:24.866Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "af": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T15:48:13.352Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "am": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T15:50:11.708Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "ar": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T15:52:29.827Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "az-Latn": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T15:54:30.049Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "az": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T15:56:16.361Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "bg": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T15:58:16.378Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "bn": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:00:04.179Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "bs": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:02:55.116Z",
+      "qualita": "mt:66/fallback:1/formula:3"
+    },
+    "ca-ES": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:04:57.220Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "ca": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:07:00.199Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "cs": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:09:03.045Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "cy": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:10:43.898Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "da": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:12:07.053Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "de": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:13:55.054Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "el": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:16:03.295Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "en-GB": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:17:58.775Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "en": {
+      "forzate": {
+        "lb_body": "362246a7fac47f6d",
+        "d_idream": "e215fa0c4e77bca4"
+      },
+      "tradotte": 204,
+      "ultima": "2026-11-10T16:17:58.782Z",
+      "qualita": "mt:201/fallback:0/formula:3"
+    },
+    "es-ES": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:19:48.414Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "es": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:22:12.960Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "et": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:23:57.363Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "eu": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:24:33.412Z",
+      "qualita": "mt:34/fallback:33/formula:3"
+    },
+    "fa": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:26:02.969Z",
+      "qualita": "mt:66/fallback:1/formula:3"
+    },
+    "fi": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:28:06.401Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "fil": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:30:19.233Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "ga": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:35:11.323Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "gl": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:37:34.187Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "gu": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:39:58.654Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "ha": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:42:17.953Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "he": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:44:03.702Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "hi": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:46:51.202Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "hr": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:49:05.382Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "hu": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:50:49.098Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "hy": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:53:05.114Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "id": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:54:47.829Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "ig": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:57:04.937Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "is": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T16:58:57.980Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "ja": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T17:00:49.604Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "ka": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T17:04:37.028Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "kk": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T17:07:26.456Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "km": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T17:11:14.851Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "kn": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T17:15:19.522Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "ko": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T17:17:49.270Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "lo": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T17:20:14.823Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "lt": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T17:22:34.444Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "lv": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T17:25:25.928Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "mg": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T17:28:15.528Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "mk": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T17:30:06.224Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "ml": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T17:33:02.226Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "mn": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T17:35:31.739Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "mr": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T17:38:12.284Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "ms": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T17:40:40.744Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "mt": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T17:41:22.256Z",
+      "qualita": "mt:34/fallback:33/formula:3"
+    },
+    "my": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T17:45:32.270Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "nb": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T17:47:46.767Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "ne": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T17:50:09.315Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "nl": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T17:52:49.672Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "no": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T17:54:34.034Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "pa": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T17:58:19.030Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "pl": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T18:02:09.290Z",
+      "qualita": "mt:66/fallback:1/formula:3"
+    },
+    "ps": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T18:05:26.244Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "pt-PT": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T18:07:56.209Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "pt": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T18:10:09.190Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "ro": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T18:13:13.673Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "ru": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T18:15:58.527Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "si": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T18:19:03.317Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "sk": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T18:21:08.293Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "sl": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T18:23:40.897Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "so": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T18:25:46.628Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "sq": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T18:28:01.501Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "sr-Latn": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T18:29:53.437Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "sr": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T18:32:48.070Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "sv": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T18:34:39.110Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "sw": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T18:37:24.882Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "ta": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T18:39:41.584Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "te": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T18:40:41.528Z",
+      "qualita": "mt:34/fallback:33/formula:3"
+    },
+    "th": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T18:43:14.714Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "tl": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T18:45:49.859Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "tr": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T18:47:53.508Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "uk": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T18:49:48.558Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "ur": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T18:51:33.047Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "uz-Latn": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T18:55:08.057Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "uz": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T18:58:29.285Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "vi": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T19:00:04.919Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "yo": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T19:03:01.261Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "zh-CN": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T19:05:09.586Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "zh-TW": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T19:07:28.849Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "zh": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T19:09:07.002Z",
+      "qualita": "mt:67/fallback:0/formula:3"
+    },
+    "zu": {
+      "forzate": {
+        "lb_body": "38bb42ded853e387",
+        "d_idream": "f3658fbab4d7effb"
+      },
+      "tradotte": 70,
+      "ultima": "2026-11-10T19:11:11.390Z",
       "qualita": "mt:67/fallback:0/formula:3"
     }
   }
