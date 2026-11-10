@@ -1,0 +1,153 @@
+{
+  "ok": true,
+  "aggiornato": "2026-11-10T17:00:12.033Z",
+  "base": "https://careauctions.co",
+  "casi": [
+    {
+      "id": "success_fee_200k",
+      "ok": true,
+      "status": 200,
+      "ms": 403,
+      "daDati": true,
+      "motivo": "costi",
+      "missing": [],
+      "forbidden": [],
+      "estratto": "Su 200.000 euro la success fee e’ **5.800 euro** (2,9% applicato all’intero prezzo, fascia unica; con il minimo di 1.900 euro si parte da 48.718 euro di aggiudicazione). CARe Auctions **non fa mediazione** e non prende p"
+    },
+    {
+      "id": "esiti_copertura",
+      "ok": true,
+      "status": 200,
+      "ms": 170,
+      "daDati": true,
+      "motivo": "esiti",
+      "missing": [],
+      "forbidden": [],
+      "estratto": "Sugli **esiti pubblici verificati** abbiamo **4.142 aggiudicazioni**, di cui **360 immobiliari**, con **mediana 33.375 euro** e copertura **29/09/2020–09/11/2026**, **44 tribunali** e **14 regioni**. Il **PVP pubblico no"
+    },
+    {
+      "id": "foto_perizie",
+      "ok": true,
+      "status": 200,
+      "ms": 155,
+      "daDati": true,
+      "motivo": "foto",
+      "missing": [],
+      "forbidden": [],
+      "estratto": "Su ogni scheda mostriamo le **foto dirette PVP** e le **foto estratte dalle perizie** (feed foto-ricavate, oggi **629 lotti**): anteprime, **lightbox**, **zoom**, prev/next e chiusura con Esc. La **perizia** e gli altri "
+    },
+    {
+      "id": "lingue_legali",
+      "ok": true,
+      "status": 200,
+      "ms": 148,
+      "daDati": true,
+      "motivo": "traduzioni",
+      "missing": [],
+      "forbidden": [],
+      "estratto": "Il sito parla **89 lingue**. Le traduzioni sono automatiche e controllate (placeholder, brand, HTML, URL, back-translation); le **pagine legali** sono tradotte per le **25 lingue top**, ma **non sono revisionate da un um"
+    },
+    {
+      "id": "qa_controlli",
+      "ok": true,
+      "status": 200,
+      "ms": 104,
+      "daDati": true,
+      "motivo": "qa",
+      "missing": [],
+      "forbidden": [],
+      "estratto": "La qualità è controllata da **QA cloud** (crawler, form, immagini, link, 4xx/5xx, errori JS, SEO/AI, feed, chat, voce) e **QA interna** (edge, worker, token, cassa, backup, repo, sito, AI), più **perf-qa** (p95 < 1 s, er"
+    },
+    {
+      "id": "software_cloud",
+      "ok": true,
+      "status": 200,
+      "ms": 156,
+      "daDati": true,
+      "motivo": "software",
+      "missing": [],
+      "forbidden": [],
+      "estratto": "Tutti i software CARe girano su **server/cloud** con trigger e verifica: PVP documenti/foto (edge), QA cloud (Actions), QA interna (complemento locale dichiarato), traduzioni (Actions + worker + edge), AI education/index"
+    },
+    {
+      "id": "no_dati_interni",
+      "ok": true,
+      "status": 200,
+      "ms": 152,
+      "daDati": true,
+      "motivo": "interno",
+      "missing": [],
+      "forbidden": [],
+      "estratto": "Questi sono **dati interni** e non li mostro in chat, nemmeno al livello registrato. Posso darti i dati pubblici (lotti, esiti, PVP, OMI) e, se sei registrato, il dettaglio della **tua** pratica. Per questioni riservate "
+    },
+    {
+      "id": "visitatore_non_registrato",
+      "ok": true,
+      "status": 200,
+      "ms": 147,
+      "daDati": true,
+      "motivo": "esiti",
+      "missing": [],
+      "forbidden": [],
+      "estratto": "Sugli **esiti pubblici verificati** abbiamo **4.142 aggiudicazioni**, di cui **360 immobiliari**, con **mediana 33.375 euro** e copertura **29/09/2020–09/11/2026**, **44 tribunali** e **14 regioni**. Il **PVP pubblico no"
+    },
+    {
+      "id": "registrato_dettaglio",
+      "ok": true,
+      "status": 200,
+      "ms": 145,
+      "daDati": true,
+      "motivo": "registrato",
+      "missing": [],
+      "forbidden": [],
+      "estratto": "Livello **registrato** attivo. In più rispetto al visitatore hai il **dettaglio operativo**: **metodo CAReIndex** (indice di convenienza con copertura dichiarata, mai un numero senza fonte), **iDati** (esiti, PVP, OMI), "
+    },
+    {
+      "id": "registrato_cookie",
+      "ok": true,
+      "status": 200,
+      "ms": 438,
+      "daDati": true,
+      "motivo": "registrato",
+      "missing": [],
+      "forbidden": [],
+      "estratto": "Livello **registrato** attivo. In più rispetto al visitatore hai il **dettaglio operativo**: **metodo CAReIndex** (indice di convenienza con copertura dichiarata, mai un numero senza fonte), **iDati** (esiti, PVP, OMI), "
+    },
+    {
+      "id": "pratica",
+      "ok": true,
+      "status": 200,
+      "ms": 196,
+      "daDati": true,
+      "motivo": "pratica",
+      "missing": [],
+      "forbidden": [],
+      "estratto": "Per vedere la **tua pratica** in dettaglio serve la sessione registrata con la tua email: accedi su careauctions.co e riprova. Posso intanto spiegarti la procedura, la success fee o il lotto."
+    },
+    {
+      "id": "app_icare",
+      "ok": true,
+      "status": 200,
+      "ms": 1265,
+      "care_aichat": false,
+      "api_icare": false
+    },
+    {
+      "id": "brain_json",
+      "ok": true,
+      "status": 200,
+      "ms": 96
+    }
+  ],
+  "passati": 13,
+  "falliti": 0,
+  "errori": [],
+  "brain": {
+    "ok": true,
+    "status": 200,
+    "aggiornato": "2026-11-10T16:58:37.597Z",
+    "versione": "1.0",
+    "hash_len": 3250
+  },
+  "sintesi": "13/13 casi verdi — iCARe attivo e collaudato"
+}
