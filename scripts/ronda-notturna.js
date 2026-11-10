@@ -184,6 +184,7 @@ function add(nome, livello, dettaglio) { C.push({ nome, livello, ok: livello ===
     } catch (e) { sveglie.push(wf + ' errore'); }
   }
   if (process.env.GITHUB_TOKEN) {
+    if (etaSt != null && etaSt > 90) await sveglia('feed-sync.yml');
     if (etaPosta != null && etaPosta > 45) await sveglia('mail-qa.yml');
     const etaVit = vit && vit.generato ? etaMin(vit.generato) : null;
     if (etaVit != null && etaVit > 40) await sveglia('verifica-it.yml');
