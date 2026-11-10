@@ -2,6 +2,8 @@
 /* QA email-alert: riceve gli allarmi dal mail-qa, li registra e attiva i soccorsi noti. */
 import fs from 'node:fs';
 import path from 'node:path';
+const AI = JSON.parse(process.env.AI_ALERT_JSON || '{}');
+const AI_ANOM = Array.isArray(AI.anomalie) ? AI.anomalie : [];
 const A = JSON.parse(process.env.ALERT_JSON || '{}');
 const alerts = A.alerts || [];
 const REPO = process.env.GITHUB_REPOSITORY || 'PuntoLuce26/care-auctions-pagine';
@@ -25,4 +27,9 @@ const api = async (u, opt = {}) => { const r = await fetch('https://api.github.c
   const body = '## Allarmi mail ricevuti dal QA\n\n' + alerts.map((a, i) => `${i + 1}. **${a.gravita}** · ${a.componente} · ${a.oggetto}\n   da ${a.da} · ${a.data}${a.link ? ' · ' + a.link : ''}`).join('\n') + '\n\n## Azioni\n\n' + azioni.map(a => `- ${a.componente}: ${a.azione}`).join('\n') + '\n\nQA run: https://github.com/' + REPO + '/actions/runs/' + RUN;
   const r = alerts.length ? await api('/repos/' + REPO + '/issues', { method: 'POST', body: JSON.stringify({ title: '[QA] Allarme mail: ' + alerts.length + ' segnalazioni', body, labels: ['qa', 'alert'] }) }) : { status: 'nessuna issue (se non ci sono allarmi non si apre una issue)' };
   console.log(JSON.stringify({ alerts: alerts.length, azioni, issue: r.status }));
+  if (AI_ANOM.length) {
+    const aiBody = '## AI Sentinel — anomalie rilevate\n\n' + AI_ANOM.map((a, i) => `${i + 1}. **${a.gravita || 'high'}** · ${a.componente || 'ai'} · ${a.oggetto || ''}`).join('\n') + '\n\nRun: https://github.com/' + REPO + '/actions/runs/' + RUN + '\n\nIl QA e\' stato attivato: crawl, fix rules e issue.';
+    const ar = await api('/repos/' + REPO + '/issues', { method: 'POST', body: JSON.stringify({ title: '[QA] Allarme AI: ' + AI_ANOM.length + ' anomalie', body: aiBody, labels: ['qa', 'alert', 'ai'] }) });
+    console.log(JSON.stringify({ aiAnomalie: AI_ANOM.length, issue: ar.status }));
+  }
 })().catch(e => { console.error('QA ALERT ERRORE', e.message); process.exit(1); });
