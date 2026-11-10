@@ -30,8 +30,22 @@ jobs:
       - name: sync (inc ogni 15 min, full + IVG all'01:00 UTC)
         run: |
           H=$(date -u +%H)
-          if [ "${{ github.event.inputs.mode }}" = "full" ] || [ "$H" = "01" ]; then MODE=full; else MODE=inc; fi
-          echo "MODE=$MODE"
+          # 10/11/2026 - SOLO il cron notturno '0 1 * * *' fa la raccolta completa.
+          # Prima la condizione era [ "$H" = "01" ]: qualunque run partito fra le 01:00 e le
+          # 01:59 UTC (anche i dispatch della sentinella ogni ~3 min) faceva una full da ~56
+          # minuti, quindi la notte si incatenavano due full e il feed restava fermo ~2 ore.
+          MODE_IN='${{ github.event.inputs.mode }}'
+          SCHED='${{ github.event.schedule }}'
+          if [ "$MODE_IN" = "full" ]; then
+            MODE=full
+          elif [ "$MODE_IN" = "inc" ]; then
+            MODE=inc
+          elif [ "${{ github.event_name }}" = "schedule" ] && [ "$SCHED" = "0 1 * * *" ]; then
+            MODE=full
+          else
+            MODE=inc
+          fi
+          echo "MODE=$MODE (evento ${{ github.event_name }}, cron '$SCHED', input '$MODE_IN')"
           MODE=$MODE node scripts/sync-feed.js
           node scripts/dati-indice.js || echo "indice dati: non aggiornato"
           node scripts/numeri-vivi.js || echo "numeri vivi: non rigenerati in questo giro"
