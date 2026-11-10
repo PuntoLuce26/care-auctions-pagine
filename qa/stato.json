@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-10T21:05:22.790Z",
-  "runId": "42900681871",
-  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42900681871",
+  "generatedAt": "2026-11-10T21:22:09.744Z",
+  "runId": "42903486515",
+  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42903486515",
   "base": "https://careauctions.co",
-  "durationSec": 206,
+  "durationSec": 217,
   "build": {
     "sito": "main.685e7a77.js",
     "origine": "main.685e7a77.js"
@@ -11,19 +11,11 @@
   "summary": {
     "critical": 0,
     "high": 0,
-    "medium": 1,
-    "low": 4,
-    "total": 5
+    "medium": 0,
+    "low": 3,
+    "total": 3
   },
   "issues": [
-    {
-      "severity": "medium",
-      "type": "github_run_falliti",
-      "route": "log",
-      "viewport": "",
-      "message": "pages build and deployment (failure)",
-      "suggestion": "Aprire i run falliti; se sono build Pages cancellate da un commit, non è un guasto (vedi LEZIONI)."
-    },
     {
       "severity": "low",
       "type": "form_invalid",
@@ -38,14 +30,6 @@
       "route": "/mappa-prezzi",
       "viewport": "desktop",
       "message": "campi obbligatori non compilati dal QA (atteso per consenso/date): INPUT",
-      "suggestion": "Verificare che il form sia compilabile e che i campi obbligatori abbiano un messaggio chiaro."
-    },
-    {
-      "severity": "low",
-      "type": "form_invalid",
-      "route": "/",
-      "viewport": "mobile",
-      "message": "campi obbligatori non compilati dal QA (atteso per consenso/date): INPUT, INPUT",
       "suggestion": "Verificare che il form sia compilabile e che i campi obbligatori abbiano un messaggio chiaro."
     },
     {
@@ -95,7 +79,7 @@
       "route": "/osservatorio",
       "viewport": "desktop",
       "http": 200,
-      "text": 7837,
+      "text": 5869,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -260,12 +244,12 @@
       "route": "/",
       "viewport": "mobile",
       "http": 200,
-      "text": 20147,
+      "text": 21479,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
       "formsFilled": 6,
-      "clicks": 0
+      "clicks": 3
     },
     {
       "route": "/aste",
@@ -418,7 +402,7 @@
       "status": 200,
       "aggiornato": "2026-11-10T20:46:32.474Z",
       "totale": 321290,
-      "ageHours": 0.3
+      "ageHours": 0.6
     },
     "aggiudicazioni": {
       "status": 200,
@@ -435,64 +419,55 @@
         "name": "stato",
         "ok": true,
         "status": 200,
-        "ms": 1396,
+        "ms": 1319,
         "detail": "tabella popolata"
       },
       {
         "name": "feed statistiche",
         "ok": true,
         "status": 200,
-        "ms": 46,
-        "detail": "totale 321290 · 0.3 h fa"
+        "ms": 79,
+        "detail": "totale 321290 · 0.6 h fa"
       },
       {
         "name": "feed aggiudicazioni",
         "ok": true,
         "status": 200,
-        "ms": 348,
+        "ms": 272,
         "detail": "18115 record"
       },
       {
         "name": "origine Emergent",
         "ok": true,
         "status": 200,
-        "ms": 375,
+        "ms": 570,
         "detail": "main.685e7a77.js"
       },
       {
         "name": "chat iCARe",
         "ok": true,
         "status": 200,
-        "ms": 487,
+        "ms": 368,
         "detail": "{\"ok\":true,\"risposta\":\"Ciao, sono **iCARe**, la consulente immobiliare di CARe …"
       },
       {
         "name": "iCAReWall API",
         "ok": true,
         "status": 200,
-        "ms": 425,
+        "ms": 423,
         "detail": "15531 byte"
       },
       {
         "name": "voce TTS",
         "ok": true,
         "status": 200,
-        "ms": 71,
+        "ms": 62,
         "detail": "6482 byte"
       }
     ],
     "github": {
       "checked": 30,
-      "failedLast24h": [
-        {
-          "name": "pages build and deployment",
-          "status": "completed",
-          "conclusion": "failure",
-          "created_at": "2026-11-10T20:19:48Z",
-          "url": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42894202506",
-          "head": "d74aed91"
-        }
-      ]
+      "failedLast24h": []
     }
   }
 }
