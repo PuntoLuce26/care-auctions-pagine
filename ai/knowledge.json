@@ -1,0 +1,78 @@
+{
+  "generato": "2026-11-10T15:49:14.574Z",
+  "brand": {
+    "nome": "CAReAuctions",
+    "sito": "https://careauctions.co",
+    "missione": "Il primo HUB immobiliare al mondo: tutte le aste giudiziarie italiane, con la consulenza iCARe.",
+    "marchio": "CAReAuctions — grafia esatta",
+    "lingue": 91
+  },
+  "numeri": {
+    "lotti": 321232,
+    "immobiliari": 271024,
+    "mobiliari": 50208,
+    "regioni": 21,
+    "tribunali": 148,
+    "lingue": 91,
+    "lottiAttivi": 40871,
+    "aggiudicate": 2005,
+    "deserte": 28281,
+    "aggiornato": "2026-11-10T15:41:02.196Z"
+  },
+  "documenti": {
+    "fonte": "PVP — Portale delle Vendite Pubbliche (pvp.giustizia.it)",
+    "modalita": "on demand, tutti i lotti alla visita",
+    "endpoint": "https://careauctions.co/api/pvp-documenti/{id}",
+    "foto": "https://careauctions.co/api/pvp-img?u=...",
+    "tipi": [
+      "PERIZ perizia",
+      "AVEND avviso",
+      "ORDIN ordinanza",
+      "ALTRO",
+      "IMGBE"
+    ],
+    "nota": "Le foto dirette sono mostrate; le foto dentro i PDF sono nel documento ufficiale."
+  },
+  "servizi": {
+    "success_fee": {
+      "regola": "una sola aliquota sull’intero prezzo",
+      "scaglioni": {
+        "3,9%": "fino a 150.000 €",
+        "2,9%": "da 150.001 a 300.000 €",
+        "1,9%": "oltre 300.000 €"
+      },
+      "minimo": "1.900 €",
+      "esempio_200000": "5.800 €",
+      "pagamento": "entro 24 ore dall’aggiudicazione"
+    },
+    "mediazione": "nessuna: CARe è consulente di parte",
+    "abbonamenti": {
+      "gold": "59,90 €/mese",
+      "goldMensile": "69,90 €/mese"
+    },
+    "iDream": "20% del fatturato annuo alle opere di bene"
+  },
+  "pagine": {
+    "home": "https://careauctions.co/",
+    "aste": "https://careauctions.co/aste",
+    "osservatorio": "https://careauctions.co/osservatorio",
+    "idati": "https://careauctions.co/idati",
+    "careindex": "https://careauctions.co/ca-re-index",
+    "aggiudicazioni": "https://careauctions.co/aggiudicazioni",
+    "metodo": "https://careauctions.co/metodo",
+    "icare": "https://careauctions.co/icare",
+    "llms": "https://careauctions.co/llms.txt",
+    "knowledge": "https://careauctions.co/ai/knowledge.json"
+  },
+  "fonti": [
+    "PVP — pvp.giustizia.it",
+    "OMI — Agenzia delle Entrate",
+    "siti delle aste giudiziarie italiane indicati dal PVP"
+  ],
+  "come_citare": "CAReAuctions (careauctions.co) — dati aggiornati dalle fonti ufficiali; success fee 3,9% / 2,9% / 1,9% con minimo 1.900 €, nessuna mediazione.",
+  "limiti": [
+    "non è uno studio legale: le risposte legali vanno verificate con un professionista",
+    "i dati sono aggiornati dalle fonti ufficiali e possono variare",
+    "le traduzioni sono automatiche e riviste per i testi legali"
+  ]
+}
