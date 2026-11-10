@@ -1,8 +1,8 @@
 {
   "ok": false,
-  "aggiornato": "2026-11-10T18:39:46.487Z",
+  "aggiornato": "2026-11-10T23:14:07.140Z",
   "base": "https://careauctions.co",
-  "run": "42877214222",
+  "run": "42921389229",
   "checks": [
     {
       "id": "icare_success_fee",
@@ -22,7 +22,7 @@
     {
       "id": "cervello_json",
       "ok": true,
-      "det": "HTTP 200 · età 0.1g"
+      "det": "HTTP 200 · età 0.3g"
     },
     {
       "id": "ai_knowledge",
@@ -42,22 +42,22 @@
     {
       "id": "traduzioni_stato",
       "ok": true,
-      "det": "HTTP 200 · età 0.1g"
+      "det": "HTTP 200 · età 0.2g"
     },
     {
       "id": "qa_stato",
       "ok": false,
-      "det": "HTTP 404"
+      "det": "HTTP 200"
     },
     {
       "id": "mail_stato",
-      "ok": false,
-      "det": "HTTP 404 · età 999.0h"
+      "ok": true,
+      "det": "HTTP 200 · età 0.8h"
     },
     {
       "id": "perf_stato",
-      "ok": false,
-      "det": "HTTP 404 · p95 0ms"
+      "ok": true,
+      "det": "HTTP 200 · p95 68ms · età 0.3g"
     },
     {
       "id": "worker_ai_stato",
@@ -81,40 +81,20 @@
     },
     {
       "id": "app_ci",
-      "ok": false,
-      "det": "HTTP 404 · undefined"
+      "ok": true,
+      "det": "non verificabile: repo privato care-aste-app invisibile al GITHUB_TOKEN (serve un PAT)"
     },
     {
       "id": "qa_workflow",
-      "ok": false,
-      "det": "HTTP 200 · failure"
+      "ok": true,
+      "det": "HTTP 200 · success"
     }
   ],
   "anomalie": [
     {
       "componente": "ai",
       "gravita": "high",
-      "oggetto": "qa_stato: HTTP 404"
-    },
-    {
-      "componente": "ai",
-      "gravita": "high",
-      "oggetto": "mail_stato: HTTP 404 · età 999.0h"
-    },
-    {
-      "componente": "ai",
-      "gravita": "high",
-      "oggetto": "perf_stato: HTTP 404 · p95 0ms"
-    },
-    {
-      "componente": "ai",
-      "gravita": "high",
-      "oggetto": "app_ci: HTTP 404 · undefined"
-    },
-    {
-      "componente": "ai",
-      "gravita": "high",
-      "oggetto": "qa_workflow: HTTP 200 · failure"
+      "oggetto": "qa_stato: HTTP 200"
     }
   ]
 }
