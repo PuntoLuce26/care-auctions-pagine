@@ -54,9 +54,14 @@ const post = (body) => req(BASE + '/api/icare', { method: 'POST', headers: { 'Co
   const etaT = tj.data ? (Date.now() - Date.parse(tj.data)) / 86400000 : 999;
   ck('traduzioni_stato', tr.status === 200 && etaT <= 3, 'HTTP ' + tr.status + ' · età ' + etaT.toFixed(1) + 'g');
   // 9. QA
+  // 11/11/2026 — qa/stato.json ha schema {generatedAt, summary:{critical,high,medium,low,total}, issues}.
+  // Prima si cercavano chiavi che NON esistono (ok/critici/sintesi): l'allarme era falso a ogni giro.
   const qa = await req(BASE + '/qa/stato.json');
   const qj = qa.json || {};
-  ck('qa_stato', qa.status === 200 && (qj.ok === true || qj.critici === 0 || qj.sintesi), 'HTTP ' + qa.status);
+  const sq = qj.summary || {};
+  const etaQ = qj.generatedAt ? (Date.now() - Date.parse(qj.generatedAt)) / 3600000 : 999;
+  ck('qa_stato', qa.status === 200 && Number(sq.critical) === 0 && Number(sq.high) === 0 && etaQ <= 6,
+     'HTTP ' + qa.status + ' · ' + Number(sq.critical || 0) + 'C/' + Number(sq.high || 0) + 'A · ' + etaQ.toFixed(1) + 'h');
   // 10. mail-qa
   // 11/11/2026 — lo stato di mail-qa e' INTERNO (puo' contenere oggetti di mail): non si
   // pubblica sul sito, si legge dalla raw che e' la fonte vera. La chiave di tempo e' ultimoControllo.
