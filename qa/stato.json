@@ -1,21 +1,45 @@
 {
-  "generatedAt": "2026-11-10T14:23:18.135Z",
-  "runId": "42832053374",
-  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42832053374",
+  "generatedAt": "2026-11-10T16:07:47.738Z",
+  "runId": "42850473221",
+  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42850473221",
   "base": "https://careauctions.co",
-  "durationSec": 210,
+  "durationSec": 208,
   "build": {
     "sito": "main.66d9c2e6.js",
     "origine": "main.66d9c2e6.js"
   },
   "summary": {
     "critical": 0,
-    "high": 0,
+    "high": 2,
     "medium": 0,
-    "low": 3,
-    "total": 3
+    "low": 5,
+    "total": 7
   },
   "issues": [
+    {
+      "severity": "high",
+      "type": "seo_llms",
+      "route": "seo",
+      "viewport": "",
+      "message": "controllo llms fallito",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "seo_home_strip",
+      "route": "seo",
+      "viewport": "",
+      "message": "controllo home_strip fallito",
+      "suggestion": ""
+    },
+    {
+      "severity": "low",
+      "type": "form_invalid",
+      "route": "/",
+      "viewport": "desktop",
+      "message": "campi obbligatori non compilati dal QA (atteso per consenso/date): INPUT, INPUT",
+      "suggestion": "Verificare che il form sia compilabile e che i campi obbligatori abbiano un messaggio chiaro."
+    },
     {
       "severity": "low",
       "type": "form_invalid",
@@ -35,6 +59,14 @@
     {
       "severity": "low",
       "type": "form_invalid",
+      "route": "/",
+      "viewport": "mobile",
+      "message": "campi obbligatori non compilati dal QA (atteso per consenso/date): INPUT, INPUT",
+      "suggestion": "Verificare che il form sia compilabile e che i campi obbligatori abbiano un messaggio chiaro."
+    },
+    {
+      "severity": "low",
+      "type": "form_invalid",
       "route": "/buynow/san-pasquale",
       "viewport": "mobile",
       "message": "campi obbligatori non compilati dal QA (atteso per consenso/date): INPUT, INPUT",
@@ -46,7 +78,7 @@
       "route": "/",
       "viewport": "desktop",
       "http": 200,
-      "text": 21535,
+      "text": 20283,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -57,7 +89,7 @@
       "route": "/aste",
       "viewport": "desktop",
       "http": 200,
-      "text": 22329,
+      "text": 20851,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -79,7 +111,7 @@
       "route": "/osservatorio",
       "viewport": "desktop",
       "http": 200,
-      "text": 5869,
+      "text": 7837,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -167,7 +199,7 @@
       "route": "/buynow/san-pasquale",
       "viewport": "desktop",
       "http": 200,
-      "text": 4666,
+      "text": 4586,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -178,7 +210,7 @@
       "route": "/compra-ora",
       "viewport": "desktop",
       "http": 200,
-      "text": 22255,
+      "text": 22175,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -189,7 +221,7 @@
       "route": "/ishop",
       "viewport": "desktop",
       "http": 200,
-      "text": 5114,
+      "text": 5034,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -233,7 +265,7 @@
       "route": "/stato",
       "viewport": "desktop",
       "http": 200,
-      "text": 765,
+      "text": 769,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -244,18 +276,18 @@
       "route": "/",
       "viewport": "mobile",
       "http": 200,
-      "text": 21400,
+      "text": 20147,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
       "formsFilled": 6,
-      "clicks": 3
+      "clicks": 0
     },
     {
       "route": "/aste",
       "viewport": "mobile",
       "http": 200,
-      "text": 22868,
+      "text": 22870,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -277,7 +309,7 @@
       "route": "/buynow/san-pasquale",
       "viewport": "mobile",
       "http": 200,
-      "text": 4646,
+      "text": 4566,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -288,7 +320,7 @@
       "route": "/compra-ora",
       "viewport": "mobile",
       "http": 200,
-      "text": 22241,
+      "text": 22161,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -299,7 +331,7 @@
       "route": "/ishop",
       "viewport": "mobile",
       "http": 200,
-      "text": 5094,
+      "text": 5014,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -321,7 +353,7 @@
         {
           "route": "/buynow/san-pasquale",
           "http": 200,
-          "text": 4666,
+          "text": 4586,
           "errors": 0
         }
       ]
@@ -339,7 +371,7 @@
         {
           "route": "/buynow/san-pasquale",
           "http": 200,
-          "text": 4647,
+          "text": 4567,
           "errors": 0
         }
       ]
@@ -349,8 +381,8 @@
     "llms": {
       "status": 200,
       "ok": true,
-      "hasPages": true,
-      "hasCite": true
+      "hasPages": false,
+      "hasCite": false
     },
     "robots": {
       "status": 200,
@@ -376,7 +408,7 @@
     },
     "home": {
       "status": 200,
-      "strip": true,
+      "strip": false,
       "linkNovita": true,
       "build": "main.66d9c2e6.js"
     },
@@ -398,9 +430,9 @@
   "feed": {
     "statistiche": {
       "status": 200,
-      "aggiornato": "2026-11-10T14:20:21.185Z",
-      "totale": 321200,
-      "ageHours": 0
+      "aggiornato": "2026-11-10T15:41:02.196Z",
+      "totale": 321232,
+      "ageHours": 0.4
     },
     "aggiudicazioni": {
       "status": 200,
@@ -417,49 +449,49 @@
         "name": "stato",
         "ok": true,
         "status": 200,
-        "ms": 1539,
+        "ms": 1591,
         "detail": "tabella popolata"
       },
       {
         "name": "feed statistiche",
         "ok": true,
         "status": 200,
-        "ms": 60,
-        "detail": "totale 321200 · 0 h fa"
+        "ms": 20,
+        "detail": "totale 321232 · 0.4 h fa"
       },
       {
         "name": "feed aggiudicazioni",
         "ok": true,
         "status": 200,
-        "ms": 332,
+        "ms": 251,
         "detail": "18115 record"
       },
       {
         "name": "origine Emergent",
         "ok": true,
         "status": 200,
-        "ms": 446,
+        "ms": 226,
         "detail": "main.66d9c2e6.js"
       },
       {
         "name": "chat iCARe",
         "ok": true,
         "status": 200,
-        "ms": 517,
+        "ms": 549,
         "detail": "{\"ok\":true,\"risposta\":\"Ciao, sono **iCARe**, la consulente immobiliare di CARe …"
       },
       {
         "name": "iCAReWall API",
         "ok": true,
         "status": 200,
-        "ms": 255,
-        "detail": "15515 byte"
+        "ms": 265,
+        "detail": "15575 byte"
       },
       {
         "name": "voce TTS",
         "ok": true,
         "status": 200,
-        "ms": 50,
+        "ms": 15,
         "detail": "6482 byte"
       }
     ],
