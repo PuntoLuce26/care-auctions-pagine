@@ -1,5 +1,5 @@
 {
-  "generato": "2026-11-10T16:03:14.096Z",
+  "generato": "2026-11-10T16:10:36.799Z",
   "brand": {
     "nome": "CAReAuctions",
     "sito": "https://careauctions.co",
@@ -60,6 +60,8 @@
     "careindex": "https://careauctions.co/ca-re-index",
     "aggiudicazioni": "https://careauctions.co/aggiudicazioni",
     "metodo": "https://careauctions.co/metodo",
+    "novita": "https://careauctions.co/novita",
+    "buynow": "https://careauctions.co/buynow/san-pasquale",
     "icare": "https://careauctions.co/icare",
     "llms": "https://careauctions.co/llms.txt",
     "knowledge": "https://careauctions.co/ai/knowledge.json"
