@@ -1,0 +1,471 @@
+{
+  "generatedAt": "2026-11-10T14:06:34.432Z",
+  "runId": "42829868148",
+  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42829868148",
+  "base": "https://careauctions.co",
+  "durationSec": 203,
+  "build": {
+    "sito": "main.66d9c2e6.js",
+    "origine": "main.66d9c2e6.js"
+  },
+  "summary": {
+    "critical": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 3,
+    "total": 3
+  },
+  "issues": [
+    {
+      "severity": "low",
+      "type": "form_invalid",
+      "route": "/buynow/san-pasquale",
+      "viewport": "desktop",
+      "message": "campi obbligatori non compilati dal QA (atteso per consenso/date): INPUT, INPUT",
+      "suggestion": "Verificare che il form sia compilabile e che i campi obbligatori abbiano un messaggio chiaro."
+    },
+    {
+      "severity": "low",
+      "type": "form_invalid",
+      "route": "/mappa-prezzi",
+      "viewport": "desktop",
+      "message": "campi obbligatori non compilati dal QA (atteso per consenso/date): INPUT",
+      "suggestion": "Verificare che il form sia compilabile e che i campi obbligatori abbiano un messaggio chiaro."
+    },
+    {
+      "severity": "low",
+      "type": "form_invalid",
+      "route": "/buynow/san-pasquale",
+      "viewport": "mobile",
+      "message": "campi obbligatori non compilati dal QA (atteso per consenso/date): INPUT, INPUT",
+      "suggestion": "Verificare che il form sia compilabile e che i campi obbligatori abbiano un messaggio chiaro."
+    }
+  ],
+  "routes": [
+    {
+      "route": "/",
+      "viewport": "desktop",
+      "http": 200,
+      "text": 21535,
+      "imagesBroken": 0,
+      "jsErrors": 0,
+      "consoleErrors": 0,
+      "formsFilled": 5,
+      "clicks": 3
+    },
+    {
+      "route": "/aste",
+      "viewport": "desktop",
+      "http": 200,
+      "text": 22317,
+      "imagesBroken": 0,
+      "jsErrors": 0,
+      "consoleErrors": 0,
+      "formsFilled": 13,
+      "clicks": 3
+    },
+    {
+      "route": "/idati",
+      "viewport": "desktop",
+      "http": 200,
+      "text": 5581,
+      "imagesBroken": 0,
+      "jsErrors": 0,
+      "consoleErrors": 0,
+      "formsFilled": 1,
+      "clicks": 3
+    },
+    {
+      "route": "/osservatorio",
+      "viewport": "desktop",
+      "http": 200,
+      "text": 5869,
+      "imagesBroken": 0,
+      "jsErrors": 0,
+      "consoleErrors": 0,
+      "formsFilled": 1,
+      "clicks": 3
+    },
+    {
+      "route": "/aggiudicazioni",
+      "viewport": "desktop",
+      "http": 200,
+      "text": 3600,
+      "imagesBroken": 0,
+      "jsErrors": 0,
+      "consoleErrors": 0,
+      "formsFilled": 1,
+      "clicks": 3
+    },
+    {
+      "route": "/dati",
+      "viewport": "desktop",
+      "http": 200,
+      "text": 6214,
+      "imagesBroken": 0,
+      "jsErrors": 0,
+      "consoleErrors": 0,
+      "formsFilled": 0,
+      "clicks": 0
+    },
+    {
+      "route": "/ilive",
+      "viewport": "desktop",
+      "http": 200,
+      "text": 4314,
+      "imagesBroken": 0,
+      "jsErrors": 0,
+      "consoleErrors": 0,
+      "formsFilled": 2,
+      "clicks": 3
+    },
+    {
+      "route": "/stampa",
+      "viewport": "desktop",
+      "http": 200,
+      "text": 5434,
+      "imagesBroken": 0,
+      "jsErrors": 0,
+      "consoleErrors": 0,
+      "formsFilled": 1,
+      "clicks": 3
+    },
+    {
+      "route": "/emozioni",
+      "viewport": "desktop",
+      "http": 200,
+      "text": 3680,
+      "imagesBroken": 0,
+      "jsErrors": 0,
+      "consoleErrors": 0,
+      "formsFilled": 1,
+      "clicks": 0
+    },
+    {
+      "route": "/novita",
+      "viewport": "desktop",
+      "http": 200,
+      "text": 1716,
+      "imagesBroken": 0,
+      "jsErrors": 0,
+      "consoleErrors": 0,
+      "formsFilled": 0,
+      "clicks": 0
+    },
+    {
+      "route": "/affiliazione",
+      "viewport": "desktop",
+      "http": 200,
+      "text": 1303,
+      "imagesBroken": 0,
+      "jsErrors": 0,
+      "consoleErrors": 0,
+      "formsFilled": 0,
+      "clicks": 0
+    },
+    {
+      "route": "/buynow/san-pasquale",
+      "viewport": "desktop",
+      "http": 200,
+      "text": 4666,
+      "imagesBroken": 0,
+      "jsErrors": 0,
+      "consoleErrors": 0,
+      "formsFilled": 3,
+      "clicks": 3
+    },
+    {
+      "route": "/compra-ora",
+      "viewport": "desktop",
+      "http": 200,
+      "text": 22255,
+      "imagesBroken": 0,
+      "jsErrors": 0,
+      "consoleErrors": 0,
+      "formsFilled": 13,
+      "clicks": 3
+    },
+    {
+      "route": "/ishop",
+      "viewport": "desktop",
+      "http": 200,
+      "text": 5114,
+      "imagesBroken": 0,
+      "jsErrors": 0,
+      "consoleErrors": 0,
+      "formsFilled": 1,
+      "clicks": 3
+    },
+    {
+      "route": "/icare",
+      "viewport": "desktop",
+      "http": 200,
+      "text": 6993,
+      "imagesBroken": 0,
+      "jsErrors": 0,
+      "consoleErrors": 0,
+      "formsFilled": 1,
+      "clicks": 3
+    },
+    {
+      "route": "/faq",
+      "viewport": "desktop",
+      "http": 200,
+      "text": 4585,
+      "imagesBroken": 0,
+      "jsErrors": 0,
+      "consoleErrors": 0,
+      "formsFilled": 0,
+      "clicks": 0
+    },
+    {
+      "route": "/mappa-prezzi",
+      "viewport": "desktop",
+      "http": 200,
+      "text": 3532,
+      "imagesBroken": 0,
+      "jsErrors": 0,
+      "consoleErrors": 0,
+      "formsFilled": 1,
+      "clicks": 0
+    },
+    {
+      "route": "/stato",
+      "viewport": "desktop",
+      "http": 200,
+      "text": 770,
+      "imagesBroken": 0,
+      "jsErrors": 0,
+      "consoleErrors": 0,
+      "formsFilled": 0,
+      "clicks": 0
+    },
+    {
+      "route": "/",
+      "viewport": "mobile",
+      "http": 200,
+      "text": 21399,
+      "imagesBroken": 0,
+      "jsErrors": 0,
+      "consoleErrors": 0,
+      "formsFilled": 6,
+      "clicks": 3
+    },
+    {
+      "route": "/aste",
+      "viewport": "mobile",
+      "http": 200,
+      "text": 22868,
+      "imagesBroken": 0,
+      "jsErrors": 0,
+      "consoleErrors": 0,
+      "formsFilled": 13,
+      "clicks": 3
+    },
+    {
+      "route": "/novita",
+      "viewport": "mobile",
+      "http": 200,
+      "text": 1716,
+      "imagesBroken": 0,
+      "jsErrors": 0,
+      "consoleErrors": 0,
+      "formsFilled": 0,
+      "clicks": 0
+    },
+    {
+      "route": "/buynow/san-pasquale",
+      "viewport": "mobile",
+      "http": 200,
+      "text": 4646,
+      "imagesBroken": 0,
+      "jsErrors": 0,
+      "consoleErrors": 0,
+      "formsFilled": 3,
+      "clicks": 3
+    },
+    {
+      "route": "/compra-ora",
+      "viewport": "mobile",
+      "http": 200,
+      "text": 22241,
+      "imagesBroken": 0,
+      "jsErrors": 0,
+      "consoleErrors": 0,
+      "formsFilled": 13,
+      "clicks": 3
+    },
+    {
+      "route": "/ishop",
+      "viewport": "mobile",
+      "http": 200,
+      "text": 5094,
+      "imagesBroken": 0,
+      "jsErrors": 0,
+      "consoleErrors": 0,
+      "formsFilled": 1,
+      "clicks": 3
+    }
+  ],
+  "smoke": [
+    {
+      "browser": "firefox",
+      "skipped": null,
+      "routes": [
+        {
+          "route": "/",
+          "http": 200,
+          "text": 18475,
+          "errors": 0
+        },
+        {
+          "route": "/buynow/san-pasquale",
+          "http": 200,
+          "text": 4666,
+          "errors": 0
+        }
+      ]
+    },
+    {
+      "browser": "webkit",
+      "skipped": null,
+      "routes": [
+        {
+          "route": "/",
+          "http": 200,
+          "text": 18122,
+          "errors": 0
+        },
+        {
+          "route": "/buynow/san-pasquale",
+          "http": 200,
+          "text": 4647,
+          "errors": 0
+        }
+      ]
+    }
+  ],
+  "seo": {
+    "llms": {
+      "status": 200,
+      "ok": true,
+      "hasPages": true,
+      "hasCite": true
+    },
+    "robots": {
+      "status": 200,
+      "ok": true,
+      "hasAi": true
+    },
+    "sitemap": {
+      "status": 200,
+      "ok": true,
+      "hasNovita": true,
+      "hasPagine": true
+    },
+    "sitemapNovita": {
+      "status": 200,
+      "ok": true,
+      "urls": 4,
+      "hasAffiliationSelf": true
+    },
+    "sitemapPagine": {
+      "status": 200,
+      "ok": true,
+      "hasBuynow": true
+    },
+    "home": {
+      "status": 200,
+      "strip": true,
+      "linkNovita": true,
+      "build": "main.66d9c2e6.js"
+    },
+    "botHome": {
+      "status": 200,
+      "links": [
+        "/novita",
+        "/affiliazione",
+        "/buynow/san-pasquale",
+        "/llms.txt"
+      ],
+      "build": null
+    },
+    "origin": {
+      "status": 200,
+      "build": "main.66d9c2e6.js"
+    }
+  },
+  "feed": {
+    "statistiche": {
+      "status": 200,
+      "aggiornato": "2026-11-10T12:42:09.375Z",
+      "totale": 321168,
+      "ageHours": 1.4
+    },
+    "aggiudicazioni": {
+      "status": 200,
+      "count": 18115
+    },
+    "stato": {
+      "status": 200,
+      "ok": true
+    }
+  },
+  "logs": {
+    "checks": [
+      {
+        "name": "stato",
+        "ok": true,
+        "status": 200,
+        "ms": 1761,
+        "detail": "tabella popolata"
+      },
+      {
+        "name": "feed statistiche",
+        "ok": true,
+        "status": 200,
+        "ms": 64,
+        "detail": "totale 321168 · 1.4 h fa"
+      },
+      {
+        "name": "feed aggiudicazioni",
+        "ok": true,
+        "status": 200,
+        "ms": 316,
+        "detail": "18115 record"
+      },
+      {
+        "name": "origine Emergent",
+        "ok": true,
+        "status": 200,
+        "ms": 202,
+        "detail": "main.66d9c2e6.js"
+      },
+      {
+        "name": "chat iCARe",
+        "ok": true,
+        "status": 200,
+        "ms": 511,
+        "detail": "{\"ok\":true,\"risposta\":\"Ciao, sono **iCARe**, la consulente immobiliare di CARe …"
+      },
+      {
+        "name": "iCAReWall API",
+        "ok": true,
+        "status": 200,
+        "ms": 237,
+        "detail": "15515 byte"
+      },
+      {
+        "name": "voce TTS",
+        "ok": true,
+        "status": 200,
+        "ms": 70,
+        "detail": "6482 byte"
+      }
+    ],
+    "github": {
+      "checked": 30,
+      "failedLast24h": []
+    }
+  }
+}
