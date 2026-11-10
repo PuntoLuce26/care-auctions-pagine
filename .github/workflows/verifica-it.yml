@@ -1,0 +1,65 @@
+name: verifica-it
+# Watcher cloud dei quattro indirizzi di careauctions.it.
+# Ogni 10 minuti (e a comando) verifica che http/https su careauctions.it e
+# www.careauctions.it finiscano su https://careauctions.co/<percorso> in max 2 salti
+# e registra qa/verifica-it.json.
+# Committa SOLO quando lo stato cambia (ok / pending / anomalia): un commit in piu'
+# cancella la build Pages in corso, quindi niente rumore. Il contenuto del file non
+# contiene segreti: solo URL, codici HTTP, Location ed esito.
+# Exit code 2 = anomalia (run rossa vera); tls-pending/redirect-parziale = run verde
+# (il certificato non e' un guasto nostro).
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# un solo watcher alla volta: il giro e' corto, non serve accodare.
+concurrency:
+  group: verifica-it
+  cancel-in-progress: true
+
+jobs:
+  verifica-it:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Verifica indirizzi careauctions.it
+        id: verifica
+        run: python3 scripts/verifica-it.py
+
+      - name: Commit dello stato (solo se cambiato)
+        if: always() && steps.verifica.outputs.commit == 'true'
+        env:
+          STATO: ${{ steps.verifica.outputs.stato }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          set -eu
+          git config user.name "care-watcher"
+          git config user.email "care-watcher@users.noreply.github.com"
+          git add qa/verifica-it.json
+          if git diff --cached --quiet; then
+            echo "qa/verifica-it.json identico: niente commit."
+            exit 0
+          fi
+          git commit -m "verifica-it: stato ${STATO} (run ${RUN_ID})"
+          # race-safe: il repo e' condiviso con feed-sync e qa, che committano spesso.
+          for tentativo in 1 2 3 4 5; do
+            if git pull --rebase --autostash origin main && git push; then
+              echo "push ok al tentativo ${tentativo}"
+              exit 0
+            fi
+            echo "tentativo ${tentativo} fallito, riprovo tra 3 s"
+            git rebase --abort 2>/dev/null || true
+            sleep 3
+          done
+          echo "::error::push fallito dopo 5 tentativi"
+          exit 1
