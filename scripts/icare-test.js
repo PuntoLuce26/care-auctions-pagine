@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const BASE = process.env.ICARE_BASE || 'https://careauctions.co';
 const API = BASE + '/api/icare';
-const BRAIN = 'https://raw.githubusercontent.com/PuntoLuce26/care-auctions-pagine/main/ai/cervello.json';
+const BRAIN = 'https://careauctions.co/ai/cervello.json';
 const casi = [
   { id: 'success_fee_200k', q: 'Quanto costa la success fee su 200.000 euro?', must: ['5.800', 'non fa mediazione', '3,9%', '1,9%', '1.900'] },
   { id: 'esiti_copertura', q: 'Quanti esiti avete e con quale copertura?', must: ['4.142', '360', '33.375', '44', '14', '29/09/2020'] },
