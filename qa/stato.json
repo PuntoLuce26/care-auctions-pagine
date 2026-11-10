@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-10T21:59:34.771Z",
-  "runId": "42909474895",
-  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42909474895",
+  "generatedAt": "2026-11-10T23:20:23.757Z",
+  "runId": "42921645957",
+  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42921645957",
   "base": "https://careauctions.co",
-  "durationSec": 200,
+  "durationSec": 199,
   "build": {
     "sito": "main.685e7a77.js",
     "origine": "main.685e7a77.js"
@@ -16,6 +16,14 @@
     "total": 4
   },
   "issues": [
+    {
+      "severity": "low",
+      "type": "form_invalid",
+      "route": "/osservatorio",
+      "viewport": "desktop",
+      "message": "campi obbligatori non compilati dal QA (atteso per consenso/date): INPUT",
+      "suggestion": "Verificare che il form sia compilabile e che i campi obbligatori abbiano un messaggio chiaro."
+    },
     {
       "severity": "low",
       "type": "form_invalid",
@@ -35,14 +43,6 @@
     {
       "severity": "low",
       "type": "form_invalid",
-      "route": "/",
-      "viewport": "mobile",
-      "message": "campi obbligatori non compilati dal QA (atteso per consenso/date): INPUT, INPUT",
-      "suggestion": "Verificare che il form sia compilabile e che i campi obbligatori abbiano un messaggio chiaro."
-    },
-    {
-      "severity": "low",
-      "type": "form_invalid",
       "route": "/buynow/san-pasquale",
       "viewport": "mobile",
       "message": "campi obbligatori non compilati dal QA (atteso per consenso/date): INPUT, INPUT",
@@ -54,7 +54,7 @@
       "route": "/",
       "viewport": "desktop",
       "http": 200,
-      "text": 21614,
+      "text": 21567,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -65,7 +65,7 @@
       "route": "/aste",
       "viewport": "desktop",
       "http": 200,
-      "text": 22319,
+      "text": 22228,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -87,7 +87,7 @@
       "route": "/osservatorio",
       "viewport": "desktop",
       "http": 200,
-      "text": 7837,
+      "text": 4565,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -241,7 +241,7 @@
       "route": "/stato",
       "viewport": "desktop",
       "http": 200,
-      "text": 765,
+      "text": 769,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -252,12 +252,12 @@
       "route": "/",
       "viewport": "mobile",
       "http": 200,
-      "text": 20147,
+      "text": 21432,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
       "formsFilled": 6,
-      "clicks": 0
+      "clicks": 3
     },
     {
       "route": "/aste",
@@ -408,9 +408,9 @@
   "feed": {
     "statistiche": {
       "status": 200,
-      "aggiornato": "2026-11-10T20:46:32.474Z",
-      "totale": 321290,
-      "ageHours": 1.2
+      "aggiornato": "2026-11-10T23:02:19.863Z",
+      "totale": 321291,
+      "ageHours": 0.3
     },
     "aggiudicazioni": {
       "status": 200,
@@ -427,49 +427,49 @@
         "name": "stato",
         "ok": true,
         "status": 200,
-        "ms": 1486,
+        "ms": 1604,
         "detail": "tabella popolata"
       },
       {
         "name": "feed statistiche",
         "ok": true,
         "status": 200,
-        "ms": 42,
-        "detail": "totale 321290 · 1.2 h fa"
+        "ms": 135,
+        "detail": "totale 321291 · 0.3 h fa"
       },
       {
         "name": "feed aggiudicazioni",
         "ok": true,
         "status": 200,
-        "ms": 368,
+        "ms": 587,
         "detail": "18115 record"
       },
       {
         "name": "origine Emergent",
         "ok": true,
         "status": 200,
-        "ms": 207,
+        "ms": 162,
         "detail": "main.685e7a77.js"
       },
       {
         "name": "chat iCARe",
         "ok": true,
         "status": 200,
-        "ms": 405,
+        "ms": 377,
         "detail": "{\"ok\":true,\"risposta\":\"Ciao, sono **iCARe**, la consulente immobiliare di CARe …"
       },
       {
         "name": "iCAReWall API",
         "ok": true,
         "status": 200,
-        "ms": 301,
-        "detail": "15531 byte"
+        "ms": 390,
+        "detail": "15437 byte"
       },
       {
         "name": "voce TTS",
         "ok": true,
         "status": 200,
-        "ms": 56,
+        "ms": 24,
         "detail": "6482 byte"
       }
     ],
