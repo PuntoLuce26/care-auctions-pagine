@@ -1,0 +1,96 @@
+name: qa
+# QA CAReAuctions — crawler + form + immagini + link + log + SEO/AI.
+# Gira in cloud su GitHub Actions. Non compra, non paga, non invia form.
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+  repository_dispatch:
+    types: [emergent-published, qa-run]
+  push:
+    paths:
+      - "qa/**"
+      - "scripts/verifica-playwright.mjs"
+      - ".github/workflows/qa.yml"
+      - "prerender/**"
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  actions: read
+
+concurrency:
+  group: qa
+  cancel-in-progress: true
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Cache Playwright
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: qa-pw-${{ runner.os }}-1.63.0
+
+      - name: Installa Playwright (Chromium, Firefox, WebKit)
+        run: |
+          npm i playwright@1.63.0 --no-save
+          npx playwright install --with-deps chromium firefox webkit
+
+      - name: QA crawl + log scan
+        env:
+          QA_BASE: https://careauctions.co
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node qa/run.mjs
+
+      - name: Riepilogo nel run
+        if: always()
+        run: |
+          if [ -f qa/out/summary.md ]; then cat qa/out/summary.md >> "$GITHUB_STEP_SUMMARY"; fi
+
+      - name: Artefatto del report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-report
+          path: qa/out/
+          retention-days: 30
+
+      - name: Issue GitHub (una sola, aggiornata)
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node qa/publish.mjs
+
+      - name: Patch sicura su branch + PR
+        if: ${{ vars.QA_AUTOMERGE == 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ ! -s qa/out/patch.diff ]; then echo "Nessuna patch sicura in questo giro."; exit 0; fi
+          git config user.name "CARe QA"
+          git config user.email "qa@careauctions.co"
+          BR="qa/auto-${GITHUB_RUN_ID}"
+          git checkout -b "$BR"
+          git apply qa/out/patch.diff
+          git add -A
+          git commit -m "QA: patch automatica ${GITHUB_RUN_ID}"
+          git push origin "$BR"
+          gh pr create --title "QA: patch automatica ${GITHUB_RUN_ID}" --body-file qa/out/fix-proposals.md --base main --head "$BR"
+
+      - name: Quality gate (rosso solo per i critici)
+        if: always()
+        run: node qa/gate.mjs
