@@ -68,6 +68,22 @@ jobs:
           path: qa/out/
           retention-days: 30
 
+      - name: Pubblica lo stato per il Secondo Cervello
+        if: always()
+        run: |
+          node qa/status.mjs
+          git config user.name "CARe QA"
+          git config user.email "qa@careauctions.co"
+          git add qa/stato.json
+          if git diff --cached --quiet; then echo "nessuna variazione di stato"; exit 0; fi
+          git commit -m "qa: stato $(date -u +%FT%TZ)"
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null
+            if git push; then exit 0; fi
+            sleep 4
+          done
+          echo "::warning::push qa/stato.json fallito"
+
       - name: Issue GitHub (una sola, aggiornata)
         if: always()
         env:
