@@ -1,0 +1,120 @@
+{
+  "ok": false,
+  "aggiornato": "2026-11-10T18:39:46.487Z",
+  "base": "https://careauctions.co",
+  "run": "42877214222",
+  "checks": [
+    {
+      "id": "icare_success_fee",
+      "ok": true,
+      "det": "HTTP 200"
+    },
+    {
+      "id": "icare_perimetro",
+      "ok": true,
+      "det": "HTTP 200"
+    },
+    {
+      "id": "icare_registrato",
+      "ok": true,
+      "det": "HTTP 200"
+    },
+    {
+      "id": "cervello_json",
+      "ok": true,
+      "det": "HTTP 200 · età 0.1g"
+    },
+    {
+      "id": "ai_knowledge",
+      "ok": true,
+      "det": "HTTP 200 · 2830B"
+    },
+    {
+      "id": "ai_education_stato",
+      "ok": true,
+      "det": "HTTP 200"
+    },
+    {
+      "id": "llms_txt",
+      "ok": true,
+      "det": "HTTP 200"
+    },
+    {
+      "id": "traduzioni_stato",
+      "ok": true,
+      "det": "HTTP 200 · età 0.1g"
+    },
+    {
+      "id": "qa_stato",
+      "ok": false,
+      "det": "HTTP 404"
+    },
+    {
+      "id": "mail_stato",
+      "ok": false,
+      "det": "HTTP 404 · età 999.0h"
+    },
+    {
+      "id": "perf_stato",
+      "ok": false,
+      "det": "HTTP 404 · p95 0ms"
+    },
+    {
+      "id": "worker_ai_stato",
+      "ok": true,
+      "det": "HTTP 200"
+    },
+    {
+      "id": "ponte_cloud_revisione",
+      "ok": true,
+      "det": "HTTP 200"
+    },
+    {
+      "id": "voce_tts",
+      "ok": true,
+      "det": "HTTP 200"
+    },
+    {
+      "id": "icarewall",
+      "ok": true,
+      "det": "HTTP 200"
+    },
+    {
+      "id": "app_ci",
+      "ok": false,
+      "det": "HTTP 404 · undefined"
+    },
+    {
+      "id": "qa_workflow",
+      "ok": false,
+      "det": "HTTP 200 · failure"
+    }
+  ],
+  "anomalie": [
+    {
+      "componente": "ai",
+      "gravita": "high",
+      "oggetto": "qa_stato: HTTP 404"
+    },
+    {
+      "componente": "ai",
+      "gravita": "high",
+      "oggetto": "mail_stato: HTTP 404 · età 999.0h"
+    },
+    {
+      "componente": "ai",
+      "gravita": "high",
+      "oggetto": "perf_stato: HTTP 404 · p95 0ms"
+    },
+    {
+      "componente": "ai",
+      "gravita": "high",
+      "oggetto": "app_ci: HTTP 404 · undefined"
+    },
+    {
+      "componente": "ai",
+      "gravita": "high",
+      "oggetto": "qa_workflow: HTTP 200 · failure"
+    }
+  ]
+}
