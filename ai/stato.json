@@ -1,0 +1,96 @@
+{
+  "generato": "2026-11-10T15:49:14.574Z",
+  "numeri": {
+    "lotti": 321232,
+    "immobiliari": 271024,
+    "mobiliari": 50208,
+    "regioni": 21,
+    "tribunali": 148,
+    "lingue": 91,
+    "lottiAttivi": 40871,
+    "aggiudicate": 2005,
+    "deserte": 28281,
+    "aggiornato": "2026-11-10T15:41:02.196Z"
+  },
+  "checks": [
+    {
+      "nome": "AI GPTBot llms",
+      "ok": true,
+      "dettaglio": "HTTP 200"
+    },
+    {
+      "nome": "AI ClaudeBot llms",
+      "ok": true,
+      "dettaglio": "HTTP 200"
+    },
+    {
+      "nome": "AI PerplexityBot llms",
+      "ok": true,
+      "dettaglio": "HTTP 200"
+    },
+    {
+      "nome": "AI Google-Extended llms",
+      "ok": true,
+      "dettaglio": "HTTP 200"
+    },
+    {
+      "nome": "AI Bingbot llms",
+      "ok": true,
+      "dettaglio": "HTTP 200"
+    },
+    {
+      "nome": "robots AI",
+      "ok": true,
+      "dettaglio": "HTTP 200"
+    },
+    {
+      "nome": "llms.txt",
+      "ok": true,
+      "dettaglio": "HTTP 200"
+    },
+    {
+      "nome": "ai knowledge",
+      "ok": false,
+      "dettaglio": "HTTP 404"
+    },
+    {
+      "nome": "sitemap",
+      "ok": true,
+      "dettaglio": "HTTP 200"
+    },
+    {
+      "nome": "schema home",
+      "ok": true,
+      "dettaglio": "HTTP 200"
+    },
+    {
+      "nome": "iCARe success fee 200k",
+      "ok": true,
+      "dettaglio": "Su 200.000 euro la success fee e’ **5.800 euro** (2,9% applicato all’intero prezzo, fascia unica; con il minimo di 1.900 euro si parte da 48.718 euro di aggiudi"
+    },
+    {
+      "nome": "i18n fr",
+      "ok": true,
+      "dettaglio": "HTTP 200 · 4000 chiavi"
+    },
+    {
+      "nome": "PVP documenti",
+      "ok": true,
+      "dettaglio": "HTTP 200 · 12 allegati"
+    },
+    {
+      "nome": "IndexNow key",
+      "ok": true,
+      "dettaglio": "HTTP 200"
+    }
+  ],
+  "indexnow": {
+    "inviati": 100,
+    "stato": "HTTP 200"
+  },
+  "ok": false,
+  "chat": {
+    "daDati": true,
+    "risposta": "Su 200.000 euro la success fee e’ **5.800 euro** (2,9% applicato all’intero prezzo, fascia unica; con il minimo di 1.900 euro si parte da 48.718 euro di aggiudicazione). CARe Auctions **non fa mediazione** e non prende provvigioni: e’ **consulente di parte** del compratore. Si paga una **success fee solo se l’asta si aggiudica**: **3,9%** fino a 150.000 euro, **2,9%** da 150.001 a 300.000 euro, **1,9%** oltre 300.000 euro, con un **minimo di 1.900 euro**, entro 24 ore dall’aggiudicazione. Se non"
+  }
+}
