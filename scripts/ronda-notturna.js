@@ -169,6 +169,31 @@ function add(nome, livello, dettaglio) { C.push({ nome, livello, ok: livello ===
   }
   add('workflow GitHub', runKo.length ? 'attenzione' : 'ok', runKo.length ? runKo.join(' · ') : 'nessun rosso nelle ultime 3 h');
 
+  // ── 7b. Sveglia dei monitoraggi che GitHub dirada ──────────────────────────
+  // GitHub strozza le schedule: mail-qa, verifica-it e il digest ogni 3 ore possono restare
+  // fermi per ore. La ronda fa da battito: se li vede fermi, li lancia.
+  const sveglie = [];
+  async function sveglia(wf) {
+    try {
+      const r = await fetch('https://api.github.com/repos/PuntoLuce26/care-auctions-pagine/actions/workflows/' + wf + '/dispatches', {
+        method: 'POST',
+        headers: { Authorization: 'Bearer ' + process.env.GITHUB_TOKEN, Accept: 'application/vnd.github+json', 'User-Agent': 'CARe-Ronda-Notturna', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ref: 'main' })
+      });
+      sveglie.push(wf + (r.status === 204 ? ' lanciato' : ' http ' + r.status));
+    } catch (e) { sveglie.push(wf + ' errore'); }
+  }
+  if (process.env.GITHUB_TOKEN) {
+    if (etaPosta != null && etaPosta > 45) await sveglia('mail-qa.yml');
+    const etaVit = vit && vit.generato ? etaMin(vit.generato) : null;
+    if (etaVit != null && etaVit > 40) await sveglia('verifica-it.yml');
+    const dAgg = await gh('/repos/PuntoLuce26/care-auctions-pagine/actions/workflows/aggiornamento-mail.yml/runs?per_page=1');
+    const rAgg = dAgg && dAgg.workflow_runs && dAgg.workflow_runs[0];
+    const etaAgg = rAgg ? etaMin(rAgg.updated_at) : null;
+    if (etaAgg != null && etaAgg > 240) await sveglia('aggiornamento-mail.yml');
+  }
+  add('sveglie dei monitoraggi', 'ok', sveglie.length ? sveglie.join(' · ') : 'nessuna necessaria');
+
   // ── Verdetto ───────────────────────────────────────────────────────────────
   const problemi = C.filter((c) => c.livello === 'problemi');
   const attenzioni = C.filter((c) => c.livello === 'attenzione');
@@ -215,6 +240,7 @@ function add(nome, livello, dettaglio) { C.push({ nome, livello, ok: livello ===
       '',
       ...C.map((c) => (c.livello === 'ok' ? 'OK  ' : (c.livello === 'attenzione' ? 'ATT ' : 'KO  ')) + c.nome + ': ' + c.dettaglio),
       '',
+      sveglie.length ? 'Monitoraggi svegliati stanotte: ' + sveglie.join(', ') : '',
       problemi.length ? 'DA FARE OGGI: ' + problemi.map((p) => p.nome).join(', ') : 'DA FARE OGGI: niente di urgente dalla ronda.',
       attenzioni.length ? 'Da tenere d occhio: ' + attenzioni.map((p) => p.nome).join(', ') : '',
       '',
