@@ -1,45 +1,21 @@
 {
-  "generatedAt": "2026-11-10T16:07:47.738Z",
-  "runId": "42850473221",
-  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42850473221",
+  "generatedAt": "2026-11-10T16:16:19.884Z",
+  "runId": "42851919462",
+  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42851919462",
   "base": "https://careauctions.co",
-  "durationSec": 208,
+  "durationSec": 223,
   "build": {
     "sito": "main.66d9c2e6.js",
     "origine": "main.66d9c2e6.js"
   },
   "summary": {
     "critical": 0,
-    "high": 2,
+    "high": 0,
     "medium": 0,
-    "low": 5,
-    "total": 7
+    "low": 4,
+    "total": 4
   },
   "issues": [
-    {
-      "severity": "high",
-      "type": "seo_llms",
-      "route": "seo",
-      "viewport": "",
-      "message": "controllo llms fallito",
-      "suggestion": ""
-    },
-    {
-      "severity": "high",
-      "type": "seo_home_strip",
-      "route": "seo",
-      "viewport": "",
-      "message": "controllo home_strip fallito",
-      "suggestion": ""
-    },
-    {
-      "severity": "low",
-      "type": "form_invalid",
-      "route": "/",
-      "viewport": "desktop",
-      "message": "campi obbligatori non compilati dal QA (atteso per consenso/date): INPUT, INPUT",
-      "suggestion": "Verificare che il form sia compilabile e che i campi obbligatori abbiano un messaggio chiaro."
-    },
     {
       "severity": "low",
       "type": "form_invalid",
@@ -78,7 +54,7 @@
       "route": "/",
       "viewport": "desktop",
       "http": 200,
-      "text": 20283,
+      "text": 21593,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -89,7 +65,7 @@
       "route": "/aste",
       "viewport": "desktop",
       "http": 200,
-      "text": 20851,
+      "text": 9189,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -210,7 +186,7 @@
       "route": "/compra-ora",
       "viewport": "desktop",
       "http": 200,
-      "text": 22175,
+      "text": 22181,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -265,7 +241,7 @@
       "route": "/stato",
       "viewport": "desktop",
       "http": 200,
-      "text": 769,
+      "text": 765,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -287,7 +263,7 @@
       "route": "/aste",
       "viewport": "mobile",
       "http": 200,
-      "text": 22870,
+      "text": 22311,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -347,7 +323,7 @@
         {
           "route": "/",
           "http": 200,
-          "text": 18475,
+          "text": 19837,
           "errors": 0
         },
         {
@@ -381,8 +357,8 @@
     "llms": {
       "status": 200,
       "ok": true,
-      "hasPages": false,
-      "hasCite": false
+      "hasPages": true,
+      "hasCite": true
     },
     "robots": {
       "status": 200,
@@ -410,6 +386,8 @@
       "status": 200,
       "strip": false,
       "linkNovita": true,
+      "linkAffiliazione": true,
+      "linkBuynow": true,
       "build": "main.66d9c2e6.js"
     },
     "botHome": {
@@ -432,7 +410,7 @@
       "status": 200,
       "aggiornato": "2026-11-10T15:41:02.196Z",
       "totale": 321232,
-      "ageHours": 0.4
+      "ageHours": 0.6
     },
     "aggiudicazioni": {
       "status": 200,
@@ -449,49 +427,49 @@
         "name": "stato",
         "ok": true,
         "status": 200,
-        "ms": 1591,
+        "ms": 1567,
         "detail": "tabella popolata"
       },
       {
         "name": "feed statistiche",
         "ok": true,
         "status": 200,
-        "ms": 20,
-        "detail": "totale 321232 · 0.4 h fa"
+        "ms": 74,
+        "detail": "totale 321232 · 0.6 h fa"
       },
       {
         "name": "feed aggiudicazioni",
         "ok": true,
         "status": 200,
-        "ms": 251,
+        "ms": 293,
         "detail": "18115 record"
       },
       {
         "name": "origine Emergent",
         "ok": true,
         "status": 200,
-        "ms": 226,
+        "ms": 506,
         "detail": "main.66d9c2e6.js"
       },
       {
         "name": "chat iCARe",
         "ok": true,
         "status": 200,
-        "ms": 549,
+        "ms": 459,
         "detail": "{\"ok\":true,\"risposta\":\"Ciao, sono **iCARe**, la consulente immobiliare di CARe …"
       },
       {
         "name": "iCAReWall API",
         "ok": true,
         "status": 200,
-        "ms": 265,
+        "ms": 371,
         "detail": "15575 byte"
       },
       {
         "name": "voce TTS",
         "ok": true,
         "status": 200,
-        "ms": 15,
+        "ms": 58,
         "detail": "6482 byte"
       }
     ],
