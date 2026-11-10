@@ -1,0 +1,34 @@
+[
+  {
+    "q": "Che cos’è CAReAuctions?",
+    "a": "Il primo HUB immobiliare al mondo: tutte le aste giudiziarie italiane, con la consulenza iCARe."
+  },
+  {
+    "q": "Quante aste ci sono?",
+    "a": "Oggi 321232 lotti, 271024 immobiliari, in 21 regioni e 148 tribunali."
+  },
+  {
+    "q": "Quanto costa la consulenza su 200.000 €?",
+    "a": "5.800 €: 2,9% sull’intero prezzo (fascia 150.001–300.000 €), con il minimo di 1.900 €; pagamento entro 24 ore dall’aggiudicazione."
+  },
+  {
+    "q": "Fate mediazione?",
+    "a": "No: CAReAuctions è consulente di parte del compratore e non percepisce provvigioni di mediazione."
+  },
+  {
+    "q": "Dove trovo perizia e documenti?",
+    "a": "Sulla scheda del lotto, sezione “Documenti e foto ufficiali”: perizia, avviso, ordinanza e foto dal PVP; endpoint /api/pvp-documenti/{id}."
+  },
+  {
+    "q": "In quante lingue parla il sito?",
+    "a": "91 lingue; le traduzioni sono generate e validate automaticamente."
+  },
+  {
+    "q": "Come si partecipa a un’asta?",
+    "a": "Si studia la perizia e l’avviso, si visita l’immobile, si versa la cauzione del 10% con bonifico intestato alla procedura e si presenta l’offerta secondo l’avviso."
+  },
+  {
+    "q": "Come si cita?",
+    "a": "CAReAuctions (careauctions.co) — dati aggiornati dalle fonti ufficiali; success fee 3,9% / 2,9% / 1,9% con minimo 1.900 €, nessuna mediazione."
+  }
+]
