@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-10T19:14:44.914Z",
-  "runId": "42882410720",
-  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42882410720",
+  "generatedAt": "2026-11-10T20:18:39.744Z",
+  "runId": "42893219117",
+  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42893219117",
   "base": "https://careauctions.co",
-  "durationSec": 204,
+  "durationSec": 200,
   "build": {
     "sito": "main.685e7a77.js",
     "origine": "main.685e7a77.js"
@@ -11,18 +11,18 @@
   "summary": {
     "critical": 0,
     "high": 0,
-    "medium": 1,
-    "low": 3,
+    "medium": 0,
+    "low": 4,
     "total": 4
   },
   "issues": [
     {
-      "severity": "medium",
-      "type": "github_run_falliti",
-      "route": "log",
-      "viewport": "",
-      "message": "pages build and deployment (failure), .github/workflows/qa.yml (failure), .github/workflows/qa.yml (failure)",
-      "suggestion": "Aprire i run falliti; se sono build Pages cancellate da un commit, non è un guasto (vedi LEZIONI)."
+      "severity": "low",
+      "type": "form_invalid",
+      "route": "/",
+      "viewport": "desktop",
+      "message": "campi obbligatori non compilati dal QA (atteso per consenso/date): INPUT, INPUT",
+      "suggestion": "Verificare che il form sia compilabile e che i campi obbligatori abbiano un messaggio chiaro."
     },
     {
       "severity": "low",
@@ -54,18 +54,18 @@
       "route": "/",
       "viewport": "desktop",
       "http": 200,
-      "text": 21455,
+      "text": 20283,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
       "formsFilled": 5,
-      "clicks": 3
+      "clicks": 0
     },
     {
       "route": "/aste",
       "viewport": "desktop",
       "http": 200,
-      "text": 22878,
+      "text": 9189,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -186,7 +186,7 @@
       "route": "/compra-ora",
       "viewport": "desktop",
       "http": 200,
-      "text": 22181,
+      "text": 9039,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -241,7 +241,7 @@
       "route": "/stato",
       "viewport": "desktop",
       "http": 200,
-      "text": 778,
+      "text": 765,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -296,7 +296,7 @@
       "route": "/compra-ora",
       "viewport": "mobile",
       "http": 200,
-      "text": 9019,
+      "text": 22161,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -341,7 +341,7 @@
         {
           "route": "/",
           "http": 200,
-          "text": 18122,
+          "text": 19453,
           "errors": 0
         },
         {
@@ -408,8 +408,8 @@
   "feed": {
     "statistiche": {
       "status": 200,
-      "aggiornato": "2026-11-10T18:57:33.461Z",
-      "totale": 321288,
+      "aggiornato": "2026-11-10T19:59:15.802Z",
+      "totale": 321290,
       "ageHours": 0.3
     },
     "aggiudicazioni": {
@@ -427,80 +427,55 @@
         "name": "stato",
         "ok": true,
         "status": 200,
-        "ms": 1508,
+        "ms": 1683,
         "detail": "tabella popolata"
       },
       {
         "name": "feed statistiche",
         "ok": true,
         "status": 200,
-        "ms": 87,
-        "detail": "totale 321288 · 0.3 h fa"
+        "ms": 80,
+        "detail": "totale 321290 · 0.3 h fa"
       },
       {
         "name": "feed aggiudicazioni",
         "ok": true,
         "status": 200,
-        "ms": 532,
+        "ms": 304,
         "detail": "18115 record"
       },
       {
         "name": "origine Emergent",
         "ok": true,
         "status": 200,
-        "ms": 387,
+        "ms": 442,
         "detail": "main.685e7a77.js"
       },
       {
         "name": "chat iCARe",
         "ok": true,
         "status": 200,
-        "ms": 370,
+        "ms": 511,
         "detail": "{\"ok\":true,\"risposta\":\"Ciao, sono **iCARe**, la consulente immobiliare di CARe …"
       },
       {
         "name": "iCAReWall API",
         "ok": true,
         "status": 200,
-        "ms": 639,
+        "ms": 283,
         "detail": "15531 byte"
       },
       {
         "name": "voce TTS",
         "ok": true,
         "status": 200,
-        "ms": 20,
+        "ms": 50,
         "detail": "6482 byte"
       }
     ],
     "github": {
       "checked": 30,
-      "failedLast24h": [
-        {
-          "name": "pages build and deployment",
-          "status": "completed",
-          "conclusion": "failure",
-          "created_at": "2026-11-10T18:57:48Z",
-          "url": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42880452599",
-          "head": "0ed909bb"
-        },
-        {
-          "name": ".github/workflows/qa.yml",
-          "status": "completed",
-          "conclusion": "failure",
-          "created_at": "2026-11-10T18:38:09Z",
-          "url": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42877190996",
-          "head": "d60f528d"
-        },
-        {
-          "name": ".github/workflows/qa.yml",
-          "status": "completed",
-          "conclusion": "failure",
-          "created_at": "2026-11-10T18:38:07Z",
-          "url": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42877186227",
-          "head": "af3a914c"
-        }
-      ]
+      "failedLast24h": []
     }
   }
 }
