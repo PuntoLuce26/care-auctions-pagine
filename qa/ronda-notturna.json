@@ -1,0 +1,92 @@
+{
+  "generato": "2026-11-10T21:31:49Z",
+  "stato": "attenzione",
+  "controlli": [
+    {
+      "nome": "sito: 20/20 rotte 200",
+      "livello": "ok",
+      "ok": true,
+      "dettaglio": "tutte 200"
+    },
+    {
+      "nome": "feed statistiche",
+      "livello": "ok",
+      "ok": true,
+      "dettaglio": "321290 lotti · aggiornato 2026-11-10T20:46:32.474Z (45 min fa)"
+    },
+    {
+      "nome": "feed aggiudicazioni",
+      "livello": "ok",
+      "ok": true,
+      "dettaglio": "18115 record"
+    },
+    {
+      "nome": "QA cloud",
+      "livello": "ok",
+      "ok": true,
+      "dettaglio": "run 42903486515 · 10 min fa · {\"critical\":0,\"high\":0,\"medium\":0,\"low\":3,\"total\":3}"
+    },
+    {
+      "nome": "QA Orchestra",
+      "livello": "ok",
+      "ok": true,
+      "dettaglio": "TUTTO OK · 72 min fa"
+    },
+    {
+      "nome": "AI Sentinel",
+      "livello": "attenzione",
+      "ok": false,
+      "dettaglio": "172 min fa · anomalie: [{\"componente\":\"ai\",\"gravita\":\"high\",\"oggetto\":\"qa_stato: HTTP 404\"},{\"componente\":\"ai\",\"gravita\":\"high\",\"oggetto\":\"mail"
+    },
+    {
+      "nome": "careauctions.it (watcher)",
+      "livello": "ok",
+      "ok": true,
+      "dettaglio": "ok · 2026-11-10T21:15:14Z"
+    },
+    {
+      "nome": "careauctions.it (DNS DoH)",
+      "livello": "ok",
+      "ok": true,
+      "dettaglio": "NS hank.ns.cloudflare.com., macy.ns.cloudflare.com. · A 104.21.77.20, 172.67.203.138"
+    },
+    {
+      "nome": "careauctions.it (301 dal vivo)",
+      "livello": "ok",
+      "ok": true,
+      "dettaglio": "careauctions.it/→https://careauctions.co/ (200) · careauctions.it/→https://careauctions.co/ (200) · www.careauctions.it/→https://careauctions.co/ (200) · www.careauctions.it/→https://careauctions.co/ (200)"
+    },
+    {
+      "nome": "monitor posta",
+      "livello": "ok",
+      "ok": true,
+      "dettaglio": "ultimo controllo 2026-11-10T21:01:39.426Z (30 min fa) · allarmi: 0"
+    },
+    {
+      "nome": "build sito = origine",
+      "livello": "ok",
+      "ok": true,
+      "dettaglio": "sito 685e7a77 · origine 685e7a77"
+    },
+    {
+      "nome": "workflow GitHub",
+      "livello": "ok",
+      "ok": true,
+      "dettaglio": "nessun rosso nelle ultime 3 h"
+    }
+  ],
+  "problemi": [],
+  "attenzioni": [
+    {
+      "nome": "AI Sentinel",
+      "dettaglio": "172 min fa · anomalie: [{\"componente\":\"ai\",\"gravita\":\"high\",\"oggetto\":\"qa_stato: HTTP 404\"},{\"componente\":\"ai\",\"gravita\":\"high\",\"oggetto\":\"mail"
+    }
+  ],
+  "storico": [
+    {
+      "t": "2026-11-10T21:31:49Z",
+      "stato": "attenzione",
+      "problemi": []
+    }
+  ]
+}
