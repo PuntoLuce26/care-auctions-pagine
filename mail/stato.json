@@ -1,148 +1,38 @@
 {
-  "ultimoControllo": "2026-11-10T16:24:57.518Z",
-  "ultimoQa": "2026-11-10T16:24:57.518Z",
+  "ultimoControllo": "2026-11-10T20:59:57.654Z",
+  "ultimoQa": "2026-11-10T20:59:57.654Z",
   "qaEsito": "QA dispatch HTTP 204",
-  "nuoveMail": 14,
+  "nuoveMail": 3,
   "allarmi": [
     {
-      "id": "1a1c634c8df2049e",
-      "data": "2026-11-10T16:05:09.000Z",
-      "da": "PuntoLuce26 <notifications@github.com>",
-      "oggetto": "[PuntoLuce26/care-aste-app] Run failed: app-ci - main (97b250a)",
-      "a": "\"PuntoLuce26/care-aste-app\" <care-aste-app@noreply.github.com>",
-      "componente": "app-ci",
-      "gravita": "alta",
-      "link": "https://github.com/PuntoLuce26/care-aste-app/actions/runs/42850627427"
-    },
-    {
-      "id": "1a1c61ea5c103f0b",
-      "data": "2026-11-10T15:40:58.000Z",
-      "da": "PuntoLuce26 <notifications@github.com>",
-      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: pages build and deployment - main (df6d6c6)",
-      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
+      "id": "1a1c6fb5b9fc6c73",
+      "data": "2026-11-10T19:42:04.000Z",
+      "da": "info@puntoluce26.com",
+      "oggetto": "CARe — aggiornamento 10/11 ore 20:45 (QA, registrazione, posta)",
+      "a": "info@puntoluce26.com",
       "componente": "pages",
       "gravita": "alta",
-      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42844589264"
+      "link": "https://careauctions.co/qa/stato.json"
     },
     {
-      "id": "1a1c354be3f274ca",
-      "data": "2026-11-10T02:41:12.000Z",
+      "id": "1a1c6c12c89fef76",
+      "data": "2026-11-10T18:38:29.000Z",
       "da": "PuntoLuce26 <notifications@github.com>",
-      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: pages build and deployment, Attempt #2 - main (a9da439)",
+      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: .github/workflows/qa.yml - main (d60f528)",
       "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
-      "componente": "pages",
-      "gravita": "critica",
-      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42742115029"
+      "componente": "github-actions",
+      "gravita": "media",
+      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42877190996"
     },
     {
-      "id": "1a1c346696c33269",
-      "data": "2026-11-10T02:25:33.000Z",
+      "id": "1a1c6c1211fb9616",
+      "data": "2026-11-10T18:38:27.000Z",
       "da": "PuntoLuce26 <notifications@github.com>",
-      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: pages build and deployment - main (a9da439)",
+      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: .github/workflows/qa.yml - main (af3a914)",
       "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
-      "componente": "pages",
-      "gravita": "critica",
-      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42742115029"
-    },
-    {
-      "id": "1a1c3218a1175617",
-      "data": "2026-11-10T01:45:11.000Z",
-      "da": "CARe Guardiano <info@careauctions.co>",
-      "oggetto": "⚠️ CARe: qualcosa non va (1)",
-      "a": "<info@puntoluce26.com>, <info@careauctions.co>",
-      "componente": "guardiano",
-      "gravita": "alta",
-      "link": "https://r.info.careauctions.co/tr/op/ueIDgt5ZNa4TuiVZR55pjVTEKger1v8PD6xc7Dho5EdaQXX2rVdaV4wRyVRgjLmyiy7fHXA6xXxt_UbowLRtlLAu7dbioM2_DD7-98o06wDMsgssMvD0nJPn7hcOSzLmyP4oEmneGn_-fTt_ucSMOyQSW3WhodgsbDtz4U1y1AzD_dSRd9F4IPkLL7i4gAPzNtqq3xvvaJLiwTyUbgsD9g"
-    },
-    {
-      "id": "1a1c321708175617",
-      "data": "2026-11-10T01:45:10.000Z",
-      "da": "CARe Guardiano <info@careauctions.co>",
-      "oggetto": "⚠️ CARe: qualcosa non va (1)",
-      "a": "<info@puntoluce26.com>, <info@careauctions.co>",
-      "componente": "guardiano",
-      "gravita": "alta",
-      "link": "https://r.info.careauctions.co/tr/op/ZgJbVWnD4JQHWJeanj8kB1Kl6pNurMH5TnMZnl-D9ToGLLzWoRyFCdplzNGR-m4ADp-P9C-5E4F8ZnO3Ly4uN2EYxMGcvpIWYCih5DzAoO7bRxLzpdxE1gl1DOkTQDAWQr8yRTA_PeAHujoLMm88gQIgZ2dRXfZiXYRGhbBnp2Hj8M9nicgte4X37JXwqLl7pDwLSbQK7Tiv-7_Z-bYMpA"
-    },
-    {
-      "id": "1a1c3040fc9caf8d",
-      "data": "2026-11-10T01:13:04.000Z",
-      "da": "PuntoLuce26 <notifications@github.com>",
-      "oggetto": "[PuntoLuce26/second-brain] Run failed: peso - main (197be42)",
-      "a": "\"PuntoLuce26/second-brain\" <second-brain@noreply.github.com>",
-      "componente": "second-brain",
-      "gravita": "alta",
-      "link": "https://github.com/PuntoLuce26/second-brain/actions/runs/42734110495"
-    },
-    {
-      "id": "1a1c1f69c4378976",
-      "data": "2026-11-09T20:18:45.000Z",
-      "da": "PuntoLuce26 <notifications@github.com>",
-      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: pages build and deployment - main (6fd05c2)",
-      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
-      "componente": "pages",
-      "gravita": "alta",
-      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42689789364"
-    },
-    {
-      "id": "1a1c1ca26a95ed36",
-      "data": "2026-11-09T19:30:12.000Z",
-      "da": "CARe Guardiano <info@careauctions.co>",
-      "oggetto": "⚠️ CARe: qualcosa non va (1)",
-      "a": "<info@puntoluce26.com>, <info@careauctions.co>",
-      "componente": "guardiano",
-      "gravita": "alta",
-      "link": "https://r.info.careauctions.co/tr/op/BsL5q3peOhfN1n83aew1Gwk1Cv9MLV2NcV2N4RCi_gW_sck-GPL4U0aMsm0M8N-xKnDZhKCi82Wx-MZbFMAJZZBnEFVvOwHxKScC6TavU5geKHvcAMYF-4Wal9PIABD9BWo59jCmc_T86_rzHPRHzS93mcTQwYSDrU9aHDnZjpuNFPM5K0ITWbo3szAvdleqM5rhKwoTlaCYKOVf8KfyQw"
-    },
-    {
-      "id": "1a1c191f28c130af",
-      "data": "2026-11-09T18:28:46.000Z",
-      "da": "PuntoLuce26 <notifications@github.com>",
-      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: feed-sync - main (8177383)",
-      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
-      "componente": "feed",
-      "gravita": "critica",
-      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42674211502"
-    },
-    {
-      "id": "1a1c18a18e8dca74",
-      "data": "2026-11-09T18:19:04.000Z",
-      "da": "PuntoLuce26 <notifications@github.com>",
-      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: pages build and deployment - main (ea7d9d6)",
-      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
-      "componente": "pages",
-      "gravita": "alta",
-      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42672407692"
-    },
-    {
-      "id": "1a1c1859c3cdd8d4",
-      "data": "2026-11-09T18:14:25.000Z",
-      "da": "PuntoLuce26 <notifications@github.com>",
-      "oggetto": "[PuntoLuce26/second-brain] Run failed: peso - main (1024381)",
-      "a": "\"PuntoLuce26/second-brain\" <second-brain@noreply.github.com>",
-      "componente": "second-brain",
-      "gravita": "alta",
-      "link": "https://github.com/PuntoLuce26/second-brain/actions/runs/42672090046"
-    },
-    {
-      "id": "1a1c183e3c06f58d",
-      "data": "2026-11-09T18:12:43.000Z",
-      "da": "PuntoLuce26 <notifications@github.com>",
-      "oggetto": "[PuntoLuce26/second-brain] Run failed: peso - main (f17f58e)",
-      "a": "\"PuntoLuce26/second-brain\" <second-brain@noreply.github.com>",
-      "componente": "second-brain",
-      "gravita": "alta",
-      "link": "https://github.com/PuntoLuce26/second-brain/actions/runs/42671821066"
-    },
-    {
-      "id": "1a1c180ed4dce3be",
-      "data": "2026-11-09T18:10:11.000Z",
-      "da": "PuntoLuce26 <notifications@github.com>",
-      "oggetto": "[PuntoLuce26/second-brain] Run failed: peso - main (c6b47b6)",
-      "a": "\"PuntoLuce26/second-brain\" <second-brain@noreply.github.com>",
-      "componente": "second-brain",
-      "gravita": "alta",
-      "link": "https://github.com/PuntoLuce26/second-brain/actions/runs/42671398669"
+      "componente": "github-actions",
+      "gravita": "media",
+      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42877186227"
     }
   ],
   "processati": [
@@ -170,6 +60,15 @@
     "1a1c18a18e8dca74",
     "1a1c1859c3cdd8d4",
     "1a1c183e3c06f58d",
-    "1a1c180ed4dce3be"
+    "1a1c180ed4dce3be",
+    "1a1c7130d8e5c4ca",
+    "1a1c71171462c055",
+    "1a1c709d3b415639",
+    "1a1c7082bd38c63b",
+    "1a1c6fb5b9fc6c73",
+    "1a1c6e6c8ce61911",
+    "1a1c6c12c89fef76",
+    "1a1c6c1211fb9616",
+    "1a1c6647e2abb718"
   ]
 }
