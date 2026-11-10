@@ -55,6 +55,12 @@ const tsa = (u) => u + (u.includes('?') ? '&' : '?') + 'ts=' + Date.now();
   add('qa/stato.json', qa.ok && qa.json, qa.json ? 'run ' + qa.json.runId + ' · ' + Math.round(qaAgeH * 10) / 10 + ' h fa · ' + (qs.critical || 0) + 'C/' + (qs.high || 0) + 'A' : 'HTTP ' + qa.status, 'alta');
   add('QA recente (<8 h)', qaAgeH < 8, Math.round(qaAgeH * 10) / 10 + ' h', 'media');
   add('QA senza critici', (qs.critical || 0) === 0, (qs.critical || 0) + ' critici', 'alta');
+  // 3b. Registrazione dei run QA nel Secondo Cervello (via stato pubblico dell'audit interno)
+  const aud = await json(tsa(RAW + '/qa/audit-interno.json'));
+  const audAge = aud.json && aud.json.generato ? (Date.now() - Date.parse(aud.json.generato)) / 3600e3 : 999;
+  add('registrazione QA (audit interno)', !!(aud.json && aud.json.qaRunRegistrato),
+      aud.json ? ('registrato · ' + Math.round(audAge * 10) / 10 + ' h fa · ' + String(aud.json.qaRunDettaglio || '')) : 'audit interno non ha ancora pubblicato lo stato',
+      'media');
   // 4. Feed
   const st = await json(tsa(RAW + '/feed/statistiche.json'));
   const stAge = st.json && st.json.aggiornato ? (Date.now() - Date.parse(st.json.aggiornato)) / 3600e3 : 999;
@@ -99,7 +105,6 @@ const tsa = (u) => u + (u.includes('?') ? '&' : '?') + 'ts=' + Date.now();
   if (GH) {
     for (const [repo, wf, nome] of [
       ['PuntoLuce26/care-auctions-pagine', 'qa.yml', 'QA cloud'],
-      ['PuntoLuce26/second-brain', 'qa-sync.yml', 'QA → Secondo Cervello'],
       ['PuntoLuce26/care-auctions-pagine', 'feed-sync.yml', 'feed-sync'],
       ['PuntoLuce26/care-auctions-pagine', 'traduzioni.yml', 'traduzioni'],
       ['PuntoLuce26/care-auctions-pagine', 'ai-education.yml', 'AI education'],
