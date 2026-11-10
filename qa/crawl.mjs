@@ -235,7 +235,7 @@ async function checkSeo() {
   // home umana + home bot
   try {
     const h = await fetchText(BASE + '/?qa=' + Date.now(), { ua: UA });
-    out.home = { status: h.status, strip: h.text.includes('care-scopri'), linkNovita: h.text.includes('href="/novita"'), build: buildHash(h.text) };
+    out.home = { status: h.status, strip: h.text.includes('care-scopri'), linkNovita: h.text.includes('href="/novita"'), linkAffiliazione: h.text.includes('href="/affiliazione"'), linkBuynow: h.text.includes('href="/buynow/san-pasquale"'), build: buildHash(h.text) };
   } catch (e) { out.home = { status: 0, error: short(e.message, 100) }; }
   try {
     const b = await fetchText(BASE + '/?qa=' + Date.now(), { ua: 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)' });
@@ -337,7 +337,7 @@ export async function runCrawl() {
     ['sitemap', seo.sitemap?.ok && seo.sitemap?.hasNovita && seo.sitemap?.hasPagine],
     ['sitemapNovita', seo.sitemapNovita?.ok && seo.sitemapNovita?.hasAffiliationSelf],
     ['sitemapPagine', seo.sitemapPagine?.ok && seo.sitemapPagine?.hasBuynow],
-    ['home_strip', seo.home?.strip && seo.home?.linkNovita],
+    ['home_links', seo.home?.linkNovita && seo.home?.linkAffiliazione && seo.home?.linkBuynow],
     ['bot_links', seo.botHome?.links?.length === 4],
     ['build_allineata', seo.home?.build && seo.origin?.build && seo.home.build === seo.origin.build]
   ];
