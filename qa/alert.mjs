@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /* QA email-alert: riceve gli allarmi dal mail-qa, li registra e attiva i soccorsi noti. */
-const fs = require('fs'), path = require('path');
+import fs from 'node:fs';
+import path from 'node:path';
 const A = JSON.parse(process.env.ALERT_JSON || '{}');
 const alerts = A.alerts || [];
 const REPO = process.env.GITHUB_REPOSITORY || 'PuntoLuce26/care-auctions-pagine';
