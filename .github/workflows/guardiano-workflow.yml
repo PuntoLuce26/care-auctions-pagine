@@ -1,0 +1,83 @@
+name: guardiano-workflow
+# Meta-controllo: ogni file in .github/workflows/ deve essere YAML valido e ogni step deve avere run o uses.
+# Perche': l'11/11/2026 un patch automatico ha lasciato righe orfane in qa.yml -> GitHub ha rifiutato il workflow
+# al parse, le run sono fallite in 0 secondi con 0 job e il QA del sito e' rimasto spento ~10 minuti senza un allarme vero.
+on:
+  push:
+    paths:
+      - ".github/workflows/**"
+  schedule:
+    - cron: "10 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: guardiano-workflow
+  cancel-in-progress: true
+
+jobs:
+  valida:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Valida i workflow (YAML + struttura)
+        run: |
+          ruby - <<'RUBY' | tee /tmp/valida.txt
+          require 'yaml'
+          esiti = []
+          Dir.glob('.github/workflows/*.yml').sort.each do |f|
+            nome = File.basename(f)
+            begin
+              d = YAML.load_file(f)
+              err = []
+              err << 'radice non e\' un mapping' unless d.is_a?(Hash)
+              err << 'manca "on"' unless d.key?('on') || d.key?(true) || d.key?('true')
+              err << 'manca "jobs"' unless d['jobs'].is_a?(Hash)
+              (d['jobs'] || {}).each do |jn, j|
+                next err << "job #{jn} non e' un mapping" unless j.is_a?(Hash)
+                err << "job #{jn}: manca runs-on/uses" unless j.key?('runs-on') || j.key?('uses')
+                (j['steps'] || []).each_with_index do |s, i|
+                  next err << "job #{jn} step #{i + 1}: non e' un mapping" unless s.is_a?(Hash)
+                  err << "job #{jn} step #{i + 1} (#{s['name']}): senza run ne' uses" unless s.key?('run') || s.key?('uses')
+                end
+              end
+              esiti << [nome, err.empty? ? 'OK' : err.join('; ')]
+            rescue => e
+              esiti << [nome, 'YAML NON VALIDO: ' + e.message.lines.first.to_s.strip[0, 160]]
+            end
+          end
+          ko = esiti.reject { |_, s| s == 'OK' }
+          esiti.each { |n, s| puts format('%-28s %s', n, s) }
+          puts ''
+          puts "workflow: #{esiti.size} · rotti: #{ko.size}"
+          exit(ko.empty? ? 0 : 1)
+          RUBY
+
+      - name: Issue (una sola) se rosso
+        if: failure()
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo '## Guardiano workflow — file non validi' > /tmp/body.md
+          echo '' >> /tmp/body.md
+          echo 'Un file in `.github/workflows/` non e YAML valido o ha uno step senza `run`/`uses`.' >> /tmp/body.md
+          echo 'Un workflow cosi non parte: la run fallisce in 0 secondi con 0 job (firma tipica di un patch a mano andato storto).' >> /tmp/body.md
+          echo '' >> /tmp/body.md
+          echo '```' >> /tmp/body.md
+          tail -50 /tmp/valida.txt >> /tmp/body.md || true
+          echo '```' >> /tmp/body.md
+          echo '' >> /tmp/body.md
+          echo "Commit: \`${GITHUB_SHA}\` · Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" >> /tmp/body.md
+          NUM=$(gh issue list --state open --search 'in:title "[CI] Workflow non valido"' --json number --jq '.[0].number // empty' || true)
+          if [ -n "$NUM" ]; then
+            gh issue comment "$NUM" --body-file /tmp/body.md
+            echo "aggiornata issue #$NUM"
+          else
+            gh issue create --title "[CI] Workflow non valido" --body-file /tmp/body.md --label ci || gh issue create --title "[CI] Workflow non valido" --body-file /tmp/body.md
+          fi
