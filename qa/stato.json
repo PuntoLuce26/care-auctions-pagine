@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-10T14:06:34.432Z",
-  "runId": "42829868148",
-  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42829868148",
+  "generatedAt": "2026-11-10T14:23:18.135Z",
+  "runId": "42832053374",
+  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42832053374",
   "base": "https://careauctions.co",
-  "durationSec": 203,
+  "durationSec": 210,
   "build": {
     "sito": "main.66d9c2e6.js",
     "origine": "main.66d9c2e6.js"
@@ -57,7 +57,7 @@
       "route": "/aste",
       "viewport": "desktop",
       "http": 200,
-      "text": 22317,
+      "text": 22329,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -233,7 +233,7 @@
       "route": "/stato",
       "viewport": "desktop",
       "http": 200,
-      "text": 770,
+      "text": 765,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -244,7 +244,7 @@
       "route": "/",
       "viewport": "mobile",
       "http": 200,
-      "text": 21399,
+      "text": 21400,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -398,9 +398,9 @@
   "feed": {
     "statistiche": {
       "status": 200,
-      "aggiornato": "2026-11-10T12:42:09.375Z",
-      "totale": 321168,
-      "ageHours": 1.4
+      "aggiornato": "2026-11-10T14:20:21.185Z",
+      "totale": 321200,
+      "ageHours": 0
     },
     "aggiudicazioni": {
       "status": 200,
@@ -417,49 +417,49 @@
         "name": "stato",
         "ok": true,
         "status": 200,
-        "ms": 1761,
+        "ms": 1539,
         "detail": "tabella popolata"
       },
       {
         "name": "feed statistiche",
         "ok": true,
         "status": 200,
-        "ms": 64,
-        "detail": "totale 321168 · 1.4 h fa"
+        "ms": 60,
+        "detail": "totale 321200 · 0 h fa"
       },
       {
         "name": "feed aggiudicazioni",
         "ok": true,
         "status": 200,
-        "ms": 316,
+        "ms": 332,
         "detail": "18115 record"
       },
       {
         "name": "origine Emergent",
         "ok": true,
         "status": 200,
-        "ms": 202,
+        "ms": 446,
         "detail": "main.66d9c2e6.js"
       },
       {
         "name": "chat iCARe",
         "ok": true,
         "status": 200,
-        "ms": 511,
+        "ms": 517,
         "detail": "{\"ok\":true,\"risposta\":\"Ciao, sono **iCARe**, la consulente immobiliare di CARe …"
       },
       {
         "name": "iCAReWall API",
         "ok": true,
         "status": 200,
-        "ms": 237,
+        "ms": 255,
         "detail": "15515 byte"
       },
       {
         "name": "voce TTS",
         "ok": true,
         "status": 200,
-        "ms": 70,
+        "ms": 50,
         "detail": "6482 byte"
       }
     ],
