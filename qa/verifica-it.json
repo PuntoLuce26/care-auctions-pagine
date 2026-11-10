@@ -1,0 +1,31 @@
+{
+  "generato": "2026-11-10T21:15:14Z",
+  "stato": "ok",
+  "indirizzi": [
+    {
+      "url": "http://careauctions.it/",
+      "http": 301,
+      "location": "https://careauctions.it/",
+      "esito": "ok"
+    },
+    {
+      "url": "https://careauctions.it/",
+      "http": 301,
+      "location": "https://careauctions.co/",
+      "esito": "ok"
+    },
+    {
+      "url": "http://www.careauctions.it/",
+      "http": 301,
+      "location": "https://www.careauctions.it/",
+      "esito": "ok"
+    },
+    {
+      "url": "https://www.careauctions.it/",
+      "http": 301,
+      "location": "https://careauctions.co/",
+      "esito": "ok"
+    }
+  ],
+  "note": "Tutti e 4 gli indirizzi arrivano su https://careauctions.co (max 2 salti)."
+}
