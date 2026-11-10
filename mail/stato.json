@@ -1,40 +1,9 @@
 {
-  "ultimoControllo": "2026-11-10T20:59:57.654Z",
+  "ultimoControllo": "2026-11-10T21:01:39.426Z",
   "ultimoQa": "2026-11-10T20:59:57.654Z",
-  "qaEsito": "QA dispatch HTTP 204",
-  "nuoveMail": 3,
-  "allarmi": [
-    {
-      "id": "1a1c6fb5b9fc6c73",
-      "data": "2026-11-10T19:42:04.000Z",
-      "da": "info@puntoluce26.com",
-      "oggetto": "CARe — aggiornamento 10/11 ore 20:45 (QA, registrazione, posta)",
-      "a": "info@puntoluce26.com",
-      "componente": "pages",
-      "gravita": "alta",
-      "link": "https://careauctions.co/qa/stato.json"
-    },
-    {
-      "id": "1a1c6c12c89fef76",
-      "data": "2026-11-10T18:38:29.000Z",
-      "da": "PuntoLuce26 <notifications@github.com>",
-      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: .github/workflows/qa.yml - main (d60f528)",
-      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
-      "componente": "github-actions",
-      "gravita": "media",
-      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42877190996"
-    },
-    {
-      "id": "1a1c6c1211fb9616",
-      "data": "2026-11-10T18:38:27.000Z",
-      "da": "PuntoLuce26 <notifications@github.com>",
-      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: .github/workflows/qa.yml - main (af3a914)",
-      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
-      "componente": "github-actions",
-      "gravita": "media",
-      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42877186227"
-    }
-  ],
+  "qaEsito": "nessun allarme nuovo",
+  "nuoveMail": 0,
+  "allarmi": [],
   "processati": [
     "1a1c636ae4a6b5a9",
     "1a1c634c8df2049e",
