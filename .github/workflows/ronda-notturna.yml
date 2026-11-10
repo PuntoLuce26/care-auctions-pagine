@@ -1,0 +1,95 @@
+name: ronda-notturna
+
+# Sorveglianza notturna di CAReAuctions, interamente in cloud (nessun Mac).
+# Ogni 2 ore controlla sito, feed, QA, orchestra, sentinella AI, watcher del .it, DNS del .it,
+# monitor posta, allineamento della build e gli ultimi run dei workflow; scrive qa/ronda-notturna.json.
+# Alle 06:10 UTC (07:10 Europe/Rome) manda il riepilogo della notte via Gmail API.
+# Run rossa SOLO per problemi veri e nuovi: una mail di GitHub per condizione, non una raffica.
+
+on:
+  schedule:
+    - cron: '10 */2 * * *'
+  workflow_dispatch:
+    inputs:
+      mail:
+        description: "Manda il riepilogo via email (solo per prova manuale)"
+        type: choice
+        options:
+          - "no"
+          - "si"
+        default: "no"
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: ronda-notturna
+  cancel-in-progress: false
+
+jobs:
+  ronda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Riepilogo email attivo?
+        env:
+          MAIL_INPUT: ${{ github.event.inputs.mail }}
+        run: |
+          if [ "$(date -u +%H)" = "06" ] || [ "${MAIL_INPUT:-}" = "si" ]; then
+            echo "RONDA_MAIL=1" >> "$GITHUB_ENV"
+            echo "riepilogo email attivo in questo giro"
+          else
+            echo "nessuna email in questo giro"
+          fi
+
+      - name: Ronda
+        id: ronda
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GMAIL_CLIENT_ID: ${{ secrets.GMAIL_CLIENT_ID }}
+          GMAIL_CLIENT_SECRET: ${{ secrets.GMAIL_CLIENT_SECRET }}
+          GMAIL_REFRESH_TOKEN: ${{ secrets.GMAIL_REFRESH_TOKEN }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+        run: node scripts/ronda-notturna.js
+
+      - name: Commit dello stato (solo se cambiato)
+        if: always() && steps.ronda.outputs.commit == 'true'
+        env:
+          STATO: ${{ steps.ronda.outputs.stato }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          set -eu
+          git config user.name "care-ronda"
+          git config user.email "care-ronda@users.noreply.github.com"
+          git add qa/ronda-notturna.json
+          if git diff --cached --quiet; then
+            echo "qa/ronda-notturna.json identico: niente commit."
+            exit 0
+          fi
+          git commit -m "ronda-notturna: stato ${STATO} (run ${RUN_ID})"
+          for tentativo in 1 2 3 4 5; do
+            if git pull --rebase --autostash origin main && git push; then
+              echo "push ok al tentativo ${tentativo}"
+              exit 0
+            fi
+            echo "tentativo ${tentativo} fallito, riprovo tra 3 s"
+            git rebase --abort 2>/dev/null || true
+            sleep 3
+          done
+          echo "::error::push fallito dopo 5 tentativi"
+          exit 1
+
+      - name: Artefatto
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ronda-notturna
+          path: qa/ronda-notturna.json
+          if-no-files-found: warn
+          retention-days: 30
