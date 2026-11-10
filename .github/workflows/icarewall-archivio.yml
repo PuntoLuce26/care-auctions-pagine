@@ -1,0 +1,42 @@
+name: icarewall-archivio
+# Conserva OGNI messaggio della iCAReWall, per sempre. Decreto di Gianluca, 10/11/2026:
+# la parete tiene tutti i messaggi dall'inizio all'eternita'. Se l'app ne nasconde o ne pota,
+# questo archivio li conserva comunque. Append-only: non si cancella mai un messaggio.
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: icarewall-archivio
+  cancel-in-progress: false
+
+jobs:
+  archivia:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Archivia i messaggi della parete
+        run: node scripts/icarewall-archivio.js
+      - name: Commit se ci sono novita
+        run: |
+          git config user.name "CARe archivio"
+          git config user.email "archivio@careauctions.co"
+          git add feed/icarewall-archivio.json
+          if git diff --cached --quiet; then echo "nessun messaggio nuovo"; exit 0; fi
+          git commit -m "icarewall: archivio $(date -u +%FT%TZ)"
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main 2>/dev/null || { git rebase --abort 2>/dev/null; true; }
+            if git push; then echo "archivio salvato"; exit 0; fi
+            sleep 4
+          done
+          echo "::error::push dell archivio non riuscito"
+          exit 1
