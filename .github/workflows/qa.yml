@@ -6,7 +6,7 @@ on:
     - cron: "*/30 * * * *"
   workflow_dispatch:
   repository_dispatch:
-    types: [emergent-published, qa-run, email-alert]
+    types: [emergent-published, qa-run, email-alert, ai-alert]
   push:
     paths:
       - "qa/**"
@@ -115,5 +115,11 @@ jobs:
         if: github.event_name == 'repository_dispatch' && github.event.action == 'email-alert'
         env:
           ALERT_JSON: ${{ toJSON(github.event.client_payload) }}
+      - name: Allarme AI -> triage
+        if: github.event_name == 'repository_dispatch' && github.event.action == 'ai-alert'
+        env:
+          AI_ALERT_JSON: ${{ toJSON(github.event.client_payload) }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node qa/alert.mjs
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node qa/alert.mjs
