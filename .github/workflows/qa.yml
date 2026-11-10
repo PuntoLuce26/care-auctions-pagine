@@ -124,3 +124,22 @@ jobs:
           AI_ALERT_JSON: ${{ toJSON(github.event.client_payload) }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node qa/alert.mjs
+
+      # 10/11/2026 (turno posta/allarmi) — il cron */10 di mail-qa non è stato onorato
+      # da GitHub (0 run in 5,5 ore): il monitor posta restava fermo e la catena
+      # mail -> qa/alert.mjs non partiva. Se qa gira (schedule 30 min + dispatch di
+      # Emergent) e lo stato della posta è vecchio, qa sveglia mail-qa.
+      - name: Sveglia mail-qa (se il monitor posta è fermo)
+        if: always()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ultimo=$(node -e 'try{const j=require("./mail/stato.json");process.stdout.write(String(j.ultimoControllo||""))}catch(e){process.stdout.write("")}')
+          if [ -z "$ultimo" ]; then eta=999999; else eta=$(( ( $(date -u +%s) - $(date -u -d "$ultimo" +%s) ) / 60 )); fi
+          echo "mail-qa ultimoControllo: ${ultimo:-nessuno} (${eta} min fa)"
+          if [ "$eta" -gt 40 ]; then
+            gh workflow run mail-qa.yml --repo "$GITHUB_REPOSITORY" --ref main && echo "mail-qa svegliato" || echo "sveglia non riuscita"
+          else
+            echo "monitor posta fresco: nessuna sveglia"
+          fi
