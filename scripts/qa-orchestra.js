@@ -95,8 +95,8 @@ const tsa = (u) => u + (u.includes('?') ? '&' : '?') + 'ts=' + Date.now();
   const mail = await json(tsa(RAW + '/mail/stato.json'));
   const mailAge = mail.json && mail.json.ultimoControllo ? (Date.now() - Date.parse(mail.json.ultimoControllo)) / 3600e3 : 999;
   add('posta: ultima scansione (<6 h)', mailAge < 6, Math.round(mailAge * 10) / 10 + ' h · ' + ((mail.json && mail.json.allarmi) || []).length + ' allarmi', 'media');
+  const PAT = process.env.QA_PAT || '';
   if (GH) {
-    const H = { Authorization: 'Bearer ' + GH, Accept: 'application/vnd.github+json', 'User-Agent': 'CARe-QA-Orchestra' };
     for (const [repo, wf, nome] of [
       ['PuntoLuce26/care-auctions-pagine', 'qa.yml', 'QA cloud'],
       ['PuntoLuce26/second-brain', 'qa-sync.yml', 'QA → Secondo Cervello'],
@@ -104,18 +104,27 @@ const tsa = (u) => u + (u.includes('?') ? '&' : '?') + 'ts=' + Date.now();
       ['PuntoLuce26/care-auctions-pagine', 'traduzioni.yml', 'traduzioni'],
       ['PuntoLuce26/care-auctions-pagine', 'ai-education.yml', 'AI education'],
       ['PuntoLuce26/care-auctions-pagine', 'esiti-sync.yml', 'esiti-sync'],
-      ['PuntoLuce26/care-aste-app', 'ci.yml', 'app-ci'],
     ]) {
+      const tok = repo === 'PuntoLuce26/care-auctions-pagine' ? GH : PAT;
+      if (!tok) { add('run ' + nome, true, 'serve QA_PAT (repo privato non leggibile col token del workflow)', 'bassa', true); continue; }
+      const H = { Authorization: 'Bearer ' + tok, Accept: 'application/vnd.github+json', 'User-Agent': 'CARe-QA-Orchestra' };
       try {
         const r = await fetch('https://api.github.com/repos/' + repo + '/actions/workflows/' + wf + '/runs?per_page=1', { headers: H });
         if (!r.ok) { add('run ' + nome, true, 'non verificabile (HTTP ' + r.status + ', il token del workflow vede solo questo repo)', 'bassa', true); continue; }
         const j = await r.json();
         const run = (j.workflow_runs || [])[0];
-        add('run ' + nome, !!run && run.conclusion === 'success', run ? run.conclusion + ' · ' + run.created_at : 'mai eseguito', 'bassa', !run);
+        const inCorso = run && run.status !== 'completed';
+        add('run ' + nome, !!run && run.conclusion === 'success', run ? (inCorso ? 'in corso · ' + run.created_at : run.conclusion + ' · ' + run.created_at) : 'mai eseguito', 'bassa', !run || inCorso);
       } catch (e) { add('run ' + nome, false, e.message, 'bassa'); }
     }
   }
-  // 11. Pages
+  // 11. App Emergent: risponde e serve lo stesso bundle dell'origine
+  const appP = await get('https://care-aste.emergent.host/idati');
+  let appH = '';
+  try { appH = appP.ok ? await appP.r.text() : ''; } catch (e) {}
+  const appb = (appH.match(/main\.[0-9a-f]{8}\.js/) || ['?'])[0];
+  add('app Emergent /idati', appP.ok && appb === origine && appb !== '?', appP.ok ? ('HTTP 200 · ' + appb) : 'HTTP ' + appP.status, 'alta');
+  // 12. Pages
   const pb = await get(PAGES + '/feed/statistiche.json');
   add('Pages serve i feed', pb.ok, 'HTTP ' + pb.status, 'bassa');
 
