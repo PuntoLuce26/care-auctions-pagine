@@ -1,0 +1,43 @@
+name: esiti-sync
+# Prezzi di aggiudicazione pubblici (FallcoAste, Notarile Verona, AstaGiudiziaria/IVG):
+# li normalizza, calcola CAReIndex/iDati/CAReOS e aggiorna i feed. La copertura è dichiarata.
+on:
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: esiti-sync
+  cancel-in-progress: false
+jobs:
+  esiti:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Raccogli i prezzi pubblici (FallcoAste)
+        run: node scripts/fallco-aggiudicazioni.js
+      - name: Raccogli i prezzi pubblici (AstaGiudiziaria/IVG)
+        run: node scripts/ivg-aggiudicazioni.js
+      - name: Normalizza, calcola indici e aggiorna i feed
+        run: node scripts/esiti-sync.js
+      - name: Commit e push
+        shell: bash
+        run: |
+          git config user.name "CARe Cloud"
+          git config user.email "cloud@careauctions.co"
+          git add feed
+          if git diff --cached --quiet; then echo "nessuna variazione"; exit 0; fi
+          git commit -m "esiti: prezzi aggiudicazione e indici ($(date -u +%FT%TZ))"
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null
+            if git push; then exit 0; fi
+            sleep 4
+          done
+          exit 1
