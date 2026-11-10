@@ -1,0 +1,56 @@
+name: qa-orchestra
+# Il QA che interpella TUTTI i software (sito, feed, AI, traduzioni, PVP, posta, workflow)
+# e produce qa/orchestra.json + qa/orchestra.md. La mail di conferma parte dal digest locale.
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+  repository_dispatch:
+    types: [qa-fix-resolved]
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: qa-orchestra
+  cancel-in-progress: false
+
+jobs:
+  orchestra:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Interpella tutti i software
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/qa-orchestra.js
+      - name: Riepilogo nel run
+        if: always()
+        run: cat qa/orchestra.md >> "$GITHUB_STEP_SUMMARY" || true
+      - name: Committa il report
+        if: always()
+        run: |
+          git config user.name "CARe QA"
+          git config user.email "qa@careauctions.co"
+          git add qa/orchestra.json qa/orchestra.md
+          if git diff --cached --quiet; then echo "nessuna variazione"; exit 0; fi
+          git commit -m "qa-orchestra: report $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main || git rebase --abort || true
+            git push && exit 0
+            sleep 4
+          done
+          exit 1
+      - name: Artefatto del report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-orchestra
+          path: |
+            qa/orchestra.json
+            qa/orchestra.md
