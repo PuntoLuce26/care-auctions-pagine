@@ -1,0 +1,40 @@
+name: iCARe collaudo
+on:
+  schedule:
+    - cron: '30 5 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: icare-test
+  cancel-in-progress: false
+jobs:
+  collaudo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Collaudo live (visitatore + registrato + app + brain)
+        run: node scripts/icare-test.js
+      - name: Salva stato
+        if: always()
+        run: |
+          git config user.name 'CARe iCARe'
+          git config user.email 'icare@careauctions.co'
+          git add qa/icare-stato.json
+          if git diff --cached --quiet; then echo 'nessuna modifica'; else git commit -m 'iCARe collaudo: stato live'; fi
+          for i in 1 2 3; do git pull --rebase && git push && break || sleep 5; done
+      - name: Issue se fallisce
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh issue create --title '[QA] iCARe collaudo fallito' --body 'Il collaudo iCARe ha fallito. Vedi qa/icare-stato.json e l artefatto del run.' --label qa || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: icare-stato
+          path: qa/icare-stato.json
