@@ -1,8 +1,8 @@
 {
  "meta": {
   "titolo": "NPL's — crediti in sofferenza e crediti in procedura (dati veri dal PVP)",
-  "generatoIl": "2026-11-09T13:03:01.477Z",
-  "aggiornato": "2026-11-09",
+  "generatoIl": "2026-11-10T12:48:45.114Z",
+  "aggiornato": "2026-11-10",
   "fonte": "PVP — Portale delle Vendite Pubbliche, Ministero della Giustizia (pvp.giustizia.it)",
   "query": "tipoLotto=VALORI-CREDITI",
   "licenza": "Dati pubblici del PVP (Portale delle Vendite Pubbliche, Ministero della Giustizia). Riuso consentito per finalità informative con citazione della fonte; nessun dato personale oltre a quanto già pubblico nel bando.",
@@ -10,8 +10,8 @@
   "totale": 258,
   "dichiaratoPVP": 1128,
   "esclusi": {
-   "titoli-e-quote": 445,
-   "credito-fiscale": 403,
+   "titoli-e-quote": 442,
+   "credito-fiscale": 406,
    "non-credito": 22
   },
   "copertura": {
@@ -36,9 +36,9 @@
    "NPL": 4
   },
   "perStato": {
-   "conclusa-esito-non-pubblicato": 208,
-   "in-programma": 30,
-   "deserta": 19,
+   "conclusa-esito-non-pubblicato": 211,
+   "in-programma": 28,
+   "deserta": 18,
    "aggiudicata": 1
   },
   "fasceImportoNominale": {
@@ -49,17 +49,17 @@
    "50k-250k": 4
   },
   "fascePrezzoBase": {
-   "10k-50k": 84,
-   "fino-10k": 71,
+   "10k-50k": 85,
+   "fino-10k": 70,
    "50k-250k": 31,
    "250k-1M": 29,
    "oltre-1M": 23
   },
   "regioni": 16,
-  "province": 38,
-  "sommaPrezzoBase": 377230854,
+  "province": 39,
+  "sommaPrezzoBase": 377270604,
   "freschezza": {
-   "ultimaRaccolta": "2026-11-09",
+   "ultimaRaccolta": "2026-11-10",
    "dataLottoPiuRecente": "2026-12-31",
    "dataLottoPiuVecchio": "2024-01-12"
   },
@@ -97,7 +97,7 @@
   "Enna": 3,
   "Firenze": 3,
   "Vibo Valentia": 3,
-  "Cuneo": 3,
+  "Cuneo": 2,
   "Treviso": 2,
   "Macerata": 2,
   "Genova": 2,
@@ -107,6 +107,7 @@
   "Bari": 2,
   "L'Aquila": 1,
   "Padova": 1,
+  "Alessandria": 1,
   "Como": 1,
   "Modena": 1,
   "Caserta": 1,
