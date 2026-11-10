@@ -1,43 +1,43 @@
 {
-  "generato": "2026-11-10T20:15:24.292Z",
+  "generato": "2026-11-10T20:19:41.812Z",
   "esito": "TUTTO OK",
-  "sintesi": "29 controlli eseguiti · 0 non passati (0 gravi, 0 avvisi) · 2 non verificabili",
+  "sintesi": "30 controlli eseguiti · 0 non passati (0 gravi, 0 avvisi) · 1 non verificabili",
   "sito": "main.685e7a77.js",
   "origine": "main.685e7a77.js",
-  "qaRun": "42882410720",
+  "qaRun": "42893219117",
   "controlli": [
     {
       "nome": "sito /",
       "ok": true,
-      "dettaglio": "HTTP 200 · 969 ms",
+      "dettaglio": "HTTP 200 · 377 ms",
       "gravita": "alta",
       "skip": false
     },
     {
       "nome": "sito /idati",
       "ok": true,
-      "dettaglio": "HTTP 200 · 704 ms",
+      "dettaglio": "HTTP 200 · 267 ms",
       "gravita": "alta",
       "skip": false
     },
     {
       "nome": "sito /osservatorio",
       "ok": true,
-      "dettaglio": "HTTP 200 · 288 ms",
+      "dettaglio": "HTTP 200 · 580 ms",
       "gravita": "alta",
       "skip": false
     },
     {
       "nome": "sito /aggiudicazioni",
       "ok": true,
-      "dettaglio": "HTTP 200 · 498 ms",
+      "dettaglio": "HTTP 200 · 649 ms",
       "gravita": "alta",
       "skip": false
     },
     {
       "nome": "sito /ilive",
       "ok": true,
-      "dettaglio": "HTTP 200 · 380 ms",
+      "dettaglio": "HTTP 200 · 470 ms",
       "gravita": "alta",
       "skip": false
     },
@@ -51,14 +51,14 @@
     {
       "nome": "qa/stato.json",
       "ok": true,
-      "dettaglio": "run 42882410720 · 1 h fa · 0C/0A",
+      "dettaglio": "run 42893219117 · 0 h fa · 0C/0A",
       "gravita": "alta",
       "skip": false
     },
     {
       "nome": "QA recente (<8 h)",
       "ok": true,
-      "dettaglio": "1 h",
+      "dettaglio": "0 h",
       "gravita": "media",
       "skip": false
     },
@@ -72,7 +72,7 @@
     {
       "nome": "registrazione QA (audit interno)",
       "ok": true,
-      "dettaglio": "registrato · 0 h fa · run 42882410720",
+      "dettaglio": "registrato · 0.1 h fa · run 42882410720",
       "gravita": "media",
       "skip": false
     },
@@ -107,21 +107,21 @@
     {
       "nome": "AI/SEO /llms.txt",
       "ok": true,
-      "dettaglio": "HTTP 200 · 164 ms",
+      "dettaglio": "HTTP 200 · 127 ms",
       "gravita": "media",
       "skip": false
     },
     {
       "nome": "AI/SEO /robots.txt",
       "ok": true,
-      "dettaglio": "HTTP 200 · 72 ms",
+      "dettaglio": "HTTP 200 · 51 ms",
       "gravita": "media",
       "skip": false
     },
     {
       "nome": "AI/SEO /sitemap.xml",
       "ok": true,
-      "dettaglio": "HTTP 200 · 131 ms",
+      "dettaglio": "HTTP 200 · 220 ms",
       "gravita": "media",
       "skip": false
     },
@@ -170,16 +170,16 @@
     {
       "nome": "posta: ultima scansione (<6 h)",
       "ok": true,
-      "dettaglio": "3.8 h · 14 allarmi",
+      "dettaglio": "3.9 h · 14 allarmi",
       "gravita": "media",
       "skip": false
     },
     {
       "nome": "run QA cloud",
-      "ok": false,
-      "dettaglio": "in corso · 2026-11-10T20:13:55Z",
+      "ok": true,
+      "dettaglio": "success · 2026-11-10T20:13:55Z",
       "gravita": "bassa",
-      "skip": true
+      "skip": false
     },
     {
       "nome": "run feed-sync",
