@@ -1,0 +1,34 @@
+name: perf-qa
+on:
+  schedule:
+    - cron: "0 5 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: perf-qa
+  cancel-in-progress: false
+jobs:
+  perf:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Test carico e performance
+        run: node scripts/perf-test.js
+      - name: Commit perf
+        if: always()
+        shell: bash
+        run: |
+          git config user.name "CARe Cloud"
+          git config user.email "cloud@careauctions.co"
+          git add perf
+          if git diff --cached --quiet; then echo "nessuna variazione"; exit 0; fi
+          git commit -m "perf: carico e performance ($(date -u +%FT%TZ))"
+          for i in 1 2 3 4 5; do git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null; if git push; then exit 0; fi; sleep 4; done
+          exit 1
