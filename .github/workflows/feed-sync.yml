@@ -82,11 +82,17 @@ jobs:
           # arrivato 2 minuti dopo l'inizio del deploy). Ora se c'e' un deploy in corso il
           # commit si salta e il giro successivo lo rifa'; soglia del freno portata a 600s.
           if [ "$MODE" != "full" ]; then
-            ULTIMO=$(git log -1 --format=%ct)
-            ADESSO=$(date +%s)
-            ATTESO=$((ADESSO - ULTIMO))
+            # 10/11/2026 - il freno deve misurare l'ultimo commit SUL FEED, non l'ultimo commit
+            # qualsiasi: dal 13:27 del 10/11 il workflow qa committa su main ogni ~30 min e ogni
+            # suo commit azzerava il freno, quindi feed-sync girava ogni 3 min senza mai
+            # committare (statistiche.json fermo alle 12:42Z mentre i run dicevano success).
+            # Il checkout e' shallow (depth 1) quindi si chiede alla API l'ultimo commit di feed/.
+            ULTIMO=$(curl -sS -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+              "https://api.github.com/repos/${{ github.repository }}/commits?path=feed&per_page=1" \
+              | jq -r '.[0].commit.committer.date // empty')
+            if [ -n "$ULTIMO" ]; then ATTESO=$(( $(date +%s) - $(date -d "$ULTIMO" +%s) )); else ATTESO=999999; fi
             if [ "$ATTESO" -lt 600 ]; then
-              echo "commit saltato: ultimo commit ${ATTESO}s fa (soglia 600s)"
+              echo "commit saltato: ultimo commit sul feed ${ATTESO}s fa (soglia 600s)"
               exit 0
             fi
             CODICE=$(curl -sS -o /tmp/deploy-in-corso.json -w '%{http_code}' \
