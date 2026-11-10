@@ -15,6 +15,7 @@ on:
         default: 'inc'
 permissions:
   contents: write
+  actions: read   # 10/11/2026 - per sapere se un deploy Pages e' in corso
 # 9/11/2026 - un giro alla volta: due raccolte in parallelo si sovrascrivevano i file
 concurrency:
   group: feed-sync
@@ -74,12 +75,25 @@ jobs:
           # prezzi di aggiudicazione e' rimasto invisibile per 10 minuti).
           # Qui si committa al massimo ogni 5 minuti; il giro full notturno committa sempre.
           # Non si perde niente: il giro successivo rilegge il feed e riaggiunge i lotti.
+          # 10/11/2026 - NON si committa mentre un deploy Pages e' in corso. Con ~75.700 file
+          # l'artefatto di Pages e' 177 MB e il deploy dura piu' dei 5 minuti del freno: ogni
+          # commit nuovo lo CANCELLAVA. Misurato: dalle 01:00Z alle 02:20Z del 10/11 il sito
+          # non ha pubblicato piu' un feed nuovo (run 42741120004 cancellato da un commit
+          # arrivato 2 minuti dopo l'inizio del deploy). Ora se c'e' un deploy in corso il
+          # commit si salta e il giro successivo lo rifa'; soglia del freno portata a 600s.
           if [ "$MODE" != "full" ]; then
             ULTIMO=$(git log -1 --format=%ct)
             ADESSO=$(date +%s)
             ATTESO=$((ADESSO - ULTIMO))
-            if [ "$ATTESO" -lt 300 ]; then
-              echo "commit saltato: ultimo commit ${ATTESO}s fa (soglia 300s) — lascio finire il deploy Pages"
+            if [ "$ATTESO" -lt 600 ]; then
+              echo "commit saltato: ultimo commit ${ATTESO}s fa (soglia 600s)"
+              exit 0
+            fi
+            CODICE=$(curl -sS -o /tmp/deploy-in-corso.json -w '%{http_code}' \
+              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+              "https://api.github.com/repos/${{ github.repository }}/actions/workflows/391602963/runs?status=in_progress&per_page=1")
+            if [ "$CODICE" = "200" ] && grep -q '"id"' /tmp/deploy-in-corso.json; then
+              echo "commit saltato: un deploy Pages e' in corso — aspetto che finisca ($(date -u +%FT%TZ))"
               exit 0
             fi
           fi
