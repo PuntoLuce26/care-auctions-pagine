@@ -46,7 +46,7 @@ const eur = (v) => (v == null ? null : Number(v).toLocaleString('it-IT', { style
     ['Mobiliari', n(mob.lotti)],
     ['Prezzo medio immobiliare', eur(imm.prezzoMedio)],
     ['Sconto mediano vs OMI', (conf && conf.nazionale && conf.nazionale.scontoMedianoPct != null && conf.meta.copertura.lottiConMq)
-      ? (String(conf.nazionale.scontoMedianoPct).replace('.', ',') + '% su ' + conf.meta.copertura.lottiConMq + ' lotti confrontabili in ' + conf.meta.copertura.comuniPubblicati + ' comuni')
+      ? (String(conf.nazionale.scontoMedianoPct).replace('.', ',') + '% su ' + Number(conf.meta.copertura.lottiConMq).toLocaleString('it-IT') + ' lotti confrontabili in ' + conf.meta.copertura.comuniPubblicati + ' comuni')
       : null],
     ['Aggiudicazioni monitorate', n(agg)],
     ['Importo aggiudicato', eur(importo)],
