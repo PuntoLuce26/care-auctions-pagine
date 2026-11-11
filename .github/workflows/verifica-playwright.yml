@@ -27,7 +27,13 @@ jobs:
       - name: Installa Playwright
         run: |
           npm i playwright@1.63.0 --no-save
-          npx playwright install --with-deps chromium
+          # 11/11/2026 — i runner GitHub a volte non risolvono security.ubuntu.com e
+          # "--with-deps" muore (run 158/159). Se le dipendenze mancano si prova senza:
+          # il test deve dire se il SITO è rotto, non se la rete di GitHub è rotta.
+          npx playwright install --with-deps chromium || {
+            echo "::warning::dipendenze di sistema non installabili: provo senza"
+            npx playwright install chromium
+          }
       - name: Rotte e stabilità (Playwright)
         run: node scripts/verifica-playwright.mjs --wait=2500 --out=/tmp/verifica.json
       - name: Lingue — tutte le 20 del sito
