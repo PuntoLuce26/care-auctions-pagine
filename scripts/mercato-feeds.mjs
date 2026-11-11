@@ -11,10 +11,11 @@ const UA = { 'User-Agent': 'CARe-mercato' };
 const leggi = async (f) => { const r = await fetch(BASE + f, { headers: UA }); if (!r.ok) throw new Error(f + ' ' + r.status); return r.json(); };
 const r1 = (v, d = 1) => v === null || v === undefined || isNaN(v) ? null : Math.round(v * 10 ** d) / 10 ** d;
 
-const [ap, cm, oc] = await Promise.all([
+const [ap, cm, oc, rc] = await Promise.all([
   leggi('andamento-partecipazione.json'),
   leggi('confronto-mercato.json'),
-  leggi('omi-comuni.json')
+  leggi('omi-comuni.json'),
+  leggi('residenziale-comune.json').catch(() => null)
 ]);
 const oggi = new Date().toISOString();
 
@@ -39,11 +40,14 @@ console.log('aste-trend.json · giorni:', giorni.length, '·', (fs.statSync('fee
 
 // 2) confronto per comune
 const omi = new Map((oc.comuni || []).map((c) => [c.comune.toUpperCase(), c]));
+const attivi = new Map(((rc && rc.comuni) || []).map((c) => [String(c.comune).toUpperCase(), c]));
 const comuni = [];
 for (const c of (cm.comuni || [])) {
   const o = omi.get(String(c.comune).toUpperCase());
   const asteMq = Number(c.prezzoMqMedio) || null;
   const mercatoMq = o && o.residenziale ? (Number(o.residenziale.mediano) || null) : null;
+  const a = attivi.get(String(c.comune).toUpperCase());
+  const lottiAttiviRes = a ? Number(a.residenziali) || null : null;
   const lotti = Number(c.lotti) || 0;
   const ntnRes = o ? (Number(o.ntnRes) || null) : null;
   comuni.push({
@@ -55,11 +59,12 @@ for (const c of (cm.comuni || [])) {
     prezzoMqMercato: mercatoMq,
     scontoPct: asteMq && mercatoMq ? r1((1 - asteMq / mercatoMq) * 100) : null,
     lottiAsta: lotti,
+    lottiAttiviResidenziali: lottiAttiviRes,
     ntnRes: ntnRes,
     // 540 lotti su 37.293 compravendite = 1,4% del mercato: «anni di magazzino» arrotondato
     // a zero non dice niente, quindi si pubblica la QUOTA e i MESI, non gli anni.
-    quotaAsteSuMercatoPct: ntnRes ? r1((lotti / ntnRes) * 100, 2) : null,   // % delle compravendite
-    tempoAssorbimentoMesi: ntnRes && lotti ? r1((lotti / ntnRes) * 12, 1) : null
+    quotaAsteSuMercatoPct: ntnRes && lottiAttiviRes !== null ? r1((lottiAttiviRes / ntnRes) * 100, 2) : null,
+    tempoAssorbimentoMesi: ntnRes && lottiAttiviRes ? r1((lottiAttiviRes / ntnRes) * 12, 2) : null
   });
 }
 comuni.sort((a, b) => (b.lottiAsta || 0) - (a.lottiAsta || 0));
@@ -71,7 +76,7 @@ const confronto = {
     semestreOmi: oc.meta?.semestreCorrente || null,
     annoVolumi: oc.meta?.annoVolumi || null,
     generatoIl: oggi,
-    metodo: 'scontoPct = 1 − (prezzo €/m² delle nostre aste / mediana OMI residenziale del comune). quotaAsteSuMercatoPct = lotti in asta ÷ compravendite residenziali annue del comune (quanto pesano le aste sul mercato). tempoAssorbimentoMesi = quota × 12: quanti mesi di vendite servirebbero per smaltire i lotti attualmente in asta, al ritmo del mercato di oggi. Non è un termine OMI né ISTAT: è una nostra misura, e la formula è questa.',
+    metodo: 'scontoPct = 1 − (prezzo €/m² delle nostre aste / mediana OMI residenziale del comune). quotaAsteSuMercatoPct = lotti ATTIVI residenziali in asta ÷ compravendite residenziali annue del comune (quanto pesano le aste sul mercato). tempoAssorbimentoMesi = quota × 12: quanti mesi di vendite servirebbero per smaltire i lotti attualmente in asta, al ritmo del mercato di oggi. Non è un termine OMI né ISTAT: è una nostra misura, e la formula è questa.',
     nota: 'Valori OMI pubblicati solo come statistica derivata (mediana per comune); il dato di zona resta interno.',
     copertura: { comuni: comuni.length, conPrezzoAste: comuni.filter((x) => x.prezzoMqAste).length, conOmi: comuni.filter((x) => x.prezzoMqMercato).length, conVolumi: comuni.filter((x) => x.ntnRes).length }
   },
