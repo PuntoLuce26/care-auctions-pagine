@@ -199,7 +199,10 @@ try { fs.writeFileSync(path.join(FEED, 'citta-top.json'), JSON.stringify({ gener
 console.log('citta-top.json:', Object.keys(cittaOut).length, 'citta con almeno 10 lotti attivi');
 
 // --- sitemap-locali.xml rigenerata (la vecchia era ferma al 25/10 e conteneva varianti /en-us duplicate)
-const SEO_LANG = ['it', 'en', 'es', 'de', 'fr', 'ca'];
+// 11/11/2026 — la sitemap elenca SOLO l'italiano finche' le varianti lingua non hanno
+// contenuto tradotto (direttiva 5.950). Le altre lingue tornano in sitemap quando le pagine
+// localizzate della fase C saranno vere: ora sarebbero duplicati che bruciano crawl budget.
+const SEO_LANG = ['it'];
 const regDaProv = new Set();
 for (const m of provVotes.values()) for (const r of Object.keys(m)) regDaProv.add(slugify(r));
 const righeLoc = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'];
