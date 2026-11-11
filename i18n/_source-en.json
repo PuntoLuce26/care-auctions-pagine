@@ -4094,6 +4094,8 @@
  "ad_p_aria": "Last 30 days: awarded, unsold and suspended auctions",
  "ad_p_rate_agg": "Awarded out of total:",
  "ad_p_rate_des": "Unsold out of total:",
- "ad_p_rate_note": "shares of the day's total auctions",
- "ad_p_legend": "Bar colour key"
+ "ad_p_rate_note": "shares of the day's total auctions; the 30-day average adds up every auction in the period",
+ "ad_p_legend": "Bar colour key",
+ "ad_p_rate_30": "30-day average",
+ "ad_p_tap": "Tap a bar to see that day's numbers."
 }
