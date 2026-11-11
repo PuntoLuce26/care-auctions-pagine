@@ -1,806 +1,806 @@
 {
-  "data": "2026-11-11T09:42:06.067Z",
+  "data": "2026-11-11T12:47:28.657Z",
   "lingue": {
     "fr": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T15:42:24.866Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:38:54.674Z",
+      "qualita": "mt:50/fallback:2/formula:0"
     },
     "af": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T15:48:13.352Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:17:49.600Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "am": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T15:50:11.708Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:18:40.035Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "ar": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T15:52:29.827Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:19:22.005Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "az-Latn": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T15:54:30.049Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:20:02.434Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "az": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T15:56:16.361Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:20:52.909Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "bg": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T15:58:16.378Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:21:49.775Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "bn": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:00:04.179Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:22:39.506Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "bs": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:02:55.116Z",
-      "qualita": "mt:66/fallback:1/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:23:18.550Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "ca-ES": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:04:57.220Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:24:12.690Z",
+      "qualita": "mt:51/fallback:1/formula:0"
     },
     "ca": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:07:00.199Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:25:06.737Z",
+      "qualita": "mt:51/fallback:1/formula:0"
     },
     "cs": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:09:03.045Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:26:07.316Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "cy": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:10:43.898Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:26:48.696Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "da": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:12:07.053Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:27:39.336Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "de": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:13:55.054Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:28:22.564Z",
+      "qualita": "mt:51/fallback:1/formula:0"
     },
     "el": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:16:03.295Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:29:12.551Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "en-GB": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:17:58.775Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:30:03.171Z",
+      "qualita": "mt:51/fallback:1/formula:0"
     },
     "en": {
       "forzate": {
         "lb_body": "362246a7fac47f6d",
         "d_idream": "e215fa0c4e77bca4"
       },
-      "tradotte": 204,
-      "ultima": "2026-11-10T16:17:58.782Z",
-      "qualita": "mt:201/fallback:0/formula:3"
+      "tradotte": 256,
+      "ultima": "2026-11-11T11:30:03.177Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "es-ES": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:19:48.414Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:31:22.290Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "es": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:22:12.960Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:32:35.199Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "et": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:23:57.363Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:33:47.979Z",
+      "qualita": "mt:51/fallback:1/formula:0"
     },
     "eu": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:24:33.412Z",
-      "qualita": "mt:34/fallback:33/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:34:10.656Z",
+      "qualita": "mt:13/fallback:39/formula:0"
     },
     "fa": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:26:02.969Z",
-      "qualita": "mt:66/fallback:1/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:35:36.746Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "fi": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:28:06.401Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:37:03.384Z",
+      "qualita": "mt:51/fallback:1/formula:0"
     },
     "fil": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:30:19.233Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:38:07.478Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "ga": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:35:11.323Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:40:04.054Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "gl": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:37:34.187Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:40:47.928Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "gu": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:39:58.654Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:41:37.464Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "ha": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:42:17.953Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:42:26.268Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "he": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:44:03.702Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:43:10.369Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "hi": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:46:51.202Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:44:09.342Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "hr": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:49:05.382Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:44:43.993Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "hu": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:50:49.098Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:45:24.692Z",
+      "qualita": "mt:51/fallback:1/formula:0"
     },
     "hy": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:53:05.114Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:46:34.861Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "id": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:54:47.829Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:47:13.621Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "ig": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:57:04.937Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:47:58.867Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "is": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T16:58:57.980Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:48:56.353Z",
+      "qualita": "mt:51/fallback:1/formula:0"
     },
     "ja": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T17:00:49.604Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:49:47.368Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "ka": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T17:04:37.028Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:50:44.100Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "kk": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T17:07:26.456Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:52:14.261Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "km": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T17:11:14.851Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:53:28.573Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "kn": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T17:15:19.522Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:54:22.283Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "ko": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T17:17:49.270Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:55:13.764Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "lo": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T17:20:14.823Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:56:09.531Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "lt": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T17:22:34.444Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:56:47.656Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "lv": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T17:25:25.928Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:57:43.070Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "mg": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T17:28:15.528Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:58:37.550Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "mk": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T17:30:06.224Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:59:19.242Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "ml": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T17:33:02.226Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T11:59:58.798Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "mn": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T17:35:31.739Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:02:29.989Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "mr": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T17:38:12.284Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:03:49.151Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "ms": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T17:40:40.744Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:04:43.298Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "mt": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T17:41:22.256Z",
-      "qualita": "mt:34/fallback:33/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:05:03.200Z",
+      "qualita": "mt:13/fallback:39/formula:0"
     },
     "my": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T17:45:32.270Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:06:14.612Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "nb": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T17:47:46.767Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:07:25.258Z",
+      "qualita": "mt:51/fallback:1/formula:0"
     },
     "ne": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T17:50:09.315Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:08:32.386Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "nl": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T17:52:49.672Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:09:29.918Z",
+      "qualita": "mt:51/fallback:1/formula:0"
     },
     "no": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T17:54:34.034Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:10:49.919Z",
+      "qualita": "mt:51/fallback:1/formula:0"
     },
     "pa": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T17:58:19.030Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:12:29.478Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "pl": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T18:02:09.290Z",
-      "qualita": "mt:66/fallback:1/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:13:59.741Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "ps": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T18:05:26.244Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:15:01.129Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "pt-PT": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T18:07:56.209Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:16:47.123Z",
+      "qualita": "mt:51/fallback:1/formula:0"
     },
     "pt": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T18:10:09.190Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:18:00.141Z",
+      "qualita": "mt:51/fallback:1/formula:0"
     },
     "ro": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T18:13:13.673Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:19:24.777Z",
+      "qualita": "mt:51/fallback:1/formula:0"
     },
     "ru": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T18:15:58.527Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:20:13.420Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "si": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T18:19:03.317Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:21:16.674Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "sk": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T18:21:08.293Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:22:45.205Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "sl": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T18:23:40.897Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:23:56.273Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "so": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T18:25:46.628Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:25:05.300Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "sq": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T18:28:01.501Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:25:56.127Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "sr-Latn": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T18:29:53.437Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:27:16.047Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "sr": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T18:32:48.070Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:28:38.478Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "sv": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T18:34:39.110Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:29:32.324Z",
+      "qualita": "mt:51/fallback:1/formula:0"
     },
     "sw": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T18:37:24.882Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:30:29.020Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "ta": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T18:39:41.584Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:32:37.147Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "te": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T18:40:41.528Z",
-      "qualita": "mt:34/fallback:33/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:33:14.160Z",
+      "qualita": "mt:13/fallback:39/formula:0"
     },
     "th": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T18:43:14.714Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:34:32.435Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "tl": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T18:45:49.859Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:35:29.237Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "tr": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T18:47:53.508Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:36:49.901Z",
+      "qualita": "mt:51/fallback:1/formula:0"
     },
     "uk": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T18:49:48.558Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:37:57.913Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "ur": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T18:51:33.047Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:38:52.675Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "uz-Latn": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T18:55:08.057Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:40:23.158Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "uz": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T18:58:29.285Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:41:51.740Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "vi": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T19:00:04.919Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:42:47.357Z",
+      "qualita": "mt:51/fallback:1/formula:0"
     },
     "yo": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T19:03:01.261Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:43:40.969Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "zh-CN": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T19:05:09.586Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:44:26.690Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "zh-TW": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T19:07:28.849Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:45:14.651Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "zh": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T19:09:07.002Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:46:24.438Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     },
     "zu": {
       "forzate": {
         "lb_body": "38bb42ded853e387",
         "d_idream": "f3658fbab4d7effb"
       },
-      "tradotte": 70,
-      "ultima": "2026-11-10T19:11:11.390Z",
-      "qualita": "mt:67/fallback:0/formula:3"
+      "tradotte": 122,
+      "ultima": "2026-11-11T12:47:28.654Z",
+      "qualita": "mt:52/fallback:0/formula:0"
     }
   }
 }
