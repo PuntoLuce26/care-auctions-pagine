@@ -1,30 +1,9 @@
 {
-  "ultimoControllo": "2026-11-11T09:19:18.630Z",
+  "ultimoControllo": "2026-11-11T09:28:03.710Z",
   "ultimoQa": "2026-11-11T09:19:18.630Z",
-  "qaEsito": "QA dispatch HTTP 204",
-  "nuoveMail": 2,
-  "allarmi": [
-    {
-      "id": "1a1c9e6e9c9e3c71",
-      "data": "2026-11-11T09:18:34.000Z",
-      "da": "PuntoLuce26 <notifications@github.com>",
-      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: ronda-notturna - main (65f8f8f)",
-      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
-      "componente": "github-actions",
-      "gravita": "media",
-      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42993796663"
-    },
-    {
-      "id": "1a1c9c23f4a81303",
-      "data": "2026-11-11T08:35:58.000Z",
-      "da": "mittente riservato · edge",
-      "oggetto": "[oggetto riservato · edge]",
-      "a": "info@puntoluce26.com",
-      "componente": "edge",
-      "gravita": "critica",
-      "link": ""
-    }
-  ],
+  "qaEsito": "nessun allarme nuovo",
+  "nuoveMail": 0,
+  "allarmi": [],
   "processati": [
     "1a1c636ae4a6b5a9",
     "1a1c634c8df2049e",
@@ -79,6 +58,8 @@
     "1a1c9a5b0360facb",
     "1a1c9e6e9c9e3c71",
     "1a1c9e06286fac43",
-    "1a1c9c23f4a81303"
+    "1a1c9c23f4a81303",
+    "1a1c9ede8b727fa4",
+    "1a1c9e7a9104d6f9"
   ]
 }
