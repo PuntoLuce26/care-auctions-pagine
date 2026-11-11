@@ -1,0 +1,39 @@
+name: emergent-watch
+# 11/11/2026 — EMERGENT SORVEGLIATO DA FUORI (GitHub Actions).
+# Il pannello di Emergent (CPU, memoria) è interno e non ha API pubblica: quello che possiamo
+# misurare davvero è il comportamento visto da fuori — tempo di risposta, stato, dimensione HTML,
+# hash del bundle. Se l'origine rallenta o cade, lo vediamo qui prima che lo vedano gli utenti.
+# Storico in perf/emergent.json (max 500 punti) + stato in perf/stato.json.
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: emergent-watch
+  cancel-in-progress: false
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Misura l'origine e il sito
+        run: node scripts/emergent-watch.mjs
+      - name: Commit dello storico
+        run: |
+          git config user.name "CARe Cloud"
+          git config user.email "cloud@careauctions.co"
+          git add perf
+          git diff --cached --quiet && echo "nessuna variazione" && exit 0
+          git commit -m "perf: misura emergent ($(date -u +%FT%TZ))"
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null
+            if git push; then exit 0; fi
+            sleep 4
+          done
+          echo "::error::push fallito"; exit 1
