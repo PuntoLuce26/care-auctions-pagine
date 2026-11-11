@@ -391,15 +391,19 @@ function costruisci(d) {
   md.push('');
   // 11/11/2026 — le statistiche nate oggi non erano nel quadro: OMI completo, mercato libero,
   // zone e lotti attivi. Se un feed manca si scrive «in arrivo», mai un numero inventato.
-  const oi = d.omiIndice && d.omiIndice.meta ? d.omiIndice.meta : null;
+  const oiRaw = d.omiIndice || null;
+  const oiNaz = oiRaw && Array.isArray(oiRaw.nazionale) ? oiRaw.nazionale : [];
+  const oi = oiNaz.length ? oiNaz[oiNaz.length - 1] : null;
   const mi = d.mercatoIndice && d.mercatoIndice.totale ? d.mercatoIndice.totale : null;
   const az = d.asteZone && d.asteZone.meta ? d.asteZone.meta : null;
   const rc = d.residenzialeComune && d.residenzialeComune.meta ? d.residenzialeComune.meta : null;
   md.push('## 5. Mercato e OMI — le statistiche di oggi');
   md.push('');
-  md.push(`- **OMI completo**: ${oi ? `${int(oi.comuni)} comuni · ${int(oi.aree)} aree · ${int(oi.regioni)} regioni · ${int(oi.province)} province · ${oi.semestri ? oi.semestri.length : 0} semestri (${oi.semestri ? oi.semestri[0] : '?'} → ${oi.semestri ? oi.semestri[oi.semestri.length - 1] : '?'})` : ARRIVO}.`);
-  const ultimoIndice = oi && d.omiIndice.nazionale ? d.omiIndice.nazionale[d.omiIndice.nazionale.length - 1] : null;
-  md.push(`- **Indice CAReIndex OMI**: ${ultimoIndice ? `${ultimoIndice.semestre} · mediana ${int(ultimoIndice.min)}–${int(ultimoIndice.max)} €/m² · indice ${ultimoIndice.indice} (base 100 nel 2004/1)` : ARRIVO}.`);
+  const oiAree = oiRaw && oiRaw.aree ? Object.keys(oiRaw.aree).length : 0;
+  const oiReg = oiRaw && oiRaw.regioni ? Object.keys(oiRaw.regioni).length : 0;
+  const oiProv = oiRaw && oiRaw.province ? Object.keys(oiRaw.province).length : 0;
+  md.push(`- **OMI completo**: ${oi ? `${int(oi.righe)} comuni · ${int(oiAree)} aree · ${int(oiReg)} regioni · ${int(oiProv)} province · ${int(oiNaz.length)} semestri (${oiNaz[0].semestre} → ${oi.semestre})` : ARRIVO}.`);
+  md.push(`- **Indice CAReIndex OMI**: ${oi ? `${oi.semestre} · mediana ${int(oi.min)}–${int(oi.max)} €/m² (${int(oi.mediano)} €/m²) · indice ${oi.indice} (base 100 nel 2004/1)` : ARRIVO}.`);
   const ult = mi ? mi[mi.length - 1] : null;
   md.push(`- **Mercato libero** (Eurostat, trimestrale): ${ult ? `${ult.periodo} · indice ${ult.indice} (2015 = 100) · ${ult.variazionePct > 0 ? '+' : ''}${ult.variazionePct}% sul trimestre prima` : ARRIVO}.`);
   md.push(`- **Aste per zona**: ${az ? `${int(az.zone)} zone in ${int(az.comuni)} comuni · ${int(az.assegnati)} lotti attivi assegnati (${int(az.senzaZona)} senza zona)` : ARRIVO}.`);
@@ -465,6 +469,8 @@ function costruisci(d) {
   const dossier = {
     adesso, automazioni, omi, config,
     statistiche: feeds.statistiche, indice: feeds.indice, npl: feeds.npl,
+    omiIndice: feeds.omiIndice, mercatoIndice: feeds.mercatoIndice,
+    asteZone: feeds.asteZone, residenzialeComune: feeds.residenzialeComune,
     crediti: feeds.crediti, sitemapMeta: feeds.sitemapMeta, indexnow: feeds.indexnow,
     perizieOcr: feeds.perizieOcr, ocrStato: feeds.ocrStato,
     runs: runs.filter(Boolean), rotte, foto, fotoEsatto, sitemap,
