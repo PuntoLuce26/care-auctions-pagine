@@ -1,10 +1,14 @@
 name: gate
 # 11/11/2026 — il cancello prima della produzione, per il codice che scriviamo NOI.
-# Tre controlli, zero costi: segreti (gitleaks), analisi statica (semgrep), dipendenze (npm audit se c'è package.json).
+# Tre controlli, zero costi: segreti (gitleaks), analisi statica (semgrep), dipendenze (npm audit se c'è).
 # Il codice dell'app (Emergent) non è qui: su quello valgono i contract test e il QA sul comportamento.
 on:
   push:
-    paths: ["scripts/**", "qa/**", ".github/workflows/**", ".semgrep.yml"]
+    paths:
+      - "scripts/**"
+      - "qa/**"
+      - ".github/workflows/**"
+      - ".semgrep.yml"
   pull_request:
   workflow_dispatch:
 permissions:
@@ -18,32 +22,36 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-        with: { fetch-depth: 0 }
-      - name: gitleaks (segreti nel repo e nella storia recente)
+      - name: gitleaks (segreti nel repo)
         run: |
           curl -sSL -o /tmp/gl.tgz https://github.com/gitleaks/gitleaks/releases/download/v8.18.4/gitleaks_8.18.4_linux_x64.tar.gz
           tar -xzf /tmp/gl.tgz -C /tmp gitleaks
-          /tmp/gitleaks detect --no-git --source . --redact --report-format json --report-path /tmp/gl.json --exit-code 2 \
-            || { echo "::error::gitleaks ha trovato possibili segreti"; python3 -c "
-import json;d=json.load(open('/tmp/gl.json'));print('trovati:',len(d))
-for x in d[:8]: print(' -',x.get('RuleID'),x.get('File'),'riga',x.get('StartLine'))"; exit 1; }
+          if /tmp/gitleaks detect --no-git --source . --redact --report-format json --report-path /tmp/gl.json --exit-code 2; then
+            echo "gitleaks: nessun segreto trovato"
+          else
+            echo "::error::gitleaks ha trovato possibili segreti"
+            python3 -c "import json;d=json.load(open('/tmp/gl.json'));print('trovati:',len(d));[print(' -',x.get('RuleID'),x.get('File'),'riga',x.get('StartLine')) for x in d[:8]]"
+            exit 1
+          fi
   sast:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with: { python-version: "3.12" }
+        with:
+          python-version: "3.12"
       - name: semgrep (analisi statica sui nostri script)
         run: |
           pip install -q semgrep
           semgrep --version
-          semgrep --config .semgrep.yml --error --quiet --json --output /tmp/sg.json scripts qa .github || {
+          if semgrep --config .semgrep.yml --error --quiet --json --output /tmp/sg.json scripts qa .github; then
+            echo "semgrep: nessun problema di gravità alta"
+          else
             echo "::error::semgrep ha trovato problemi di gravità alta"
-            python3 -c "
-import json;d=json.load(open('/tmp/sg.json'))
-for r in d.get('results',[])[:10]: print(' -',r['check_id'].split('.')[-1],r['path'],'riga',r['start']['line'])"
-            exit 1; }
+            python3 -c "import json;d=json.load(open('/tmp/sg.json'));[print(' -',r['check_id'].split('.')[-1],r['path'],'riga',r['start']['line']) for r in d.get('results',[])[:10]]"
+            exit 1
+          fi
   dipendenze:
     runs-on: ubuntu-latest
     timeout-minutes: 8
@@ -52,7 +60,7 @@ for r in d.get('results',[])[:10]: print(' -',r['check_id'].split('.')[-1],r['pa
       - name: npm audit (solo se esiste un package.json)
         run: |
           if [ -f package.json ]; then
-            npm audit --omit=dev --audit-level=high || { echo "::error::dipendenze con vulnerabilità alte"; exit 1; }
+            npm audit --omit=dev --audit-level=high
           else
             echo "nessun package.json: niente dipendenze da controllare (i worker non hanno node_modules)"
           fi
