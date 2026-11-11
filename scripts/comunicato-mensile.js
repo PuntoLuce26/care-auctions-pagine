@@ -30,7 +30,16 @@ const eur = (v) => (v == null ? 'non disponibile' : Number(v).toLocaleString('it
   const az = (aziende && aziende.meta) || {};
   const tot = (indice && indice.totaleLotti) || (stats && stats.totale);
   const agg = e.aggiudicate || (stats && stats.esiti && stats.esiti.aggiudicate);
-  const importo = e.importoTotale || e.importo || (esiti && esiti.importo);
+  // 11/11/2026 — l'importo aggiudicato non è un campo piatto: esiti-monitor.json lo tiene
+  // dentro `giorni` come [tipo, conteggio, importo]. Lo si somma, invece di scrivere «non disponibile».
+  const importoDaGiorni = (() => {
+    try {
+      let s = 0;
+      for (const [, arr] of (e.giorni || [])) for (const t of arr) s += Number(t[2]) || 0;
+      return s > 0 ? s : null;
+    } catch (_) { return null; }
+  })();
+  const importo = e.importoTotale || e.importo || (esiti && esiti.importo) || importoDaGiorni;
   const righe = [
     ['Aste totali', n(tot)],
     ['Immobiliari', n(imm.lotti)],
