@@ -102,12 +102,22 @@ jobs:
               echo "commit saltato: ultimo commit di feed-sync ${ATTESO}s fa (soglia 600s)"
               exit 0
             fi
-            CODICE=$(curl -sS -o /tmp/deploy-in-corso.json -w '%{http_code}' \
-              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-              "https://api.github.com/repos/${{ github.repository }}/actions/workflows/391602963/runs?status=in_progress&per_page=1")
-            if [ "$CODICE" = "200" ] && grep -q '"id"' /tmp/deploy-in-corso.json; then
-              echo "commit saltato: un deploy Pages e' in corso — aspetto che finisca ($(date -u +%FT%TZ))"
-              exit 0
+            # 11/11/2026 - VALVOLA DI SICUREZZA: il rispetto del deploy in corso vale solo
+            # se il feed e' fresco (ultimo commit feed-sync < 20 minuti). Con i commit di
+            # qa/mail-qa/ocr/aziende/ishop che si incatenano, il deploy Pages risulta
+            # SEMPRE in corso e il feed restava fermo (statistiche.json 06:52Z con run verdi).
+            # Oltre i 20 minuti la freschezza del feed passa davanti alla build statica:
+            # il feed e' servito dalla raw (edge), la build riparte al commit successivo.
+            if [ "$ATTESO" -lt 1200 ]; then
+              CODICE=$(curl -sS -o /tmp/deploy-in-corso.json -w '%{http_code}' \
+                -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+                "https://api.github.com/repos/${{ github.repository }}/actions/workflows/391602963/runs?status=in_progress&per_page=1")
+              if [ "$CODICE" = "200" ] && grep -q '"id"' /tmp/deploy-in-corso.json; then
+                echo "commit saltato: un deploy Pages e' in corso — aspetto che finisca ($(date -u +%FT%TZ))"
+                exit 0
+              fi
+            else
+              echo "feed fermo da ${ATTESO}s: committo anche con un deploy in corso"
             fi
           fi
           git add feed/ sitemap-locali.xml report-*.html report-*.json
