@@ -1,0 +1,21 @@
+name: ishop-check
+# La verifica di iShop + CAReIndex dopo il publish di Emergent. A comando, nessun cron.
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Playwright
+        run: |
+          npm i -D playwright@1.47.2 --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Verifica iShop e CAReIndex
+        run: node qa/ishop-check.mjs
