@@ -405,7 +405,18 @@ function costruisci(d) {
   md.push(`- **Aste per zona**: ${az ? `${int(az.zone)} zone in ${int(az.comuni)} comuni · ${int(az.assegnati)} lotti attivi assegnati (${int(az.senzaZona)} senza zona)` : ARRIVO}.`);
   md.push(`- **Lotti attivi per comune**: ${rc ? `${int(rc.comuni)} comuni · ${int(rc.letti)} lotti letti dal PVP` : ARRIVO}.`);
   md.push('');
-  md.push('## 6. Cosa manca');
+  // 11/11/2026 — blocco indicizzazione: TRE righe distinte, ognuna con la sua verità.
+  // La prima è un fatto (URL nella sitemap), la seconda è un invio (IndexNow), la terza
+  // NON è verificabile finché Search Console non è collegata: si scrive così, non un numero.
+  const sm = d.sitemapMeta || null;
+  const inz = d.indexnow || null;
+  md.push('## 6. Indicizzazione — tre numeri, tre nature');
+  md.push('');
+  md.push(`- **URL nella sitemap**: ${sm ? `${int(sm.totale)} (${int(sm.shard)} pezzi · ${(sm.lingue || []).join(', ')})` : ARRIVO}.`);
+  md.push(`- **URL inviati a IndexNow**: ${inz ? `${int(inz.inviati)} il ${txt(inz.giorno)}` : ARRIVO}. Un invio è un fatto misurabile; non dimostra che il motore li abbia presi.`);
+  md.push('- **URL indicizzati da Google**: non verificabile — Search Console non è collegata. Finché non lo è, questa riga resta «non verificabile» e non si sostituisce con una stima.');
+  md.push('');
+  md.push('## 7. Cosa manca');
   md.push('');
   manca.forEach((m, i) => md.push(`${i + 1}. ${m}`));
   md.push('');
