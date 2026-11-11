@@ -57,8 +57,8 @@ for (const c of (cm.comuni || [])) {
     ntnRes: ntnRes,
     // 540 lotti su 37.293 compravendite = 1,4% del mercato: «anni di magazzino» arrotondato
     // a zero non dice niente, quindi si pubblica la QUOTA e i MESI, non gli anni.
-    quotaAsteSuMercatoPct: ntnRes ? r1((lotti / ntnRes) * 100, 2) : null,
-    mesiMagazzino: ntnRes && lotti ? r1((lotti / ntnRes) * 12, 1) : null
+    quotaAsteSuMercatoPct: ntnRes ? r1((lotti / ntnRes) * 100, 2) : null,   // % delle compravendite
+    tempoAssorbimentoMesi: ntnRes && lotti ? r1((lotti / ntnRes) * 12, 1) : null
   });
 }
 comuni.sort((a, b) => (b.lottiAsta || 0) - (a.lottiAsta || 0));
@@ -70,7 +70,7 @@ const confronto = {
     semestreOmi: oc.meta?.semestreCorrente || null,
     annoVolumi: oc.meta?.annoVolumi || null,
     generatoIl: oggi,
-    metodo: 'scontoPct = 1 − (prezzo €/m² delle nostre aste / mediana OMI residenziale del comune). quotaAsteSuMercatoPct = lotti in asta ÷ NTN residenziale annuo (quanto pesano le aste); mesiMagazzino = quota × 12.',
+    metodo: 'scontoPct = 1 − (prezzo €/m² delle nostre aste / mediana OMI residenziale del comune). quotaAsteSuMercatoPct = lotti in asta ÷ compravendite residenziali annue del comune (quanto pesano le aste sul mercato). tempoAssorbimentoMesi = quota × 12: quanti mesi di vendite servirebbero per smaltire i lotti attualmente in asta, al ritmo del mercato di oggi. Non è un termine OMI né ISTAT: è una nostra misura, e la formula è questa.',
     nota: 'Valori OMI pubblicati solo come statistica derivata (mediana per comune); il dato di zona resta interno.',
     copertura: { comuni: comuni.length, conPrezzoAste: comuni.filter((x) => x.prezzoMqAste).length, conOmi: comuni.filter((x) => x.prezzoMqMercato).length, conVolumi: comuni.filter((x) => x.ntnRes).length }
   },
