@@ -1,21 +1,29 @@
 {
-  "generatedAt": "2026-11-11T19:52:12.039Z",
-  "runId": "43090427059",
-  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43090427059",
+  "generatedAt": "2026-11-11T22:23:21.195Z",
+  "runId": "43110341075",
+  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43110341075",
   "base": "https://careauctions.co",
-  "durationSec": 211,
+  "durationSec": 237,
   "build": {
-    "sito": "main.e5039569.js",
-    "origine": "main.e5039569.js"
+    "sito": "main.e77c99f5.js",
+    "origine": "main.e77c99f5.js"
   },
   "summary": {
     "critical": 0,
     "high": 0,
-    "medium": 0,
+    "medium": 1,
     "low": 3,
-    "total": 3
+    "total": 4
   },
   "issues": [
+    {
+      "severity": "medium",
+      "type": "github_run_falliti",
+      "route": "log",
+      "viewport": "",
+      "message": "esiti-sync (failure)",
+      "suggestion": "Aprire i run falliti; se sono build Pages cancellate da un commit, non è un guasto (vedi LEZIONI)."
+    },
     {
       "severity": "low",
       "type": "form_invalid",
@@ -46,7 +54,7 @@
       "route": "/",
       "viewport": "desktop",
       "http": 200,
-      "text": 21455,
+      "text": 21450,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -57,7 +65,7 @@
       "route": "/aste",
       "viewport": "desktop",
       "http": 200,
-      "text": 22889,
+      "text": 22872,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -68,7 +76,7 @@
       "route": "/idati",
       "viewport": "desktop",
       "http": 200,
-      "text": 5581,
+      "text": 5576,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -79,7 +87,7 @@
       "route": "/osservatorio",
       "viewport": "desktop",
       "http": 200,
-      "text": 7822,
+      "text": 7782,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -90,7 +98,7 @@
       "route": "/aggiudicazioni",
       "viewport": "desktop",
       "http": 200,
-      "text": 3600,
+      "text": 3595,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -112,7 +120,7 @@
       "route": "/ilive",
       "viewport": "desktop",
       "http": 200,
-      "text": 4314,
+      "text": 4309,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -123,7 +131,7 @@
       "route": "/stampa",
       "viewport": "desktop",
       "http": 200,
-      "text": 5434,
+      "text": 5429,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -145,7 +153,7 @@
       "route": "/novita",
       "viewport": "desktop",
       "http": 200,
-      "text": 1716,
+      "text": 1717,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -156,7 +164,7 @@
       "route": "/affiliazione",
       "viewport": "desktop",
       "http": 200,
-      "text": 1303,
+      "text": 1304,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -167,7 +175,7 @@
       "route": "/buynow/san-pasquale",
       "viewport": "desktop",
       "http": 200,
-      "text": 4586,
+      "text": 4581,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -178,7 +186,7 @@
       "route": "/compra-ora",
       "viewport": "desktop",
       "http": 200,
-      "text": 22174,
+      "text": 22224,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -189,7 +197,7 @@
       "route": "/ishop",
       "viewport": "desktop",
       "http": 200,
-      "text": 5768,
+      "text": 3574,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -200,7 +208,7 @@
       "route": "/icare",
       "viewport": "desktop",
       "http": 200,
-      "text": 6993,
+      "text": 6988,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -233,7 +241,7 @@
       "route": "/stato",
       "viewport": "desktop",
       "http": 200,
-      "text": 771,
+      "text": 774,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -266,7 +274,7 @@
       "route": "/novita",
       "viewport": "mobile",
       "http": 200,
-      "text": 1716,
+      "text": 1717,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -299,7 +307,7 @@
       "route": "/ishop",
       "viewport": "mobile",
       "http": 200,
-      "text": 5748,
+      "text": 3559,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -315,13 +323,13 @@
         {
           "route": "/",
           "http": 200,
-          "text": 19645,
+          "text": 19640,
           "errors": 0
         },
         {
           "route": "/buynow/san-pasquale",
           "http": 200,
-          "text": 4586,
+          "text": 4581,
           "errors": 0
         }
       ]
@@ -339,7 +347,7 @@
         {
           "route": "/buynow/san-pasquale",
           "http": 200,
-          "text": 4567,
+          "text": 4562,
           "errors": 0
         }
       ]
@@ -380,7 +388,7 @@
       "linkNovita": true,
       "linkAffiliazione": true,
       "linkBuynow": true,
-      "build": "main.e5039569.js"
+      "build": "main.e77c99f5.js"
     },
     "botHome": {
       "status": 200,
@@ -394,14 +402,14 @@
     },
     "origin": {
       "status": 200,
-      "build": "main.e5039569.js"
+      "build": "main.e77c99f5.js"
     }
   },
   "feed": {
     "statistiche": {
       "status": 200,
-      "aggiornato": "2026-11-11T19:43:31.040Z",
-      "totale": 321564,
+      "aggiornato": "2026-11-11T22:13:29.002Z",
+      "totale": 321577,
       "ageHours": 0.1
     },
     "aggiudicazioni": {
@@ -419,55 +427,64 @@
         "name": "stato",
         "ok": true,
         "status": 200,
-        "ms": 2009,
+        "ms": 1885,
         "detail": "tabella popolata"
       },
       {
         "name": "feed statistiche",
         "ok": true,
         "status": 200,
-        "ms": 31,
-        "detail": "totale 321564 · 0.1 h fa"
+        "ms": 22,
+        "detail": "totale 321577 · 0.2 h fa"
       },
       {
         "name": "feed aggiudicazioni",
         "ok": true,
         "status": 200,
-        "ms": 210,
+        "ms": 258,
         "detail": "18115 record"
       },
       {
         "name": "origine Emergent",
         "ok": true,
         "status": 200,
-        "ms": 482,
-        "detail": "main.e5039569.js"
+        "ms": 250,
+        "detail": "main.e77c99f5.js"
       },
       {
         "name": "chat iCARe",
         "ok": true,
         "status": 200,
-        "ms": 467,
+        "ms": 428,
         "detail": "{\"ok\":true,\"risposta\":\"Ciao, sono **iCARe**, la consulente immobiliare di CARe …"
       },
       {
         "name": "iCAReWall API",
         "ok": true,
         "status": 200,
-        "ms": 504,
+        "ms": 175,
         "detail": "15527 byte"
       },
       {
         "name": "voce TTS",
         "ok": true,
         "status": 200,
-        "ms": 26,
+        "ms": 12,
         "detail": "6482 byte"
       }
     ],
     "github": {
       "checked": 30,
-      "failedLast24h": []
+      "failedLast24h": [
+        {
+          "name": "esiti-sync",
+          "status": "completed",
+          "conclusion": "failure",
+          "created_at": "2026-11-11T21:43:18Z",
+          "url": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43105534598",
+          "head": "a5c008f3"
+        }
+      ]
     }
   }
 }
