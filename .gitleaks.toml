@@ -1,0 +1,6 @@
+# 11/11/2026 — allowlist CON MOTIVO. Un segreto soppresso senza spiegazione è un segreto aperto.
+[allowlist]
+description = "La chiave IndexNow è pubblica per progetto: viene servita su https://careauctions.co/<KEY>.txt perché i motori di ricerca la verifichino. Non è una credenziale."
+regexes = [
+  '''b2c9e4a7f3d15e6b8a0c4d2f6e8a1c3d''',
+]
