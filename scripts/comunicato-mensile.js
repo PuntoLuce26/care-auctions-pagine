@@ -12,8 +12,8 @@ function get(url) {
     }).on('error', () => res(null)).setTimeout(30000, function () { this.destroy(); res(null); });
   });
 }
-const n = (v) => (v == null ? 'non disponibile' : Number(v).toLocaleString('it-IT'));
-const eur = (v) => (v == null ? 'non disponibile' : Number(v).toLocaleString('it-IT', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }));
+const n = (v) => (v == null ? null : Number(v).toLocaleString('it-IT'));
+const eur = (v) => (v == null ? null : Number(v).toLocaleString('it-IT', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }));
 
 (async () => {
   const mese = process.env.MESE || new Date().toISOString().slice(0, 7);
@@ -35,11 +35,11 @@ const eur = (v) => (v == null ? 'non disponibile' : Number(v).toLocaleString('it
   const importoDaGiorni = (() => {
     try {
       let s = 0;
-      for (const [, arr] of (e.giorni || [])) for (const t of arr) s += Number(t[2]) || 0;
+      for (const [, arr] of ((esiti && esiti.giorni) || [])) for (const t of arr) s += Number(t[2]) || 0;
       return s > 0 ? s : null;
     } catch (_) { return null; }
   })();
-  const importo = e.importoTotale || e.importo || (esiti && esiti.importo) || importoDaGiorni;
+  const importo = e.importoTotale || e.importo || (esiti && esiti.importo) || importoDaGiorni || null;
   const righe = [
     ['Aste totali', n(tot)],
     ['Immobiliari', n(imm.lotti)],
@@ -47,15 +47,16 @@ const eur = (v) => (v == null ? 'non disponibile' : Number(v).toLocaleString('it
     ['Prezzo medio immobiliare', eur(imm.prezzoMedio)],
     ['Sconto mediano vs OMI', (conf && conf.nazionale && conf.nazionale.scontoMedianoPct != null && conf.meta.copertura.lottiConMq)
       ? (String(conf.nazionale.scontoMedianoPct).replace('.', ',') + '% su ' + conf.meta.copertura.lottiConMq + ' lotti confrontabili in ' + conf.meta.copertura.comuniPubblicati + ' comuni')
-      : 'non disponibile'],
+      : null],
     ['Aggiudicazioni monitorate', n(agg)],
     ['Importo aggiudicato', eur(importo)],
     ['Aste di aziende e crediti', n(az.totale)],
-    ['Valore base attivo (aziende)', az.valoreAttive ? eur(az.valoreAttive) : 'non disponibile']
+    ['Valore base attivo (aziende)', az.valoreAttive ? eur(az.valoreAttive) : null]
   ];
+  const righeValide = righe.filter(([, v]) => v !== null && v !== undefined && v !== '' && v !== 'non disponibile');
   const data = new Date().toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
   let mdPro = `# CAReIndex — comunicato ${mese}\n\n**${data}** — I numeri del mercato delle aste immobiliari italiane, dai sistemi CARe.\n\n` +
-    righe.map(([k, v]) => `- **${k}**: ${v}`).join('\n') +
+    righeValide.map(([k, v]) => `- **${k}**: ${v}`).join('\n') +
     `\n\nFonti: PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia), Agenzia delle Entrate — OMI, CAReIndex. Metodo e copertura: https://careauctions.co/metodo. Nessun numero inventato: i dati sono calcolati dai giri automatici e aggiornati ogni 15 minuti.\n\nCARe Auctions è consulente di parte: non fa mediazione e non percepisce provvigioni. Success fee: 3,9% fino a 150.000 €, 2,9% fino a 300.000 €, 1,9% oltre, minimo 1.900 €, entro 24 ore dall'aggiudicazione.\n\nContatti stampa: info@careauctions.co\n`;
   // 11/11/2026 — ogni comunicato mensile ha la sua foto a tema, creata da Emergent
   // in stile sito e salvata in img/newsletter/<AAAA-MM>.webp. Se manca, il comunicato
@@ -69,18 +70,30 @@ const eur = (v) => (v == null ? 'non disponibile' : Number(v).toLocaleString('it
   if (heroUrl) {
     mdPro = mdPro.replace('\n\n', `\n\n![${mese}](${heroUrl})\n\n`);
   }
-  const html = `<!doctype html><html lang="it"><head><meta charset="utf-8"><title>CAReIndex — comunicato ${mese}</title><style>
-  body{margin:0;background:#F4F1EA;color:#0F1E3A;font-family:-apple-system,system-ui,sans-serif;line-height:1.6}
-  .wrap{max-width:820px;margin:40px auto;padding:0 24px}
-  h1{font-size:32px;margin:0 0 6px}.kicker{color:#A8811F;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
-  .lead{font-size:19px;color:#3C4A65}.card{background:#fff;border:1px solid #E3D9C0;border-radius:14px;padding:20px;margin:18px 0}
-  table{width:100%;border-collapse:collapse;font-size:15px}td{padding:9px 10px;border-bottom:1px solid #EFE7D2}td:last-child{text-align:right;font-variant-numeric:tabular-nums}
-  .nota{font-size:13px;color:#5a6a85;border-top:1px solid #E3D9C0;padding-top:14px;margin-top:24px}
-  </style></head><body><div class="wrap"><div class="kicker">CAReIndex · comunicato mensile</div><h1>${mese}</h1>
-  ${heroUrl ? `<img src="${heroUrl}" alt="Comunicato ${mese} — immagine a tema" style="width:100%;height:auto;border-radius:16px;margin:0 0 22px;display:block" />` : ''}
-  <p class="lead">I numeri del mercato delle aste immobiliari italiane, dai sistemi CARe. Dati vivi, fonti citate, nessun numero inventato.</p>
-  <div class="card"><table>${righe.map(([k, v]) => `<tr><td>${k}</td><td><strong>${v}</strong></td></tr>`).join('')}</table></div>
-  <p class="nota">Fonti: PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia), Agenzia delle Entrate — OMI, CAReIndex. Metodo e copertura: https://careauctions.co/metodo. CARe Auctions è consulente di parte: non fa mediazione. Success fee 3,9% / 2,9% / 1,9%, minimo 1.900 €, entro 24 ore. Contatti: info@careauctions.co</p></div></body></html>`;
+  const html = `<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CAReIndex — comunicato ${mese}</title><style>
+  body{margin:0;background:#FBF9F4;color:#0F1E3A;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;line-height:1.6}
+  .wrap{max-width:640px;margin:0 auto;padding:56px 28px 44px}
+  .kicker{color:#A2977E;font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;margin:0 0 14px}
+  h1{font-size:44px;font-weight:300;letter-spacing:-.02em;line-height:1;margin:0 0 26px}
+  .hero{width:100%;height:auto;display:block;border-radius:2px;margin:0 0 30px}
+  .lead{font-size:18px;color:#3C4A65;margin:0 0 34px;max-width:520px}
+  table{width:100%;border-collapse:collapse;margin:0 0 30px}
+  td{padding:15px 0;border-bottom:1px solid #E7DFCF;font-size:16px;vertical-align:baseline}
+  td:first-child{color:#5A6478}
+  td:last-child{text-align:right;font-variant-numeric:tabular-nums;font-weight:500;white-space:nowrap}
+  tr:last-child td{border-bottom:none}
+  .nota{font-size:12px;color:#8A7F68;border-top:1px solid #E7DFCF;padding-top:18px;margin:36px 0 0;line-height:1.7}
+  .firma{margin-top:26px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#A2977E}
+  @media(max-width:480px){.wrap{padding:36px 20px}h1{font-size:34px}td{font-size:15px}}
+</style></head><body><div class="wrap">
+  <p class="kicker">CAReIndex · comunicato mensile</p>
+  <h1>${mese}</h1>
+  ${heroUrl ? `<img class="hero" src="${heroUrl}" alt="Comunicato ${mese} — immagine a tema" />` : ''}
+  <p class="lead">I numeri del mercato delle aste immobiliari italiane, dai sistemi CARe.</p>
+  <table>${righeValide.map(([k, v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join('')}</table>
+  <p class="nota">Fonti: PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia), Agenzia delle Entrate — OMI, CAReIndex. Metodo e copertura: careauctions.co/metodo. Success fee 3,9% / 2,9% / 1,9%, minimo 1.900 €, entro 24 ore dall'aggiudicazione.</p>
+  <p class="firma">CAReAuctions · Italian Property Auctions</p>
+</div></body></html>`;
   fs.mkdirSync('comunicati', { recursive: true });
   fs.writeFileSync(`comunicati/${mese}.md`, mdPro);
   fs.writeFileSync(`comunicati/${mese}.html`, html);
