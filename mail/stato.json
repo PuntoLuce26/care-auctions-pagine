@@ -1,50 +1,9 @@
 {
-  "ultimoControllo": "2026-11-11T16:30:42.851Z",
+  "ultimoControllo": "2026-11-11T16:59:32.544Z",
   "ultimoQa": "2026-11-11T16:30:42.851Z",
-  "qaEsito": "QA dispatch HTTP 204",
-  "nuoveMail": 4,
-  "allarmi": [
-    {
-      "id": "1a1cb699a21bb0aa",
-      "data": "2026-11-11T16:20:57.000Z",
-      "da": "PuntoLuce26 <notifications@github.com>",
-      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: ocr-perizie - main (1387179)",
-      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
-      "componente": "github-actions",
-      "gravita": "media",
-      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43055214983"
-    },
-    {
-      "id": "1a1cb68749eb4b48",
-      "data": "2026-11-11T16:19:41.000Z",
-      "da": "PuntoLuce26 <notifications@github.com>",
-      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: verifica-playwright - main (1387179)",
-      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
-      "componente": "github-actions",
-      "gravita": "media",
-      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43055210819"
-    },
-    {
-      "id": "1a1cb592d13ebeef",
-      "data": "2026-11-11T16:03:00.000Z",
-      "da": "PuntoLuce26 <notifications@github.com>",
-      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: ocr-perizie - main (04a2497)",
-      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
-      "componente": "github-actions",
-      "gravita": "media",
-      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43052242257"
-    },
-    {
-      "id": "1a1cb59036a71828",
-      "data": "2026-11-11T16:02:49.000Z",
-      "da": "PuntoLuce26 <notifications@github.com>",
-      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: verifica-playwright - main (04a2497)",
-      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
-      "componente": "github-actions",
-      "gravita": "media",
-      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43052418201"
-    }
-  ],
+  "qaEsito": "nessun allarme nuovo",
+  "nuoveMail": 0,
+  "allarmi": [],
   "processati": [
     "1a1c636ae4a6b5a9",
     "1a1c634c8df2049e",
@@ -116,6 +75,8 @@
     "1a1cb596fa951923",
     "1a1cb592d13ebeef",
     "1a1cb59036a71828",
-    "1a1cb551fa8a5854"
+    "1a1cb551fa8a5854",
+    "1a1cb770ffda0e6f",
+    "1a1cb7616cf8c764"
   ]
 }
