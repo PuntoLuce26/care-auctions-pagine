@@ -97,7 +97,12 @@ function add(nome, livello, dettaglio) { C.push({ nome, livello, ok: livello ===
 
   const sent = await json('/ai/sentinella-stato.json');
   const etaSent = sent && sent.aggiornato ? etaMin(sent.aggiornato) : null;
-  add('AI Sentinel', etaSent == null ? 'attenzione' : (etaSent > 360 ? 'problemi' : (etaSent > 120 ? 'attenzione' : 'ok')),
+  /* GitHub strozza la schedule di ai-sentinel (dichiarata ogni 15 minuti, misurata 1 run ogni 6-8 h):
+     uno stato vecchio ma verde e senza anomalie e' un buco di monitoraggio, non un guasto del
+     sito. Si dichiara «attenzione» e la ronda sveglia il workflow (sezione 7b); «problemi»
+     resta per quando la sentinella dice ok:false o segnala anomalie. */
+  const sentOk = !!(sent && sent.ok === true && !(sent.anomalie || []).length);
+  add('AI Sentinel', etaSent == null ? 'attenzione' : (etaSent > 360 ? (sentOk ? 'attenzione' : 'problemi') : (etaSent > 120 ? 'attenzione' : 'ok')),
     sent ? (etaSent + ' min fa · anomalie: ' + JSON.stringify(sent.anomalie || []).slice(0, 120)) : 'irraggiungibile');
 
   // ── 4. careauctions.it: DNS (DoH, immune alla cache locale) + watcher + 301 ──
@@ -186,6 +191,7 @@ function add(nome, livello, dettaglio) { C.push({ nome, livello, ok: livello ===
   if (process.env.GITHUB_TOKEN) {
     if (etaSt != null && etaSt > 90) await sveglia('feed-sync.yml');
     if (etaPosta != null && etaPosta > 45) await sveglia('mail-qa.yml');
+    if (etaSent != null && etaSent > 150) await sveglia('ai-sentinel.yml');
     const etaVit = vit && vit.generato ? etaMin(vit.generato) : null;
     if (etaVit != null && etaVit > 40) await sveglia('verifica-it.yml');
     const dAgg = await gh('/repos/PuntoLuce26/care-auctions-pagine/actions/workflows/aggiornamento-mail.yml/runs?per_page=1');
