@@ -4101,5 +4101,11 @@
   "ad_p_sos": "Suspensión",
   "ad_p_tot": "Total de prazas do día",
   "ad_p_day": "ás do {d}",
-  "ad_p_aria": "Últimos 30 días: licitacións adxudicadas, desertas e suspendidas"
+  "ad_p_aria": "Últimos 30 días: licitacións adxudicadas, desertas e suspendidas",
+  "ad_p_rate_agg": "Axudámosche no total:",
+  "ad_p_rate_des": "Desertos en xeral:",
+  "ad_p_rate_note": "A media de 30 días suma todas as poxas do período",
+  "ad_p_legend": "A lenda das barras",
+  "ad_p_rate_30": "Media de 30 días",
+  "ad_p_tap": "Preme nunha barra para ver os números dese día."
 }

@@ -4102,5 +4102,11 @@
   "ad_p_sos": "Suspensi",
   "ad_p_tot": "Jumlah total harian",
   "ad_p_day": "ASI dari {d}",
-  "ad_p_aria": "30 hari terakhir: lelang yang ditandatangani, ditinggalkan dan ditangguhkan"
+  "ad_p_aria": "30 hari terakhir: lelang yang ditandatangani, ditinggalkan dan ditangguhkan",
+  "ad_p_rate_agg": "Pertimbangkan total :",
+  "ad_p_rate_des": "Gurun dengan total:",
+  "ad_p_rate_note": "rata-rata dari 30 hari; rata-rata 30 hari mencakup semua penawaran dalam periode",
+  "ad_p_legend": "Legenda dari Bar",
+  "ad_p_rate_30": "Rata-rata 30 hari",
+  "ad_p_tap": "Tekan bar untuk melihat nomor hari itu."
 }

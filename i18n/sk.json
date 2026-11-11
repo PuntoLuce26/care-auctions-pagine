@@ -4101,5 +4101,11 @@
   "ad_p_sos": "pozastavenie",
   "ad_p_tot": "Celková cena dňa",
   "ad_p_day": "Prečítajte si {d}",
-  "ad_p_aria": "Posledných 30 dní: udelené aukcie, zrušené a pozastavené"
+  "ad_p_aria": "Posledných 30 dní: udelené aukcie, zrušené a pozastavené",
+  "ad_p_rate_agg": "Prečítajte si celkový počet:",
+  "ad_p_rate_des": "Pôda v celku:",
+  "ad_p_rate_note": "úroky z celkového počtu denných aukcií; priemer 30 dní sa rovná súčtu všetkých aukcií v danom období",
+  "ad_p_legend": "Legenda o baroch",
+  "ad_p_rate_30": "Priemerný 30 dní",
+  "ad_p_tap": "Dotknite sa lišty, aby ste videli čísla toho dňa."
 }

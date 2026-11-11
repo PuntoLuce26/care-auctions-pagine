@@ -4101,5 +4101,11 @@
   "ad_p_sos": "Suspenderad",
   "ad_p_tot": "Totalt pris per dag",
   "ad_p_day": "Öppna del {d}",
-  "ad_p_aria": "De senaste 30 dagarna: auktioner som tilldelats, övergivna och upphävda"
+  "ad_p_aria": "De senaste 30 dagarna: auktioner som tilldelats, övergivna och upphävda",
+  "ad_p_rate_agg": "Räkna med totalt:",
+  "ad_p_rate_des": "Öknen i helhet:",
+  "ad_p_rate_note": "30 dagars genomsnitt summera alla auktioner under perioden",
+  "ad_p_legend": "Legenden om barer",
+  "ad_p_rate_30": "Genomsnitt 30 dagar",
+  "ad_p_tap": "Tryck på en bar för att se siffrorna för den dagen."
 }

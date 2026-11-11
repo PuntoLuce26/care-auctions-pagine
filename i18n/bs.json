@@ -4101,5 +4101,11 @@
   "ad_p_sos": "Suspenzija",
   "ad_p_tot": "Ukupna prodaja dnevno",
   "ad_p_day": "Ostavka za {d}",
-  "ad_p_aria": "Posljednjih 30 dana: dodijeljene aukcije, ostavke i suspenzije"
+  "ad_p_aria": "Posljednjih 30 dana: dodijeljene aukcije, ostavke i suspenzije",
+  "ad_p_rate_agg": "Pročitajte u cjelini:",
+  "ad_p_rate_des": "Pustinja u cjelini:",
+  "ad_p_rate_note": "Prosjek od 30 dana se sastoji od ukupnih dražbi u toku dana.",
+  "ad_p_legend": "Legenda o barovima",
+  "ad_p_rate_30": "Prosječno 30 dana",
+  "ad_p_tap": "Kliknite na bar da biste videli brojeve tog dana."
 }

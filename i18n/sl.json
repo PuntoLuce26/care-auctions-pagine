@@ -4101,5 +4101,11 @@
   "ad_p_sos": "Suspenzija",
   "ad_p_tot": "Skupna cena dneva",
   "ad_p_day": "Ajdovščina {d}",
-  "ad_p_aria": "Zadnjih 30 dni: podeljene dražbe, zapuščene in prekinjene dražbe"
+  "ad_p_aria": "Zadnjih 30 dni: podeljene dražbe, zapuščene in prekinjene dražbe",
+  "ad_p_rate_agg": "Podpišite v celoti:",
+  "ad_p_rate_des": "Pustolovščina v celoti:",
+  "ad_p_rate_note": "delež na skupni dnevni dražbi; povprečje 30 dni sešteje vse dražbe v obdobju",
+  "ad_p_legend": "Legenda o barkah",
+  "ad_p_rate_30": "Povprečje 30 dni",
+  "ad_p_tap": "Tapnite na vrstico, da si ogledate številke tega dne."
 }

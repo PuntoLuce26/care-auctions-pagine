@@ -4101,5 +4101,11 @@
   "ad_p_sos": "Suspendert",
   "ad_p_tot": "Totalt salg av dagen",
   "ad_p_day": "Les av {d}",
-  "ad_p_aria": "De siste 30 dagene: Tildelte, forlatte og suspenderte auksjoner"
+  "ad_p_aria": "De siste 30 dagene: Tildelte, forlatte og suspenderte auksjoner",
+  "ad_p_rate_agg": "Satser på totalt:",
+  "ad_p_rate_des": "Ørkener på totalt:",
+  "ad_p_rate_note": "Deltakelse på de samlede daglige auksjonene; 30 dagers gjennomsnitt summerer alle auksjonene i perioden",
+  "ad_p_legend": "Legenden om barene",
+  "ad_p_rate_30": "Gjennomsnittlig 30 dager",
+  "ad_p_tap": "Trykk på en bar for å se tallene for den dagen."
 }

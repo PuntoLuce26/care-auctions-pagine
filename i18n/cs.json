@@ -4101,5 +4101,11 @@
   "ad_p_sos": "pozastavení",
   "ad_p_tot": "Celková cena za den",
   "ad_p_day": "Ať si {d}",
-  "ad_p_aria": "Posledních 30 dní: vyřazené, vyřazené a pozastavené dražby"
+  "ad_p_aria": "Posledních 30 dní: vyřazené, vyřazené a pozastavené dražby",
+  "ad_p_rate_agg": "Vyberte si z celkového počtu:",
+  "ad_p_rate_des": "Pustiny v celku:",
+  "ad_p_rate_note": "celkový počet dražeb v daném dni; 30denní průměr sečte všechny dražby v daném období",
+  "ad_p_legend": "Legenda o barech",
+  "ad_p_rate_30": "Průměr 30 dní",
+  "ad_p_tap": "Klepněte na čárku, abyste viděli čísla toho dne."
 }

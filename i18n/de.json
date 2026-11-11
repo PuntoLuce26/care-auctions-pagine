@@ -4101,5 +4101,11 @@
   "ad_p_sos": "Suspendiert",
   "ad_p_tot": "Gesamtpreis des Tages",
   "ad_p_day": "Achten Sie auf {d}",
-  "ad_p_aria": "Letzte 30 Tage: Zuschlag, Verzicht und Aussetzung"
+  "ad_p_aria": "Letzte 30 Tage: Zuschlag, Verzicht und Aussetzung",
+  "ad_p_rate_agg": "Kaufen Sie im Gesamtwert:",
+  "ad_p_rate_des": "Wüste im Ganzen:",
+  "ad_p_rate_note": "Anteile auf die Gesamtmenge der Auktionen des Tages; der 30-Tage-Durchschnitt ergibt alle Auktionen des Zeitraums",
+  "ad_p_legend": "Legende der Barren",
+  "ad_p_rate_30": "Durchschnitt 30 Tage",
+  "ad_p_tap": "Tippen Sie auf eine Bar, um die Zahlen für diesen Tag zu sehen."
 }

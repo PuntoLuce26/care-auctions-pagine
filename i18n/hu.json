@@ -4101,5 +4101,11 @@
   "ad_p_sos": "felfüggesztett",
   "ad_p_tot": "A nap teljes árverése",
   "ad_p_day": "Az ázsiai {d}",
-  "ad_p_aria": "Utolsó 30 nap: Megbocsátott, elhagyott és felfüggesztett árverések"
+  "ad_p_aria": "Utolsó 30 nap: Megbocsátott, elhagyott és felfüggesztett árverések",
+  "ad_p_rate_agg": "Összesen ajánljuk fel:",
+  "ad_p_rate_des": "A sivatagban összesen:",
+  "ad_p_rate_note": "részesedések a napi összes árverésen; a 30 napos átlag az időszak összes árverésének összegét jelenti",
+  "ad_p_legend": "A bárok legendája",
+  "ad_p_rate_30": "Átlag 30 nap",
+  "ad_p_tap": "Koppintson egy sávra, hogy megnézze az adott nap számát."
 }

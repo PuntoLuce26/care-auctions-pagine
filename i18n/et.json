@@ -4101,5 +4101,11 @@
   "ad_p_sos": "peatatud",
   "ad_p_tot": "Päeva kogupakkumised",
   "ad_p_day": "OÜ OÜ {d}",
-  "ad_p_aria": "Viimased 30 päeva: välja antud, välja jäetud ja peatatud enampakkumised"
+  "ad_p_aria": "Viimased 30 päeva: välja antud, välja jäetud ja peatatud enampakkumised",
+  "ad_p_rate_agg": "Hoiame kokku kokku:",
+  "ad_p_rate_des": "Täielikult kõrbes:",
+  "ad_p_rate_note": "30 päeva keskmine on kogu ajavahemiku kõikide enampakkumiste summa",
+  "ad_p_legend": "Baaride legend",
+  "ad_p_rate_30": "Keskmine 30 päeva",
+  "ad_p_tap": "Vajuta rida, et näha selle päeva numbreid."
 }

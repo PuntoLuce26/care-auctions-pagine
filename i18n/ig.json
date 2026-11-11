@@ -4101,5 +4101,11 @@
   "ad_p_sos": "Ngwuputa",
   "ad_p_tot": "Ọnụ ọgụgụ nke ụbọchị",
   "ad_p_day": "Ọchịchị {d}",
-  "ad_p_aria": "Ụbọchị 30 na-adịbeghị anya: Auctioned, Deserted and Suspended"
+  "ad_p_aria": "Ụbọchị 30 na-adịbeghị anya: Auctioned, Deserted and Suspended",
+  "ad_p_rate_agg": "Kpọmkwem na total:",
+  "ad_p_rate_des": "Na-agba ọsọ na total:",
+  "ad_p_rate_note": "Ọnụ ọgụgụ n'ozuzu nke na-agba ọsọ nke ụbọchị; 30 ụbọchị gbasara niile na-agba ọsọ nke oge",
+  "ad_p_legend": "Ọnụ ọgụgụ",
+  "ad_p_rate_30": "ọnwa 30 ụbọchị",
+  "ad_p_tap": "Pịa na a akara ịhụ ndị nọmba nke ụbọchị ahụ."
 }

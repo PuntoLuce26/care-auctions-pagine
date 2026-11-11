@@ -4102,5 +4102,11 @@
   "ad_p_sos": "Suspensi",
   "ad_p_tot": "Jumlah keseluruhan hari",
   "ad_p_day": "AAS daripada {d}",
-  "ad_p_aria": "30 hari terakhir: lelongan yang telah dianugerahkan, ditinggalkan dan ditangguhkan"
+  "ad_p_aria": "30 hari terakhir: lelongan yang telah dianugerahkan, ditinggalkan dan ditangguhkan",
+  "ad_p_rate_agg": "Peruntukan untuk keseluruhan:",
+  "ad_p_rate_des": "Keselamatan dalam keseluruhan:",
+  "ad_p_rate_note": "jumlah lelongan harian; purata 30 hari menyumbang semua lelongan dalam tempoh",
+  "ad_p_legend": "Legenda Bar",
+  "ad_p_rate_30": "Rata-rata 30 hari",
+  "ad_p_tap": "Tekan bar untuk melihat nombor hari itu."
 }

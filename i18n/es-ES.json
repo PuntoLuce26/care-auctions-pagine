@@ -4101,5 +4101,11 @@
   "ad_p_sos": "Suspensión",
   "ad_p_tot": "Ventajas totales del día",
   "ad_p_day": "Aves del {d}",
-  "ad_p_aria": "Últimos 30 días: licitaciones adjudicadas, desiertas y suspendidas"
+  "ad_p_aria": "Últimos 30 días: licitaciones adjudicadas, desiertas y suspendidas",
+  "ad_p_rate_agg": "Encuentra el total:",
+  "ad_p_rate_des": "Desierto en total:",
+  "ad_p_rate_note": "cuotas sobre el total de las subastas del día; la media de 30 días suma todas las subastas del período",
+  "ad_p_legend": "La leyenda de las barras",
+  "ad_p_rate_30": "Media de 30 días",
+  "ad_p_tap": "Toque en una barra para ver los números de ese día."
 }

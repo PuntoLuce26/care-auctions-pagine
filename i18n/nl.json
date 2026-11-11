@@ -4101,5 +4101,11 @@
   "ad_p_sos": "Suspenderen",
   "ad_p_tot": "Totaal Aankopen van de Dag",
   "ad_p_day": "AAS van de {d}",
-  "ad_p_aria": "De laatste 30 dagen: geopende, verlaten en opgeschort veilingen"
+  "ad_p_aria": "De laatste 30 dagen: geopende, verlaten en opgeschort veilingen",
+  "ad_p_rate_agg": "Aankomst in totaal:",
+  "ad_p_rate_des": "De woestijn in totaal:",
+  "ad_p_rate_note": "aandeel op de totale veilingen van de dag; het gemiddelde van 30 dagen telt alle veilingen van de periode",
+  "ad_p_legend": "Legende van de bars",
+  "ad_p_rate_30": "Gemiddeld 30 dagen",
+  "ad_p_tap": "Tik op een bar om de nummers van die dag te zien."
 }

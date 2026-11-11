@@ -4101,5 +4101,11 @@
   "ad_p_sos": "Suspensijos",
   "ad_p_tot": "Bendras dienos aukcionas",
   "ad_p_day": "ATS iš {d}",
-  "ad_p_aria": "Paskutinės 30 dienų: aukcionai, atidėti ir sustabdyti"
+  "ad_p_aria": "Paskutinės 30 dienų: aukcionai, atidėti ir sustabdyti",
+  "ad_p_rate_agg": "Pirkite iš viso:",
+  "ad_p_rate_des": "Visoje dykumoje:",
+  "ad_p_rate_note": "30 dienų vidurkis sudaro visus laikotarpio aukcionus",
+  "ad_p_legend": "Legenda apie barus",
+  "ad_p_rate_30": "Vidutiniškai 30 dienų",
+  "ad_p_tap": "Paspauskite juostą, kad pamatytumėte tos dienos numerius."
 }

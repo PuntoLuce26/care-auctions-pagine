@@ -4103,5 +4103,11 @@
   "ad_p_sos": "Ymchwiliad",
   "ad_p_tot": "Ymchwiliad o'r dydd",
   "ad_p_day": "Ymchwiliad {d}",
-  "ad_p_aria": "30 diwrnod yn ôl: cyfnewidion a chyflenwi"
+  "ad_p_aria": "30 diwrnod yn ôl: cyfnewidion a chyflenwi",
+  "ad_p_rate_agg": "Ymchwiliad ar y cyfanswm:",
+  "ad_p_rate_des": "Ymchwiliad o ganlyniadau:",
+  "ad_p_rate_note": "Mae'r cyfanswm 30 diwrnod yn cyfanswm o'r cyfanswm 30 diwrnod o'r cyfanswm",
+  "ad_p_legend": "Lleoliad Barri",
+  "ad_p_rate_30": "30 diwrnod",
+  "ad_p_tap": "Rhowch y bar i weld y cyfres y dydd."
 }

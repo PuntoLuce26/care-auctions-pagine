@@ -4101,5 +4101,11 @@
   "ad_p_sos": "zawieszenie",
   "ad_p_tot": "Całkowita licytacja dnia",
   "ad_p_day": "Auta z {d}",
-  "ad_p_aria": "Ostatnie 30 dni: licytacje udzielone, wycofane i zawieszone"
+  "ad_p_aria": "Ostatnie 30 dni: licytacje udzielone, wycofane i zawieszone",
+  "ad_p_rate_agg": "Zapisz się na całość:",
+  "ad_p_rate_des": "Pustynia w całości:",
+  "ad_p_rate_note": "Średnia 30 dni sumuje wszystkie aukcje w danym okresie",
+  "ad_p_legend": "Legenda o barkach",
+  "ad_p_rate_30": "Średnia 30 dni",
+  "ad_p_tap": "Naciśnij pasek, aby zobaczyć numery tego dnia."
 }

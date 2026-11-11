@@ -4101,5 +4101,11 @@
   "ad_p_sos": "Suspensyon",
   "ad_p_tot": "Total na ang araw",
   "ad_p_day": "Ipasok sa {d}",
-  "ad_p_aria": "Araw ng Kalayaan - 15 Ago"
+  "ad_p_aria": "Araw ng Kalayaan - 15 Ago",
+  "ad_p_rate_agg": "Pumunta sa total:",
+  "ad_p_rate_des": "Ang lahat ng desert:",
+  "ad_p_rate_note": "Ang average ng 30 araw ay sumunod sa lahat ng mga auction ng panahon",
+  "ad_p_legend": "Legenda ng mga bar",
+  "ad_p_rate_30": "30 taon ang nakalipas",
+  "ad_p_tap": "I-tap ang isang bar upang makita ang mga numero ng araw na iyon."
 }

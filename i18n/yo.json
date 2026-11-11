@@ -4101,5 +4101,11 @@
   "ad_p_sos": "àwárí",
   "ad_p_tot": "Oṣuwọn Ọjọ",
   "ad_p_day": "Oṣuwọn {d}",
-  "ad_p_aria": "Awọn akoko 30 ọjọ ti o tobi: awọn aṣa, awọn aṣa, awọn aṣa ati awọn aṣa"
+  "ad_p_aria": "Awọn akoko 30 ọjọ ti o tobi: awọn aṣa, awọn aṣa, awọn aṣa ati awọn aṣa",
+  "ad_p_rate_agg": "Ti o ba tẹsiwaju lilọpọ:",
+  "ad_p_rate_des": "Ti o ba tẹsiwaju:",
+  "ad_p_rate_note": "Oṣuwọn oṣuwọn oṣuwọn oṣuwọn oṣuwọn oṣuwọn oṣuwọn oṣuwọn oṣuwọn oṣuwọn oṣuwọn oṣuwọn oṣuwọn",
+  "ad_p_legend": "Ọrọigbaniwọle",
+  "ad_p_rate_30": "Oṣuwọn 30 ọjọ",
+  "ad_p_tap": "Ti o ba tẹ lori ọkọ ayọkẹlẹ lati ri awọn nọmba ti o ọjọ."
 }
