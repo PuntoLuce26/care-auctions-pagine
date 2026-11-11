@@ -67,6 +67,34 @@ jobs:
             node scripts/aggiudicazioni-merge.js fallco /tmp/aggiudicazioni-fallco.json || echo "FALLCO: archivio aggiudicazioni intatto"
             node scripts/aggiudicazioni-merge.js ivg /tmp/aggiudicazioni-ivg.json || echo "IVG: archivio aggiudicazioni intatto"
           fi
+      - name: Indice compatto delle aggiudicazioni (per la pagina 410)
+        run: |
+          node - <<'JS'
+          const fs = require('fs');
+          const p = 'feed/aggiudicazioni.json';
+          let d = [];
+          try { d = JSON.parse(fs.readFileSync(p, 'utf8')); } catch (e) { console.log('aggiudicazioni non leggibile'); process.exit(0); }
+          if (!Array.isArray(d)) d = [];
+          const re = /^(\d{2})\/(\d{2})\/(\d{2})$/;
+          const ind = {};
+          let n = 0;
+          for (const r of d) {
+            const i = String(r && r.id || '').trim();
+            if (!i || !/^\d+$/.test(i)) continue;
+            const prezzo = Number(r.prezzo || 0);
+            if (!(prezzo > 0)) continue;
+            const t = String(r.termina || '').replace(/[^0-9\/]/g, ' ').trim().split(' ')[0];
+            const m = re.exec(t);
+            const data = m ? ('20' + m[3] + '-' + m[2] + '-' + m[1]) : '';
+            const trib = String(r.tribunale || '').replace(/^Tribunale di\s*/i, '').split(' - ')[0].trim().slice(0, 40);
+            ind[i] = [Math.round(prezzo), data, trib];
+            n++;
+          }
+          const out = { generato: new Date().toISOString().slice(0, 10), fonte: 'feed/aggiudicazioni.json', nota: 'indice compatto id -> [prezzo, data, tribunale]; serve alla pagina 410', n, indice: ind };
+          if (n < 100) { console.log('indice troppo piccolo (' + n + '): non lo scrivo'); process.exit(0); }
+          fs.writeFileSync('feed/aggiudicazioni-indice.json', JSON.stringify(out, null, 0));
+          console.log('indice aggiudicazioni:', n, 'record');
+          JS
       - name: commit e push
         run: |
           git config user.name "Sam CARe"
