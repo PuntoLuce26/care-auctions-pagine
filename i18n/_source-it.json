@@ -4096,5 +4096,9 @@
  "ad_p_sos": "Sospese",
  "ad_p_tot": "Totale aste del giorno",
  "ad_p_day": "aste del {d}",
- "ad_p_aria": "Ultimi 30 giorni: aste aggiudicate, deserte e sospese"
+ "ad_p_aria": "Ultimi 30 giorni: aste aggiudicate, deserte e sospese",
+ "ad_p_rate_agg": "Aggiudicate sul totale:",
+ "ad_p_rate_des": "Deserte sul totale:",
+ "ad_p_rate_note": "quote sul totale delle aste del giorno",
+ "ad_p_legend": "Legenda delle barre"
 }
