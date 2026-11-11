@@ -11,12 +11,11 @@ const STATE = path.join(process.cwd(), 'mail', 'stato.json');
 let st = {}; try { st = JSON.parse(fs.readFileSync(STATE, 'utf8')); } catch (e) {}
 const done = new Set(st.processati || []);
 const Q = '(to:info@careauctions.co OR deliveredto:info@careauctions.co OR to:info@puntoluce26.com OR deliveredto:info@puntoluce26.com) newer_than:2d';
-const ERR = /run failed|failed|failure|errore|error|exception|critical|\u26a0|qualcosa non va|not working|down|500|502|503|504|timeout|build and deployment|deploy|pages build|guardiano|sospeso|suspended|payment failed|rifiutato|insoluto|scadenza|dns|ssl|dmarc|spf|bounce|postmaster|credits|quota/i;
-const IGNORE = /nuovo pagamento|newsletter|offers|what.s new|share ai skills|test intestazioni|richiesta di visita|pagamento da|nuovo pagamento|fattura|ricevuta|ordine/i;
+const ERR = /run failed|failed|failure|errore|error|exception|critical|\u26a0|qualcosa non va|not working|\bdown\b|500|502|503|504|timeout|build and deployment|deploy|pages build|guardiano|sospeso|suspended|payment failed|rifiutato|insoluto|scadenza|dns|ssl|dmarc|spf|bounce|postmaster|credits|quota/i;
+const IGNORE = /nuovo pagamento|newsletter|offers|what.s new|share ai skills|test intestazioni|richiesta di visita|pagamento da|nuovo pagamento|fattura|ricevuta|ordine|email\.openai\.com|update\.finom\.co|thuisbezorgd|mailchimp\.com/i;
 /* Le mail che le NOSTRE automazioni mandano a info@ dicendo "tutto ok" non sono allarmi:
    senza questo filtro il digest notturno diventa un allarme critico e rilancia il QA in loop. */
-const SELF_OK = /^info@(puntoluce26\.com|careauctions\.co)$/i;
-const SELF_OK_SUBJ = /qa tutto ok|prova patch|\(0 problemi\)|nessun problema/i;
+const SELF_DOMAIN = /@(puntoluce26\.com|careauctions\.co)$/i;
 function comp(from, sub, txt) {
   const t = (from + ' ' + sub + ' ' + txt).toLowerCase();
   if (/pages build|build and deployment|deploy pages/.test(t)) return 'pages';
@@ -58,7 +57,10 @@ function bodyText(p) {
     const h = {}; for (const x of (d.payload && d.payload.headers) || []) h[x.name.toLowerCase()] = x.value;
     const testo = ((h.subject || '') + ' ' + (h.from || '') + ' ' + (d.snippet || '') + ' ' + bodyText(d.payload)).slice(0, 4000);
     const fromAddr = ((h.from || '').match(/<([^>]+)>/) || [null, h.from || ''])[1].trim();
-    if (SELF_OK.test(fromAddr) && SELF_OK_SUBJ.test((h.subject || '') + ' ' + (d.snippet || ''))) { done.add(m.id); continue; }
+    /* Un digest partito da un nostro indirizzo non e' un allarme: se lo trattassimo come tale
+       il QA ripartirebbe a ogni digest (digest -> QA -> allarme -> digest). Una notifica di
+       guasto vera arriva sempre da fuori (GitHub, Cloudflare, banca, fornitore). */
+    if (SELF_DOMAIN.test(fromAddr)) { done.add(m.id); continue; }
     if (IGNORE.test(testo) || !ERR.test(testo)) { done.add(m.id); continue; }
     const c = comp(h.from || '', h.subject || '', testo);
     const s = sev(c, testo);
