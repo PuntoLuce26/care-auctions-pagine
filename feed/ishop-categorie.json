@@ -1,0 +1,17 @@
+{
+ "meta": {
+  "titolo": "iShop — categorie",
+  "nota": "Si mostrano le CATEGORIE, non i marchi: un marchio entra in pagina solo quando l'accordo è attivo (regola creare-attesa).",
+  "generatoIl": "2026-11-11T19:00:00.000Z",
+  "fotoBase": "https://careauctions.co/img/ishop/",
+  "svelatiSpontaneamente": false
+ },
+ "categorie": [
+  { "slug": "casa-arredo", "etichetta": "Casa e arredo", "descrizione": "Tutto ciò che serve dopo l'aggiudicazione: arredo, elettrodomestici, ristrutturazione.", "foto": "casa-arredo.webp", "stato": "in_arrivo", "partner": [] },
+  { "slug": "energia", "etichetta": "Energia e utenze", "descrizione": "Luce e gas per la casa che hai comprato, con un prezzo riservato a chi passa da noi.", "foto": "energia.webp", "stato": "in_arrivo", "partner": [] },
+  { "slug": "assicurazioni", "etichetta": "Assicurazioni", "descrizione": "La casa, l'immobile, la responsabilità: coperture scelte una per una.", "foto": "assicurazioni.webp", "stato": "in_arrivo", "partner": [] },
+  { "slug": "mutui", "etichetta": "Mutui e credito", "descrizione": "Il finanziamento giusto per un'asta: tempi, documenti e tassi spiegati prima.", "foto": "mutui.webp", "stato": "in_arrivo", "partner": [] },
+  { "slug": "viaggi", "etichetta": "Viaggi", "descrizione": "Il viaggio per andare a vedere l'immobile, o per festeggiare l'aggiudicazione.", "foto": "viaggi.webp", "stato": "in_arrivo", "partner": [] },
+  { "slug": "servizi-casa", "etichetta": "Servizi per la casa", "descrizione": "Pulizie, traslochi, manutenzione: chi entra in casa prima e dopo di te.", "foto": "servizi-casa.webp", "stato": "in_arrivo", "partner": [] }
+ ]
+}
