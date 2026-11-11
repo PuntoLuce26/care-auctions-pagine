@@ -23,6 +23,9 @@ concurrency:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    # 11/11/2026 - una fetch appesa non deve tenere il lock di concorrenza per 6 ore:
+    # il 11/11 un run e' rimasto in 'sync' 26+ minuti e ha bloccato la coda del feed.
+    timeout-minutes: 110
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -86,13 +89,17 @@ jobs:
             # qualsiasi: dal 13:27 del 10/11 il workflow qa committa su main ogni ~30 min e ogni
             # suo commit azzerava il freno, quindi feed-sync girava ogni 3 min senza mai
             # committare (statistiche.json fermo alle 12:42Z mentre i run dicevano success).
-            # Il checkout e' shallow (depth 1) quindi si chiede alla API l'ultimo commit di feed/.
+            # 11/11/2026 - il freno deve misurare l'ultimo commit FATTO DA QUESTO WORKFLOW,
+            # non l'ultimo commit su feed/: aziende-sync e ishop committano in feed/ ogni pochi
+            # minuti e ogni loro commit azzerava la soglia, quindi feed-sync girava e non
+            # committava mai (statistiche.json fermo dalle 06:52Z con run verdi).
+            # Il messaggio dei nostri commit e' "Feed sync <mode> <data>": si filtra su quello.
             ULTIMO=$(curl -sS -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-              "https://api.github.com/repos/${{ github.repository }}/commits?path=feed&per_page=1" \
-              | jq -r '.[0].commit.committer.date // empty')
+              "https://api.github.com/repos/${{ github.repository }}/commits?path=feed&per_page=10" \
+              | jq -r '[.[] | select(.commit.message | startswith("Feed sync"))][0].commit.committer.date // empty')
             if [ -n "$ULTIMO" ]; then ATTESO=$(( $(date +%s) - $(date -d "$ULTIMO" +%s) )); else ATTESO=999999; fi
             if [ "$ATTESO" -lt 600 ]; then
-              echo "commit saltato: ultimo commit sul feed ${ATTESO}s fa (soglia 600s)"
+              echo "commit saltato: ultimo commit di feed-sync ${ATTESO}s fa (soglia 600s)"
               exit 0
             fi
             CODICE=$(curl -sS -o /tmp/deploy-in-corso.json -w '%{http_code}' \
