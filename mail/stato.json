@@ -1,20 +1,9 @@
 {
-  "ultimoControllo": "2026-11-11T13:25:40.687Z",
+  "ultimoControllo": "2026-11-11T15:51:05.156Z",
   "ultimoQa": "2026-11-11T13:25:40.687Z",
-  "qaEsito": "QA dispatch HTTP 204",
-  "nuoveMail": 1,
-  "allarmi": [
-    {
-      "id": "1a1caaeab4f222c4",
-      "data": "2026-11-11T12:56:46.000Z",
-      "da": "PuntoLuce26 <notifications@github.com>",
-      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: traduzioni - main (59f6e9e)",
-      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
-      "componente": "github-actions",
-      "gravita": "media",
-      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43011775488"
-    }
-  ],
+  "qaEsito": "nessun allarme nuovo",
+  "nuoveMail": 0,
+  "allarmi": [],
   "processati": [
     "1a1c636ae4a6b5a9",
     "1a1c634c8df2049e",
@@ -78,6 +67,7 @@
     "1a1ca62ccad3f5ac",
     "1a1ca604ec23517c",
     "1a1cab83a9c8d68e",
-    "1a1caaeab4f222c4"
+    "1a1caaeab4f222c4",
+    "1a1cad138a96d168"
   ]
 }
