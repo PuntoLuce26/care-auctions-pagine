@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-11T09:25:56.716Z",
-  "runId": "42994389304",
-  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42994389304",
+  "generatedAt": "2026-11-11T09:42:33.170Z",
+  "runId": "42996732072",
+  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42996732072",
   "base": "https://careauctions.co",
-  "durationSec": 198,
+  "durationSec": 204,
   "build": {
     "sito": "main.685e7a77.js",
     "origine": "main.685e7a77.js"
@@ -11,19 +11,11 @@
   "summary": {
     "critical": 0,
     "high": 0,
-    "medium": 1,
+    "medium": 0,
     "low": 3,
-    "total": 4
+    "total": 3
   },
   "issues": [
-    {
-      "severity": "medium",
-      "type": "github_run_falliti",
-      "route": "log",
-      "viewport": "",
-      "message": "ronda-notturna (failure)",
-      "suggestion": "Aprire i run falliti; se sono build Pages cancellate da un commit, non è un guasto (vedi LEZIONI)."
-    },
     {
       "severity": "low",
       "type": "form_invalid",
@@ -65,7 +57,7 @@
       "route": "/aste",
       "viewport": "desktop",
       "http": 200,
-      "text": 9189,
+      "text": 22887,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -87,7 +79,7 @@
       "route": "/osservatorio",
       "viewport": "desktop",
       "http": 200,
-      "text": 5854,
+      "text": 7822,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -241,7 +233,7 @@
       "route": "/stato",
       "viewport": "desktop",
       "http": 200,
-      "text": 771,
+      "text": 773,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -263,7 +255,7 @@
       "route": "/aste",
       "viewport": "mobile",
       "http": 200,
-      "text": 9169,
+      "text": 22870,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -323,7 +315,7 @@
         {
           "route": "/",
           "http": 200,
-          "text": 19665,
+          "text": 19664,
           "errors": 0
         },
         {
@@ -408,9 +400,9 @@
   "feed": {
     "statistiche": {
       "status": 200,
-      "aggiornato": "2026-11-11T09:05:19.408Z",
-      "totale": 321343,
-      "ageHours": 0.3
+      "aggiornato": "2026-11-11T09:27:15.928Z",
+      "totale": 321351,
+      "ageHours": 0.2
     },
     "aggiudicazioni": {
       "status": 200,
@@ -427,64 +419,55 @@
         "name": "stato",
         "ok": true,
         "status": 200,
-        "ms": 1870,
+        "ms": 1912,
         "detail": "tabella popolata"
       },
       {
         "name": "feed statistiche",
         "ok": true,
         "status": 200,
-        "ms": 32,
-        "detail": "totale 321343 · 0.3 h fa"
+        "ms": 20,
+        "detail": "totale 321351 · 0.3 h fa"
       },
       {
         "name": "feed aggiudicazioni",
         "ok": true,
         "status": 200,
-        "ms": 212,
+        "ms": 199,
         "detail": "18115 record"
       },
       {
         "name": "origine Emergent",
         "ok": true,
         "status": 200,
-        "ms": 375,
+        "ms": 183,
         "detail": "main.685e7a77.js"
       },
       {
         "name": "chat iCARe",
         "ok": true,
         "status": 200,
-        "ms": 366,
+        "ms": 369,
         "detail": "{\"ok\":true,\"risposta\":\"Ciao, sono **iCARe**, la consulente immobiliare di CARe …"
       },
       {
         "name": "iCAReWall API",
         "ok": true,
         "status": 200,
-        "ms": 188,
+        "ms": 230,
         "detail": "15245 byte"
       },
       {
         "name": "voce TTS",
         "ok": true,
         "status": 200,
-        "ms": 12,
+        "ms": 8,
         "detail": "6482 byte"
       }
     ],
     "github": {
       "checked": 30,
-      "failedLast24h": [
-        {
-          "name": "ronda-notturna",
-          "status": "completed",
-          "conclusion": "failure",
-          "created_at": "2026-11-11T09:16:32Z",
-          "url": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42993796663",
-          "head": "65f8f8fa"
-        }
-      ]
+      "failedLast24h": []
     }
   }
 }
