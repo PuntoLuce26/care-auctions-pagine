@@ -47,6 +47,7 @@ for (const c of (cm.comuni || [])) {
   const lotti = Number(c.lotti) || 0;
   const ntnRes = o ? (Number(o.ntnRes) || null) : null;
   comuni.push({
+    istat: o ? o.istat : null,
     comune: c.comune,
     prov: c.provincia || (o ? o.prov : null),
     regione: o ? o.regione : null,
