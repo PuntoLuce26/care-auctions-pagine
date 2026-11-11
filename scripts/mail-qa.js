@@ -61,6 +61,13 @@ function bodyText(p) {
        il QA ripartirebbe a ogni digest (digest -> QA -> allarme -> digest). Una notifica di
        guasto vera arriva sempre da fuori (GitHub, Cloudflare, banca, fornitore). */
     if (SELF_DOMAIN.test(fromAddr)) { done.add(m.id); continue; }
+    /* Le mail BULK (List-Unsubscribe / campaign-id / Feedback-ID) sono marketing dei fornitori:
+       "that viral trend? Clone it." di Emergent e' diventata un allarme «edge» CRITICA e ha
+       rilanciato il QA. Si scartano, tranne quando l'OGGETTO parla di soldi, accessi o guasti:
+       una sospensione per pagamento o un addebito fallito resta un allarme. */
+    const bulk = ['list-unsubscribe', 'list-unsubscribe-post', 'x-campaignid', 'feedback-id'].some((k) => h[k]);
+    const SUBJ_ALARM = /payment|pagamento|addebit|insoluto|fattur|invoice|subscription|abbonament|sospes|suspend|rinnov|scadenz|domin|dns|ssl|dmarc|login|accesso|password|verific|device|dispositiv|failed|failure|errore|error|critical|bounce|quota|credits/i;
+    if (bulk && !SUBJ_ALARM.test(h.subject || '')) { done.add(m.id); continue; }
     if (IGNORE.test(testo) || !ERR.test(testo)) { done.add(m.id); continue; }
     const c = comp(h.from || '', h.subject || '', testo);
     const s = sev(c, testo);
