@@ -4207,5 +4207,20 @@
  "omi_cmp_title": "Compare two provinces",
  "omi_cmp_a": "Province",
  "omi_cmp_b": "Second province",
- "omi_cmp_var": "Change sem."
+ "omi_cmp_var": "Change sem.",
+ "omi_copy": "Copy the link to this view",
+ "omi_copied": "Link copied",
+ "omi_csv": "Download CSV ({n} towns)",
+ "omi_cc_title": "Two towns compared",
+ "omi_cc_hint": "Pick a second town in the table with «Compare».",
+ "omi_cc_measure": "Measure",
+ "omi_cc_var": "Change vs previous semester",
+ "omi_cc_ntn": "NTN {y}",
+ "omi_cc_none": "{c}: OMI publishes no residential values for semester {s}.",
+ "omi_cc_remove": "Remove",
+ "omi_cc_remove_aria": "Remove {c} from the comparison",
+ "omi_cc_add": "Compare",
+ "omi_cc_in": "In the comparison",
+ "omi_cc_in_aria": "Add {c} to the comparison",
+ "omi_cc_out_aria": "Remove {c} from the comparison"
 }
