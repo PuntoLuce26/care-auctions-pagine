@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-11T18:58:52.953Z",
-  "runId": "43081889212",
-  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43081889212",
+  "generatedAt": "2026-11-11T19:52:12.039Z",
+  "runId": "43090427059",
+  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43090427059",
   "base": "https://careauctions.co",
-  "durationSec": 220,
+  "durationSec": 211,
   "build": {
-    "sito": "main.425cb2b1.js",
-    "origine": "main.425cb2b1.js"
+    "sito": "main.e5039569.js",
+    "origine": "main.e5039569.js"
   },
   "summary": {
     "critical": 0,
@@ -46,7 +46,7 @@
       "route": "/",
       "viewport": "desktop",
       "http": 200,
-      "text": 21408,
+      "text": 21455,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -57,7 +57,7 @@
       "route": "/aste",
       "viewport": "desktop",
       "http": 200,
-      "text": 22330,
+      "text": 22889,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -233,7 +233,7 @@
       "route": "/stato",
       "viewport": "desktop",
       "http": 200,
-      "text": 777,
+      "text": 771,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -244,7 +244,7 @@
       "route": "/",
       "viewport": "mobile",
       "http": 200,
-      "text": 21273,
+      "text": 21320,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -315,7 +315,7 @@
         {
           "route": "/",
           "http": 200,
-          "text": 19598,
+          "text": 19645,
           "errors": 0
         },
         {
@@ -380,7 +380,7 @@
       "linkNovita": true,
       "linkAffiliazione": true,
       "linkBuynow": true,
-      "build": "main.425cb2b1.js"
+      "build": "main.e5039569.js"
     },
     "botHome": {
       "status": 200,
@@ -394,14 +394,14 @@
     },
     "origin": {
       "status": 200,
-      "build": "main.425cb2b1.js"
+      "build": "main.e5039569.js"
     }
   },
   "feed": {
     "statistiche": {
       "status": 200,
-      "aggiornato": "2026-11-11T18:49:35.033Z",
-      "totale": 321542,
+      "aggiornato": "2026-11-11T19:43:31.040Z",
+      "totale": 321564,
       "ageHours": 0.1
     },
     "aggiudicazioni": {
@@ -419,49 +419,49 @@
         "name": "stato",
         "ok": true,
         "status": 200,
-        "ms": 2047,
+        "ms": 2009,
         "detail": "tabella popolata"
       },
       {
         "name": "feed statistiche",
         "ok": true,
         "status": 200,
-        "ms": 78,
-        "detail": "totale 321542 · 0.2 h fa"
+        "ms": 31,
+        "detail": "totale 321564 · 0.1 h fa"
       },
       {
         "name": "feed aggiudicazioni",
         "ok": true,
         "status": 200,
-        "ms": 387,
+        "ms": 210,
         "detail": "18115 record"
       },
       {
         "name": "origine Emergent",
         "ok": true,
         "status": 200,
-        "ms": 245,
-        "detail": "main.425cb2b1.js"
+        "ms": 482,
+        "detail": "main.e5039569.js"
       },
       {
         "name": "chat iCARe",
         "ok": true,
         "status": 200,
-        "ms": 392,
+        "ms": 467,
         "detail": "{\"ok\":true,\"risposta\":\"Ciao, sono **iCARe**, la consulente immobiliare di CARe …"
       },
       {
         "name": "iCAReWall API",
         "ok": true,
         "status": 200,
-        "ms": 114,
-        "detail": "15433 byte"
+        "ms": 504,
+        "detail": "15527 byte"
       },
       {
         "name": "voce TTS",
         "ok": true,
         "status": 200,
-        "ms": 49,
+        "ms": 26,
         "detail": "6482 byte"
       }
     ],
