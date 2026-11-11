@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-10T23:59:23.597Z",
-  "runId": "42927089519",
-  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42927089519",
+  "generatedAt": "2026-11-11T01:49:10.707Z",
+  "runId": "42941117051",
+  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42941117051",
   "base": "https://careauctions.co",
-  "durationSec": 216,
+  "durationSec": 200,
   "build": {
     "sito": "main.685e7a77.js",
     "origine": "main.685e7a77.js"
@@ -12,8 +12,8 @@
     "critical": 0,
     "high": 0,
     "medium": 0,
-    "low": 3,
-    "total": 3
+    "low": 4,
+    "total": 4
   },
   "issues": [
     {
@@ -35,6 +35,14 @@
     {
       "severity": "low",
       "type": "form_invalid",
+      "route": "/",
+      "viewport": "mobile",
+      "message": "campi obbligatori non compilati dal QA (atteso per consenso/date): INPUT, INPUT",
+      "suggestion": "Verificare che il form sia compilabile e che i campi obbligatori abbiano un messaggio chiaro."
+    },
+    {
+      "severity": "low",
+      "type": "form_invalid",
       "route": "/buynow/san-pasquale",
       "viewport": "mobile",
       "message": "campi obbligatori non compilati dal QA (atteso per consenso/date): INPUT, INPUT",
@@ -46,7 +54,7 @@
       "route": "/",
       "viewport": "desktop",
       "http": 200,
-      "text": 21408,
+      "text": 21568,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -57,7 +65,7 @@
       "route": "/aste",
       "viewport": "desktop",
       "http": 200,
-      "text": 22890,
+      "text": 9189,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -178,7 +186,7 @@
       "route": "/compra-ora",
       "viewport": "desktop",
       "http": 200,
-      "text": 9039,
+      "text": 22181,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -244,12 +252,12 @@
       "route": "/",
       "viewport": "mobile",
       "http": 200,
-      "text": 21432,
+      "text": 20147,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
       "formsFilled": 6,
-      "clicks": 3
+      "clicks": 0
     },
     {
       "route": "/aste",
@@ -400,8 +408,8 @@
   "feed": {
     "statistiche": {
       "status": 200,
-      "aggiornato": "2026-11-10T23:52:09.819Z",
-      "totale": 321291,
+      "aggiornato": "2026-11-11T01:40:13.474Z",
+      "totale": 321302,
       "ageHours": 0.1
     },
     "aggiudicazioni": {
@@ -419,49 +427,49 @@
         "name": "stato",
         "ok": true,
         "status": 200,
-        "ms": 1709,
+        "ms": 1353,
         "detail": "tabella popolata"
       },
       {
         "name": "feed statistiche",
         "ok": true,
         "status": 200,
-        "ms": 85,
-        "detail": "totale 321291 · 0.1 h fa"
+        "ms": 95,
+        "detail": "totale 321302 · 0.1 h fa"
       },
       {
         "name": "feed aggiudicazioni",
         "ok": true,
         "status": 200,
-        "ms": 507,
+        "ms": 321,
         "detail": "18115 record"
       },
       {
         "name": "origine Emergent",
         "ok": true,
         "status": 200,
-        "ms": 330,
+        "ms": 485,
         "detail": "main.685e7a77.js"
       },
       {
         "name": "chat iCARe",
         "ok": true,
         "status": 200,
-        "ms": 435,
+        "ms": 380,
         "detail": "{\"ok\":true,\"risposta\":\"Ciao, sono **iCARe**, la consulente immobiliare di CARe …"
       },
       {
         "name": "iCAReWall API",
         "ok": true,
         "status": 200,
-        "ms": 409,
+        "ms": 370,
         "detail": "15437 byte"
       },
       {
         "name": "voce TTS",
         "ok": true,
         "status": 200,
-        "ms": 169,
+        "ms": 58,
         "detail": "6482 byte"
       }
     ],
