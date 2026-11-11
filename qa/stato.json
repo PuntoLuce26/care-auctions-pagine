@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-11T07:47:20.639Z",
-  "runId": "42981442533",
-  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42981442533",
+  "generatedAt": "2026-11-11T07:55:21.237Z",
+  "runId": "42982394488",
+  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42982394488",
   "base": "https://careauctions.co",
-  "durationSec": 200,
+  "durationSec": 197,
   "build": {
     "sito": "main.685e7a77.js",
     "origine": "main.685e7a77.js"
@@ -61,7 +61,7 @@
       "type": "github_run_falliti",
       "route": "log",
       "viewport": "",
-      "message": "qa (failure)",
+      "message": "mail-qa (failure), qa (failure)",
       "suggestion": "Aprire i run falliti; se sono build Pages cancellate da un commit, non è un guasto (vedi LEZIONI)."
     },
     {
@@ -105,7 +105,7 @@
       "route": "/aste",
       "viewport": "desktop",
       "http": 200,
-      "text": 9189,
+      "text": 22331,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -127,7 +127,7 @@
       "route": "/osservatorio",
       "viewport": "desktop",
       "http": 200,
-      "text": 7822,
+      "text": 5854,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -226,7 +226,7 @@
       "route": "/compra-ora",
       "viewport": "desktop",
       "http": 200,
-      "text": 9039,
+      "text": 22175,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -281,7 +281,7 @@
       "route": "/stato",
       "viewport": "desktop",
       "http": 200,
-      "text": 781,
+      "text": 779,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -303,7 +303,7 @@
       "route": "/aste",
       "viewport": "mobile",
       "http": 200,
-      "text": 22311,
+      "text": 22870,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -448,9 +448,9 @@
   "feed": {
     "statistiche": {
       "status": 200,
-      "aggiornato": "2026-11-11T06:52:05.196Z",
+      "aggiornato": "2026-11-11T07:52:19.523Z",
       "totale": 321304,
-      "ageHours": 0.9
+      "ageHours": 0
     },
     "aggiudicazioni": {
       "status": 200,
@@ -467,49 +467,49 @@
         "name": "stato",
         "ok": true,
         "status": 200,
-        "ms": 1705,
+        "ms": 1898,
         "detail": "tabella popolata"
       },
       {
         "name": "feed statistiche",
         "ok": true,
         "status": 200,
-        "ms": 38,
-        "detail": "totale 321304 · 0.9 h fa"
+        "ms": 36,
+        "detail": "totale 321304 · 0 h fa"
       },
       {
         "name": "feed aggiudicazioni",
         "ok": true,
         "status": 200,
-        "ms": 221,
+        "ms": 248,
         "detail": "18115 record"
       },
       {
         "name": "origine Emergent",
         "ok": true,
         "status": 200,
-        "ms": 408,
+        "ms": 280,
         "detail": "main.685e7a77.js"
       },
       {
         "name": "chat iCARe",
         "ok": true,
         "status": 200,
-        "ms": 353,
+        "ms": 396,
         "detail": "{\"ok\":true,\"risposta\":\"Ciao, sono **iCARe**, la consulente immobiliare di CARe …"
       },
       {
         "name": "iCAReWall API",
         "ok": true,
         "status": 200,
-        "ms": 239,
+        "ms": 260,
         "detail": "15245 byte"
       },
       {
         "name": "voce TTS",
         "ok": true,
         "status": 200,
-        "ms": 40,
+        "ms": 18,
         "detail": "6482 byte"
       }
     ],
@@ -517,12 +517,20 @@
       "checked": 30,
       "failedLast24h": [
         {
+          "name": "mail-qa",
+          "status": "completed",
+          "conclusion": "failure",
+          "created_at": "2026-11-11T07:48:50Z",
+          "url": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42982239107",
+          "head": "9af54de0"
+        },
+        {
           "name": "qa",
           "status": "completed",
           "conclusion": "failure",
-          "created_at": "2026-11-11T07:17:39Z",
-          "url": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42978437667",
-          "head": "e4a75285"
+          "created_at": "2026-11-11T07:42:22Z",
+          "url": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42981442533",
+          "head": "8e536d4b"
         }
       ]
     }
