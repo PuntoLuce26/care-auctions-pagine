@@ -1,0 +1,45 @@
+name: qa-presidio
+# 11/11/2026 — il presidio che parla: ogni 15 minuti guarda i run rossi e le issue,
+# decide CHI deve risolvere e manda UNA mail quando lo stato cambia (nuovo rosso o risolto).
+# Non lancia publish né Emergent: classifica e basta, per non far sforare i crediti dell'app.
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+  issues: read
+  actions: read
+concurrency:
+  group: qa-presidio
+  cancel-in-progress: false
+jobs:
+  presidio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Guarda, classifica, avvisa
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GMAIL_CLIENT_ID: ${{ secrets.GMAIL_CLIENT_ID }}
+          GMAIL_CLIENT_SECRET: ${{ secrets.GMAIL_CLIENT_SECRET }}
+          GMAIL_REFRESH_TOKEN: ${{ secrets.GMAIL_REFRESH_TOKEN }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+        run: node scripts/qa-presidio.mjs
+      - name: Commit dello stato
+        run: |
+          git config user.name "CARe Cloud"
+          git config user.email "cloud@careauctions.co"
+          git add qa/presidio.json
+          git diff --cached --quiet && echo "nessuna variazione" && exit 0
+          git commit -m "qa: presidio ($(date -u +%FT%TZ))"
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null
+            if git push -q; then exit 0; fi
+            sleep 4
+          done
+          echo "::error::push fallito"; exit 1
