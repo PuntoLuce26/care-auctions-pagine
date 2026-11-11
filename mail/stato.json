@@ -1,20 +1,9 @@
 {
-  "ultimoControllo": "2026-11-11T01:44:22.912Z",
+  "ultimoControllo": "2026-11-11T02:11:13.478Z",
   "ultimoQa": "2026-11-11T01:44:22.912Z",
-  "qaEsito": "QA dispatch HTTP 204",
-  "nuoveMail": 1,
-  "allarmi": [
-    {
-      "id": "1a1c82ab11342645",
-      "data": "2026-11-11T01:13:21.000Z",
-      "da": "mittente riservato · edge",
-      "oggetto": "[oggetto riservato · edge]",
-      "a": "info@puntoluce26.com",
-      "componente": "edge",
-      "gravita": "critica",
-      "link": ""
-    }
-  ],
+  "qaEsito": "nessun allarme nuovo",
+  "nuoveMail": 0,
+  "allarmi": [],
   "processati": [
     "1a1c636ae4a6b5a9",
     "1a1c634c8df2049e",
