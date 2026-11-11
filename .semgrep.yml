@@ -1,0 +1,48 @@
+# Regole nostre, poche e precise: niente rumore, altrimenti il cancello viene ignorato.
+rules:
+  - id: care-eval
+    languages: [javascript, typescript]
+    severity: ERROR
+    message: "eval / new Function: esecuzione di codice arbitrario, vietato nei worker e negli script."
+    patterns:
+      - pattern-either:
+          - pattern: eval(...)
+          - pattern: new Function(...)
+  - id: care-child-process-dinamico
+    languages: [javascript, typescript]
+    severity: ERROR
+    message: "exec/spawn con stringa costruita a runtime: rischio di command injection. Usa execFile con argomenti separati."
+    patterns:
+      - pattern-either:
+          - pattern: child_process.exec($X, ...)
+          - pattern: require('child_process').exec($X, ...)
+      - pattern-not: child_process.exec("...", ...)
+  - id: care-segreto-in-codice
+    languages: [javascript, typescript]
+    severity: ERROR
+    message: "Possibile segreto scritto nel codice. Le chiavi stanno nei secret, mai nel file."
+    patterns:
+      - pattern-either:
+          - pattern: $OBJ.chiave = "..."
+          - pattern: $OBJ.chiaveTest = "..."
+          - pattern: $OBJ.apiKey = "..."
+          - pattern: $OBJ.token = "..."
+          - pattern: $OBJ.password = "..."
+      - metavariable-regex:
+          metavariable: $OBJ
+          regex: .*
+  - id: care-innerhtml-variabile
+    languages: [javascript, typescript]
+    severity: ERROR
+    message: "innerHTML con contenuto non letterale: rischio XSS. Usa textContent o sanitizza."
+    patterns:
+      - pattern: $EL.innerHTML = $X
+      - pattern-not: $EL.innerHTML = "..."
+  - id: care-sql-concat
+    languages: [javascript, typescript]
+    severity: ERROR
+    message: "SQL costruito per concatenazione/template: usa i parametri (prepare/bind)."
+    patterns:
+      - pattern-either:
+          - pattern: $DB.prepare(`...${$X}...`)
+          - pattern: $DB.prepare("..." + $X + "...")
