@@ -1,12 +1,7 @@
 {
- "aggiornato": "2026-11-11T16:17:28.240Z",
- "rossi": [
-  "verifica-playwright#158",
-  "ocr-perizie#155"
- ],
+ "aggiornato": "2026-11-11T18:14:53.750Z",
+ "rossi": [],
  "issue": [
-  "[QA] Allarme mail: 1 segnalazioni",
-  "[QA] Allarme mail: 1 segnalazioni",
   "[QA] Aggiornamento 2026-11-11",
   "[QA] Aggiornamento 2026-11-10",
   "[QA] 2026-11-10 16:07 — 0 critici, 2 alti"
