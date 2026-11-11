@@ -1,6 +1,6 @@
 {
-  "generato": "2026-11-10T21:31:49Z",
-  "stato": "attenzione",
+  "generato": "2026-11-11T09:17:55Z",
+  "stato": "problemi",
   "controlli": [
     {
       "nome": "sito: 20/20 rotte 200",
@@ -12,7 +12,7 @@
       "nome": "feed statistiche",
       "livello": "ok",
       "ok": true,
-      "dettaglio": "321290 lotti · aggiornato 2026-11-10T20:46:32.474Z (45 min fa)"
+      "dettaglio": "321343 lotti · aggiornato 2026-11-11T09:05:19.408Z (13 min fa)"
     },
     {
       "nome": "feed aggiudicazioni",
@@ -24,19 +24,19 @@
       "nome": "QA cloud",
       "livello": "ok",
       "ok": true,
-      "dettaglio": "run 42903486515 · 10 min fa · {\"critical\":0,\"high\":0,\"medium\":0,\"low\":3,\"total\":3}"
+      "dettaglio": "run 42990394224 · 21 min fa · {\"critical\":0,\"high\":0,\"medium\":0,\"low\":3,\"total\":3}"
     },
     {
       "nome": "QA Orchestra",
       "livello": "ok",
       "ok": true,
-      "dettaglio": "TUTTO OK · 72 min fa"
+      "dettaglio": "OK CON AVVISI · 258 min fa"
     },
     {
       "nome": "AI Sentinel",
-      "livello": "attenzione",
+      "livello": "problemi",
       "ok": false,
-      "dettaglio": "172 min fa · anomalie: [{\"componente\":\"ai\",\"gravita\":\"high\",\"oggetto\":\"qa_stato: HTTP 404\"},{\"componente\":\"ai\",\"gravita\":\"high\",\"oggetto\":\"mail"
+      "dettaglio": "366 min fa · anomalie: []"
     },
     {
       "nome": "careauctions.it (watcher)",
@@ -48,7 +48,7 @@
       "nome": "careauctions.it (DNS DoH)",
       "livello": "ok",
       "ok": true,
-      "dettaglio": "NS hank.ns.cloudflare.com., macy.ns.cloudflare.com. · A 104.21.77.20, 172.67.203.138"
+      "dettaglio": "NS hank.ns.cloudflare.com., macy.ns.cloudflare.com. · A 172.67.203.138, 104.21.77.20"
     },
     {
       "nome": "careauctions.it (301 dal vivo)",
@@ -60,7 +60,7 @@
       "nome": "monitor posta",
       "livello": "ok",
       "ok": true,
-      "dettaglio": "ultimo controllo 2026-11-10T21:01:39.426Z (30 min fa) · allarmi: 0"
+      "dettaglio": "ultimo controllo 2026-11-11T08:28:16.993Z (50 min fa) · allarmi: 1"
     },
     {
       "nome": "build sito = origine",
@@ -73,20 +73,33 @@
       "livello": "ok",
       "ok": true,
       "dettaglio": "nessun rosso nelle ultime 3 h"
+    },
+    {
+      "nome": "sveglie dei monitoraggi",
+      "livello": "ok",
+      "ok": true,
+      "dettaglio": "mail-qa.yml lanciato · verifica-it.yml lanciato · aggiornamento-mail.yml lanciato"
     }
   ],
-  "problemi": [],
-  "attenzioni": [
+  "problemi": [
     {
       "nome": "AI Sentinel",
-      "dettaglio": "172 min fa · anomalie: [{\"componente\":\"ai\",\"gravita\":\"high\",\"oggetto\":\"qa_stato: HTTP 404\"},{\"componente\":\"ai\",\"gravita\":\"high\",\"oggetto\":\"mail"
+      "dettaglio": "366 min fa · anomalie: []"
     }
   ],
+  "attenzioni": [],
   "storico": [
     {
       "t": "2026-11-10T21:31:49Z",
       "stato": "attenzione",
       "problemi": []
+    },
+    {
+      "t": "2026-11-11T09:17:55Z",
+      "stato": "problemi",
+      "problemi": [
+        "AI Sentinel"
+      ]
     }
   ]
 }
