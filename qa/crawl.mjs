@@ -98,9 +98,9 @@ async function crawlOne(browser, route, vp) {
   const errs = [], consoleErrs = [], badResp = [], failed = [], clickErrors = [];
   let http = null, loadMs = null;
   page.on('pageerror', e => errs.push(short(e.message, 200)));
-  page.on('console', m => { if (m.type() === 'error') consoleErrs.push(short(m.text(), 200)); });
-  page.on('response', r => { try { if (r.status() >= 400) badResp.push({ status: r.status(), url: r.url() }); } catch (e) {} });
-  page.on('requestfailed', r => failed.push({ url: r.url(), error: (r.failure()?.errorText) || 'failed' }));
+  page.on('console', m => { if (m.type() === 'error' && !/cdn-cgi/i.test(m.text())) consoleErrs.push(short(m.text(), 200)); });
+  page.on('response', r => { try { if (r.status() >= 400 && !/cdn-cgi/i.test(r.url())) badResp.push({ status: r.status(), url: r.url() }); } catch (e) {} });
+  page.on('requestfailed', r => { if (!/cdn-cgi/i.test(r.url())) failed.push({ url: r.url(), error: (r.failure()?.errorText) || 'failed' }); });
 
   try {
     const t0 = Date.now();
