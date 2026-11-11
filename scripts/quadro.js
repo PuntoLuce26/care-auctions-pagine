@@ -137,7 +137,9 @@ const MESI = ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'lug
 const FEED = [['statistiche', 'statistiche.json'], ['confronto', 'confronto-mercato.json'], ['indice', 'indice.json'],
   ['npl', 'npl.json'], ['crediti', 'crediti-fiscali.json'],
   ['sitemapMeta', 'sitemap-meta.json'], ['indexnow', 'indexnow.json'],
-  ['perizieOcr', 'perizie-ocr.json'], ['ocrStato', 'ocr-stato.json']];
+  ['perizieOcr', 'perizie-ocr.json'], ['ocrStato', 'ocr-stato.json'],
+  ['omiIndice', 'omi-indice.json'], ['mercatoIndice', 'mercato-indice.json'],
+  ['asteZone', 'aste-zone.json'], ['residenzialeComune', 'residenziale-comune.json']];
 
 const WF = [['feed-sync', 'feed-sync.yml'], ['verifica-playwright', 'verifica-playwright.yml'],
   ['icarewall-cron', 'icarewall-cron.yml'], ['guardiano-cron', 'guardiano-cron.yml'],
@@ -387,7 +389,23 @@ function costruisci(d) {
     md.push(`- **Prezzi in vigore**: iCARe ${eur(cfg.prezzi.icare)} · iShop ${eur(cfg.prezzi.ishop)} · iPartner ${eur(cfg.prezzi.ipartner)} · iGold ${eur(cfg.prezzi.gold)} · success fee ${pctP(cfg.prezzi.successFeeTier1Pct)} / ${pctP(cfg.prezzi.successFeeTier2Pct)} / ${pctP(cfg.prezzi.successFeeTier3Pct)} con minimo ${eur(cfg.prezzi.successFeeMin)} (entro ${txt(cfg.prezzi.successFeePagamentoOre)} ore dall'aggiudicazione).`);
   }
   md.push('');
-  md.push('## 5. Cosa manca');
+  // 11/11/2026 — le statistiche nate oggi non erano nel quadro: OMI completo, mercato libero,
+  // zone e lotti attivi. Se un feed manca si scrive «in arrivo», mai un numero inventato.
+  const oi = d.omiIndice && d.omiIndice.meta ? d.omiIndice.meta : null;
+  const mi = d.mercatoIndice && d.mercatoIndice.totale ? d.mercatoIndice.totale : null;
+  const az = d.asteZone && d.asteZone.meta ? d.asteZone.meta : null;
+  const rc = d.residenzialeComune && d.residenzialeComune.meta ? d.residenzialeComune.meta : null;
+  md.push('## 5. Mercato e OMI — le statistiche di oggi');
+  md.push('');
+  md.push(`- **OMI completo**: ${oi ? `${int(oi.comuni)} comuni · ${int(oi.aree)} aree · ${int(oi.regioni)} regioni · ${int(oi.province)} province · ${oi.semestri ? oi.semestri.length : 0} semestri (${oi.semestri ? oi.semestri[0] : '?'} → ${oi.semestri ? oi.semestri[oi.semestri.length - 1] : '?'})` : ARRIVO}.`);
+  const ultimoIndice = oi && d.omiIndice.nazionale ? d.omiIndice.nazionale[d.omiIndice.nazionale.length - 1] : null;
+  md.push(`- **Indice CAReIndex OMI**: ${ultimoIndice ? `${ultimoIndice.semestre} · mediana ${int(ultimoIndice.min)}–${int(ultimoIndice.max)} €/m² · indice ${ultimoIndice.indice} (base 100 nel 2004/1)` : ARRIVO}.`);
+  const ult = mi ? mi[mi.length - 1] : null;
+  md.push(`- **Mercato libero** (Eurostat, trimestrale): ${ult ? `${ult.periodo} · indice ${ult.indice} (2015 = 100) · ${ult.variazionePct > 0 ? '+' : ''}${ult.variazionePct}% sul trimestre prima` : ARRIVO}.`);
+  md.push(`- **Aste per zona**: ${az ? `${int(az.zone)} zone in ${int(az.comuni)} comuni · ${int(az.assegnati)} lotti attivi assegnati (${int(az.senzaZona)} senza zona)` : ARRIVO}.`);
+  md.push(`- **Lotti attivi per comune**: ${rc ? `${int(rc.comuni)} comuni · ${int(rc.letti)} lotti letti dal PVP` : ARRIVO}.`);
+  md.push('');
+  md.push('## 6. Cosa manca');
   md.push('');
   manca.forEach((m, i) => md.push(`${i + 1}. ${m}`));
   md.push('');
