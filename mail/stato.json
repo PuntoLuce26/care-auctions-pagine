@@ -1,18 +1,28 @@
 {
-  "ultimoControllo": "2026-11-11T08:28:16.993Z",
-  "ultimoQa": "2026-11-11T08:28:16.993Z",
+  "ultimoControllo": "2026-11-11T09:19:18.630Z",
+  "ultimoQa": "2026-11-11T09:19:18.630Z",
   "qaEsito": "QA dispatch HTTP 204",
-  "nuoveMail": 1,
+  "nuoveMail": 2,
   "allarmi": [
     {
-      "id": "1a1c9a5b0360facb",
-      "data": "2026-11-11T08:07:20.000Z",
+      "id": "1a1c9e6e9c9e3c71",
+      "data": "2026-11-11T09:18:34.000Z",
       "da": "PuntoLuce26 <notifications@github.com>",
-      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: shell-test - main (a4816f8)",
+      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: ronda-notturna - main (65f8f8f)",
       "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
       "componente": "github-actions",
       "gravita": "media",
-      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42984193124"
+      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42993796663"
+    },
+    {
+      "id": "1a1c9c23f4a81303",
+      "data": "2026-11-11T08:35:58.000Z",
+      "da": "mittente riservato · edge",
+      "oggetto": "[oggetto riservato · edge]",
+      "a": "info@puntoluce26.com",
+      "componente": "edge",
+      "gravita": "critica",
+      "link": ""
     }
   ],
   "processati": [
@@ -66,6 +76,9 @@
     "1a1c98ec0c6d5a81",
     "1a1c97cf934f8d7c",
     "1a1c9b52310fa528",
-    "1a1c9a5b0360facb"
+    "1a1c9a5b0360facb",
+    "1a1c9e6e9c9e3c71",
+    "1a1c9e06286fac43",
+    "1a1c9c23f4a81303"
   ]
 }
