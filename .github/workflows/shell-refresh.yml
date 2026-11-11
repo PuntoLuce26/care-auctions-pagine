@@ -1,0 +1,55 @@
+name: shell-refresh
+# 11/11/2026 — la shell dell'app deve citare il bundle VIVO. Se Emergent pubblica e la shell
+# resta al bundle vecchio, le pagine servite dalla shell (/ca-re-index, /idati, /indice,
+# /andamento-prezzi, /icarewall, ...) diventano bianche: il browser cerca un file che non esiste.
+# Questo giro riallinea shell/app.html ogni 30 minuti (e a comando), senza aspettare il prerender.
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: shell-refresh
+  cancel-in-progress: false
+jobs:
+  shell:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rigenera shell/app.html dall'origine
+        run: |
+          node - <<'JS'
+          const fs = require('fs');
+          (async () => {
+            const r = await fetch('https://care-aste.emergent.host/', { headers: { 'User-Agent': 'Mozilla/5.0 CARe-shell' } });
+            if (!r.ok) { console.error('origine non raggiungibile', r.status); process.exit(1); }
+            const h = await r.text();
+            const i = h.indexOf('<head>'), j = h.indexOf('</head>');
+            if (i < 0 || j < 0) { console.error('head non trovato'); process.exit(1); }
+            const head = h.slice(i, j + 7);
+            const shell = '<!DOCTYPE html><html lang="it">' + head + '<body><noscript><p>CARe Auctions · careauctions.co</p><p>Attiva JavaScript per usare il sito.</p></noscript><div id="pr"></div><div id="root"></div></body></html>';
+            const m = shell.match(/main\.[a-f0-9]{8}\.js/);
+            if (!m) { console.error('bundle non trovato nella shell'); process.exit(1); }
+            fs.mkdirSync('shell', { recursive: true });
+            const vecchio = fs.existsSync('shell/app.html') ? fs.readFileSync('shell/app.html', 'utf8') : '';
+            const mv = vecchio.match(/main\.[a-f0-9]{8}\.js/);
+            if (mv && mv[0] === m[0]) { console.log('shell gia allineata a', m[0]); process.exit(0); }
+            fs.writeFileSync('shell/app.html', shell);
+            console.log('shell riallineata a', m[0], shell.length, 'byte');
+          })();
+          JS
+      - name: Commit se cambiata
+        run: |
+          git config user.name "CARe Cloud"
+          git config user.email "cloud@careauctions.co"
+          git add shell
+          git diff --cached --quiet && echo "nessuna variazione" && exit 0
+          git commit -m "shell: riallineata al bundle vivo ($(date -u +%FT%TZ))"
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null
+            if git push; then exit 0; fi
+            sleep 4
+          done
+          echo "::error::push fallito"; exit 1
