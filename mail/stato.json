@@ -1,9 +1,50 @@
 {
-  "ultimoControllo": "2026-11-11T15:51:05.156Z",
-  "ultimoQa": "2026-11-11T13:25:40.687Z",
-  "qaEsito": "nessun allarme nuovo",
-  "nuoveMail": 0,
-  "allarmi": [],
+  "ultimoControllo": "2026-11-11T16:30:42.851Z",
+  "ultimoQa": "2026-11-11T16:30:42.851Z",
+  "qaEsito": "QA dispatch HTTP 204",
+  "nuoveMail": 4,
+  "allarmi": [
+    {
+      "id": "1a1cb699a21bb0aa",
+      "data": "2026-11-11T16:20:57.000Z",
+      "da": "PuntoLuce26 <notifications@github.com>",
+      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: ocr-perizie - main (1387179)",
+      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
+      "componente": "github-actions",
+      "gravita": "media",
+      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43055214983"
+    },
+    {
+      "id": "1a1cb68749eb4b48",
+      "data": "2026-11-11T16:19:41.000Z",
+      "da": "PuntoLuce26 <notifications@github.com>",
+      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: verifica-playwright - main (1387179)",
+      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
+      "componente": "github-actions",
+      "gravita": "media",
+      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43055210819"
+    },
+    {
+      "id": "1a1cb592d13ebeef",
+      "data": "2026-11-11T16:03:00.000Z",
+      "da": "PuntoLuce26 <notifications@github.com>",
+      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: ocr-perizie - main (04a2497)",
+      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
+      "componente": "github-actions",
+      "gravita": "media",
+      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43052242257"
+    },
+    {
+      "id": "1a1cb59036a71828",
+      "data": "2026-11-11T16:02:49.000Z",
+      "da": "PuntoLuce26 <notifications@github.com>",
+      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: verifica-playwright - main (04a2497)",
+      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
+      "componente": "github-actions",
+      "gravita": "media",
+      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43052418201"
+    }
+  ],
   "processati": [
     "1a1c636ae4a6b5a9",
     "1a1c634c8df2049e",
@@ -68,6 +109,13 @@
     "1a1ca604ec23517c",
     "1a1cab83a9c8d68e",
     "1a1caaeab4f222c4",
-    "1a1cad138a96d168"
+    "1a1cad138a96d168",
+    "1a1cb699a21bb0aa",
+    "1a1cb68749eb4b48",
+    "1a1cb6668a3878f1",
+    "1a1cb596fa951923",
+    "1a1cb592d13ebeef",
+    "1a1cb59036a71828",
+    "1a1cb551fa8a5854"
   ]
 }
