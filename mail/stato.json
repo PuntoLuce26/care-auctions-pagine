@@ -1,9 +1,80 @@
 {
-  "ultimoControllo": "2026-11-11T19:53:34.241Z",
-  "ultimoQa": "2026-11-11T18:52:33.301Z",
-  "qaEsito": "nessun allarme nuovo",
-  "nuoveMail": 0,
-  "allarmi": [],
+  "ultimoControllo": "2026-11-11T22:24:51.034Z",
+  "ultimoQa": "2026-11-11T22:24:51.034Z",
+  "qaEsito": "QA dispatch HTTP 204",
+  "nuoveMail": 7,
+  "allarmi": [
+    {
+      "id": "1a1cca7b6d646d2b",
+      "data": "2026-11-11T22:08:23.000Z",
+      "da": "PuntoLuce26 <notifications@github.com>",
+      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: esiti-sync - main (a5c008f)",
+      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
+      "componente": "github-actions",
+      "gravita": "media",
+      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43105534598"
+    },
+    {
+      "id": "1a1cc59ec652f274",
+      "data": "2026-11-11T20:43:26.000Z",
+      "da": "PuntoLuce26 <notifications@github.com>",
+      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed at startup: feed-sync - main (46f9fe5)",
+      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
+      "componente": "feed",
+      "gravita": "media",
+      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43097177675"
+    },
+    {
+      "id": "1a1cc59c3e4b0c10",
+      "data": "2026-11-11T20:43:16.000Z",
+      "da": "PuntoLuce26 <notifications@github.com>",
+      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed at startup: feed-sync - main (46f9fe5)",
+      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
+      "componente": "feed",
+      "gravita": "media",
+      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43097269894"
+    },
+    {
+      "id": "1a1cc584c03a5783",
+      "data": "2026-11-11T20:41:40.000Z",
+      "da": "PuntoLuce26 <notifications@github.com>",
+      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed at startup: quadro - main (46f9fe5)",
+      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
+      "componente": "github-actions",
+      "gravita": "media",
+      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43096924044"
+    },
+    {
+      "id": "1a1cc5610ed672dd",
+      "data": "2026-11-11T20:39:14.000Z",
+      "da": "PuntoLuce26 <notifications@github.com>",
+      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed at startup: pages build and deployment - main (46f9fe5)",
+      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
+      "componente": "pages",
+      "gravita": "alta",
+      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43096917415"
+    },
+    {
+      "id": "1a1cc55ce12c845d",
+      "data": "2026-11-11T20:38:56.000Z",
+      "da": "PuntoLuce26 <notifications@github.com>",
+      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed at startup: feed-sync - main (4a6bbe2)",
+      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
+      "componente": "feed",
+      "gravita": "media",
+      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43095877085"
+    },
+    {
+      "id": "1a1cc53bc0edccac",
+      "data": "2026-11-11T20:36:40.000Z",
+      "da": "PuntoLuce26 <notifications@github.com>",
+      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed at startup: feed-sync - main (4a6bbe2)",
+      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
+      "componente": "feed",
+      "gravita": "media",
+      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43095672150"
+    }
+  ],
   "processati": [
     "1a1c636ae4a6b5a9",
     "1a1c634c8df2049e",
@@ -84,6 +155,15 @@
     "1a1cbeaa46622f0e",
     "1a1cbd36eca37204",
     "1a1cbbeeff163a99",
-    "1a1cc02de3f8de0d"
+    "1a1cc02de3f8de0d",
+    "1a1cca7b6d646d2b",
+    "1a1cc59ec652f274",
+    "1a1cc59c3e4b0c10",
+    "1a1cc584c03a5783",
+    "1a1cc5610ed672dd",
+    "1a1cc55ce12c845d",
+    "1a1cc53bc0edccac",
+    "1a1cc2e7f73a0bfb",
+    "1a1cc2e6c53ff983"
   ]
 }
