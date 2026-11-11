@@ -4101,5 +4101,11 @@
   "ad_p_sos": "Suspended",
   "ad_p_tot": "Allar upphæðir dagsins",
   "ad_p_day": "Aftur á {d}",
-  "ad_p_aria": "Síðustu 30 daga: Aukningarnar veittar, hættuð og hættuð"
+  "ad_p_aria": "Síðustu 30 daga: Aukningarnar veittar, hættuð og hættuð",
+  "ad_p_rate_agg": "Hlaupið í heild:",
+  "ad_p_rate_des": "Svíar í heild:",
+  "ad_p_rate_note": "Hlutfall á heildar aukningarnar á degi; 30 daga meðaltali samanburðar allar aukningarnar á tímabilinu",
+  "ad_p_legend": "Legenda um bar",
+  "ad_p_rate_30": "Meðal 30 daga",
+  "ad_p_tap": "Smelltu á bar til að sjá tölurnar á þeim degi."
 }

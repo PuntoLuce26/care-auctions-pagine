@@ -4101,5 +4101,11 @@
   "ad_p_sos": "Suspensiya",
   "ad_p_tot": "Gün ərzində toplam",
   "ad_p_day": "AZERTAG {d}",
-  "ad_p_aria": "Son 30 gün: satılan, boşanılan və qısa müddət"
+  "ad_p_aria": "Son 30 gün: satılan, boşanılan və qısa müddət",
+  "ad_p_rate_agg": "Ümumilikdə müqayisədə:",
+  "ad_p_rate_des": "Ümumilikdə çöl:",
+  "ad_p_rate_note": "Bu il 30 ildir ki, o, 30 ildir ki, o, bütün ölkələrdə satışa çıxır.",
+  "ad_p_legend": "Barların efirləri",
+  "ad_p_rate_30": "30 gün ərzində",
+  "ad_p_tap": "O günün sayıları görmək üçün bir bar tapın."
 }

@@ -4101,5 +4101,11 @@
   "ad_p_sos": "Suspension",
   "ad_p_tot": "Toutes les enchères du jour",
   "ad_p_day": "Astuce du {d}",
-  "ad_p_aria": "Derniers 30 jours : enchères attribuées, désertes et suspendues"
+  "ad_p_aria": "Derniers 30 jours : enchères attribuées, désertes et suspendues",
+  "ad_p_rate_agg": "Résumé du total :",
+  "ad_p_rate_des": "Désert au total :",
+  "ad_p_rate_note": "le total des enchères du jour; la moyenne de 30 jours ajoute toutes les enchères de la période",
+  "ad_p_legend": "La légende des barres",
+  "ad_p_rate_30": "Moyenne 30 jours",
+  "ad_p_tap": "Appuyez sur une barre pour voir les numéros de cette journée."
 }

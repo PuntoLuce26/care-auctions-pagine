@@ -4101,5 +4101,11 @@
   "ad_p_sos": "Suspensió",
   "ad_p_tot": "Ajudes totals del dia",
   "ad_p_day": "Àtoms del {d}",
-  "ad_p_aria": "Últims 30 dies: subhastes adjudicades, deserts i suspeses"
+  "ad_p_aria": "Últims 30 dies: subhastes adjudicades, deserts i suspeses",
+  "ad_p_rate_agg": "Adjudicacions en total:",
+  "ad_p_rate_des": "Desert en total:",
+  "ad_p_rate_note": "La mitjana de 30 dies suma totes les subhastes del període",
+  "ad_p_legend": "La llegenda de les barres",
+  "ad_p_rate_30": "Mitjana de 30 dies",
+  "ad_p_tap": "Premeu una barra per veure els números d'aquell dia."
 }

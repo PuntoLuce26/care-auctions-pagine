@@ -4101,5 +4101,11 @@
   "ad_p_sos": "Tuntube",
   "ad_p_tot": "Ƙwararraki na yau da kullum",
   "ad_p_day": "Kasa {d}",
-  "ad_p_aria": "Last 30 kwanaki: Auctions awarded, shigarwa da kuma shigarwa"
+  "ad_p_aria": "Last 30 kwanaki: Auctions awarded, shigarwa da kuma shigarwa",
+  "ad_p_rate_agg": "Tuntube mu:",
+  "ad_p_rate_des": "Ƙungiyar Ƙungiyar:",
+  "ad_p_rate_note": "Ƙungiyoyi na Ƙungiyoyi na Ƙungiyoyi na Ƙungiyoyi na Ƙungiyoyi na Ƙungiyoyi na Ƙungiyoyi na Ƙungiyoyi na Ƙungiyoyi na Ƙungiyoyi na Ƙungiyoyi na Ƙungiyoyi na Ƙungiyoyi",
+  "ad_p_legend": "Tsarin Bar",
+  "ad_p_rate_30": "Ƙararrawa 30 Days",
+  "ad_p_tap": "Sauke wani rubutu don ganin lambar na wannan rana."
 }

@@ -4101,5 +4101,11 @@
   "ad_p_sos": "Pārtraukums",
   "ad_p_tot": "Kopējais dienas piedāvājums",
   "ad_p_day": "Astoņi no {d}",
-  "ad_p_aria": "Pēdējo 30 dienu laikā: piešķirti, atstāti un apturēti izsoles"
+  "ad_p_aria": "Pēdējo 30 dienu laikā: piešķirti, atstāti un apturēti izsoles",
+  "ad_p_rate_agg": "Iegādājieties kopējo summu:",
+  "ad_p_rate_des": "Pilsētas tuksnesis kopumā:",
+  "ad_p_rate_note": "Tādēļ ir svarīgi atcerēties, ka tas ir ļoti efektīvs līdzeklis, lai izvairītos no nepatīkamām sajūtām.",
+  "ad_p_legend": "Legenda par bāriem",
+  "ad_p_rate_30": "Vidēji 30 dienas",
+  "ad_p_tap": "Piespiedieties uz joslu, lai redzētu šīs dienas numurus."
 }

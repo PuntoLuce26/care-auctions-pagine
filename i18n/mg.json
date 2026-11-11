@@ -4101,5 +4101,11 @@
   "ad_p_sos": "Ny fanapahan-kevitra",
   "ad_p_tot": "Amin'ny ankapobeny ny andro",
   "ad_p_day": "Ary ny {d}",
-  "ad_p_aria": "30 andro farany: Fandefasana, fandoavam-bola na fandoavam-bola"
+  "ad_p_aria": "30 andro farany: Fandefasana, fandoavam-bola na fandoavam-bola",
+  "ad_p_rate_agg": "Ampiasao amin'ny ankapobeny izy ireo:",
+  "ad_p_rate_des": "Ao amin'ny tanana manontolo:",
+  "ad_p_rate_note": "Ny fifanarahana amin'ny fifanarahana amin'ny fifanarahana amin'ny fifanarahana amin'ny fifanarahana amin'ny fifanarahana amin'ny fifanarahana amin'ny fifanarahana amin'ny fifanarahana amin'ny fifanarahana amin'ny fifanarahana amin'ny fifanarahana amin'ny fifanarahana amin'ny fifanarahana amin'ny fifanarahana amin'ny fifanarahana amin'ny fifanarahana amin'ny fifanarahana amin'ny fifanarahana",
+  "ad_p_legend": "Ny Lazain'ny Bar",
+  "ad_p_rate_30": "Nandritra ny 30 andro",
+  "ad_p_tap": "Tsindrio ny tabilao mba hahita ny isa tamin'izany andro izany."
 }

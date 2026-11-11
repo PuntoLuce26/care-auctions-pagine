@@ -4101,5 +4101,11 @@
   "ad_p_sos": "Suspended",
   "ad_p_tot": "Total sales of the day",
   "ad_p_day": "See also {d}",
-  "ad_p_aria": "Last 30 days: awarded, abandoned and suspended auctions"
+  "ad_p_aria": "Last 30 days: awarded, abandoned and suspended auctions",
+  "ad_p_rate_agg": "Avoid the total:",
+  "ad_p_rate_des": "Deserts in total:",
+  "ad_p_rate_note": "The average of 30 days amounts to all the auctions of the period.",
+  "ad_p_legend": "Legend of the bars",
+  "ad_p_rate_30": "Average 30 days",
+  "ad_p_tap": "Tap a bar to see the numbers of that day."
 }

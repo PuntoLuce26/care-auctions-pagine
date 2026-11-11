@@ -4101,5 +4101,11 @@
   "ad_p_sos": "Ukuqhathanisa",
   "ad_p_tot": "Ukubuyekezwa yonke imizuzu",
   "ad_p_day": "Ukubuyekezwa {d}",
-  "ad_p_aria": "Izinsuku ezingu-30 ezidlulile: Izincwajana eziholile, eziholile futhi eziholile"
+  "ad_p_aria": "Izinsuku ezingu-30 ezidlulile: Izincwajana eziholile, eziholile futhi eziholile",
+  "ad_p_rate_agg": "Ukubuyekezwa ku:",
+  "ad_p_rate_des": "Ukubuyekezwa ngokugcwele:",
+  "ad_p_rate_note": "I-30 Days Average Imininingwane ye-30 Days Average Imininingwane ye-30 Days Average ye-30 Days Average",
+  "ad_p_legend": "I-Legend Of The Bar",
+  "ad_p_rate_30": "Ubukhulu 30 Izinsuku",
+  "ad_p_tap": "Hlola ibha ukuze ubone izibalo yedlulile."
 }

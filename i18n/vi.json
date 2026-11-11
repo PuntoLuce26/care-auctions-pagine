@@ -4101,5 +4101,11 @@
   "ad_p_sos": "Tạm ngưng",
   "ad_p_tot": "Tổng đợt đấu giá của ngày",
   "ad_p_day": "AAS của {d}",
-  "ad_p_aria": "30 ngày cuối cùng: đấu thầu được trao, bỏ trống và đình chỉ"
+  "ad_p_aria": "30 ngày cuối cùng: đấu thầu được trao, bỏ trống và đình chỉ",
+  "ad_p_rate_agg": "Đánh giá tổng cộng:",
+  "ad_p_rate_des": "Sa mạc trên toàn bộ:",
+  "ad_p_rate_note": "tỷ lệ trên tổng số đấu giá trong ngày; trung bình 30 ngày cộng tất cả các đấu giá trong giai đoạn",
+  "ad_p_legend": "Huyền Thoại Bar",
+  "ad_p_rate_30": "Trung bình 30 ngày",
+  "ad_p_tap": "Chạm vào một thanh để xem số ngày đó."
 }

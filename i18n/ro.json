@@ -4101,5 +4101,11 @@
   "ad_p_sos": "Suspendată",
   "ad_p_tot": "Valoarea totală a zilei",
   "ad_p_day": "Acestea din {d}",
-  "ad_p_aria": "Ultimii 30 de zile: licitații atribuite, abandonate și suspendate"
+  "ad_p_aria": "Ultimii 30 de zile: licitații atribuite, abandonate și suspendate",
+  "ad_p_rate_agg": "Cumpărați în total:",
+  "ad_p_rate_des": "Desert în total:",
+  "ad_p_rate_note": "cotați pe totalul licitațiilor zilnice; media de 30 de zile sumă toate licitațiile din perioada respectivă",
+  "ad_p_legend": "Legenda barelor",
+  "ad_p_rate_30": "Media de 30 de zile",
+  "ad_p_tap": "Atingeți o bară pentru a vedea numerele din acea zi."
 }

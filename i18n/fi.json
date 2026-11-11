@@ -4101,5 +4101,11 @@
   "ad_p_sos": "keskeytetty",
   "ad_p_tot": "Päivän kokonaiskierrokset",
   "ad_p_day": "Näytä El {d}",
-  "ad_p_aria": "Viimeiset 30 päivää: myönnetyt, hylätyt ja keskeytetyt huutokaupat"
+  "ad_p_aria": "Viimeiset 30 päivää: myönnetyt, hylätyt ja keskeytetyt huutokaupat",
+  "ad_p_rate_agg": "Valitse kokonaisuudessaan:",
+  "ad_p_rate_des": "Kaiken kaikkiaan autiomaassa:",
+  "ad_p_rate_note": "Päivän huutokauppojen kokonaismäärä; 30 päivän keskiarvo on kaikkien kauden huutokauppojen summa",
+  "ad_p_legend": "Legenda baareista",
+  "ad_p_rate_30": "Keskimäärin 30 päivää",
+  "ad_p_tap": "Napauta ruutua nähdäksesi päivän numerot."
 }

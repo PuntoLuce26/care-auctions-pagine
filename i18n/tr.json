@@ -4101,5 +4101,11 @@
   "ad_p_sos": "askıya",
   "ad_p_tot": "Günlük Toplam Satış",
   "ad_p_day": "Azerbaycan {d}",
-  "ad_p_aria": "Son 30 gün: Alınan, terk edilen ve askıya alınan ihale"
+  "ad_p_aria": "Son 30 gün: Alınan, terk edilen ve askıya alınan ihale",
+  "ad_p_rate_agg": "Toplam Ücret:",
+  "ad_p_rate_des": "Toplam Çöl:",
+  "ad_p_rate_note": "Günlük ortalama 30 günün toplam satışı; 30 günün ortalaması, dönemdeki tüm satışı toplamaktadır.",
+  "ad_p_legend": "Barlar Efsanesi",
+  "ad_p_rate_30": "Ortalama 30 gün",
+  "ad_p_tap": "O günün rakamlarını görmek için bir çubuğa dokunun."
 }

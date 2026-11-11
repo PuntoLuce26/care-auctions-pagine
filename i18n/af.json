@@ -4102,5 +4102,11 @@
   "ad_p_sos": "Suspendeer",
   "ad_p_tot": "Totale aandele van die dag",
   "ad_p_day": "Oor die {d}",
-  "ad_p_aria": "Die laaste 30 dae: toegekende veilings, verlaat en opgespoor"
+  "ad_p_aria": "Die laaste 30 dae: toegekende veilings, verlaat en opgespoor",
+  "ad_p_rate_agg": "Verwys na die totaal:",
+  "ad_p_rate_des": "Die hele woestyn:",
+  "ad_p_rate_note": "aandeel op die totale veiling van die dag; die gemiddelde van 30 dae som al die veilings van die tydperk",
+  "ad_p_legend": "Legende van die bars",
+  "ad_p_rate_30": "Gemiddelde 30 dae",
+  "ad_p_tap": "Tik op 'n bar om die nommers van daardie dag te sien."
 }

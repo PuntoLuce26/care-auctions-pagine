@@ -4101,5 +4101,11 @@
   "ad_p_sos": "pezulluar",
   "ad_p_tot": "Të gjitha ofertat e ditës",
   "ad_p_day": "Ato të {d}",
-  "ad_p_aria": "30 ditët e fundit: ankandet e fituara, të braktisura dhe të pezulluara"
+  "ad_p_aria": "30 ditët e fundit: ankandet e fituara, të braktisura dhe të pezulluara",
+  "ad_p_rate_agg": "Vlerësoni në total:",
+  "ad_p_rate_des": "Shkretëtirë në total:",
+  "ad_p_rate_note": "Përqindja e 30 ditëve përmban të gjitha ankandet e periudhës",
+  "ad_p_legend": "Legjenda e Barrave",
+  "ad_p_rate_30": "Mesatarisht 30 ditë",
+  "ad_p_tap": "Shtypni një bar për të parë numrat e asaj dite."
 }

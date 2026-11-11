@@ -4101,5 +4101,11 @@
   "ad_p_sos": "Suspensão",
   "ad_p_tot": "Aulas totais do dia",
   "ad_p_day": "Água do {d}",
-  "ad_p_aria": "Últimos 30 dias: Leilões adjudicados, desertos e suspensos"
+  "ad_p_aria": "Últimos 30 dias: Leilões adjudicados, desertos e suspensos",
+  "ad_p_rate_agg": "Conheça o total:",
+  "ad_p_rate_des": "Desertos no total:",
+  "ad_p_rate_note": "A média de 30 dias soma todos os leilões do período",
+  "ad_p_legend": "A Lenda das Barras",
+  "ad_p_rate_30": "Média 30 dias",
+  "ad_p_tap": "Toque em uma barra para ver os números desse dia."
 }

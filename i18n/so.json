@@ -4101,5 +4101,11 @@
   "ad_p_sos": "Haku",
   "ad_p_tot": "Qalabka ugu badan ee day",
   "ad_p_day": "Haku {d}",
-  "ad_p_aria": "30 maalmood ka hor: wax soo saarka, wax soo saarka, wax soo saarka"
+  "ad_p_aria": "30 maalmood ka hor: wax soo saarka, wax soo saarka, wax soo saarka",
+  "ad_p_rate_agg": "Nala soo xiriir Total:",
+  "ad_p_rate_des": "Qalabka ugu badan:",
+  "ad_p_rate_note": "30 maalmood oo ka mid ah oo ka mid ah 30 maalmood oo ka mid ah 30 maalmood",
+  "ad_p_legend": "Qalabka Bar",
+  "ad_p_rate_30": "30 maalmood",
+  "ad_p_tap": "Waayo, waxaa loo yaabaa in la soo xiriir in la soo xiriir."
 }

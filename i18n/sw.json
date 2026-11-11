@@ -4101,5 +4101,11 @@
   "ad_p_sos": "Kuondolewa",
   "ad_p_tot": "Jumla ya mauzo ya siku",
   "ad_p_day": "wa wa wa {d}",
-  "ad_p_aria": "Siku 30 za mwisho: Maonyesho yaliyotolewa, yaliyotolewa na yaliyopangwa"
+  "ad_p_aria": "Siku 30 za mwisho: Maonyesho yaliyotolewa, yaliyotolewa na yaliyopangwa",
+  "ad_p_rate_agg": "Tazama kwa jumla:",
+  "ad_p_rate_des": "Maua kwa jumla:",
+  "ad_p_rate_note": "Mabadiliko juu ya jumla ya mauzo ya siku; wastani wa siku 30 unajumuisha mauzo yote ya kipindi",
+  "ad_p_legend": "Hadithi ya Bar",
+  "ad_p_rate_30": "Wastani wa siku 30",
+  "ad_p_tap": "Bonyeza bar ili kuona namba za siku hiyo."
 }
