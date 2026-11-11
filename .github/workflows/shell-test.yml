@@ -1,0 +1,22 @@
+name: shell-test
+# Collaudo della shell vuota sul URL di prova (?shell=1) con il browser che poi giudica.
+# Si lancia a mano prima di attivare la shell per tutti. Nessun cron.
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  shell:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Playwright
+        run: |
+          npm i -D playwright@1.47.2 --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Collaudo shell
+        run: node qa/shell-test.mjs
