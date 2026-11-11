@@ -1,9 +1,40 @@
 {
-  "ultimoControllo": "2026-11-11T17:54:07.986Z",
-  "ultimoQa": "2026-11-11T16:30:42.851Z",
-  "qaEsito": "nessun allarme nuovo",
-  "nuoveMail": 0,
-  "allarmi": [],
+  "ultimoControllo": "2026-11-11T18:52:33.301Z",
+  "ultimoQa": "2026-11-11T18:52:33.301Z",
+  "qaEsito": "QA dispatch HTTP 204",
+  "nuoveMail": 3,
+  "allarmi": [
+    {
+      "id": "1a1cbef411c5c76f",
+      "data": "2026-11-11T18:46:55.000Z",
+      "da": "PuntoLuce26 <notifications@github.com>",
+      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: gate - main (23e40d4)",
+      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
+      "componente": "github-actions",
+      "gravita": "media",
+      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43080546865"
+    },
+    {
+      "id": "1a1cbebdf555b135",
+      "data": "2026-11-11T18:43:14.000Z",
+      "da": "PuntoLuce26 <notifications@github.com>",
+      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: .github/workflows/gate.yml - main (94b3c31)",
+      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
+      "componente": "github-actions",
+      "gravita": "media",
+      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43080370986"
+    },
+    {
+      "id": "1a1cbeaa46622f0e",
+      "data": "2026-11-11T18:41:53.000Z",
+      "da": "PuntoLuce26 <notifications@github.com>",
+      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: .github/workflows/gate.yml - main (7241d78)",
+      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
+      "componente": "github-actions",
+      "gravita": "media",
+      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43080165291"
+    }
+  ],
   "processati": [
     "1a1c636ae4a6b5a9",
     "1a1c634c8df2049e",
@@ -78,6 +109,11 @@
     "1a1cb551fa8a5854",
     "1a1cb770ffda0e6f",
     "1a1cb7616cf8c764",
-    "1a1cb9c90d63e6a1"
+    "1a1cb9c90d63e6a1",
+    "1a1cbef411c5c76f",
+    "1a1cbebdf555b135",
+    "1a1cbeaa46622f0e",
+    "1a1cbd36eca37204",
+    "1a1cbbeeff163a99"
   ]
 }
