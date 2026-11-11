@@ -1,9 +1,30 @@
 {
-  "ultimoControllo": "2026-11-11T02:11:13.478Z",
-  "ultimoQa": "2026-11-11T01:44:22.912Z",
-  "qaEsito": "nessun allarme nuovo",
-  "nuoveMail": 0,
-  "allarmi": [],
+  "ultimoControllo": "2026-11-11T04:44:06.911Z",
+  "ultimoQa": "2026-11-11T04:44:06.911Z",
+  "qaEsito": "QA dispatch HTTP 204",
+  "nuoveMail": 2,
+  "allarmi": [
+    {
+      "id": "1a1c8abb1d066500",
+      "data": "2026-11-11T03:34:17.000Z",
+      "da": "mittente riservato · feed",
+      "oggetto": "[oggetto riservato · feed]",
+      "a": "info@puntoluce26.com",
+      "componente": "feed",
+      "gravita": "media",
+      "link": ""
+    },
+    {
+      "id": "1a1c882a9e4e5f6c",
+      "data": "2026-11-11T02:49:27.000Z",
+      "da": "mittente riservato · edge",
+      "oggetto": "[oggetto riservato · edge]",
+      "a": "info@puntoluce26.com",
+      "componente": "edge",
+      "gravita": "critica",
+      "link": ""
+    }
+  ],
   "processati": [
     "1a1c636ae4a6b5a9",
     "1a1c634c8df2049e",
@@ -44,6 +65,9 @@
     "1a1c7a01903604e3",
     "1a1c845185b8741c",
     "1a1c82ab11342645",
-    "1a1c81de76859437"
+    "1a1c81de76859437",
+    "1a1c8e9b2f4e42f0",
+    "1a1c8abb1d066500",
+    "1a1c882a9e4e5f6c"
   ]
 }
