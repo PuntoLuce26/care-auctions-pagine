@@ -1,0 +1,14 @@
+{
+  "aggiornato": "2026-11-11T07:45:00Z",
+  "nota": "Catalogo iShop. Vuoto finche' non arrivano i feed dei programmi approvati. Le categorie servono alla pagina anche quando non ci sono prodotti.",
+  "categorie": [
+    { "id": "casa", "nome": "Casa e arredo" },
+    { "id": "elettronica", "nome": "Elettronica" },
+    { "id": "bricolage", "nome": "Bricolage e giardino" },
+    { "id": "animali", "nome": "Animali" },
+    { "id": "sport", "nome": "Sport e tempo libero" },
+    { "id": "viaggi", "nome": "Viaggi" },
+    { "id": "energia", "nome": "Energia e utenze" }
+  ],
+  "prodotti": []
+}
