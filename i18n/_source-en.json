@@ -4091,5 +4091,9 @@
  "ad_p_sos": "Suspended",
  "ad_p_tot": "Total auctions of the day",
  "ad_p_day": "auctions of {d}",
- "ad_p_aria": "Last 30 days: awarded, unsold and suspended auctions"
+ "ad_p_aria": "Last 30 days: awarded, unsold and suspended auctions",
+ "ad_p_rate_agg": "Awarded out of total:",
+ "ad_p_rate_des": "Unsold out of total:",
+ "ad_p_rate_note": "shares of the day's total auctions",
+ "ad_p_legend": "Bar colour key"
 }
