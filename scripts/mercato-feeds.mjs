@@ -78,6 +78,15 @@ const confronto = {
     generatoIl: oggi,
     metodo: 'scontoPct = 1 − (prezzo €/m² delle nostre aste / mediana OMI residenziale del comune). quotaAsteSuMercatoPct = lotti ATTIVI residenziali in asta ÷ compravendite residenziali annue del comune (quanto pesano le aste sul mercato). tempoAssorbimentoMesi = quota × 12: quanti mesi di vendite servirebbero per smaltire i lotti attualmente in asta, al ritmo del mercato di oggi. Non è un termine OMI né ISTAT: è una nostra misura, e la formula è questa.',
     nota: 'Valori OMI pubblicati solo come statistica derivata (mediana per comune); il dato di zona resta interno.',
+    // 11/11/2026 — DUE POPOLAZIONI, DICHIARATE. Lo sconto nasce dai lotti con superficie
+    // (anche già venduti: servono i €/m²), la quota dai lotti ATTIVI. Non sono la stessa
+    // popolazione: finché non si estrae la superficie anche per gli attivi, va scritto qui.
+    popolazioni: {
+      sconto: 'lotti residenziali CON superficie, anche non più in asta (servono i €/m² per il confronto con OMI)',
+      quota: 'lotti residenziali ATTIVI con asta non ancora svolta (stock reale di oggi)',
+      prezzoMqMercato: 'mediana OMI residenziale del comune, semestre ' + (oc.meta?.semestreCorrente || 'n/d'),
+      allineamento: 'parziale: sconto e quota usano popolazioni diverse. Allineamento completo = estrarre la superficie anche per i lotti attivi.'
+    },
     copertura: { comuni: comuni.length, conPrezzoAste: comuni.filter((x) => x.prezzoMqAste).length, conOmi: comuni.filter((x) => x.prezzoMqMercato).length, conVolumi: comuni.filter((x) => x.ntnRes).length }
   },
   comuni
