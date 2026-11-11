@@ -1,0 +1,44 @@
+name: superfici-attivi
+# 11/11/2026 — la superficie dei lotti ATTIVI: serve a calcolare lo sconto sulla stessa
+# popolazione della quota. La superficie non è nell'API di ricerca né nella descrizione:
+# sta nella perizia allegata, che si scopre solo dal dettaglio del lotto.
+# Questo giro: 200 lotti ogni 30 minuti → i 884 lotti attivi senza superficie si coprono in poche ore.
+on:
+  schedule:
+    - cron: "5,35 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: superfici-attivi
+  cancel-in-progress: false
+jobs:
+  superfici:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: poppler (pdftotext)
+        run: |
+          sudo apt-get update -qq
+          (sudo apt-get install -y -qq poppler-utils) || echo "::warning::apt fallito: se pdftotext manca il job lo dichiara e non stima nulla"
+      - name: Estrai le superfici dalle perizie dei lotti attivi
+        env:
+          SUP_N: "200"
+        run: node scripts/superfici-attivi.mjs
+      - name: Commit della cache
+        run: |
+          git config user.name "CARe Cloud"
+          git config user.email "cloud@careauctions.co"
+          git add feed/superfici-attivi.json
+          git diff --cached --quiet && echo "nessuna variazione" && exit 0
+          git commit -m "superfici: lotti attivi ($(date -u +%FT%TZ))"
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null
+            if git push -q; then exit 0; fi
+            sleep 4
+          done
+          echo "::error::push fallito"; exit 1
