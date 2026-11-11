@@ -61,12 +61,32 @@ jobs:
             if (ok < 6) process.exit(1);
           })();
           JS
+      - name: Rigenera la shell statica (scheletro dell'app)
+        run: |
+          node - <<'JS'
+          const fs = require('fs');
+          (async () => {
+            const r = await fetch('https://care-aste.emergent.host/');
+            if (!r.ok) { console.error('origine non raggiungibile', r.status); process.exit(1); }
+            const h = await r.text();
+            const i = h.indexOf('<head>'), j = h.indexOf('</head>');
+            if (i < 0 || j < 0) { console.error('head non trovato'); process.exit(1); }
+            const head = h.slice(i, j + 7);
+            const shell = '<!DOCTYPE html><html lang="it">' + head +
+              '<body><noscript><p>CARe Auctions · careauctions.co</p><p>Attiva JavaScript per usare il sito.</p></noscript><div id="root"></div></body></html>';
+            if (!/main\.[a-f0-9]{8}\.js/.test(shell)) { console.error('bundle non trovato nella shell'); process.exit(1); }
+            fs.mkdirSync('shell', { recursive: true });
+            fs.writeFileSync('shell/app.html', shell);
+            console.log('shell/app.html', shell.length, 'byte');
+          })();
+          JS
+
       - name: Commit e push
         shell: bash
         run: |
           git config user.name "CARe Cloud"
           git config user.email "cloud@careauctions.co"
-          git add prerender
+          git add prerender shell
           if git diff --cached --quiet; then echo "nessuna variazione"; exit 0; fi
           git commit -m "prerender: pagine pronte rigenerate ($(date -u +%FT%TZ))"
           for i in 1 2 3 4 5; do
