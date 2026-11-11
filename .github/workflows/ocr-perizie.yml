@@ -22,7 +22,7 @@ jobs:
       - name: Strumenti OCR
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y -qq poppler-utils tesseract-ocr tesseract-ocr-ita
+          (sudo apt-get install -y -qq poppler-utils tesseract-ocr tesseract-ocr-ita) || echo "::warning::apt fallito (rete runner): tesseract potrebbe esserci già"
       - name: OCR incrementale
         run: node scripts/ocr-perizie.js
         env:
