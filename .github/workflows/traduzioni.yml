@@ -40,9 +40,18 @@ jobs:
           git add i18n
           if git diff --cached --quiet; then echo "nessuna variazione"; exit 0; fi
           git commit -m "i18n: traduzioni automatiche ($(date -u +%FT%TZ))"
+          # 11/11/2026 — la run dura ~90 minuti: main si muove quasi sempre nel frattempo.
+          # Il vecchio `pull --rebase` andava in conflitto su i18n/*.json (file riscritti
+          # da entrambi i lati) e abortiva: run 43011775488 ha perso tutto il lavoro.
+          # Ora si fa un MERGE con `-X ours`: sui file generati vince la run (le traduzioni
+          # appena fatte), mentre le modifiche degli altri arrivano senza conflitti.
           for i in 1 2 3 4 5; do
-            git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null
-            if git push; then exit 0; fi
-            sleep 4
+            git fetch -q origin main
+            if git merge -q --no-edit -X ours FETCH_HEAD; then
+              if git push -q origin HEAD:main; then echo "push ok (tentativo $i)"; exit 0; fi
+            else
+              git merge --abort 2>/dev/null || true
+            fi
+            sleep 5
           done
-          exit 1
+          echo "::error::push fallito dopo 5 tentativi"; exit 1
