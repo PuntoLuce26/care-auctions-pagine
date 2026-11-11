@@ -1,0 +1,38 @@
+name: residenziale-comune
+# 11/11/2026 — A+B del piano metriche: conta i lotti immobiliari ATTIVI per comune e categoria,
+# e ricava la mappa comune→tribunale (serve ad attribuire gli esiti, che il PVP dà per tribunale).
+# Perché: confronto-mercato.json conta solo i lotti con superficie (3,8%) e la quota aste
+# sul mercato risultava sottostimata. Girando ogni notte il dato resta allineato al PVP.
+on:
+  schedule:
+    - cron: "30 5 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: residenziale-comune
+  cancel-in-progress: false
+jobs:
+  conta:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Conta i lotti attivi per comune
+        run: node scripts/residenziale-comune.js
+      - name: Commit
+        run: |
+          git config user.name "CARe Cloud"
+          git config user.email "cloud@careauctions.co"
+          git add feed/residenziale-comune.json feed/comune-tribunale.json
+          git diff --cached --quiet && echo "nessuna variazione" && exit 0
+          git commit -m "feed: lotti attivi per comune e mappa comune-tribunale ($(date -u +%FT%TZ))"
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null
+            if git push -q; then exit 0; fi
+            sleep 4
+          done
+          echo "::error::push fallito"; exit 1
