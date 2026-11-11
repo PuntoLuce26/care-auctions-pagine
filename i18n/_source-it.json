@@ -4212,5 +4212,20 @@
  "omi_cmp_title": "Confronta due province",
  "omi_cmp_a": "Provincia",
  "omi_cmp_b": "Seconda provincia",
- "omi_cmp_var": "Variazione sem."
+ "omi_cmp_var": "Variazione sem.",
+ "omi_copy": "Copia il link di questa vista",
+ "omi_copied": "Link copiato",
+ "omi_csv": "Scarica CSV ({n} comuni)",
+ "omi_cc_title": "Confronto tra due comuni",
+ "omi_cc_hint": "Scegli un secondo comune nella tabella con «Confronta».",
+ "omi_cc_measure": "Voce",
+ "omi_cc_var": "Variazione vs semestre precedente",
+ "omi_cc_ntn": "NTN {y}",
+ "omi_cc_none": "{c}: l'OMI non pubblica valori residenziali per il semestre {s}.",
+ "omi_cc_remove": "Togli",
+ "omi_cc_remove_aria": "Togli {c} dal confronto",
+ "omi_cc_add": "Confronta",
+ "omi_cc_in": "Nel confronto",
+ "omi_cc_in_aria": "Aggiungi {c} al confronto",
+ "omi_cc_out_aria": "Togli {c} dal confronto"
 }
