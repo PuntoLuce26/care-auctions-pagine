@@ -1,25 +1,137 @@
 {
-  "aggiornato": "2026-11-11T07:45:00Z",
-  "nota": "Tabella dei programmi di affiliazione dell'iShop. stato: attivo | da_attivare | in_arrivo. urlAffiliato e' il link del network; {sub} viene sostituito con il sub-id di tracciamento (care_<id>).",
-  "reti": [
-    { "id": "awin", "nome": "Awin", "sito": "https://www.awin.com/it", "stato": "da_attivare" },
-    { "id": "amazon", "nome": "Amazon Associates", "sito": "https://programma-affiliazione.amazon.it/", "stato": "da_attivare" },
-    { "id": "epn", "nome": "eBay Partner Network", "sito": "https://partnernetwork.ebay.it/", "stato": "da_attivare" },
-    { "id": "admitad", "nome": "Admitad", "sito": "https://www.admitad.com/affiliates/", "stato": "da_attivare" },
-    { "id": "cj", "nome": "CJ Affiliate", "sito": "https://www.cj.com/publisher", "stato": "da_attivare" }
-  ],
-  "programmi": [
-    { "id": "amazon", "marchio": "Amazon.it", "rete": "amazon", "categoria": "casa", "stato": "da_attivare", "commissione": "fino al 12%", "urlAffiliato": "" },
-    { "id": "ebay", "marchio": "eBay.it", "rete": "epn", "categoria": "casa", "stato": "da_attivare", "commissione": "variabile per categoria", "urlAffiliato": "" },
-    { "id": "leroymerlin", "marchio": "Leroy Merlin", "rete": "awin", "categoria": "bricolage", "stato": "da_attivare", "commissione": "da definire all'approvazione", "urlAffiliato": "" },
-    { "id": "mediaworld", "marchio": "MediaWorld", "rete": "awin", "categoria": "elettronica", "stato": "da_attivare", "commissione": "da definire all'approvazione", "urlAffiliato": "" },
-    { "id": "unieuro", "marchio": "Unieuro", "rete": "awin", "categoria": "elettronica", "stato": "da_attivare", "commissione": "da definire all'approvazione", "urlAffiliato": "" },
-    { "id": "euronics", "marchio": "Euronics", "rete": "awin", "categoria": "elettronica", "stato": "da_attivare", "commissione": "da definire all'approvazione", "urlAffiliato": "" },
-    { "id": "zooplus", "marchio": "Zooplus", "rete": "awin", "categoria": "animali", "stato": "da_attivare", "commissione": "da definire all'approvazione", "urlAffiliato": "" },
-    { "id": "decathlon", "marchio": "Decathlon", "rete": "awin", "categoria": "sport", "stato": "da_attivare", "commissione": "da definire all'approvazione", "urlAffiliato": "" },
-    { "id": "manomano", "marchio": "ManoMano", "rete": "manomano", "categoria": "bricolage", "stato": "da_attivare", "commissione": "da definire all'approvazione", "urlAffiliato": "" },
-    { "id": "booking", "marchio": "Booking.com", "rete": "cj", "categoria": "viaggi", "stato": "da_attivare", "commissione": "su prenotazione idonea", "urlAffiliato": "" },
-    { "id": "sorgenia", "marchio": "Sorgenia", "rete": "awin", "categoria": "energia", "stato": "da_attivare", "commissione": "a lead", "urlAffiliato": "" },
-    { "id": "demo", "marchio": "Prova interna", "rete": "demo", "categoria": "prova", "stato": "attivo", "commissione": "-", "urlAffiliato": "https://careauctions.co/affiliazione?da=demo&sub={sub}" }
-  ]
+ "aggiornato": "2026-11-11T07:45:00Z",
+ "nota": "Tabella dei programmi di affiliazione dell'iShop. stato: attivo | da_attivare | in_arrivo. urlAffiliato e' il link del network; {sub} viene sostituito con il sub-id di tracciamento (care_<id>).",
+ "reti": [
+  {
+   "id": "awin",
+   "nome": "Awin",
+   "sito": "https://www.awin.com/it",
+   "stato": "da_attivare"
+  },
+  {
+   "id": "amazon",
+   "nome": "Amazon Associates",
+   "sito": "https://programma-affiliazione.amazon.it/",
+   "stato": "da_attivare"
+  },
+  {
+   "id": "epn",
+   "nome": "eBay Partner Network",
+   "sito": "https://partnernetwork.ebay.it/",
+   "stato": "da_attivare"
+  },
+  {
+   "id": "admitad",
+   "nome": "Admitad",
+   "sito": "https://www.admitad.com/affiliates/",
+   "stato": "da_attivare"
+  },
+  {
+   "id": "cj",
+   "nome": "CJ Affiliate",
+   "sito": "https://www.cj.com/publisher",
+   "stato": "da_attivare"
+  }
+ ],
+ "programmi": [
+  {
+   "id": "amazon",
+   "marchio": "Amazon.it",
+   "rete": "amazon",
+   "categoria": "casa",
+   "stato": "da_attivare",
+   "commissione": "fino al 12%",
+   "urlAffiliato": ""
+  },
+  {
+   "id": "ebay",
+   "marchio": "eBay.it",
+   "rete": "epn",
+   "categoria": "casa",
+   "stato": "da_attivare",
+   "commissione": "variabile per categoria",
+   "urlAffiliato": ""
+  },
+  {
+   "id": "leroymerlin",
+   "marchio": "Leroy Merlin",
+   "rete": "awin",
+   "categoria": "bricolage",
+   "stato": "da_attivare",
+   "commissione": "da definire all'approvazione",
+   "urlAffiliato": ""
+  },
+  {
+   "id": "mediaworld",
+   "marchio": "MediaWorld",
+   "rete": "awin",
+   "categoria": "elettronica",
+   "stato": "da_attivare",
+   "commissione": "da definire all'approvazione",
+   "urlAffiliato": ""
+  },
+  {
+   "id": "unieuro",
+   "marchio": "Unieuro",
+   "rete": "awin",
+   "categoria": "elettronica",
+   "stato": "da_attivare",
+   "commissione": "da definire all'approvazione",
+   "urlAffiliato": ""
+  },
+  {
+   "id": "euronics",
+   "marchio": "Euronics",
+   "rete": "awin",
+   "categoria": "elettronica",
+   "stato": "da_attivare",
+   "commissione": "da definire all'approvazione",
+   "urlAffiliato": ""
+  },
+  {
+   "id": "zooplus",
+   "marchio": "Zooplus",
+   "rete": "awin",
+   "categoria": "animali",
+   "stato": "da_attivare",
+   "commissione": "da definire all'approvazione",
+   "urlAffiliato": ""
+  },
+  {
+   "id": "decathlon",
+   "marchio": "Decathlon",
+   "rete": "awin",
+   "categoria": "sport",
+   "stato": "da_attivare",
+   "commissione": "da definire all'approvazione",
+   "urlAffiliato": ""
+  },
+  {
+   "id": "manomano",
+   "marchio": "ManoMano",
+   "rete": "manomano",
+   "categoria": "bricolage",
+   "stato": "da_attivare",
+   "commissione": "da definire all'approvazione",
+   "urlAffiliato": ""
+  },
+  {
+   "id": "booking",
+   "marchio": "Booking.com",
+   "rete": "cj",
+   "categoria": "viaggi",
+   "stato": "da_attivare",
+   "commissione": "su prenotazione idonea",
+   "urlAffiliato": ""
+  },
+  {
+   "id": "sorgenia",
+   "marchio": "Sorgenia",
+   "rete": "awin",
+   "categoria": "energia",
+   "stato": "da_attivare",
+   "commissione": "a lead",
+   "urlAffiliato": ""
+  }
+ ]
 }
