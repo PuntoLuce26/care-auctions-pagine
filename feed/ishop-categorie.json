@@ -4,14 +4,69 @@
   "nota": "Si mostrano le CATEGORIE, non i marchi: un marchio entra in pagina solo quando l'accordo è attivo (regola creare-attesa).",
   "generatoIl": "2026-11-11T19:00:00.000Z",
   "fotoBase": "https://careauctions.co/img/ishop/",
-  "svelatiSpontaneamente": false
+  "svelatiSpontaneamente": false,
+  "note_en": "English labels are provided so the page never mixes an Italian label with an English sentence."
  },
  "categorie": [
-  { "slug": "casa-arredo", "etichetta": "Casa e arredo", "descrizione": "Tutto ciò che serve dopo l'aggiudicazione: arredo, elettrodomestici, ristrutturazione.", "foto": "casa-arredo.webp", "stato": "in_arrivo", "partner": [] },
-  { "slug": "energia", "etichetta": "Energia e utenze", "descrizione": "Luce e gas per la casa che hai comprato, con un prezzo riservato a chi passa da noi.", "foto": "energia.webp", "stato": "in_arrivo", "partner": [] },
-  { "slug": "assicurazioni", "etichetta": "Assicurazioni", "descrizione": "La casa, l'immobile, la responsabilità: coperture scelte una per una.", "foto": "assicurazioni.webp", "stato": "in_arrivo", "partner": [] },
-  { "slug": "mutui", "etichetta": "Mutui e credito", "descrizione": "Il finanziamento giusto per un'asta: tempi, documenti e tassi spiegati prima.", "foto": "mutui.webp", "stato": "in_arrivo", "partner": [] },
-  { "slug": "viaggi", "etichetta": "Viaggi", "descrizione": "Il viaggio per andare a vedere l'immobile, o per festeggiare l'aggiudicazione.", "foto": "viaggi.webp", "stato": "in_arrivo", "partner": [] },
-  { "slug": "servizi-casa", "etichetta": "Servizi per la casa", "descrizione": "Pulizie, traslochi, manutenzione: chi entra in casa prima e dopo di te.", "foto": "servizi-casa.webp", "stato": "in_arrivo", "partner": [] }
+  {
+   "slug": "casa-arredo",
+   "etichetta": "Casa e arredo",
+   "descrizione": "Tutto ciò che serve dopo l'aggiudicazione: arredo, elettrodomestici, ristrutturazione.",
+   "foto": "casa-arredo.webp",
+   "stato": "in_arrivo",
+   "partner": [],
+   "etichetta_en": "Home and furnishing",
+   "descrizione_en": "Everything you need after the award: furniture, appliances, renovation."
+  },
+  {
+   "slug": "energia",
+   "etichetta": "Energia e utenze",
+   "descrizione": "Luce e gas per la casa che hai comprato, con un prezzo riservato a chi passa da noi.",
+   "foto": "energia.webp",
+   "stato": "in_arrivo",
+   "partner": [],
+   "etichetta_en": "Energy and utilities",
+   "descrizione_en": "Electricity and gas for the home you bought, at a price reserved for our customers."
+  },
+  {
+   "slug": "assicurazioni",
+   "etichetta": "Assicurazioni",
+   "descrizione": "La casa, l'immobile, la responsabilità: coperture scelte una per una.",
+   "foto": "assicurazioni.webp",
+   "stato": "in_arrivo",
+   "partner": [],
+   "etichetta_en": "Insurance",
+   "descrizione_en": "The home, the property, the liability: cover chosen one by one."
+  },
+  {
+   "slug": "mutui",
+   "etichetta": "Mutui e credito",
+   "descrizione": "Il finanziamento giusto per un'asta: tempi, documenti e tassi spiegati prima.",
+   "foto": "mutui.webp",
+   "stato": "in_arrivo",
+   "partner": [],
+   "etichetta_en": "Mortgages and credit",
+   "descrizione_en": "The right financing for an auction: timing, documents and rates explained up front."
+  },
+  {
+   "slug": "viaggi",
+   "etichetta": "Viaggi",
+   "descrizione": "Il viaggio per andare a vedere l'immobile, o per festeggiare l'aggiudicazione.",
+   "foto": "viaggi.webp",
+   "stato": "in_arrivo",
+   "partner": [],
+   "etichetta_en": "Travel",
+   "descrizione_en": "The trip to see the property, or to celebrate the award."
+  },
+  {
+   "slug": "servizi-casa",
+   "etichetta": "Servizi per la casa",
+   "descrizione": "Pulizie, traslochi, manutenzione: chi entra in casa prima e dopo di te.",
+   "foto": "servizi-casa.webp",
+   "stato": "in_arrivo",
+   "partner": [],
+   "etichetta_en": "Home services",
+   "descrizione_en": "Cleaning, moving, maintenance: who comes into your home before and after you."
+  }
  ]
 }
