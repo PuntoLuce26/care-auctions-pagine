@@ -24,6 +24,9 @@ const PROTETTI_FEED = new Set([
   'andamento-esiti.json',       // rilevazione datata: se sparisce, si perde la data
   'andamento-prezzi.json',      // serie storica del prezzo medio
   'andamento-partecipazione.json', // serie storica della partecipazione
+  // 11/11 — iShop: file nostri, non si rigenerano dal PVP
+  'ishop-programmi.json',
+  'ishop-prodotti.json',
   // 9/11 — file generati da ALTRI workflow: il full rebuild li cancellava e restavano 404
   // finché il loro workflow non rigirava (npl.json è stato 404 per ore il 9/11).
   'npl.json',                 // workflow npl-sync
