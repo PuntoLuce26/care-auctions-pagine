@@ -1,21 +1,93 @@
 {
-  "generatedAt": "2026-11-11T07:05:33.482Z",
-  "runId": "42976384908",
-  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42976384908",
+  "generatedAt": "2026-11-11T07:22:21.671Z",
+  "runId": "42978437667",
+  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/42978437667",
   "base": "https://careauctions.co",
-  "durationSec": 197,
+  "durationSec": 192,
   "build": {
     "sito": "main.685e7a77.js",
     "origine": "main.685e7a77.js"
   },
   "summary": {
-    "critical": 0,
-    "high": 0,
+    "critical": 1,
+    "high": 8,
     "medium": 0,
     "low": 3,
-    "total": 3
+    "total": 12
   },
   "issues": [
+    {
+      "severity": "critical",
+      "type": "pagina_vuota",
+      "route": "/idati",
+      "viewport": "desktop",
+      "message": "testo 0 caratteri",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "console_error",
+      "route": "/",
+      "viewport": "desktop",
+      "message": "Failed to load resource: the server responded with a status of 404 ()",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "risorsa_4xx",
+      "route": "/",
+      "viewport": "desktop",
+      "message": "404 https://careauctions.co/cdn-cgi/rum?",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "console_error",
+      "route": "/idati",
+      "viewport": "desktop",
+      "message": "Failed to load resource: the server responded with a status of 404 ()",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "risorsa_4xx",
+      "route": "/idati",
+      "viewport": "desktop",
+      "message": "404 https://careauctions.co/cdn-cgi/rum?",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "console_error",
+      "route": "/aggiudicazioni",
+      "viewport": "desktop",
+      "message": "Failed to load resource: the server responded with a status of 404 ()",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "risorsa_4xx",
+      "route": "/aggiudicazioni",
+      "viewport": "desktop",
+      "message": "404 https://careauctions.co/cdn-cgi/rum?",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "console_error",
+      "route": "/",
+      "viewport": "mobile",
+      "message": "Failed to load resource: the server responded with a status of 404 ()",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "risorsa_4xx",
+      "route": "/",
+      "viewport": "mobile",
+      "message": "404 https://careauctions.co/cdn-cgi/rum?",
+      "suggestion": ""
+    },
     {
       "severity": "low",
       "type": "form_invalid",
@@ -49,7 +121,7 @@
       "text": 21473,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 0,
+      "consoleErrors": 1,
       "formsFilled": 5,
       "clicks": 3
     },
@@ -57,7 +129,7 @@
       "route": "/aste",
       "viewport": "desktop",
       "http": 200,
-      "text": 22331,
+      "text": 9748,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -68,12 +140,12 @@
       "route": "/idati",
       "viewport": "desktop",
       "http": 200,
-      "text": 5581,
+      "text": 0,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 0,
-      "formsFilled": 1,
-      "clicks": 3
+      "consoleErrors": 1,
+      "formsFilled": 0,
+      "clicks": 0
     },
     {
       "route": "/osservatorio",
@@ -93,7 +165,7 @@
       "text": 3600,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 0,
+      "consoleErrors": 1,
       "formsFilled": 1,
       "clicks": 3
     },
@@ -233,7 +305,7 @@
       "route": "/stato",
       "viewport": "desktop",
       "http": 200,
-      "text": 778,
+      "text": 779,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -247,7 +319,7 @@
       "text": 21338,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 0,
+      "consoleErrors": 1,
       "formsFilled": 6,
       "clicks": 3
     },
@@ -402,7 +474,7 @@
       "status": 200,
       "aggiornato": "2026-11-11T06:52:05.196Z",
       "totale": 321304,
-      "ageHours": 0.2
+      "ageHours": 0.5
     },
     "aggiudicazioni": {
       "status": 200,
@@ -419,49 +491,49 @@
         "name": "stato",
         "ok": true,
         "status": 200,
-        "ms": 1757,
+        "ms": 1799,
         "detail": "tabella popolata"
       },
       {
         "name": "feed statistiche",
         "ok": true,
         "status": 200,
-        "ms": 14,
-        "detail": "totale 321304 · 0.2 h fa"
+        "ms": 74,
+        "detail": "totale 321304 · 0.5 h fa"
       },
       {
         "name": "feed aggiudicazioni",
         "ok": true,
         "status": 200,
-        "ms": 207,
+        "ms": 258,
         "detail": "18115 record"
       },
       {
         "name": "origine Emergent",
         "ok": true,
         "status": 200,
-        "ms": 295,
+        "ms": 218,
         "detail": "main.685e7a77.js"
       },
       {
         "name": "chat iCARe",
         "ok": true,
         "status": 200,
-        "ms": 271,
+        "ms": 395,
         "detail": "{\"ok\":true,\"risposta\":\"Ciao, sono **iCARe**, la consulente immobiliare di CARe …"
       },
       {
         "name": "iCAReWall API",
         "ok": true,
         "status": 200,
-        "ms": 114,
+        "ms": 144,
         "detail": "15245 byte"
       },
       {
         "name": "voce TTS",
         "ok": true,
         "status": 200,
-        "ms": 14,
+        "ms": 22,
         "detail": "6482 byte"
       }
     ],
