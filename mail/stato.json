@@ -1,9 +1,20 @@
 {
-  "ultimoControllo": "2026-11-10T23:21:42.823Z",
-  "ultimoQa": "2026-11-10T21:54:02.717Z",
-  "qaEsito": "nessun allarme nuovo",
-  "nuoveMail": 0,
-  "allarmi": [],
+  "ultimoControllo": "2026-11-11T01:44:22.912Z",
+  "ultimoQa": "2026-11-11T01:44:22.912Z",
+  "qaEsito": "QA dispatch HTTP 204",
+  "nuoveMail": 1,
+  "allarmi": [
+    {
+      "id": "1a1c82ab11342645",
+      "data": "2026-11-11T01:13:21.000Z",
+      "da": "mittente riservato · edge",
+      "oggetto": "[oggetto riservato · edge]",
+      "a": "info@puntoluce26.com",
+      "componente": "edge",
+      "gravita": "critica",
+      "link": ""
+    }
+  ],
   "processati": [
     "1a1c636ae4a6b5a9",
     "1a1c634c8df2049e",
@@ -41,6 +52,9 @@
     "1a1c6647e2abb718",
     "1a1c75ff6f423de1",
     "1a1c748c642d0ed9",
-    "1a1c7a01903604e3"
+    "1a1c7a01903604e3",
+    "1a1c845185b8741c",
+    "1a1c82ab11342645",
+    "1a1c81de76859437"
   ]
 }
