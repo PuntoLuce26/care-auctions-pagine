@@ -1,0 +1,33 @@
+{
+ "meta": {
+  "titolo": "Percorso di pagamento",
+  "generatoIl": "2026-11-11T21:05:00.000Z",
+  "nota": "I prezzi ci sono, la strada per pagare no: questo file la definisce. Quando il gateway funziona il pulsante compra, quando non funziona il pulsante NON deve essere morto — mostra l'attesa e prende la mail.",
+  "gateway": "paypal",
+  "stato": "non_disponibile",
+  "motivo": "PayPal risponde invalid_client: le chiavi configurate non autenticano. Vanno rigenerate dal pannello developer di PayPal (Client ID + Secret) e rimesse nei secret del worker icare-ai.",
+  "verificatoIl": "2026-11-11T21:04:00.000Z",
+  "alternativa": "Stripe Payment Link: nessun costo fisso, 1,5% + 0,25 sulle carte UE (meno di PayPal ~3,4% + 0,35). Si può impostare in 20 minuti se preferisci.",
+  "consiglio": "Per gli abbonamenti usare Stripe (più economico e con rinnovo automatico); PayPal resta per la success fee una tantum."
+ },
+ "piani": [
+  { "id": "icare-mensile", "nome": "iCARe", "prezzoEur": 179.00, "periodo": "mese", "azione": "paypal-crea", "descrizione": "Consulenza CARe su un'asta, un mese", "rinnovabile": true },
+  { "id": "icare-unlimited", "nome": "iCARe Unlimited", "prezzoEur": 159.00, "periodo": "mese", "azione": "paypal-crea", "descrizione": "iCARe con canone ridotto e più pratiche", "rinnovabile": true },
+  { "id": "ishop-mensile", "nome": "iShop", "prezzoEur": 129.00, "periodo": "mese", "azione": "paypal-crea", "descrizione": "Vetrina e strumenti per chi compra e rivende", "rinnovabile": true },
+  { "id": "ishop-unlimited", "nome": "iShop Unlimited", "prezzoEur": 99.00, "periodo": "mese", "azione": "paypal-crea", "descrizione": "iShop con canone ridotto", "rinnovabile": true },
+  { "id": "ipartner-mensile", "nome": "iPartner", "prezzoEur": 799.00, "periodo": "mese", "azione": "paypal-crea", "descrizione": "Per agenzie e professionisti", "rinnovabile": true },
+  { "id": "gold-mensile", "nome": "iGold", "prezzoEur": 69.90, "periodo": "mese", "azione": "paypal-crea", "descrizione": "Livello oro mensile", "rinnovabile": true },
+  { "id": "gold-annuale", "nome": "iGold annuale", "prezzoEur": 59.90, "periodo": "mese fatturato annualmente", "azione": "paypal-crea", "descrizione": "Livello oro con sconto annuale", "rinnovabile": true }
+ ],
+ "successFee": {
+  "nonPagabileOnline": true,
+  "motivo": "La success fee si paga DOPO l'aggiudicazione, entro 24 ore: non è un abbonamento e non si incassa prima.",
+  "tier": [
+   { "finoA": 150000, "percentuale": 3.9 },
+   { "finoA": 300000, "percentuale": 2.9 },
+   { "oltreA": 300000, "percentuale": 1.9 }
+  ],
+  "minimoEur": 1900,
+  "entroOre": 24
+ }
+}
