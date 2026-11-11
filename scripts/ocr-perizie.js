@@ -73,6 +73,18 @@ function estraiMq(t) {
       if (!fatti.has(key) && !gia.has(key)) coda.push({ key, id: String(lotto.id), url });
     }
   }
+  // 11/11/2026 — LA CODA HA UNA PRIORITÀ: i lotti ATTIVI residenziali, quelli che servono
+  // per calcolare lo sconto sulla stessa popolazione della quota (job superfici-lotti.mjs).
+  // Senza priorità l'OCR consumava i giri sulle perizie vecchie e i lotti in asta restavano
+  // senza superficie (5 su 889 al primo controllo).
+  try {
+    const prio = JSON.parse(fs.readFileSync('feed/ocr-priorita.json', 'utf8'));
+    const urgenti = new Set((prio.ids || []).map(String));
+    if (urgenti.size) {
+      coda.sort((a, b) => (urgenti.has(b.id) ? 1 : 0) - (urgenti.has(a.id) ? 1 : 0));
+      console.log('priorità: lotti attivi senza superficie =', urgenti.size, '| primi in coda:', coda.slice(0, 3).map(x => x.id).join(','));
+    }
+  } catch (e) { console.log('nessuna lista di priorità (feed/ocr-priorita.json assente)'); }
   console.log('perizie totali:', coda.length + fatti.size, '| da fare:', coda.length, '| giro:', Math.min(N, coda.length));
   const giro = coda.slice(0, N);
   let ok = 0, mqTrovati = 0, errori = 0;
