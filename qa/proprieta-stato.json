@@ -1,35 +1,35 @@
 {
-  "generato": "2026-11-12T23:30:27Z",
+  "generato": "2026-11-12T23:47:03Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "31b4be945f",
-    "a": "4d2ed9a041"
+    "da": "cfa27b2ca3",
+    "a": "879df17de8"
   },
-  "fileEsaminati": 2,
+  "fileEsaminati": 1,
   "sintesi": {
-    "violazioni": 1,
-    "violazioniDaCommit": 1,
-    "commitSenzaAgente": 0,
+    "violazioni": 0,
+    "violazioniDaCommit": 0,
+    "commitSenzaAgente": 1,
     "duplicatiProcessi": 0,
     "esito": "attenzione"
   },
-  "violazioni": [
+  "violazioni": [],
+  "violazioniTroncate": 0,
+  "commitSenzaAgente": [
     {
-      "commit": "4d2ed9a041",
-      "agente": "proprieta-file",
-      "file": ".github/workflows/guardiano-proprieta.README.md",
-      "tipo": "owner",
-      "owner": "workflow-owner",
-      "nota": "unico. Chi tocca un file qui lo valida con Ruby/Psych prima del push e verifica la run CON JOB, non il commit.",
-      "cosaFare": "non scrivere: deposita la richiesta in coda/.github/<timestamp>-proprieta-file.json"
+      "commit": "879df17de8",
+      "oggetto": "ownership: riga quadro-scribe sopra .github/workflows/**",
+      "fileToccati": 1,
+      "esempi": [
+        "ownership.json"
+      ],
+      "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
   ],
-  "violazioniTroncate": 0,
-  "commitSenzaAgente": [],
   "commitSenzaAgenteTroncati": 0,
   "simulazioniIgnorate": [],
   "processi": {
@@ -51,8 +51,8 @@
   "storia": [
     {
       "giorno": "2026-11-12",
-      "violazioni": 1,
-      "senzaAgente": 0,
+      "violazioni": 0,
+      "senzaAgente": 1,
       "duplicati": 0,
       "pulito": false
     }
