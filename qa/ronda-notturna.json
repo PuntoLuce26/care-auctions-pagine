@@ -1,6 +1,6 @@
 {
-  "generato": "2026-11-12T18:13:06Z",
-  "stato": "ok",
+  "generato": "2026-11-12T20:39:55Z",
+  "stato": "attenzione",
   "controlli": [
     {
       "nome": "sito: 20/20 rotte 200",
@@ -12,7 +12,7 @@
       "nome": "feed statistiche",
       "livello": "ok",
       "ok": true,
-      "dettaglio": "321677 lotti · aggiornato 2026-11-12T18:10:41.085Z (2 min fa)"
+      "dettaglio": "321687 lotti · aggiornato 2026-11-12T20:29:26.469Z (11 min fa)"
     },
     {
       "nome": "feed aggiudicazioni",
@@ -24,19 +24,19 @@
       "nome": "QA cloud",
       "livello": "ok",
       "ok": true,
-      "dettaglio": "run 43276575278 · 1 min fa · {\"critical\":0,\"high\":1,\"medium\":0,\"low\":3,\"total\":4}"
+      "dettaglio": "run 43297213797 · 26 min fa · {\"critical\":0,\"high\":1,\"medium\":0,\"low\":3,\"total\":4}"
     },
     {
       "nome": "QA Orchestra",
       "livello": "ok",
       "ok": true,
-      "dettaglio": "OK CON AVVISI · 208 min fa"
+      "dettaglio": "OK CON AVVISI · 355 min fa"
     },
     {
       "nome": "AI Sentinel",
-      "livello": "ok",
-      "ok": true,
-      "dettaglio": "72 min fa · anomalie: [{\"componente\":\"ai\",\"gravita\":\"high\",\"oggetto\":\"qa_stato: HTTP 200 · 0C/1A · 0.7h\"},{\"componente\":\"ai\",\"gravita\":\"high\","
+      "livello": "attenzione",
+      "ok": false,
+      "dettaglio": "219 min fa · anomalie: [{\"componente\":\"ai\",\"gravita\":\"high\",\"oggetto\":\"qa_stato: HTTP 200 · 0C/1A · 0.7h\"},{\"componente\":\"ai\",\"gravita\":\"high\","
     },
     {
       "nome": "careauctions.it (watcher)",
@@ -48,7 +48,7 @@
       "nome": "careauctions.it (DNS DoH)",
       "livello": "ok",
       "ok": true,
-      "dettaglio": "NS hank.ns.cloudflare.com., macy.ns.cloudflare.com. · A 172.67.203.138, 104.21.77.20"
+      "dettaglio": "NS hank.ns.cloudflare.com., macy.ns.cloudflare.com. · A 104.21.77.20, 172.67.203.138"
     },
     {
       "nome": "careauctions.it (301 dal vivo)",
@@ -60,13 +60,13 @@
       "nome": "monitor posta",
       "livello": "ok",
       "ok": true,
-      "dettaglio": "ultimo controllo 2026-11-12T17:07:38.646Z (66 min fa) · allarmi: 0"
+      "dettaglio": "ultimo controllo 2026-11-12T19:39:28.896Z (61 min fa) · allarmi: 0"
     },
     {
       "nome": "build sito = origine",
       "livello": "ok",
       "ok": true,
-      "dettaglio": "sito 108d8717 · origine 108d8717"
+      "dettaglio": "sito f7ed485d · origine f7ed485d"
     },
     {
       "nome": "workflow GitHub",
@@ -78,11 +78,16 @@
       "nome": "sveglie dei monitoraggi",
       "livello": "ok",
       "ok": true,
-      "dettaglio": "mail-qa.yml lanciato · verifica-it.yml lanciato · aggiornamento-mail.yml lanciato"
+      "dettaglio": "mail-qa.yml lanciato · ai-sentinel.yml lanciato · verifica-it.yml lanciato"
     }
   ],
   "problemi": [],
-  "attenzioni": [],
+  "attenzioni": [
+    {
+      "nome": "AI Sentinel",
+      "dettaglio": "219 min fa · anomalie: [{\"componente\":\"ai\",\"gravita\":\"high\",\"oggetto\":\"qa_stato: HTTP 200 · 0C/1A · 0.7h\"},{\"componente\":\"ai\",\"gravita\":\"high\","
+    }
+  ],
   "storico": [
     {
       "t": "2026-11-10T21:31:49Z",
@@ -104,6 +109,11 @@
     {
       "t": "2026-11-12T18:13:06Z",
       "stato": "ok",
+      "problemi": []
+    },
+    {
+      "t": "2026-11-12T20:39:55Z",
+      "stato": "attenzione",
       "problemi": []
     }
   ]
