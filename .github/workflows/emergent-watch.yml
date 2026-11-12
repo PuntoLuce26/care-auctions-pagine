@@ -40,9 +40,12 @@ jobs:
           git add perf/emergent.json
           git diff --cached --quiet && echo "nessuna variazione" && exit 0
           git commit -m "perf: misura emergent ($(date -u +%FT%TZ))"
+          # 12/11/2026 — il passo moriva con exit 128 quando `git rebase --abort` non aveva
+          # niente da abortire (bash -e sul secondo ramo di `||`): misurato sul run 43326522752
+          # dopo che un altro commit aveva cambiato main. Ora il ramo di pulizia non può fallire.
           for i in 1 2 3 4 5; do
-            git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null
-            if git push; then exit 0; fi
+            if git pull -q --rebase --autostash origin main 2>/dev/null && git push; then exit 0; fi
+            git rebase --abort 2>/dev/null || true
             sleep 4
           done
           echo "::error::push fallito"; exit 1
