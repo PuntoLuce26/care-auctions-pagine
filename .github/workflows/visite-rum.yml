@@ -1,0 +1,62 @@
+name: visite-rum
+# Il ponte fra la KV del worker icare-ai e il feed interno feed/visite-rum.json.
+#
+# PERCHÉ ESISTE (misurato il 12/11/2026): la raccolta è viva (KV `visite_rum`, azione `visite-rum`,
+# aggiornata 2026-11-12T00:00:11Z con 24 giorni / 5.000 visite / 5.590 pageview) ma il feed servito
+# era fermo al 2026-11-07T18:43:47Z (22 giorni / 3.040 visite / 3.890 pv). Nessun workflow e nessuno
+# script nominava «visite-rum»: il file era stato scritto una volta a mano (commit 467d2bbc) e non
+# aveva più nessun ponte. Questo workflow è quel ponte, e gira da solo anche a Mac spento.
+#
+# Ogni 6 ore: legge la KV con l'azione `visite-rum` e committa feed/visite-rum.json.
+# Se la KV è più vecchia di ~25 ore lo script forza la raccolta (`visite-rum-aggiorna`) e rilegge:
+# quando la veglia (icare-veglia, soglia 2880 minuti) dispatcha questo workflow, il giro RIPARA.
+# Se la raccolta è muta o incoerente lo script NON scrive e la run diventa rossa: un feed fermo
+# si dichiara, non si stima.
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: visite-rum
+  cancel-in-progress: false
+jobs:
+  pubblica:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Legge la KV del worker e scrive feed/visite-rum.json
+        env:
+          REGIA_KEY: ${{ secrets.REGIA_KEY }}
+        run: node scripts/visite-rum-feed.js
+      - name: Committa il feed
+        run: |
+          git config user.name "CARe Cloud"
+          git config user.email "cloud@careauctions.co"
+          git add feed/visite-rum.json
+          git diff --cached --quiet && echo "nessuna variazione" && exit 0
+          git commit -m "visite-rum: feed dalla KV $(date -u +%FT%TZ)"
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null
+            if git push; then exit 0; fi
+            sleep 4
+          done
+          echo "::error::push fallito"; exit 1
+      - name: Verifica l'artefatto committato
+        run: |
+          node -e '
+          const d = require("./feed/visite-rum.json");
+          const giorni = Object.keys(d.giorni || {});
+          console.log("file:", d.aggiornato);
+          console.log("giorni:", giorni.length, "visite:", d.totale.visite, "pv:", d.totale.pv);
+          const eta = (Date.now() - Date.parse(d.aggiornato)) / 60000;
+          if (!Number.isFinite(eta) || eta < 0) { console.error("::error::aggiornato non valido"); process.exit(1); }
+          if (giorni.length === 0) { console.error("::error::giorni vuoto"); process.exit(1); }
+          if (typeof d.totale.visite !== "number" || typeof d.totale.pv !== "number") { console.error("::error::totale non numerico"); process.exit(1); }
+          console.log("::notice title=visite-rum::artefatto ok");
+          '
