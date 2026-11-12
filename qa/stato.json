@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-12T14:55:39.376Z",
-  "runId": "43241366903",
-  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43241366903",
+  "generatedAt": "2026-11-12T15:01:21.217Z",
+  "runId": "43242446637",
+  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43242446637",
   "base": "https://careauctions.co",
-  "durationSec": 208,
+  "durationSec": 201,
   "build": {
     "sito": "main.542ff606.js",
     "origine": "main.542ff606.js"
@@ -11,9 +11,9 @@
   "summary": {
     "critical": 0,
     "high": 3,
-    "medium": 1,
+    "medium": 0,
     "low": 3,
-    "total": 7
+    "total": 6
   },
   "issues": [
     {
@@ -29,7 +29,7 @@
       "type": "risorsa_4xx",
       "route": "/osservatorio",
       "viewport": "desktop",
-      "message": "404 https://careauctions.co/feed/tribunali.json?t=5981650",
+      "message": "404 https://careauctions.co/feed/tribunali.json?t=5981651",
       "suggestion": ""
     },
     {
@@ -39,14 +39,6 @@
       "viewport": "",
       "message": "controllo home_links fallito",
       "suggestion": ""
-    },
-    {
-      "severity": "medium",
-      "type": "github_run_falliti",
-      "route": "log",
-      "viewport": "",
-      "message": "warm-pages (failure)",
-      "suggestion": "Aprire i run falliti; se sono build Pages cancellate da un commit, non è un guasto (vedi LEZIONI)."
     },
     {
       "severity": "low",
@@ -89,7 +81,7 @@
       "route": "/aste",
       "viewport": "desktop",
       "http": 200,
-      "text": 7885,
+      "text": 7325,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -265,7 +257,7 @@
       "route": "/stato",
       "viewport": "desktop",
       "http": 200,
-      "text": 777,
+      "text": 771,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -347,7 +339,7 @@
         {
           "route": "/",
           "http": 200,
-          "text": 17678,
+          "text": 17676,
           "errors": 0
         },
         {
@@ -365,7 +357,7 @@
         {
           "route": "/",
           "http": 200,
-          "text": 16093,
+          "text": 17324,
           "errors": 0
         },
         {
@@ -434,7 +426,7 @@
       "status": 200,
       "aggiornato": "2026-11-12T14:54:37.228Z",
       "totale": 321612,
-      "ageHours": 0
+      "ageHours": 0.1
     },
     "aggiudicazioni": {
       "status": 200,
@@ -451,64 +443,55 @@
         "name": "stato",
         "ok": true,
         "status": 200,
-        "ms": 2071,
+        "ms": 3326,
         "detail": "tabella popolata"
       },
       {
         "name": "feed statistiche",
         "ok": true,
         "status": 200,
-        "ms": 25,
-        "detail": "totale 321612 · 0 h fa"
+        "ms": 84,
+        "detail": "totale 321612 · 0.1 h fa"
       },
       {
         "name": "feed aggiudicazioni",
         "ok": true,
         "status": 200,
-        "ms": 274,
+        "ms": 539,
         "detail": "18368 record"
       },
       {
         "name": "origine Emergent",
         "ok": true,
         "status": 200,
-        "ms": 415,
+        "ms": 475,
         "detail": "main.542ff606.js"
       },
       {
         "name": "chat iCARe",
         "ok": true,
         "status": 200,
-        "ms": 468,
+        "ms": 438,
         "detail": "{\"ok\":true,\"risposta\":\"Ciao, sono **iCARe**, la consulente immobiliare di CARe …"
       },
       {
         "name": "iCAReWall API",
         "ok": true,
         "status": 200,
-        "ms": 279,
+        "ms": 246,
         "detail": "15587 byte"
       },
       {
         "name": "voce TTS",
         "ok": true,
         "status": 200,
-        "ms": 33,
+        "ms": 582,
         "detail": "6482 byte"
       }
     ],
     "github": {
       "checked": 30,
-      "failedLast24h": [
-        {
-          "name": "warm-pages",
-          "status": "completed",
-          "conclusion": "failure",
-          "created_at": "2026-11-12T14:13:26Z",
-          "url": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43234956796",
-          "head": "4b435f41"
-        }
-      ]
+      "failedLast24h": []
     }
   }
 }
