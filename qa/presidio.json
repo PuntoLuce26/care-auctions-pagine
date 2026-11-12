@@ -1,9 +1,13 @@
 {
- "aggiornato": "2026-11-12T11:39:02.623Z",
+ "aggiornato": "2026-11-12T19:07:10.051Z",
  "rossi": [
-  "esiti-sync#5"
+  "mail-qa#43"
  ],
  "issue": [
+  "[QA] Allarme AI: 2 anomalie",
+  "[QA] Allarme mail: 1 segnalazioni",
+  "[QA] Allarme mail: 1 segnalazioni",
+  "[QA] Allarme mail: 1 segnalazioni",
   "[QA] Allarme AI: 2 anomalie",
   "[QA] Allarme AI: 1 anomalie",
   "[QA] Allarme AI: 1 anomalie",
@@ -15,5 +19,5 @@
   "[QA] Aggiornamento 2026-11-10",
   "[QA] 2026-11-10 16:07 — 0 critici, 2 alti"
  ],
- "ultimaMail": "2026-11-12T11:39:03.259Z"
+ "ultimaMail": "2026-11-12T19:07:10.690Z"
 }
