@@ -1,21 +1,37 @@
 {
-  "generatedAt": "2026-11-12T13:40:25.820Z",
-  "runId": "43228414663",
-  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43228414663",
+  "generatedAt": "2026-11-12T14:55:39.376Z",
+  "runId": "43241366903",
+  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43241366903",
   "base": "https://careauctions.co",
-  "durationSec": 206,
+  "durationSec": 208,
   "build": {
-    "sito": "main.32d7a910.js",
-    "origine": "main.32d7a910.js"
+    "sito": "main.542ff606.js",
+    "origine": "main.542ff606.js"
   },
   "summary": {
     "critical": 0,
-    "high": 1,
-    "medium": 0,
+    "high": 3,
+    "medium": 1,
     "low": 3,
-    "total": 4
+    "total": 7
   },
   "issues": [
+    {
+      "severity": "high",
+      "type": "console_error",
+      "route": "/osservatorio",
+      "viewport": "desktop",
+      "message": "Failed to load resource: the server responded with a status of 404 ()",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "risorsa_4xx",
+      "route": "/osservatorio",
+      "viewport": "desktop",
+      "message": "404 https://careauctions.co/feed/tribunali.json?t=5981650",
+      "suggestion": ""
+    },
     {
       "severity": "high",
       "type": "seo_home_links",
@@ -23,6 +39,14 @@
       "viewport": "",
       "message": "controllo home_links fallito",
       "suggestion": ""
+    },
+    {
+      "severity": "medium",
+      "type": "github_run_falliti",
+      "route": "log",
+      "viewport": "",
+      "message": "warm-pages (failure)",
+      "suggestion": "Aprire i run falliti; se sono build Pages cancellate da un commit, non è un guasto (vedi LEZIONI)."
     },
     {
       "severity": "low",
@@ -54,7 +78,7 @@
       "route": "/",
       "viewport": "desktop",
       "http": 200,
-      "text": 19448,
+      "text": 19486,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -65,7 +89,7 @@
       "route": "/aste",
       "viewport": "desktop",
       "http": 200,
-      "text": 7325,
+      "text": 7885,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -87,10 +111,10 @@
       "route": "/osservatorio",
       "viewport": "desktop",
       "http": 200,
-      "text": 5923,
+      "text": 6025,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 0,
+      "consoleErrors": 1,
       "formsFilled": 1,
       "clicks": 3
     },
@@ -186,7 +210,7 @@
       "route": "/compra-ora",
       "viewport": "desktop",
       "http": 200,
-      "text": 20411,
+      "text": 20405,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -241,7 +265,7 @@
       "route": "/stato",
       "viewport": "desktop",
       "http": 200,
-      "text": 775,
+      "text": 777,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -252,7 +276,7 @@
       "route": "/",
       "viewport": "mobile",
       "http": 200,
-      "text": 19367,
+      "text": 19405,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -263,7 +287,7 @@
       "route": "/aste",
       "viewport": "mobile",
       "http": 200,
-      "text": 20456,
+      "text": 21016,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -323,7 +347,7 @@
         {
           "route": "/",
           "http": 200,
-          "text": 17638,
+          "text": 17678,
           "errors": 0
         },
         {
@@ -388,7 +412,7 @@
       "linkNovita": true,
       "linkAffiliazione": true,
       "linkBuynow": false,
-      "build": "main.32d7a910.js"
+      "build": "main.542ff606.js"
     },
     "botHome": {
       "status": 200,
@@ -402,15 +426,15 @@
     },
     "origin": {
       "status": 200,
-      "build": "main.32d7a910.js"
+      "build": "main.542ff606.js"
     }
   },
   "feed": {
     "statistiche": {
       "status": 200,
-      "aggiornato": "2026-11-12T13:32:37.319Z",
-      "totale": 321584,
-      "ageHours": 0.1
+      "aggiornato": "2026-11-12T14:54:37.228Z",
+      "totale": 321612,
+      "ageHours": 0
     },
     "aggiudicazioni": {
       "status": 200,
@@ -427,55 +451,64 @@
         "name": "stato",
         "ok": true,
         "status": 200,
-        "ms": 2497,
+        "ms": 2071,
         "detail": "tabella popolata"
       },
       {
         "name": "feed statistiche",
         "ok": true,
         "status": 200,
-        "ms": 13,
-        "detail": "totale 321584 · 0.1 h fa"
+        "ms": 25,
+        "detail": "totale 321612 · 0 h fa"
       },
       {
         "name": "feed aggiudicazioni",
         "ok": true,
         "status": 200,
-        "ms": 244,
+        "ms": 274,
         "detail": "18368 record"
       },
       {
         "name": "origine Emergent",
         "ok": true,
         "status": 200,
-        "ms": 231,
-        "detail": "main.32d7a910.js"
+        "ms": 415,
+        "detail": "main.542ff606.js"
       },
       {
         "name": "chat iCARe",
         "ok": true,
         "status": 200,
-        "ms": 396,
+        "ms": 468,
         "detail": "{\"ok\":true,\"risposta\":\"Ciao, sono **iCARe**, la consulente immobiliare di CARe …"
       },
       {
         "name": "iCAReWall API",
         "ok": true,
         "status": 200,
-        "ms": 200,
-        "detail": "15511 byte"
+        "ms": 279,
+        "detail": "15587 byte"
       },
       {
         "name": "voce TTS",
         "ok": true,
         "status": 200,
-        "ms": 8,
+        "ms": 33,
         "detail": "6482 byte"
       }
     ],
     "github": {
       "checked": 30,
-      "failedLast24h": []
+      "failedLast24h": [
+        {
+          "name": "warm-pages",
+          "status": "completed",
+          "conclusion": "failure",
+          "created_at": "2026-11-12T14:13:26Z",
+          "url": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43234956796",
+          "head": "4b435f41"
+        }
+      ]
     }
   }
 }
