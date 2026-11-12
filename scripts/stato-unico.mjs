@@ -84,10 +84,21 @@ else{
   add('worker','cancello (paypal-lunghezze senza chiave)', pz.status===403?'ok':'rosso', String(pz.status), pz.status===403?'protetta':'risponde senza chiave');
 }
 
+/* stato interno da R2 (bucket care-stato): un solo punto, così i lettori non divergono. */
+let _statoMod=null;
+async function statoInterno(percorso){
+  try{
+    if(!_statoMod) _statoMod=await import('./stato-pubblica.mjs');
+    return await _statoMod.leggiStato(percorso);
+  }catch(e){ return {ok:false}; }
+}
 // 6 · FILE DI STATO STORICI (le vecchie sonde, lette in un posto)
 const file=[['qa/stato.json','qa','summary'],['mail/stato.json','mail','allarmi'],['ai/sentinella-stato.json','sentinella','ok'],['perf/stato.json','perf','']];
 for(const [f,sez] of file){
-  const r=await req(`${RAW}${f}?ts=${Date.now()}`);
+  // 12/11/2026 — gli stati interni si leggono da R2 (fonte vera); la raw resta come ripiego.
+  let r=null;
+  try{ const l=await statoInterno(f.replace(/^\//,'')); if(l&&l.ok&&l.json) r={ok:true,status:200,text:l.testo}; }catch(e){}
+  if(!r) r=await req(`${RAW}${f}?ts=${Date.now()}`);
   if(!r.ok){ add(sez,f,'non_verificabile',String(r.status)); continue; }
   let d=null; try{ d=JSON.parse(r.text); }catch{}
   if(!d){ add(sez,f,'non_verificabile','json'); continue; }
