@@ -22,6 +22,18 @@ function ck(id, cond, det, gravita = 'high') {
   checks.push({ id, ok: !!cond, det: String(det || '').slice(0, 280) });
   if (!cond) anomalie.push({ componente: 'ai', gravita, oggetto: id + ': ' + String(det || '').slice(0, 180) });
 }
+/* 12/11/2026 — gli stati interni vivono su R2 (bucket care-stato): si legge da lì. Il ripiego
+ * (raw GitHub / sito) resta per la sessione locale senza token: mai un lettore cieco. */
+let _statoMod = null;
+async function statoInterno(percorso, ripiego) {
+  try {
+    if (!_statoMod) _statoMod = await import('./stato-pubblica.mjs');
+    const l = await _statoMod.leggiStato(percorso);
+    if (l.ok && l.json) return { status: 200, ok: true, json: l.json, text: l.testo, fonte: 'r2' };
+  } catch (e) { /* si ricade sotto */ }
+  const r = await req(ripiego);
+  return { ...r, fonte: 'repo' };
+}
 const post = (body) => req(BASE + '/api/icare', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
 (async () => {
   // 1. iCARe success fee
@@ -56,27 +68,27 @@ const post = (body) => req(BASE + '/api/icare', { method: 'POST', headers: { 'Co
   // 9. QA
   // 11/11/2026 — qa/stato.json ha schema {generatedAt, summary:{critical,high,medium,low,total}, issues}.
   // Prima si cercavano chiavi che NON esistono (ok/critici/sintesi): l'allarme era falso a ogni giro.
-  const qa = await req(BASE + '/qa/stato.json');
+  const qa = await statoInterno('qa/stato.json', BASE + '/qa/stato.json');
   const qj = qa.json || {};
   const sq = qj.summary || {};
   const etaQ = qj.generatedAt ? (Date.now() - Date.parse(qj.generatedAt)) / 3600000 : 999;
   ck('qa_stato', qa.status === 200 && Number(sq.critical) === 0 && Number(sq.high) === 0 && etaQ <= 6,
-     'HTTP ' + qa.status + ' · ' + Number(sq.critical || 0) + 'C/' + Number(sq.high || 0) + 'A · ' + etaQ.toFixed(1) + 'h');
+     (qa.fonte === 'r2' ? 'R2' : 'repo') + ' · ' + Number(sq.critical || 0) + 'C/' + Number(sq.high || 0) + 'A · ' + etaQ.toFixed(1) + 'h');
   // 10. mail-qa
   // 11/11/2026 — lo stato di mail-qa e' INTERNO (puo' contenere oggetti di mail): non si
   // pubblica sul sito, si legge dalla raw che e' la fonte vera. La chiave di tempo e' ultimoControllo.
-  const ml = await req(RAW + '/mail/stato.json');
+  const ml = await statoInterno('mail/stato.json', RAW + '/mail/stato.json');
   const mj = ml.json || {};
   const tM = mj.ultimaEsecuzione || mj.ultimoControllo || mj.aggiornato || mj.data;
   const etaM = tM ? (Date.now() - Date.parse(tM)) / 3600000 : 999;
-  ck('mail_stato', ml.status === 200 && etaM <= 26, 'HTTP ' + ml.status + ' · età ' + etaM.toFixed(1) + 'h');
+  ck('mail_stato', ml.status === 200 && etaM <= 26, (ml.fonte === 'r2' ? 'R2' : 'raw') + ' · età ' + etaM.toFixed(1) + 'h');
   // 11. perf
   // Anche il report di carico e' interno: raw, non sito.
-  const pf = await req(RAW + '/perf/stato.json');
+  const pf = await statoInterno('perf/stato.json', RAW + '/perf/stato.json');
   const pj = pf.json || {};
   const p95 = Number(pj.p95 || (pj.risultati && pj.risultati.p95) || 0);
   const etaP = pj.generato ? (Date.now() - Date.parse(pj.generato)) / 86400000 : 999;
-  ck('perf_stato', pf.status === 200 && (!p95 || p95 < 1000) && etaP <= 8, 'HTTP ' + pf.status + ' · p95 ' + p95 + 'ms · età ' + etaP.toFixed(1) + 'g');
+  ck('perf_stato', pf.status === 200 && (!p95 || p95 < 1000) && etaP <= 8, (pf.fonte === 'r2' ? 'R2' : 'raw') + ' · p95 ' + p95 + 'ms · età ' + etaP.toFixed(1) + 'g');
   // 12. worker AI (con chiave)
   if (KEY) {
     const wa = await req('https://icare-ai.misty-mode-1cbc.workers.dev', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ azione: 'stato-automazioni', chiave: KEY }) });
