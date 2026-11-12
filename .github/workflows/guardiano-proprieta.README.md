@@ -67,6 +67,12 @@ dall'abitudine di scrivere l'intestazione). Il giorno dopo basta una riga:
 Con `GUARDIANO_BLOCCANTE=1` lo script esce con codice 1 se ci sono violazioni o duplicati, e
 la run diventa rossa (il push **non** viene rifiutato da GitHub: il rosso è la firma visibile).
 
+**La condizione è misurabile, non una promessa.** Lo stato porta due campi che la rendono
+tale: `rodaggio.giorniPulitiConsecutivi` (contatore) e `storia[]` (una voce per giorno, con
+violazioni, commit senza agente, duplicati e `pulito: true|false`, ultimi 14 giorni). Quando
+`giorniPulitiConsecutivi` arriva a 7 si aggiunge la riga `GUARDIANO_BLOCCANTE: "1"` e il
+rodaggio è finito. Un giorno rosso azzera il contatore: si riparte da capo, non si media.
+
 ## Cosa fare quando arriva un warning
 
 Non si corregge il file: si deposita la richiesta.
@@ -101,10 +107,16 @@ mai un numero di riga: è così che la collisione diventa impossibile.
 - Nessun altro segreto. Il token del repo serve solo a `contents: write` per pubblicare lo
   stato e a `issues: write` per l'issue `[PROPRIETA]`.
 
-## Il primo giro
+## Il primo giro (misurato, non previsto)
 
 - `qa/proprieta-stato.json` nasce con `schema: proprieta-stato-v1`.
+- Commit `6e0f00b8fc`, run **43328922152**: 1 job, 12 step, verde. `fileEsaminati: 4`,
+  **3 violazioni** (`.github/workflows/guardiano-proprieta.yml`, `.github/workflows/
+  guardiano-proprieta.README.md` → `workflow-owner`; `ownership.json` → `lead`),
+  **0 commit senza agente**, **0 duplicati** `PROCESSI` su **14 processi** letti dal repo
+  privato (`care-workers letto: 1129 righe in veglia/worker.js`).
 - Il primo commit che ha creato mappa e guardiano è **del Lead, per procura** (agente
   `proprieta-file`): il guardiano lo segnala come violazione, ed è la prova che le vede.
   È l'unica violazione «di esordio» ammessa: dalla seconda run in poi ogni violazione è
-  vera e va chiusa (depositando una richiesta, non scrivendo il file).
+  vera e va chiusa (depositando una richiesta, non scrivendo il file). Il contatore
+  `giorniPulitiConsecutivi` parte quindi da 0 e i 7 giorni si contano dal primo giorno pulito.

@@ -296,6 +296,32 @@ function simulazioni(lista, mappa) {
   return { violazioni, ignorati };
 }
 
+// ── la storia: serve a misurare i 7 giorni, non solo l'ultimo push ──────────
+// Lo stato dice com'e' andata QUESTA run. La storia dice da quanti giorni di fila va
+// pulita: senza, la condizione «zero violazioni per 7 giorni consecutivi» non e'
+// verificabile da nessuno, e la regola resta una promessa.
+function aggiornaStoria(percorsoStato, oggi) {
+  const giorno = new Date().toISOString().slice(0, 10);
+  let precedente = [];
+  try {
+    const vecchio = JSON.parse(fs.readFileSync(percorsoStato, 'utf8'));
+    if (Array.isArray(vecchio.storia)) precedente = vecchio.storia;
+  } catch (e) {
+    // primo giro: la storia comincia oggi
+  }
+  const pulito = oggi.violazioni === 0 && oggi.senzaAgente === 0 && oggi.duplicati === 0;
+  const voce = { giorno, violazioni: oggi.violazioni, senzaAgente: oggi.senzaAgente, duplicati: oggi.duplicati, pulito };
+  const storia = precedente.filter((v) => v && v.giorno && v.giorno < giorno);
+  storia.push(voce);
+  const tenuta = storia.slice(-14);
+  let giorni = 0;
+  for (let i = tenuta.length - 1; i >= 0; i--) {
+    if (!tenuta[i].pulito) break;
+    giorni++;
+  }
+  return { giorni: tenuta, giorniPulitiConsecutivi: giorni };
+}
+
 // ── main ────────────────────────────────────────────────────────────────────
 (async function main() {
   const opt = argomenti(process.argv.slice(2));
@@ -312,6 +338,11 @@ function simulazioni(lista, mappa) {
   const processi = await controlloProcessi();
 
   const tutte = violazioni.concat(sim.violazioni);
+  const storia = aggiornaStoria(percorsoStato, {
+    violazioni: tutte.length,
+    senzaAgente: senzaAgente.length,
+    duplicati: processi.duplicati.length,
+  });
   const stato = {
     generato: new Date().toISOString().replace(/\.\d{3}Z$/, 'Z'),
     schema: 'proprieta-stato-v1',
@@ -345,7 +376,10 @@ function simulazioni(lista, mappa) {
       bloccante: process.env.GUARDIANO_BLOCCANTE === '1',
       dal: '2026-11-13',
       passaABloccante: 'quando le violazioni saranno zero per 7 giorni consecutivi',
+      giorniPulitiConsecutivi: storia.giorniPulitiConsecutivi,
+      giorniAlPassaggio: Math.max(0, 7 - storia.giorniPulitiConsecutivi),
     },
+    storia: storia.giorni,
   };
 
   fs.mkdirSync(path.dirname(percorsoStato), { recursive: true });
@@ -361,7 +395,7 @@ function simulazioni(lista, mappa) {
     for (const v of tutte.slice(0, 20)) console.log('   · ' + v.commit + ' ' + v.agente + ' → ' + v.file + ' (owner ' + v.owner + ', ' + v.tipo + ')');
     for (const c of senzaAgente.slice(0, 10)) console.log('   · senza agente: ' + c.commit + ' "' + c.oggetto + '"');
     console.log('  stato scritto in .... ' + opt.stato);
-    console.log('  rodaggio ............ ' + (stato.rodaggio.bloccante ? 'BLOCCANTE' : 'segnala soltanto (non blocca il push)'));
+    console.log('  rodaggio ............ ' + (stato.rodaggio.bloccante ? 'BLOCCANTE' : 'segnala soltanto (non blocca il push)') + ' · giorni puliti di fila ' + stato.rodaggio.giorniPulitiConsecutivi + '/7');
   }
 
   if (stato.rodaggio.bloccante && (tutte.length > 0 || processi.duplicati.length > 0)) process.exit(1);
