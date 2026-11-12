@@ -35,14 +35,10 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: node scripts/stato-pubblica.mjs mail/stato.json --verifica
-      - name: Commit stato mail
-        if: always()
-        shell: bash
-        run: |
-          git config user.name "CARe Cloud"
-          git config user.email "cloud@careauctions.co"
-          git add mail
-          if git diff --cached --quiet; then echo "nessuna variazione"; exit 0; fi
-          git commit -m "mail-qa: stato ($(date -u +%FT%TZ))"
-          for i in 1 2 3 4 5; do git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null; if git push; then exit 0; fi; sleep 4; done
-          exit 1
+      # 12/11/2026 — BASTA COMMIT SU mail/stato.json. Lo stato della posta vive su R2 (bucket
+      # care-stato), caricato dallo step qui sopra: 20 commit/24h su questo file, ognuno capace
+      # di cancellare la build Pages in corso, e i soggetti delle mail finivano in un repo PUBBLICO.
+      # Il file resta nel repo come copia congelata finché non lo si toglie (nessun lettore lo usa
+      # più: veglia, ai-sentinel, ronda, stato-unico, orchestra e la sveglia del QA leggono da R2).
+      - name: Nessun commit dello stato (migrato su R2)
+        run: echo "mail/stato.json pubblicato su R2, nessun commit sul repo pubblico"
