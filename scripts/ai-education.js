@@ -12,7 +12,13 @@ const fetched = async (u, opt) => { try { const r = await fetch(u, { headers: { 
 (async () => {
   const stat = JSON.parse((await (await fetch('https://careauctions.co/feed/statistiche.json', { headers: { 'User-Agent': UA } })).text()) || '{}');
   const indice = JSON.parse((await (await fetch('https://careauctions.co/feed/indice.json', { headers: { 'User-Agent': UA } })).text()) || '{}');
-  const qa = JSON.parse((await (await fetch('https://careauctions.co/qa/stato.json', { headers: { 'User-Agent': UA } })).text()) || '{}');
+  // 12/11/2026 — lo stato del QA vive su R2 (bucket care-stato): fonte vera. Senza token si
+  // ricade sul sito, che serve l'ultima versione pubblicata (congelata dopo la migrazione).
+  let qa = {};
+  try { const _m = await import('./stato-pubblica.mjs'); const _l = await _m.leggiStato('qa/stato.json'); if (_l.ok && _l.json) qa = _l.json; } catch (e) { /* ripiego sotto */ }
+  if (!qa || !Object.keys(qa).length) {
+    try { qa = JSON.parse((await (await fetch('https://careauctions.co/qa/stato.json', { headers: { 'User-Agent': UA } })).text()) || '{}'); } catch (e) { qa = {}; }
+  }
   let sitemapUrls = 0;
   for (let i = 0; i < 5; i++) { const r = await fetched('https://careauctions.co/sitemap-aste-it-' + i + '.xml'); if (r.ok) sitemapUrls += (r.text.match(/<loc>/g) || []).length; }
   const esiti = stat.esiti || {};
