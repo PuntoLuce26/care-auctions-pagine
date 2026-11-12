@@ -21,6 +21,14 @@ jobs:
           node-version: "22"
       - name: Test carico e performance
         run: node scripts/perf-test.js
+      # 12/11/2026 — lo STATO INTERNO esce dal repo pubblico: va su R2 (bucket care-stato),
+      # letto da lì dai consumatori (icare-veglia via binding, script via API). Il commit qui
+      # resta FINCHÉ tutti i lettori non sono migrati: doppia scrittura, nessun lettore cieco.
+      - name: Pubblica lo stato su R2
+        if: always()
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: node scripts/stato-pubblica.mjs perf/stato.json --verifica
       - name: Commit perf
         if: always()
         shell: bash
