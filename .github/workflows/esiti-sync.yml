@@ -51,11 +51,19 @@ jobs:
           git config user.name "CARe Cloud"
           git config user.email "cloud@careauctions.co"
           git add feed
+          # 12/11/2026 — feed/statistiche.json lo scrive il feed-sync (ogni pochi minuti):
+          # committarlo qui produceva CONFLICT + non-fast-forward a ogni giro.
+          git reset -q HEAD feed/statistiche.json 2>/dev/null || true
+          git checkout -- feed/statistiche.json 2>/dev/null || true
           if git diff --cached --quiet; then echo "nessuna variazione"; exit 0; fi
           git commit -m "esiti: prezzi aggiudicazione e indici ($(date -u +%FT%TZ))"
           for i in 1 2 3 4 5; do
-            git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null
-            if git push; then exit 0; fi
-            sleep 4
+            if git pull -q --rebase origin main; then
+              if git push; then exit 0; fi
+            else
+              git rebase --abort 2>/dev/null || true
+            fi
+            sleep 8
           done
+          echo "::error::push esiti non riuscito dopo 5 tentativi"
           exit 1
