@@ -1,0 +1,61 @@
+name: stato-unico
+
+# Un solo stato per tutta la piattaforma: sostituisce la lettura a mano di 8 sonde.
+# Scrive stato/unico.json (macchina) e stato/unico.md (umano). Non fallisce mai:
+# una sonda che non risponde viene dichiarata "non verificabile" dentro il file.
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: stato-unico
+  cancel-in-progress: false
+
+jobs:
+  stato:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Raccogli lo stato
+        env:
+          REGIA_KEY: ${{ secrets.REGIA_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/stato-unico.mjs
+
+      - name: Pubblica lo stato (race-safe)
+        run: |
+          set -e
+          git config user.name "CARe Stato"
+          git config user.email "cloud@careauctions.co"
+          [ -f stato/unico.json ] || { echo "::error::stato/unico.json non prodotto"; exit 1; }
+          git add stato/unico.json stato/unico.md
+          if git diff --cached --quiet; then echo "nessuna variazione"; exit 0; fi
+          git commit -m "stato: unico.json + unico.md ($(date -u +%FT%TZ))"
+          for i in 1 2 3 4 5; do
+            if git pull -q --rebase origin main; then
+              if git push; then echo "pubblicato"; exit 0; fi
+            else
+              git rebase --abort 2>/dev/null || true
+            fi
+            sleep 6
+          done
+          echo "::error::push dello stato non riuscito dopo 5 tentativi"
+          exit 1
+
+      - name: Riepilogo nel job
+        if: always()
+        run: |
+          echo "=== SEMAFORO ==="
+          head -3 stato/unico.md 2>/dev/null || echo "stato non prodotto"
+          echo "=== VOCI NON OK ==="
+          grep -E "^- (X|!|\?)" stato/unico.md 2>/dev/null | head -12 || echo "nessuna"
