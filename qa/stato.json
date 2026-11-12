@@ -1,157 +1,21 @@
 {
-  "generatedAt": "2026-11-12T08:29:24.654Z",
-  "runId": "43182668235",
-  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43182668235",
+  "generatedAt": "2026-11-12T09:20:09.116Z",
+  "runId": "43189799631",
+  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43189799631",
   "base": "https://careauctions.co",
-  "durationSec": 193,
+  "durationSec": 205,
   "build": {
     "sito": "main.d05a3655.js",
     "origine": "main.d05a3655.js"
   },
   "summary": {
     "critical": 0,
-    "high": 18,
+    "high": 1,
     "medium": 0,
     "low": 3,
-    "total": 21
+    "total": 4
   },
   "issues": [
-    {
-      "severity": "high",
-      "type": "console_error",
-      "route": "/",
-      "viewport": "desktop",
-      "message": "Manifest: Line: 1, column: 1, Syntax error.",
-      "suggestion": ""
-    },
-    {
-      "severity": "high",
-      "type": "console_error",
-      "route": "/aste",
-      "viewport": "desktop",
-      "message": "Manifest: Line: 1, column: 1, Syntax error.",
-      "suggestion": ""
-    },
-    {
-      "severity": "high",
-      "type": "console_error",
-      "route": "/idati",
-      "viewport": "desktop",
-      "message": "Manifest: Line: 1, column: 1, Syntax error.",
-      "suggestion": ""
-    },
-    {
-      "severity": "high",
-      "type": "console_error",
-      "route": "/osservatorio",
-      "viewport": "desktop",
-      "message": "Manifest: Line: 1, column: 1, Syntax error.",
-      "suggestion": ""
-    },
-    {
-      "severity": "high",
-      "type": "console_error",
-      "route": "/aggiudicazioni",
-      "viewport": "desktop",
-      "message": "Manifest: Line: 1, column: 1, Syntax error.",
-      "suggestion": ""
-    },
-    {
-      "severity": "high",
-      "type": "console_error",
-      "route": "/ilive",
-      "viewport": "desktop",
-      "message": "Manifest: Line: 1, column: 1, Syntax error.",
-      "suggestion": ""
-    },
-    {
-      "severity": "high",
-      "type": "console_error",
-      "route": "/stampa",
-      "viewport": "desktop",
-      "message": "Manifest: Line: 1, column: 1, Syntax error.",
-      "suggestion": ""
-    },
-    {
-      "severity": "high",
-      "type": "console_error",
-      "route": "/buynow/san-pasquale",
-      "viewport": "desktop",
-      "message": "Manifest: Line: 1, column: 1, Syntax error.",
-      "suggestion": ""
-    },
-    {
-      "severity": "high",
-      "type": "console_error",
-      "route": "/compra-ora",
-      "viewport": "desktop",
-      "message": "Manifest: Line: 1, column: 1, Syntax error.",
-      "suggestion": ""
-    },
-    {
-      "severity": "high",
-      "type": "console_error",
-      "route": "/ishop",
-      "viewport": "desktop",
-      "message": "Manifest: Line: 1, column: 1, Syntax error.",
-      "suggestion": ""
-    },
-    {
-      "severity": "high",
-      "type": "console_error",
-      "route": "/icare",
-      "viewport": "desktop",
-      "message": "Manifest: Line: 1, column: 1, Syntax error.",
-      "suggestion": ""
-    },
-    {
-      "severity": "high",
-      "type": "console_error",
-      "route": "/mappa-prezzi",
-      "viewport": "desktop",
-      "message": "Manifest: Line: 1, column: 1, Syntax error.",
-      "suggestion": ""
-    },
-    {
-      "severity": "high",
-      "type": "console_error",
-      "route": "/",
-      "viewport": "mobile",
-      "message": "Manifest: Line: 1, column: 1, Syntax error.",
-      "suggestion": ""
-    },
-    {
-      "severity": "high",
-      "type": "console_error",
-      "route": "/aste",
-      "viewport": "mobile",
-      "message": "Manifest: Line: 1, column: 1, Syntax error.",
-      "suggestion": ""
-    },
-    {
-      "severity": "high",
-      "type": "console_error",
-      "route": "/buynow/san-pasquale",
-      "viewport": "mobile",
-      "message": "Manifest: Line: 1, column: 1, Syntax error.",
-      "suggestion": ""
-    },
-    {
-      "severity": "high",
-      "type": "console_error",
-      "route": "/compra-ora",
-      "viewport": "mobile",
-      "message": "Manifest: Line: 1, column: 1, Syntax error.",
-      "suggestion": ""
-    },
-    {
-      "severity": "high",
-      "type": "console_error",
-      "route": "/ishop",
-      "viewport": "mobile",
-      "message": "Manifest: Line: 1, column: 1, Syntax error.",
-      "suggestion": ""
-    },
     {
       "severity": "high",
       "type": "seo_home_links",
@@ -190,21 +54,21 @@
       "route": "/",
       "viewport": "desktop",
       "http": 200,
-      "text": 18286,
+      "text": 18238,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 1,
-      "formsFilled": 5,
+      "consoleErrors": 0,
+      "formsFilled": 3,
       "clicks": 3
     },
     {
       "route": "/aste",
       "viewport": "desktop",
       "http": 200,
-      "text": 20468,
+      "text": 5847,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 1,
+      "consoleErrors": 0,
       "formsFilled": 13,
       "clicks": 3
     },
@@ -215,7 +79,7 @@
       "text": 3582,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 1,
+      "consoleErrors": 0,
       "formsFilled": 1,
       "clicks": 3
     },
@@ -223,10 +87,10 @@
       "route": "/osservatorio",
       "viewport": "desktop",
       "http": 200,
-      "text": 5924,
+      "text": 5923,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 1,
+      "consoleErrors": 0,
       "formsFilled": 1,
       "clicks": 3
     },
@@ -237,7 +101,7 @@
       "text": 1601,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 1,
+      "consoleErrors": 0,
       "formsFilled": 1,
       "clicks": 3
     },
@@ -245,7 +109,7 @@
       "route": "/dati",
       "viewport": "desktop",
       "http": 200,
-      "text": 6214,
+      "text": 6216,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -259,7 +123,7 @@
       "text": 2452,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 1,
+      "consoleErrors": 0,
       "formsFilled": 2,
       "clicks": 3
     },
@@ -270,7 +134,7 @@
       "text": 3572,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 1,
+      "consoleErrors": 0,
       "formsFilled": 1,
       "clicks": 3
     },
@@ -314,7 +178,7 @@
       "text": 4508,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 1,
+      "consoleErrors": 0,
       "formsFilled": 3,
       "clicks": 0
     },
@@ -322,10 +186,10 @@
       "route": "/compra-ora",
       "viewport": "desktop",
       "http": 200,
-      "text": 20312,
+      "text": 20313,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 1,
+      "consoleErrors": 0,
       "formsFilled": 13,
       "clicks": 3
     },
@@ -336,7 +200,7 @@
       "text": 1717,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 1,
+      "consoleErrors": 0,
       "formsFilled": 1,
       "clicks": 3
     },
@@ -347,7 +211,7 @@
       "text": 5131,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 1,
+      "consoleErrors": 0,
       "formsFilled": 1,
       "clicks": 3
     },
@@ -369,7 +233,7 @@
       "text": 1533,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 1,
+      "consoleErrors": 0,
       "formsFilled": 1,
       "clicks": 0
     },
@@ -377,7 +241,7 @@
       "route": "/stato",
       "viewport": "desktop",
       "http": 200,
-      "text": 771,
+      "text": 773,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -388,10 +252,10 @@
       "route": "/",
       "viewport": "mobile",
       "http": 200,
-      "text": 19351,
+      "text": 19350,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 1,
+      "consoleErrors": 0,
       "formsFilled": 6,
       "clicks": 2
     },
@@ -399,10 +263,10 @@
       "route": "/aste",
       "viewport": "mobile",
       "http": 200,
-      "text": 20924,
+      "text": 20364,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 1,
+      "consoleErrors": 0,
       "formsFilled": 13,
       "clicks": 2
     },
@@ -424,7 +288,7 @@
       "text": 4405,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 1,
+      "consoleErrors": 0,
       "formsFilled": 3,
       "clicks": 0
     },
@@ -432,10 +296,10 @@
       "route": "/compra-ora",
       "viewport": "mobile",
       "http": 200,
-      "text": 20215,
+      "text": 20216,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 1,
+      "consoleErrors": 0,
       "formsFilled": 13,
       "clicks": 2
     },
@@ -446,7 +310,7 @@
       "text": 1614,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 1,
+      "consoleErrors": 0,
       "formsFilled": 1,
       "clicks": 2
     }
@@ -459,7 +323,7 @@
         {
           "route": "/",
           "http": 200,
-          "text": 17623,
+          "text": 17624,
           "errors": 0
         },
         {
@@ -544,13 +408,13 @@
   "feed": {
     "statistiche": {
       "status": 200,
-      "aggiornato": "2026-11-12T07:43:14.388Z",
-      "totale": 321618,
-      "ageHours": 0.8
+      "aggiornato": "2026-11-12T09:15:30.660Z",
+      "totale": 321461,
+      "ageHours": 0.1
     },
     "aggiudicazioni": {
       "status": 200,
-      "count": 18115
+      "count": 18368
     },
     "stato": {
       "status": 200,
@@ -563,49 +427,49 @@
         "name": "stato",
         "ok": true,
         "status": 200,
-        "ms": 2194,
+        "ms": 2120,
         "detail": "tabella popolata"
       },
       {
         "name": "feed statistiche",
         "ok": true,
         "status": 200,
-        "ms": 39,
-        "detail": "totale 321618 · 0.8 h fa"
+        "ms": 19,
+        "detail": "totale 321461 · 0.1 h fa"
       },
       {
         "name": "feed aggiudicazioni",
         "ok": true,
         "status": 200,
-        "ms": 371,
-        "detail": "18115 record"
+        "ms": 250,
+        "detail": "18368 record"
       },
       {
         "name": "origine Emergent",
         "ok": true,
         "status": 200,
-        "ms": 183,
+        "ms": 224,
         "detail": "main.d05a3655.js"
       },
       {
         "name": "chat iCARe",
         "ok": true,
         "status": 200,
-        "ms": 396,
+        "ms": 335,
         "detail": "{\"ok\":true,\"risposta\":\"Ciao, sono **iCARe**, la consulente immobiliare di CARe …"
       },
       {
         "name": "iCAReWall API",
         "ok": true,
         "status": 200,
-        "ms": 121,
+        "ms": 323,
         "detail": "15481 byte"
       },
       {
         "name": "voce TTS",
         "ok": true,
         "status": 200,
-        "ms": 31,
+        "ms": 13,
         "detail": "6482 byte"
       }
     ],
