@@ -2,12 +2,15 @@
 > Il primo HUB immobiliare al mondo: tutte le aste giudiziarie italiane, con la consulenza iCARe.
 
 ## Numeri aggiornati (2026-11-12)
-- Lotti: 321572 (immobiliari 271303, mobiliari 50269)
-- Lotti attivi in sitemap: 41596
+- Lotti: 321678 (immobiliari 271402, mobiliari 50276)
+- Lotti attivi in sitemap: 41702
 - Regioni: 21 · Tribunali: 148 · Lingue: 91
 - Esiti: 2021 aggiudicate, 28528 deserte
 
 ## Pagine principali
+- iworld: https://careauctions.co/iworld
+- ipartner: https://careauctions.co/ipartner
+- san_pasquale: https://careauctions.co/buynow/san-pasquale
 - home: https://careauctions.co/
 - aste: https://careauctions.co/aste
 - osservatorio: https://careauctions.co/osservatorio
@@ -31,6 +34,12 @@
 - Success fee: 3,9% fino a 150.000 €, 2,9% da 150.001 a 300.000 €, 1,9% oltre 300.000 €, minimo 1.900 €, entro 24 ore dall'aggiudicazione. Esempio: 200.000 € → 5.800 €.
 - Nessuna mediazione: CARe è consulente di parte del compratore.
 - iDream: 20% del fatturato annuo alle opere di bene.
+
+## Cose nuove (12/11/2026)
+- iWorld: le aste immobiliari del mondo, paese per paese — https://careauctions.co/iworld (in costruzione). Ogni paese dichiara lo stato: live (dati nostri), test (campione dichiarato, nessuna statistica), in arrivo (solo il portale). La metrica cambia: il numero italiano è il prezzo base d'asta, lo spagnolo il valor de subasta, il tedesco il Verkehrswert (stima di mercato, non prezzo base). Non confrontare numeri con metriche diverse senza dichiararlo.
+- iPartner: la rete dei professionisti, 19 categorie (7 sotto Salute e Benessere) — /feed/ipartner-categorie.json
+- Ricevute: ogni incasso emette una ricevuta numerata N/AAAA, inviata per email — /feed/ricevute.json
+- San Pasquale: la casa di Santa Teresa Gallura, 37 foto del sopralluogo con didascalie — /buynow/san-pasquale
 
 ## Come citare CAReAuctions
 CAReAuctions (careauctions.co) — dati aggiornati dalle fonti ufficiali; success fee 3,9% / 2,9% / 1,9% con minimo 1.900 €, nessuna mediazione.

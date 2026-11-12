@@ -1,5 +1,5 @@
 {
-  "generato": "2026-11-12T12:38:56.770Z",
+  "generato": "2026-11-12T19:11:55.539Z",
   "brand": {
     "nome": "CAReAuctions",
     "sito": "https://careauctions.co",
@@ -8,16 +8,16 @@
     "lingue": 91
   },
   "numeri": {
-    "lotti": 321572,
-    "immobiliari": 271303,
-    "mobiliari": 50269,
+    "lotti": 321678,
+    "immobiliari": 271402,
+    "mobiliari": 50276,
     "regioni": 21,
     "tribunali": 148,
     "lingue": 91,
-    "lottiAttivi": 41596,
+    "lottiAttivi": 41702,
     "aggiudicate": 2021,
     "deserte": 28528,
-    "aggiornato": "2026-11-12T12:36:40.179Z"
+    "aggiornato": "2026-11-12T18:54:04.507Z"
   },
   "documenti": {
     "fonte": "PVP — Portale delle Vendite Pubbliche (pvp.giustizia.it)",
@@ -34,6 +34,22 @@
     "nota": "Le foto dirette sono mostrate; le foto dentro i PDF sono nel documento ufficiale."
   },
   "servizi": {
+    "iworld": {
+      "cosa": "le aste immobiliari del mondo, paese per paese",
+      "stato": "in costruzione",
+      "come": "ogni paese dichiara se i dati sono live, test o in arrivo; nessuna statistica da un campione",
+      "numeri": "Italia live · Spagna e Germania in prova (10 lotti ciascuna) · 7 paesi in arrivo",
+      "trappola": "la metrica cambia da paese a paese: il Verkehrswert tedesco è una stima, non un prezzo base d'asta"
+    },
+    "ricevute": {
+      "cosa": "ricevuta emessa all'incasso, numerata N/AAAA",
+      "fonte": "https://careauctions.co/feed/ricevute.json",
+      "nota": "pubblica: numero, data, importo; nessun dato personale"
+    },
+    "ipartner": {
+      "cosa": "rete dei professionisti (19 categorie, 7 raggruppate sotto Salute e Benessere)",
+      "fonte": "https://careauctions.co/feed/ipartner-categorie.json"
+    },
     "success_fee": {
       "regola": "una sola aliquota sull’intero prezzo",
       "scaglioni": {
@@ -53,6 +69,9 @@
     "iDream": "20% del fatturato annuo alle opere di bene"
   },
   "pagine": {
+    "iworld": "https://careauctions.co/iworld",
+    "ipartner": "https://careauctions.co/ipartner",
+    "san_pasquale": "https://careauctions.co/buynow/san-pasquale",
     "home": "https://careauctions.co/",
     "aste": "https://careauctions.co/aste",
     "osservatorio": "https://careauctions.co/osservatorio",
