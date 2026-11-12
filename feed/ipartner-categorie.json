@@ -1,11 +1,25 @@
 {
  "meta": {
   "titolo": "iPartner — categorie di professionisti",
-  "nota": "Come per iShop: si mostrano le CATEGORIE, non i nomi. Un professionista entra in pagina solo con l'accordo attivo (regola creare-attesa). Le categorie sanitarie (dentisti, medici di base, pediatri, specialisti, psicologi, veterinari, fisioterapisti) sono il presidio di chi compra e si trasferisce: aprono la porta a tutta la famiglia. La stessa lista alimenta la tendina del form di registrazione: se una professione non è qui, non si scegli.",
+  "nota": "Come per iShop: si mostrano le CATEGORIE, non i nomi. Un professionista entra in pagina solo con l'accordo attivo (regola creare-attesa). Le categorie sanitarie (tutte raggruppate sotto «Salute e Benessere», ognuna resta una voce singola) (dentisti, medici di base, pediatri, specialisti, psicologi, veterinari, fisioterapisti) sono il presidio di chi compra e si trasferisce: aprono la porta a tutta la famiglia. La stessa lista alimenta la tendina del form di registrazione: se una professione non è qui, non si scegli.",
   "generatoIl": "2026-11-12T11:40:00.000Z",
   "ordine": "prima le categorie che l'utente cerca subito dopo l'aggiudicazione, poi le altre",
   "canary": "care-canary-d2c32afaa5d5",
-  "canaryNota": "valore di riconoscimento: se compare su un altro sito, quei dati sono copiati da noi"
+  "canaryNota": "valore di riconoscimento: se compare su un altro sito, quei dati sono copiati da noi",
+  "gruppi": {
+   "Salute e Benessere": {
+    "en": "Health and Wellbeing",
+    "slugs": [
+     "dentisti",
+     "fisioterapisti",
+     "medici-di-base",
+     "pediatri",
+     "psicologi",
+     "specialisti",
+     "veterinari"
+    ]
+   }
+  }
  },
  "categorie": [
   {
@@ -15,7 +29,9 @@
    "descrizione": "Chi compra casa si trasferisce, e cerca un dentista prima ancora del geometra. Una rete di studi dentistici con un prezzo riservato a chi passa da noi.",
    "descrizione_en": "When you buy a home you move, and you look for a dentist before you look for a surveyor. A network of dental practices with a reserved price for our customers.",
    "stato": "in_arrivo",
-   "partner": []
+   "partner": [],
+   "gruppo": "Salute e Benessere",
+   "gruppo_en": "Health and Wellbeing"
   },
   {
    "slug": "medici-di-base",
@@ -24,7 +40,9 @@
    "descrizione": "Cambi casa, cambi comune, e il medico di base va scelto. Chi entra nella rete si prende cura di chi arriva.",
    "descrizione_en": "You change home and town, and you have to choose a family doctor. Those in the network look after who arrives.",
    "stato": "in_arrivo",
-   "partner": []
+   "partner": [],
+   "gruppo": "Salute e Benessere",
+   "gruppo_en": "Health and Wellbeing"
   },
   {
    "slug": "pediatri",
@@ -33,7 +51,9 @@
    "descrizione": "Una casa nuova con bambini piccoli: il pediatra è la prima domanda. La rete risponde prima che tu la faccia.",
    "descrizione_en": "A new home with small children: the paediatrician is the first question. The network answers before you ask.",
    "stato": "in_arrivo",
-   "partner": []
+   "partner": [],
+   "gruppo": "Salute e Benessere",
+   "gruppo_en": "Health and Wellbeing"
   },
   {
    "slug": "specialisti",
@@ -42,7 +62,9 @@
    "descrizione": "Cardiologo, ortopedico, oculista: visite che non aspettano un trasloco. Prenotazione riservata a chi passa da noi.",
    "descrizione_en": "Cardiologist, orthopaedist, ophthalmologist: appointments that do not wait for a move. Booking reserved for our clients.",
    "stato": "in_arrivo",
-   "partner": []
+   "partner": [],
+   "gruppo": "Salute e Benessere",
+   "gruppo_en": "Health and Wellbeing"
   },
   {
    "slug": "psicologi",
@@ -51,7 +73,9 @@
    "descrizione": "Cambiare città è un passaggio, non solo una consegna di chiavi. Uno spazio riservato per parlarne.",
    "descrizione_en": "Changing town is a passage, not just a key handover. A private space to talk about it.",
    "stato": "in_arrivo",
-   "partner": []
+   "partner": [],
+   "gruppo": "Salute e Benessere",
+   "gruppo_en": "Health and Wellbeing"
   },
   {
    "slug": "veterinari",
@@ -60,7 +84,9 @@
    "descrizione": "Il gatto, il cane, il coniglio: in una casa nuova entrano tutti. Una rete di ambulatori nella zona.",
    "descrizione_en": "The cat, the dog, the rabbit: everyone moves into a new home. A network of practices nearby.",
    "stato": "in_arrivo",
-   "partner": []
+   "partner": [],
+   "gruppo": "Salute e Benessere",
+   "gruppo_en": "Health and Wellbeing"
   },
   {
    "slug": "fisioterapisti",
@@ -69,7 +95,9 @@
    "descrizione": "Dopo il trasloco c'è chi ha mal di schiena. E chi ha bisogno di riprendersi. Studi convenzionati.",
    "descrizione_en": "After a move someone has a bad back. Someone needs to recover. Partner practices.",
    "stato": "in_arrivo",
-   "partner": []
+   "partner": [],
+   "gruppo": "Salute e Benessere",
+   "gruppo_en": "Health and Wellbeing"
   },
   {
    "slug": "notai",
