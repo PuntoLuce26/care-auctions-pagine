@@ -30,6 +30,7 @@ jobs:
         env:
           REGIA_KEY: ${{ secrets.REGIA_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: node scripts/stato-unico.mjs
 
       - name: Pubblica lo stato (race-safe)
