@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-12T12:00:43.835Z",
-  "runId": "43213269879",
-  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43213269879",
+  "generatedAt": "2026-11-12T13:40:25.820Z",
+  "runId": "43228414663",
+  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43228414663",
   "base": "https://careauctions.co",
-  "durationSec": 200,
+  "durationSec": 206,
   "build": {
-    "sito": "main.759cc15a.js",
-    "origine": "main.759cc15a.js"
+    "sito": "main.32d7a910.js",
+    "origine": "main.32d7a910.js"
   },
   "summary": {
     "critical": 0,
@@ -65,7 +65,7 @@
       "route": "/aste",
       "viewport": "desktop",
       "http": 200,
-      "text": 20560,
+      "text": 7325,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -186,7 +186,7 @@
       "route": "/compra-ora",
       "viewport": "desktop",
       "http": 200,
-      "text": 20409,
+      "text": 20411,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -241,7 +241,7 @@
       "route": "/stato",
       "viewport": "desktop",
       "http": 200,
-      "text": 781,
+      "text": 775,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -263,7 +263,7 @@
       "route": "/aste",
       "viewport": "mobile",
       "http": 200,
-      "text": 7222,
+      "text": 20456,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -296,7 +296,7 @@
       "route": "/compra-ora",
       "viewport": "mobile",
       "http": 200,
-      "text": 20309,
+      "text": 20308,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -323,7 +323,7 @@
         {
           "route": "/",
           "http": 200,
-          "text": 17640,
+          "text": 17638,
           "errors": 0
         },
         {
@@ -341,7 +341,7 @@
         {
           "route": "/",
           "http": 200,
-          "text": 16077,
+          "text": 16093,
           "errors": 0
         },
         {
@@ -388,7 +388,7 @@
       "linkNovita": true,
       "linkAffiliazione": true,
       "linkBuynow": false,
-      "build": "main.759cc15a.js"
+      "build": "main.32d7a910.js"
     },
     "botHome": {
       "status": 200,
@@ -402,14 +402,14 @@
     },
     "origin": {
       "status": 200,
-      "build": "main.759cc15a.js"
+      "build": "main.32d7a910.js"
     }
   },
   "feed": {
     "statistiche": {
       "status": 200,
-      "aggiornato": "2026-11-12T11:54:37.644Z",
-      "totale": 321563,
+      "aggiornato": "2026-11-12T13:32:37.319Z",
+      "totale": 321584,
       "ageHours": 0.1
     },
     "aggiudicazioni": {
@@ -427,49 +427,49 @@
         "name": "stato",
         "ok": true,
         "status": 200,
-        "ms": 2095,
+        "ms": 2497,
         "detail": "tabella popolata"
       },
       {
         "name": "feed statistiche",
         "ok": true,
         "status": 200,
-        "ms": 28,
-        "detail": "totale 321563 · 0.1 h fa"
+        "ms": 13,
+        "detail": "totale 321584 · 0.1 h fa"
       },
       {
         "name": "feed aggiudicazioni",
         "ok": true,
         "status": 200,
-        "ms": 294,
+        "ms": 244,
         "detail": "18368 record"
       },
       {
         "name": "origine Emergent",
         "ok": true,
         "status": 200,
-        "ms": 439,
-        "detail": "main.759cc15a.js"
+        "ms": 231,
+        "detail": "main.32d7a910.js"
       },
       {
         "name": "chat iCARe",
         "ok": true,
         "status": 200,
-        "ms": 365,
+        "ms": 396,
         "detail": "{\"ok\":true,\"risposta\":\"Ciao, sono **iCARe**, la consulente immobiliare di CARe …"
       },
       {
         "name": "iCAReWall API",
         "ok": true,
         "status": 200,
-        "ms": 464,
+        "ms": 200,
         "detail": "15511 byte"
       },
       {
         "name": "voce TTS",
         "ok": true,
         "status": 200,
-        "ms": 33,
+        "ms": 8,
         "detail": "6482 byte"
       }
     ],
