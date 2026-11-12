@@ -1,21 +1,53 @@
 {
-  "generatedAt": "2026-11-12T20:14:16.114Z",
-  "runId": "43297213797",
-  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43297213797",
+  "generatedAt": "2026-11-12T20:46:01.789Z",
+  "runId": "43302735324",
+  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43302735324",
   "base": "https://careauctions.co",
   "durationSec": 206,
   "build": {
-    "sito": "main.f7ed485d.js",
-    "origine": "main.f7ed485d.js"
+    "sito": "main.aedf2a48.js",
+    "origine": "main.aedf2a48.js"
   },
   "summary": {
-    "critical": 0,
-    "high": 1,
+    "critical": 1,
+    "high": 4,
     "medium": 0,
     "low": 3,
-    "total": 4
+    "total": 8
   },
   "issues": [
+    {
+      "severity": "critical",
+      "type": "pagina_vuota",
+      "route": "/ilive",
+      "viewport": "desktop",
+      "message": "testo 0 caratteri",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "console_error",
+      "route": "/",
+      "viewport": "desktop",
+      "message": "Access to XMLHttpRequest at 'https://care-aste.emergent.host/api/pulse/missions-config?lang=it' from origin 'https://careauctions.co' has been blocked by CORS policy: No 'Access-Control-Allow-Origin'…",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "console_error",
+      "route": "/ilive",
+      "viewport": "desktop",
+      "message": "Failed to load resource: the server responded with a status of 404 ()",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "risorsa_4xx",
+      "route": "/ilive",
+      "viewport": "desktop",
+      "message": "404 https://careauctions.co/static/js/main.f7ed485d.js",
+      "suggestion": ""
+    },
     {
       "severity": "high",
       "type": "seo_home_links",
@@ -54,10 +86,10 @@
       "route": "/",
       "viewport": "desktop",
       "http": 200,
-      "text": 19517,
+      "text": 19041,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 0,
+      "consoleErrors": 10,
       "formsFilled": 5,
       "clicks": 3
     },
@@ -65,7 +97,7 @@
       "route": "/aste",
       "viewport": "desktop",
       "http": 200,
-      "text": 7885,
+      "text": 6304,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -120,12 +152,12 @@
       "route": "/ilive",
       "viewport": "desktop",
       "http": 200,
-      "text": 2452,
+      "text": 0,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 0,
-      "formsFilled": 2,
-      "clicks": 3
+      "consoleErrors": 1,
+      "formsFilled": 0,
+      "clicks": 0
     },
     {
       "route": "/stampa",
@@ -175,7 +207,7 @@
       "route": "/buynow/san-pasquale",
       "viewport": "desktop",
       "http": 200,
-      "text": 5312,
+      "text": 5277,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -186,7 +218,7 @@
       "route": "/compra-ora",
       "viewport": "desktop",
       "http": 200,
-      "text": 20405,
+      "text": 20411,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -241,7 +273,7 @@
       "route": "/stato",
       "viewport": "desktop",
       "http": 200,
-      "text": 774,
+      "text": 779,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -263,7 +295,7 @@
       "route": "/aste",
       "viewport": "mobile",
       "http": 200,
-      "text": 20456,
+      "text": 21016,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -285,7 +317,7 @@
       "route": "/buynow/san-pasquale",
       "viewport": "mobile",
       "http": 200,
-      "text": 5209,
+      "text": 5174,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -329,7 +361,7 @@
         {
           "route": "/buynow/san-pasquale",
           "http": 200,
-          "text": 5312,
+          "text": 5277,
           "errors": 0
         }
       ]
@@ -341,13 +373,13 @@
         {
           "route": "/",
           "http": 200,
-          "text": 8292,
+          "text": 15915,
           "errors": 0
         },
         {
           "route": "/buynow/san-pasquale",
           "http": 200,
-          "text": 5293,
+          "text": 5258,
           "errors": 0
         }
       ]
@@ -388,7 +420,7 @@
       "linkNovita": true,
       "linkAffiliazione": true,
       "linkBuynow": false,
-      "build": "main.f7ed485d.js"
+      "build": "main.aedf2a48.js"
     },
     "botHome": {
       "status": 200,
@@ -402,15 +434,15 @@
     },
     "origin": {
       "status": 200,
-      "build": "main.f7ed485d.js"
+      "build": "main.aedf2a48.js"
     }
   },
   "feed": {
     "statistiche": {
       "status": 200,
-      "aggiornato": "2026-11-12T20:01:54.675Z",
-      "totale": 321684,
-      "ageHours": 0.2
+      "aggiornato": "2026-11-12T20:44:38.088Z",
+      "totale": 321688,
+      "ageHours": 0
     },
     "aggiudicazioni": {
       "status": 200,
@@ -427,49 +459,49 @@
         "name": "stato",
         "ok": true,
         "status": 200,
-        "ms": 2116,
+        "ms": 1911,
         "detail": "tabella popolata"
       },
       {
         "name": "feed statistiche",
         "ok": true,
         "status": 200,
-        "ms": 55,
-        "detail": "totale 321684 · 0.2 h fa"
+        "ms": 25,
+        "detail": "totale 321688 · 0 h fa"
       },
       {
         "name": "feed aggiudicazioni",
         "ok": true,
         "status": 200,
-        "ms": 316,
+        "ms": 286,
         "detail": "18368 record"
       },
       {
         "name": "origine Emergent",
         "ok": true,
         "status": 200,
-        "ms": 230,
-        "detail": "main.f7ed485d.js"
+        "ms": 384,
+        "detail": "main.aedf2a48.js"
       },
       {
         "name": "chat iCARe",
         "ok": true,
         "status": 200,
-        "ms": 401,
+        "ms": 556,
         "detail": "{\"ok\":true,\"risposta\":\"Ciao, sono **iCARe**, la consulente immobiliare di CARe …"
       },
       {
         "name": "iCAReWall API",
         "ok": true,
         "status": 200,
-        "ms": 234,
+        "ms": 208,
         "detail": "15641 byte"
       },
       {
         "name": "voce TTS",
         "ok": true,
         "status": 200,
-        "ms": 58,
+        "ms": 43,
         "detail": "6482 byte"
       }
     ],
