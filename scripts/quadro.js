@@ -138,7 +138,7 @@ const FEED = [['statistiche', 'statistiche.json'], ['confronto', 'confronto-merc
   ['npl', 'npl.json'], ['crediti', 'crediti-fiscali.json'],
   ['sitemapMeta', 'sitemap-meta.json'], ['indexnow', 'indexnow.json'],
   ['perizieOcr', 'perizie-ocr.json'], ['ocrStato', 'ocr-stato.json'],
-  ['omiIndice', 'omi-indice.json'], ['mercatoIndice', 'mercato-indice.json'],
+  ['gsc', 'gsc.json'], ['omiIndice', 'omi-indice.json'], ['mercatoIndice', 'mercato-indice.json'],
   ['asteZone', 'aste-zone.json'], ['residenzialeComune', 'residenziale-comune.json']];
 
 const WF = [['feed-sync', 'feed-sync.yml'], ['verifica-playwright', 'verifica-playwright.yml'],
@@ -424,7 +424,14 @@ function costruisci(d) {
   md.push('');
   md.push(`- **URL nella sitemap**: ${sm ? `${int(sm.totale)} (${int(sm.shard)} pezzi · ${(sm.lingue || []).join(', ')})` : ARRIVO}.`);
   md.push(`- **URL inviati a IndexNow**: ${inz ? `${int(inz.inviati)} il ${txt(inz.giorno)}` : ARRIVO}. Un invio è un fatto misurabile; non dimostra che il motore li abbia presi.`);
-  md.push('- **URL indicizzati da Google**: non verificabile — Search Console non è collegata. Finché non lo è, questa riga resta «non verificabile» e non si sostituisce con una stima.');
+  const gs = d.gsc || null;
+  if (gs && gs.campione) {
+    md.push(`- **URL indicizzati da Google** (Search Console, campione dichiarato di ${int(gs.campione.ispezionate)} pagine): **${int(gs.campione.indicizzate)} indicizzate** · ${int(gs.campione.sconosciute)} sconosciute. Analytics 28 giorni: ${int((gs.analytics || {}).clic || 0)} clic, ${int((gs.analytics || {}).impressioni || 0)} impressioni.`);
+    const nonOk = (gs.campione.dettaglio || []).filter((x) => x.verdetto !== 'PASS').slice(0, 5).map((x) => `${x.pagina} (${(x.stato || '').slice(0, 38)})`).join(' · ');
+    if (nonOk) md.push(`  - Da indicizzare: ${nonOk}`);
+  } else {
+    md.push('- **URL indicizzati da Google**: non verificabile — manca feed/gsc.json (job gsc-sync non ancora girato).');
+  }
   md.push('');
   md.push('## 7. Cosa manca');
   md.push('');
@@ -475,7 +482,7 @@ function costruisci(d) {
   const dossier = {
     adesso, automazioni, omi, config,
     statistiche: feeds.statistiche, indice: feeds.indice, npl: feeds.npl,
-    omiIndice: feeds.omiIndice, mercatoIndice: feeds.mercatoIndice,
+    gsc: feeds.gsc, omiIndice: feeds.omiIndice, mercatoIndice: feeds.mercatoIndice,
     asteZone: feeds.asteZone, residenzialeComune: feeds.residenzialeComune,
     crediti: feeds.crediti, sitemapMeta: feeds.sitemapMeta, indexnow: feeds.indexnow,
     perizieOcr: feeds.perizieOcr, ocrStato: feeds.ocrStato,
