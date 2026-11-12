@@ -1,27 +1,171 @@
 {
-  "generatedAt": "2026-11-12T01:51:48.964Z",
-  "runId": "43136830858",
-  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43136830858",
+  "generatedAt": "2026-11-12T08:29:24.654Z",
+  "runId": "43182668235",
+  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43182668235",
   "base": "https://careauctions.co",
-  "durationSec": 195,
+  "durationSec": 193,
   "build": {
-    "sito": "main.e77c99f5.js",
-    "origine": "main.e77c99f5.js"
+    "sito": "main.d05a3655.js",
+    "origine": "main.d05a3655.js"
   },
   "summary": {
     "critical": 0,
-    "high": 0,
+    "high": 18,
     "medium": 0,
     "low": 3,
-    "total": 3
+    "total": 21
   },
   "issues": [
+    {
+      "severity": "high",
+      "type": "console_error",
+      "route": "/",
+      "viewport": "desktop",
+      "message": "Manifest: Line: 1, column: 1, Syntax error.",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "console_error",
+      "route": "/aste",
+      "viewport": "desktop",
+      "message": "Manifest: Line: 1, column: 1, Syntax error.",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "console_error",
+      "route": "/idati",
+      "viewport": "desktop",
+      "message": "Manifest: Line: 1, column: 1, Syntax error.",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "console_error",
+      "route": "/osservatorio",
+      "viewport": "desktop",
+      "message": "Manifest: Line: 1, column: 1, Syntax error.",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "console_error",
+      "route": "/aggiudicazioni",
+      "viewport": "desktop",
+      "message": "Manifest: Line: 1, column: 1, Syntax error.",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "console_error",
+      "route": "/ilive",
+      "viewport": "desktop",
+      "message": "Manifest: Line: 1, column: 1, Syntax error.",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "console_error",
+      "route": "/stampa",
+      "viewport": "desktop",
+      "message": "Manifest: Line: 1, column: 1, Syntax error.",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "console_error",
+      "route": "/buynow/san-pasquale",
+      "viewport": "desktop",
+      "message": "Manifest: Line: 1, column: 1, Syntax error.",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "console_error",
+      "route": "/compra-ora",
+      "viewport": "desktop",
+      "message": "Manifest: Line: 1, column: 1, Syntax error.",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "console_error",
+      "route": "/ishop",
+      "viewport": "desktop",
+      "message": "Manifest: Line: 1, column: 1, Syntax error.",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "console_error",
+      "route": "/icare",
+      "viewport": "desktop",
+      "message": "Manifest: Line: 1, column: 1, Syntax error.",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "console_error",
+      "route": "/mappa-prezzi",
+      "viewport": "desktop",
+      "message": "Manifest: Line: 1, column: 1, Syntax error.",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "console_error",
+      "route": "/",
+      "viewport": "mobile",
+      "message": "Manifest: Line: 1, column: 1, Syntax error.",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "console_error",
+      "route": "/aste",
+      "viewport": "mobile",
+      "message": "Manifest: Line: 1, column: 1, Syntax error.",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "console_error",
+      "route": "/buynow/san-pasquale",
+      "viewport": "mobile",
+      "message": "Manifest: Line: 1, column: 1, Syntax error.",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "console_error",
+      "route": "/compra-ora",
+      "viewport": "mobile",
+      "message": "Manifest: Line: 1, column: 1, Syntax error.",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "console_error",
+      "route": "/ishop",
+      "viewport": "mobile",
+      "message": "Manifest: Line: 1, column: 1, Syntax error.",
+      "suggestion": ""
+    },
+    {
+      "severity": "high",
+      "type": "seo_home_links",
+      "route": "seo",
+      "viewport": "",
+      "message": "controllo home_links fallito",
+      "suggestion": ""
+    },
     {
       "severity": "low",
       "type": "form_invalid",
       "route": "/buynow/san-pasquale",
       "viewport": "desktop",
-      "message": "campi obbligatori non compilati dal QA (atteso per consenso/date): INPUT, INPUT",
+      "message": "campi obbligatori non compilati dal QA (atteso per consenso/date): INPUT, INPUT, INPUT, INPUT",
       "suggestion": "Verificare che il form sia compilabile e che i campi obbligatori abbiano un messaggio chiaro."
     },
     {
@@ -37,7 +181,7 @@
       "type": "form_invalid",
       "route": "/buynow/san-pasquale",
       "viewport": "mobile",
-      "message": "campi obbligatori non compilati dal QA (atteso per consenso/date): INPUT, INPUT",
+      "message": "campi obbligatori non compilati dal QA (atteso per consenso/date): INPUT, INPUT, INPUT, INPUT",
       "suggestion": "Verificare che il form sia compilabile e che i campi obbligatori abbiano un messaggio chiaro."
     }
   ],
@@ -46,10 +190,10 @@
       "route": "/",
       "viewport": "desktop",
       "http": 200,
-      "text": 20206,
+      "text": 18286,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 0,
+      "consoleErrors": 1,
       "formsFilled": 5,
       "clicks": 3
     },
@@ -57,10 +201,10 @@
       "route": "/aste",
       "viewport": "desktop",
       "http": 200,
-      "text": 9184,
+      "text": 20468,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 0,
+      "consoleErrors": 1,
       "formsFilled": 13,
       "clicks": 3
     },
@@ -68,10 +212,10 @@
       "route": "/idati",
       "viewport": "desktop",
       "http": 200,
-      "text": 5576,
+      "text": 3582,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 0,
+      "consoleErrors": 1,
       "formsFilled": 1,
       "clicks": 3
     },
@@ -79,10 +223,10 @@
       "route": "/osservatorio",
       "viewport": "desktop",
       "http": 200,
-      "text": 5848,
+      "text": 5924,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 0,
+      "consoleErrors": 1,
       "formsFilled": 1,
       "clicks": 3
     },
@@ -90,10 +234,10 @@
       "route": "/aggiudicazioni",
       "viewport": "desktop",
       "http": 200,
-      "text": 3595,
+      "text": 1601,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 0,
+      "consoleErrors": 1,
       "formsFilled": 1,
       "clicks": 3
     },
@@ -112,10 +256,10 @@
       "route": "/ilive",
       "viewport": "desktop",
       "http": 200,
-      "text": 4309,
+      "text": 2452,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 0,
+      "consoleErrors": 1,
       "formsFilled": 2,
       "clicks": 3
     },
@@ -123,10 +267,10 @@
       "route": "/stampa",
       "viewport": "desktop",
       "http": 200,
-      "text": 5429,
+      "text": 3572,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 0,
+      "consoleErrors": 1,
       "formsFilled": 1,
       "clicks": 3
     },
@@ -167,21 +311,21 @@
       "route": "/buynow/san-pasquale",
       "viewport": "desktop",
       "http": 200,
-      "text": 4581,
+      "text": 4508,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 0,
+      "consoleErrors": 1,
       "formsFilled": 3,
-      "clicks": 3
+      "clicks": 0
     },
     {
       "route": "/compra-ora",
       "viewport": "desktop",
       "http": 200,
-      "text": 9083,
+      "text": 20312,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 0,
+      "consoleErrors": 1,
       "formsFilled": 13,
       "clicks": 3
     },
@@ -189,10 +333,10 @@
       "route": "/ishop",
       "viewport": "desktop",
       "http": 200,
-      "text": 3574,
+      "text": 1717,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 0,
+      "consoleErrors": 1,
       "formsFilled": 1,
       "clicks": 3
     },
@@ -200,10 +344,10 @@
       "route": "/icare",
       "viewport": "desktop",
       "http": 200,
-      "text": 6988,
+      "text": 5131,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 0,
+      "consoleErrors": 1,
       "formsFilled": 1,
       "clicks": 3
     },
@@ -222,10 +366,10 @@
       "route": "/mappa-prezzi",
       "viewport": "desktop",
       "http": 200,
-      "text": 3532,
+      "text": 1533,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 0,
+      "consoleErrors": 1,
       "formsFilled": 1,
       "clicks": 0
     },
@@ -233,7 +377,7 @@
       "route": "/stato",
       "viewport": "desktop",
       "http": 200,
-      "text": 777,
+      "text": 771,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -244,23 +388,23 @@
       "route": "/",
       "viewport": "mobile",
       "http": 200,
-      "text": 21315,
+      "text": 19351,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 0,
+      "consoleErrors": 1,
       "formsFilled": 6,
-      "clicks": 3
+      "clicks": 2
     },
     {
       "route": "/aste",
       "viewport": "mobile",
       "http": 200,
-      "text": 22869,
+      "text": 20924,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 0,
+      "consoleErrors": 1,
       "formsFilled": 13,
-      "clicks": 3
+      "clicks": 2
     },
     {
       "route": "/novita",
@@ -277,34 +421,34 @@
       "route": "/buynow/san-pasquale",
       "viewport": "mobile",
       "http": 200,
-      "text": 4566,
+      "text": 4405,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 0,
+      "consoleErrors": 1,
       "formsFilled": 3,
-      "clicks": 3
+      "clicks": 0
     },
     {
       "route": "/compra-ora",
       "viewport": "mobile",
       "http": 200,
-      "text": 22160,
+      "text": 20215,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 0,
+      "consoleErrors": 1,
       "formsFilled": 13,
-      "clicks": 3
+      "clicks": 2
     },
     {
       "route": "/ishop",
       "viewport": "mobile",
       "http": 200,
-      "text": 3559,
+      "text": 1614,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 0,
+      "consoleErrors": 1,
       "formsFilled": 1,
-      "clicks": 3
+      "clicks": 2
     }
   ],
   "smoke": [
@@ -315,13 +459,13 @@
         {
           "route": "/",
           "http": 200,
-          "text": 19637,
+          "text": 17623,
           "errors": 0
         },
         {
           "route": "/buynow/san-pasquale",
           "http": 200,
-          "text": 4581,
+          "text": 4508,
           "errors": 0
         }
       ]
@@ -333,13 +477,13 @@
         {
           "route": "/",
           "http": 200,
-          "text": 18125,
+          "text": 16077,
           "errors": 0
         },
         {
           "route": "/buynow/san-pasquale",
           "http": 200,
-          "text": 4562,
+          "text": 4489,
           "errors": 0
         }
       ]
@@ -379,8 +523,8 @@
       "strip": false,
       "linkNovita": true,
       "linkAffiliazione": true,
-      "linkBuynow": true,
-      "build": "main.e77c99f5.js"
+      "linkBuynow": false,
+      "build": "main.d05a3655.js"
     },
     "botHome": {
       "status": 200,
@@ -394,15 +538,15 @@
     },
     "origin": {
       "status": 200,
-      "build": "main.e77c99f5.js"
+      "build": "main.d05a3655.js"
     }
   },
   "feed": {
     "statistiche": {
       "status": 200,
-      "aggiornato": "2026-11-12T01:38:10.287Z",
-      "totale": 321613,
-      "ageHours": 0.2
+      "aggiornato": "2026-11-12T07:43:14.388Z",
+      "totale": 321618,
+      "ageHours": 0.8
     },
     "aggiudicazioni": {
       "status": 200,
@@ -419,49 +563,49 @@
         "name": "stato",
         "ok": true,
         "status": 200,
-        "ms": 1507,
+        "ms": 2194,
         "detail": "tabella popolata"
       },
       {
         "name": "feed statistiche",
         "ok": true,
         "status": 200,
-        "ms": 29,
-        "detail": "totale 321613 · 0.2 h fa"
+        "ms": 39,
+        "detail": "totale 321618 · 0.8 h fa"
       },
       {
         "name": "feed aggiudicazioni",
         "ok": true,
         "status": 200,
-        "ms": 267,
+        "ms": 371,
         "detail": "18115 record"
       },
       {
         "name": "origine Emergent",
         "ok": true,
         "status": 200,
-        "ms": 217,
-        "detail": "main.e77c99f5.js"
+        "ms": 183,
+        "detail": "main.d05a3655.js"
       },
       {
         "name": "chat iCARe",
         "ok": true,
         "status": 200,
-        "ms": 404,
+        "ms": 396,
         "detail": "{\"ok\":true,\"risposta\":\"Ciao, sono **iCARe**, la consulente immobiliare di CARe …"
       },
       {
         "name": "iCAReWall API",
         "ok": true,
         "status": 200,
-        "ms": 145,
-        "detail": "15521 byte"
+        "ms": 121,
+        "detail": "15481 byte"
       },
       {
         "name": "voce TTS",
         "ok": true,
         "status": 200,
-        "ms": 48,
+        "ms": 31,
         "detail": "6482 byte"
       }
     ],
