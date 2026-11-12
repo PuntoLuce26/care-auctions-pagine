@@ -1,9 +1,9 @@
 {
- "generato": "2026-11-12T23:18:48.159Z",
- "semaforo": "giallo",
+ "generato": "2026-11-12T23:51:08.003Z",
+ "semaforo": "verde",
  "conteggi": {
-  "ok": 23,
-  "giallo": 1,
+  "ok": 24,
+  "giallo": 0,
   "rosso": 0,
   "non_verificabile": 0
  },
@@ -89,28 +89,28 @@
    "sezione": "feed",
    "nome": "statistiche",
    "stato": "ok",
-   "valore": "9 min",
+   "valore": "11 min",
    "dettaglio": "321689 lotti"
   },
   {
    "sezione": "feed",
    "nome": "world",
    "stato": "ok",
-   "valore": "115 min",
+   "valore": "147 min",
    "dettaglio": "33 paesi"
   },
   {
    "sezione": "feed",
    "nome": "ricevute",
    "stato": "ok",
-   "valore": "480 min",
+   "valore": "513 min",
    "dettaglio": "0 ricevute"
   },
   {
    "sezione": "feed",
    "nome": "san-pasquale-foto",
    "stato": "ok",
-   "valore": "353 min",
+   "valore": "385 min",
    "dettaglio": "37 foto"
   },
   {
@@ -123,9 +123,9 @@
   {
    "sezione": "prerender",
    "nome": "snapshot vs vivo",
-   "stato": "giallo",
-   "valore": "main.23df51ef.js / main.0ca21dff.js",
-   "dettaglio": "drift: i crawler ricevono un bundle vecchio"
+   "stato": "ok",
+   "valore": "main.0ca21dff.js / main.0ca21dff.js",
+   "dettaglio": ""
   },
   {
    "sezione": "prerender",
@@ -153,7 +153,7 @@
    "nome": "critici",
    "stato": "ok",
    "valore": "0",
-   "dettaglio": "5 controlli"
+   "dettaglio": "4 controlli"
   },
   {
    "sezione": "mail",
@@ -167,7 +167,7 @@
    "nome": "ok",
    "stato": "ok",
    "valore": "nessuna anomalia vera",
-   "dettaglio": "2 note dichiarate, ignorate"
+   "dettaglio": "1 note dichiarate, ignorate"
   },
   {
    "sezione": "perf",
@@ -180,8 +180,8 @@
    "sezione": "github",
    "nome": "run rossi (2h)",
    "stato": "ok",
-   "valore": "1 isolati",
-   "dettaglio": "emergent-watch (una volta sola: race nota)"
+   "valore": "0 isolati",
+   "dettaglio": ""
   }
  ]
 }

@@ -1,6 +1,6 @@
-# Stato CAReAuctions — GIALLO
+# Stato CAReAuctions — VERDE
 
-> 2026-11-12T23:18:48.159Z · 23 ok · 1 gialli · 0 rossi · 0 non verificabili
+> 2026-11-12T23:51:08.003Z · 24 ok · 0 gialli · 0 rossi · 0 non verificabili
 
 ## rotte
 
@@ -18,10 +18,10 @@
 
 ## feed
 
-- · **statistiche** — 9 min · 321689 lotti
-- · **world** — 115 min · 33 paesi
-- · **ricevute** — 480 min · 0 ricevute
-- · **san-pasquale-foto** — 353 min · 37 foto
+- · **statistiche** — 11 min · 321689 lotti
+- · **world** — 147 min · 33 paesi
+- · **ricevute** — 513 min · 0 ricevute
+- · **san-pasquale-foto** — 385 min · 37 foto
 
 ## build
 
@@ -29,7 +29,7 @@
 
 ## prerender
 
-- ! **snapshot vs vivo** — main.23df51ef.js / main.0ca21dff.js · drift: i crawler ricevono un bundle vecchio
+- · **snapshot vs vivo** — main.0ca21dff.js / main.0ca21dff.js
 - · **bot allineato** — main.0ca21dff.js
 
 ## worker
@@ -39,7 +39,7 @@
 
 ## qa
 
-- · **critici** — 0 · 5 controlli
+- · **critici** — 0 · 4 controlli
 
 ## mail
 
@@ -47,7 +47,7 @@
 
 ## sentinella
 
-- · **ok** — nessuna anomalia vera · 2 note dichiarate, ignorate
+- · **ok** — nessuna anomalia vera · 1 note dichiarate, ignorate
 
 ## perf
 
@@ -55,7 +55,7 @@
 
 ## github
 
-- · **run rossi (2h)** — 1 isolati · emergent-watch (una volta sola: race nota)
+- · **run rossi (2h)** — 0 isolati
 
 
 _Generato da scripts/stato-unico.mjs. Un solo stato, un solo posto: se una sonda non risponde la dichiara non verificabile, mai rotta._
