@@ -1,0 +1,67 @@
+{
+  "generato": "2026-11-12T23:27:32Z",
+  "schema": "proprieta-stato-v1",
+  "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
+  "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
+  "repo": "PuntoLuce26/care-auctions-pagine",
+  "commit": {
+    "esaminati": 1,
+    "da": "7d937e00c1",
+    "a": "6e0f00b8fc"
+  },
+  "fileEsaminati": 4,
+  "sintesi": {
+    "violazioni": 3,
+    "violazioniDaCommit": 3,
+    "commitSenzaAgente": 0,
+    "duplicatiProcessi": 0,
+    "esito": "attenzione"
+  },
+  "violazioni": [
+    {
+      "commit": "6e0f00b8fc",
+      "agente": "proprieta-file",
+      "file": ".github/workflows/guardiano-proprieta.README.md",
+      "tipo": "owner",
+      "owner": "workflow-owner",
+      "nota": "unico. Chi tocca un file qui lo valida con Ruby/Psych prima del push e verifica la run CON JOB, non il commit.",
+      "cosaFare": "non scrivere: deposita la richiesta in coda/.github/<timestamp>-proprieta-file.json"
+    },
+    {
+      "commit": "6e0f00b8fc",
+      "agente": "proprieta-file",
+      "file": ".github/workflows/guardiano-proprieta.yml",
+      "tipo": "owner",
+      "owner": "workflow-owner",
+      "nota": "unico. Chi tocca un file qui lo valida con Ruby/Psych prima del push e verifica la run CON JOB, non il commit.",
+      "cosaFare": "non scrivere: deposita la richiesta in coda/.github/<timestamp>-proprieta-file.json"
+    },
+    {
+      "commit": "6e0f00b8fc",
+      "agente": "proprieta-file",
+      "file": "ownership.json",
+      "tipo": "owner",
+      "owner": "lead",
+      "nota": "la mappa la cambia il Lead, non chi vuole scrivere un file.",
+      "cosaFare": "non scrivere: deposita la richiesta in coda/ownership.json/<timestamp>-proprieta-file.json"
+    }
+  ],
+  "violazioniTroncate": 0,
+  "commitSenzaAgente": [],
+  "commitSenzaAgenteTroncati": 0,
+  "simulazioniIgnorate": [],
+  "processi": {
+    "file": "care-workers/veglia/worker.js (repo privato PuntoLuce26/care-workers)",
+    "verificabile": true,
+    "fonte": "file locale /tmp/care-workers/veglia/worker.js",
+    "motivo": null,
+    "nota": null,
+    "totaleProcessi": 14,
+    "duplicati": []
+  },
+  "rodaggio": {
+    "bloccante": false,
+    "dal": "2026-11-13",
+    "passaABloccante": "quando le violazioni saranno zero per 7 giorni consecutivi"
+  }
+}
