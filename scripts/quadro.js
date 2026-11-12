@@ -138,7 +138,7 @@ const FEED = [['statistiche', 'statistiche.json'], ['confronto', 'confronto-merc
   ['npl', 'npl.json'], ['crediti', 'crediti-fiscali.json'],
   ['sitemapMeta', 'sitemap-meta.json'], ['indexnow', 'indexnow.json'],
   ['perizieOcr', 'perizie-ocr.json'], ['ocrStato', 'ocr-stato.json'],
-  ['gsc', 'gsc.json'], ['omiIndice', 'omi-indice.json'], ['mercatoIndice', 'mercato-indice.json'],
+  ['gsc', 'gsc.json'], ['bing', 'bing.json'], ['omiIndice', 'omi-indice.json'], ['mercatoIndice', 'mercato-indice.json'],
   ['asteZone', 'aste-zone.json'], ['residenzialeComune', 'residenziale-comune.json']];
 
 const WF = [['feed-sync', 'feed-sync.yml'], ['verifica-playwright', 'verifica-playwright.yml'],
@@ -429,6 +429,12 @@ function costruisci(d) {
     md.push(`- **URL indicizzati da Google** (Search Console, campione dichiarato di ${int(gs.campione.ispezionate)} pagine): **${int(gs.campione.indicizzate)} indicizzate** · ${int(gs.campione.sconosciute)} sconosciute. Analytics 28 giorni: ${int((gs.analytics || {}).clic || 0)} clic, ${int((gs.analytics || {}).impressioni || 0)} impressioni.`);
     const nonOk = (gs.campione.dettaglio || []).filter((x) => x.verdetto !== 'PASS').slice(0, 5).map((x) => `${x.pagina} (${(x.stato || '').slice(0, 38)})`).join(' · ');
     if (nonOk) md.push(`  - Da indicizzare: ${nonOk}`);
+
+    const bg = d.bing || null;
+    if (bg && bg.scansione) {
+      const indexed = (bg.url || []).filter((x) => x.indicizzata === true).length;
+      md.push(`  - **Bing**: ${int(indexed)}/${int((bg.url || []).length)} pagine chiave indicizzate · ${int(bg.scansione.pagineScansionate)} scansionate e ${int(bg.scansione.errori)} errori negli ultimi ${int(bg.scansione.giorni)} giorni · ${int((bg.traffico || {}).clic || 0)} clic.`);
+    }
   } else {
     md.push('- **URL indicizzati da Google**: non verificabile — manca feed/gsc.json (job gsc-sync non ancora girato).');
   }
@@ -482,7 +488,7 @@ function costruisci(d) {
   const dossier = {
     adesso, automazioni, omi, config,
     statistiche: feeds.statistiche, indice: feeds.indice, npl: feeds.npl,
-    gsc: feeds.gsc, omiIndice: feeds.omiIndice, mercatoIndice: feeds.mercatoIndice,
+    gsc: feeds.gsc, bing: feeds.bing, omiIndice: feeds.omiIndice, mercatoIndice: feeds.mercatoIndice,
     asteZone: feeds.asteZone, residenzialeComune: feeds.residenzialeComune,
     crediti: feeds.crediti, sitemapMeta: feeds.sitemapMeta, indexnow: feeds.indexnow,
     perizieOcr: feeds.perizieOcr, ocrStato: feeds.ocrStato,
