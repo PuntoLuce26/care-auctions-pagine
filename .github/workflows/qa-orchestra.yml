@@ -28,6 +28,7 @@ jobs:
       - name: Interpella tutti i software
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: node scripts/qa-orchestra.js
       - name: Riepilogo nel run
         if: always()
