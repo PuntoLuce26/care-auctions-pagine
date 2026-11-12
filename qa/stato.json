@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-12T10:21:29.945Z",
-  "runId": "43198873841",
-  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43198873841",
+  "generatedAt": "2026-11-12T12:00:43.835Z",
+  "runId": "43213269879",
+  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43213269879",
   "base": "https://careauctions.co",
-  "durationSec": 203,
+  "durationSec": 200,
   "build": {
-    "sito": "main.d05a3655.js",
-    "origine": "main.d05a3655.js"
+    "sito": "main.759cc15a.js",
+    "origine": "main.759cc15a.js"
   },
   "summary": {
     "critical": 0,
@@ -54,7 +54,7 @@
       "route": "/",
       "viewport": "desktop",
       "http": 200,
-      "text": 19432,
+      "text": 19448,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -87,7 +87,7 @@
       "route": "/osservatorio",
       "viewport": "desktop",
       "http": 200,
-      "text": 3990,
+      "text": 5923,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -186,7 +186,7 @@
       "route": "/compra-ora",
       "viewport": "desktop",
       "http": 200,
-      "text": 20406,
+      "text": 20409,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -241,7 +241,7 @@
       "route": "/stato",
       "viewport": "desktop",
       "http": 200,
-      "text": 778,
+      "text": 781,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -252,7 +252,7 @@
       "route": "/",
       "viewport": "mobile",
       "http": 200,
-      "text": 19350,
+      "text": 19367,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -263,7 +263,7 @@
       "route": "/aste",
       "viewport": "mobile",
       "http": 200,
-      "text": 20457,
+      "text": 7222,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -323,7 +323,7 @@
         {
           "route": "/",
           "http": 200,
-          "text": 17623,
+          "text": 17640,
           "errors": 0
         },
         {
@@ -388,7 +388,7 @@
       "linkNovita": true,
       "linkAffiliazione": true,
       "linkBuynow": false,
-      "build": "main.d05a3655.js"
+      "build": "main.759cc15a.js"
     },
     "botHome": {
       "status": 200,
@@ -402,14 +402,14 @@
     },
     "origin": {
       "status": 200,
-      "build": "main.d05a3655.js"
+      "build": "main.759cc15a.js"
     }
   },
   "feed": {
     "statistiche": {
       "status": 200,
-      "aggiornato": "2026-11-12T10:15:31.946Z",
-      "totale": 321491,
+      "aggiornato": "2026-11-12T11:54:37.644Z",
+      "totale": 321563,
       "ageHours": 0.1
     },
     "aggiudicazioni": {
@@ -427,49 +427,49 @@
         "name": "stato",
         "ok": true,
         "status": 200,
-        "ms": 1772,
+        "ms": 2095,
         "detail": "tabella popolata"
       },
       {
         "name": "feed statistiche",
         "ok": true,
         "status": 200,
-        "ms": 24,
-        "detail": "totale 321491 · 0.1 h fa"
+        "ms": 28,
+        "detail": "totale 321563 · 0.1 h fa"
       },
       {
         "name": "feed aggiudicazioni",
         "ok": true,
         "status": 200,
-        "ms": 243,
+        "ms": 294,
         "detail": "18368 record"
       },
       {
         "name": "origine Emergent",
         "ok": true,
         "status": 200,
-        "ms": 399,
-        "detail": "main.d05a3655.js"
+        "ms": 439,
+        "detail": "main.759cc15a.js"
       },
       {
         "name": "chat iCARe",
         "ok": true,
         "status": 200,
-        "ms": 306,
+        "ms": 365,
         "detail": "{\"ok\":true,\"risposta\":\"Ciao, sono **iCARe**, la consulente immobiliare di CARe …"
       },
       {
         "name": "iCAReWall API",
         "ok": true,
         "status": 200,
-        "ms": 266,
-        "detail": "15481 byte"
+        "ms": 464,
+        "detail": "15511 byte"
       },
       {
         "name": "voce TTS",
         "ok": true,
         "status": 200,
-        "ms": 12,
+        "ms": 33,
         "detail": "6482 byte"
       }
     ],
