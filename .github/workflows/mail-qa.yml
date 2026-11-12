@@ -27,6 +27,14 @@ jobs:
           GMAIL_TOKEN: ${{ secrets.GMAIL_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/mail-qa.js
+      # 12/11/2026 — lo STATO INTERNO esce dal repo pubblico: va su R2 (bucket care-stato),
+      # letto da lì dai consumatori (icare-veglia via binding, script via API). Il commit qui
+      # resta FINCHÉ tutti i lettori non sono migrati: doppia scrittura, nessun lettore cieco.
+      - name: Pubblica lo stato su R2
+        if: always()
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: node scripts/stato-pubblica.mjs mail/stato.json --verifica
       - name: Commit stato mail
         if: always()
         shell: bash
