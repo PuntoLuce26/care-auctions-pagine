@@ -1,0 +1,240 @@
+{
+ "titolo": "iWorld — le aste immobiliari nel mondo",
+ "aggiornato": "2026-11-12T16:42:38Z",
+ "nota": "Un paese entra con i numeri solo quando li abbiamo letti dalla fonte. Fino ad allora la scheda esiste e dichiara «in arrivo»: si mostra la categoria, non il nome (regola creare-attesa). Nessun numero senza fonte e data di rilevazione.",
+ "regole": {
+  "stati": [
+   "live",
+   "test",
+   "in_arrivo"
+  ],
+  "significato": {
+   "live": "dati nostri, letti dalla fonte primaria",
+   "test": "campione di prova, non copertura",
+   "in_arrivo": "portale individuato, numeri non ancora raccolti"
+  },
+  "statistiche": "prezzoBaseMedio, offertaMinimaMedia, stimaMedia, scartoMedio sono null finché non esiste una copertura sufficiente: un campione di test non produce statistiche pubbliche"
+ },
+ "paesi": [
+  {
+   "slug": "italia",
+   "nome": "Italia",
+   "nome_en": "Italy",
+   "iso": "IT",
+   "regione": "Europa",
+   "portale": "Portale delle Vendite Pubbliche",
+   "portale_url": "https://pvp.giustizia.it",
+   "stato": "live",
+   "copertura": {
+    "lotti": 321646,
+    "fonte": "PVP — Ministero della Giustizia",
+    "rilevazione": "2026-11-12T16:42:38Z"
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "Fonte primaria letta dal nostro motore: nessun intermediario."
+  },
+  {
+   "slug": "spagna",
+   "nome": "Spagna",
+   "nome_en": "Spain",
+   "iso": "ES",
+   "regione": "Europa",
+   "portale": "Subastas BOE",
+   "portale_url": "https://subastas.boe.es",
+   "stato": "test",
+   "copertura": {
+    "lotti": 10,
+    "fonte": "BOE, campione di 10 aste (Madrid, immobiliare, live)",
+    "rilevazione": "2026-11-12"
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "Test riuscito: schema identico al PVP italiano (base d'asta, minima, stima, date, autorità, link diretto). Copertura completa da costruire."
+  },
+  {
+   "slug": "germania",
+   "nome": "Germania",
+   "nome_en": "Germany",
+   "iso": "DE",
+   "regione": "Europa",
+   "portale": "ZVG-Portal",
+   "portale_url": "https://www.zvg-portal.de",
+   "stato": "in_arrivo",
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "Actor disponibile e maturo (1.063 run). Test da 0,02 USD, non ancora eseguito."
+  },
+  {
+   "slug": "portogallo",
+   "nome": "Portogallo",
+   "nome_en": "Portugal",
+   "iso": "PT",
+   "regione": "Europa",
+   "portale": "e-Leilões",
+   "portale_url": "https://www.e-leiloes.pt",
+   "stato": "in_arrivo",
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "Due test a vuoto (0 righe): da capire se il mercato era fermo o serve un input diverso."
+  },
+  {
+   "slug": "francia",
+   "nome": "Francia",
+   "nome_en": "France",
+   "iso": "FR",
+   "regione": "Europa",
+   "portale": "Ventes aux enchères judiciaires",
+   "portale_url": "https://www.licitor.com",
+   "stato": "in_arrivo",
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "Actor disponibile; test da eseguire. In Francia esiste anche DVF per i valori di mercato."
+  },
+  {
+   "slug": "austria",
+   "nome": "Austria",
+   "nome_en": "Austria",
+   "iso": "AT",
+   "regione": "Europa",
+   "portale": "Edikte — Justiz",
+   "portale_url": "https://edikte.justiz.gv.at",
+   "stato": "in_arrivo",
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "Nessun actor Apify: si parte dal portale pubblico, direttamente."
+  },
+  {
+   "slug": "regno-unito",
+   "nome": "Regno Unito",
+   "nome_en": "United Kingdom",
+   "iso": "GB",
+   "regione": "Europa",
+   "portale": "HM Land Registry",
+   "portale_url": "https://www.gov.uk/government/organisations/land-registry",
+   "stato": "in_arrivo",
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "Unico paese con open data e API pubblica (Price Paid Data): il più facile da portare a dato nostro."
+  },
+  {
+   "slug": "giappone",
+   "nome": "Giappone",
+   "nome_en": "Japan",
+   "iso": "JP",
+   "regione": "Asia",
+   "portale": "BIT — Keibai",
+   "portale_url": "https://www.bit.sikkou.jp",
+   "stato": "in_arrivo",
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "Nessun actor Apify: si parte dal portale pubblico, direttamente."
+  },
+  {
+   "slug": "cina",
+   "nome": "Cina",
+   "nome_en": "China",
+   "iso": "CN",
+   "regione": "Asia",
+   "portale": "Taobao Judicial Auctions",
+   "portale_url": "https://sf.taobao.com",
+   "stato": "in_arrivo",
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "Mercato enorme ma ecosistema chiuso: da valutare con attenzione legale prima di toccarlo."
+  },
+  {
+   "slug": "australia",
+   "nome": "Australia",
+   "nome_en": "Australia",
+   "iso": "AU",
+   "regione": "Oceania",
+   "portale": "NSW auctions",
+   "portale_url": "https://www.auctions.nsw.gov.au",
+   "stato": "in_arrivo",
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "Open data sui valori di mercato (NSW): utile per lo sconto reale."
+  }
+ ]
+}
