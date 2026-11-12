@@ -1,0 +1,180 @@
+{
+  "schema": "ownership-v1",
+  "versione": 1,
+  "aggiornato": "2026-11-13",
+  "decisoIn": "01-decisioni/PROPRIETA-FILE.md (second-brain)",
+  "regola": "Un file ha un solo scrittore. Chi non lo possiede non lo apre in scrittura: deposita una richiesta di patch in coda/<dominio>/<timestamp>-<agente>.json e il proprietario la applica o la rifiuta con motivo. Non si edita mai un artefatto generato: si edita il generatore.",
+  "comeSiLegge": "Le righe si leggono dall'alto in basso e vince la PRIMA che combacia (le piu' specifiche stanno in alto). Il glob usa * per un livello, ** per qualunque profondita'.",
+  "tipi": {
+    "owner": "un solo agente scrive. Se il committer non e' l'owner: violazione.",
+    "generato": "artefatto di un workflow: si tocca solo con l'agente del generatore dichiarato; chi vuole un contenuto diverso cambia il generatore.",
+    "append-only": "si aggiunge (file nuovo), non si riscrive: modificare un file esistente e' violazione.",
+    "libero": "nessun controllo: un file per sessione/agente, la collisione e' impossibile per costruzione."
+  },
+  "righe": [
+    {
+      "glob": "care-workers/veglia/worker.js",
+      "tipo": "owner",
+      "owner": "veglia-append",
+      "nota": "workflow deterministico, non un LLM. La tabella PROCESSI si allunga SOLO per richiesta in coda/veglia/. E' il file che stanotte tre agenti hanno scritto in tre modi diversi."
+    },
+    {
+      "glob": "careauctions/ai-proxy/worker.js",
+      "tipo": "owner",
+      "owner": "monolite-owner",
+      "nota": "monolite congelato: solo bugfix, nessuna funzione nuova."
+    },
+    {
+      "glob": "careauctions/edge/worker.js",
+      "tipo": "owner",
+      "owner": "edge-owner",
+      "nota": "unico file da ~1,6 MB: prima di scriverlo accertarsi che nessun'altra sessione lo stia modificando."
+    },
+    {
+      "glob": "careauctions/workers/icare-ricevute/**",
+      "tipo": "owner",
+      "owner": "ricevute-owner"
+    },
+    {
+      "glob": ".github/workflows/**",
+      "tipo": "owner",
+      "owner": "workflow-owner",
+      "nota": "unico. Chi tocca un file qui lo valida con Ruby/Psych prima del push e verifica la run CON JOB, non il commit."
+    },
+    {
+      "glob": "ownership.json",
+      "tipo": "owner",
+      "owner": "lead",
+      "nota": "la mappa la cambia il Lead, non chi vuole scrivere un file."
+    },
+    {
+      "glob": "qa/proprieta-stato.json",
+      "tipo": "owner",
+      "owner": "guardiano-proprieta",
+      "nota": "lo scrive solo il guardiano."
+    },
+    {
+      "glob": "config/countries.json",
+      "tipo": "owner",
+      "owner": "motore-world",
+      "nota": "configurazione del motore mondo: si cambia dal suo generatore, non a mano."
+    },
+    {
+      "glob": "04-lavori/QUADRO-LAVORI.md",
+      "tipo": "owner",
+      "owner": "quadro-scribe",
+      "nota": "unico scrittore. Gli altri agenti scrivono il PROPRIO file in 04-lavori/registro/ e quadro-scribe li appende."
+    },
+    {
+      "glob": "04-lavori/registro/**",
+      "tipo": "libero",
+      "nota": "un file per agente: il nome lo rende unico, nessuna contesa."
+    },
+    {
+      "glob": "07-quadri/**",
+      "tipo": "libero",
+      "nota": "un file per sessione (AAAA-MM-GG-titolo.md): libero per costruzione."
+    },
+    {
+      "glob": "01-decisioni/**",
+      "tipo": "append-only",
+      "nota": "si aggiunge, non si riscrive. Una decisione si annulla con una voce nuova che dice SUPERA:, non cancellando."
+    },
+    {
+      "glob": "02-lezioni/**",
+      "tipo": "append-only"
+    },
+    {
+      "glob": "feed/statistiche.json",
+      "tipo": "generato",
+      "generatori": ["feed-sync"]
+    },
+    {
+      "glob": "feed/aggiudicazioni.json",
+      "tipo": "generato",
+      "generatori": ["esiti-sync", "aggiudicazioni-merge", "fallco-aggiudicazioni", "ivg-aggiudicazioni"],
+      "nota": "tre scrittori nello stesso giro: il 9/11 un array vuoto ha cancellato 16.771 prezzi. Mai sovrascrivere: si unisce."
+    },
+    {
+      "glob": "feed/esiti-monitor.json",
+      "tipo": "generato",
+      "generatori": ["esiti-sync"]
+    },
+    {
+      "glob": "feed/andamento-*.json",
+      "tipo": "generato",
+      "generatori": ["esiti-sync", "feed-sync"],
+      "nota": "serie storiche: si ricalcolano da zero, non si incrementano, e non si cancellano mai nel full."
+    },
+    {
+      "glob": "feed/*.json",
+      "tipo": "generato",
+      "generatori": [
+        "feed-sync",
+        "esiti-sync",
+        "foto-sync",
+        "foto-perizie",
+        "ocr-perizie",
+        "npl-sync",
+        "aste-aziende-sync",
+        "traduzioni",
+        "traduzioni-prelancio",
+        "ai-education",
+        "ai-sentinel",
+        "confronto-mercato",
+        "residenziale-comune",
+        "andamento-partecipazione",
+        "dati-indice",
+        "visite-rum",
+        "prerender",
+        "indexnow-daily",
+        "quadro",
+        "aggiornamento-mail",
+        "mail-qa",
+        "qa",
+        "perf",
+        "ishop-check",
+        "comunicato-mensile",
+        "riconcilia-esiti",
+        "allineamento-pvp",
+        "icare-brain",
+        "superfici-attivi"
+      ],
+      "nota": "feed generati: il proprietario e' il workflow che li produce. Chi vuole un numero diverso cambia lo script, non il JSON. L'elenco dei generatori si allunga quando nasce un generatore nuovo (e lo aggiunge il Lead)."
+    },
+    {
+      "glob": "prerender/**",
+      "tipo": "generato",
+      "generatori": ["prerender", "prerender-guardiano"],
+      "nota": "si dispatcha prerender.yml, non si scrive l'HTML a mano."
+    },
+    {
+      "glob": "i18n/**",
+      "tipo": "generato",
+      "generatori": ["traduzioni", "traduzioni-prelancio"]
+    },
+    {
+      "glob": "ai/**",
+      "tipo": "generato",
+      "generatori": ["ai-education", "ai-sentinel"],
+      "nota": "knowledge.json, llms.txt, faq, stato, qualita: tutti generati."
+    },
+    {
+      "glob": "sitemap*.xml",
+      "tipo": "generato",
+      "generatori": ["feed-sync", "idmap-sitemap"],
+      "nota": "le sitemap si generano: mai a mano."
+    },
+    {
+      "glob": "qa/**",
+      "tipo": "generato",
+      "generatori": ["qa", "qa-presidio", "qa-orchestra", "ronda-notturna", "guardiano-proprieta"],
+      "nota": "stato e report del QA: li scrivono i workflow del QA."
+    }
+  ],
+  "default": {
+    "tipo": "non-mappato",
+    "owner": null,
+    "nota": "path fuori mappa = nessun controllo, di proposito: la mappa cresce per decisione del Lead, non per caso. Un non-mappato NON e' una violazione."
+  }
+}
