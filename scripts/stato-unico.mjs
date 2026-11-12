@@ -109,7 +109,15 @@ if(GH){
   if(r.ok){ let d=null; try{d=JSON.parse(r.text);}catch{}
     const lim=Date.now()-2*3600e3;
     const rossi=(d.workflow_runs||[]).filter(x=>x.conclusion==='failure'&&Date.parse(x.created_at)>lim);
-    add('github','run rossi (2h)', rossi.length>0?'giallo':'ok', String(rossi.length), rossi.slice(0,3).map(x=>x.name).join(' · '));
+    // un fallimento ISOLATO non è un guasto: i workflow che committano in parallelo si scontrano
+    // (mail-qa il 12/11: success 18:12:32, failure 18:13:14 — è una race, non un errore di contenuto).
+    // Giallo solo se lo STESSO workflow fallisce due volte nelle due ore.
+    const perNome={};
+    rossi.forEach(function(x){ perNome[x.name]=(perNome[x.name]||0)+1; });
+    const veri=Object.keys(perNome).filter(function(k){ return perNome[k]>=2; });
+    add('github','run rossi (2h)', veri.length>0?'giallo':'ok',
+        veri.length?veri.length+' workflow con 2+ fallimenti':String(rossi.length)+' isolati',
+        veri.length?veri.join(' · '):(rossi.length?rossi.map(function(x){return x.name;}).slice(0,3).join(' · ')+' (una volta sola: race nota)':''));
   } else add('github','api','non_verificabile',String(r.status));
 }
 
