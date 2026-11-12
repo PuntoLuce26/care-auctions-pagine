@@ -1,5 +1,5 @@
 {
- "generato": "2026-11-12T22:58:24.907Z",
+ "generato": "2026-11-12T23:18:48.159Z",
  "semaforo": "giallo",
  "conteggi": {
   "ok": 23,
@@ -89,49 +89,49 @@
    "sezione": "feed",
    "nome": "statistiche",
    "stato": "ok",
-   "valore": "5 min",
+   "valore": "9 min",
    "dettaglio": "321689 lotti"
   },
   {
    "sezione": "feed",
    "nome": "world",
    "stato": "ok",
-   "valore": "94 min",
+   "valore": "115 min",
    "dettaglio": "33 paesi"
   },
   {
    "sezione": "feed",
    "nome": "ricevute",
    "stato": "ok",
-   "valore": "460 min",
+   "valore": "480 min",
    "dettaglio": "0 ricevute"
   },
   {
    "sezione": "feed",
    "nome": "san-pasquale-foto",
    "stato": "ok",
-   "valore": "332 min",
+   "valore": "353 min",
    "dettaglio": "37 foto"
   },
   {
    "sezione": "build",
    "nome": "sito vs origine",
    "stato": "ok",
-   "valore": "main.23df51ef.js / main.23df51ef.js",
+   "valore": "main.0ca21dff.js / main.0ca21dff.js",
    "dettaglio": ""
   },
   {
    "sezione": "prerender",
    "nome": "snapshot vs vivo",
-   "stato": "ok",
-   "valore": "main.23df51ef.js / main.23df51ef.js",
-   "dettaglio": ""
+   "stato": "giallo",
+   "valore": "main.23df51ef.js / main.0ca21dff.js",
+   "dettaglio": "drift: i crawler ricevono un bundle vecchio"
   },
   {
    "sezione": "prerender",
    "nome": "bot allineato",
    "stato": "ok",
-   "valore": "main.23df51ef.js",
+   "valore": "main.0ca21dff.js",
    "dettaglio": ""
   },
   {
@@ -153,14 +153,14 @@
    "nome": "critici",
    "stato": "ok",
    "valore": "0",
-   "dettaglio": "4 controlli"
+   "dettaglio": "5 controlli"
   },
   {
    "sezione": "mail",
    "nome": "allarmi",
-   "stato": "giallo",
-   "valore": "1",
-   "dettaglio": "2026-11-12T22:51:20.769Z"
+   "stato": "ok",
+   "valore": "0",
+   "dettaglio": "2026-11-12T23:10:47.147Z"
   },
   {
    "sezione": "sentinella",
@@ -180,8 +180,8 @@
    "sezione": "github",
    "nome": "run rossi (2h)",
    "stato": "ok",
-   "valore": "0 isolati",
-   "dettaglio": ""
+   "valore": "1 isolati",
+   "dettaglio": "emergent-watch (una volta sola: race nota)"
   }
  ]
 }
