@@ -68,21 +68,13 @@ jobs:
           path: qa/out/
           retention-days: 30
 
-      - name: Pubblica lo stato per il Secondo Cervello
+      # 12/11/2026 — BASTA COMMIT SU qa/stato.json (27 commit/24h misurati, ognuno capace di
+      # cancellare la build Pages in corso). Lo stato si scrive e si pubblica su R2: qui sotto.
+      # Il file resta nel repo come copia congelata finché non lo si toglie; i lettori
+      # (veglia, ai-sentinel, ronda, stato-unico, orchestra, ai-education, qa-sync) leggono da R2.
+      - name: Scrivi lo stato del QA (niente commit)
         if: always()
-        run: |
-          node qa/status.mjs
-          git config user.name "CARe QA"
-          git config user.email "qa@careauctions.co"
-          git add qa/stato.json
-          if git diff --cached --quiet; then echo "nessuna variazione di stato"; exit 0; fi
-          git commit -m "qa: stato $(date -u +%FT%TZ)"
-          for i in 1 2 3 4 5; do
-            git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null
-            if git push; then exit 0; fi
-            sleep 4
-          done
-          echo "::warning::push qa/stato.json fallito"
+        run: node qa/status.mjs
       # 12/11/2026 — lo stato del QA esce dal repo pubblico: va su R2 (care-stato) e si legge da lì.
       # Il commit sopra resta finché tutti i lettori non sono migrati (doppia scrittura).
       - name: Pubblica lo stato QA su R2
