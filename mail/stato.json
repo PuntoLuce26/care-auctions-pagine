@@ -1,9 +1,20 @@
 {
-  "ultimoControllo": "2026-11-12T10:22:10.586Z",
-  "ultimoQa": "2026-11-11T22:24:51.034Z",
-  "qaEsito": "nessun allarme nuovo",
-  "nuoveMail": 0,
-  "allarmi": [],
+  "ultimoControllo": "2026-11-12T11:55:10.276Z",
+  "ultimoQa": "2026-11-12T11:55:10.276Z",
+  "qaEsito": "QA dispatch HTTP 204",
+  "nuoveMail": 1,
+  "allarmi": [
+    {
+      "id": "1a1cf6d66ecb63d4",
+      "data": "2026-11-12T11:03:34.000Z",
+      "da": "PuntoLuce26 <notifications@github.com>",
+      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: esiti-sync - main (3e0f2a9)",
+      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
+      "componente": "github-actions",
+      "gravita": "media",
+      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43201813790"
+    }
+  ],
   "processati": [
     "1a1c636ae4a6b5a9",
     "1a1c634c8df2049e",
@@ -113,6 +124,11 @@
     "1a1ce0b26f4dc93d",
     "1a1ce0b05d03b592",
     "1a1cf42a599b8c76",
-    "1a1cf25434b083f4"
+    "1a1cf25434b083f4",
+    "1a1cf8ddb696df01",
+    "1a1cf7e1e940c3e3",
+    "1a1cf7e0e5410f1c",
+    "1a1cf6d66ecb63d4",
+    "1a1cf50db032654e"
   ]
 }
