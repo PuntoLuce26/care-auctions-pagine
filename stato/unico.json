@@ -1,5 +1,5 @@
 {
- "generato": "2026-11-12T22:01:02.212Z",
+ "generato": "2026-11-12T22:35:57.563Z",
  "semaforo": "giallo",
  "conteggi": {
   "ok": 23,
@@ -89,28 +89,28 @@
    "sezione": "feed",
    "nome": "statistiche",
    "stato": "ok",
-   "valore": "9 min",
+   "valore": "5 min",
    "dettaglio": "321689 lotti"
   },
   {
    "sezione": "feed",
    "nome": "world",
    "stato": "ok",
-   "valore": "37 min",
+   "valore": "72 min",
    "dettaglio": "33 paesi"
   },
   {
    "sezione": "feed",
    "nome": "ricevute",
    "stato": "ok",
-   "valore": "403 min",
+   "valore": "437 min",
    "dettaglio": "0 ricevute"
   },
   {
    "sezione": "feed",
    "nome": "san-pasquale-foto",
    "stato": "ok",
-   "valore": "275 min",
+   "valore": "310 min",
    "dettaglio": "37 foto"
   },
   {
@@ -153,7 +153,7 @@
    "nome": "critici",
    "stato": "ok",
    "valore": "0",
-   "dettaglio": "4 controlli"
+   "dettaglio": "5 controlli"
   },
   {
    "sezione": "mail",
@@ -180,8 +180,8 @@
    "sezione": "github",
    "nome": "run rossi (2h)",
    "stato": "ok",
-   "valore": "0 isolati",
-   "dettaglio": ""
+   "valore": "1 isolati",
+   "dettaglio": "esiti-sync (una volta sola: race nota)"
   }
  ]
 }
