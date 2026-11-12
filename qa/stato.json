@@ -1,61 +1,21 @@
 {
-  "generatedAt": "2026-11-12T20:57:25.786Z",
-  "runId": "43304607960",
-  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43304607960",
+  "generatedAt": "2026-11-12T21:58:05.091Z",
+  "runId": "43314529513",
+  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43314529513",
   "base": "https://careauctions.co",
-  "durationSec": 206,
+  "durationSec": 207,
   "build": {
-    "sito": "main.aedf2a48.js",
-    "origine": "main.aedf2a48.js"
+    "sito": "main.23df51ef.js",
+    "origine": "main.23df51ef.js"
   },
   "summary": {
     "critical": 0,
-    "high": 6,
-    "medium": 1,
+    "high": 1,
+    "medium": 0,
     "low": 3,
-    "total": 10
+    "total": 4
   },
   "issues": [
-    {
-      "severity": "high",
-      "type": "console_error",
-      "route": "/osservatorio",
-      "viewport": "desktop",
-      "message": "Access to XMLHttpRequest at 'https://care-aste.emergent.host/api/osservatorio/chiavi' from origin 'https://careauctions.co' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is…",
-      "suggestion": ""
-    },
-    {
-      "severity": "high",
-      "type": "console_error",
-      "route": "/aggiudicazioni",
-      "viewport": "desktop",
-      "message": "Access to XMLHttpRequest at 'https://care-aste.emergent.host/api/servizi' from origin 'https://careauctions.co' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on …",
-      "suggestion": ""
-    },
-    {
-      "severity": "high",
-      "type": "console_error",
-      "route": "/ilive",
-      "viewport": "desktop",
-      "message": "Access to XMLHttpRequest at 'https://care-aste.emergent.host/api/config/pubblica' from origin 'https://careauctions.co' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is pre…",
-      "suggestion": ""
-    },
-    {
-      "severity": "high",
-      "type": "console_error",
-      "route": "/stampa",
-      "viewport": "desktop",
-      "message": "Access to XMLHttpRequest at 'https://care-aste.emergent.host/api/config/promo?lang=it' from origin 'https://careauctions.co' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header i…",
-      "suggestion": ""
-    },
-    {
-      "severity": "high",
-      "type": "console_error",
-      "route": "/compra-ora",
-      "viewport": "desktop",
-      "message": "Access to XMLHttpRequest at 'https://care-aste.emergent.host/api/aste/type-counts?region=Abruzzo&category=' from origin 'https://careauctions.co' has been blocked by CORS policy: No 'Access-Control-A…",
-      "suggestion": ""
-    },
     {
       "severity": "high",
       "type": "seo_home_links",
@@ -63,14 +23,6 @@
       "viewport": "",
       "message": "controllo home_links fallito",
       "suggestion": ""
-    },
-    {
-      "severity": "medium",
-      "type": "github_run_falliti",
-      "route": "log",
-      "viewport": "",
-      "message": "qa (failure)",
-      "suggestion": "Aprire i run falliti; se sono build Pages cancellate da un commit, non è un guasto (vedi LEZIONI)."
     },
     {
       "severity": "low",
@@ -102,7 +54,7 @@
       "route": "/",
       "viewport": "desktop",
       "http": 200,
-      "text": 19517,
+      "text": 19519,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -113,7 +65,7 @@
       "route": "/aste",
       "viewport": "desktop",
       "http": 200,
-      "text": 20559,
+      "text": 21119,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -135,10 +87,10 @@
       "route": "/osservatorio",
       "viewport": "desktop",
       "http": 200,
-      "text": 3834,
+      "text": 5767,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 18,
+      "consoleErrors": 0,
       "formsFilled": 1,
       "clicks": 3
     },
@@ -149,7 +101,7 @@
       "text": 1601,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 50,
+      "consoleErrors": 0,
       "formsFilled": 1,
       "clicks": 3
     },
@@ -171,7 +123,7 @@
       "text": 2452,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 44,
+      "consoleErrors": 0,
       "formsFilled": 2,
       "clicks": 3
     },
@@ -182,7 +134,7 @@
       "text": 3572,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 34,
+      "consoleErrors": 0,
       "formsFilled": 1,
       "clicks": 3
     },
@@ -234,10 +186,10 @@
       "route": "/compra-ora",
       "viewport": "desktop",
       "http": 200,
-      "text": 7074,
+      "text": 20405,
       "imagesBroken": 0,
       "jsErrors": 0,
-      "consoleErrors": 4,
+      "consoleErrors": 0,
       "formsFilled": 13,
       "clicks": 3
     },
@@ -289,7 +241,7 @@
       "route": "/stato",
       "viewport": "desktop",
       "http": 200,
-      "text": 769,
+      "text": 771,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -300,7 +252,7 @@
       "route": "/",
       "viewport": "mobile",
       "http": 200,
-      "text": 19437,
+      "text": 19436,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -389,7 +341,7 @@
         {
           "route": "/",
           "http": 200,
-          "text": 15915,
+          "text": 16056,
           "errors": 0
         },
         {
@@ -436,7 +388,7 @@
       "linkNovita": true,
       "linkAffiliazione": true,
       "linkBuynow": false,
-      "build": "main.aedf2a48.js"
+      "build": "main.23df51ef.js"
     },
     "botHome": {
       "status": 200,
@@ -450,15 +402,15 @@
     },
     "origin": {
       "status": 200,
-      "build": "main.aedf2a48.js"
+      "build": "main.23df51ef.js"
     }
   },
   "feed": {
     "statistiche": {
       "status": 200,
-      "aggiornato": "2026-11-12T20:44:38.088Z",
-      "totale": 321688,
-      "ageHours": 0.2
+      "aggiornato": "2026-11-12T21:51:40.070Z",
+      "totale": 321689,
+      "ageHours": 0.1
     },
     "aggiudicazioni": {
       "status": 200,
@@ -475,64 +427,55 @@
         "name": "stato",
         "ok": true,
         "status": 200,
-        "ms": 2037,
+        "ms": 1856,
         "detail": "tabella popolata"
       },
       {
         "name": "feed statistiche",
         "ok": true,
         "status": 200,
-        "ms": 80,
-        "detail": "totale 321688 · 0.2 h fa"
+        "ms": 73,
+        "detail": "totale 321689 · 0.1 h fa"
       },
       {
         "name": "feed aggiudicazioni",
         "ok": true,
         "status": 200,
-        "ms": 603,
+        "ms": 537,
         "detail": "18368 record"
       },
       {
         "name": "origine Emergent",
         "ok": true,
         "status": 200,
-        "ms": 431,
-        "detail": "main.aedf2a48.js"
+        "ms": 351,
+        "detail": "main.23df51ef.js"
       },
       {
         "name": "chat iCARe",
         "ok": true,
         "status": 200,
-        "ms": 468,
+        "ms": 604,
         "detail": "{\"ok\":true,\"risposta\":\"Ciao, sono **iCARe**, la consulente immobiliare di CARe …"
       },
       {
         "name": "iCAReWall API",
         "ok": true,
         "status": 200,
-        "ms": 135,
+        "ms": 170,
         "detail": "15641 byte"
       },
       {
         "name": "voce TTS",
         "ok": true,
         "status": 200,
-        "ms": 31,
+        "ms": 44,
         "detail": "6482 byte"
       }
     ],
     "github": {
       "checked": 30,
-      "failedLast24h": [
-        {
-          "name": "qa",
-          "status": "completed",
-          "conclusion": "failure",
-          "created_at": "2026-11-12T20:41:05Z",
-          "url": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43302735324",
-          "head": "ac216fca"
-        }
-      ]
+      "failedLast24h": []
     }
   }
 }
