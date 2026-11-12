@@ -1,7 +1,7 @@
 {
  "titolo": "iWorld — le aste immobiliari nel mondo",
- "aggiornato": "2026-11-12T21:11:31Z",
- "nota": "Un paese entra con i numeri solo quando li abbiamo letti dalla fonte. Fino ad allora la scheda esiste e dichiara «in arrivo»: si mostra la categoria, non il nome. Nessun numero senza fonte e data di rilevazione. La metrica è dichiarata per ogni paese: un prezzo base d'asta, una stima e un'offerta minima non si confrontano.",
+ "aggiornato": "2026-11-12T21:23:54Z",
+ "nota": "Un paese entra con i numeri solo quando la fonte è LEGALE da leggere (robots + ToS verificati, con data) e i dati sono stati letti davvero. Fino ad allora la scheda esiste, dichiara «in arrivo» e riporta il portale ufficiale. La metrica è dichiarata per ogni paese. Si linka la fonte, non si copia.",
  "regole": {
   "stati": [
    "live",
@@ -55,7 +55,7 @@
    "regione": "Europa",
    "portale": "Subastas BOE",
    "portale_url": "https://subastas.boe.es/",
-   "stato": "test",
+   "stato": "in_arrivo",
    "valuta": "EUR",
    "tipo_prezzo": "prezzo_base",
    "copertura": {
@@ -69,10 +69,14 @@
     "stimaMedia": null,
     "scartoMedio": null
    },
-   "nota": "HTTP 200. 10 righe lette via actor, schema base/minima/stima/date/link.",
+   "nota": "BLoccato: subastas.boe.es/robots.txt dice «Disallow: /». Nessuna estrazione lecita.",
    "metrica": "valor de subasta (base d'asta BOE)",
    "metrica_en": "auction starting value",
-   "verdetto": "leggibile subito"
+   "verdetto": "leggibile subito",
+   "legal": {
+    "esito": "permesso",
+    "verificato": "2026-11-12"
+   }
   },
   {
    "slug": "germania",
@@ -82,7 +86,7 @@
    "regione": "Europa",
    "portale": "ZVG-Portal",
    "portale_url": "https://www.zvg-portal.de/",
-   "stato": "test",
+   "stato": "in_arrivo",
    "valuta": "EUR",
    "tipo_prezzo": "stima",
    "copertura": {
@@ -96,10 +100,14 @@
     "stimaMedia": null,
     "scartoMedio": null
    },
-   "nota": "HTTP 200. 10 aste NRW via actor; il dettaglio richiede cookie di sessione.",
+   "nota": "Bloccato in parte: il robots vieta showZvg.php, showAnhang.php e showAll.php, cioè il dettaglio dell'asta. Solo link.",
    "metrica": "Verkehrswert (stima di mercato, NON prezzo base d'asta)",
    "metrica_en": "market appraisal value, not a starting price",
-   "verdetto": "serve un actor"
+   "verdetto": "serve un actor",
+   "legal": {
+    "esito": "bloccato",
+    "verificato": "2026-11-12"
+   }
   },
   {
    "slug": "francia",
@@ -109,7 +117,7 @@
    "regione": "Europa",
    "portale": "Avoventes / Licitor — ventes aux enchères",
    "portale_url": "https://avoventes.fr/",
-   "stato": "test",
+   "stato": "in_arrivo",
    "valuta": "EUR",
    "tipo_prezzo": "prezzo_base",
    "copertura": {
@@ -123,10 +131,14 @@
     "stimaMedia": null,
     "scartoMedio": null
    },
-   "nota": "HTTP 200. 10 righe il 12/11 (0,0058 USD); il primo actor provato è tornato vuoto.",
+   "nota": "Bloccato: le mentions légales di avoventes.fr vietano l'estrazione totale o parziale. Solo link.",
    "metrica": "mise à prix (base d'asta)",
    "metrica_en": "auction starting bid",
-   "verdetto": "serve un actor"
+   "verdetto": "serve un actor",
+   "legal": {
+    "esito": "bloccato",
+    "verificato": "2026-11-12"
+   }
   },
   {
    "slug": "portogallo",
@@ -136,7 +148,7 @@
    "regione": "Europa",
    "portale": "e-Leilões",
    "portale_url": "https://www.e-leiloes.pt/",
-   "stato": "test",
+   "stato": "in_arrivo",
    "valuta": "EUR",
    "tipo_prezzo": "prezzo_base",
    "copertura": {
@@ -150,10 +162,14 @@
     "stimaMedia": null,
     "scartoMedio": null
    },
-   "nota": "HTTP 200. 10 righe il 12/11 (0,0440 USD); 89 aste disponibili a Lisbona; sconto vs stima già calcolato dall'actor.",
+   "nota": "Da verificare: robots consente (vieta solo API e aree private), ma i ToS sono serviti dal client e vanno letti a mano.",
    "metrica": "valor base de licitação",
    "metrica_en": "auction starting value",
-   "verdetto": "serve un actor"
+   "verdetto": "serve un actor",
+   "legal": {
+    "esito": "da_verificare",
+    "verificato": "2026-11-12"
+   }
   },
   {
    "slug": "austria",
@@ -163,7 +179,7 @@
    "regione": "Europa",
    "portale": "Ediktsdatei — Justiz",
    "portale_url": "https://edikte.justiz.gv.at/",
-   "stato": "test",
+   "stato": "in_arrivo",
    "valuta": "EUR",
    "tipo_prezzo": "offerta_minima",
    "copertura": {
@@ -177,10 +193,14 @@
     "stimaMedia": null,
     "scartoMedio": null
    },
-   "nota": "HTTP 200. 10 righe il 12/11 (0,0451 USD), ma perlopiù rinvii e SENZA stima: non basta per la metrica. · La fonte dà solo l'offerta minima: nessuna stima di mercato. In test come campione.",
+   "nota": "Bloccato: nessun robots, e l'Impressum BMJ ammette il ristampo solo «ausser zu kommerziellen Zwecken» — il nostro uso è commerciale.",
    "metrica": "geringstes Gebot (offerta minima richiesta, NON una stima)",
    "metrica_en": "minimum required bid, not an appraisal",
-   "verdetto": "serve un actor"
+   "verdetto": "serve un actor",
+   "legal": {
+    "esito": "bloccato",
+    "verificato": "2026-11-12"
+   }
   },
   {
    "slug": "belgio",
@@ -190,7 +210,7 @@
    "regione": "Europa",
    "portale": "Biddit — piattaforma ufficiale dei notai",
    "portale_url": "https://www.biddit.be/",
-   "stato": "test",
+   "stato": "in_arrivo",
    "valuta": "EUR",
    "tipo_prezzo": "prezzo_base",
    "copertura": {
@@ -204,10 +224,14 @@
     "stimaMedia": null,
     "scartoMedio": null
    },
-   "nota": "HTTP 200. 10 righe il 12/11 (0,1600 USD, il più caro dei test): prezzo, valuta, indirizzo, coordinate.",
+   "nota": "Da verificare: nessun esito legale ancora. Non si estrae finché non c'è.",
    "metrica": "mise à prix / inzetprijs",
    "metrica_en": "auction starting price",
-   "verdetto": "serve un actor"
+   "verdetto": "serve un actor",
+   "legal": {
+    "esito": "da_verificare",
+    "verificato": "2026-11-12"
+   }
   },
   {
    "slug": "paesi-bassi",
@@ -771,10 +795,14 @@
     "stimaMedia": null,
     "scartoMedio": null
    },
-   "nota": "HTTP 200 sull'open data; il servizio di download risponde 403 da qui. Le aste UK non hanno portale statale.",
+   "nota": "PERMESSO: gov.uk robots consente e OGL v3 autorizza anche lo sfruttamento commerciale con attribuzione. Open data, da costruire.",
    "metrica": "sold price registrato (NON prezzo d'asta)",
    "metrica_en": "registered sale price",
-   "verdetto": "leggibile subito"
+   "verdetto": "leggibile subito",
+   "legal": {
+    "esito": "permesso",
+    "verificato": "2026-11-12"
+   }
   },
   {
    "slug": "svizzera",
