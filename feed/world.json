@@ -1,7 +1,7 @@
 {
  "titolo": "iWorld — le aste immobiliari nel mondo",
- "aggiornato": "2026-11-12T17:06:19Z",
- "nota": "Un paese entra con i numeri solo quando li abbiamo letti dalla fonte. Fino ad allora la scheda esiste e dichiara «in arrivo»: si mostra la categoria, non il nome (regola creare-attesa). Nessun numero senza fonte e data di rilevazione.",
+ "aggiornato": "2026-11-12T21:11:31Z",
+ "nota": "Un paese entra con i numeri solo quando li abbiamo letti dalla fonte. Fino ad allora la scheda esiste e dichiara «in arrivo»: si mostra la categoria, non il nome. Nessun numero senza fonte e data di rilevazione. La metrica è dichiarata per ogni paese: un prezzo base d'asta, una stima e un'offerta minima non si confrontano.",
  "regole": {
   "stati": [
    "live",
@@ -14,7 +14,10 @@
    "in_arrivo": "portale individuato, numeri non ancora raccolti"
   },
   "statistiche": "prezzoBaseMedio, offertaMinimaMedia, stimaMedia, scartoMedio sono null finché non esiste una copertura sufficiente: un campione di test non produce statistiche pubbliche",
-  "metrica": "ogni paese dichiara che cosa è il suo numero principale. Non si confrontano tra loro metriche diverse: il prezzo base d'asta italiano, il valor de subasta spagnolo e il Verkehrswert tedesco sono tre cose diverse. Un confronto internazionale si fa solo dopo normalizzazione dichiarata."
+  "metrica": "ogni paese dichiara che cosa è il suo numero principale. Non si confrontano tra loro metriche diverse: il prezzo base d'asta italiano, il valor de subasta spagnolo e il Verkehrswert tedesco sono tre cose diverse. Un confronto internazionale si fa solo dopo normalizzazione dichiarata.",
+  "valuta": "ogni numero porta la sua valuta (ISO 4217): non si sommano valute diverse.",
+  "tipo_prezzo": "vocabolario chiuso: prezzo_base, stima, offerta_minima, prezzo_aggiudicazione, prezzo_di_mercato.",
+  "legale": "un paese entra solo se robots.txt e ToS lo consentono, con data di verifica archiviata; se i ToS vietano l'estrazione il paese resta «in arrivo» e si linka soltanto."
  },
  "paesi": [
   {
@@ -24,8 +27,10 @@
    "iso": "IT",
    "regione": "Europa",
    "portale": "Portale delle Vendite Pubbliche",
-   "portale_url": "https://pvp.giustizia.it",
+   "portale_url": "https://pvp.giustizia.it/pvp/",
    "stato": "live",
+   "valuta": "EUR",
+   "tipo_prezzo": "prezzo_base",
    "copertura": {
     "lotti": 321646,
     "fonte": "PVP — Ministero della Giustizia",
@@ -37,9 +42,10 @@
     "stimaMedia": null,
     "scartoMedio": null
    },
-   "nota": "Fonte primaria letta dal nostro motore: nessun intermediario.",
+   "nota": "Letto dal nostro motore: 321.646 lotti, rilevazione 2026-11-12T16:42:38Z.",
    "metrica": "prezzo base d'asta",
-   "metrica_en": "auction base price"
+   "metrica_en": "auction base price",
+   "verdetto": "leggibile subito"
   },
   {
    "slug": "spagna",
@@ -48,11 +54,13 @@
    "iso": "ES",
    "regione": "Europa",
    "portale": "Subastas BOE",
-   "portale_url": "https://subastas.boe.es",
+   "portale_url": "https://subastas.boe.es/",
    "stato": "test",
+   "valuta": "EUR",
+   "tipo_prezzo": "prezzo_base",
    "copertura": {
     "lotti": 10,
-    "fonte": "BOE, campione di 10 aste (Madrid, immobiliare, live)",
+    "fonte": "BOE, campione di 10 aste",
     "rilevazione": "2026-11-12"
    },
    "statistiche": {
@@ -61,9 +69,10 @@
     "stimaMedia": null,
     "scartoMedio": null
    },
-   "nota": "Test riuscito: schema identico al PVP italiano (base d'asta, minima, stima, date, autorità, link diretto). Copertura completa da costruire.",
+   "nota": "HTTP 200. 10 righe lette via actor, schema base/minima/stima/date/link.",
    "metrica": "valor de subasta (base d'asta BOE)",
-   "metrica_en": "auction starting value"
+   "metrica_en": "auction starting value",
+   "verdetto": "leggibile subito"
   },
   {
    "slug": "germania",
@@ -72,11 +81,13 @@
    "iso": "DE",
    "regione": "Europa",
    "portale": "ZVG-Portal",
-   "portale_url": "https://www.zvg-portal.de",
+   "portale_url": "https://www.zvg-portal.de/",
    "stato": "test",
+   "valuta": "EUR",
+   "tipo_prezzo": "stima",
    "copertura": {
     "lotti": 10,
-    "fonte": "ZVG-Portal (zvg-portal.de), campione di 10 aste in Nordrhein-Westfalen, dettagli attivi",
+    "fonte": "ZVG-Portal, campione di 10 aste NRW",
     "rilevazione": "2026-11-12"
    },
    "statistiche": {
@@ -85,9 +96,37 @@
     "stimaMedia": null,
     "scartoMedio": null
    },
-   "nota": "Test riuscito: 10 aste NRW con Verkehrswert in EUR, data, tribunale, numero di procedura e Gutachten PDF; i link diretti al portale rispondono solo con cookie di sessione.",
+   "nota": "HTTP 200. 10 aste NRW via actor; il dettaglio richiede cookie di sessione.",
    "metrica": "Verkehrswert (stima di mercato, NON prezzo base d'asta)",
-   "metrica_en": "market appraisal value, not a starting price"
+   "metrica_en": "market appraisal value, not a starting price",
+   "verdetto": "serve un actor"
+  },
+  {
+   "slug": "francia",
+   "nome": "Francia",
+   "nome_en": "France",
+   "iso": "FR",
+   "regione": "Europa",
+   "portale": "Avoventes / Licitor — ventes aux enchères",
+   "portale_url": "https://avoventes.fr/",
+   "stato": "test",
+   "valuta": "EUR",
+   "tipo_prezzo": "prezzo_base",
+   "copertura": {
+    "lotti": 10,
+    "fonte": "Apify, campione di 10 righe del 12/11/2026",
+    "rilevazione": "2026-11-12"
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "HTTP 200. 10 righe il 12/11 (0,0058 USD); il primo actor provato è tornato vuoto.",
+   "metrica": "mise à prix (base d'asta)",
+   "metrica_en": "auction starting bid",
+   "verdetto": "serve un actor"
   },
   {
    "slug": "portogallo",
@@ -96,12 +135,14 @@
    "iso": "PT",
    "regione": "Europa",
    "portale": "e-Leilões",
-   "portale_url": "https://www.e-leiloes.pt",
-   "stato": "in_arrivo",
+   "portale_url": "https://www.e-leiloes.pt/",
+   "stato": "test",
+   "valuta": "EUR",
+   "tipo_prezzo": "prezzo_base",
    "copertura": {
-    "lotti": null,
-    "fonte": null,
-    "rilevazione": null
+    "lotti": 10,
+    "fonte": "Apify, campione di 10 righe del 12/11/2026",
+    "rilevazione": "2026-11-12"
    },
    "statistiche": {
     "prezzoBaseMedio": null,
@@ -109,33 +150,10 @@
     "stimaMedia": null,
     "scartoMedio": null
    },
-   "nota": "Due test a vuoto (0 righe): da capire se il mercato era fermo o serve un input diverso.",
-   "metrica": null,
-   "metrica_en": null
-  },
-  {
-   "slug": "francia",
-   "nome": "Francia",
-   "nome_en": "France",
-   "iso": "FR",
-   "regione": "Europa",
-   "portale": "Ventes aux enchères judiciaires",
-   "portale_url": "https://www.licitor.com",
-   "stato": "in_arrivo",
-   "copertura": {
-    "lotti": null,
-    "fonte": null,
-    "rilevazione": null
-   },
-   "statistiche": {
-    "prezzoBaseMedio": null,
-    "offertaMinimaMedia": null,
-    "stimaMedia": null,
-    "scartoMedio": null
-   },
-   "nota": "Actor disponibile; test da eseguire. In Francia esiste anche DVF per i valori di mercato.",
-   "metrica": null,
-   "metrica_en": null
+   "nota": "HTTP 200. 10 righe il 12/11 (0,0440 USD); 89 aste disponibili a Lisbona; sconto vs stima già calcolato dall'actor.",
+   "metrica": "valor base de licitação",
+   "metrica_en": "auction starting value",
+   "verdetto": "serve un actor"
   },
   {
    "slug": "austria",
@@ -143,9 +161,65 @@
    "nome_en": "Austria",
    "iso": "AT",
    "regione": "Europa",
-   "portale": "Edikte — Justiz",
-   "portale_url": "https://edikte.justiz.gv.at",
+   "portale": "Ediktsdatei — Justiz",
+   "portale_url": "https://edikte.justiz.gv.at/",
+   "stato": "test",
+   "valuta": "EUR",
+   "tipo_prezzo": "offerta_minima",
+   "copertura": {
+    "lotti": 10,
+    "fonte": "Apify, campione di 10 righe del 12/11/2026",
+    "rilevazione": "2026-11-12"
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "HTTP 200. 10 righe il 12/11 (0,0451 USD), ma perlopiù rinvii e SENZA stima: non basta per la metrica. · La fonte dà solo l'offerta minima: nessuna stima di mercato. In test come campione.",
+   "metrica": "geringstes Gebot (offerta minima richiesta, NON una stima)",
+   "metrica_en": "minimum required bid, not an appraisal",
+   "verdetto": "serve un actor"
+  },
+  {
+   "slug": "belgio",
+   "nome": "Belgio",
+   "nome_en": "Belgium",
+   "iso": "BE",
+   "regione": "Europa",
+   "portale": "Biddit — piattaforma ufficiale dei notai",
+   "portale_url": "https://www.biddit.be/",
+   "stato": "test",
+   "valuta": "EUR",
+   "tipo_prezzo": "prezzo_base",
+   "copertura": {
+    "lotti": 10,
+    "fonte": "Apify, campione di 10 righe del 12/11/2026",
+    "rilevazione": "2026-11-12"
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "HTTP 200. 10 righe il 12/11 (0,1600 USD, il più caro dei test): prezzo, valuta, indirizzo, coordinate.",
+   "metrica": "mise à prix / inzetprijs",
+   "metrica_en": "auction starting price",
+   "verdetto": "serve un actor"
+  },
+  {
+   "slug": "paesi-bassi",
+   "nome": "Paesi Bassi",
+   "nome_en": "Netherlands",
+   "iso": "NL",
+   "regione": "Europa",
+   "portale": "Nessun portale unico: asta pubblicata dal notaio (KNB, Rechtspraak)",
+   "portale_url": "https://www.notaris.nl/",
    "stato": "in_arrivo",
+   "valuta": "EUR",
+   "tipo_prezzo": null,
    "copertura": {
     "lotti": null,
     "fonte": null,
@@ -157,9 +231,523 @@
     "stimaMedia": null,
     "scartoMedio": null
    },
-   "nota": "Nessun actor Apify: si parte dal portale pubblico, direttamente.",
+   "nota": "Nessun portale unico nazionale e nessun actor disponibile: serve un lavoro nostro su più fonti.",
    "metrica": null,
-   "metrica_en": null
+   "metrica_en": null,
+   "verdetto": "serve un lavoro nostro"
+  },
+  {
+   "slug": "lussemburgo",
+   "nome": "Lussemburgo",
+   "nome_en": "Luxembourg",
+   "iso": "LU",
+   "regione": "Europa",
+   "portale": "Portail de la Justice — ventes publiques",
+   "portale_url": "https://justice.public.lu/",
+   "stato": "in_arrivo",
+   "valuta": "EUR",
+   "tipo_prezzo": "prezzo_base",
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "HTTP 200. Nessuna lista nazionale strutturata: da confermare sul campo.",
+   "metrica": "mise à prix",
+   "metrica_en": "auction starting price",
+   "verdetto": "serve un lavoro nostro"
+  },
+  {
+   "slug": "irlanda",
+   "nome": "Irlanda",
+   "nome_en": "Ireland",
+   "iso": "IE",
+   "regione": "Europa",
+   "portale": "Courts Service — sheriff sales",
+   "portale_url": "https://www.courts.ie/",
+   "stato": "in_arrivo",
+   "valuta": "EUR",
+   "tipo_prezzo": null,
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "HTTP 200. Annunci frammentati per contea: non è una fonte prima.",
+   "metrica": null,
+   "metrica_en": null,
+   "verdetto": "serve un lavoro nostro"
+  },
+  {
+   "slug": "danimarca",
+   "nome": "Danimarca",
+   "nome_en": "Denmark",
+   "iso": "DK",
+   "regione": "Europa",
+   "portale": "Statstidende — gazzetta ufficiale",
+   "portale_url": "https://www.statstidende.dk/",
+   "stato": "in_arrivo",
+   "valuta": "DKK",
+   "tipo_prezzo": null,
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "HTTP 200. Gli annunci di tvangsauktion sono testi legali, da interpretare.",
+   "metrica": null,
+   "metrica_en": null,
+   "verdetto": "serve un lavoro nostro"
+  },
+  {
+   "slug": "svezia",
+   "nome": "Svezia",
+   "nome_en": "Sweden",
+   "iso": "SE",
+   "regione": "Europa",
+   "portale": "Kronofogden",
+   "portale_url": "https://www.kronofogden.se/",
+   "stato": "in_arrivo",
+   "valuta": "SEK",
+   "tipo_prezzo": "prezzo_base",
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "HTTP 200, 360 occorrenze di valuta nell'HTML: elenco presente, campione non ancora letto.",
+   "metrica": "utrop (base)",
+   "metrica_en": "auction starting price",
+   "verdetto": "leggibile subito"
+  },
+  {
+   "slug": "finlandia",
+   "nome": "Finlandia",
+   "nome_en": "Finland",
+   "iso": "FI",
+   "regione": "Europa",
+   "portale": "Ulosottolaitos",
+   "portale_url": "https://www.ulosottolaitos.fi/",
+   "stato": "in_arrivo",
+   "valuta": "EUR",
+   "tipo_prezzo": null,
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "HTTP 200 ma 0 valute e 0 parole d'asta nella home: la lista è altrove.",
+   "metrica": null,
+   "metrica_en": null,
+   "verdetto": "serve un lavoro nostro"
+  },
+  {
+   "slug": "polonia",
+   "nome": "Polonia",
+   "nome_en": "Poland",
+   "iso": "PL",
+   "regione": "Europa",
+   "portale": "Licytacje komornik.pl",
+   "portale_url": "https://licytacje.komornik.pl/",
+   "stato": "in_arrivo",
+   "valuta": "PLN",
+   "tipo_prezzo": "prezzo_base",
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "HTTP 200, 1.897.540 byte: la homepage È la lista (222 valute, 140 'licytacj'). Campione non ancora letto.",
+   "metrica": "cena wywoławcza (base)",
+   "metrica_en": "auction starting price",
+   "verdetto": "leggibile subito"
+  },
+  {
+   "slug": "repubblica-ceca",
+   "nome": "Repubblica Ceca",
+   "nome_en": "Czechia",
+   "iso": "CZ",
+   "regione": "Europa",
+   "portale": "Portál dražeb",
+   "portale_url": "https://www.portaldrazeb.cz/",
+   "stato": "in_arrivo",
+   "valuta": "CZK",
+   "tipo_prezzo": "prezzo_base",
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "HTTP 200 su /drazby/pripravovane, lista sottile (8 valute in 81 KB).",
+   "metrica": "vyvolávací cena (base)",
+   "metrica_en": "auction starting price",
+   "verdetto": "leggibile subito"
+  },
+  {
+   "slug": "slovacchia",
+   "nome": "Slovacchia",
+   "nome_en": "Slovakia",
+   "iso": "SK",
+   "regione": "Europa",
+   "portale": "drazby.sk",
+   "portale_url": "https://www.drazby.sk/",
+   "stato": "in_arrivo",
+   "valuta": "EUR",
+   "tipo_prezzo": "prezzo_base",
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "HTTP 200, ma l'ufficialità del portale non è dimostrata: non dichiararlo ufficiale.",
+   "metrica": "vyvolávacia cena (base)",
+   "metrica_en": "auction starting price",
+   "verdetto": "serve un lavoro nostro"
+  },
+  {
+   "slug": "ungheria",
+   "nome": "Ungheria",
+   "nome_en": "Hungary",
+   "iso": "HU",
+   "regione": "Europa",
+   "portale": "E-árverés",
+   "portale_url": "https://e-arveres.hu/",
+   "stato": "in_arrivo",
+   "valuta": "HUF",
+   "tipo_prezzo": "prezzo_base",
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "HTTP 200 ma guscio JS da 8.706 byte: 0 prezzi nell'HTML.",
+   "metrica": "kikiáltási ár (base)",
+   "metrica_en": "auction starting price",
+   "verdetto": "serve un lavoro nostro"
+  },
+  {
+   "slug": "romania",
+   "nome": "Romania",
+   "nome_en": "Romania",
+   "iso": "RO",
+   "regione": "Europa",
+   "portale": "UNEJ — portale degli esecutori giudiziari",
+   "portale_url": "https://www.executori.ro/",
+   "stato": "in_arrivo",
+   "valuta": "RON",
+   "tipo_prezzo": "prezzo_base",
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "HTTP 200 ma 1.105 byte: nessun annuncio nell'HTML.",
+   "metrica": "preț de pornire",
+   "metrica_en": "auction starting price",
+   "verdetto": "serve un lavoro nostro"
+  },
+  {
+   "slug": "bulgaria",
+   "nome": "Bulgaria",
+   "nome_en": "Bulgaria",
+   "iso": "BG",
+   "regione": "Europa",
+   "portale": "BCPEA — pubblici incanti degli agenti di esecuzione",
+   "portale_url": "https://sales.bcpea.org/",
+   "stato": "in_arrivo",
+   "valuta": "BGN",
+   "tipo_prezzo": "prezzo_base",
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "HTTP 200 (460 KB). Il vecchio dominio bpch.bg è NXDOMAIN.",
+   "metrica": "начална цена (base)",
+   "metrica_en": "auction starting price",
+   "verdetto": "serve un lavoro nostro"
+  },
+  {
+   "slug": "croazia",
+   "nome": "Croazia",
+   "nome_en": "Croatia",
+   "iso": "HR",
+   "regione": "Europa",
+   "portale": "FINA",
+   "portale_url": "https://www.fina.hr/",
+   "stato": "in_arrivo",
+   "valuta": "EUR",
+   "tipo_prezzo": "prezzo_base",
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "HTTP 200 ma /drazbe -> 404: rotta delle aste da individuare.",
+   "metrica": "početna cijena",
+   "metrica_en": "auction starting price",
+   "verdetto": "serve un lavoro nostro"
+  },
+  {
+   "slug": "slovenia",
+   "nome": "Slovenia",
+   "nome_en": "Slovenia",
+   "iso": "SI",
+   "regione": "Europa",
+   "portale": "Sodisce.si — e-dražbe",
+   "portale_url": "https://www.sodisce.si/",
+   "stato": "in_arrivo",
+   "valuta": "EUR",
+   "tipo_prezzo": "prezzo_base",
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "HTTP 200 ma 1 sola parola d'asta nella home: serve la rotta interna.",
+   "metrica": "izklicna cena",
+   "metrica_en": "auction starting price",
+   "verdetto": "serve un lavoro nostro"
+  },
+  {
+   "slug": "grecia",
+   "nome": "Grecia",
+   "nome_en": "Greece",
+   "iso": "EL",
+   "regione": "Europa",
+   "portale": "AADE (aste fiscali)",
+   "portale_url": "https://www.aade.gr/",
+   "stato": "in_arrivo",
+   "valuta": "EUR",
+   "tipo_prezzo": "prezzo_base",
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "AADE risponde 403 ai bot; pde.gr è patrimonio pubblico, non aste giudiziarie.",
+   "metrica": "τιμή εκκίνησης",
+   "metrica_en": "auction starting price",
+   "verdetto": "serve un lavoro nostro"
+  },
+  {
+   "slug": "cipro",
+   "nome": "Cipro",
+   "nome_en": "Cyprus",
+   "iso": "CY",
+   "regione": "Europa",
+   "portale": "Government Printing Office — gazzetta ufficiale",
+   "portale_url": "https://www.mof.gov.cy/mof/gpo/gpo.nsf",
+   "stato": "in_arrivo",
+   "valuta": "EUR",
+   "tipo_prezzo": "prezzo_base",
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "HTTP 200 (guscio 744 byte): gli avvisi sono in gazzetta.",
+   "metrica": "τιμή εκκίνησης",
+   "metrica_en": "auction starting price",
+   "verdetto": "serve un lavoro nostro"
+  },
+  {
+   "slug": "malta",
+   "nome": "Malta",
+   "nome_en": "Malta",
+   "iso": "MT",
+   "regione": "Europa",
+   "portale": "Courts of Justice + Government Gazette",
+   "portale_url": "https://courts.gov.mt/",
+   "stato": "in_arrivo",
+   "valuta": "EUR",
+   "tipo_prezzo": null,
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "403 da questa rete: va riprovata da un runner cloud prima di qualunque giudizio.",
+   "metrica": null,
+   "metrica_en": null,
+   "verdetto": "chiuso"
+  },
+  {
+   "slug": "estonia",
+   "nome": "Estonia",
+   "nome_en": "Estonia",
+   "iso": "EE",
+   "regione": "Europa",
+   "portale": "Ametlikud Teadaanded",
+   "portale_url": "https://www.ametlikudteadaanded.ee/",
+   "stato": "in_arrivo",
+   "valuta": "EUR",
+   "tipo_prezzo": "prezzo_base",
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "HTTP 200: registro annunci, formato da interpretare.",
+   "metrica": "alghind",
+   "metrica_en": "auction starting price",
+   "verdetto": "serve un lavoro nostro"
+  },
+  {
+   "slug": "lettonia",
+   "nome": "Lettonia",
+   "nome_en": "Latvia",
+   "iso": "LV",
+   "regione": "Europa",
+   "portale": "Izsoles",
+   "portale_url": "https://izsoles.ta.gov.lv/",
+   "stato": "in_arrivo",
+   "valuta": "EUR",
+   "tipo_prezzo": "prezzo_base",
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "HTTP 200, 243.731 byte (116 valute, 283 'izsoles'): elenco pulito, campione non ancora letto.",
+   "metrica": "sākumcena",
+   "metrica_en": "auction starting price",
+   "verdetto": "leggibile subito"
+  },
+  {
+   "slug": "lituania",
+   "nome": "Lituania",
+   "nome_en": "Lithuania",
+   "iso": "LT",
+   "regione": "Europa",
+   "portale": "EVS / e-aukcionai",
+   "portale_url": "https://www.eaukcionai.lt/evs/",
+   "stato": "in_arrivo",
+   "valuta": "EUR",
+   "tipo_prezzo": "prezzo_base",
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "HTTP 200 (16 KB): elenco da mappare. L'URL storico evarzytynes.lt reindirizza qui.",
+   "metrica": "pradinė kaina",
+   "metrica_en": "auction starting price",
+   "verdetto": "serve un lavoro nostro"
   },
   {
    "slug": "regno-unito",
@@ -167,9 +755,11 @@
    "nome_en": "United Kingdom",
    "iso": "GB",
    "regione": "Europa",
-   "portale": "HM Land Registry",
-   "portale_url": "https://www.gov.uk/government/organisations/land-registry",
+   "portale": "HM Land Registry — Price Paid Data",
+   "portale_url": "https://www.gov.uk/government/collections/price-paid-data",
    "stato": "in_arrivo",
+   "valuta": "GBP",
+   "tipo_prezzo": "prezzo_di_mercato",
    "copertura": {
     "lotti": null,
     "fonte": null,
@@ -181,9 +771,64 @@
     "stimaMedia": null,
     "scartoMedio": null
    },
-   "nota": "Unico paese con open data e API pubblica (Price Paid Data): il più facile da portare a dato nostro.",
+   "nota": "HTTP 200 sull'open data; il servizio di download risponde 403 da qui. Le aste UK non hanno portale statale.",
+   "metrica": "sold price registrato (NON prezzo d'asta)",
+   "metrica_en": "registered sale price",
+   "verdetto": "leggibile subito"
+  },
+  {
+   "slug": "svizzera",
+   "nome": "Svizzera",
+   "nome_en": "Switzerland",
+   "iso": "CH",
+   "regione": "Europa",
+   "portale": "Ufficio federale di giustizia + uffici cantonali",
+   "portale_url": "https://www.bj.admin.ch/",
+   "stato": "in_arrivo",
+   "valuta": "CHF",
+   "tipo_prezzo": null,
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "26 sistemi cantonali: si apre cantone per cantone, non con un portale unico.",
    "metrica": null,
-   "metrica_en": null
+   "metrica_en": null,
+   "verdetto": "serve un lavoro nostro"
+  },
+  {
+   "slug": "norvegia",
+   "nome": "Norvegia",
+   "nome_en": "Norway",
+   "iso": "NO",
+   "regione": "Europa",
+   "portale": "Politiets namsmann / tvangssalg",
+   "portale_url": "https://www.politiet.no/",
+   "stato": "in_arrivo",
+   "valuta": "NOK",
+   "tipo_prezzo": null,
+   "copertura": {
+    "lotti": null,
+    "fonte": null,
+    "rilevazione": null
+   },
+   "statistiche": {
+    "prezzoBaseMedio": null,
+    "offertaMinimaMedia": null,
+    "stimaMedia": null,
+    "scartoMedio": null
+   },
+   "nota": "politiet.no 200; tvangssalg.no guscio 264 byte; namsmannen.no irraggiungibile da qui.",
+   "metrica": null,
+   "metrica_en": null,
+   "verdetto": "serve un lavoro nostro"
   },
   {
    "slug": "giappone",
@@ -194,6 +839,8 @@
    "portale": "BIT — Keibai",
    "portale_url": "https://www.bit.sikkou.jp",
    "stato": "in_arrivo",
+   "valuta": "JPY",
+   "tipo_prezzo": null,
    "copertura": {
     "lotti": null,
     "fonte": null,
@@ -205,7 +852,7 @@
     "stimaMedia": null,
     "scartoMedio": null
    },
-   "nota": "Nessun actor Apify: si parte dal portale pubblico, direttamente.",
+   "nota": "Invariato rispetto a feed/world.json: nessuna verifica fatta in questa operazione.",
    "metrica": null,
    "metrica_en": null
   },
@@ -218,6 +865,8 @@
    "portale": "Taobao Judicial Auctions",
    "portale_url": "https://sf.taobao.com",
    "stato": "in_arrivo",
+   "valuta": "CNY",
+   "tipo_prezzo": null,
    "copertura": {
     "lotti": null,
     "fonte": null,
@@ -229,7 +878,7 @@
     "stimaMedia": null,
     "scartoMedio": null
    },
-   "nota": "Mercato enorme ma ecosistema chiuso: da valutare con attenzione legale prima di toccarlo.",
+   "nota": "Invariato rispetto a feed/world.json: ecosistema chiuso, valutazione legale prima di toccarlo.",
    "metrica": null,
    "metrica_en": null
   },
@@ -242,6 +891,8 @@
    "portale": "NSW auctions",
    "portale_url": "https://www.auctions.nsw.gov.au",
    "stato": "in_arrivo",
+   "valuta": "AUD",
+   "tipo_prezzo": null,
    "copertura": {
     "lotti": null,
     "fonte": null,
@@ -253,7 +904,7 @@
     "stimaMedia": null,
     "scartoMedio": null
    },
-   "nota": "Open data sui valori di mercato (NSW): utile per lo sconto reale.",
+   "nota": "Invariato rispetto a feed/world.json: open data NSW sui valori di mercato.",
    "metrica": null,
    "metrica_en": null
   }
