@@ -1,5 +1,5 @@
 {
-  "generato": "2026-11-11T11:51:32.145Z",
+  "generato": "2026-11-12T12:38:56.770Z",
   "chat": {
     "daDati": true,
     "risposta": "Su 200.000 euro la success fee e’ **5.800 euro** (2,9% applicato all’intero prezzo, fascia unica; con il minimo di 1.900 euro si parte da 48.718 euro di aggiudicazione). CARe Auctions **non fa mediazione** e non prende provvigioni: e’ **consulente di parte** del compratore. Si paga una **success fee solo se l’asta si aggiudica**: **3,9%** fino a 150.000 euro, **2,9%** da 150.001 a 300.000 euro, **1,9%** oltre 300.000 euro, con un **minimo di 1.900 euro**, entro 24 ore dall’aggiudicazione. Se non"
@@ -58,7 +58,7 @@
     {
       "nome": "i18n fr",
       "ok": true,
-      "dettaglio": "HTTP 200 · 4000 chiavi"
+      "dettaglio": "HTTP 200 · 4058 chiavi"
     },
     {
       "nome": "PVP documenti",
