@@ -6,10 +6,16 @@ const fs = require('fs');
 const RAW = 'https://raw.githubusercontent.com/PuntoLuce26/care-auctions-pagine/main';
 const ts = () => Math.floor(Date.now() / 1000);
 async function j(u) { try { const r = await fetch(u); return r.ok ? r.json() : null; } catch (e) { return null; } }
+/* 12/11/2026 — lo stato della posta vive su R2 (bucket care-stato), non più nel repo pubblico:
+ * 20 commit/24h misurati, e i soggetti delle mail finivano in chiaro in un repo pubblico.
+ * Senza token si ricade sulla raw: il digest non resta mai muto. */
+async function statoDaR2(percorso) {
+  try { const mod = await import('./stato-pubblica.mjs'); const l = await mod.leggiStato(percorso); return l.ok ? l.json : null; } catch (e) { return null; }
+}
 
 (async () => {
   const o = await j(RAW + '/qa/orchestra.json?ts=' + ts());
-  const m = await j(RAW + '/mail/stato.json?ts=' + ts());
+  const m = (await statoDaR2('mail/stato.json')) || await j(RAW + '/mail/stato.json?ts=' + ts());
   const ora = new Date().toLocaleString('it-IT', { timeZone: 'Europe/Rome' });
   if (!o) { console.log('Orchestra non leggibile'); process.exit(1); }
   const ko = (o.controlli || []).filter((c) => !c.ok && !c.skip);
