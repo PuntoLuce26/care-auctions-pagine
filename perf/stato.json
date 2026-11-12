@@ -1,10 +1,10 @@
 {
- "aggiornato": "2026-11-12T20:42:27.293Z",
- "origine_ttfb_ultimo": 401,
+ "aggiornato": "2026-11-12T22:30:27.028Z",
+ "origine_ttfb_ultimo": 389,
  "origine_ttfb_max_8": 851,
- "sito_ttfb_ultimo": 223,
+ "sito_ttfb_ultimo": 326,
  "punti_lenti_su_8": 0,
  "punti_giu_su_8": 0,
- "bundle_origine": "main.f7ed485d.js",
+ "bundle_origine": "main.23df51ef.js",
  "allarme": "ok"
 }
