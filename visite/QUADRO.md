@@ -1,8 +1,8 @@
-CARe — rapporto visite · 12/11/2026, 02:50:10
+CARe — rapporto visite · 12/11/2026, 17:37:22
 
 VISITE (Cloudflare RUM, 24 giorni misurati)
 - Ultimo giorno (2026-11-11): 1030 pagine viste · 1030 visite
-- Doppia percentuale: vs giorno prima +39,2% · vs report precedente +39,2%
+- Doppia percentuale: vs giorno prima +39,2% · vs report precedente 0%
 - Totale cumulato: 5590 pagine viste · 5000 visite
 - Media ultimi 7 giorni: 323 pagine viste/giorno
 
