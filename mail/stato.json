@@ -1,20 +1,9 @@
 {
-  "ultimoControllo": "2026-11-12T16:15:50.576Z",
+  "ultimoControllo": "2026-11-12T17:07:38.646Z",
   "ultimoQa": "2026-11-12T16:15:50.576Z",
-  "qaEsito": "QA dispatch HTTP 204",
-  "nuoveMail": 1,
-  "allarmi": [
-    {
-      "id": "1a1d05f04d75383a",
-      "data": "2026-11-12T15:27:29.000Z",
-      "da": "PuntoLuce26 <notifications@github.com>",
-      "oggetto": "[PuntoLuce26/care-auctions-pagine] Run failed: esiti-sync - main (f9e3074)",
-      "a": "\"PuntoLuce26/care-auctions-pagine\" <care-auctions-pagine@noreply.github.com>",
-      "componente": "github-actions",
-      "gravita": "media",
-      "link": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43243146065"
-    }
-  ],
+  "qaEsito": "nessun allarme nuovo",
+  "nuoveMail": 0,
+  "allarmi": [],
   "processati": [
     "1a1c636ae4a6b5a9",
     "1a1c634c8df2049e",
@@ -139,6 +128,7 @@
     "1a1d0567943e963e",
     "1a1d05678946e278",
     "1a1d05537947b255",
-    "1a1d05536c97e524"
+    "1a1d05536c97e524",
+    "1a1d09efd6f57fce"
   ]
 }
