@@ -83,6 +83,13 @@ jobs:
             sleep 4
           done
           echo "::warning::push qa/stato.json fallito"
+      # 12/11/2026 — lo stato del QA esce dal repo pubblico: va su R2 (care-stato) e si legge da lì.
+      # Il commit sopra resta finché tutti i lettori non sono migrati (doppia scrittura).
+      - name: Pubblica lo stato QA su R2
+        if: always()
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: node scripts/stato-pubblica.mjs qa/stato.json --verifica
 
       - name: Issue GitHub (una sola, aggiornata)
         if: always()
@@ -134,8 +141,16 @@ jobs:
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
-          ultimo=$(node -e 'try{const j=require("./mail/stato.json");process.stdout.write(String(j.ultimoControllo||""))}catch(e){process.stdout.write("")}')
+          # 12/11/2026 — lo stato della posta vive su R2: la sveglia legge da lì (il file nel repo
+          # resta solo come ripiego durante la migrazione). Un `require` del file congelato darebbe
+          # un'età falsa e sveglierebbe mail-qa a ogni giro: qui si legge la fonte vera.
+          ultimo=$(node scripts/stato-pubblica.mjs --leggi mail/stato.json --campo ultimoControllo 2>/dev/null || true)
+          if [ -z "$ultimo" ]; then
+            ultimo=$(node -e 'try{const j=require("./mail/stato.json");process.stdout.write(String(j.ultimoControllo||""))}catch(e){process.stdout.write("")}')
+            echo "R2 non leggibile: ripiego sul file nel repo (migrazione in corso)"
+          fi
           if [ -z "$ultimo" ]; then eta=999999; else eta=$(( ( $(date -u +%s) - $(date -u -d "$ultimo" +%s) ) / 60 )); fi
           echo "mail-qa ultimoControllo: ${ultimo:-nessuno} (${eta} min fa)"
           if [ "$eta" -gt 40 ]; then
