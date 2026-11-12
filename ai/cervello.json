@@ -1,6 +1,6 @@
 {
   "versione": "1.0",
-  "aggiornato": "2026-11-11T12:00:23.057Z",
+  "aggiornato": "2026-11-12T13:00:18.525Z",
   "sintesi": "iCARe è la consulente di CAReAuctions per aste giudiziarie italiane: success fee 3,9%/2,9%/1,9% a fascia unica, minimo 1.900 € (200.000 € = 5.800 €), nessuna mediazione; 321.232 lotti, 4.142 esiti pubblici verificati (360 immobiliari, mediana 33.375 €, copertura 29/09/2020-09/11/2026, 44 tribunali/14 regioni); PVP documenti/foto on-demand con 629 lotti di foto estratte; 89 lingue, 25 legali, italiano vincolante, revisione umana assente; QA cloud/interna, perf, mail-qa, app CI; tutti i software su cloud con trigger e registrati nel Secondo Cervello. Livello visitatore = generale/pubblico; registrato = dettaglio operativo (CAReIndex, iDati, CAReOS, OMI, PVP, strategia, propria pratica); mai dati interni o di altri utenti.",
   "pubblico": {
     "brand": "CAReAuctions",
@@ -20,7 +20,7 @@
       }
     },
     "dati": {
-      "lotti_banca_dati": 321428,
+      "lotti_banca_dati": 321574,
       "esiti_verificati": 4142,
       "esiti_immobiliari": 360,
       "mediana_esiti_immobiliari": 33375,
@@ -33,7 +33,7 @@
     "pvp": {
       "documenti": "/api/pvp-documenti/<id>",
       "immagini": "/api/pvp-img?u=",
-      "foto_estratte": 734,
+      "foto_estratte": 744,
       "nota": "perizia e documenti linkati, foto con lightbox/zoom",
       "fonte": "PVP/IVG"
     },
