@@ -1,49 +1,31 @@
 {
-  "generato": "2026-11-12T23:27:32Z",
+  "generato": "2026-11-12T23:30:27Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "7d937e00c1",
-    "a": "6e0f00b8fc"
+    "da": "31b4be945f",
+    "a": "4d2ed9a041"
   },
-  "fileEsaminati": 4,
+  "fileEsaminati": 2,
   "sintesi": {
-    "violazioni": 3,
-    "violazioniDaCommit": 3,
+    "violazioni": 1,
+    "violazioniDaCommit": 1,
     "commitSenzaAgente": 0,
     "duplicatiProcessi": 0,
     "esito": "attenzione"
   },
   "violazioni": [
     {
-      "commit": "6e0f00b8fc",
+      "commit": "4d2ed9a041",
       "agente": "proprieta-file",
       "file": ".github/workflows/guardiano-proprieta.README.md",
       "tipo": "owner",
       "owner": "workflow-owner",
       "nota": "unico. Chi tocca un file qui lo valida con Ruby/Psych prima del push e verifica la run CON JOB, non il commit.",
       "cosaFare": "non scrivere: deposita la richiesta in coda/.github/<timestamp>-proprieta-file.json"
-    },
-    {
-      "commit": "6e0f00b8fc",
-      "agente": "proprieta-file",
-      "file": ".github/workflows/guardiano-proprieta.yml",
-      "tipo": "owner",
-      "owner": "workflow-owner",
-      "nota": "unico. Chi tocca un file qui lo valida con Ruby/Psych prima del push e verifica la run CON JOB, non il commit.",
-      "cosaFare": "non scrivere: deposita la richiesta in coda/.github/<timestamp>-proprieta-file.json"
-    },
-    {
-      "commit": "6e0f00b8fc",
-      "agente": "proprieta-file",
-      "file": "ownership.json",
-      "tipo": "owner",
-      "owner": "lead",
-      "nota": "la mappa la cambia il Lead, non chi vuole scrivere un file.",
-      "cosaFare": "non scrivere: deposita la richiesta in coda/ownership.json/<timestamp>-proprieta-file.json"
     }
   ],
   "violazioniTroncate": 0,
@@ -62,6 +44,17 @@
   "rodaggio": {
     "bloccante": false,
     "dal": "2026-11-13",
-    "passaABloccante": "quando le violazioni saranno zero per 7 giorni consecutivi"
-  }
+    "passaABloccante": "quando le violazioni saranno zero per 7 giorni consecutivi",
+    "giorniPulitiConsecutivi": 0,
+    "giorniAlPassaggio": 7
+  },
+  "storia": [
+    {
+      "giorno": "2026-11-12",
+      "violazioni": 1,
+      "senzaAgente": 0,
+      "duplicati": 0,
+      "pulito": false
+    }
+  ]
 }
