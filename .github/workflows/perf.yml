@@ -35,7 +35,9 @@ jobs:
         run: |
           git config user.name "CARe Cloud"
           git config user.email "cloud@careauctions.co"
-          git add perf
+          # 12/11/2026 — perf/stato.json è stato interno e vive su R2 (caricato sopra).
+          # Qui resta solo l'artefatto del test di carico.
+          git add perf/stato-test.json
           if git diff --cached --quiet; then echo "nessuna variazione"; exit 0; fi
           git commit -m "perf: carico e performance ($(date -u +%FT%TZ))"
           for i in 1 2 3 4 5; do git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null; if git push; then exit 0; fi; sleep 4; done
