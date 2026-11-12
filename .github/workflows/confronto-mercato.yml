@@ -1,0 +1,72 @@
+name: confronto-mercato
+# 12/11/2026 — LO SCONTO REALE CERTIFICATO (aste vs OMI) ERA ORFANO.
+# Il 43,6% citato in home veniva da `feed/confronto-mercato.json` generato il 31/10/2026 da uno
+# script del Mac: nessuno lo riscriveva (sei lettori, zero scrittori). Un numero senza data accanto
+# è un'affermazione falsa. Ora il calcolo vive qui, in cloud, dentro il repo.
+# Cadenza dichiarata: SETTIMANALE, lunedì 03:30 UTC — l'OMI è semestrale (il valore di mercato
+# cambia 2 volte l'anno) e i lotti cambiano: una settimana è la granularità minima onesta.
+# Rigenerarlo ogni giorno sarebbe spreco.
+# Regola: se la KV OMI non risponde, `scripts/confronto-mercato.mjs` esce con errore e NON
+# scrive il file (mai un numero senza fonte). Il commit c'è solo se il controllo sull'artefatto passa.
+on:
+  schedule:
+    - cron: "30 3 * * 1"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: confronto-mercato
+  cancel-in-progress: false
+jobs:
+  sconto:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Calcola lo sconto reale (prezzo base d'asta vs valore OMI del comune)
+        env:
+          REGIA_KEY: ${{ secrets.REGIA_KEY }}
+          MAX_MINUTES: "75"
+        run: node scripts/confronto-mercato.mjs
+      - name: Controllo sull'artefatto (rilevazione + copertura dentro il file)
+        run: |
+          node -e "
+          const f = JSON.parse(require('fs').readFileSync('feed/confronto-mercato.json','utf8'));
+          const c = (f.meta && f.meta.copertura) || {};
+          const problemi = [];
+          if (!f.rilevazione || !/^\d{4}-\d{2}-\d{2}T/.test(f.rilevazione)) problemi.push('rilevazione mancante');
+          if (!(f.nazionale && f.nazionale.lotti > 0)) problemi.push('nazionale.lotti mancante');
+          if (!(c.lottiConMq > 0)) problemi.push('copertura.lottiConMq mancante');
+          if (!(c.lottiResidenziali > 0)) problemi.push('copertura.lottiResidenziali mancante');
+          if (!(c.comuniPubblicati > 0)) problemi.push('copertura.comuniPubblicati mancante');
+          if (problemi.length) { console.error('ARTEFATTO NON VALIDO:', problemi.join(' · ')); process.exit(1); }
+          console.log('ok · rilevazione', f.rilevazione, '· sconto mediano', f.nazionale.scontoMedianoPct + '%',
+            '·', f.nazionale.lotti, 'lotti confrontabili su', c.lottiResidenziali, 'residenziali ·',
+            c.comuniPubblicati, 'comuni su', c.comuniOmi);
+          "
+      - name: Commit
+        run: |
+          git config user.name "CARe Cloud"
+          git config user.email "cloud@careauctions.co"
+          git add feed/confronto-mercato.json
+          git diff --cached --quiet && echo "nessuna variazione" && exit 0
+          git commit -m "feed: sconto reale vs OMI rigenerato ($(date -u +%FT%TZ))"
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null
+            if git push -q; then exit 0; fi
+            sleep 4
+          done
+          echo "::error::push fallito"; exit 1
+      - name: Riepilogo
+        run: |
+          node -e "
+          const f = JSON.parse(require('fs').readFileSync('feed/confronto-mercato.json','utf8'));
+          const c = f.meta.copertura;
+          console.log('### Sconto reale vs OMI');
+          console.log('- rilevazione: ' + f.rilevazione + ' (semestre OMI ' + f.meta.semestreOmi + ')');
+          console.log('- sconto mediano: **' + f.nazionale.scontoMedianoPct + '%** · P25 ' + f.nazionale.scontoP25Pct + ' · P75 ' + f.nazionale.scontoP75Pct);
+          console.log('- copertura: ' + f.nazionale.lotti + ' lotti confrontabili su ' + c.lottiResidenziali + ' residenziali (' + c.percentualeConMq + '% con mq dichiarato) · ' + c.comuniPubblicati + ' comuni su ' + c.comuniOmi + ' con valori OMI');
+          " >> "$GITHUB_STEP_SUMMARY"
