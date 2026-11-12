@@ -52,8 +52,12 @@ for(const f of ['statistiche','world','ricevute','san-pasquale-foto']){
   if(agg){ const ms=Date.now()-Date.parse(agg); if(!isNaN(ms)) eta=Math.round(ms/60000); }
   // un feed LEGITTIMAMENTE vuoto non e in ritardo: le ricevute nascono all'incasso
   const vuotoLegittimo = f==='ricevute' && (d.ricevute||[]).length===0;
+  // ogni feed ha il suo ritmo: le statistiche girano ogni pochi minuti, gli altri cambiano di rado.
+  // Una soglia unica produce falsi gialli (misurato il 12/11: world e san-pasquale-foto a 101 e 81 min).
+  const SOGLIE={statistiche:[60,180], world:[1440,2880], ricevute:[1440,2880], 'san-pasquale-foto':[1440,2880]};
+  const [gialla,rossa]=SOGLIE[f]||[60,180];
   const stato = vuotoLegittimo ? 'ok'
-              : eta===null?'giallo' : eta>180?'rosso' : eta>60?'giallo':'ok';
+              : eta===null?'giallo' : eta>rossa?'rosso' : eta>gialla?'giallo':'ok';
   const extra = f==='statistiche'?`${d.totale||'?'} lotti` : f==='world'?`${(d.paesi||[]).length} paesi` : f==='ricevute'?`${(d.ricevute||[]).length} ricevute` : `${(d.foto||[]).length} foto`;
   add('feed',f,stato, eta===null?'data assente':`${eta} min`, extra);
 }
