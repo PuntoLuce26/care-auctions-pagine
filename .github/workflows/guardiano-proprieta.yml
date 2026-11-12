@@ -1,0 +1,153 @@
+name: guardiano-proprieta
+# PROPRIETA' DEI FILE — rende VISIBILE chi scrive cosa.
+#
+# Perche' esiste: tre agenti hanno scritto lo stesso care-workers/veglia/worker.js in tre
+# modi diversi e ci si e' salvati solo per iniziativa di uno di loro. Git non se ne
+# accorge: due scritture locali sullo stesso file, l'ultima vince in silenzio.
+#
+# Regola (Secondo Cervello, 01-decisioni/PROPRIETA-FILE.md):
+#   un file ha UN solo scrittore; chi non lo possiede non lo apre in scrittura, deposita
+#   una richiesta di patch in coda/<dominio>/<timestamp>-<agente>.json.
+#
+# Questa NON e' la guardia della sintassi (quella e' guardiano-workflow): e' la guardia
+# della PROPRIETA'.
+#
+# RODAGGIO: segnala, non blocca. Passa a bloccante quando le violazioni saranno zero per
+# 7 giorni consecutivi (GUARDIANO_BLOCCANTE=1 nel passo di analisi; vedi
+# .github/workflows/guardiano-proprieta.README.md).
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: guardiano-proprieta
+  cancel-in-progress: true
+
+jobs:
+  proprieta:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # Il guardiano non guarda se stesso: il commit con cui pubblica lo stato non riapre il giro.
+    if: "github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'proprieta: stato')"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 30
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Legge la tabella PROCESSI (repo privato care-workers, chiave di sola lettura)
+        continue-on-error: true
+        env:
+          CHIAVE: ${{ secrets.PROPRIETA_DEPLOY_KEY }}
+        run: |
+          if [ -z "$CHIAVE" ]; then echo "::warning title=Guardiano proprieta::PROPRIETA_DEPLOY_KEY assente, duplicati PROCESSI non verificabili"; exit 0; fi
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "$CHIAVE" > ~/.ssh/proprieta
+          chmod 600 ~/.ssh/proprieta
+          export GIT_SSH_COMMAND="ssh -i $HOME/.ssh/proprieta -o StrictHostKeyChecking=accept-new -o IdentitiesOnly=yes -o BatchMode=yes"
+          rm -rf /tmp/care-workers
+          if git clone --depth 1 --quiet git@github.com:PuntoLuce26/care-workers.git /tmp/care-workers; then
+            echo "care-workers letto: $(wc -l < /tmp/care-workers/veglia/worker.js) righe in veglia/worker.js"
+          else
+            echo "::warning title=Guardiano proprieta::clone di care-workers non riuscito, duplicati PROCESSI non verificabili"
+          fi
+
+      - name: Controlla la proprieta dei file toccati
+        env:
+          # Tabella PROCESSI letta dal clone del repo privato (chiave di sola lettura sopra).
+          # Se il clone non c'e', il controllo dichiara "non verificabile" e NON fallisce:
+          # un allarme falso cronico e' peggio di un controllo mancante.
+          VEGLIA_WORKER_PATH: /tmp/care-workers/veglia/worker.js
+          GITHUB_EVENT_BEFORE: ${{ github.event.before }}
+          GITHUB_SHA: ${{ github.sha }}
+        run: |
+          node scripts/guardiano-proprieta.js || echo "::warning title=Guardiano proprieta::lo script e uscito con errore (vedi log)"
+
+      - name: Warning nella interfaccia per ogni segnale
+        if: always()
+        run: |
+          node -e '
+            const s = require("./qa/proprieta-stato.json");
+            for (const v of s.violazioni.slice(0, 20)) {
+              console.log("::warning title=Proprieta del file::" + v.file + " e di " + v.owner + ", scritto da " + v.agente + " (commit " + v.commit + ")");
+            }
+            for (const c of s.commitSenzaAgente.slice(0, 10)) {
+              console.log("::warning title=Commit senza agente::" + c.commit + " - " + c.oggetto);
+            }
+            if (s.processi.duplicati.length) {
+              console.log("::warning title=PROCESSI duplicati::" + s.processi.duplicati.map(function (d) { return d.nome + " x" + d.volte; }).join(", "));
+            }
+          ' || true
+
+      - name: Issue [PROPRIETA] se la tabella PROCESSI ha nomi duplicati
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          DUP=$(node -e 'const s=require("./qa/proprieta-stato.json"); console.log(s.processi.duplicati.length)' 2>/dev/null || echo 0)
+          if [ "$DUP" = "0" ]; then echo "nessun duplicato nella tabella PROCESSI"; exit 0; fi
+          {
+            echo "## Tabella PROCESSI con nomi duplicati"
+            echo ""
+            echo "In care-workers/veglia/worker.js la tabella PROCESSI contiene lo stesso nome piu di una volta."
+            echo "Due righe con lo stesso nome sono due verita sullo stesso processo: una delle due mente."
+            echo ""
+            echo "| processo | righe |"
+            echo "|---|---|"
+            node -e 'const s=require("./qa/proprieta-stato.json"); for (const d of s.processi.duplicati) console.log("| " + d.nome + " | " + d.volte + " |");'
+            echo ""
+            echo "Si corregge SOLO per richiesta in coda/veglia/ (owner: veglia-append)."
+            echo ""
+            echo "Commit: ${GITHUB_SHA} - Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          } > /tmp/body.md
+          NUM=$(gh issue list --state open --search 'in:title "[PROPRIETA]"' --json number --jq '.[0].number // empty' || true)
+          if [ -n "$NUM" ]; then
+            gh issue comment "$NUM" --body-file /tmp/body.md
+          else
+            gh issue create --title "[PROPRIETA] Tabella PROCESSI con nomi duplicati" --body-file /tmp/body.md
+          fi
+
+      - name: "Committa qa/proprieta-stato.json (freno: pulito e fresco = nessun commit)"
+        if: always()
+        run: |
+          set -e
+          git config user.name "guardiano-proprieta"
+          git config user.email "cloud@careauctions.co"
+          [ -f qa/proprieta-stato.json ] || { echo "::warning::qa/proprieta-stato.json non prodotto"; exit 0; }
+          git add qa/proprieta-stato.json
+          if git diff --cached --quiet; then echo "stato identico a quello committato"; exit 0; fi
+          V=$(node -e 'const s=require("./qa/proprieta-stato.json"); console.log(s.sintesi.violazioni + s.sintesi.commitSenzaAgente + s.sintesi.duplicatiProcessi)' 2>/dev/null || echo 0)
+          ORA=$(date -u +%s)
+          ULTIMO=$(git log -1 --format=%ct -- qa/proprieta-stato.json 2>/dev/null || echo 0)
+          [ -n "$ULTIMO" ] || ULTIMO=0
+          if [ "$V" = "0" ] && [ $((ORA - ULTIMO)) -lt 3600 ]; then
+            echo "stato pulito e piu fresco di 60 minuti: non serve un commit a ogni push"
+            exit 0
+          fi
+          git commit -m "proprieta: stato - ${V} segnali [skip ci]"
+          for i in 1 2 3 4 5; do
+            if git pull -q --rebase origin main; then
+              if git push; then echo "stato pubblicato al tentativo $i"; exit 0; fi
+            else
+              git rebase --abort 2>/dev/null || true
+            fi
+            sleep 6
+          done
+          echo "::warning title=Guardiano proprieta::stato non pubblicato dopo 5 tentativi (non bloccante in rodaggio)"
+
+      - name: Prova della run (artefatto, anche se il commit e saltato)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: proprieta-stato
+          path: qa/proprieta-stato.json
+          if-no-files-found: warn
