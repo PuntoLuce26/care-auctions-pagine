@@ -26,8 +26,13 @@ const fileTutti = fs.readdirSync(cacheDir).filter((f) => /^\d{4}-\d\.json$/.test
 if (!fileTutti.length) { console.error('nessuna cache in', cacheDir); process.exit(1); }
 const file = [], dati = [], saltati = [];
 for (const f of fileTutti) {
+  const pp = path.join(cacheDir, f);
   try {
-    const t = fs.readFileSync(path.join(cacheDir, f), 'utf8');
+    // 12/11/2026 — i file EVASI da iCloud hanno blocks = 0 (size normale): leggerli BLOCCA
+    // il processo per sempre. Si scartano PRIMA di aprire, con una stat (veloce).
+    const st = fs.statSync(pp);
+    if (st.size > 0 && st.blocks === 0) { saltati.push(f.replace('.json', '').replace('-', '/')); continue; }
+    const t = fs.readFileSync(pp, 'utf8');
     if (!t || t.length < 100) throw new Error('file vuoto');
     dati.push(JSON.parse(t)); file.push(f);
   } catch (e) { saltati.push(f.replace('.json', '').replace('-', '/')); }
@@ -35,6 +40,18 @@ for (const f of fileTutti) {
 if (!file.length) { console.error('nessuna cache leggibile in', cacheDir); process.exit(1); }
 if (saltati.length) console.error('cache non leggibili (salto, riprendo dal feed):', saltati.join(', '));
 const semestri = file.map((f) => f.replace('-', '/').replace('.json', ''));
+// 12/11/2026 — GUARDIA: mai un feed con MENO storia di quello che c'è già.
+// Era successo: con 44 cache evase da iCloud il giro ha scritto un omi-indice con 1 semestre
+// al posto di 45, cancellando la serie storica pubblicata. Ora si ferma e lo dice.
+const vecchioIndice = (() => { try { return JSON.parse(fs.readFileSync(path.join(outDir, 'omi-indice.json'), 'utf8')); } catch (e) { return null; } })();
+const semestriVecchi = (vecchioIndice && vecchioIndice.nazionale) ? vecchioIndice.nazionale.length : 0;
+const MANCA_STORIA = saltati.length > 0 && semestri.length < semestriVecchi;
+const FORZA = process.argv.includes('--forza');
+if (MANCA_STORIA) {
+  console.error('ATTENZIONE: ' + saltati.length + ' cache non leggibili, semestri calcolati ' + semestri.length + ' su ' + semestriVecchi + ' pubblicati.');
+  console.error('I semestri mancanti vengono RIPRESI dal feed pubblicato (la storia non si perde).');
+}
+
 const ultimo = semestri[semestri.length - 1], penultimo = semestri[semestri.length - 2] || null;
 
 const agg = (comuni, filtro) => { const mins = [], maxs = []; for (const c of Object.values(comuni)) { if (filtro && !filtro(c)) continue; if (c.min != null) { mins.push(c.min); maxs.push(c.max); } } return { righe: mins.length, min: r1(med(mins)), max: r1(med(maxs)), mediano: r1((med(mins) + med(maxs)) / 2) }; };
@@ -48,6 +65,29 @@ const aree = {}, regioni = {}, province = {};
 for (const a of [...chiaviAree].sort()) aree[a] = dati.map((d, i) => ({ semestre: semestri[i], ...agg(d.comuni, (c) => c.area === a) }));
 for (const r of [...chiaviReg].sort()) regioni[r] = dati.map((d, i) => ({ semestre: semestri[i], ...agg(d.comuni, (c) => c.reg === r) }));
 for (const p of [...chiaviProv].sort()) province[p] = dati.map((d, i) => ({ semestre: semestri[i], ...agg(d.comuni, (c) => c.prov === p) }));
+
+// 12/11/2026 — MERGE CON LA STORIA PUBBLICATA: per i semestri la cui cache non è
+// leggibile (iCloud l'ha in deposito) si riusano i valori del feed già pubblicato.
+// Così un giro con poche cache non cancella 45 semestri: li completa.
+if (MANCA_STORIA && vecchioIndice) {
+  const fondi = (serieNuova, serieVecchia) => {
+    const perSem = new Map();
+    for (const x of serieNuova) perSem.set(x.semestre, x);
+    for (const x of (serieVecchia || [])) if (!perSem.has(x.semestre)) perSem.set(x.semestre, { ...x, ripreso: true });
+    return [...perSem.values()].sort((a, b) => chiave(a.semestre) - chiave(b.semestre));
+  };
+  const nazFusa = fondi(naz, vecchioIndice.nazionale);
+  const base = nazFusa.length && nazFusa[0].mediano ? nazFusa[0].mediano : null;
+  const ricalcola = (serie) => serie.map((x) => ({ ...x, indice: base && x.mediano ? r1(x.mediano / base * 100, 1) : x.indice }));
+  const indiceFuso = ricalcola(nazFusa.map(({ ripreso, ...x }) => x));
+  naz.length = 0; indice.length = 0;
+  nazFusa.forEach(({ ripreso, ...x }, i) => { naz.push(x); indice.push(indiceFuso[i]); });
+  for (const [nome, obj, vecchio] of [['aree', aree, vecchioIndice.aree || {}], ['regioni', regioni, vecchioIndice.regioni || {}], ['province', province, vecchioIndice.province || {}]]) {
+    for (const k of Object.keys(obj)) obj[k] = fondi(obj[k], vecchio[k] || []);
+    for (const k of Object.keys(vecchio)) if (!obj[k]) obj[k] = vecchio[k];
+  }
+  console.error('storia ricomposta: ' + naz.length + ' semestri (di cui ' + saltati.length + ' ripresi dal feed)');
+}
 
 const ult = dati[dati.length - 1], pen = penultimo ? dati[dati.length - 2] : null;
 // volumi di compravendita (liquidità): ultimo anno disponibile, per comune
@@ -92,7 +132,14 @@ for (const [prov, serie] of Object.entries(province)) {
   provinceInfo[prov] = { comuni: lista.length, renditaMedianaPct: rend ? r1(med(rend), 2) : null, ntn: ntn || null };
 }
 fs.writeFileSync(path.join(outDir, 'omi-indice.json'), JSON.stringify({ meta, nazionale: indice, aree, regioni, province, provinceInfo }));
+// 12/11/2026 — se manca la cache dell'ULTIMO semestre, omi-comuni sarebbe costruito su
+// dati vecchi spacciati per attuali: non si scrive e si tiene quello pubblicato.
+const ultimoVero = (vecchioIndice && vecchioIndice.nazionale && vecchioIndice.nazionale.length) ? vecchioIndice.nazionale[vecchioIndice.nazionale.length - 1].semestre : ultimo;
+if (saltati.includes(ultimoVero) || saltati.includes(ultimoVero.replace('/', '-'))) {
+  console.error('omi-comuni NON riscritto: manca la cache di ' + ultimo + ' (quella pubblicata resta valida).');
+} else {
 fs.writeFileSync(path.join(outDir, 'omi-comuni.json'), JSON.stringify({ meta, comuni }));
+}
 fs.writeFileSync(path.join(outDir, 'omi-stato.json'), JSON.stringify({ meta, allarme: comuni.length ? 'ok' : 'nessun dato' }));
 console.log('semestri', semestri.length, '· comuni', comuni.length, '· aree', meta.aree, '· regioni', meta.regioni, '· province', meta.province);
 console.log('indice', indice[0].semestre, indice[0].indice, '→', indice[indice.length - 1].semestre, indice[indice.length - 1].indice);
