@@ -87,7 +87,11 @@ const post = (body) => req(BASE + '/api/icare', { method: 'POST', headers: { 'Co
   const pf = await statoInterno('perf/stato.json', RAW + '/perf/stato.json');
   const pj = pf.json || {};
   const p95 = Number(pj.p95 || (pj.risultati && pj.risultati.p95) || 0);
-  const etaP = pj.generato ? (Date.now() - Date.parse(pj.generato)) / 86400000 : 999;
+  // 12/11/2026 — il file di perf dichiara `aggiornato`, NON `generato`: il check cercava un campo
+  // che non esiste e gridava «999 giorni» a OGNI giro, per sempre. Un allarme falso cronico è
+  // peggio di un controllo mancante: spegne l'attenzione (regola watchdog 11/11/2026).
+  const tP = pj.aggiornato || pj.generato || pj.ultimoGiro || null;
+  const etaP = tP ? (Date.now() - Date.parse(tP)) / 86400000 : 999;
   ck('perf_stato', pf.status === 200 && (!p95 || p95 < 1000) && etaP <= 8, (pf.fonte === 'r2' ? 'R2' : 'raw') + ' · p95 ' + p95 + 'ms · età ' + etaP.toFixed(1) + 'g');
   // 12. worker AI (con chiave)
   if (KEY) {
