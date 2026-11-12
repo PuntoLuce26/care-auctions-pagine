@@ -68,11 +68,11 @@
    "regione": "Europa",
    "portale": "ZVG-Portal",
    "portale_url": "https://www.zvg-portal.de",
-   "stato": "in_arrivo",
+   "stato": "test",
    "copertura": {
-    "lotti": null,
-    "fonte": null,
-    "rilevazione": null
+    "lotti": 10,
+    "fonte": "ZVG-Portal (zvg-portal.de), campione di 10 aste in Nordrhein-Westfalen, dettagli attivi",
+    "rilevazione": "2026-11-12"
    },
    "statistiche": {
     "prezzoBaseMedio": null,
@@ -80,7 +80,7 @@
     "stimaMedia": null,
     "scartoMedio": null
    },
-   "nota": "Actor disponibile e maturo (1.063 run). Test da 0,02 USD, non ancora eseguito."
+   "nota": "Test riuscito: 10 aste NRW con Verkehrswert in EUR, data, tribunale, numero di procedura e Gutachten PDF; i link diretti al portale rispondono solo con cookie di sessione."
   },
   {
    "slug": "portogallo",
