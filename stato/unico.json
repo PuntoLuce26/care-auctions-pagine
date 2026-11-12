@@ -1,9 +1,9 @@
 {
- "generato": "2026-11-12T21:25:59.460Z",
- "semaforo": "verde",
+ "generato": "2026-11-12T22:01:02.212Z",
+ "semaforo": "giallo",
  "conteggi": {
-  "ok": 24,
-  "giallo": 0,
+  "ok": 23,
+  "giallo": 1,
   "rosso": 0,
   "non_verificabile": 0
  },
@@ -89,49 +89,49 @@
    "sezione": "feed",
    "nome": "statistiche",
    "stato": "ok",
-   "valore": "6 min",
+   "valore": "9 min",
    "dettaglio": "321689 lotti"
   },
   {
    "sezione": "feed",
    "nome": "world",
    "stato": "ok",
-   "valore": "2 min",
+   "valore": "37 min",
    "dettaglio": "33 paesi"
   },
   {
    "sezione": "feed",
    "nome": "ricevute",
    "stato": "ok",
-   "valore": "367 min",
+   "valore": "403 min",
    "dettaglio": "0 ricevute"
   },
   {
    "sezione": "feed",
    "nome": "san-pasquale-foto",
    "stato": "ok",
-   "valore": "240 min",
+   "valore": "275 min",
    "dettaglio": "37 foto"
   },
   {
    "sezione": "build",
    "nome": "sito vs origine",
    "stato": "ok",
-   "valore": "main.aedf2a48.js / main.aedf2a48.js",
+   "valore": "main.23df51ef.js / main.23df51ef.js",
    "dettaglio": ""
   },
   {
    "sezione": "prerender",
    "nome": "snapshot vs vivo",
    "stato": "ok",
-   "valore": "main.aedf2a48.js / main.aedf2a48.js",
+   "valore": "main.23df51ef.js / main.23df51ef.js",
    "dettaglio": ""
   },
   {
    "sezione": "prerender",
    "nome": "bot allineato",
    "stato": "ok",
-   "valore": "main.aedf2a48.js",
+   "valore": "main.23df51ef.js",
    "dettaglio": ""
   },
   {
@@ -153,14 +153,14 @@
    "nome": "critici",
    "stato": "ok",
    "valore": "0",
-   "dettaglio": "10 controlli"
+   "dettaglio": "4 controlli"
   },
   {
    "sezione": "mail",
    "nome": "allarmi",
-   "stato": "ok",
-   "valore": "0",
-   "dettaglio": "2026-11-12T20:40:42.401Z"
+   "stato": "giallo",
+   "valore": "1",
+   "dettaglio": "2026-11-12T21:58:53.134Z"
   },
   {
    "sezione": "sentinella",
@@ -180,8 +180,8 @@
    "sezione": "github",
    "nome": "run rossi (2h)",
    "stato": "ok",
-   "valore": "1 isolati",
-   "dettaglio": "qa (una volta sola: race nota)"
+   "valore": "0 isolati",
+   "dettaglio": ""
   }
  ]
 }
