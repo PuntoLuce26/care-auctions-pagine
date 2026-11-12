@@ -13,7 +13,8 @@
    "test": "campione di prova, non copertura",
    "in_arrivo": "portale individuato, numeri non ancora raccolti"
   },
-  "statistiche": "prezzoBaseMedio, offertaMinimaMedia, stimaMedia, scartoMedio sono null finché non esiste una copertura sufficiente: un campione di test non produce statistiche pubbliche"
+  "statistiche": "prezzoBaseMedio, offertaMinimaMedia, stimaMedia, scartoMedio sono null finché non esiste una copertura sufficiente: un campione di test non produce statistiche pubbliche",
+  "metrica": "ogni paese dichiara che cosa è il suo numero principale. Non si confrontano tra loro metriche diverse: il prezzo base d'asta italiano, il valor de subasta spagnolo e il Verkehrswert tedesco sono tre cose diverse. Un confronto internazionale si fa solo dopo normalizzazione dichiarata."
  },
  "paesi": [
   {
@@ -36,7 +37,9 @@
     "stimaMedia": null,
     "scartoMedio": null
    },
-   "nota": "Fonte primaria letta dal nostro motore: nessun intermediario."
+   "nota": "Fonte primaria letta dal nostro motore: nessun intermediario.",
+   "metrica": "prezzo base d'asta",
+   "metrica_en": "auction base price"
   },
   {
    "slug": "spagna",
@@ -58,7 +61,9 @@
     "stimaMedia": null,
     "scartoMedio": null
    },
-   "nota": "Test riuscito: schema identico al PVP italiano (base d'asta, minima, stima, date, autorità, link diretto). Copertura completa da costruire."
+   "nota": "Test riuscito: schema identico al PVP italiano (base d'asta, minima, stima, date, autorità, link diretto). Copertura completa da costruire.",
+   "metrica": "valor de subasta (base d'asta BOE)",
+   "metrica_en": "auction starting value"
   },
   {
    "slug": "germania",
@@ -80,7 +85,9 @@
     "stimaMedia": null,
     "scartoMedio": null
    },
-   "nota": "Test riuscito: 10 aste NRW con Verkehrswert in EUR, data, tribunale, numero di procedura e Gutachten PDF; i link diretti al portale rispondono solo con cookie di sessione."
+   "nota": "Test riuscito: 10 aste NRW con Verkehrswert in EUR, data, tribunale, numero di procedura e Gutachten PDF; i link diretti al portale rispondono solo con cookie di sessione.",
+   "metrica": "Verkehrswert (stima di mercato, NON prezzo base d'asta)",
+   "metrica_en": "market appraisal value, not a starting price"
   },
   {
    "slug": "portogallo",
@@ -102,7 +109,9 @@
     "stimaMedia": null,
     "scartoMedio": null
    },
-   "nota": "Due test a vuoto (0 righe): da capire se il mercato era fermo o serve un input diverso."
+   "nota": "Due test a vuoto (0 righe): da capire se il mercato era fermo o serve un input diverso.",
+   "metrica": null,
+   "metrica_en": null
   },
   {
    "slug": "francia",
@@ -124,7 +133,9 @@
     "stimaMedia": null,
     "scartoMedio": null
    },
-   "nota": "Actor disponibile; test da eseguire. In Francia esiste anche DVF per i valori di mercato."
+   "nota": "Actor disponibile; test da eseguire. In Francia esiste anche DVF per i valori di mercato.",
+   "metrica": null,
+   "metrica_en": null
   },
   {
    "slug": "austria",
@@ -146,7 +157,9 @@
     "stimaMedia": null,
     "scartoMedio": null
    },
-   "nota": "Nessun actor Apify: si parte dal portale pubblico, direttamente."
+   "nota": "Nessun actor Apify: si parte dal portale pubblico, direttamente.",
+   "metrica": null,
+   "metrica_en": null
   },
   {
    "slug": "regno-unito",
@@ -168,7 +181,9 @@
     "stimaMedia": null,
     "scartoMedio": null
    },
-   "nota": "Unico paese con open data e API pubblica (Price Paid Data): il più facile da portare a dato nostro."
+   "nota": "Unico paese con open data e API pubblica (Price Paid Data): il più facile da portare a dato nostro.",
+   "metrica": null,
+   "metrica_en": null
   },
   {
    "slug": "giappone",
@@ -190,7 +205,9 @@
     "stimaMedia": null,
     "scartoMedio": null
    },
-   "nota": "Nessun actor Apify: si parte dal portale pubblico, direttamente."
+   "nota": "Nessun actor Apify: si parte dal portale pubblico, direttamente.",
+   "metrica": null,
+   "metrica_en": null
   },
   {
    "slug": "cina",
@@ -212,7 +229,9 @@
     "stimaMedia": null,
     "scartoMedio": null
    },
-   "nota": "Mercato enorme ma ecosistema chiuso: da valutare con attenzione legale prima di toccarlo."
+   "nota": "Mercato enorme ma ecosistema chiuso: da valutare con attenzione legale prima di toccarlo.",
+   "metrica": null,
+   "metrica_en": null
   },
   {
    "slug": "australia",
@@ -234,7 +253,9 @@
     "stimaMedia": null,
     "scartoMedio": null
    },
-   "nota": "Open data sui valori di mercato (NSW): utile per lo sconto reale."
+   "nota": "Open data sui valori di mercato (NSW): utile per lo sconto reale.",
+   "metrica": null,
+   "metrica_en": null
   }
  ]
 }
