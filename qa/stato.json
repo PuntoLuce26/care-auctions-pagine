@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-12T17:06:33.101Z",
-  "runId": "43264906310",
-  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43264906310",
+  "generatedAt": "2026-11-12T17:27:51.864Z",
+  "runId": "43268762253",
+  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43268762253",
   "base": "https://careauctions.co",
-  "durationSec": 210,
+  "durationSec": 207,
   "build": {
-    "sito": "main.6173aa11.js",
-    "origine": "main.6173aa11.js"
+    "sito": "main.07badebe.js",
+    "origine": "main.07badebe.js"
   },
   "summary": {
     "critical": 0,
@@ -54,18 +54,18 @@
       "route": "/",
       "viewport": "desktop",
       "http": 200,
-      "text": 18292,
+      "text": 19492,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
-      "formsFilled": 0,
+      "formsFilled": 5,
       "clicks": 3
     },
     {
       "route": "/aste",
       "viewport": "desktop",
       "http": 200,
-      "text": 20559,
+      "text": 20407,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -175,7 +175,7 @@
       "route": "/buynow/san-pasquale",
       "viewport": "desktop",
       "http": 200,
-      "text": 4508,
+      "text": 4507,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -186,7 +186,7 @@
       "route": "/compra-ora",
       "viewport": "desktop",
       "http": 200,
-      "text": 20408,
+      "text": 7177,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -241,7 +241,7 @@
       "route": "/stato",
       "viewport": "desktop",
       "http": 200,
-      "text": 775,
+      "text": 769,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -263,7 +263,7 @@
       "route": "/aste",
       "viewport": "mobile",
       "http": 200,
-      "text": 20456,
+      "text": 21016,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -285,7 +285,7 @@
       "route": "/buynow/san-pasquale",
       "viewport": "mobile",
       "http": 200,
-      "text": 4405,
+      "text": 4404,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -329,7 +329,7 @@
         {
           "route": "/buynow/san-pasquale",
           "http": 200,
-          "text": 4508,
+          "text": 4507,
           "errors": 0
         }
       ]
@@ -341,13 +341,13 @@
         {
           "route": "/",
           "http": 200,
-          "text": 16131,
+          "text": 16029,
           "errors": 0
         },
         {
           "route": "/buynow/san-pasquale",
           "http": 200,
-          "text": 4489,
+          "text": 4488,
           "errors": 0
         }
       ]
@@ -388,7 +388,7 @@
       "linkNovita": true,
       "linkAffiliazione": true,
       "linkBuynow": false,
-      "build": "main.6173aa11.js"
+      "build": "main.07badebe.js"
     },
     "botHome": {
       "status": 200,
@@ -402,15 +402,15 @@
     },
     "origin": {
       "status": 200,
-      "build": "main.6173aa11.js"
+      "build": "main.07badebe.js"
     }
   },
   "feed": {
     "statistiche": {
       "status": 200,
-      "aggiornato": "2026-11-12T16:44:43.481Z",
-      "totale": 321658,
-      "ageHours": 0.4
+      "aggiornato": "2026-11-12T17:09:36.709Z",
+      "totale": 321661,
+      "ageHours": 0.3
     },
     "aggiudicazioni": {
       "status": 200,
@@ -427,49 +427,49 @@
         "name": "stato",
         "ok": true,
         "status": 200,
-        "ms": 2200,
+        "ms": 2033,
         "detail": "tabella popolata"
       },
       {
         "name": "feed statistiche",
         "ok": true,
         "status": 200,
-        "ms": 232,
-        "detail": "totale 321658 · 0.4 h fa"
+        "ms": 61,
+        "detail": "totale 321661 · 0.3 h fa"
       },
       {
         "name": "feed aggiudicazioni",
         "ok": true,
         "status": 200,
-        "ms": 284,
+        "ms": 250,
         "detail": "18368 record"
       },
       {
         "name": "origine Emergent",
         "ok": true,
         "status": 200,
-        "ms": 410,
-        "detail": "main.6173aa11.js"
+        "ms": 373,
+        "detail": "main.07badebe.js"
       },
       {
         "name": "chat iCARe",
         "ok": true,
         "status": 200,
-        "ms": 479,
+        "ms": 476,
         "detail": "{\"ok\":true,\"risposta\":\"Ciao, sono **iCARe**, la consulente immobiliare di CARe …"
       },
       {
         "name": "iCAReWall API",
         "ok": true,
         "status": 200,
-        "ms": 269,
+        "ms": 570,
         "detail": "15587 byte"
       },
       {
         "name": "voce TTS",
         "ok": true,
         "status": 200,
-        "ms": 65,
+        "ms": 17,
         "detail": "6482 byte"
       }
     ],
