@@ -180,13 +180,19 @@ async function main() {
   const a = argomenti(process.argv.slice(2));
   if (a.help || a.aiuto) {
     console.log('uso: node scripts/stato-pubblica.mjs <file> [--chiave k] [--bucket b] [--prefisso p] [--verifica] [--forza]');
-    console.log('     node scripts/stato-pubblica.mjs --leggi <chiave-o-percorso>');
+    console.log('     node scripts/stato-pubblica.mjs --leggi <chiave-o-percorso> [--campo <nome>]');
     return 0;
   }
   const opts = { chiave: a.chiave, bucket: a.bucket, prefisso: a.prefisso, account: a.account, verifica: !!a.verifica, forza: !!a.forza };
   if (a.leggi) {
     const l = await leggiStato(String(a.leggi), opts);
     if (!l.ok) { console.error('stato-pubblica: lettura non riuscita · ' + l.motivo); return 1; }
+    if (a.campo) {
+      // `--campo ultimoControllo` stampa SOLO quel campo: comodo nei passi shell dei workflow.
+      const v = l.json && Object.prototype.hasOwnProperty.call(l.json, a.campo) ? l.json[a.campo] : '';
+      process.stdout.write(v == null ? '' : String(v));
+      return 0;
+    }
     process.stdout.write(l.testo);
     return 0;
   }
