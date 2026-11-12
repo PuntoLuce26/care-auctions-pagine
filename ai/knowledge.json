@@ -1,5 +1,5 @@
 {
-  "generato": "2026-11-11T11:51:32.145Z",
+  "generato": "2026-11-12T12:38:56.770Z",
   "brand": {
     "nome": "CAReAuctions",
     "sito": "https://careauctions.co",
@@ -8,16 +8,16 @@
     "lingue": 91
   },
   "numeri": {
-    "lotti": 321428,
-    "immobiliari": 271215,
-    "mobiliari": 50213,
+    "lotti": 321572,
+    "immobiliari": 271303,
+    "mobiliari": 50269,
     "regioni": 21,
     "tribunali": 148,
     "lingue": 91,
-    "lottiAttivi": 41065,
-    "aggiudicate": 4142,
-    "deserte": 28281,
-    "aggiornato": "2026-11-11T11:45:16.470Z"
+    "lottiAttivi": 41596,
+    "aggiudicate": 2021,
+    "deserte": 28528,
+    "aggiornato": "2026-11-12T12:36:40.179Z"
   },
   "documenti": {
     "fonte": "PVP — Portale delle Vendite Pubbliche (pvp.giustizia.it)",
