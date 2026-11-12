@@ -1,231 +1,305 @@
 {
- "casa": "San Pasquale, Santa Teresa Gallura — trilocale 78 mq con balcone vista mare e garage doppio",
- "aggiornato": "2026-11-12T16:30:09Z",
- "totale": 37,
- "base": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale",
- "nota": "Foto nostre del sopralluogo. Full 1200px per la scheda, thumb 480px per la griglia. Ordine = numero.",
- "foto": [
-  {
-   "n": "01",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/01.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/01.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 1 di 37"
-  },
-  {
-   "n": "02",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/02.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/02.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 2 di 37"
-  },
-  {
-   "n": "03",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/03.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/03.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 3 di 37"
-  },
-  {
-   "n": "04",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/04.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/04.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 4 di 37"
-  },
-  {
-   "n": "05",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/05.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/05.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 5 di 37"
-  },
-  {
-   "n": "06",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/06.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/06.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 6 di 37"
-  },
-  {
-   "n": "07",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/07.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/07.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 7 di 37"
-  },
-  {
-   "n": "08",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/08.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/08.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 8 di 37"
-  },
-  {
-   "n": "09",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/09.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/09.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 9 di 37"
-  },
-  {
-   "n": "10",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/10.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/10.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 10 di 37"
-  },
-  {
-   "n": "11",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/11.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/11.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 11 di 37"
-  },
-  {
-   "n": "12",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/12.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/12.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 12 di 37"
-  },
-  {
-   "n": "13",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/13.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/13.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 13 di 37"
-  },
-  {
-   "n": "14",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/14.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/14.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 14 di 37"
-  },
-  {
-   "n": "15",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/15.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/15.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 15 di 37"
-  },
-  {
-   "n": "16",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/16.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/16.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 16 di 37"
-  },
-  {
-   "n": "17",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/17.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/17.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 17 di 37"
-  },
-  {
-   "n": "18",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/18.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/18.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 18 di 37"
-  },
-  {
-   "n": "19",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/19.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/19.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 19 di 37"
-  },
-  {
-   "n": "20",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/20.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/20.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 20 di 37"
-  },
-  {
-   "n": "21",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/21.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/21.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 21 di 37"
-  },
-  {
-   "n": "22",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/22.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/22.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 22 di 37"
-  },
-  {
-   "n": "23",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/23.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/23.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 23 di 37"
-  },
-  {
-   "n": "24",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/24.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/24.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 24 di 37"
-  },
-  {
-   "n": "25",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/25.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/25.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 25 di 37"
-  },
-  {
-   "n": "26",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/26.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/26.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 26 di 37"
-  },
-  {
-   "n": "27",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/27.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/27.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 27 di 37"
-  },
-  {
-   "n": "28",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/28.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/28.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 28 di 37"
-  },
-  {
-   "n": "29",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/29.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/29.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 29 di 37"
-  },
-  {
-   "n": "30",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/30.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/30.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 30 di 37"
-  },
-  {
-   "n": "31",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/31.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/31.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 31 di 37"
-  },
-  {
-   "n": "32",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/32.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/32.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 32 di 37"
-  },
-  {
-   "n": "33",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/33.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/33.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 33 di 37"
-  },
-  {
-   "n": "34",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/34.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/34.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 34 di 37"
-  },
-  {
-   "n": "35",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/35.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/35.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 35 di 37"
-  },
-  {
-   "n": "36",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/36.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/36.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 36 di 37"
-  },
-  {
-   "n": "37",
-   "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/37.jpg",
-   "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/37.jpg",
-   "alt": "San Pasquale, Santa Teresa Gallura — foto 37 di 37"
-  }
- ]
+  "casa": "San Pasquale, Santa Teresa Gallura — trilocale 78 mq con balcone vista mare e garage doppio",
+  "aggiornato": "2026-11-12T17:26:12Z",
+  "totale": 37,
+  "base": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale",
+  "nota": "Foto nostre del sopralluogo. Full 1200px per la scheda, thumb 480px per la griglia. Ordine = numero.",
+  "foto": [
+    {
+      "n": "01",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/01.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/01.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 1 di 37",
+      "caption": "Il tetto, vista mare",
+      "caption_en": "The roof, sea view"
+    },
+    {
+      "n": "02",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/02.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/02.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 2 di 37",
+      "caption": "Il giardino esterno",
+      "caption_en": "The outdoor garden"
+    },
+    {
+      "n": "03",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/03.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/03.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 3 di 37",
+      "caption": "La camera matrimoniale",
+      "caption_en": "The double bedroom"
+    },
+    {
+      "n": "04",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/04.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/04.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 4 di 37",
+      "caption": "La sedia, dettaglio",
+      "caption_en": "The chair, detail"
+    },
+    {
+      "n": "05",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/05.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/05.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 5 di 37",
+      "caption": "Il letto, dettaglio",
+      "caption_en": "The bed, detail"
+    },
+    {
+      "n": "06",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/06.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/06.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 6 di 37",
+      "caption": "La camera, la finestra",
+      "caption_en": "The bedroom window"
+    },
+    {
+      "n": "07",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/07.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/07.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 7 di 37",
+      "caption": "La camera, l'armadio",
+      "caption_en": "The bedroom wardrobe"
+    },
+    {
+      "n": "08",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/08.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/08.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 8 di 37",
+      "caption": "Il letto, il quadro",
+      "caption_en": "The bed, the picture"
+    },
+    {
+      "n": "09",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/09.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/09.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 9 di 37",
+      "caption": "La camera singola",
+      "caption_en": "The single bedroom"
+    },
+    {
+      "n": "10",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/10.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/10.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 10 di 37",
+      "caption": "L'armadio in legno",
+      "caption_en": "The wooden wardrobe"
+    },
+    {
+      "n": "11",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/11.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/11.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 11 di 37",
+      "caption": "Il bagno, la lavatrice",
+      "caption_en": "The bathroom, washing machine"
+    },
+    {
+      "n": "12",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/12.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/12.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 12 di 37",
+      "caption": "Il bagno, il lavandino",
+      "caption_en": "The bathroom sink"
+    },
+    {
+      "n": "13",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/13.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/13.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 13 di 37",
+      "caption": "La doccia",
+      "caption_en": "The shower"
+    },
+    {
+      "n": "14",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/14.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/14.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 14 di 37",
+      "caption": "Il box doccia, la tenda",
+      "caption_en": "The shower box and curtain"
+    },
+    {
+      "n": "15",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/15.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/15.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 15 di 37",
+      "caption": "Il corridoio, l'arazzo",
+      "caption_en": "The hallway, the tapestry"
+    },
+    {
+      "n": "16",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/16.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/16.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 16 di 37",
+      "caption": "La zona pranzo",
+      "caption_en": "The dining area"
+    },
+    {
+      "n": "17",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/17.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/17.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 17 di 37",
+      "caption": "Il soggiorno, il divano",
+      "caption_en": "The living room, the sofa"
+    },
+    {
+      "n": "18",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/18.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/18.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 18 di 37",
+      "caption": "Il soggiorno, la scala",
+      "caption_en": "The living room, the stairs"
+    },
+    {
+      "n": "19",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/19.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/19.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 19 di 37",
+      "caption": "Il soggiorno, la TV",
+      "caption_en": "The living room, the TV"
+    },
+    {
+      "n": "20",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/20.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/20.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 20 di 37",
+      "caption": "Il divano, il tavolino",
+      "caption_en": "The sofa and coffee table"
+    },
+    {
+      "n": "21",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/21.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/21.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 21 di 37",
+      "caption": "Il tavolo da pranzo",
+      "caption_en": "The dining table"
+    },
+    {
+      "n": "22",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/22.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/22.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 22 di 37",
+      "caption": "La porta finestra",
+      "caption_en": "The French door"
+    },
+    {
+      "n": "23",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/23.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/23.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 23 di 37",
+      "caption": "Il divano, la scala",
+      "caption_en": "The sofa and the stairs"
+    },
+    {
+      "n": "24",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/24.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/24.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 24 di 37",
+      "caption": "Il soggiorno, la nicchia",
+      "caption_en": "The living room, the niche"
+    },
+    {
+      "n": "25",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/25.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/25.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 25 di 37",
+      "caption": "Il divano, la TV",
+      "caption_en": "The sofa and the TV"
+    },
+    {
+      "n": "26",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/26.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/26.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 26 di 37",
+      "caption": "La cucina",
+      "caption_en": "The kitchen"
+    },
+    {
+      "n": "27",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/27.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/27.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 27 di 37",
+      "caption": "Lo specchio, dettaglio",
+      "caption_en": "The mirror, detail"
+    },
+    {
+      "n": "28",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/28.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/28.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 28 di 37",
+      "caption": "Il soggiorno, la cucina",
+      "caption_en": "The living room and kitchen"
+    },
+    {
+      "n": "29",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/29.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/29.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 29 di 37",
+      "caption": "Il balcone, vista mare",
+      "caption_en": "The balcony, sea view"
+    },
+    {
+      "n": "30",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/30.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/30.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 30 di 37",
+      "caption": "Il balcone, le poltrone",
+      "caption_en": "The balcony chairs"
+    },
+    {
+      "n": "31",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/31.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/31.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 31 di 37",
+      "caption": "Il balcone, il tavolino",
+      "caption_en": "The balcony table"
+    },
+    {
+      "n": "32",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/32.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/32.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 32 di 37",
+      "caption": "Il balcone, la ringhiera",
+      "caption_en": "The balcony railing"
+    },
+    {
+      "n": "33",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/33.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/33.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 33 di 37",
+      "caption": "La persiana verde",
+      "caption_en": "The green shutter"
+    },
+    {
+      "n": "34",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/34.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/34.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 34 di 37",
+      "caption": "La facciata, il garage",
+      "caption_en": "The facade and the garage"
+    },
+    {
+      "n": "35",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/35.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/35.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 35 di 37",
+      "caption": "L'ingresso, il giardino",
+      "caption_en": "The entrance and the garden"
+    },
+    {
+      "n": "36",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/36.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/36.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 36 di 37",
+      "caption": "La scala esterna",
+      "caption_en": "The outdoor stairs"
+    },
+    {
+      "n": "37",
+      "full": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/37.jpg",
+      "thumb": "https://puntoluce26.github.io/care-auctions-pagine/foto/san-pasquale/thumb/37.jpg",
+      "alt": "San Pasquale, Santa Teresa Gallura — foto 37 di 37",
+      "caption": "Il viale d'ingresso",
+      "caption_en": "The driveway"
+    }
+  ]
 }
