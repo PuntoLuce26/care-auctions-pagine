@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-12T18:12:24.125Z",
-  "runId": "43276575278",
-  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43276575278",
+  "generatedAt": "2026-11-12T19:44:24.149Z",
+  "runId": "43292249208",
+  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43292249208",
   "base": "https://careauctions.co",
-  "durationSec": 194,
+  "durationSec": 210,
   "build": {
-    "sito": "main.108d8717.js",
-    "origine": "main.108d8717.js"
+    "sito": "main.31bf2621.js",
+    "origine": "main.31bf2621.js"
   },
   "summary": {
     "critical": 0,
@@ -54,7 +54,7 @@
       "route": "/",
       "viewport": "desktop",
       "http": 200,
-      "text": 19492,
+      "text": 19517,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -65,7 +65,7 @@
       "route": "/aste",
       "viewport": "desktop",
       "http": 200,
-      "text": 20547,
+      "text": 7325,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -87,7 +87,7 @@
       "route": "/osservatorio",
       "viewport": "desktop",
       "http": 200,
-      "text": 3834,
+      "text": 5767,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -175,7 +175,7 @@
       "route": "/buynow/san-pasquale",
       "viewport": "desktop",
       "http": 200,
-      "text": 4507,
+      "text": 5312,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -186,7 +186,7 @@
       "route": "/compra-ora",
       "viewport": "desktop",
       "http": 200,
-      "text": 7177,
+      "text": 20411,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -241,7 +241,7 @@
       "route": "/stato",
       "viewport": "desktop",
       "http": 200,
-      "text": 771,
+      "text": 777,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -252,7 +252,7 @@
       "route": "/",
       "viewport": "mobile",
       "http": 200,
-      "text": 19411,
+      "text": 19437,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -263,7 +263,7 @@
       "route": "/aste",
       "viewport": "mobile",
       "http": 200,
-      "text": 20913,
+      "text": 21016,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -285,7 +285,7 @@
       "route": "/buynow/san-pasquale",
       "viewport": "mobile",
       "http": 200,
-      "text": 4404,
+      "text": 5209,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -323,13 +323,13 @@
         {
           "route": "/",
           "http": 200,
-          "text": 16139,
+          "text": 17709,
           "errors": 0
         },
         {
           "route": "/buynow/san-pasquale",
           "http": 200,
-          "text": 4507,
+          "text": 5312,
           "errors": 0
         }
       ]
@@ -341,13 +341,13 @@
         {
           "route": "/",
           "http": 200,
-          "text": 16029,
+          "text": 16056,
           "errors": 0
         },
         {
           "route": "/buynow/san-pasquale",
           "http": 200,
-          "text": 4488,
+          "text": 5293,
           "errors": 0
         }
       ]
@@ -388,7 +388,7 @@
       "linkNovita": true,
       "linkAffiliazione": true,
       "linkBuynow": false,
-      "build": "main.108d8717.js"
+      "build": "main.31bf2621.js"
     },
     "botHome": {
       "status": 200,
@@ -402,15 +402,15 @@
     },
     "origin": {
       "status": 200,
-      "build": "main.108d8717.js"
+      "build": "main.31bf2621.js"
     }
   },
   "feed": {
     "statistiche": {
       "status": 200,
-      "aggiornato": "2026-11-12T17:55:44.670Z",
-      "totale": 321674,
-      "ageHours": 0.3
+      "aggiornato": "2026-11-12T19:29:40.121Z",
+      "totale": 321680,
+      "ageHours": 0.2
     },
     "aggiudicazioni": {
       "status": 200,
@@ -427,49 +427,49 @@
         "name": "stato",
         "ok": true,
         "status": 200,
-        "ms": 2082,
+        "ms": 2106,
         "detail": "tabella popolata"
       },
       {
         "name": "feed statistiche",
         "ok": true,
         "status": 200,
-        "ms": 26,
-        "detail": "totale 321674 · 0.3 h fa"
+        "ms": 107,
+        "detail": "totale 321680 · 0.2 h fa"
       },
       {
         "name": "feed aggiudicazioni",
         "ok": true,
         "status": 200,
-        "ms": 171,
+        "ms": 303,
         "detail": "18368 record"
       },
       {
         "name": "origine Emergent",
         "ok": true,
         "status": 200,
-        "ms": 465,
-        "detail": "main.108d8717.js"
+        "ms": 676,
+        "detail": "main.31bf2621.js"
       },
       {
         "name": "chat iCARe",
         "ok": true,
         "status": 200,
-        "ms": 366,
+        "ms": 499,
         "detail": "{\"ok\":true,\"risposta\":\"Ciao, sono **iCARe**, la consulente immobiliare di CARe …"
       },
       {
         "name": "iCAReWall API",
         "ok": true,
         "status": 200,
-        "ms": 261,
-        "detail": "15587 byte"
+        "ms": 245,
+        "detail": "15641 byte"
       },
       {
         "name": "voce TTS",
         "ok": true,
         "status": 200,
-        "ms": 23,
+        "ms": 29,
         "detail": "6482 byte"
       }
     ],
