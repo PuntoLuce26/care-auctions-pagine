@@ -1,18 +1,10 @@
 {
-  "generato": "2026-11-12T13:27:59.206Z",
-  "base": "https://careauctions.co",
-  "concorrenza": 50,
-  "durata": 10,
-  "richieste": 6553,
-  "rps": 631,
-  "p50": 21,
-  "p95": 285,
-  "p99": 404,
-  "errorePct": 0,
-  "budget": {
-    "p95Ms": 1000,
-    "errorePct": 1
-  },
-  "ok": true,
-  "nota": "Test sul bordo/CDN (cache reale). Il carico mondiale si regge su edge, cache e pagine statiche; l origine Emergent resta il collo di bottiglia."
+ "aggiornato": "2026-11-12T16:46:59.606Z",
+ "origine_ttfb_ultimo": 851,
+ "origine_ttfb_max_8": 851,
+ "sito_ttfb_ultimo": 486,
+ "punti_lenti_su_8": 0,
+ "punti_giu_su_8": 0,
+ "bundle_origine": "main.6173aa11.js",
+ "allarme": "ok"
 }
