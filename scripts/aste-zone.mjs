@@ -117,8 +117,14 @@ const feed = {
     fonte: 'PVP — Portale delle Vendite Pubbliche (lotti attivi) · Agenzia delle Entrate – OMI (valori di zona e perimetri)',
     licenza: 'dati pubblici · CC-BY 4.0 (OMI)',
     generatoIl: new Date().toISOString(),
-    metodo: 'Ogni lotto attivo è assegnato alla zona OMI il cui centroide è più vicino (distanza corretta in latitudine). Valori OMI: mediana delle tipologie residenziali della zona nel semestre corrente.',
+    metodo: 'Ogni immobile è associato alla zona OMI più vicina al suo indirizzo. Valori OMI: mediana delle tipologie residenziali della zona nel semestre corrente.',
     nonDisponibile: 'Lo SCONTO per zona richiede la superficie del lotto: l\'API PVP non la espone (verificato anche nel testo della descrizione). Senza mq non si calcola uno sconto per zona: si pubblica il prezzo base mediano e i valori OMI, e lo sconto resta per comune dove esiste.',
+    glossario_en: {
+      'market zone': 'the part of the city where the Revenue Agency measures prices. Smaller than the whole municipality, and more useful.',
+      'how a property is assigned to a zone': 'we take the property address and pick the nearest zone.',
+      'discount by zone': 'not available yet: it needs the property surface, which we are extracting from the appraisal documents.',
+      'NTN': 'how many sales happen in a year. Available only per municipality, not per zone.'
+    },
     nota_ntn: 'Le compravendite (NTN) esistono solo per comune: nessun tempo di assorbimento per zona. Da decidere quando saranno scaricati tutti gli ZIP.',
     comuni: new Set(zone.map((z) => z.comune)).size, zone: zone.length, letti, assegnati, senzaZona
   },
