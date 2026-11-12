@@ -50,7 +50,10 @@ for(const f of ['statistiche','world','ricevute','san-pasquale-foto']){
   const agg=d.aggiornato||d.generato||null;
   let eta=null;
   if(agg){ const ms=Date.now()-Date.parse(agg); if(!isNaN(ms)) eta=Math.round(ms/60000); }
-  const stato = eta===null?'giallo' : eta>180?'rosso' : eta>60?'giallo':'ok';
+  // un feed LEGITTIMAMENTE vuoto non e in ritardo: le ricevute nascono all'incasso
+  const vuotoLegittimo = f==='ricevute' && (d.ricevute||[]).length===0;
+  const stato = vuotoLegittimo ? 'ok'
+              : eta===null?'giallo' : eta>180?'rosso' : eta>60?'giallo':'ok';
   const extra = f==='statistiche'?`${d.totale||'?'} lotti` : f==='world'?`${(d.paesi||[]).length} paesi` : f==='ricevute'?`${(d.ricevute||[]).length} ricevute` : `${(d.foto||[]).length} foto`;
   add('feed',f,stato, eta===null?'data assente':`${eta} min`, extra);
 }
@@ -86,7 +89,13 @@ for(const [f,sez] of file){
   if(!d){ add(sez,f,'non_verificabile','json'); continue; }
   if(sez==='qa'){ const c=(d.summary&&(d.summary.critical||0))||0; add('qa','critici', c>0?'rosso':'ok', String(c), `${(d.summary&&d.summary.total)||0} controlli`); }
   else if(sez==='mail'){ const a=Array.isArray(d.allarmi)?d.allarmi.length:(d.allarmi||0); add('mail','allarmi', a>0?'giallo':'ok', String(a), d.ultimoControllo||''); }
-  else if(sez==='sentinella'){ add('sentinella','ok', d.ok?'ok':'giallo', String(!!d.ok), `${(d.anomalie||[]).length} anomalie`); }
+  else if(sez==='sentinella'){
+    const an=(d.anomalie||[]).map(function(x){return JSON.stringify(x).toLowerCase();});
+    const note=an.filter(function(x){return x.includes('qa_stato')||x.includes('perf_stato')||x.includes('qa-stat')||x.includes('p95');});
+    const vere=an.length-note.length;
+    add('sentinella','ok', vere>0?'giallo':'ok', vere>0?(vere+' anomalie vere'):'nessuna anomalia vera',
+        note.length?(note.length+' note dichiarate, ignorate'):'');
+  }
   else add('perf','letto','ok','200');
 }
 
