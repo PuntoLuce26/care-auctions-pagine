@@ -24,11 +24,20 @@ jobs:
           node-version: "22"
       - name: Misura l'origine e il sito
         run: node scripts/emergent-watch.mjs
+      - name: Pubblica perf/stato.json su R2
+        if: always()
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: node scripts/stato-pubblica.mjs perf/stato.json --verifica
+
       - name: Commit dello storico
         run: |
           git config user.name "CARe Cloud"
           git config user.email "cloud@careauctions.co"
-          git add perf
+          # 12/11/2026 — solo lo STORICO resta versionato: perf/stato.json è stato interno e vive
+          # su R2 (bucket care-stato). Sei commit/24h su quel file, ognuno capace di cancellare
+          # la build Pages in corso.
+          git add perf/emergent.json
           git diff --cached --quiet && echo "nessuna variazione" && exit 0
           git commit -m "perf: misura emergent ($(date -u +%FT%TZ))"
           for i in 1 2 3 4 5; do
