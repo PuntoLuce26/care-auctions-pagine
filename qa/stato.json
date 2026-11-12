@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-12T22:03:44.959Z",
-  "runId": "43315526852",
-  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43315526852",
+  "generatedAt": "2026-11-12T22:21:27.036Z",
+  "runId": "43318360190",
+  "runUrl": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43318360190",
   "base": "https://careauctions.co",
-  "durationSec": 196,
+  "durationSec": 204,
   "build": {
     "sito": "main.23df51ef.js",
     "origine": "main.23df51ef.js"
@@ -11,9 +11,9 @@
   "summary": {
     "critical": 0,
     "high": 1,
-    "medium": 0,
+    "medium": 1,
     "low": 3,
-    "total": 4
+    "total": 5
   },
   "issues": [
     {
@@ -23,6 +23,14 @@
       "viewport": "",
       "message": "controllo home_links fallito",
       "suggestion": ""
+    },
+    {
+      "severity": "medium",
+      "type": "github_run_falliti",
+      "route": "log",
+      "viewport": "",
+      "message": "esiti-sync (failure)",
+      "suggestion": "Aprire i run falliti; se sono build Pages cancellate da un commit, non è un guasto (vedi LEZIONI)."
     },
     {
       "severity": "low",
@@ -54,18 +62,18 @@
       "route": "/",
       "viewport": "desktop",
       "http": 200,
-      "text": 19519,
+      "text": 18217,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
-      "formsFilled": 5,
+      "formsFilled": 3,
       "clicks": 3
     },
     {
       "route": "/aste",
       "viewport": "desktop",
       "http": 200,
-      "text": 7325,
+      "text": 20559,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -87,7 +95,7 @@
       "route": "/osservatorio",
       "viewport": "desktop",
       "http": 200,
-      "text": 3834,
+      "text": 5767,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -241,7 +249,7 @@
       "route": "/stato",
       "viewport": "desktop",
       "http": 200,
-      "text": 774,
+      "text": 772,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -263,7 +271,7 @@
       "route": "/aste",
       "viewport": "mobile",
       "http": 200,
-      "text": 7782,
+      "text": 21016,
       "imagesBroken": 0,
       "jsErrors": 0,
       "consoleErrors": 0,
@@ -323,7 +331,7 @@
         {
           "route": "/",
           "http": 200,
-          "text": 17709,
+          "text": 17711,
           "errors": 0
         },
         {
@@ -341,7 +349,7 @@
         {
           "route": "/",
           "http": 200,
-          "text": 16056,
+          "text": 17356,
           "errors": 0
         },
         {
@@ -408,7 +416,7 @@
   "feed": {
     "statistiche": {
       "status": 200,
-      "aggiornato": "2026-11-12T21:51:40.070Z",
+      "aggiornato": "2026-11-12T22:06:28.402Z",
       "totale": 321689,
       "ageHours": 0.2
     },
@@ -427,55 +435,64 @@
         "name": "stato",
         "ok": true,
         "status": 200,
-        "ms": 1968,
+        "ms": 1834,
         "detail": "tabella popolata"
       },
       {
         "name": "feed statistiche",
         "ok": true,
         "status": 200,
-        "ms": 31,
+        "ms": 60,
         "detail": "totale 321689 · 0.2 h fa"
       },
       {
         "name": "feed aggiudicazioni",
         "ok": true,
         "status": 200,
-        "ms": 189,
+        "ms": 295,
         "detail": "18368 record"
       },
       {
         "name": "origine Emergent",
         "ok": true,
         "status": 200,
-        "ms": 452,
+        "ms": 355,
         "detail": "main.23df51ef.js"
       },
       {
         "name": "chat iCARe",
         "ok": true,
         "status": 200,
-        "ms": 378,
+        "ms": 517,
         "detail": "{\"ok\":true,\"risposta\":\"Ciao, sono **iCARe**, la consulente immobiliare di CARe …"
       },
       {
         "name": "iCAReWall API",
         "ok": true,
         "status": 200,
-        "ms": 404,
+        "ms": 214,
         "detail": "15641 byte"
       },
       {
         "name": "voce TTS",
         "ok": true,
         "status": 200,
-        "ms": 27,
+        "ms": 50,
         "detail": "6482 byte"
       }
     ],
     "github": {
       "checked": 30,
-      "failedLast24h": []
+      "failedLast24h": [
+        {
+          "name": "esiti-sync",
+          "status": "completed",
+          "conclusion": "failure",
+          "created_at": "2026-11-12T21:42:34Z",
+          "url": "https://github.com/PuntoLuce26/care-auctions-pagine/actions/runs/43312904186",
+          "head": "0dc293cb"
+        }
+      ]
     }
   }
 }
