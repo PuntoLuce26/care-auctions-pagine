@@ -40,7 +40,23 @@ async function http(url, opt = {}) {
   } finally { clearTimeout(to); }
 }
 
+/* 12/11/2026 — lo STATO INTERNO (qa/, mail/, perf/) vive su Cloudflare R2, non più nel repo
+ * pubblico: la fonte vera è l'oggetto su R2. Il ripiego sulla raw resta solo per quando il token
+ * non c'è (sessione locale) o R2 è irraggiungibile: così l'automazione non resta mai cieca. */
+const STATO_SU_R2 = ['/qa/stato.json', '/mail/stato.json', '/perf/stato.json', '/qa/ronda-notturna.json'];
+let _statoMod = null;
+async function daR2(percorso) {
+  try {
+    if (!_statoMod) _statoMod = await import('./stato-pubblica.mjs');
+    const l = await _statoMod.leggiStato(String(percorso).replace(/^\//, ''));
+    return l.ok ? l.json : null;
+  } catch (e) { return null; }
+}
 async function json(t) {
+  if (STATO_SU_R2.includes(t)) {
+    const j = await daR2(t);
+    if (j) return j;
+  }
   try {
     const r = await fetch(RAW + t + '?ts=' + ts(), { headers: { 'User-Agent': UA } });
     if (!r.ok) return null;
