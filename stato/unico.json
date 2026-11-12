@@ -1,0 +1,187 @@
+{
+ "generato": "2026-11-12T17:48:47.510Z",
+ "semaforo": "giallo",
+ "conteggi": {
+  "ok": 22,
+  "giallo": 2,
+  "rosso": 0,
+  "non_verificabile": 0
+ },
+ "voci": [
+  {
+   "sezione": "rotte",
+   "nome": "/",
+   "stato": "ok",
+   "valore": "200",
+   "dettaglio": ""
+  },
+  {
+   "sezione": "rotte",
+   "nome": "/idati",
+   "stato": "ok",
+   "valore": "200",
+   "dettaglio": ""
+  },
+  {
+   "sezione": "rotte",
+   "nome": "/osservatorio",
+   "stato": "ok",
+   "valore": "200",
+   "dettaglio": ""
+  },
+  {
+   "sezione": "rotte",
+   "nome": "/mercato",
+   "stato": "ok",
+   "valore": "200",
+   "dettaglio": ""
+  },
+  {
+   "sezione": "rotte",
+   "nome": "/aggiudicazioni",
+   "stato": "ok",
+   "valore": "200",
+   "dettaglio": ""
+  },
+  {
+   "sezione": "rotte",
+   "nome": "/aste",
+   "stato": "ok",
+   "valore": "200",
+   "dettaglio": ""
+  },
+  {
+   "sezione": "rotte",
+   "nome": "/buynow/san-pasquale",
+   "stato": "ok",
+   "valore": "200",
+   "dettaglio": ""
+  },
+  {
+   "sezione": "rotte",
+   "nome": "/ilive",
+   "stato": "ok",
+   "valore": "200",
+   "dettaglio": ""
+  },
+  {
+   "sezione": "rotte",
+   "nome": "/iworld",
+   "stato": "in_arrivo",
+   "valore": "404",
+   "dettaglio": "non ancora pubblicata"
+  },
+  {
+   "sezione": "rotte",
+   "nome": "/qa/stato.json",
+   "stato": "ok",
+   "valore": "200",
+   "dettaglio": ""
+  },
+  {
+   "sezione": "rotte",
+   "nome": "rotte non 200",
+   "stato": "ok",
+   "valore": "0",
+   "dettaglio": "tutte le rotte rispondono"
+  },
+  {
+   "sezione": "feed",
+   "nome": "statistiche",
+   "stato": "ok",
+   "valore": "13 min",
+   "dettaglio": "321669 lotti"
+  },
+  {
+   "sezione": "feed",
+   "nome": "world",
+   "stato": "ok",
+   "valore": "42 min",
+   "dettaglio": "10 paesi"
+  },
+  {
+   "sezione": "feed",
+   "nome": "ricevute",
+   "stato": "giallo",
+   "valore": "150 min",
+   "dettaglio": "0 ricevute"
+  },
+  {
+   "sezione": "feed",
+   "nome": "san-pasquale-foto",
+   "stato": "ok",
+   "valore": "23 min",
+   "dettaglio": "37 foto"
+  },
+  {
+   "sezione": "build",
+   "nome": "sito vs origine",
+   "stato": "ok",
+   "valore": "main.07badebe.js / main.07badebe.js",
+   "dettaglio": ""
+  },
+  {
+   "sezione": "prerender",
+   "nome": "snapshot vs vivo",
+   "stato": "ok",
+   "valore": "main.07badebe.js / main.07badebe.js",
+   "dettaglio": ""
+  },
+  {
+   "sezione": "prerender",
+   "nome": "bot allineato",
+   "stato": "ok",
+   "valore": "main.07badebe.js",
+   "dettaglio": ""
+  },
+  {
+   "sezione": "worker",
+   "nome": "stato-automazioni",
+   "stato": "ok",
+   "valore": "200",
+   "dettaglio": "11 automazioni"
+  },
+  {
+   "sezione": "worker",
+   "nome": "cancello (paypal-lunghezze senza chiave)",
+   "stato": "ok",
+   "valore": "403",
+   "dettaglio": "protetta"
+  },
+  {
+   "sezione": "qa",
+   "nome": "critici",
+   "stato": "ok",
+   "valore": "0",
+   "dettaglio": "4 controlli"
+  },
+  {
+   "sezione": "mail",
+   "nome": "allarmi",
+   "stato": "ok",
+   "valore": "0",
+   "dettaglio": "2026-11-12T17:07:38.646Z"
+  },
+  {
+   "sezione": "sentinella",
+   "nome": "ok",
+   "stato": "giallo",
+   "valore": "false",
+   "dettaglio": "2 anomalie"
+  },
+  {
+   "sezione": "perf",
+   "nome": "letto",
+   "stato": "ok",
+   "valore": "200",
+   "dettaglio": ""
+  },
+  {
+   "sezione": "github",
+   "nome": "run rossi (2h)",
+   "stato": "ok",
+   "valore": "0",
+   "dettaglio": ""
+  }
+ ]
+}
