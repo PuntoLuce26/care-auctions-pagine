@@ -1,16 +1,16 @@
 {
-  "generato": "2026-11-12T12:38:56.770Z",
+  "generato": "2026-11-12T19:11:55.539Z",
   "numeri": {
-    "lotti": 321572,
-    "immobiliari": 271303,
-    "mobiliari": 50269,
+    "lotti": 321678,
+    "immobiliari": 271402,
+    "mobiliari": 50276,
     "regioni": 21,
     "tribunali": 148,
     "lingue": 91,
-    "lottiAttivi": 41596,
+    "lottiAttivi": 41702,
     "aggiudicate": 2021,
     "deserte": 28528,
-    "aggiornato": "2026-11-12T12:36:40.179Z"
+    "aggiornato": "2026-11-12T18:54:04.507Z"
   },
   "checks": [
     {
@@ -71,7 +71,7 @@
     {
       "nome": "i18n fr",
       "ok": true,
-      "dettaglio": "HTTP 200 · 4058 chiavi"
+      "dettaglio": "HTTP 200 · 4183 chiavi"
     },
     {
       "nome": "PVP documenti",
