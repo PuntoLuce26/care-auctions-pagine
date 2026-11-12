@@ -1,9 +1,20 @@
 {
-  "ultimoControllo": "2026-11-12T20:40:42.401Z",
-  "ultimoQa": "2026-11-12T19:38:32.522Z",
-  "qaEsito": "nessun allarme nuovo",
-  "nuoveMail": 0,
-  "allarmi": [],
+  "ultimoControllo": "2026-11-12T21:58:53.134Z",
+  "ultimoQa": "2026-11-12T21:58:53.134Z",
+  "qaEsito": "QA dispatch HTTP 204",
+  "nuoveMail": 1,
+  "allarmi": [
+    {
+      "id": "1a1d1815fd1559d7",
+      "data": "2026-11-12T20:44:37.000Z",
+      "da": "PuntoLuce26 <notifications@github.com>",
+      "oggetto": "[PuntoLuce26/care-workers] Run failed: deploy-worker - main (77b3e3c)",
+      "a": "\"PuntoLuce26/care-workers\" <care-workers@noreply.github.com>",
+      "componente": "edge",
+      "gravita": "media",
+      "link": "https://github.com/PuntoLuce26/care-workers/actions/runs/43303160974"
+    }
+  ],
   "processati": [
     "1a1c636ae4a6b5a9",
     "1a1c634c8df2049e",
@@ -141,6 +152,7 @@
     "1a1d0f762e239282",
     "1a1d14405ffd4c42",
     "1a1d169f1359b2aa",
-    "1a1d1692c1ad4a83"
+    "1a1d1692c1ad4a83",
+    "1a1d1815fd1559d7"
   ]
 }
