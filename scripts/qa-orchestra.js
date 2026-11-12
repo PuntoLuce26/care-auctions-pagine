@@ -22,7 +22,22 @@ async function get(url, opt = {}) {
     return { ok: r.ok, status: r.status, ms, r };
   } catch (e) { return { ok: false, status: 0, ms: Date.now() - t, errore: e.message }; }
 }
+/* 12/11/2026 — gli stati interni (qa/stato.json, mail/stato.json, perf/stato.json) si leggono da
+ * R2 (bucket care-stato), che è la fonte vera; la raw resta come ripiego senza token. */
+let _statoMod = null;
+async function daR2(percorso) {
+  try {
+    if (!_statoMod) _statoMod = await import('./stato-pubblica.mjs');
+    const l = await _statoMod.leggiStato(percorso);
+    return l.ok ? l.json : null;
+  } catch (e) { return null; }
+}
 async function json(url) {
+  const m = String(url).match(/\/(qa|mail|perf)\/(stato|ronda-notturna)\.json/);
+  if (m) {
+    const j = await daR2(`${m[1]}/${m[2]}.json`);
+    if (j) return { ok: true, status: 200, json: j, fonte: 'r2' };
+  }
   const g = await get(url);
   if (!g.ok) return { ...g, json: null };
   let j = null;
