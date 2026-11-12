@@ -138,7 +138,7 @@ const FEED = [['statistiche', 'statistiche.json'], ['confronto', 'confronto-merc
   ['npl', 'npl.json'], ['crediti', 'crediti-fiscali.json'],
   ['sitemapMeta', 'sitemap-meta.json'], ['indexnow', 'indexnow.json'],
   ['perizieOcr', 'perizie-ocr.json'], ['ocrStato', 'ocr-stato.json'],
-  ['gsc', 'gsc.json'], ['omiIndice', 'omi-indice.json'], ['mercatoIndice', 'mercato-indice.json'],
+  ['omiIndice', 'omi-indice.json'], ['mercatoIndice', 'mercato-indice.json'],
   ['asteZone', 'aste-zone.json'], ['residenzialeComune', 'residenziale-comune.json']];
 
 const WF = [['feed-sync', 'feed-sync.yml'], ['verifica-playwright', 'verifica-playwright.yml'],
@@ -148,7 +148,13 @@ const WF = [['feed-sync', 'feed-sync.yml'], ['verifica-playwright', 'verifica-pl
 const ROTTE = [['/', 'home'], ['/ca-re-index', 'ca-re-index'], ['/osservatorio', 'osservatorio'],
   ['/dati', 'dati'], ['/icarewall', 'icarewall'], ['/sitemap.xml', 'sitemap']];
 
+// 12/11/2026 — I FEED SI LEGGONO DAL SITO, NON DA GITHUB PAGES.
+// Il mirror Pages può restare indietro di ore (o non avere il file: gsc.json dava 404),
+// mentre careauctions.co/feed/ è servito dall'edge che legge PRIMA la raw dei repo.
+// Quindi: prima il sito, poi Pages come ripiego. Un feed non è mai "mancante" se esiste nella raw.
 async function leggiFeed(nome) {
+  const dalSito = await getJson('https://careauctions.co/feed/' + nome + '?t=' + Date.now(), { headers: { accept: 'application/json' } }, 30000);
+  if (dalSito) return dalSito;
   return getJson(PAGES + 'feed/' + nome, { headers: { accept: 'application/json' } }, 30000);
 }
 
@@ -418,14 +424,7 @@ function costruisci(d) {
   md.push('');
   md.push(`- **URL nella sitemap**: ${sm ? `${int(sm.totale)} (${int(sm.shard)} pezzi · ${(sm.lingue || []).join(', ')})` : ARRIVO}.`);
   md.push(`- **URL inviati a IndexNow**: ${inz ? `${int(inz.inviati)} il ${txt(inz.giorno)}` : ARRIVO}. Un invio è un fatto misurabile; non dimostra che il motore li abbia presi.`);
-  const gs = d.gsc || null;
-  if (gs && gs.campione) {
-    md.push(`- **URL indicizzati da Google** (Search Console, campione dichiarato di ${int(gs.campione.ispezionate)} pagine): **${int(gs.campione.indicizzate)} indicizzate** · ${int(gs.campione.sconosciute)} sconosciute a Google. Sulle 28 ore di analytics: ${int((gs.analytics || {}).clic || 0)} clic e ${int((gs.analytics || {}).impressioni || 0)} impressioni.`);
-    const nonOk = (gs.campione.dettaglio || []).filter((x) => x.verdetto !== 'PASS').slice(0, 5).map((x) => `${x.pagina} (${(x.stato || '').slice(0, 40)})`).join(' · ');
-    if (nonOk) md.push(`  - Da indicizzare: ${nonOk}`);
-  } else {
-    md.push('- **URL indicizzati da Google**: non verificabile — manca il feed gsc.json (il job gsc-sync non ha ancora girato).');
-  }
+  md.push('- **URL indicizzati da Google**: non verificabile — Search Console non è collegata. Finché non lo è, questa riga resta «non verificabile» e non si sostituisce con una stima.');
   md.push('');
   md.push('## 7. Cosa manca');
   md.push('');
@@ -476,7 +475,7 @@ function costruisci(d) {
   const dossier = {
     adesso, automazioni, omi, config,
     statistiche: feeds.statistiche, indice: feeds.indice, npl: feeds.npl,
-    gsc: feeds.gsc, omiIndice: feeds.omiIndice, mercatoIndice: feeds.mercatoIndice,
+    omiIndice: feeds.omiIndice, mercatoIndice: feeds.mercatoIndice,
     asteZone: feeds.asteZone, residenzialeComune: feeds.residenzialeComune,
     crediti: feeds.crediti, sitemapMeta: feeds.sitemapMeta, indexnow: feeds.indexnow,
     perizieOcr: feeds.perizieOcr, ocrStato: feeds.ocrStato,
