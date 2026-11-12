@@ -1,0 +1,36 @@
+{
+ "meta": {
+  "titolo": "iPartner — regole di legame con iCARe personale",
+  "generatoIl": "2026-11-12T12:20:00.000Z",
+  "principio": "Una persona, un accesso, due spazi. Il legame lo decide il partner, e iCARe personale lo ricorda sempre."
+ },
+ "sconto": {
+  "valore": 30,
+  "unita": "percento",
+  "si_applica_a": "abbonamento iCARe personale",
+  "condizione": "solo se il legame è attivo e il partner è attivo",
+  "durata": "finché il legame resta attivo",
+  "note": "Nessun codice sconto da digitare: lo sconto si applica da solo se l'account è collegato a un iPartner attivo."
+ },
+ "legame": {
+  "default": "separati",
+  "opzioni": ["separati", "collegati"],
+  "chi_decide": "il partner, in ogni momento",
+  "effetti": {
+   "separati": "i due spazi restano indipendenti: iCARe personale funziona normalmente, senza sconto e senza vedere i dati del partner",
+   "collegati": "iCARe personale sa di essere collegato allo studio e applica lo sconto del 30%; il partner vede solo il fatto che il legame esiste, non i contenuti della vita personale"
+  },
+  "cambio": "il partner può cambiare stato quando vuole; la modifica ha effetto immediato e resta scritta nel registro",
+  "se_partner_disattivato": "il legame resta, lo sconto si sospende"
+ },
+ "memoria": {
+  "regola": "iCARe personale mostra sempre lo stato del legame: 'Collegato a <nome studio> — sconto 30%' oppure 'Separato da <nome studio>'",
+  "dove": "in alto, nella pagina dell'abbonamento e nel profilo",
+  "motivo": "la persona deve sempre sapere a chi è collegata e perché paga meno"
+ },
+ "privacy": {
+  "consenso": "il collegamento richiede un consenso esplicito del partner e della persona",
+  "dati_condivisi": "solo l'esistenza del legame e lo stato del partner: nessun contenuto personale",
+  "revoca": "si revoca in un clic e non lascia traccia di dati condivisi"
+ }
+}
