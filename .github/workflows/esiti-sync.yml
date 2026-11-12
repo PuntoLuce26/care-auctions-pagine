@@ -55,6 +55,12 @@ jobs:
           # committarlo qui produceva CONFLICT + non-fast-forward a ogni giro.
           git reset -q HEAD feed/statistiche.json 2>/dev/null || true
           git checkout -- feed/statistiche.json 2>/dev/null || true
+          # 12/11/2026 — il conflitto vero era su esiti-monitor.json, non su statistiche.json:
+          # il fix dell'11/11 copriva solo il primo file e il push falliva dopo 5 tentativi.
+          git reset -q HEAD feed/esiti-monitor.json 2>/dev/null || true
+          git checkout -- feed/esiti-monitor.json 2>/dev/null || true
+          git reset -q HEAD feed/andamento-esiti.json 2>/dev/null || true
+          git checkout -- feed/andamento-esiti.json 2>/dev/null || true
           if git diff --cached --quiet; then echo "nessuna variazione"; exit 0; fi
           git commit -m "esiti: prezzi aggiudicazione e indici ($(date -u +%FT%TZ))"
           for i in 1 2 3 4 5; do
