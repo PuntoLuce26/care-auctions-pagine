@@ -40,5 +40,11 @@ jobs:
           git add perf/stato-test.json
           if git diff --cached --quiet; then echo "nessuna variazione"; exit 0; fi
           git commit -m "perf: carico e performance ($(date -u +%FT%TZ))"
-          for i in 1 2 3 4 5; do git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null; if git push; then exit 0; fi; sleep 4; done
+          # 12/11/2026 — stesso inciampo di emergent-watch: `|| git rebase --abort` senza rebase
+          # in corso esce 128 e con `bash -e` uccide il passo. La pulizia non deve poter fallire.
+          for i in 1 2 3 4 5; do
+            if git pull -q --rebase --autostash origin main 2>/dev/null && git push; then exit 0; fi
+            git rebase --abort 2>/dev/null || true
+            sleep 4
+          done
           exit 1
