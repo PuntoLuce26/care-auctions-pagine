@@ -1,6 +1,6 @@
 {
-  "generato": "2026-11-11T09:28:05Z",
-  "stato": "attenzione",
+  "generato": "2026-11-12T18:13:06Z",
+  "stato": "ok",
   "controlli": [
     {
       "nome": "sito: 20/20 rotte 200",
@@ -12,31 +12,31 @@
       "nome": "feed statistiche",
       "livello": "ok",
       "ok": true,
-      "dettaglio": "321343 lotti · aggiornato 2026-11-11T09:05:19.408Z (23 min fa)"
+      "dettaglio": "321677 lotti · aggiornato 2026-11-12T18:10:41.085Z (2 min fa)"
     },
     {
       "nome": "feed aggiudicazioni",
       "livello": "ok",
       "ok": true,
-      "dettaglio": "18115 record"
+      "dettaglio": "18368 record"
     },
     {
       "nome": "QA cloud",
       "livello": "ok",
       "ok": true,
-      "dettaglio": "run 42994389304 · 2 min fa · {\"critical\":0,\"high\":0,\"medium\":1,\"low\":3,\"total\":4}"
+      "dettaglio": "run 43276575278 · 1 min fa · {\"critical\":0,\"high\":1,\"medium\":0,\"low\":3,\"total\":4}"
     },
     {
       "nome": "QA Orchestra",
       "livello": "ok",
       "ok": true,
-      "dettaglio": "OK CON AVVISI · 268 min fa"
+      "dettaglio": "OK CON AVVISI · 208 min fa"
     },
     {
       "nome": "AI Sentinel",
-      "livello": "attenzione",
-      "ok": false,
-      "dettaglio": "376 min fa · anomalie: []"
+      "livello": "ok",
+      "ok": true,
+      "dettaglio": "72 min fa · anomalie: [{\"componente\":\"ai\",\"gravita\":\"high\",\"oggetto\":\"qa_stato: HTTP 200 · 0C/1A · 0.7h\"},{\"componente\":\"ai\",\"gravita\":\"high\","
     },
     {
       "nome": "careauctions.it (watcher)",
@@ -60,13 +60,13 @@
       "nome": "monitor posta",
       "livello": "ok",
       "ok": true,
-      "dettaglio": "ultimo controllo 2026-11-11T09:28:03.710Z (0 min fa) · allarmi: 0"
+      "dettaglio": "ultimo controllo 2026-11-12T17:07:38.646Z (66 min fa) · allarmi: 0"
     },
     {
       "nome": "build sito = origine",
       "livello": "ok",
       "ok": true,
-      "dettaglio": "sito 685e7a77 · origine 685e7a77"
+      "dettaglio": "sito 108d8717 · origine 108d8717"
     },
     {
       "nome": "workflow GitHub",
@@ -78,16 +78,11 @@
       "nome": "sveglie dei monitoraggi",
       "livello": "ok",
       "ok": true,
-      "dettaglio": "ai-sentinel.yml lanciato · verifica-it.yml lanciato"
+      "dettaglio": "mail-qa.yml lanciato · verifica-it.yml lanciato · aggiornamento-mail.yml lanciato"
     }
   ],
   "problemi": [],
-  "attenzioni": [
-    {
-      "nome": "AI Sentinel",
-      "dettaglio": "376 min fa · anomalie: []"
-    }
-  ],
+  "attenzioni": [],
   "storico": [
     {
       "t": "2026-11-10T21:31:49Z",
@@ -104,6 +99,11 @@
     {
       "t": "2026-11-11T09:28:05Z",
       "stato": "attenzione",
+      "problemi": []
+    },
+    {
+      "t": "2026-11-12T18:13:06Z",
+      "stato": "ok",
       "problemi": []
     }
   ]
