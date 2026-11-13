@@ -101,6 +101,11 @@ jobs:
         env:
           ESITO_NORMALIZZA: ${{ steps.normalizza.outcome }}
           ESITO_COMMIT: ${{ steps.commit.outcome }}
+          # servono a LEGGERE lo stato del giro precedente da R2 (`--leggi`): senza token il
+          # confronto resta null e il file direbbe «giro-eseguito» a ogni giro — cioè non
+          # distinguerebbe più «nuovi record» da «niente di nuovo», che è il suo scopo.
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           # il giro precedente serve a distinguere «nuovi record» da «niente di nuovo»:
           # si legge da R2 (se il secret manca il confronto resta null = «non so», mai zero)
