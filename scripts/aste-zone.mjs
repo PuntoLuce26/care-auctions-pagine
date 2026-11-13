@@ -14,6 +14,17 @@ const BASE = 'https://pvp.giustizia.it/ric-496b258c-986a1b71/ric-ms/ricerca/vend
 const RESID = /^(ABITAZIONE|APPARTAMENTO|VILLA|VILLINO|CASALE|RUSTICO|ALLOGGIO|CASCINA|STALLA|IMMOBILE_RESIDENZIALE)/i;
 const oggi = new Date();
 
+// 13/11/2026 — FONTE PUBBLICA + DATA DI RILEVAZIONE.
+// Regola: un numero senza fonte pubblica e data non si pubblica. La fonte non è il percorso del
+// file (scripts/aste-zone.mjs -> feed/aste-zone.json): è il nome pubblico che chiunque può controllare.
+// Questo feed ha DUE fonti, con ruoli diversi: i lotti e i prezzi vengono dal PVP (raccolta viva a
+// ogni giro), i valori e i perimetri di zona vengono dall'OMI (semestre, raccolto una volta sola).
+const FONTI = {
+  pvp: { nome: 'Portale delle Vendite Pubbliche (Ministero della Giustizia)', url: 'https://pvp.giustizia.it', ruolo: "lotti attivi e prezzo base d'asta" },
+  omi: { nome: 'OMI - Agenzia delle Entrate', url: 'https://www1.agenziaentrate.gov.it/servizi/geopoi_omi/', ruolo: 'valori di mercato e perimetri delle zone' },
+};
+const FONTE = [FONTI.pvp, FONTI.omi];
+
 // comuni che ci interessano: quelli con zone e con lotti nel nostro confronto
 const zoneIdx = JSON.parse(fs.readFileSync('feed/omi-zone-centroidi.json', 'utf8'));
 const confronto = JSON.parse(fs.readFileSync('feed/confronto-aste-mercato.json', 'utf8'));
@@ -24,6 +35,9 @@ for (const [cod, v] of Object.entries(zoneIdx.comuni)) codPerNome.set(String(v.n
 
 // valori OMI per zona (semestre corrente) dal dataset locale
 let omiZone = new Map();   // codcom -> linkZona -> {min,max,mediano,stato}
+// Rilevazione OMI: il semestre e l'istante in cui il dataset OMI è stato raccolto (meta.generatoIl).
+let rilevazioneOmi = null;
+let rilevazioneOmiMotivo = 'il dataset OMI locale non è leggibile in questa esecuzione: i valori di zona restano fuori dal feed';
 try {
   const ds = JSON.parse(fs.readFileSync('puntoluce/dati/omi/omi-dataset.json', 'utf8'));
   const sem = Object.keys(ds.meta.semestri || []).length ? ds.meta.semestri[ds.meta.semestri.length - 1] : null;
@@ -40,6 +54,10 @@ try {
     if (m.size) omiZone.set(istat, m);
   }
   console.log('valori OMI per zona: comuni', omiZone.size, '· semestre', sem);
+  if (omiZone.size) {
+    rilevazioneOmi = { semestre: sem || null, raccolta: ds.meta?.generatoIl || null };
+    rilevazioneOmiMotivo = rilevazioneOmi.raccolta ? null : 'il dataset OMI non dichiara meta.generatoIl: il semestre è noto, l\'istante della raccolta no';
+  }
 } catch (e) { console.log('dataset OMI non leggibile:', e.message); }
 
 // lotto -> zona: centroide più vicino (distanza euclidea sui gradi, corretta in latitudine)
@@ -67,6 +85,10 @@ async function pagina(p) {
 const perZona = new Map();  // "CODCOM|linkZona" -> { codcom, comune, zona, fascia, micro, nLotti, prezzi:[] }
 let letti = 0, assegnati = 0, senzaZona = 0;
 
+// Istante VERO della raccolta: il primo scambio con l'API pubblica del PVP (non la fine dello
+// script e non l'istante di scrittura del file). I lotti e i prezzi pubblicati qui sono quelli che
+// il PVP restituiva in questo istante.
+const rilevazione = new Date().toISOString();
 const primo = await pagina(0);
 const tot = primo.totalElements || 0;
 console.log('lotti totali PVP:', tot);
@@ -112,9 +134,17 @@ const zone = [...perZona.values()].map((r) => {
 }).sort((a, b) => (b.lottiAttivi - a.lottiAttivi) || a.comune.localeCompare(b.comune));
 
 const feed = {
+  // fonte e rilevazione in chiaro anche alla radice (come feed/statistiche.json e feed/numeri-vivi.json):
+  // così il blocco si può pubblicare leggendo un solo campo, senza sapere dov'è l'anagrafica.
+  fonte: FONTE,
+  rilevazione,
   meta: {
     titolo: 'Aste per zona OMI',
-    fonte: 'PVP — Portale delle Vendite Pubbliche (lotti attivi) · Agenzia delle Entrate – OMI (valori di zona e perimetri)',
+    fonte: FONTE,
+    fonteTesto: 'PVP — Portale delle Vendite Pubbliche (lotti attivi) · Agenzia delle Entrate – OMI (valori di zona e perimetri)',
+    rilevazione,
+    rilevazioneOmi,
+    rilevazioneOmiMotivo,
     licenza: 'dati pubblici · CC-BY 4.0 (OMI)',
     generatoIl: new Date().toISOString(),
     metodo: 'Ogni immobile è associato alla zona OMI più vicina al suo indirizzo. Valori OMI: mediana delle tipologie residenziali della zona nel semestre corrente.',
