@@ -1,16 +1,16 @@
 {
-  "generato": "2026-11-13T15:53:25.364Z",
+  "generato": "2026-11-13T16:01:27.924Z",
   "numeri": {
-    "lotti": 321825,
-    "immobiliari": 271545,
+    "lotti": 321827,
+    "immobiliari": 271547,
     "mobiliari": 50280,
     "regioni": 21,
     "tribunali": 148,
     "lingue": 91,
-    "lottiAttivi": 41088,
+    "lottiAttivi": 41097,
     "aggiudicate": 2021,
     "deserte": 28528,
-    "aggiornato": "2026-11-13T15:48:47.002Z"
+    "aggiornato": "2026-11-13T16:00:27.882Z"
   },
   "checks": [
     {
@@ -45,6 +45,16 @@
     },
     {
       "nome": "llms.txt",
+      "ok": true,
+      "dettaglio": "HTTP 200"
+    },
+    {
+      "nome": "ai chi-siamo",
+      "ok": true,
+      "dettaglio": "HTTP 200"
+    },
+    {
+      "nome": "ai organization schema",
       "ok": true,
       "dettaglio": "HTTP 200"
     },
