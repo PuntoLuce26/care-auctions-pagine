@@ -1,13 +1,13 @@
 {
-  "generato": "2026-11-13T08:55:48Z",
+  "generato": "2026-11-13T09:25:52Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "df0efd1375",
-    "a": "07c748ea40"
+    "da": "3647bdc1dc",
+    "a": "5b0b8901c3"
   },
   "fileEsaminati": 1,
   "sintesi": {
@@ -21,11 +21,11 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "07c748ea40",
-      "oggetto": "feed: aste-zone con fonte (PVP + OMI) e rilevazione della raccolta",
+      "commit": "5b0b8901c3",
+      "oggetto": "aggiudicazioni-merge: conserva la data VERA di raccolta (raccolto_il del collettore) in feed/aggiudicazioni-meta.json",
       "fileToccati": 1,
       "esempi": [
-        "feed/aste-zone.json"
+        "scripts/aggiudicazioni-merge.js"
       ],
       "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
