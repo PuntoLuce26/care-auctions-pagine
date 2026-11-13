@@ -1,13 +1,13 @@
 {
-  "generato": "2026-11-13T09:44:24Z",
+  "generato": "2026-11-13T10:17:03Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "5a60ec79dd",
-    "a": "6c200cf779"
+    "da": "6eab6b1478",
+    "a": "25f77663d3"
   },
   "fileEsaminati": 1,
   "sintesi": {
@@ -21,11 +21,11 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "6c200cf779",
-      "oggetto": "esiti-sync: il token Cloudflare serve anche a LEGGERE lo stato precedente",
+      "commit": "25f77663d3",
+      "oggetto": "qa: audit interno 2026-11-13T10:15:54.444Z",
       "fileToccati": 1,
       "esempi": [
-        ".github/workflows/esiti-sync.yml"
+        "qa/audit-interno.json"
       ],
       "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
