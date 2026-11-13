@@ -1,5 +1,5 @@
 {
- "generato": "2026-11-13T21:25:59.687Z",
+ "generato": "2026-11-13T23:57:38.186Z",
  "semaforo": "giallo",
  "conteggi": {
   "ok": 20,
@@ -89,49 +89,49 @@
    "sezione": "feed",
    "nome": "statistiche",
    "stato": "ok",
-   "valore": "10 min",
+   "valore": "6 min",
    "dettaglio": "321881 lotti"
   },
   {
    "sezione": "feed",
    "nome": "world",
    "stato": "giallo",
-   "valore": "1442 min",
+   "valore": "1594 min",
    "dettaglio": "33 paesi"
   },
   {
    "sezione": "feed",
    "nome": "ricevute",
    "stato": "ok",
-   "valore": "1807 min",
+   "valore": "1959 min",
    "dettaglio": "0 ricevute"
   },
   {
    "sezione": "feed",
    "nome": "san-pasquale-foto",
    "stato": "giallo",
-   "valore": "1680 min",
+   "valore": "1831 min",
    "dettaglio": "37 foto"
   },
   {
    "sezione": "build",
    "nome": "sito vs origine",
    "stato": "ok",
-   "valore": "main.8c92e816.js / main.8c92e816.js",
+   "valore": "main.07556919.js / main.07556919.js",
    "dettaglio": ""
   },
   {
    "sezione": "prerender",
    "nome": "snapshot vs vivo",
    "stato": "ok",
-   "valore": "main.8c92e816.js / main.8c92e816.js",
+   "valore": "main.07556919.js / main.07556919.js",
    "dettaglio": ""
   },
   {
    "sezione": "prerender",
    "nome": "bot allineato",
    "stato": "ok",
-   "valore": "main.8c92e816.js",
+   "valore": "main.07556919.js",
    "dettaglio": ""
   },
   {
@@ -153,14 +153,14 @@
    "nome": "critici",
    "stato": "ok",
    "valore": "0",
-   "dettaglio": "5 controlli"
+   "dettaglio": "4 controlli"
   },
   {
    "sezione": "mail",
    "nome": "allarmi",
    "stato": "giallo",
-   "valore": "5",
-   "dettaglio": "2026-11-13T21:05:57.564Z"
+   "valore": "7",
+   "dettaglio": "2026-11-13T23:56:24.700Z"
   },
   {
    "sezione": "sentinella",
@@ -180,8 +180,8 @@
    "sezione": "github",
    "nome": "run rossi (2h)",
    "stato": "ok",
-   "valore": "1 isolati",
-   "dettaglio": "warm-pages (una volta sola: race nota)"
+   "valore": "0 isolati",
+   "dettaglio": ""
   }
  ]
 }
