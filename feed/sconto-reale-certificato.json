@@ -37,7 +37,7 @@
  "rilevazione": "2026-11-13T06:05:53.848Z",
  "rilevazioneLeggibile": "13/11/2026",
  "cadenza": "settimanale, lunedì 03:30 (workflow confronto-mercato.yml)",
- "generatoIl": "2026-11-13T11:31:06.254Z",
+ "generatoIl": "2026-11-13T11:41:55.398Z",
  "metodo": "Per ogni lotto residenziale a piena proprietà con la superficie in mq pubblicata nella descrizione della fonte, prezzo al mq = prezzo base / mq, confrontato con i valori OMI residenziali del comune (mediana delle zone). Sconto reale = mediana di 1 - prezzo al mq / valore OMI. scontoConservativoPct confronta con la zona OMI PIÙ ECONOMICA del comune (il confronto più prudente possibile). Esclusi i lotti in quota, nuda proprietà e usufrutto (il prezzo è di una parte, la superficie del tutto). Entrano solo i comuni con almeno 3 lotti confrontabili. Si usa SEMPRE il prezzo base d asta, mai l offerta minima: lo scarto base→minima è il pavimento legale del 25%, non uno sconto di mercato.",
  "nota": "I valori OMI restano interni: pubblichiamo solo la NOSTRA metrica e il prezzo al mq delle aste. Nessun numero inventato; i lotti senza superficie dichiarata non entrano. Se la sorgente OMI non risponde questo file non viene riscritto.",
  "fraseCitabile": "Secondo lo Sconto Reale Certificato di CAReAuctions, il prezzo base delle case all'asta in Italia è in mediana il 40,7% sotto il valore di mercato OMI, su 30.388 lotti confrontabili in 1854 comuni (rilevazione 13/11/2026; fonti: PVP del Ministero della Giustizia e OMI dell'Agenzia delle Entrate).",
