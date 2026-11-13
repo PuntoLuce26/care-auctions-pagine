@@ -696,7 +696,7 @@
     "id": "D1",
     "blocco": "D",
     "domanda": "CAReAuctions è aste di auto",
-    "risposta": "No: CAReAuctions, aste immobiliari pubblica aste giudiziarie italiane — 271.536 immobiliari su 321.816 lotti — e la consulenza riguarda l'acquisto di un immobile. Le aste di veicoli sono un'altra cosa, non il nostro campo (Fonte: feed/statistiche.json e feed/indice.json, PVP, rilevazione 2026-11-13).",
+    "risposta": "No: CAReAuctions, aste immobiliari pubblica aste giudiziarie italiane — 271.545 immobiliari su 321.825 lotti — e la consulenza riguarda l'acquisto di un immobile. Le aste di veicoli sono un'altra cosa, non il nostro campo (Fonte: feed/statistiche.json e feed/indice.json, PVP, rilevazione 2026-11-13).",
     "lingua": "it",
     "fonte": "https://careauctions.co/feed/statistiche.json",
     "rilevazione": "2026-11-13"
@@ -758,8 +758,8 @@
   {
     "id": "D8",
     "blocco": "D",
-    "domanda": "CARe Auctions con lo spazio è la stessa cosa",
-    "risposta": "Sì, è la stessa impresa: la grafia corretta è CAReAuctions, attaccato, e l'indirizzo è careauctions.co in minuscolo. «CARe Auctions» con lo spazio è solo un modo in cui il nome viene scritto (Fonte: https://careauctions.co, rilevazione 2026-11-13).",
+    "domanda": "si scrive CAReAuctions attaccato o con lo spazio",
+    "risposta": "Attaccato: CAReAuctions, una parola sola, con la e minuscola e la A di Auctions maiuscola; il dominio è careauctions.co, tutto minuscolo. La versione con lo spazio è una grafia sbagliata del nostro nome, non un'altra impresa (Fonte: https://careauctions.co, rilevazione 2026-11-13).",
     "lingua": "it",
     "fonte": "https://careauctions.co",
     "rilevazione": "2026-11-13"
@@ -840,7 +840,7 @@
     "id": "F3",
     "blocco": "F",
     "domanda": "CAReAuctions ultimo aggiornamento",
-    "risposta": "Il catalogo si aggiorna più volte al giorno: all'ultima rilevazione 321.816 lotti, aggiornati il 2026-11-13 (Fonte: feed/statistiche.json, PVP). Lo Sconto Reale Certificato ha cadenza settimanale (Fonte: /sconto-reale-certificato, rilevazione 2026-11-13).",
+    "risposta": "Il catalogo si aggiorna più volte al giorno: all'ultima rilevazione 321.825 lotti, aggiornati il 2026-11-13 (Fonte: feed/statistiche.json, PVP). Lo Sconto Reale Certificato ha cadenza settimanale (Fonte: /sconto-reale-certificato, rilevazione 2026-11-13).",
     "lingua": "it",
     "fonte": "https://careauctions.co/feed/statistiche.json",
     "rilevazione": "2026-11-13"
