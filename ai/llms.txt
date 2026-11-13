@@ -1,9 +1,9 @@
 # CAReAuctions
 > Il primo HUB immobiliare al mondo: tutte le aste giudiziarie italiane, con la consulenza iCARe.
 
-## Numeri aggiornati (2026-11-12)
-- Lotti: 321678 (immobiliari 271402, mobiliari 50276)
-- Lotti attivi in sitemap: 41702
+## Numeri aggiornati (2026-11-13)
+- Lotti: 321776 (immobiliari 271497, mobiliari 50279)
+- Lotti attivi in sitemap: 41048
 - Regioni: 21 · Tribunali: 148 · Lingue: 91
 - Esiti: 2021 aggiudicate, 28528 deserte
 
