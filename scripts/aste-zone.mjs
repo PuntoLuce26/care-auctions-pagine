@@ -21,7 +21,7 @@ const oggi = new Date();
 // ogni giro), i valori e i perimetri di zona vengono dall'OMI (semestre, raccolto una volta sola).
 const FONTI = {
   pvp: { nome: 'Portale delle Vendite Pubbliche (Ministero della Giustizia)', url: 'https://pvp.giustizia.it', ruolo: "lotti attivi e prezzo base d'asta" },
-  omi: { nome: 'OMI - Agenzia delle Entrate', url: 'https://www1.agenziaentrate.gov.it/servizi/geopoi_omi/', ruolo: 'valori di mercato e perimetri delle zone' },
+  omi: { nome: 'OMI — Agenzia delle Entrate', url: 'https://www1.agenziaentrate.gov.it/servizi/geopoi_omi/', ruolo: 'valori di mercato e perimetri delle zone' },
 };
 const FONTE = [FONTI.pvp, FONTI.omi];
 
