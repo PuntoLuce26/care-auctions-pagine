@@ -128,7 +128,17 @@ function scegliEsiti({ modo, esitiAcc, canone, sogliaGiorni = SOGLIA_GIORNI, ade
   return { esiti: null, motivo: 'nessuna rilevazione degli esiti disponibile', scriviCanone: false, rilevazione: null };
 }
 
-module.exports = { PROTETTI_FEED, SOGLIA_GIORNI, fileDaCancellare, fileDaIndice, scegliEsiti, conteggioVivo };
+// 13/11/2026 — FONTI PUBBLICHE (figura sweep).
+// Regola ferma: un numero senza fonte pubblica e senza data non si pubblica. Il feed deve
+// dichiarare il NOME PUBBLICO della fonte (chiunque possa controllarlo), MAI il percorso del
+// file o dello script che l'ha scritto: "scripts/sync-feed.js → feed/statistiche.json" non è
+// una fonte, è un indirizzo interno.
+const FONTI_PUBBLICHE = {
+  pvp: { nome: 'Portale delle Vendite Pubbliche (Ministero della Giustizia)', url: 'https://pvp.giustizia.it' },
+  omi: { nome: 'OMI — Agenzia delle Entrate', url: 'https://www1.agenziaentrate.gov.it/servizi/geopoi_omi/' },
+};
+
+module.exports = { PROTETTI_FEED, SOGLIA_GIORNI, FONTI_PUBBLICHE, fileDaCancellare, fileDaIndice, scegliEsiti, conteggioVivo };
 
 if (require.main === module) {
   // prova rapida: stampare la decisione con i dati veri di feed/
