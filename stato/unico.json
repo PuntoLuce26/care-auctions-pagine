@@ -1,9 +1,9 @@
 {
- "generato": "2026-11-13T09:11:03.279Z",
+ "generato": "2026-11-13T11:27:59.713Z",
  "semaforo": "giallo",
  "conteggi": {
-  "ok": 22,
-  "giallo": 2,
+  "ok": 23,
+  "giallo": 1,
   "rosso": 0,
   "non_verificabile": 0
  },
@@ -89,49 +89,49 @@
    "sezione": "feed",
    "nome": "statistiche",
    "stato": "ok",
-   "valore": "10 min",
-   "dettaglio": "321718 lotti"
+   "valore": "9 min",
+   "dettaglio": "321769 lotti"
   },
   {
    "sezione": "feed",
    "nome": "world",
    "stato": "ok",
-   "valore": "707 min",
+   "valore": "844 min",
    "dettaglio": "33 paesi"
   },
   {
    "sezione": "feed",
    "nome": "ricevute",
    "stato": "ok",
-   "valore": "1072 min",
+   "valore": "1209 min",
    "dettaglio": "0 ricevute"
   },
   {
    "sezione": "feed",
    "nome": "san-pasquale-foto",
    "stato": "ok",
-   "valore": "945 min",
+   "valore": "1082 min",
    "dettaglio": "37 foto"
   },
   {
    "sezione": "build",
    "nome": "sito vs origine",
    "stato": "ok",
-   "valore": "main.afdcfbb3.js / main.afdcfbb3.js",
+   "valore": "main.28d81ac4.js / main.28d81ac4.js",
    "dettaglio": ""
   },
   {
    "sezione": "prerender",
    "nome": "snapshot vs vivo",
-   "stato": "giallo",
-   "valore": "main.d184be11.js / main.afdcfbb3.js",
-   "dettaglio": "drift: i crawler ricevono un bundle vecchio"
+   "stato": "ok",
+   "valore": "main.28d81ac4.js / main.28d81ac4.js",
+   "dettaglio": ""
   },
   {
    "sezione": "prerender",
    "nome": "bot allineato",
    "stato": "ok",
-   "valore": "main.afdcfbb3.js",
+   "valore": "main.28d81ac4.js",
    "dettaglio": ""
   },
   {
@@ -159,8 +159,8 @@
    "sezione": "mail",
    "nome": "allarmi",
    "stato": "giallo",
-   "valore": "8",
-   "dettaglio": "2026-11-13T08:58:43.914Z"
+   "valore": "5",
+   "dettaglio": "2026-11-13T10:55:45.109Z"
   },
   {
    "sezione": "sentinella",
