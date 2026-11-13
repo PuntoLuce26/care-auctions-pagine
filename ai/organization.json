@@ -9,7 +9,7 @@
         "CAReAuctions, aste immobiliari",
         "careauctions.co"
       ],
-      "legalName": "Punto Luce Srls",
+      "legalName": "PuntoLuce Srls",
       "url": "https://careauctions.co/",
       "vatID": "IT04240850927",
       "description": "CAReAuctions, aste immobiliari è il servizio di consulenza di parte del compratore sulle aste giudiziarie immobiliari italiane: legge perizia e avviso, verifica vincoli e spese, calcola il prezzo massimo e accompagna fino al decreto. È pagato con una success fee solo se l'asta si aggiudica; non fa mediazione e non prende provvigioni.",
@@ -35,12 +35,13 @@
           "@type": "ContactPoint",
           "contactType": "press",
           "email": "info@careauctions.co",
-          "url": "https://careauctions.co/stampa",
+          "url": "https://careauctions.co/chi-siamo#stampa",
           "availableLanguage": [
             "it",
             "en"
           ],
-          "areaServed": "IT"
+          "areaServed": "IT",
+          "telephone": "+39 352 291 9919"
         }
       ],
       "knowsAbout": [
