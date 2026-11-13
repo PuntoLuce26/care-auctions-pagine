@@ -1,0 +1,83 @@
+name: mercato-feed
+# 13/11/2026 — TRE FEED DELLA SEZIONE MERCATO SENZA FONTE, SENZA DATA E SENZA UNO SCRITTORE.
+# `scripts/mercato-indice.mjs` e `scripts/mercato-feeds.mjs` esistevano dall'11/11 ma nessuno dei 49
+# workflow del repo li richiamava: feed/mercato-indice.json, feed/aste-trend.json e
+# feed/confronto-aste-mercato.json erano stati scritti a mano da una sessione, con la data di quel
+# giorno. Un numero senza fonte pubblica e senza data non si pubblica (regola del 6/11): qui i tre
+# feed si rigenerano in cloud e portano dentro `fonte` e `rilevazione`.
+# Cadenza: GIORNALIERA alle 04:20 UTC. La serie delle aste è giornaliera e il suo ultimo giorno cambia
+# ogni giorno: una data vecchia accanto al numero sarebbe di nuovo un numero senza data.
+# NOTA: feed/aste-zone.json NON sta qui. `scripts/aste-zone.mjs` legge il dataset OMI privato
+# (puntoluce/dati/omi/omi-dataset.json, 81 MB) che per la regola 5.874 non esce dal Mac: si rigenera
+# in locale e si pubblica. Anche quel file dichiara fonte e rilevazione.
+on:
+  schedule:
+    - cron: "20 4 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: mercato-feed
+  cancel-in-progress: false
+jobs:
+  feed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Indice del mercato libero (Eurostat prc_hpi_q) — fonte e rilevazione
+        run: node scripts/mercato-indice.mjs
+      - name: Serie giornaliera delle aste e confronto per comune — fonte e rilevazione
+        run: node scripts/mercato-feeds.mjs
+      - name: Controllo sull'artefatto (fonte, rilevazione e numeri dentro i tre file)
+        run: |
+          python3 - <<'PY'
+          import json
+          attesi = {
+              'feed/mercato-indice.json': lambda d: bool(d.get('totale')),
+              'feed/aste-trend.json': lambda d: len(d.get('giorni') or []) > 0,
+              'feed/confronto-aste-mercato.json': lambda d: len(d.get('comuni') or []) > 0,
+          }
+          problemi = []
+          for f, ha_numeri in attesi.items():
+              d = json.load(open(f, encoding='utf-8'))
+              fonte = d.get('fonte') or (d.get('meta') or {}).get('fonte')
+              rilev = d.get('rilevazione') or (d.get('meta') or {}).get('rilevazione')
+              if not fonte:
+                  problemi.append(f + ': fonte mancante')
+              if not rilev or len(str(rilev)) < 10 or 'T' not in str(rilev):
+                  problemi.append(f + ': rilevazione mancante o non ISO')
+              if not ha_numeri(d):
+                  problemi.append(f + ': numeri mancanti')
+              print('ok' if not problemi else 'ko', f, '· fonte', (fonte if isinstance(fonte, str) else 'oggetto/lista'), '· rilevazione', rilev, '· campi', len(d.get('meta') or {}))
+          if problemi:
+              raise SystemExit('ARTEFATTO NON VALIDO: ' + ' · '.join(problemi))
+          PY
+      - name: Commit
+        run: |
+          git config user.name "CARe Cloud"
+          git config user.email "cloud@careauctions.co"
+          git add feed/mercato-indice.json feed/aste-trend.json feed/confronto-aste-mercato.json
+          git diff --cached --quiet && echo "nessuna variazione" && exit 0
+          git commit -m "feed: mercato (indice, serie aste, confronto comuni) rigenerato ($(date -u +%FT%TZ))"
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null
+            if git push -q; then exit 0; fi
+            sleep 4
+          done
+          echo "::error::push fallito"; exit 1
+      - name: Riepilogo
+        run: |
+          python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          mi = json.load(open('feed/mercato-indice.json', encoding='utf-8'))
+          at = json.load(open('feed/aste-trend.json', encoding='utf-8'))
+          ca = json.load(open('feed/confronto-aste-mercato.json', encoding='utf-8'))
+          print('### Mercato: indice, serie aste, confronto comuni')
+          print('- mercato-indice: rilevazione ' + str(mi.get('rilevazione')) + ' · ' + str(len(mi.get('totale') or [])) + ' trimestri · ultimo ' + str((mi.get('totale') or [{}])[-1].get('periodo')))
+          print('- aste-trend: rilevazione ' + str(at.get('rilevazione')) + ' · ' + str(len(at.get('giorni') or [])) + ' giorni')
+          print('- confronto-aste-mercato: rilevazione ' + str(ca.get('rilevazione')) + ' · ' + str(len(ca.get('comuni') or [])) + ' comuni')
+          PY
