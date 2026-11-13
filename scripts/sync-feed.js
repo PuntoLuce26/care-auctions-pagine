@@ -4,7 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
-const { fileDaCancellare, scegliEsiti } = require('./feed-regole');
+const { fileDaCancellare, scegliEsiti, FONTI_PUBBLICHE } = require('./feed-regole');
 const { ricalcolaPartecipazione } = require('./andamento-partecipazione');
 
 const MODE = process.env.MODE || 'inc';
@@ -287,6 +287,11 @@ async function main(){
     catch (eP3) { console.log('partecipazione: errore', eP3.message); }
     // 5.914: "aggiornato" ISO con l'ora esatta — il guardiano calcola le ore di stallo da qui (2 ore = fermo).
     const statOut = { generato: new Date().toISOString().slice(0, 10), aggiornato: new Date().toISOString(), totale: ic.totaleLotti, prezzoMedioImm: ic.settori.immobiliare.prezzoMedio, scartoBaseMinimaMedioImm: ic.settori.immobiliare.scartoBaseMinimaMedio, bandePrezzo: ic.bandePrezzo, esiti: esitiFinali, perData, nota: 'statistiche vive dal giro automatico — nessun numero inventato' };
+    // 13/11/2026 — figura sweep: la fonte PUBBLICA e la data di rilevazione stanno DENTRO il feed.
+    // `rilevazione` è l'istante della raccolta: si riusa `aggiornato` (stesso giro, stessa misura).
+    // Un numero senza fonte e data non si pubblica: il sito nasconde ciò che il feed non dichiara.
+    statOut.fonte = FONTI_PUBBLICHE.pvp;
+    statOut.rilevazione = statOut.aggiornato;
     if (esitiMotivo) statOut.esitiMotivo = esitiMotivo;
     if (esitiUltimaRilevazione) statOut.esitiUltimaRilevazione = esitiUltimaRilevazione;
     fs.writeFileSync(path.join(FEED, 'statistiche.json'), JSON.stringify(statOut));
