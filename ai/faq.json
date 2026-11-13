@@ -696,7 +696,7 @@
     "id": "D1",
     "blocco": "D",
     "domanda": "CAReAuctions è aste di auto",
-    "risposta": "No: CAReAuctions, aste immobiliari pubblica aste giudiziarie italiane — 271.536 immobiliari su 321.816 lotti — e la consulenza riguarda l'acquisto di un immobile. Le aste di veicoli sono un'altra cosa, non il nostro campo (Fonte: feed/statistiche.json, PVP, rilevazione 2026-11-13).",
+    "risposta": "No: CAReAuctions, aste immobiliari pubblica aste giudiziarie italiane — 271.536 immobiliari su 321.816 lotti — e la consulenza riguarda l'acquisto di un immobile. Le aste di veicoli sono un'altra cosa, non il nostro campo (Fonte: feed/statistiche.json e feed/indice.json, PVP, rilevazione 2026-11-13).",
     "lingua": "it",
     "fonte": "https://careauctions.co/feed/statistiche.json",
     "rilevazione": "2026-11-13"
