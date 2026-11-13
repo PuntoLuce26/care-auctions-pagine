@@ -86,7 +86,33 @@ if (require.main === module) {
   catch (e) { console.log('aggiudicazioni: raccolta ' + tipo + ' non leggibile (' + e.message.slice(0, 60) + ') — archivio intatto'); process.exit(0); }
   const nuovi = tipo === 'fallco' ? daFallco(j) : tipo === 'ivg' ? daIvg(j) : [];
   if (!nuovi.length) { console.log('aggiudicazioni: la raccolta ' + tipo + ' non ha voci utili — archivio intatto'); process.exit(0); }
-  mergeRecords(file, nuovi, { log });
+  const esitoMerge = mergeRecords(file, nuovi, { log });
+  // 13/11/2026 — la DATA VERA DELLA RACCOLTA non deve piu' perdersi. Il collettore
+  // (scripts/fallco-aggiudicazioni.js) scrive raccolto_il sull'oggetto /tmp/aggiudicazioni-fallco.json,
+  // ma il merge riduce tutto a un array di record e quel campo evaporava: da qui i feed che
+  // aggregano l'archivio (esiti-monitor) non potevano dichiarare una rilevazione e restavano
+  // nascosti. Ora il sidecar conserva l'istante di FINE RACCOLTA dichiarato dal collettore
+  // stesso (non l'ora dello script ne' quella del commit, che arriva fino a un'ora dopo).
+  try {
+    const raccolto = String((j && j.raccolto_il) || '');
+    if (/^\d{4}-\d{2}-\d{2}T/.test(raccolto)) {
+      const metaFile = path.join(path.dirname(file), 'aggiudicazioni-meta.json');
+      let prev = {};
+      try { prev = JSON.parse(fs.readFileSync(metaFile, 'utf8')) || {}; } catch (e) {}
+      const meta = Object.assign({}, prev, {
+        ultimaRaccolta: raccolto,
+        raccolte: Object.assign({}, prev.raccolte || {}, { [tipo]: raccolto }),
+        fonte: 'FallcoAste — fallcoaste.it',
+        fonteUrl: 'https://www.fallcoaste.it',
+        record: (esitoMerge && esitoMerge.dopo) || undefined,
+        provenienza: 'campo raccolto_il scritto da scripts/fallco-aggiudicazioni.js al termine della raccolta; il merge in feed-sync lo conserva qui',
+        scritto: new Date().toISOString(),
+      });
+      if (!meta.record) delete meta.record;
+      fs.writeFileSync(metaFile, JSON.stringify(meta));
+      log('aggiudicazioni-meta.json: ultima raccolta ' + raccolto + ' (' + tipo + ')');
+    }
+  } catch (e) { console.log('aggiudicazioni-meta: non scritto (' + e.message.slice(0, 60) + ')'); }
 }
 
 module.exports = { mergeRecords, daFallco, daIvg, chiave };
