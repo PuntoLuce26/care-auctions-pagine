@@ -1,13 +1,13 @@
 {
-  "generato": "2026-11-13T15:12:59Z",
+  "generato": "2026-11-13T15:48:40Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "1f62c89068",
-    "a": "a85010e791"
+    "da": "c35b7d93e3",
+    "a": "560a370cee"
   },
   "fileEsaminati": 1,
   "sintesi": {
@@ -19,13 +19,13 @@
   },
   "violazioni": [
     {
-      "commit": "a85010e791",
-      "agente": "sam",
-      "file": ".github/workflows/prerender.yml",
+      "commit": "560a370cee",
+      "agente": "query-educa",
+      "file": ".github/workflows/ai-education.yml",
       "tipo": "owner",
       "owner": "workflow-owner",
       "nota": "unico. Chi tocca un file qui lo valida con Ruby/Psych prima del push e verifica la run CON JOB, non il commit.",
-      "cosaFare": "non scrivere: deposita la richiesta in coda/.github/<timestamp>-sam.json"
+      "cosaFare": "non scrivere: deposita la richiesta in coda/.github/<timestamp>-query-educa.json"
     }
   ],
   "violazioniTroncate": 0,
@@ -38,7 +38,7 @@
     "fonte": "file locale /tmp/care-workers/veglia/worker.js",
     "motivo": null,
     "nota": null,
-    "totaleProcessi": 14,
+    "totaleProcessi": 16,
     "duplicati": []
   },
   "rodaggio": {
