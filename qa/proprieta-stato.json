@@ -1,15 +1,15 @@
 {
-  "generato": "2026-11-13T09:25:52Z",
+  "generato": "2026-11-13T09:34:03Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "3647bdc1dc",
-    "a": "5b0b8901c3"
+    "da": "aed137ca88",
+    "a": "17ca3cac00"
   },
-  "fileEsaminati": 1,
+  "fileEsaminati": 2,
   "sintesi": {
     "violazioni": 0,
     "violazioniDaCommit": 0,
@@ -21,11 +21,12 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "5b0b8901c3",
-      "oggetto": "aggiudicazioni-merge: conserva la data VERA di raccolta (raccolto_il del collettore) in feed/aggiudicazioni-meta.json",
-      "fileToccati": 1,
+      "commit": "17ca3cac00",
+      "oggetto": "esiti-sync: stato del giro a ogni run (feed/esiti-stato.json → R2 stato/esiti/stato.json)",
+      "fileToccati": 2,
       "esempi": [
-        "scripts/aggiudicazioni-merge.js"
+        ".github/workflows/esiti-sync.yml",
+        "scripts/esiti-stato.mjs"
       ],
       "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
