@@ -70,17 +70,42 @@ const regioneDi = (t, mappa) => (mappa && mappa[t]) || null;
   const copertura = { dal, al, esiti: lista.length, tribunali: Object.keys(perTrib).filter(x => x !== 'N/D').length, regioni: Object.keys(perReg).filter(x => x !== 'N/D').length };
   const fonti = {};
   for (const a of lista) fonti[a.fonte] = (fonti[a.fonte] || 0) + 1;
+  // 13/11/2026 — LA FONTE SI DICHIARA CON I NOMI VERI E LA QUOTA. Prima era una frase che
+  // elencava anche "AstaGiudiziaria/IVG", presente ZERO volte in questo feed: un'etichetta che
+  // nomina una fonte senza record e' la stessa bugia di esiti-monitor. Qui l'array si costruisce
+  // dal conteggio reale (`fonti`), con nome pubblico, URL verificato sui record e quota.
+  const FONTI_NOTE = {
+    'fallcoaste': { nome: 'FallcoAste — fallcoaste.it', url: 'https://www.fallcoaste.it' },
+    'notarile-verona': { nome: 'Notarile Verona (aste notarili)', url: null },
+    'ivg': { nome: 'AstaGiudiziaria / IVG', url: 'https://www.astagiudiziaria.com' },
+    'anivg': { nome: 'ANIVG — Associazione Nazionale Istituti Vendite Giudiziarie', url: null },
+  };
+  const totFonti = lista.length || 1;
+  const fonteArr = Object.keys(fonti).sort((a, b) => fonti[b] - fonti[a]).map(k => Object.assign(
+    { nome: k, url: null },
+    FONTI_NOTE[k] || {},
+    { esiti: fonti[k], quota: Math.round((fonti[k] / totFonti) * 1000) / 1000 }
+  ));
+  const fonteTesto = fonteArr.map(f => f.nome + ' (' + f.esiti + ' esiti, ' + Math.round(f.quota * 100) + '%)').join(' · ');
+  const fontiSenzaUrl = fonteArr.filter(f => !f.url).map(f => f.nome);
   const giorniCop = (dal && al) ? Math.max(1, Math.round((new Date(al + 'T12:00:00Z') - new Date(dal + 'T12:00:00Z')) / 86400000)) : null;
-  const stat = { generato: new Date().toISOString(), categoria: 'immobiliare', tutti: allAwards, fonte: 'FallcoAste (Miglior offerta), Notarile Verona, AstaGiudiziaria/IVG — prezzi pubblici di aggiudicazione', copertura, nazionale: { conteggio: lista.length, mediana, media, min: prezzi[0] || null, max: prezzi[prezzi.length - 1] || null }, fonti, perAnno: sint(perAnno), perMese: sint(perMese), perTribunale: sint(perTrib), perRegione: sint(perReg), limiti: ['Non tutte le aste pubblicano il prezzo finale: la copertura è dichiarata', 'Il prezzo base non è disponibile per tutti i record: lo sconto base→aggiudicazione è calcolato solo dove esiste', 'Le aste mobiliari senza tribunale sono escluse da questo indice'] };
+  // rilevazione: la raccolta (fallco-aggiudicazioni.js + ivg-aggiudicazioni.js) gira negli stessi
+  // minuti di questa normalizzazione, dentro lo stesso job del workflow esiti-sync: l'istante di
+  // `generato` e' quindi quello della misura, non un'ora messa a caso su dati vecchi.
+  const rilevazione = new Date().toISOString();
+  const rilevazioneNota = 'istante della normalizzazione nella stessa run della raccolta: fallco-aggiudicazioni.js e ivg-aggiudicazioni.js girano pochi minuti prima, in questo stesso job';
+  const stat = { generato: rilevazione, categoria: 'immobiliare', tutti: allAwards, fonte: fonteArr, fonteTesto, fonteUrl: fonteArr.length === 1 ? fonteArr[0].url : null, fontiSenzaUrl, rilevazione, rilevazioneNota, copertura, nazionale: { conteggio: lista.length, mediana, media, min: prezzi[0] || null, max: prezzi[prezzi.length - 1] || null }, fonti, perAnno: sint(perAnno), perMese: sint(perMese), perTribunale: sint(perTrib), perRegione: sint(perReg), limiti: ['Non tutte le aste pubblicano il prezzo finale: la copertura è dichiarata', 'Il prezzo base non è disponibile per tutti i record: lo sconto base→aggiudicazione è calcolato solo dove esiste', 'Le aste mobiliari senza tribunale sono escluse da questo indice'] };
   w(OUT.esiti, stat);
-  w(OUT.indice, { generato: stat.generato, indice: { conteggio: lista.length, mediana, media }, copertura, perTribunale: stat.perTribunale, perRegione: stat.perRegione, fonte: stat.fonte, nota: 'CAReIndex — prezzi di aggiudicazione reali, con copertura dichiarata' });
-  w(OUT.report, { generato: stat.generato, recordTotale: tutti.length, awards: allAwards, immobiliari: lista.length, scartati: tutti.length - lista.length, fonti, copertura, esempi: lista.slice(-3) });
+  w(OUT.indice, { generato: stat.generato, indice: { conteggio: lista.length, mediana, media }, copertura, perTribunale: stat.perTribunale, perRegione: stat.perRegione, fonte: fonteArr, fonteTesto, rilevazione, rilevazioneNota, nota: 'CAReIndex — prezzi di aggiudicazione reali, con copertura dichiarata' });
+  w(OUT.report, { generato: stat.generato, recordTotale: tutti.length, awards: allAwards, immobiliari: lista.length, scartati: tutti.length - lista.length, fonti, fonte: fonteArr, fonteTesto, rilevazione, rilevazioneNota, copertura, esempi: lista.slice(-3) });
   // aggiorna statistiche senza inventare: aggiudicate = award reali; deserte/sospese restano dalla rilevazione precedente
   const stats = read(path.join(FEED, 'statistiche.json'), {});
   const oldEsiti = stats.esiti || {};
   const nuoveEsiti = { aggiudicate: allAwards, immobiliari: lista.length, deserte: Number(oldEsiti.deserte) || 0, sospese: Number(oldEsiti.sospese) || 0, nonPubblicato: Math.max(0, (Number(stats.totale) || 0) - lista.length - (Number(oldEsiti.deserte) || 0) - (Number(oldEsiti.sospese) || 0)) };
   stats.esiti = nuoveEsiti;
-  stats.esitiFonte = stat.fonte;
+  // `fonte` ora e' un array (nome+url+quota): qui si tiene la forma TESTO per i consumatori
+  // che stampano il campo (statistiche.json e' gia' in produzione: la struttura non cambia).
+  stats.esitiFonte = fonteTesto;
   stats.esitiCopertura = Object.assign({}, copertura, { esiti: allAwards, immobiliari: lista.length, giorni: giorniCop });
   stats.esitiMotivo = null;
   stats.esitiUltimaRilevazione = { data: al || new Date().toISOString().slice(0, 10), aggiudicate: allAwards, immobiliari: lista.length, deserte: nuoveEsiti.deserte, sospese: nuoveEsiti.sospese, verificati: lista.length + nuoveEsiti.deserte + nuoveEsiti.sospese, nota: 'prezzi di aggiudicazione pubblici: ' + allAwards + ' (immobiliari ' + lista.length + ') con copertura ' + dal + ' → ' + al };
