@@ -1,0 +1,18 @@
+{
+  "generato": "2026-11-13T12:43:43.429Z",
+  "base": "https://careauctions.co",
+  "concorrenza": 50,
+  "durata": 10,
+  "richieste": 6821,
+  "rps": 663,
+  "p50": 25,
+  "p95": 236,
+  "p99": 328,
+  "errorePct": 0,
+  "budget": {
+    "p95Ms": 1000,
+    "errorePct": 1
+  },
+  "ok": true,
+  "nota": "Test sul bordo/CDN (cache reale). Il carico mondiale si regge su edge, cache e pagine statiche; l origine Emergent resta il collo di bottiglia."
+}
