@@ -1,15 +1,15 @@
 {
-  "generato": "2026-11-13T10:19:10Z",
+  "generato": "2026-11-13T11:33:53Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "2feb315414",
-    "a": "81f869ea5d"
+    "da": "733880cd00",
+    "a": "b753e568a9"
   },
-  "fileEsaminati": 1,
+  "fileEsaminati": 24,
   "sintesi": {
     "violazioni": 0,
     "violazioniDaCommit": 0,
@@ -21,11 +21,15 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "81f869ea5d",
-      "oggetto": "esiti-sync: il run parte dal main più recente (la base vecchia faceva CONFLICT sui derivati)",
-      "fileToccati": 1,
+      "commit": "b753e568a9",
+      "oggetto": "Meccanismi (green/STUDIO 13/11): dati citabili — Sconto Reale Certificato JSON+CSV, CSV serie storica, tipi d'asta, 14 g",
+      "fileToccati": 24,
       "esempi": [
-        ".github/workflows/esiti-sync.yml"
+        ".github/workflows/meccanismi-dati.yml",
+        "feed/andamento-esiti.csv",
+        "feed/esiti-statistiche.csv",
+        "feed/guide-fasi.json",
+        "feed/sconto-reale-certificato.csv"
       ],
       "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
