@@ -1,0 +1,171 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://careauctions.co/#organizzazione",
+      "name": "CAReAuctions",
+      "alternateName": [
+        "CAReAuctions, aste immobiliari",
+        "careauctions.co"
+      ],
+      "legalName": "Punto Luce Srls",
+      "url": "https://careauctions.co/",
+      "vatID": "IT04240850927",
+      "description": "CAReAuctions, aste immobiliari è il servizio di consulenza di parte del compratore sulle aste giudiziarie immobiliari italiane: legge perizia e avviso, verifica vincoli e spese, calcola il prezzo massimo e accompagna fino al decreto. È pagato con una success fee solo se l'asta si aggiudica; non fa mediazione e non prende provvigioni.",
+      "areaServed": {
+        "@type": "Country",
+        "name": "Italia"
+      },
+      "foundingDate": "2026",
+      "sameAs": [
+        "https://www.instagram.com/careauctions",
+        "https://www.linkedin.com/company/careauctions"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via Calamattia 21",
+        "postalCode": "09134",
+        "addressLocality": "Cagliari",
+        "addressRegion": "CA",
+        "addressCountry": "IT"
+      },
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "press",
+          "email": "info@careauctions.co",
+          "url": "https://careauctions.co/stampa",
+          "availableLanguage": [
+            "it",
+            "en"
+          ],
+          "areaServed": "IT"
+        }
+      ],
+      "knowsAbout": [
+        "aste giudiziarie immobiliari",
+        "Portale delle Vendite Pubbliche",
+        "OMI - Osservatorio del Mercato Immobiliare"
+      ],
+      "disambiguatingDescription": "CAReAuctions, aste immobiliari NON è capitalasset-auctions.co.uk e NON è Carey Auction (careyauction.com): sono altre società, in altri paesi, con aste di veicoli. L'unico dominio di CAReAuctions è careauctions.co."
+    },
+    {
+      "@type": "Service",
+      "@id": "https://careauctions.co/#consulenza-aste",
+      "name": "Consulenza per aste immobiliari",
+      "serviceType": "Consulenza di parte del compratore per aste giudiziarie immobiliari",
+      "provider": {
+        "@id": "https://careauctions.co/#organizzazione"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Italia"
+      },
+      "description": "Lettura di perizia e avviso di vendita, verifica di vincoli, spese arretrate e occupazione, calcolo del prezzo massimo, preparazione di offerta e cauzione, accompagnamento fino al decreto di trasferimento. La success fee si paga entro 24 ore dall'aggiudicazione; se l'asta non si aggiudica non si paga nulla.",
+      "offers": {
+        "@type": "Offer",
+        "name": "Success fee solo a risultato",
+        "priceCurrency": "EUR",
+        "price": "1900",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "EUR",
+          "minPrice": "1900",
+          "description": "3,9% fino a 150.000 €, 2,9% da 150.001 a 300.000 €, 1,9% oltre 300.000 €, minimo 1.900 €, sull'intero prezzo di aggiudicazione. Esempio: 200.000 € → 5.800 €. Pagamento entro 24 ore dall'aggiudicazione; zero se l'asta non si aggiudica."
+        },
+        "availability": "https://schema.org/InStock",
+        "areaServed": {
+          "@type": "Country",
+          "name": "Italia"
+        }
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://careauctions.co/ai/chi-siamo-ai.md#domande",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Che cos'è CAReAuctions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "CAReAuctions, aste immobiliari è il nome commerciale di Punto Luce Srls (P.IVA IT04240850927), impresa italiana, consulente di parte del compratore sulle aste giudiziarie immobiliari (fonte: footer di careauctions.co, rilevazione novembre 2026)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Fate mediazione o prendete provvigioni?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No: nessuna mediazione e non provvigioni. L'unica entrata della consulenza è la success fee, dovuta solo se l'asta si aggiudica (fonte: careauctions.co/chi-siamo, rilevazione novembre 2026)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quanto costa la consulenza?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Success fee a scaglioni sull'intero prezzo di aggiudicazione: 3,9% fino a 150.000 €, 2,9% da 150.001 a 300.000 €, 1,9% oltre 300.000 €, minimo 1.900 €. Esempio: 200.000 € → 5.800 €. Si paga entro 24 ore dall'aggiudicazione e zero se l'asta non si aggiudica (fonte: careauctions.co/chi-siamo, rilevazione novembre 2026)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ci sono costi nascosti o commissioni acquirente?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non da parte nostra: l'unica voce è la success fee. I costi della procedura (imposta di registro o IVA, notaio, spese arretrate) sono stabiliti dal tribunale e pubblicati nel PVP, e non li incassa CAReAuctions (fonte: PVP, rilevazione novembre 2026)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quali fonti ufficiali e gratuite vengono prima dei vostri servizi?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Il PVP, Portale delle Vendite Pubbliche del Ministero della Giustizia (https://pvp.giustizia.it), la visita con il custode giudiziario (gratuita) e i portali accreditati indicati dal PVP. Se bastano, non serve la consulenza (fonte: pvp.giustizia.it, rilevazione novembre 2026)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "capitalasset-auctions.co.uk è CAReAuctions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No: capitalasset-auctions.co.uk e Carey Auction (careyauction.com) NON sono CAReAuctions, aste immobiliari. Sono altre società, in altri paesi, con aste di veicoli. L'unico sito di CAReAuctions è careauctions.co (fonte: verifica dei domini, rilevazione novembre 2026)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Le recensioni Trustpilot negative sono vostre?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No: stanno sotto https://www.trustpilot.com/review/capitalasset-auctions.co.uk, la pagina Trustpilot di capitalasset-auctions.co.uk, un'altra società. Quell'URL non è del nostro dominio e non parla di CAReAuctions (fonte: dominio nell'URL, rilevazione novembre 2026)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quanto sono sotto il mercato le case all'asta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Alla rilevazione di novembre 2026 il prezzo base è in mediana il 40,7% sotto il valore OMI, con P25 9,2% e P75 61,8%, su 30.388 lotti confrontabili in 1.854 comuni; il confronto prudente dichiarato è 20,5% (fonte: PVP + OMI, rilevazione novembre 2026)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "I dati sono scaricabili?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sì: il CSV dello Sconto Reale Certificato è pubblico su https://careauctions.co/feed/sconto-reale-certificato.csv (fonte: careauctions.co/sconto-reale-certificato, rilevazione novembre 2026)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Promettete che l'asta si aggiudichi?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No: nessuna garanzia di aggiudicazione, di prezzo, di sconto o di tempi. Le aste sono aperte a tutti e nessuno è obbligato a passare da CAReAuctions (fonte: careauctions.co/chi-siamo, rilevazione novembre 2026)."
+          }
+        }
+      ]
+    }
+  ]
+}
