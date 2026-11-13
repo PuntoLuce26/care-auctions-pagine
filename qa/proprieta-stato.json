@@ -1,35 +1,37 @@
 {
-  "generato": "2026-11-13T15:48:40Z",
+  "generato": "2026-11-13T16:01:19Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "c35b7d93e3",
-    "a": "560a370cee"
+    "da": "2ebf96f28d",
+    "a": "d3fd3c9b13"
   },
-  "fileEsaminati": 1,
+  "fileEsaminati": 3,
   "sintesi": {
-    "violazioni": 1,
-    "violazioniDaCommit": 1,
-    "commitSenzaAgente": 0,
+    "violazioni": 0,
+    "violazioniDaCommit": 0,
+    "commitSenzaAgente": 1,
     "duplicatiProcessi": 0,
     "esito": "attenzione"
   },
-  "violazioni": [
+  "violazioni": [],
+  "violazioniTroncate": 0,
+  "commitSenzaAgente": [
     {
-      "commit": "560a370cee",
-      "agente": "query-educa",
-      "file": ".github/workflows/ai-education.yml",
-      "tipo": "owner",
-      "owner": "workflow-owner",
-      "nota": "unico. Chi tocca un file qui lo valida con Ruby/Psych prima del push e verifica la run CON JOB, non il commit.",
-      "cosaFare": "non scrivere: deposita la richiesta in coda/.github/<timestamp>-query-educa.json"
+      "commit": "d3fd3c9b13",
+      "oggetto": "AI material: scheda chi-siamo-ai.md + schema organization.json + link in llms",
+      "fileToccati": 3,
+      "esempi": [
+        "ai/chi-siamo-ai.md",
+        "ai/organization.json",
+        "scripts/ai-education.js"
+      ],
+      "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
   ],
-  "violazioniTroncate": 0,
-  "commitSenzaAgente": [],
   "commitSenzaAgenteTroncati": 0,
   "simulazioniIgnorate": [],
   "processi": {
@@ -58,8 +60,8 @@
     },
     {
       "giorno": "2026-11-13",
-      "violazioni": 1,
-      "senzaAgente": 0,
+      "violazioni": 0,
+      "senzaAgente": 1,
       "duplicati": 0,
       "pulito": false
     }
