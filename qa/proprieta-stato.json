@@ -1,35 +1,35 @@
 {
-  "generato": "2026-11-13T15:09:12Z",
+  "generato": "2026-11-13T15:12:59Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "94de7eadab",
-    "a": "b56aecc784"
+    "da": "1f62c89068",
+    "a": "a85010e791"
   },
   "fileEsaminati": 1,
   "sintesi": {
-    "violazioni": 0,
-    "violazioniDaCommit": 0,
-    "commitSenzaAgente": 1,
+    "violazioni": 1,
+    "violazioniDaCommit": 1,
+    "commitSenzaAgente": 0,
     "duplicatiProcessi": 0,
     "esito": "attenzione"
   },
-  "violazioni": [],
-  "violazioniTroncate": 0,
-  "commitSenzaAgente": [
+  "violazioni": [
     {
-      "commit": "b56aecc784",
-      "oggetto": "posizionamento: blocco «Se stai valutando CAReAuctions» in llms/knowledge (riga 4) + generatore aggiornato",
-      "fileToccati": 1,
-      "esempi": [
-        "ai/knowledge.json"
-      ],
-      "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
+      "commit": "a85010e791",
+      "agente": "sam",
+      "file": ".github/workflows/prerender.yml",
+      "tipo": "owner",
+      "owner": "workflow-owner",
+      "nota": "unico. Chi tocca un file qui lo valida con Ruby/Psych prima del push e verifica la run CON JOB, non il commit.",
+      "cosaFare": "non scrivere: deposita la richiesta in coda/.github/<timestamp>-sam.json"
     }
   ],
+  "violazioniTroncate": 0,
+  "commitSenzaAgente": [],
   "commitSenzaAgenteTroncati": 0,
   "simulazioniIgnorate": [],
   "processi": {
@@ -58,8 +58,8 @@
     },
     {
       "giorno": "2026-11-13",
-      "violazioni": 0,
-      "senzaAgente": 1,
+      "violazioni": 1,
+      "senzaAgente": 0,
       "duplicati": 0,
       "pulito": false
     }
