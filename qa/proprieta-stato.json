@@ -1,15 +1,15 @@
 {
-  "generato": "2026-11-13T11:33:53Z",
+  "generato": "2026-11-13T15:09:12Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "733880cd00",
-    "a": "b753e568a9"
+    "da": "94de7eadab",
+    "a": "b56aecc784"
   },
-  "fileEsaminati": 24,
+  "fileEsaminati": 1,
   "sintesi": {
     "violazioni": 0,
     "violazioniDaCommit": 0,
@@ -21,15 +21,11 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "b753e568a9",
-      "oggetto": "Meccanismi (green/STUDIO 13/11): dati citabili — Sconto Reale Certificato JSON+CSV, CSV serie storica, tipi d'asta, 14 g",
-      "fileToccati": 24,
+      "commit": "b56aecc784",
+      "oggetto": "posizionamento: blocco «Se stai valutando CAReAuctions» in llms/knowledge (riga 4) + generatore aggiornato",
+      "fileToccati": 1,
       "esempi": [
-        ".github/workflows/meccanismi-dati.yml",
-        "feed/andamento-esiti.csv",
-        "feed/esiti-statistiche.csv",
-        "feed/guide-fasi.json",
-        "feed/sconto-reale-certificato.csv"
+        "ai/knowledge.json"
       ],
       "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
