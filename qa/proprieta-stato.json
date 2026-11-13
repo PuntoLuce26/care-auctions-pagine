@@ -1,13 +1,13 @@
 {
-  "generato": "2026-11-13T17:23:30Z",
+  "generato": "2026-11-13T22:17:03Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "32bf39a9bf",
-    "a": "b62461140d"
+    "da": "3b0d30aa52",
+    "a": "1f9f796775"
   },
   "fileEsaminati": 1,
   "sintesi": {
@@ -21,11 +21,11 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "b62461140d",
-      "oggetto": "iShop: 12 immagini di categoria (card 1200x1200 + header 1600x900) + feed e manifest",
+      "commit": "1f9f796775",
+      "oggetto": "qa: audit interno 2026-11-13T22:15:53.861Z",
       "fileToccati": 1,
       "esempi": [
-        "feed/ishop-immagini-manifest.json"
+        "qa/audit-interno.json"
       ],
       "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
@@ -38,7 +38,7 @@
     "fonte": "file locale /tmp/care-workers/veglia/worker.js",
     "motivo": null,
     "nota": null,
-    "totaleProcessi": 16,
+    "totaleProcessi": 17,
     "duplicati": []
   },
   "rodaggio": {
