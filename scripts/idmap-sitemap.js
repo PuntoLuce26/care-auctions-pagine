@@ -114,7 +114,12 @@ fs.writeFileSync(path.join(FEED, 'seo-slugs.json'), JSON.stringify(seo));
 console.log('seo-slugs.json:', Object.keys(seo.citta).length, 'citta,', Object.keys(seo.province).length, 'province,', Object.keys(seo.regioni).length, 'regioni');
 
 // --- esiti-monitor.json: esiti VERI con prezzo finale di aggiudicazione, aggregati per giorno x tribunale.
-// Fonte: feed/aggiudicazioni.json (vendite aggiudicate del PVP, raccolte da Fallco).
+// FONTE VERA (corretta il 13/11/2026): feed/aggiudicazioni.json, SOLO i record con fonte "fallcoaste"
+// (il filtro qui sotto scarta tutto il resto, e li conta in esclusi.altreFonti).
+// FallcoAste — fallcoaste.it — e' un portale PRIVATO che ripubblica aste: NON e' il PVP.
+// Fino al 13/11/2026 questo file si dichiarava "PVP — Portale delle Vendite Pubbliche": era
+// un'etichetta FALSA (i dati non vengono da pvp.giustizia.it) e si corregge qui, nel generatore.
+// Le due fonti si dichiarano separate: PVP = lotti del catalogo; FallcoAste = esiti con prezzo finale.
 // Regione dei tribunali ricavata dal feed vivo: provincia nel titolo -> regione (voto di maggioranza).
 const provReg = {};
 for (const [prov, v] of provVotes) { const best = Object.entries(v).sort((a, b) => b[1] - a[1])[0]; if (best) provReg[prov] = best[0]; }
@@ -123,6 +128,7 @@ for (const [trib, v] of tribVotes) { const best = Object.entries(v).sort((a, b) 
 let aggiud = [];
 try { aggiud = JSON.parse(fs.readFileSync(path.join(FEED, 'aggiudicazioni.json'), 'utf8')); } catch (e) { console.error('aggiudicazioni:', e.message); }
 const esiti = []; const esclusi = { prezzoBase: 0, senzaData: 0, senzaPrezzo: 0, altreFonti: 0 };
+let raccoltaMax = null;   // ultima raccolta dichiarata DAI RECORD (raccolto_il), non l'istante dello script
 for (const x of aggiud) {
   if (!x || x.fonte !== 'fallcoaste') { esclusi.altreFonti++; continue; }
   if (!/Miglior offerta/i.test(String(x.prezzo_label || ''))) { esclusi.prezzoBase++; continue; }
@@ -133,8 +139,19 @@ for (const x of aggiud) {
   if (prezzo <= 0) { esclusi.senzaPrezzo++; continue; }
   const trib = String(x.tribunale || '').replace(/^\s*Tribunale di /i, '').split(' - ')[0].trim().toUpperCase();
   esiti.push([anno + '-' + m[2] + '-' + m[1], trib, prezzo]);
+  const r = String(x.raccolto_il || '');
+  if (/^\d{4}-\d{2}-\d{2}T/.test(r) && (!raccoltaMax || r > raccoltaMax)) raccoltaMax = r;
 }
 const tribNomi = [...new Set(esiti.map(e => e[1]).filter(Boolean))].sort();
+// Se i record non portano raccolto_il, la raccolta dichiarata sta nel sidecar scritto dal merge
+// (feed/aggiudicazioni-meta.json): e' l'istante di fine raccolta del collettore, non l'ora dello script.
+let raccoltaMeta = null;
+try {
+  const meta = JSON.parse(fs.readFileSync(path.join(FEED, 'aggiudicazioni-meta.json'), 'utf8'));
+  const r = String((meta && meta.ultimaRaccolta) || '');
+  if (/^\d{4}-\d{2}-\d{2}T/.test(r)) raccoltaMeta = r;
+} catch (e) { /* sidecar assente: si resta sul dato dei record */ }
+const rilevazione = raccoltaMax || raccoltaMeta;
 const tribIdx = new Map(tribNomi.map((t, i) => [t, i]));
 const perGiorno = new Map();
 for (const [d, t, p] of esiti) {
@@ -147,7 +164,19 @@ const dateEsiti = esiti.map(e => e[0]).sort();
 const regioniEsiti = [...new Set(tribNomi.map(t => tribReg[t]).filter(Boolean))].sort();
 const monitor = {
   generato: new Date().toISOString(),
-  fonte: 'PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia): vendite aggiudicate',
+  // 13/11/2026 — ETICHETTA CORRETTA. Non era il PVP: questi esiti sono i record
+  // `fonte:"fallcoaste"` dell'archivio, con il loro campo "Miglior offerta" (FallcoAste).
+  // Resta una stringa (non un oggetto) perche' i consumatori la stampano come testo; la forma
+  // a macchina sta in fonteUrl + fonteDettaglio (con la quota di record, qui 100% FallcoAste).
+  fonte: 'FallcoAste — fallcoaste.it',
+  fonteUrl: 'https://www.fallcoaste.it',
+  fonteDettaglio: [{ nome: 'FallcoAste — fallcoaste.it', url: 'https://www.fallcoaste.it', quota: 1, esiti: esiti.length }],
+  fonteNota: 'Correzione del 13/11/2026: il file dichiarava «PVP — Portale delle Vendite Pubbliche» ma questo generatore include SOLO i record con fonte "fallcoaste" e scarta tutto il resto (esclusi.altreFonti). FallcoAste (fallcoaste.it) e\' un portale privato che ripubblica aste: NON e\' il PVP, e le due fonti si dichiarano separate.',
+  // rilevazione = data VERA della raccolta: raccolto_il dei record, oppure il sidecar
+  // feed/aggiudicazioni-meta.json scritto dal merge con l'istante di fine raccolta del collettore.
+  // Se non c'e', meglio null + motivo dichiarato che una data inventata (l'istante dello script
+  // e la data dell'ultima aggiudicazione NON sono la data della raccolta).
+  rilevazione: rilevazione,
   nota: 'Conteggio solo dei lotti con prezzo finale di aggiudicazione pubblicato. I lotti con solo prezzo base, o senza data, sono esclusi e dichiarati in esclusi.',
   copertura: { dal: dateEsiti[0] || null, al: dateEsiti[dateEsiti.length - 1] || null, giorni: giorniOut.length, esiti: esiti.length, tribunali: tribNomi.length, tribunaliSenzaRegione: tribNomi.filter(t => !tribReg[t]).length },
   regioni: regioniEsiti,
@@ -155,6 +184,14 @@ const monitor = {
   esclusi,
   giorni: giorniOut
 };
+if (rilevazione) {
+  monitor.rilevazioneProvenienza = raccoltaMax
+    ? 'campo raccolto_il dei record fallcoaste usati (rilevazione massima)'
+    : 'feed/aggiudicazioni-meta.json → ultimaRaccolta, scritto da scripts/aggiudicazioni-merge.js con il raccolto_il del collettore FallcoAste';
+} else {
+  monitor.rilevazioneMotivo = 'l\'archivio feed/aggiudicazioni.json non conserva l\'istante di raccolta: il collettore (scripts/fallco-aggiudicazioni.js) scrive raccolto_il sull\'oggetto /tmp/aggiudicazioni-fallco.json, ma il merge lo riduce a un array di record e fino al 13/11/2026 quel campo si perdeva. Dalla prima raccolta successiva il merge scrive feed/aggiudicazioni-meta.json e questo campo si valorizza da solo. Non uso la data dell\'ultima aggiudicazione relativa (' + (dateEsiti[dateEsiti.length - 1] || '?') + ') ne\' l\'istante dello script: non sono la data della raccolta.';
+  monitor.rilevazioneCopertura = { ultimaAggiudicazione: dateEsiti[dateEsiti.length - 1] || null, primaAggiudicazione: dateEsiti[0] || null };
+}
 fs.writeFileSync(path.join(FEED, 'esiti-monitor.json'), JSON.stringify(monitor));
 console.log('esiti-monitor.json:', esiti.length, 'esiti,', tribNomi.length, 'tribunali,', giorniOut.length, 'giorni |', monitor.copertura.dal, '->', monitor.copertura.al, '| esclusi:', JSON.stringify(esclusi));
 
