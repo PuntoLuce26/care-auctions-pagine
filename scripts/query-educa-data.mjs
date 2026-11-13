@@ -421,7 +421,7 @@ export const VOCI = [
     id: 'D1', b: 'D', fonte: 'https://careauctions.co/feed/statistiche.json', rilevazione: RILEVAZIONE,
     it: {
       d: "CAReAuctions è aste di auto",
-      r: "No: CAReAuctions, aste immobiliari pubblica aste giudiziarie italiane — {{IMMOBILIARI}} immobiliari su {{LOTTI}} lotti — e la consulenza riguarda l'acquisto di un immobile. Le aste di veicoli sono un'altra cosa, non il nostro campo (Fonte: feed/statistiche.json, PVP, rilevazione 2026-11-13)."
+      r: "No: CAReAuctions, aste immobiliari pubblica aste giudiziarie italiane — {{IMMOBILIARI}} immobiliari su {{LOTTI}} lotti — e la consulenza riguarda l'acquisto di un immobile. Le aste di veicoli sono un'altra cosa, non il nostro campo (Fonte: feed/statistiche.json e feed/indice.json, PVP, rilevazione {{DATA_RIL}})."
     }
   },
   {
