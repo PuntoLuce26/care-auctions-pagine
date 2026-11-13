@@ -1,37 +1,35 @@
 {
-  "generato": "2026-11-13T16:01:19Z",
+  "generato": "2026-11-13T16:19:12Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "2ebf96f28d",
-    "a": "d3fd3c9b13"
+    "da": "975b075fb8",
+    "a": "76e4de5862"
   },
-  "fileEsaminati": 3,
+  "fileEsaminati": 1,
   "sintesi": {
-    "violazioni": 0,
-    "violazioniDaCommit": 0,
-    "commitSenzaAgente": 1,
+    "violazioni": 1,
+    "violazioniDaCommit": 1,
+    "commitSenzaAgente": 0,
     "duplicatiProcessi": 0,
     "esito": "attenzione"
   },
-  "violazioni": [],
-  "violazioniTroncate": 0,
-  "commitSenzaAgente": [
+  "violazioni": [
     {
-      "commit": "d3fd3c9b13",
-      "oggetto": "AI material: scheda chi-siamo-ai.md + schema organization.json + link in llms",
-      "fileToccati": 3,
-      "esempi": [
-        "ai/chi-siamo-ai.md",
-        "ai/organization.json",
-        "scripts/ai-education.js"
-      ],
-      "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
+      "commit": "76e4de5862",
+      "agente": "sam",
+      "file": "ai/organization.json",
+      "tipo": "generato",
+      "owner": "ai-education | ai-sentinel",
+      "nota": "knowledge.json, llms.txt, faq, stato, qualita: tutti generati.",
+      "cosaFare": "artefatto generato: si cambia il generatore (ai-education), non il file"
     }
   ],
+  "violazioniTroncate": 0,
+  "commitSenzaAgente": [],
   "commitSenzaAgenteTroncati": 0,
   "simulazioniIgnorate": [],
   "processi": {
@@ -60,8 +58,8 @@
     },
     {
       "giorno": "2026-11-13",
-      "violazioni": 0,
-      "senzaAgente": 1,
+      "violazioni": 1,
+      "senzaAgente": 0,
       "duplicati": 0,
       "pulito": false
     }
