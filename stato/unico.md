@@ -1,6 +1,6 @@
 # Stato CAReAuctions — GIALLO
 
-> 2026-11-13T16:56:08.962Z · 23 ok · 1 gialli · 0 rossi · 0 non verificabili
+> 2026-11-13T18:42:56.648Z · 21 ok · 3 gialli · 0 rossi · 0 non verificabili
 
 ## rotte
 
@@ -18,19 +18,19 @@
 
 ## feed
 
-- · **statistiche** — 1 min · 321853 lotti
-- · **world** — 1172 min · 33 paesi
-- · **ricevute** — 1538 min · 0 ricevute
-- · **san-pasquale-foto** — 1410 min · 37 foto
+- · **statistiche** — 3 min · 321877 lotti
+- · **world** — 1279 min · 33 paesi
+- · **ricevute** — 1644 min · 0 ricevute
+- ! **san-pasquale-foto** — 1517 min · 37 foto
 
 ## build
 
-- · **sito vs origine** — main.9fc2af99.js / main.9fc2af99.js
+- · **sito vs origine** — main.a939d859.js / main.a939d859.js
 
 ## prerender
 
-- · **snapshot vs vivo** — main.9fc2af99.js / main.9fc2af99.js
-- · **bot allineato** — main.9fc2af99.js
+- · **snapshot vs vivo** — main.a939d859.js / main.a939d859.js
+- · **bot allineato** — main.a939d859.js
 
 ## worker
 
@@ -39,15 +39,15 @@
 
 ## qa
 
-- · **critici** — 0 · 10 controlli
+- · **critici** — 0 · 4 controlli
 
 ## mail
 
-- ! **allarmi** — 5 · 2026-11-13T16:36:00.942Z
+- ! **allarmi** — 5 · 2026-11-13T18:35:58.701Z
 
 ## sentinella
 
-- · **ok** — nessuna anomalia vera · 1 note dichiarate, ignorate
+- ! **ok** — 1 anomalie vere · 1 note dichiarate, ignorate
 
 ## perf
 
@@ -55,7 +55,7 @@
 
 ## github
 
-- · **run rossi (2h)** — 0 isolati
+- · **run rossi (2h)** — 1 isolati · qa (una volta sola: race nota)
 
 
 _Generato da scripts/stato-unico.mjs. Un solo stato, un solo posto: se una sonda non risponde la dichiara non verificabile, mai rotta._

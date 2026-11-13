@@ -1,9 +1,9 @@
 {
- "generato": "2026-11-13T16:56:08.962Z",
+ "generato": "2026-11-13T18:42:56.648Z",
  "semaforo": "giallo",
  "conteggi": {
-  "ok": 23,
-  "giallo": 1,
+  "ok": 21,
+  "giallo": 3,
   "rosso": 0,
   "non_verificabile": 0
  },
@@ -89,49 +89,49 @@
    "sezione": "feed",
    "nome": "statistiche",
    "stato": "ok",
-   "valore": "1 min",
-   "dettaglio": "321853 lotti"
+   "valore": "3 min",
+   "dettaglio": "321877 lotti"
   },
   {
    "sezione": "feed",
    "nome": "world",
    "stato": "ok",
-   "valore": "1172 min",
+   "valore": "1279 min",
    "dettaglio": "33 paesi"
   },
   {
    "sezione": "feed",
    "nome": "ricevute",
    "stato": "ok",
-   "valore": "1538 min",
+   "valore": "1644 min",
    "dettaglio": "0 ricevute"
   },
   {
    "sezione": "feed",
    "nome": "san-pasquale-foto",
-   "stato": "ok",
-   "valore": "1410 min",
+   "stato": "giallo",
+   "valore": "1517 min",
    "dettaglio": "37 foto"
   },
   {
    "sezione": "build",
    "nome": "sito vs origine",
    "stato": "ok",
-   "valore": "main.9fc2af99.js / main.9fc2af99.js",
+   "valore": "main.a939d859.js / main.a939d859.js",
    "dettaglio": ""
   },
   {
    "sezione": "prerender",
    "nome": "snapshot vs vivo",
    "stato": "ok",
-   "valore": "main.9fc2af99.js / main.9fc2af99.js",
+   "valore": "main.a939d859.js / main.a939d859.js",
    "dettaglio": ""
   },
   {
    "sezione": "prerender",
    "nome": "bot allineato",
    "stato": "ok",
-   "valore": "main.9fc2af99.js",
+   "valore": "main.a939d859.js",
    "dettaglio": ""
   },
   {
@@ -153,20 +153,20 @@
    "nome": "critici",
    "stato": "ok",
    "valore": "0",
-   "dettaglio": "10 controlli"
+   "dettaglio": "4 controlli"
   },
   {
    "sezione": "mail",
    "nome": "allarmi",
    "stato": "giallo",
    "valore": "5",
-   "dettaglio": "2026-11-13T16:36:00.942Z"
+   "dettaglio": "2026-11-13T18:35:58.701Z"
   },
   {
    "sezione": "sentinella",
    "nome": "ok",
-   "stato": "ok",
-   "valore": "nessuna anomalia vera",
+   "stato": "giallo",
+   "valore": "1 anomalie vere",
    "dettaglio": "1 note dichiarate, ignorate"
   },
   {
@@ -180,8 +180,8 @@
    "sezione": "github",
    "nome": "run rossi (2h)",
    "stato": "ok",
-   "valore": "0 isolati",
-   "dettaglio": ""
+   "valore": "1 isolati",
+   "dettaglio": "qa (una volta sola: race nota)"
   }
  ]
 }
