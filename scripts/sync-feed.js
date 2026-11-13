@@ -252,7 +252,18 @@ async function main(){
     }
     if (MODE === 'full' && sceltaEsiti.scriviCanone) {
       // giro completo: gli esiti contati sono la verità del giorno → aggiorna il file canonico
-      fs.writeFileSync(path.join(FEED, 'andamento-esiti.json'), JSON.stringify({ generato: new Date().toISOString(), esiti: esitiAcc, nota: 'esiti reali delle aste italiane — nessun numero inventato' }));
+      // 13/11/2026 — il full ha appena LETTO il PVP in questa stessa run: la rilevazione e'
+      // l'istante di quella misura (non un'ora messa a caso). Chi ricopia il file (incrementale)
+      // non cambia la data: resta quella dell'ultima misura vera.
+      const aggEsiti = new Date().toISOString();
+      fs.writeFileSync(path.join(FEED, 'andamento-esiti.json'), JSON.stringify({
+        generato: aggEsiti,
+        fonte: FONTI_PUBBLICHE.pvp,
+        rilevazione: aggEsiti,
+        rilevazioneNota: 'conteggio degli esiti del giro completo sul PVP: l\'istante e\' quello della misura nella stessa run',
+        esiti: esitiAcc,
+        nota: 'esiti reali delle aste italiane — nessun numero inventato'
+      }));
     }
     // PERDATA-5.836: conta le aste per dataAsta (passate / oggi / prossime)
     let passate = 0, future = 0, oggi = 0, prossimi30 = 0, prossimi90 = 0;
@@ -278,7 +289,19 @@ async function main(){
     storico = storico.filter(x => x && x.data && x.data !== oggiD);
     storico.push({ data: oggiD, totale: ic.totaleLotti, prezzoMedio: Math.round(ic.settori.immobiliare.prezzoMedio || 0), scartoBaseMinimaMedio: Math.round(ic.settori.immobiliare.scartoBaseMinimaMedio || 0) });
     storico = storico.slice(-730); // 5.860: 2 anni di storia, per sempre
-    fs.writeFileSync(path.join(FEED, 'andamento-prezzi.json'), JSON.stringify({ generato: new Date().toISOString(), giorni: storico }));
+    // 13/11/2026 — fonte + rilevazione anche qui, e la rilevazione NON e' l'istante dello script:
+    // la serie e' giornaliera, ogni punto e' il catalogo PVP letto IN QUEL GIORNO, quindi la data
+    // vera della misura e' il giorno del punto piu' recente (l'ora esatta non e' conservata dal
+    // 5.852 e non si inventa: meglio dichiarare il giorno che fabbricare un istante).
+    const puntoRecente = storico.length ? storico[storico.length - 1] : null;
+    fs.writeFileSync(path.join(FEED, 'andamento-prezzi.json'), JSON.stringify({
+      generato: new Date().toISOString(),
+      fonte: FONTI_PUBBLICHE.pvp,
+      rilevazione: (puntoRecente && puntoRecente.data) || null,
+      rilevazioneGranularita: 'giorno',
+      rilevazioneNota: 'serie giornaliera del prezzo medio: ogni punto e\' calcolato dal catalogo PVP letto in quel giorno (prezzo base, non offerta minima); la data della misura e\' il giorno del punto piu\' recente',
+      giorni: storico
+    }));
     // A — 6/11/2026: la partecipazione si RICALCOLA da zero dai lotti di ogni giorno
     // (scripts/andamento-partecipazione.js). Prima si partiva dai giorni gia' in archivio e si
     // incrementava: a ogni run (~3-5 min) si riaggiungeva il catalogo intero, fino a una somma
