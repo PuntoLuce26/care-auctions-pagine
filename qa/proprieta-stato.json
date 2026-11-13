@@ -1,15 +1,15 @@
 {
-  "generato": "2026-11-13T09:34:03Z",
+  "generato": "2026-11-13T09:44:24Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "aed137ca88",
-    "a": "17ca3cac00"
+    "da": "5a60ec79dd",
+    "a": "6c200cf779"
   },
-  "fileEsaminati": 2,
+  "fileEsaminati": 1,
   "sintesi": {
     "violazioni": 0,
     "violazioniDaCommit": 0,
@@ -21,12 +21,11 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "17ca3cac00",
-      "oggetto": "esiti-sync: stato del giro a ogni run (feed/esiti-stato.json → R2 stato/esiti/stato.json)",
-      "fileToccati": 2,
+      "commit": "6c200cf779",
+      "oggetto": "esiti-sync: il token Cloudflare serve anche a LEGGERE lo stato precedente",
+      "fileToccati": 1,
       "esempi": [
-        ".github/workflows/esiti-sync.yml",
-        "scripts/esiti-stato.mjs"
+        ".github/workflows/esiti-sync.yml"
       ],
       "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
