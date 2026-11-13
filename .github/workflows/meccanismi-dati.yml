@@ -1,0 +1,79 @@
+name: meccanismi-dati
+# I DATI dei meccanismi dei colossi (green/STUDIO.md, 13/11/2026).
+# Rigenera gli artefatti che rendono citabile un numero e scaricabile un file:
+#   · feed/sconto-reale-certificato.json + .csv   (Zillow — il numero con un nome proprio)
+#   · feed/andamento-esiti.csv, esiti-statistiche.csv, serie.csv  (Redfin — il CSV in mano)
+#   · feed/tipi-asta.json                          (Idealista — il tipo d'asta come URL)
+#   · guide/<lingua>/<fase>.html + feed/guide-fasi.json  (Immobiliare.it / Auction.com — una guida per fase)
+# Regola: ogni file porta fonte e rilevazione dentro di sé. Se una sorgente non risponde,
+# il file che ne dipende non si riscrive (mai un numero vecchio spacciato per fresco).
+on:
+  schedule:
+    - cron: '35 3 * * 1'   # lunedì 03:35 UTC, subito dopo confronto-mercato (03:30)
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["confronto-mercato"]
+    types: [completed]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: meccanismi-dati
+  cancel-in-progress: false
+
+jobs:
+  genera:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Genera i dati dei meccanismi
+        run: node scripts/meccanismi-dati.js
+
+      - name: Genera le guide per fase
+        run: node scripts/guide-fasi.js
+
+      - name: Controllo che gli artefatti non siano vuoti
+        run: |
+          set -e
+          for f in feed/sconto-reale-certificato.json feed/sconto-reale-certificato.csv feed/andamento-esiti.csv feed/esiti-statistiche.csv feed/serie.csv feed/tipi-asta.json feed/guide-fasi.json; do
+            if [ ! -s "$f" ]; then echo "VUOTO: $f"; exit 1; fi
+            echo "$f — $(wc -c < "$f") byte"
+          done
+          n=$(node -e "console.log(require('./feed/guide-fasi.json').totale)")
+          if [ "$n" -lt 14 ]; then echo "guide insufficienti: $n"; exit 1; fi
+          echo "guide dichiarate: $n"
+
+      - name: Commit
+        run: |
+          set -e
+          git config user.name "meccanismi-dati"
+          git config user.email "info@careauctions.co"
+          git add feed/sconto-reale-certificato.json feed/sconto-reale-certificato.csv feed/andamento-esiti.csv feed/esiti-statistiche.csv feed/serie.csv feed/tipi-asta.json feed/guide-fasi.json guide
+          if git diff --cached --quiet; then echo "nessuna modifica"; exit 0; fi
+          git commit -m "Meccanismi: dati citabili (Sconto Reale Certificato, CSV, tipi d'asta, guide per fase)"
+          for i in 1 2 3 4 5; do
+            if git push; then echo "push ok"; exit 0; fi
+            git pull --rebase --autostash || true
+            sleep 5
+          done
+          echo "push fallito dopo 5 tentativi"; exit 1
+
+      - name: Verifica sull'artefatto (raw GitHub)
+        if: always()
+        run: |
+          sleep 20
+          for u in https://raw.githubusercontent.com/PuntoLuce26/care-auctions-pagine/main/feed/sconto-reale-certificato.json https://raw.githubusercontent.com/PuntoLuce26/care-auctions-pagine/main/feed/andamento-esiti.csv https://raw.githubusercontent.com/PuntoLuce26/care-auctions-pagine/main/feed/tipi-asta.json; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$u")
+            echo "$code  $u"
+          done

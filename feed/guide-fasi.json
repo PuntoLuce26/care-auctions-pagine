@@ -1,0 +1,227 @@
+{
+ "generato": "2026-11-13T11:32:33.669Z",
+ "generatore": "scripts/guide-fasi.js",
+ "regola": "sitemap-guide.xml legge questo file: non si dichiara una pagina che non esiste.",
+ "fasi": [
+  {
+   "slug": "offerta",
+   "titoloIt": "Fare l'offerta all'asta: cauzione, offerta minima e modulo",
+   "titoloEn": "How to bid at an Italian court auction: deposit, minimum bid and form"
+  },
+  {
+   "slug": "termini",
+   "titoloIt": "I termini dell'asta: date, scadenze e cosa succede se cambiano",
+   "titoloEn": "Auction deadlines: dates, terms and what happens when they change"
+  },
+  {
+   "slug": "perizia",
+   "titoloIt": "Leggere la perizia: cosa contiene e cosa controllare prima di offrire",
+   "titoloEn": "Reading the valuation report: what it contains and what to check before bidding"
+  },
+  {
+   "slug": "aggiudicazione",
+   "titoloIt": "L'aggiudicazione: come si vince l'asta e cosa succede dopo",
+   "titoloEn": "The award: how an auction is won and what happens next"
+  },
+  {
+   "slug": "pagamento",
+   "titoloIt": "Pagare l'asta: saldo, imposte e spese (e cosa succede se non paghi)",
+   "titoloEn": "Paying for the auction: balance, taxes and costs (and what happens if you don't)"
+  },
+  {
+   "slug": "decreto-trasferimento",
+   "titoloIt": "Il decreto di trasferimento: la proprietà passa davvero",
+   "titoloEn": "The transfer decree: when ownership actually changes hands"
+  },
+  {
+   "slug": "occupazione-rilascio",
+   "titoloIt": "Immobile occupato: cosa significa, quanto costa e come si libera",
+   "titoloEn": "Occupied property: what it means, what it costs and how it is freed"
+  }
+ ],
+ "pagine": [
+  {
+   "lingua": "it",
+   "fase": "offerta",
+   "url": "https://careauctions.co/guide/it/offerta",
+   "percorso": "guide/it/offerta.html",
+   "titolo": "Fare l'offerta all'asta: cauzione, offerta minima e modulo",
+   "descrizione": "Come si presenta un'offerta in un'asta giudiziaria italiana: la cauzione, l'offerta minima (75% del prezzo base), il modulo e i tempi. Con la fonte ufficiale accanto a ogni passo.",
+   "aggiornato": "2026-11-13",
+   "fonte": {
+    "nome": "PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia)",
+    "url": "https://pvp.giustizia.it"
+   }
+  },
+  {
+   "lingua": "en",
+   "fase": "offerta",
+   "url": "https://careauctions.co/guide/en/offerta",
+   "percorso": "guide/en/offerta.html",
+   "titolo": "How to bid at an Italian court auction: deposit, minimum bid and form",
+   "descrizione": "How a bid is filed in an Italian judicial auction: the deposit, the minimum bid (75% of the starting price), the form and the deadlines — with the official source next to every step.",
+   "aggiornato": "2026-11-13",
+   "fonte": {
+    "nome": "PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia)",
+    "url": "https://pvp.giustizia.it"
+   }
+  },
+  {
+   "lingua": "it",
+   "fase": "termini",
+   "url": "https://careauctions.co/guide/it/termini",
+   "percorso": "guide/it/termini.html",
+   "titolo": "I termini dell'asta: date, scadenze e cosa succede se cambiano",
+   "descrizione": "Le date che contano in un'asta giudiziaria italiana: pubblicazione dell'avviso, termine per offrire, data dell'asta, rinvio, saldo. Come si leggono senza sbagliare.",
+   "aggiornato": "2026-11-13",
+   "fonte": {
+    "nome": "PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia)",
+    "url": "https://pvp.giustizia.it"
+   }
+  },
+  {
+   "lingua": "en",
+   "fase": "termini",
+   "url": "https://careauctions.co/guide/en/termini",
+   "percorso": "guide/en/termini.html",
+   "titolo": "Auction deadlines: dates, terms and what happens when they change",
+   "descrizione": "The dates that matter in an Italian judicial auction: publication of the notice, bid deadline, auction date, postponement, balance. How to read them without mistakes.",
+   "aggiornato": "2026-11-13",
+   "fonte": {
+    "nome": "PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia)",
+    "url": "https://pvp.giustizia.it"
+   }
+  },
+  {
+   "lingua": "it",
+   "fase": "perizia",
+   "url": "https://careauctions.co/guide/it/perizia",
+   "percorso": "guide/it/perizia.html",
+   "titolo": "Leggere la perizia: cosa contiene e cosa controllare prima di offrire",
+   "descrizione": "La perizia del consulente tecnico d'ufficio: identificazione, consistenza, stato, difformità, occupazione, valore. Come si legge per calcolare l'offerta massima.",
+   "aggiornato": "2026-11-13",
+   "fonte": {
+    "nome": "PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia)",
+    "url": "https://pvp.giustizia.it"
+   }
+  },
+  {
+   "lingua": "en",
+   "fase": "perizia",
+   "url": "https://careauctions.co/guide/en/perizia",
+   "percorso": "guide/en/perizia.html",
+   "titolo": "Reading the valuation report: what it contains and what to check before bidding",
+   "descrizione": "The court-appointed expert report: identification, size, condition, irregularities, occupation, value. How to read it to calculate your maximum bid.",
+   "aggiornato": "2026-11-13",
+   "fonte": {
+    "nome": "PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia)",
+    "url": "https://pvp.giustizia.it"
+   }
+  },
+  {
+   "lingua": "it",
+   "fase": "aggiudicazione",
+   "url": "https://careauctions.co/guide/it/aggiudicazione",
+   "percorso": "guide/it/aggiudicazione.html",
+   "titolo": "L'aggiudicazione: come si vince l'asta e cosa succede dopo",
+   "descrizione": "Come funziona l'aggiudicazione di un'asta giudiziaria: apertura delle offerte, gara, aggiudicazione provvisoria, asta deserta, rilancio. Con la fonte ufficiale.",
+   "aggiornato": "2026-11-13",
+   "fonte": {
+    "nome": "PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia)",
+    "url": "https://pvp.giustizia.it"
+   }
+  },
+  {
+   "lingua": "en",
+   "fase": "aggiudicazione",
+   "url": "https://careauctions.co/guide/en/aggiudicazione",
+   "percorso": "guide/en/aggiudicazione.html",
+   "titolo": "The award: how an auction is won and what happens next",
+   "descrizione": "How the award of an Italian judicial auction works: opening of bids, bidding, provisional award, unsold auctions, next attempt. With official sources.",
+   "aggiornato": "2026-11-13",
+   "fonte": {
+    "nome": "PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia)",
+    "url": "https://pvp.giustizia.it"
+   }
+  },
+  {
+   "lingua": "it",
+   "fase": "pagamento",
+   "url": "https://careauctions.co/guide/it/pagamento",
+   "percorso": "guide/it/pagamento.html",
+   "titolo": "Pagare l'asta: saldo, imposte e spese (e cosa succede se non paghi)",
+   "descrizione": "Il pagamento dopo l'aggiudicazione: saldo del prezzo, imposte di registro (2% o 9%), spese di procedura e condominiali, termini e decadenza.",
+   "aggiornato": "2026-11-13",
+   "fonte": {
+    "nome": "PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia)",
+    "url": "https://pvp.giustizia.it"
+   }
+  },
+  {
+   "lingua": "en",
+   "fase": "pagamento",
+   "url": "https://careauctions.co/guide/en/pagamento",
+   "percorso": "guide/en/pagamento.html",
+   "titolo": "Paying for the auction: balance, taxes and costs (and what happens if you don't)",
+   "descrizione": "Payment after the award: balance of the price, registration taxes (2% or 9%), procedure and condominium costs, deadlines and forfeiture.",
+   "aggiornato": "2026-11-13",
+   "fonte": {
+    "nome": "PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia)",
+    "url": "https://pvp.giustizia.it"
+   }
+  },
+  {
+   "lingua": "it",
+   "fase": "decreto-trasferimento",
+   "url": "https://careauctions.co/guide/it/decreto-trasferimento",
+   "percorso": "guide/it/decreto-trasferimento.html",
+   "titolo": "Il decreto di trasferimento: la proprietà passa davvero",
+   "descrizione": "Il decreto di trasferimento nell'asta giudiziaria: quando arriva, cosa contiene, la trascrizione, le spese e la consegna dell'immobile.",
+   "aggiornato": "2026-11-13",
+   "fonte": {
+    "nome": "PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia)",
+    "url": "https://pvp.giustizia.it"
+   }
+  },
+  {
+   "lingua": "en",
+   "fase": "decreto-trasferimento",
+   "url": "https://careauctions.co/guide/en/decreto-trasferimento",
+   "percorso": "guide/en/decreto-trasferimento.html",
+   "titolo": "The transfer decree: when ownership actually changes hands",
+   "descrizione": "The transfer decree in an Italian judicial auction: when it arrives, what it contains, registration, costs and delivery of the property.",
+   "aggiornato": "2026-11-13",
+   "fonte": {
+    "nome": "PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia)",
+    "url": "https://pvp.giustizia.it"
+   }
+  },
+  {
+   "lingua": "it",
+   "fase": "occupazione-rilascio",
+   "url": "https://careauctions.co/guide/it/occupazione-rilascio",
+   "percorso": "guide/it/occupazione-rilascio.html",
+   "titolo": "Immobile occupato: cosa significa, quanto costa e come si libera",
+   "descrizione": "Occupazione e rilascio nell'asta giudiziaria: libero o occupato, chi paga, immissione in possesso, tempi reali e impatto sul prezzo da offrire.",
+   "aggiornato": "2026-11-13",
+   "fonte": {
+    "nome": "PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia)",
+    "url": "https://pvp.giustizia.it"
+   }
+  },
+  {
+   "lingua": "en",
+   "fase": "occupazione-rilascio",
+   "url": "https://careauctions.co/guide/en/occupazione-rilascio",
+   "percorso": "guide/en/occupazione-rilascio.html",
+   "titolo": "Occupied property: what it means, what it costs and how it is freed",
+   "descrizione": "Occupation and delivery in Italian judicial auctions: vacant or occupied, who pays, taking possession, real timing and the impact on your bid.",
+   "aggiornato": "2026-11-13",
+   "fonte": {
+    "nome": "PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia)",
+    "url": "https://pvp.giustizia.it"
+   }
+  }
+ ],
+ "totale": 14
+}

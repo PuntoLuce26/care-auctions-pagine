@@ -1,0 +1,24 @@
+# Serie storica delle aste immobiliari italiane — CAReAuctions
+# Fonte: Portale delle Vendite Pubbliche (Ministero della Giustizia) — https://pvp.giustizia.it
+# Rilevazione: 2026-11-13 · granularità: giorno
+# Nota: serie giornaliera del prezzo medio: ogni punto e' calcolato dal catalogo PVP letto in quel giorno (prezzo base, non offerta minima); la data della misura e' il giorno del punto piu' recente
+# Colonne: data = giorno della misura · totale_lotti = lotti a catalogo quel giorno · prezzo_medio_eur = prezzo BASE medio (non l'offerta minima) · scarto_base_minima_pct = scarto fra prezzo base e offerta minima (pavimento legale, NON uno sconto di mercato)
+# Citazione: «CAReAuctions — serie storica delle aste, rilevazione 2026-11-13» — https://careauctions.co/feed/andamento-esiti.csv
+data,totale_lotti,prezzo_medio_eur,scarto_base_minima_pct,fonte,rilevazione
+2026-10-28,322401,166134,24.0,PVP — Ministero della Giustizia,2026-11-13
+2026-10-29,322506,166068,24.0,PVP — Ministero della Giustizia,2026-11-13
+2026-10-30,322574,166068,24.0,PVP — Ministero della Giustizia,2026-11-13
+2026-10-31,322815,166034,24.0,PVP — Ministero della Giustizia,2026-11-13
+2026-11-01,322828,166029,24.0,PVP — Ministero della Giustizia,2026-11-13
+2026-11-02,323080,166068,24.0,PVP — Ministero della Giustizia,2026-11-13
+2026-11-03,323444,166005,24.0,PVP — Ministero della Giustizia,2026-11-13
+2026-11-04,323677,165983,24.0,PVP — Ministero della Giustizia,2026-11-13
+2026-11-05,323915,165932,24.0,PVP — Ministero della Giustizia,2026-11-13
+2026-11-06,324128,165892,24.0,PVP — Ministero della Giustizia,2026-11-13
+2026-11-07,324172,165878,24.0,PVP — Ministero della Giustizia,2026-11-13
+2026-11-08,324183,165880,24.0,PVP — Ministero della Giustizia,2026-11-13
+2026-11-09,321497,165952,24.0,PVP — Ministero della Giustizia,2026-11-13
+2026-11-10,321291,165906,24.0,PVP — Ministero della Giustizia,2026-11-13
+2026-11-11,321577,165892,24.0,PVP — Ministero della Giustizia,2026-11-13
+2026-11-12,321689,166005,24.0,PVP — Ministero della Giustizia,2026-11-13
+2026-11-13,321769,166047,24.0,PVP — Ministero della Giustizia,2026-11-13
