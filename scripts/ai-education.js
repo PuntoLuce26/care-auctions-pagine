@@ -75,7 +75,7 @@ const fetched = async (u, opt) => { try { const r = await fetch(u, { headers: { 
     { q: 'Come si partecipa a un’asta?', a: 'Si studia la perizia e l’avviso, si visita l’immobile, si versa la cauzione del 10% con bonifico intestato alla procedura e si presenta l’offerta secondo l’avviso.' },
     { q: 'Quante aste ci sono nel mondo?', a: 'iWorld è in costruzione: l\'Italia è live, Spagna e Germania sono in prova con un campione di 10 lotti ciascuna, 7 paesi sono in arrivo. Non pubblichiamo statistiche da un campione.' },
     { q: 'I numeri dei paesi sono confrontabili?', a: 'Non sempre: il numero italiano è il prezzo base d\'asta, lo spagnolo il valor de subasta, il tedesco il Verkehrswert (una stima di mercato). Vanno sempre letti con la metrica accanto.' },
-    { q: 'Come funziona la ricevuta?', a: 'La ricevuta è emessa da Punto Luce Srls al momento del pagamento, con numero progressivo N/AAAA, e arriva per email all\'indirizzo usato per pagare.' },
+    { q: 'Come funziona la ricevuta?', a: 'La ricevuta è emessa da PuntoLuce Srls al momento del pagamento, con numero progressivo N/AAAA, e arriva per email all\'indirizzo usato per pagare.' },
     { q: 'Chi sono i partner?', a: 'La rete iPartner riunisce 19 categorie di professionisti, 7 raggruppate sotto Salute e Benessere: dentisti, medici di base, pediatri, specialisti, psicologi, veterinari, fisioterapisti.' },
     { q: 'Come si cita?', a: knowledge.come_citare }
   ];
