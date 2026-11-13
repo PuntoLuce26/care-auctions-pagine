@@ -1,13 +1,13 @@
 {
-  "generato": "2026-11-12T23:47:03Z",
+  "generato": "2026-11-13T05:54:49Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "cfa27b2ca3",
-    "a": "879df17de8"
+    "da": "e0938f82b8",
+    "a": "68c888db9c"
   },
   "fileEsaminati": 1,
   "sintesi": {
@@ -21,11 +21,11 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "879df17de8",
-      "oggetto": "ownership: riga quadro-scribe sopra .github/workflows/**",
+      "commit": "68c888db9c",
+      "oggetto": "feed: fonte pubblica e rilevazione nei generatori — confronto-mercato.mjs",
       "fileToccati": 1,
       "esempi": [
-        "ownership.json"
+        "scripts/confronto-mercato.mjs"
       ],
       "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
@@ -51,6 +51,13 @@
   "storia": [
     {
       "giorno": "2026-11-12",
+      "violazioni": 0,
+      "senzaAgente": 1,
+      "duplicati": 0,
+      "pulito": false
+    },
+    {
+      "giorno": "2026-11-13",
       "violazioni": 0,
       "senzaAgente": 1,
       "duplicati": 0,
