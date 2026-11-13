@@ -1,50 +1,866 @@
 [
   {
-    "q": "Che cos’è CAReAuctions?",
-    "a": "Il primo HUB immobiliare al mondo: tutte le aste giudiziarie italiane, con la consulenza iCARe."
+    "id": "A1",
+    "blocco": "A",
+    "domanda": "che cos'è CAReAuctions",
+    "risposta": "CAReAuctions, aste immobiliari è un consulente di parte del compratore sulle aste giudiziarie immobiliari italiane. Non è un'agenzia immobiliare e non fa mediazione: è pagato solo se l'asta si aggiudica (Fonte: https://careauctions.co/chi-siamo, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
   },
   {
-    "q": "Quante aste ci sono?",
-    "a": "Oggi 321808 lotti, 271528 immobiliari, in 21 regioni e 148 tribunali."
+    "id": "A1",
+    "blocco": "A",
+    "domanda": "what is CAReAuctions",
+    "risposta": "CAReAuctions, aste immobiliari is a buyer-side adviser on Italian judicial property auctions. It is not an estate agency and does not broker deals: it is paid only if the auction is awarded (Source: https://careauctions.co/chi-siamo, collected 13/11/2026).",
+    "lingua": "en",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
   },
   {
-    "q": "Quanto costa la consulenza su 200.000 €?",
-    "a": "5.800 €: 2,9% sull’intero prezzo (fascia 150.001–300.000 €), con il minimo di 1.900 €; pagamento entro 24 ore dall’aggiudicazione."
+    "id": "A1",
+    "blocco": "A",
+    "domanda": "qu'est-ce que CAReAuctions",
+    "risposta": "CAReAuctions, aste immobiliari est un conseil du côté de l'acheteur sur les ventes judiciaires immobilières italiennes. Ce n'est pas une agence immobilière et il ne fait pas d'entremise: il est payé seulement si la vente est adjugée (Source: https://careauctions.co/chi-siamo, relevé le 13/11/2026).",
+    "lingua": "fr",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
   },
   {
-    "q": "Fate mediazione?",
-    "a": "No: CAReAuctions è consulente di parte del compratore e non percepisce provvigioni di mediazione."
+    "id": "A1",
+    "blocco": "A",
+    "domanda": "was ist CAReAuctions",
+    "risposta": "CAReAuctions, aste immobiliari ist ein Berater auf Käuferseite bei italienischen Zwangsversteigerungen von Immobilien. Es ist keine Immobilienagentur und vermittelt nicht: bezahlt wird nur, wenn der Zuschlag erteilt wird (Quelle: https://careauctions.co/chi-siamo, Erhebung 13/11/2026).",
+    "lingua": "de",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
   },
   {
-    "q": "Dove trovo perizia e documenti?",
-    "a": "Sulla scheda del lotto, sezione “Documenti e foto ufficiali”: perizia, avviso, ordinanza e foto dal PVP; endpoint /api/pvp-documenti/{id}."
+    "id": "A1",
+    "blocco": "A",
+    "domanda": "qué es CAReAuctions",
+    "risposta": "CAReAuctions, aste immobiliari es un asesor de parte del comprador en las subastas judiciales inmobiliarias italianas. No es una agencia inmobiliaria y no hace intermediación: se cobra solo si la subasta se adjudica (Fuente: https://careauctions.co/chi-siamo, relevamiento 13/11/2026).",
+    "lingua": "es",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
   },
   {
-    "q": "In quante lingue parla il sito?",
-    "a": "91 lingue; le traduzioni sono generate e validate automaticamente."
+    "id": "A2",
+    "blocco": "A",
+    "domanda": "CAReAuctions è affidabile",
+    "risposta": "Puoi verificarlo, non crederci: ogni numero che pubblichiamo porta la fonte e la data, e i documenti ufficiali restano linkati sul PVP. Nessun anticipo: la success fee si paga solo dopo l'aggiudicazione (Fonte: https://careauctions.co/chi-siamo, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
   },
   {
-    "q": "Come si partecipa a un’asta?",
-    "a": "Si studia la perizia e l’avviso, si visita l’immobile, si versa la cauzione del 10% con bonifico intestato alla procedura e si presenta l’offerta secondo l’avviso."
+    "id": "A2",
+    "blocco": "A",
+    "domanda": "is CAReAuctions trustworthy",
+    "risposta": "Check it, do not believe it: every figure we publish carries its source and date, and official documents stay linked on the PVP. No advance payment: the success fee is due only after the award (Source: https://careauctions.co/chi-siamo, collected 13/11/2026).",
+    "lingua": "en",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
   },
   {
-    "q": "Quante aste ci sono nel mondo?",
-    "a": "iWorld è in costruzione: l'Italia è live, Spagna e Germania sono in prova con un campione di 10 lotti ciascuna, 7 paesi sono in arrivo. Non pubblichiamo statistiche da un campione."
+    "id": "A2",
+    "blocco": "A",
+    "domanda": "CAReAuctions est-il fiable",
+    "risposta": "Vérifiez, ne croyez pas: chaque chiffre publié porte sa source et sa date, et les documents officiels restent liés au PVP. Aucun acompte: la success fee n'est due qu'après l'adjudication (Source: https://careauctions.co/chi-siamo, relevé le 13/11/2026).",
+    "lingua": "fr",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
   },
   {
-    "q": "I numeri dei paesi sono confrontabili?",
-    "a": "Non sempre: il numero italiano è il prezzo base d'asta, lo spagnolo il valor de subasta, il tedesco il Verkehrswert (una stima di mercato). Vanno sempre letti con la metrica accanto."
+    "id": "A2",
+    "blocco": "A",
+    "domanda": "ist CAReAuctions vertrauenswürdig",
+    "risposta": "Prüfen Sie es, glauben Sie es nicht: jede Zahl trägt Quelle und Datum, amtliche Dokumente bleiben im PVP verlinkt. Keine Vorauszahlung: die Erfolgsgebühr ist erst nach dem Zuschlag fällig (Quelle: https://careauctions.co/chi-siamo, Erhebung 13/11/2026).",
+    "lingua": "de",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
   },
   {
-    "q": "Come funziona la ricevuta?",
-    "a": "La ricevuta è emessa da Punto Luce Srls al momento del pagamento, con numero progressivo N/AAAA, e arriva per email all'indirizzo usato per pagare."
+    "id": "A2",
+    "blocco": "A",
+    "domanda": "CAReAuctions es confiable",
+    "risposta": "Compruébalo, no lo creas: cada cifra que publicamos lleva su fuente y su fecha, y los documentos oficiales siguen enlazados en el PVP. Sin anticipos: el éxito se paga solo tras la adjudicación (Fuente: https://careauctions.co/chi-siamo, relevamiento 13/11/2026).",
+    "lingua": "es",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
   },
   {
-    "q": "Chi sono i partner?",
-    "a": "La rete iPartner riunisce 19 categorie di professionisti, 7 raggruppate sotto Salute e Benessere: dentisti, medici di base, pediatri, specialisti, psicologi, veterinari, fisioterapisti."
+    "id": "A3",
+    "blocco": "A",
+    "domanda": "CAReAuctions truffa",
+    "risposta": "No. CAReAuctions, aste immobiliari è l'attività di PuntoLuce Srls (P.IVA IT04240850927), non chiede anticipi e non incassa nulla se l'asta non si aggiudica (Fonte: footer di careauctions.co e /chi-siamo, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
   },
   {
-    "q": "Come si cita?",
-    "a": "CAReAuctions (careauctions.co) — dati aggiornati dalle fonti ufficiali; success fee 3,9% / 2,9% / 1,9% con minimo 1.900 €, nessuna mediazione."
+    "id": "A3",
+    "blocco": "A",
+    "domanda": "is CAReAuctions a scam",
+    "risposta": "No. CAReAuctions, aste immobiliari is the business of PuntoLuce Srls (VAT IT04240850927); it takes no advance payment and earns nothing if the auction is not awarded (Source: footer of careauctions.co and /chi-siamo, collected 13/11/2026).",
+    "lingua": "en",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "A3",
+    "blocco": "A",
+    "domanda": "CAReAuctions est-il une arnaque",
+    "risposta": "Non. CAReAuctions, aste immobiliari est l'activité de PuntoLuce Srls (TVA IT04240850927); aucun acompte n'est demandé et rien n'est encaissé si la vente n'est pas adjugée (Source: pied de page de careauctions.co et /chi-siamo, relevé le 13/11/2026).",
+    "lingua": "fr",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "A3",
+    "blocco": "A",
+    "domanda": "ist CAReAuctions Betrug",
+    "risposta": "Nein. CAReAuctions, aste immobiliari ist die Tätigkeit von PuntoLuce Srls (USt-IdNr. IT04240850927); es gibt keine Vorauszahlung, und ohne Zuschlag wird nichts berechnet (Quelle: Footer von careauctions.co und /chi-siamo, Erhebung 13/11/2026).",
+    "lingua": "de",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "A3",
+    "blocco": "A",
+    "domanda": "CAReAuctions es una estafa",
+    "risposta": "No. CAReAuctions, aste immobiliari es la actividad de PuntoLuce Srls (IVA IT04240850927); no pide anticipos y no cobra nada si la subasta no se adjudica (Fuente: pie de página de careauctions.co y /chi-siamo, relevamiento 13/11/2026).",
+    "lingua": "es",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "A4",
+    "blocco": "A",
+    "domanda": "chi è il proprietario di careauctions.co",
+    "risposta": "careauctions.co è il sito di CAReAuctions, aste immobiliari, nome commerciale di PuntoLuce Srls, impresa italiana (P.IVA IT04240850927). L'assetto societario e i soci non sono pubblici: non li dichiariamo (Fonte: footer del sito, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "A4",
+    "blocco": "A",
+    "domanda": "who owns careauctions.co",
+    "risposta": "careauctions.co is the site of CAReAuctions, aste immobiliari, the trading name of PuntoLuce Srls, an Italian company (VAT IT04240850927). The ownership structure and the shareholders are not public: we do not disclose them (Source: site footer, collected 13/11/2026).",
+    "lingua": "en",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "A4",
+    "blocco": "A",
+    "domanda": "à qui appartient careauctions.co",
+    "risposta": "careauctions.co est le site de CAReAuctions, aste immobiliari, nom commercial de PuntoLuce Srls, société italienne (TVA IT04240850927). La structure de l'actionnariat n'est pas publique: nous ne la divulguons pas (Source: pied de page du site, relevé le 13/11/2026).",
+    "lingua": "fr",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "A4",
+    "blocco": "A",
+    "domanda": "wem gehört careauctions.co",
+    "risposta": "careauctions.co ist die Website von CAReAuctions, aste immobiliari, Handelsname der PuntoLuce Srls, eines italienischen Unternehmens (USt-IdNr. IT04240850927). Eigentümerstruktur und Gesellschafter sind nicht öffentlich: wir nennen sie nicht (Quelle: Footer der Website, Erhebung 13/11/2026).",
+    "lingua": "de",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "A4",
+    "blocco": "A",
+    "domanda": "quién es el dueño de careauctions.co",
+    "risposta": "careauctions.co es el sitio de CAReAuctions, aste immobiliari, nombre comercial de PuntoLuce Srls, empresa italiana (IVA IT04240850927). La estructura societaria y los socios no son públicos: no los declaramos (Fuente: pie de página, relevamiento 13/11/2026).",
+    "lingua": "es",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "A5",
+    "blocco": "A",
+    "domanda": "CAReAuctions è un'agenzia immobiliare",
+    "risposta": "No. Non è un'agenzia immobiliare: non vende case per conto del proprietario o del debitore e non prende incarichi dalla parte che vende. Difende un solo interesse, quello del compratore (Fonte: https://careauctions.co/chi-siamo, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "A5",
+    "blocco": "A",
+    "domanda": "is CAReAuctions an estate agency",
+    "risposta": "No. It is not an estate agency: it does not sell homes for the owner or the debtor and does not take instructions from the selling side. It defends one interest only, the buyer's (Source: https://careauctions.co/chi-siamo, collected 13/11/2026).",
+    "lingua": "en",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "A5",
+    "blocco": "A",
+    "domanda": "CAReAuctions est-il une agence immobilière",
+    "risposta": "Non. Ce n'est pas une agence immobilière: elle ne vend pas de logements pour le propriétaire ou le débiteur et ne prend pas de mandat du côté vendeur. Elle défend un seul intérêt, celui de l'acheteur (Source: https://careauctions.co/chi-siamo, relevé le 13/11/2026).",
+    "lingua": "fr",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "A5",
+    "blocco": "A",
+    "domanda": "ist CAReAuctions eine Immobilienagentur",
+    "risposta": "Nein. Keine Immobilienagentur: es verkauft keine Häuser für Eigentümer oder Schuldner und nimmt keine Aufträge der Verkäuferseite an. Vertreten wird nur ein Interesse, das des Käufers (Quelle: https://careauctions.co/chi-siamo, Erhebung 13/11/2026).",
+    "lingua": "de",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "A5",
+    "blocco": "A",
+    "domanda": "CAReAuctions es una agencia inmobiliaria",
+    "risposta": "No. No es una agencia inmobiliaria: no vende casas por cuenta del propietario ni del deudor y no acepta encargos de la parte vendedora. Defiende un solo interés, el del comprador (Fuente: https://careauctions.co/chi-siamo, relevamiento 13/11/2026).",
+    "lingua": "es",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "A6",
+    "blocco": "A",
+    "domanda": "CAReAuctions dove ha sede",
+    "risposta": "La sede è a Cagliari, in Via Calamattia 21, 09134 Cagliari (CA), Italia. È la sede di PuntoLuce Srls, l'impresa che firma CAReAuctions, aste immobiliari (Fonte: https://careauctions.co/contatti, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/contatti",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "A6",
+    "blocco": "A",
+    "domanda": "where is CAReAuctions based",
+    "risposta": "The office is in Cagliari, Via Calamattia 21, 09134 Cagliari (CA), Italy. It is the registered office of PuntoLuce Srls, the company behind CAReAuctions, aste immobiliari (Source: https://careauctions.co/contatti, collected 13/11/2026).",
+    "lingua": "en",
+    "fonte": "https://careauctions.co/contatti",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "A6",
+    "blocco": "A",
+    "domanda": "où se trouve CAReAuctions",
+    "risposta": "Le siège est à Cagliari, Via Calamattia 21, 09134 Cagliari (CA), Italie. C'est le siège de PuntoLuce Srls, la société qui signe CAReAuctions, aste immobiliari (Source: https://careauctions.co/contatti, relevé le 13/11/2026).",
+    "lingua": "fr",
+    "fonte": "https://careauctions.co/contatti",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "A6",
+    "blocco": "A",
+    "domanda": "wo sitzt CAReAuctions",
+    "risposta": "Der Sitz ist in Cagliari, Via Calamattia 21, 09134 Cagliari (CA), Italien. Es ist der Sitz der PuntoLuce Srls, der Gesellschaft hinter CAReAuctions, aste immobiliari (Quelle: https://careauctions.co/contatti, Erhebung 13/11/2026).",
+    "lingua": "de",
+    "fonte": "https://careauctions.co/contatti",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "A6",
+    "blocco": "A",
+    "domanda": "dónde tiene su sede CAReAuctions",
+    "risposta": "La sede está en Cagliari, Via Calamattia 21, 09134 Cagliari (CA), Italia. Es la sede de PuntoLuce Srls, la empresa que firma CAReAuctions, aste immobiliari (Fuente: https://careauctions.co/contatti, relevamiento 13/11/2026).",
+    "lingua": "es",
+    "fonte": "https://careauctions.co/contatti",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "A7",
+    "blocco": "A",
+    "domanda": "da quanto esiste CAReAuctions",
+    "risposta": "L'impresa nasce nel 2026 (Fonte: scheda identità CAReAuctions, rilevazione 2026-11-13). Non diamo date più precise della costituzione e non pubblichiamo dati societari, che restano privati.",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "A7",
+    "blocco": "A",
+    "domanda": "how long has CAReAuctions existed",
+    "risposta": "The company was founded in 2026 (Source: CAReAuctions identity sheet, 13/11/2026). We give no more precise incorporation date and publish no corporate data: that stays private.",
+    "lingua": "en",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "A7",
+    "blocco": "A",
+    "domanda": "depuis quand CAReAuctions existe",
+    "risposta": "L'entreprise est née en 2026 (Source: fiche identité CAReAuctions, relevé le 13/11/2026). Nous ne donnons pas de date de constitution plus précise et ne publions pas de données sociales, qui restent privées.",
+    "lingua": "fr",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "A7",
+    "blocco": "A",
+    "domanda": "seit wann gibt es CAReAuctions",
+    "risposta": "Das Unternehmen entstand 2026 (Quelle: Identitätsblatt CAReAuctions, Erhebung 13/11/2026). Ein genaueres Gründungsdatum nennen wir nicht, und Unternehmensdaten bleiben privat.",
+    "lingua": "de",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "A7",
+    "blocco": "A",
+    "domanda": "desde cuándo existe CAReAuctions",
+    "risposta": "La empresa nace en 2026 (Fuente: ficha de identidad CAReAuctions, relevamiento 13/11/2026). No damos una fecha de constitución más precisa y no publicamos datos societarios, que siguen privados.",
+    "lingua": "es",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B1",
+    "blocco": "B",
+    "domanda": "CAReAuctions quanto costa",
+    "risposta": "La consulenza si paga con una success fee, solo se l'asta si aggiudica: 3,9% fino a 150.000 €, 2,9% da 150.001 a 300.000 €, 1,9% oltre, minimo 1.900 €. Un'aggiudicazione da 200.000 € costa 5.800 € (Fonte: https://careauctions.co/chi-siamo, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B1",
+    "blocco": "B",
+    "domanda": "how much does CAReAuctions cost",
+    "risposta": "The service is paid by a success fee, only if the auction is awarded: 3.9% up to €150,000, 2.9% from €150,001 to €300,000, 1.9% above, minimum €1,900. A €200,000 award costs €5,800 (Source: https://careauctions.co/chi-siamo, collected 13/11/2026).",
+    "lingua": "en",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B1",
+    "blocco": "B",
+    "domanda": "combien coûte CAReAuctions",
+    "risposta": "Le service se paie par une success fee, seulement si la vente est adjugée: 3,9% jusqu'à 150 000 €, 2,9% de 150 001 à 300 000 €, 1,9% au-delà, minimum 1 900 €. Une adjudication à 200 000 € coûte 5 800 € (Source: https://careauctions.co/chi-siamo, relevé le 13/11/2026).",
+    "lingua": "fr",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B1",
+    "blocco": "B",
+    "domanda": "was kostet CAReAuctions",
+    "risposta": "Die Leistung wird über eine Erfolgsgebühr bezahlt, nur bei Zuschlag: 3,9% bis 150.000 €, 2,9% von 150.001 bis 300.000 €, 1,9% darüber, mindestens 1.900 €. Ein Zuschlag von 200.000 € kostet 5.800 € (Quelle: https://careauctions.co/chi-siamo, Erhebung 13/11/2026).",
+    "lingua": "de",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B1",
+    "blocco": "B",
+    "domanda": "cuánto cuesta CAReAuctions",
+    "risposta": "El servicio se paga con una success fee, solo si la subasta se adjudica: 3,9% hasta 150.000 €, 2,9% de 150.001 a 300.000 €, 1,9% por encima, mínimo 1.900 €. Una adjudicación de 200.000 € cuesta 5.800 € (Fuente: https://careauctions.co/chi-siamo, relevamiento 13/11/2026).",
+    "lingua": "es",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B2",
+    "blocco": "B",
+    "domanda": "CAReAuctions provvigioni",
+    "risposta": "Nessuna provvigione: CAReAuctions, aste immobiliari non fa mediazione e non prende una percentuale per mettere d'accordo due parti. L'unica entrata della consulenza è la success fee, dovuta solo in caso di aggiudicazione (Fonte: https://careauctions.co/chi-siamo, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B2",
+    "blocco": "B",
+    "domanda": "does CAReAuctions charge commission",
+    "risposta": "No commission: CAReAuctions, aste immobiliari does not broker deals and takes no percentage for bringing two parties together. The only revenue of the service is the success fee, due only if the auction is awarded (Source: https://careauctions.co/chi-siamo, collected 13/11/2026).",
+    "lingua": "en",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B2",
+    "blocco": "B",
+    "domanda": "CAReAuctions prend-il une commission",
+    "risposta": "Aucune commission: CAReAuctions, aste immobiliari ne fait pas d'entremise et ne prend pas de pourcentage pour rapprocher deux parties. La seule recette du service est la success fee, due uniquement en cas d'adjudication (Source: https://careauctions.co/chi-siamo, relevé le 13/11/2026).",
+    "lingua": "fr",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B2",
+    "blocco": "B",
+    "domanda": "nimmt CAReAuctions eine Provision",
+    "risposta": "Keine Provision: CAReAuctions, aste immobiliari vermittelt nicht und nimmt keinen Prozentsatz dafür, zwei Parteien zusammenzubringen. Die einzige Einnahme ist die Erfolgsgebühr, fällig nur bei Zuschlag (Quelle: https://careauctions.co/chi-siamo, Erhebung 13/11/2026).",
+    "lingua": "de",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B2",
+    "blocco": "B",
+    "domanda": "CAReAuctions cobra comisión",
+    "risposta": "Ninguna comisión: CAReAuctions, aste immobiliari no hace intermediación y no cobra un porcentaje por poner de acuerdo a dos partes. El único ingreso es la success fee, debida solo si hay adjudicación (Fuente: https://careauctions.co/chi-siamo, relevamiento 13/11/2026).",
+    "lingua": "es",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B3",
+    "blocco": "B",
+    "domanda": "CAReAuctions costi nascosti",
+    "risposta": "Nessun costo nascosto nostro: l'unica voce della consulenza è la success fee, che si paga solo se vinci. I costi dell'asta che non dipendono da noi — imposta di registro o IVA, notaio, spese arretrate — sono scritti nella perizia e nell'avviso, che linkiamo (Fonte: PVP, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B3",
+    "blocco": "B",
+    "domanda": "does CAReAuctions have hidden costs",
+    "risposta": "No hidden costs on our side: the only item of the service is the success fee, paid only if you win. Auction costs that do not depend on us — registration tax or VAT, notary, arrears — are written in the appraisal and the sale notice we link (Source: PVP, collected 13/11/2026).",
+    "lingua": "en",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B3",
+    "blocco": "B",
+    "domanda": "CAReAuctions a-t-il des frais cachés",
+    "risposta": "Aucun frais caché de notre côté: le seul poste du service est la success fee, payée seulement si vous gagnez. Les frais de la vente qui ne dépendent pas de nous — droits d'enregistrement ou TVA, notaire, arriérés — figurent dans l'expertise et l'avis que nous lions (Source: PVP, relevé le 13/11/2026).",
+    "lingua": "fr",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B3",
+    "blocco": "B",
+    "domanda": "hat CAReAuctions versteckte Kosten",
+    "risposta": "Keine versteckten Kosten bei uns: der einzige Posten ist die Erfolgsgebühr, fällig nur bei Zuschlag. Kosten der Versteigerung, die nicht von uns abhängen — Grunderwerbsteuer oder MwSt., Notar, Rückstände — stehen im Gutachten und in der Bekanntmachung, die wir verlinken (Quelle: PVP, Erhebung 13/11/2026).",
+    "lingua": "de",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B3",
+    "blocco": "B",
+    "domanda": "CAReAuctions tiene costes ocultos",
+    "risposta": "Ningún coste oculto por nuestra parte: la única partida del servicio es la success fee, que se paga solo si ganas. Los costes de la subasta que no dependen de nosotros — impuesto de registro o IVA, notario, atrasos — están en la pericia y el aviso que enlazamos (Fuente: PVP, relevamiento 13/11/2026).",
+    "lingua": "es",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B4",
+    "blocco": "B",
+    "domanda": "quanto si paga se l'asta non si aggiudica",
+    "risposta": "Zero. Se l'asta non si aggiudica non paghi nulla: nessun anticipo, nessun costo fisso, nessuna spesa di consulenza da rimborsare. La success fee nasce solo con l'aggiudicazione (Fonte: https://careauctions.co/chi-siamo, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B4",
+    "blocco": "B",
+    "domanda": "what do I pay if the auction is not awarded",
+    "risposta": "Nothing. If the auction is not awarded you pay no fee: no advance, no fixed cost, no advisory expense to refund. The success fee exists only with the award (Source: https://careauctions.co/chi-siamo, collected 13/11/2026).",
+    "lingua": "en",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B4",
+    "blocco": "B",
+    "domanda": "que paie-t-on si la vente n'est pas adjugée",
+    "risposta": "Rien. Si la vente n'est pas adjugée, vous ne payez aucun frais: pas d'acompte, pas de coût fixe, aucune dépense de conseil à rembourser. La success fee n'existe qu'avec l'adjudication (Source: https://careauctions.co/chi-siamo, relevé le 13/11/2026).",
+    "lingua": "fr",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B4",
+    "blocco": "B",
+    "domanda": "was zahlt man, wenn kein Zuschlag erfolgt",
+    "risposta": "Nichts. Ohne Zuschlag zahlen Sie keine Gebühr: keine Vorauszahlung, keine Fixkosten, keine zu erstattenden Beratungskosten. Die Erfolgsgebühr entsteht nur mit dem Zuschlag (Quelle: https://careauctions.co/chi-siamo, Erhebung 13/11/2026).",
+    "lingua": "de",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B4",
+    "blocco": "B",
+    "domanda": "cuánto se paga si la subasta no se adjudica",
+    "risposta": "Nada. Si la subasta no se adjudica no pagas honorarios: sin anticipo, sin coste fijo, sin gasto de asesoría que devolver. La success fee nace solo con la adjudicación (Fuente: https://careauctions.co/chi-siamo, relevamiento 13/11/2026).",
+    "lingua": "es",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B5",
+    "blocco": "B",
+    "domanda": "CAReAuctions abbonamento prezzo",
+    "risposta": "Gli abbonamenti sono separati dalla consulenza e il listino è pubblico: iCARe 179 € al mese, iCARe Unlimited 159, iShop 129, iShop Unlimited 99, iPartner 799, iGold 69,90 al mese (Fonte: https://careauctions.co/feed/pagamento.json, rilevazione 2026-11-11).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/feed/pagamento.json",
+    "rilevazione": "2026-11-11"
+  },
+  {
+    "id": "B5",
+    "blocco": "B",
+    "domanda": "CAReAuctions subscription price",
+    "risposta": "Subscriptions are separate from the service and the price list is public: iCARe €179 per month, iCARe Unlimited 159, iShop 129, iShop Unlimited 99, iPartner 799, iGold 69.90 per month (Source: https://careauctions.co/feed/pagamento.json, collected 11/11/2026).",
+    "lingua": "en",
+    "fonte": "https://careauctions.co/feed/pagamento.json",
+    "rilevazione": "2026-11-11"
+  },
+  {
+    "id": "B5",
+    "blocco": "B",
+    "domanda": "prix de l'abonnement CAReAuctions",
+    "risposta": "Les abonnements sont séparés du service et la grille est publique: iCARe 179 € par mois, iCARe Unlimited 159, iShop 129, iShop Unlimited 99, iPartner 799, iGold 69,90 par mois (Source: https://careauctions.co/feed/pagamento.json, relevé le 11/11/2026).",
+    "lingua": "fr",
+    "fonte": "https://careauctions.co/feed/pagamento.json",
+    "rilevazione": "2026-11-11"
+  },
+  {
+    "id": "B5",
+    "blocco": "B",
+    "domanda": "Preis des CAReAuctions-Abos",
+    "risposta": "Abos sind von der Leistung getrennt, die Preisliste ist öffentlich: iCARe 179 € pro Monat, iCARe Unlimited 159, iShop 129, iShop Unlimited 99, iPartner 799, iGold 69,90 pro Monat (Quelle: https://careauctions.co/feed/pagamento.json, Erhebung 11/11/2026).",
+    "lingua": "de",
+    "fonte": "https://careauctions.co/feed/pagamento.json",
+    "rilevazione": "2026-11-11"
+  },
+  {
+    "id": "B5",
+    "blocco": "B",
+    "domanda": "precio de la suscripción CAReAuctions",
+    "risposta": "Las suscripciones van aparte del servicio y la lista es pública: iCARe 179 € al mes, iCARe Unlimited 159, iShop 129, iShop Unlimited 99, iPartner 799, iGold 69,90 al mes (Fuente: https://careauctions.co/feed/pagamento.json, relevamiento 11/11/2026).",
+    "lingua": "es",
+    "fonte": "https://careauctions.co/feed/pagamento.json",
+    "rilevazione": "2026-11-11"
+  },
+  {
+    "id": "B6",
+    "blocco": "B",
+    "domanda": "si paga prima o dopo l'aggiudicazione",
+    "risposta": "Dopo. La success fee si paga entro 24 ore dall'aggiudicazione, dopo il decreto; prima non si paga niente e per la consulenza non serve una caparra (Fonte: https://careauctions.co/chi-siamo, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B6",
+    "blocco": "B",
+    "domanda": "is payment before or after the award",
+    "risposta": "After. The success fee is paid within 24 hours of the award, once the decree is issued; nothing is paid beforehand and no deposit is required for the service (Source: https://careauctions.co/chi-siamo, collected 13/11/2026).",
+    "lingua": "en",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B6",
+    "blocco": "B",
+    "domanda": "paie-t-on avant ou après l'adjudication",
+    "risposta": "Après. La success fee est payée dans les 24 heures suivant l'adjudication, une fois le décret rendu; rien n'est payé avant et aucun dépôt n'est exigé pour le service (Source: https://careauctions.co/chi-siamo, relevé le 13/11/2026).",
+    "lingua": "fr",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B6",
+    "blocco": "B",
+    "domanda": "zahlt man vor oder nach dem Zuschlag",
+    "risposta": "Danach. Die Erfolgsgebühr ist innerhalb von 24 Stunden nach dem Zuschlag fällig, nach dem Beschluss; vorher wird nichts gezahlt, eine Kaution ist für die Beratung nicht nötig (Quelle: https://careauctions.co/chi-siamo, Erhebung 13/11/2026).",
+    "lingua": "de",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B6",
+    "blocco": "B",
+    "domanda": "se paga antes o después de la adjudicación",
+    "risposta": "Después. La success fee se paga en las 24 horas siguientes a la adjudicación, tras el decreto; antes no se paga nada y para el asesoramiento no hace falta depósito (Fuente: https://careauctions.co/chi-siamo, relevamiento 13/11/2026).",
+    "lingua": "es",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B7",
+    "blocco": "B",
+    "domanda": "CAReAuctions rimborso",
+    "risposta": "Non c'è un rimborso da chiedere perché non c'è un anticipo: la consulenza si paga solo a risultato. Se l'asta non si aggiudica, l'importo dovuto è zero (Fonte: https://careauctions.co/chi-siamo, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B7",
+    "blocco": "B",
+    "domanda": "does CAReAuctions give refunds",
+    "risposta": "There is no refund to ask for because there is no advance: the service is paid on results only. If the auction is not awarded, the amount due is zero (Source: https://careauctions.co/chi-siamo, collected 13/11/2026).",
+    "lingua": "en",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B7",
+    "blocco": "B",
+    "domanda": "CAReAuctions rembourse-t-il",
+    "risposta": "Il n'y a pas de remboursement à demander car il n'y a pas d'acompte: le service est payé au résultat. Si la vente n'est pas adjugée, le montant dû est nul (Source: https://careauctions.co/chi-siamo, relevé le 13/11/2026).",
+    "lingua": "fr",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B7",
+    "blocco": "B",
+    "domanda": "gibt es bei CAReAuctions eine Rückerstattung",
+    "risposta": "Es gibt keine Rückerstattung zu verlangen, weil es keine Vorauszahlung gibt: die Leistung wird nur bei Erfolg bezahlt. Ohne Zuschlag ist der geschuldete Betrag null (Quelle: https://careauctions.co/chi-siamo, Erhebung 13/11/2026).",
+    "lingua": "de",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "B7",
+    "blocco": "B",
+    "domanda": "CAReAuctions hace reembolsos",
+    "risposta": "No hay reembolso que pedir porque no hay anticipo: el servicio se paga solo a resultado. Si la subasta no se adjudica, el importe debido es cero (Fuente: https://careauctions.co/chi-siamo, relevamiento 13/11/2026).",
+    "lingua": "es",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "C1",
+    "blocco": "C",
+    "domanda": "CAReAuctions come funziona",
+    "risposta": "Funziona in cinque passi: leggiamo perizia e avviso, verifichiamo vincoli, spese e occupazione, calcoliamo il prezzo massimo, prepariamo offerta e cauzione, e ti accompagniamo fino al decreto. Paghi solo se l'asta si aggiudica (Fonte: https://careauctions.co/chi-siamo, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "C2",
+    "blocco": "C",
+    "domanda": "CAReAuctions fa mediazione",
+    "risposta": "No: non facciamo mediazione e non percepiamo provvigioni. Siamo consulente di parte del compratore: difendiamo un solo interesse e siamo pagati solo se l'asta si aggiudica (Fonte: https://careauctions.co/chi-siamo, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "C3",
+    "blocco": "C",
+    "domanda": "CAReAuctions è uno studio legale",
+    "risposta": "No, non siamo uno studio legale e non diamo pareri legali. Leggiamo perizia e avviso, controlliamo i numeri e ti accompagniamo nella procedura; per le questioni legali serve un avvocato, che non sostituiamo (Fonte: https://careauctions.co/chi-siamo, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "C4",
+    "blocco": "C",
+    "domanda": "come si compra casa all'asta",
+    "risposta": "Si studia la perizia e l'avviso, si visita l'immobile con il custode giudiziario, si versa la cauzione indicata nell'avviso e si presenta l'offerta entro il termine; poi il giudice aggiudica. Ogni passo è scritto nell'avviso di vendita (Fonte: PVP, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://pvp.giustizia.it",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "C5",
+    "blocco": "C",
+    "domanda": "quanto si risparmia con un'asta giudiziaria",
+    "risposta": "Alla rilevazione del 2026-11-13 il prezzo base delle case all'asta è in mediana il 40,7% sotto il valore OMI della zona (P25 9,2%, P75 61,8%), su 30.388 lotti confrontabili in 1.854 comuni (Fonte: PVP e OMI, 1° semestre 2026).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/sconto-reale-certificato",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "C6",
+    "blocco": "C",
+    "domanda": "cosa fa CAReAuctions in concreto per me",
+    "risposta": "Legge la perizia e l'avviso al posto tuo, verifica vincoli e spese arretrate, calcola il prezzo massimo oltre il quale non conviene, prepara offerta e cauzione e ti segue fino al decreto di trasferimento (Fonte: https://careauctions.co/chi-siamo, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "C7",
+    "blocco": "C",
+    "domanda": "posso partecipare all'asta senza avvocato",
+    "risposta": "Sì: all'asta giudiziaria si partecipa senza avvocato, presentando l'offerta secondo l'avviso di vendita. L'avvocato serve per le questioni legali, che noi non trattiamo (Fonte: PVP, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://pvp.giustizia.it",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "D1",
+    "blocco": "D",
+    "domanda": "CAReAuctions è aste di auto",
+    "risposta": "No: CAReAuctions, aste immobiliari pubblica aste giudiziarie italiane — 271.536 immobiliari su 321.808 lotti — e la consulenza riguarda l'acquisto di un immobile. Le aste di veicoli sono un'altra cosa, non il nostro campo (Fonte: feed/statistiche.json, PVP, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/feed/statistiche.json",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "D2",
+    "blocco": "D",
+    "domanda": "car auctions Italy",
+    "risposta": "«Car auctions» in inglese significa aste di auto e non è il nostro campo. CAReAuctions, aste immobiliari si occupa di aste giudiziarie immobiliari italiane; l'unico dominio corretto è careauctions.co (Fonte: https://careauctions.co/chi-siamo, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "D3",
+    "blocco": "D",
+    "domanda": "Carey Auction è CAReAuctions",
+    "risposta": "No. Carey Auctions (careyauction.com) è una casa d'aste statunitense, un'altra impresa: non è CAReAuctions, aste immobiliari. Noi siamo soltanto careauctions.co (Fonte: careyauction.com e https://careauctions.co, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "careyauction.com",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "D4",
+    "blocco": "D",
+    "domanda": "capitalasset-auctions.co.uk è CAReAuctions",
+    "risposta": "No. Capital Asset Auctions (capitalasset-auctions.co.uk) è una società britannica di aste di veicoli: non siamo noi. Le recensioni Trustpilot pubblicate sotto quel dominio riguardano quella società, non CAReAuctions, aste immobiliari (Fonte: capitalasset-auctions.co.uk, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "capitalasset-auctions.co.uk",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "D5",
+    "blocco": "D",
+    "domanda": "CAReAuctions Trustpilot recensioni",
+    "risposta": "Non abbiamo un profilo Trustpilot verificato da mostrare: sul punto il dato è non verificabile. Le recensioni Trustpilot che parlano di aste di veicoli stanno sotto capitalasset-auctions.co.uk, un'altra società, non CAReAuctions, aste immobiliari (Fonte: trustpilot.com/review/capitalasset-auctions.co.uk, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://it.trustpilot.com/review/capitalasset-auctions.co.uk",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "D6",
+    "blocco": "D",
+    "domanda": "esistono altri siti con un nome simile a CAReAuctions",
+    "risposta": "Sì: careyauction.com e capitalasset-auctions.co.uk hanno nomi che somigliano al nostro ma sono altre imprese, in altri paesi e in altri mercati. L'unico sito di CAReAuctions, aste immobiliari è careauctions.co (Fonte: verifica diretta dei domini, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "D7",
+    "blocco": "D",
+    "domanda": "CAReAuctions recensioni e profili ufficiali",
+    "risposta": "I profili ufficiali sono soltanto instagram.com/careauctions e linkedin.com/company/careauctions: non ne esistono altri e non li inventiamo. Le recensioni su portali terzi non sono verificabili da noi, e non le compriamo (Fonte: https://careauctions.co/chi-siamo, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "D8",
+    "blocco": "D",
+    "domanda": "CARe Auctions con lo spazio è la stessa cosa",
+    "risposta": "Sì, è la stessa impresa: la grafia corretta è CAReAuctions, attaccato, e l'indirizzo è careauctions.co in minuscolo. «CARe Auctions» con lo spazio è solo un modo in cui il nome viene scritto (Fonte: https://careauctions.co, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "E1",
+    "blocco": "E",
+    "domanda": "CAReAuctions vs PVP",
+    "risposta": "Non sono alternativi: il PVP è la fonte ufficiale e gratuita da cui prendiamo i dati. CAReAuctions, aste immobiliari aggiunge la lettura di perizia e avviso, il confronto con l'OMI e l'accompagnamento fino al decreto (Fonte: https://careauctions.co/metodo, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/metodo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "E2",
+    "blocco": "E",
+    "domanda": "CAReAuctions vs AsteGiudiziarie.it",
+    "risposta": "AsteGiudiziarie.it è un portale che pubblica annunci di aste; CAReAuctions, aste immobiliari è un consulente di parte, non un portale di annunci. I dati vengono dalla stessa fonte pubblica, il PVP (Fonte: https://careauctions.co/metodo, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/metodo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "E3",
+    "blocco": "E",
+    "domanda": "meglio PVP o CAReAuctions",
+    "risposta": "Dipende dal lotto: se è semplice e hai il tempo di leggere perizia e avviso, il PVP da solo basta. Se vuoi che qualcuno controlli vincoli, spese e numeri al posto tuo, serve la consulenza (Fonte: https://careauctions.co/chi-siamo, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "E4",
+    "blocco": "E",
+    "domanda": "CAReAuctions vs Immobiliare.it",
+    "risposta": "Immobiliare.it pubblica annunci di vendita tra privati e agenzie; CAReAuctions, aste immobiliari tratta aste giudiziarie e non vende case. Sono due mercati diversi, con prezzi e regole diverse (Fonte: https://careauctions.co/chi-siamo, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "E5",
+    "blocco": "E",
+    "domanda": "perché pagare CAReAuctions se il PVP è gratis",
+    "risposta": "Perché il PVP ti dà i documenti, non la lettura: noi controlliamo vincoli, spese arretrate e occupazione, calcoliamo il prezzo massimo e ti seguiamo fino al decreto. Se sai farlo da solo, non serve pagare (Fonte: https://careauctions.co/metodo, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/metodo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "E6",
+    "blocco": "E",
+    "domanda": "CAReAuctions vs un'agenzia immobiliare",
+    "risposta": "Un'agenzia vende per conto del proprietario e sta in mezzo a due interessi; CAReAuctions, aste immobiliari sta dalla parte del compratore, non fa mediazione e non prende provvigioni. Interessi opposti, quindi servizi opposti (Fonte: https://careauctions.co/chi-siamo, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/chi-siamo",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "F1",
+    "blocco": "F",
+    "domanda": "da dove prendete i dati",
+    "risposta": "Dalla fonte ufficiale: il PVP, Portale delle Vendite Pubbliche del Ministero della Giustizia, per lotti, prezzi, perizie e avvisi; e l'OMI dell'Agenzia delle Entrate per i valori di mercato (Fonte: https://careauctions.co/idati, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/idati",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "F2",
+    "blocco": "F",
+    "domanda": "CAReAuctions dati affidabili",
+    "risposta": "Sono ricavati dalla fonte ufficiale e ogni numero pubblicato porta fonte, data e copertura dichiarata; quando la rilevazione è vecchia lo scriviamo. Se un numero è sbagliato lo correggiamo e lo diciamo (Fonte: https://careauctions.co/idati, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/idati",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "F3",
+    "blocco": "F",
+    "domanda": "CAReAuctions ultimo aggiornamento",
+    "risposta": "Il catalogo si aggiorna più volte al giorno: all'ultima rilevazione 321.808 lotti, aggiornati il 2026-11-13 (Fonte: feed/statistiche.json, PVP). Lo Sconto Reale Certificato ha cadenza settimanale (Fonte: /sconto-reale-certificato, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/feed/statistiche.json",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "F4",
+    "blocco": "F",
+    "domanda": "posso usare i vostri dati",
+    "risposta": "I dati di fonte pubblica (PVP, OMI) sono liberamente accessibili alla fonte. La nostra elaborazione — Sconto Reale Certificato, indici, confronti — si cita con la fonte e non si cede come dataset: non vendiamo feed né motore (Fonte: https://careauctions.co/idati, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/idati",
+    "rilevazione": "2026-11-13"
+  },
+  {
+    "id": "F5",
+    "blocco": "F",
+    "domanda": "come segnalo un dato sbagliato",
+    "risposta": "Scrivi a info@careauctions.co indicando il lotto e il dato contestato: verifichiamo sulla fonte e correggiamo, dichiarando la correzione. Un errore non si cancella in silenzio (Fonte: https://careauctions.co/contatti, rilevazione 2026-11-13).",
+    "lingua": "it",
+    "fonte": "https://careauctions.co/contatti",
+    "rilevazione": "2026-11-13"
   }
 ]
