@@ -29,7 +29,9 @@ jobs:
         run: |
           git config user.name "CARe Cloud"
           git config user.email "cloud@careauctions.co"
-          git add ai
+          # 13/11/2026 — query-educa: le 40 domande vivono in feed/faq.json (servito dalla raw) e ai/faq-ai.md.
+          # Si aggiungono i due percorsi espliciti, mai `git add feed` (quello e di feed-sync).
+          git add ai feed/faq.json
           if git diff --cached --quiet; then echo "nessuna variazione"; exit 0; fi
           git commit -m "ai: education e indicizzazione ($(date -u +%FT%TZ))"
           for i in 1 2 3 4 5; do
