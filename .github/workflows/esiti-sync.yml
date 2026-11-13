@@ -34,6 +34,19 @@ jobs:
       # runner (date -u), non quello di GitHub.
       - name: Inizio del giro (per durataMin)
         run: echo "ESITI_INIZIO=$(date -u +%FT%TZ)" >> "$GITHUB_ENV"
+      # 13/11/2026 — IL RUN PARTE DAL MAIN PIÙ RECENTE, NON DAL COMMIT DELL'EVENTO.
+      # `actions/checkout` porta il tree del commit che ha triggerato la run: se è vecchio di
+      # decine di minuti, i file `feed/esiti-*.json` (che un altro esiti-sync rigenera OGNI giro)
+      # arrivano già superati e il `git pull --rebase` trova CONFLICT su ca-re-index-esiti.json,
+      # esiti-report.json ed esiti-statistiche.json → «push esiti non riuscito dopo 5 tentativi»
+      # (misurato sul run 43402314383 del 13/11: 3 file in conflitto, job rosso, derivati fermi
+      # mentre i dati erano stati raccolti bene). Allinearsi PRIMA di generare non nasconde
+      # niente: i derivati si rigenerano dai dati freschi e il commit resta un fast-forward.
+      - name: Allinea al main più recente (la base del run non deve essere vecchia)
+        run: |
+          git fetch --depth=1 origin main
+          git reset --hard FETCH_HEAD
+          git log --oneline -1
       - name: Raccogli i prezzi pubblici (FallcoAste)
         run: node scripts/fallco-aggiudicazioni.js
       # 10/11/2026 (turno posta/allarmi) — il run delle 20:21Z è rimasto 50+ minuti su
