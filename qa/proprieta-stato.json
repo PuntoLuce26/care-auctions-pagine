@@ -1,13 +1,13 @@
 {
-  "generato": "2026-11-13T10:17:03Z",
+  "generato": "2026-11-13T10:19:10Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "6eab6b1478",
-    "a": "25f77663d3"
+    "da": "2feb315414",
+    "a": "81f869ea5d"
   },
   "fileEsaminati": 1,
   "sintesi": {
@@ -21,11 +21,11 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "25f77663d3",
-      "oggetto": "qa: audit interno 2026-11-13T10:15:54.444Z",
+      "commit": "81f869ea5d",
+      "oggetto": "esiti-sync: il run parte dal main più recente (la base vecchia faceva CONFLICT sui derivati)",
       "fileToccati": 1,
       "esempi": [
-        "qa/audit-interno.json"
+        ".github/workflows/esiti-sync.yml"
       ],
       "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
