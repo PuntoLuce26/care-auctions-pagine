@@ -9,9 +9,22 @@ import fs from 'node:fs';
 const URL_ = 'https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/prc_hpi_q?geo=IT&format=JSON&lang=EN';
 const OUT = process.argv[2] || 'feed/mercato-indice.json';
 
+// 13/11/2026 — FONTE PUBBLICA + DATA DI RILEVAZIONE.
+// La fonte di questo feed NON è il PVP: qui non ci sono aste, c'è l'indice dei prezzi delle
+// abitazioni del mercato libero. Dichiarare il PVP sarebbe falso. La fonte vera è Eurostat
+// (prc_hpi_q), che è alimentato da ISTAT: entrambi pubblici e controllabili.
+const FONTE = {
+  nome: 'Eurostat — House price index (prc_hpi_q), alimentato da ISTAT',
+  url: 'https://ec.europa.eu/eurostat/databrowser/view/prc_hpi_q/default/table',
+};
+
 const r = await fetch(URL_, { headers: { 'User-Agent': 'CARe-merce' } });
 if (!r.ok) { console.error('Eurostat non raggiungibile', r.status); process.exit(1); }
+// Istante VERO della raccolta: la risposta della fonte. Non l'istante di scrittura del file.
+const raccolta = new Date().toISOString();
 const d = await r.json();
+// Revisione dichiarata dalla fonte (JSON-stat `updated`): quando Eurostat ha pubblicato questi numeri.
+const revisioneFonte = (() => { const t = Date.parse(String(d.updated || '')); return Number.isFinite(t) ? new Date(t).toISOString() : null; })();
 
 const dims = d.id;                 // ['freq','purchase','unit','geo','time']
 const size = d.size;
@@ -37,9 +50,16 @@ const serie = (iP) => {
 };
 
 const feed = {
+  fonte: FONTE,
+  rilevazione: raccolta,
   meta: {
     titolo: 'Mercato libero — indice dei prezzi delle abitazioni',
-    fonte: 'Eurostat, House price index (prc_hpi_q). ISTAT alimenta Eurostat: la serie primaria è ISTAT.',
+    fonte: FONTE,
+    fonteTesto: 'Eurostat, House price index (prc_hpi_q). ISTAT alimenta Eurostat: la serie primaria è ISTAT.',
+    rilevazione: raccolta,
+    rilevazioneRevisioneFonte: revisioneFonte,
+    rilevazioneNota: 'Istante in cui la serie è stata LETTA da Eurostat (prc_hpi_q): è la raccolta, non la scrittura del file. La serie è trimestrale: l\'ultimo periodo pubblicato è l\'ultimo dato che esiste e non cambia fra due letture.',
+    rilevazioneMotivo: null,
     licenza: 'CC-BY 4.0',
     granularita: 'trimestrale',
     base: 'indice 2015 = 100',
