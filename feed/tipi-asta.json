@@ -1,5 +1,5 @@
 {
- "generato": "2026-11-13T11:31:07.145Z",
+ "generato": "2026-11-13T11:41:55.501Z",
  "fonte": [
   {
    "nome": "Portale delle Vendite Pubbliche (Ministero della Giustizia)",
@@ -17,10 +17,10 @@
    "ruolo": "aggiudicazioni dei fallimenti"
   }
  ],
- "rilevazione": "2026-11-13T11:31:07.145Z",
+ "rilevazione": "2026-11-13T11:41:55.501Z",
  "rilevazioneLeggibile": "13/11/2026",
- "totaleCatalogo": 321769,
- "tipoLottoSomma": 324302,
+ "totaleCatalogo": 321772,
+ "tipoLottoSomma": 324323,
  "tipi": [
   {
    "slug": "immobiliare",
@@ -28,7 +28,7 @@
    "chiave": "tipoLotto",
    "valore": "IMMOBILI",
    "nota": "Case, terreni, negozi, capannoni: i lotti immobiliari del catalogo.",
-   "lotti": 271553,
+   "lotti": 271562,
    "quotaPct": 83.7,
    "url": "/aste-categoria/it/immobiliare.html"
   },
@@ -38,7 +38,7 @@
    "chiave": "tipoLotto",
    "valore": "MOBILI",
    "nota": "Auto, macchinari, arredi: i lotti mobiliari, spesso dentro la stessa procedura.",
-   "lotti": 50475,
+   "lotti": 50487,
    "quotaPct": 15.6,
    "url": "/aste-categoria/it/mobiliare.html"
   },
@@ -58,7 +58,7 @@
    "slug": "abitazione-tipo-civ",
    "nome": "Abitazione tipo civ",
    "categoria": "ABITAZIONE_TIPO_CIV",
-   "lotti": 47442,
+   "lotti": 47443,
    "quotaPct": 14.7,
    "url": "/aste-categoria/it/abitazione-tipo-civ.html"
   },
@@ -138,7 +138,7 @@
    "slug": "abitazione-in-villini",
    "nome": "Abitazione in villini",
    "categoria": "ABITAZIONE_IN_VILLINI",
-   "lotti": 7141,
+   "lotti": 7142,
    "quotaPct": 2.2,
    "url": "/aste-categoria/it/abitazione-in-villini.html"
   },
