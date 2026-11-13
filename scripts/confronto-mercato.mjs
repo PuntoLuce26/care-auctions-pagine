@@ -24,6 +24,10 @@
  * Zero dipendenze: node:fs + fetch (Node 20+).
  */
 import fs from 'node:fs';
+import { createRequire } from 'node:module';
+// 13/11/2026 (figura sweep) — i nomi pubblici delle fonti vivono in un solo posto:
+// scripts/feed-regole.js · FONTI_PUBBLICHE (CommonJS, si carica dal modulo ESM).
+const { FONTI_PUBBLICHE } = createRequire(import.meta.url)('./feed-regole.js');
 
 const WORKER = process.env.WORKER_URL || 'https://icare-ai.misty-mode-1cbc.workers.dev';
 const REGIA_KEY = process.env.REGIA_KEY || '';
@@ -258,6 +262,12 @@ async function main() {
       generatoIl: rilevazione,
       cadenza: 'settimanale, lunedì 03:30 (workflow confronto-mercato.yml)',
       semestreOmi: omi.semestre || null,
+      // 13/11/2026 (figura sweep) — la FONTE PUBBLICA, nominata, accanto alla `rilevazione` che c'è già.
+      // Un numero senza fonte e data non si pubblica: il sito nasconde ciò che il feed non dichiara.
+      fonte: [
+        { nome: FONTI_PUBBLICHE.pvp.nome, url: FONTI_PUBBLICHE.pvp.url, ruolo: 'prezzi base d asta dei lotti' },
+        { nome: FONTI_PUBBLICHE.omi.nome, url: FONTI_PUBBLICHE.omi.url, ruolo: 'valori di mercato OMI (mediana delle zone del comune)' },
+      ],
       fonteValore: 'Agenzia delle Entrate — OMI (Osservatorio del Mercato Immobiliare), KV del worker icare-ai',
       fontePrezzi: 'fonte PVP - Portale delle Vendite Pubbliche Giustizia - Ministero della Giustizia',
       metodo: 'Per ogni lotto residenziale a piena proprietà con la superficie in mq pubblicata nella descrizione della fonte, prezzo al mq = prezzo base / mq, confrontato con i valori OMI residenziali del comune (mediana delle zone). Sconto reale = mediana di 1 - prezzo al mq / valore OMI. scontoConservativoPct confronta con la zona OMI PIÙ ECONOMICA del comune (il confronto più prudente possibile). Esclusi i lotti in quota, nuda proprietà e usufrutto (il prezzo è di una parte, la superficie del tutto). Entrano solo i comuni con almeno 3 lotti confrontabili. Si usa SEMPRE il prezzo base d asta, mai l offerta minima: lo scarto base→minima è il pavimento legale del 25%, non uno sconto di mercato.',
