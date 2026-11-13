@@ -11,6 +11,17 @@ const UA = { 'User-Agent': 'CARe-mercato' };
 const leggi = async (f) => { const r = await fetch(BASE + f, { headers: UA }); if (!r.ok) throw new Error(f + ' ' + r.status); return r.json(); };
 const r1 = (v, d = 1) => v === null || v === undefined || isNaN(v) ? null : Math.round(v * 10 ** d) / 10 ** d;
 
+// 13/11/2026 — FONTE PUBBLICA + DATA DI RILEVAZIONE.
+// Questo script non raccoglie nulla: aggrega feed già raccolti. La fonte pubblica è quella dei
+// dati di partenza (PVP per i lotti e i prezzi base, OMI per i valori di mercato e i volumi) e la
+// rilevazione è l'istante VERO della raccolta che sta dentro gli ingressi — mai l'istante in cui
+// gira questo script. Quando un ingresso non dichiara la sua rilevazione si scrive null e il motivo.
+const FONTI = {
+  pvp: { nome: 'Portale delle Vendite Pubbliche (Ministero della Giustizia)', url: 'https://pvp.giustizia.it', ruolo: "lotti e prezzi base d'asta" },
+  omi: { nome: 'OMI — Agenzia delle Entrate', url: 'https://www1.agenziaentrate.gov.it/servizi/geopoi_omi/', ruolo: 'valori di mercato e volumi (NTN)' },
+};
+const FONTE_ASTE = [FONTI.pvp, FONTI.omi];
+
 const [ap, cm, oc, rc] = await Promise.all([
   leggi('andamento-partecipazione.json'),
   leggi('confronto-mercato.json'),
@@ -21,10 +32,20 @@ const oggi = new Date().toISOString();
 
 // 1) serie giornaliera delle aste
 const giorni = (ap.giorni || []).map((g) => ({ data: g.data, aggiudicate: g.aggiudicate, deserte: g.deserte, sospese: g.sospese, totale: g.totale }));
+// Rilevazione = `generato` di andamento-partecipazione.json: l'istante in cui la serie è stata
+// ricalcolata da zero sui lotti del catalogo (il metodo è dichiarato dentro quel feed). L'ultimo
+// giorno della serie è contato su quel catalogo: è quella la data della raccolta.
+const rilevazioneTrend = (ap && ap.generato) || (ap && ap.meta && ap.meta.generatoIl) || null;
 const asteTrend = {
+  fonte: FONTI.pvp,
+  rilevazione: rilevazioneTrend,
   meta: {
     titolo: 'Aste giudiziarie — giorno per giorno',
-    fonte: 'PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia) e fonti pubbliche delle aste',
+    fonte: FONTI.pvp,
+    fonteTesto: 'PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia) e fonti pubbliche delle aste',
+    rilevazione: rilevazioneTrend,
+    rilevazioneOrigine: "feed/andamento-partecipazione.json · campo generato (serie ricalcolata da zero sui lotti del catalogo, un giorno per data d'asta)",
+    rilevazioneMotivo: rilevazioneTrend ? null : 'andamento-partecipazione.json non dichiara generato: la data della raccolta non è tracciata, quindi non si inventa',
     licenza: 'dati pubblici, elaborazione CAReAuctions',
     granularita: 'giornaliera',
     generatoIl: oggi,
@@ -68,9 +89,23 @@ for (const c of (cm.comuni || [])) {
   });
 }
 comuni.sort((a, b) => (b.lottiAsta || 0) - (a.lottiAsta || 0));
+// Rilevazione del confronto = la rilevazione del feed che porta i PREZZI (confronto-mercato.json),
+// perché è su quei lotti che nasce lo sconto. Le altre due popolazioni hanno istanti propri e
+// vengono dichiarati uno per uno: un solo istante per tutto il file sarebbe una data finta.
+const rilevazioneConfronto = (cm && cm.meta && cm.meta.rilevazione) || (cm && cm.rilevazione) || null;
 const confronto = {
+  fonte: FONTE_ASTE,
+  rilevazione: rilevazioneConfronto,
   meta: {
     titolo: 'Aste contro mercato libero, comune per comune',
+    fonte: FONTE_ASTE,
+    rilevazione: rilevazioneConfronto,
+    rilevazioni: {
+      prezziAste: rilevazioneConfronto,
+      valoriOmi: { semestre: (oc.meta && oc.meta.semestreCorrente) || null, raccolta: (oc.meta && oc.meta.generatoIl) || null },
+      lottiAttivi: (rc && rc.meta && rc.meta.generatoIl) || null,
+    },
+    rilevazioneMotivo: rilevazioneConfronto ? null : 'confronto-mercato.json (ingresso dei prezzi) non dichiara meta.rilevazione: la data della raccolta non è tracciata, quindi resta null',
     fonti: { valoriOmi: 'Agenzia delle Entrate – OMI (CC-BY 4.0)', prezziAste: 'PVP e fonti pubbliche, elaborazione CAReAuctions' },
     licenza: 'CC-BY 4.0 (dati OMI) · elaborazione CAReAuctions',
     semestreOmi: oc.meta?.semestreCorrente || null,
