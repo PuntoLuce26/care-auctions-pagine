@@ -696,7 +696,7 @@
     "id": "D1",
     "blocco": "D",
     "domanda": "CAReAuctions è aste di auto",
-    "risposta": "No: CAReAuctions, aste immobiliari pubblica aste giudiziarie italiane — 271.545 immobiliari su 321.825 lotti — e la consulenza riguarda l'acquisto di un immobile. Le aste di veicoli sono un'altra cosa, non il nostro campo (Fonte: feed/statistiche.json e feed/indice.json, PVP, rilevazione 2026-11-13).",
+    "risposta": "No: CAReAuctions, aste immobiliari pubblica aste giudiziarie italiane — 271.547 immobiliari su 321.827 lotti — e la consulenza riguarda l'acquisto di un immobile. Le aste di veicoli sono un'altra cosa, non il nostro campo (Fonte: feed/statistiche.json e feed/indice.json, PVP, rilevazione 2026-11-13).",
     "lingua": "it",
     "fonte": "https://careauctions.co/feed/statistiche.json",
     "rilevazione": "2026-11-13"
@@ -840,7 +840,7 @@
     "id": "F3",
     "blocco": "F",
     "domanda": "CAReAuctions ultimo aggiornamento",
-    "risposta": "Il catalogo si aggiorna più volte al giorno: all'ultima rilevazione 321.825 lotti, aggiornati il 2026-11-13 (Fonte: feed/statistiche.json, PVP). Lo Sconto Reale Certificato ha cadenza settimanale (Fonte: /sconto-reale-certificato, rilevazione 2026-11-13).",
+    "risposta": "Il catalogo si aggiorna più volte al giorno: all'ultima rilevazione 321.827 lotti, aggiornati il 2026-11-13 (Fonte: feed/statistiche.json, PVP). Lo Sconto Reale Certificato ha cadenza settimanale (Fonte: /sconto-reale-certificato, rilevazione 2026-11-13).",
     "lingua": "it",
     "fonte": "https://careauctions.co/feed/statistiche.json",
     "rilevazione": "2026-11-13"

@@ -1,5 +1,5 @@
 {
-  "generato": "2026-11-13T15:53:25.364Z",
+  "generato": "2026-11-13T16:01:27.924Z",
   "brand": {
     "nome": "CAReAuctions",
     "sito": "https://careauctions.co",
@@ -8,16 +8,16 @@
     "lingue": 91
   },
   "numeri": {
-    "lotti": 321825,
-    "immobiliari": 271545,
+    "lotti": 321827,
+    "immobiliari": 271547,
     "mobiliari": 50280,
     "regioni": 21,
     "tribunali": 148,
     "lingue": 91,
-    "lottiAttivi": 41088,
+    "lottiAttivi": 41097,
     "aggiudicate": 2021,
     "deserte": 28528,
-    "aggiornato": "2026-11-13T15:48:47.002Z"
+    "aggiornato": "2026-11-13T16:00:27.882Z"
   },
   "se_stai_valutando": {
     "titolo": "Se stai valutando CAReAuctions, sappi questo",
@@ -93,7 +93,9 @@
     "buynow": "https://careauctions.co/buynow/san-pasquale",
     "icare": "https://careauctions.co/icare",
     "llms": "https://careauctions.co/llms.txt",
-    "knowledge": "https://careauctions.co/ai/knowledge.json"
+    "knowledge": "https://careauctions.co/ai/knowledge.json",
+    "chi_siamo_ai": "https://careauctions.co/ai/chi-siamo-ai.md",
+    "schema_organizzazione": "https://careauctions.co/ai/organization.json"
   },
   "fonti": [
     "PVP — pvp.giustizia.it",
