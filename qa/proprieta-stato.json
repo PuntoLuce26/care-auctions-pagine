@@ -1,53 +1,35 @@
 {
-  "generato": "2026-11-13T16:23:24Z",
+  "generato": "2026-11-13T17:23:30Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "552d0cd8ab",
-    "a": "e94d68caf4"
+    "da": "32bf39a9bf",
+    "a": "b62461140d"
   },
-  "fileEsaminati": 5,
+  "fileEsaminati": 1,
   "sintesi": {
-    "violazioni": 3,
-    "violazioniDaCommit": 3,
-    "commitSenzaAgente": 0,
+    "violazioni": 0,
+    "violazioniDaCommit": 0,
+    "commitSenzaAgente": 1,
     "duplicatiProcessi": 0,
     "esito": "attenzione"
   },
-  "violazioni": [
+  "violazioni": [],
+  "violazioniTroncate": 0,
+  "commitSenzaAgente": [
     {
-      "commit": "e94d68caf4",
-      "agente": "fix-traduzioni",
-      "file": "ai/faq-ai.md",
-      "tipo": "generato",
-      "owner": "ai-education | ai-sentinel",
-      "nota": "knowledge.json, llms.txt, faq, stato, qualita: tutti generati.",
-      "cosaFare": "artefatto generato: si cambia il generatore (ai-education), non il file"
-    },
-    {
-      "commit": "e94d68caf4",
-      "agente": "fix-traduzioni",
-      "file": "ai/faq.json",
-      "tipo": "generato",
-      "owner": "ai-education | ai-sentinel",
-      "nota": "knowledge.json, llms.txt, faq, stato, qualita: tutti generati.",
-      "cosaFare": "artefatto generato: si cambia il generatore (ai-education), non il file"
-    },
-    {
-      "commit": "e94d68caf4",
-      "agente": "fix-traduzioni",
-      "file": "feed/faq.json",
-      "tipo": "generato",
-      "owner": "feed-sync | esiti-sync | foto-sync | foto-perizie | ocr-perizie | npl-sync | aste-aziende-sync | traduzioni | traduzioni-prelancio | ai-education | ai-sentinel | confronto-mercato | residenziale-comune | andamento-partecipazione | dati-indice | visite-rum | prerender | indexnow-daily | quadro | aggiornamento-mail | mail-qa | qa | perf | ishop-check | comunicato-mensile | riconcilia-esiti | allineamento-pvp | icare-brain | superfici-attivi",
-      "nota": "feed generati: il proprietario e' il workflow che li produce. Chi vuole un numero diverso cambia lo script, non il JSON. L'elenco dei generatori si allunga quando nasce un generatore nuovo (e lo aggiunge il Lead).",
-      "cosaFare": "artefatto generato: si cambia il generatore (feed-sync), non il file"
+      "commit": "b62461140d",
+      "oggetto": "iShop: 12 immagini di categoria (card 1200x1200 + header 1600x900) + feed e manifest",
+      "fileToccati": 1,
+      "esempi": [
+        "feed/ishop-immagini-manifest.json"
+      ],
+      "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
   ],
-  "violazioniTroncate": 0,
-  "commitSenzaAgente": [],
   "commitSenzaAgenteTroncati": 0,
   "simulazioniIgnorate": [],
   "processi": {
@@ -76,8 +58,8 @@
     },
     {
       "giorno": "2026-11-13",
-      "violazioni": 3,
-      "senzaAgente": 0,
+      "violazioni": 0,
+      "senzaAgente": 1,
       "duplicati": 0,
       "pulito": false
     }
