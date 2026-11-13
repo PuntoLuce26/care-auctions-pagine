@@ -1,9 +1,9 @@
 {
- "generato": "2026-11-13T18:42:56.648Z",
+ "generato": "2026-11-13T21:25:59.687Z",
  "semaforo": "giallo",
  "conteggi": {
-  "ok": 21,
-  "giallo": 3,
+  "ok": 20,
+  "giallo": 4,
   "rosso": 0,
   "non_verificabile": 0
  },
@@ -89,49 +89,49 @@
    "sezione": "feed",
    "nome": "statistiche",
    "stato": "ok",
-   "valore": "3 min",
-   "dettaglio": "321877 lotti"
+   "valore": "10 min",
+   "dettaglio": "321881 lotti"
   },
   {
    "sezione": "feed",
    "nome": "world",
-   "stato": "ok",
-   "valore": "1279 min",
+   "stato": "giallo",
+   "valore": "1442 min",
    "dettaglio": "33 paesi"
   },
   {
    "sezione": "feed",
    "nome": "ricevute",
    "stato": "ok",
-   "valore": "1644 min",
+   "valore": "1807 min",
    "dettaglio": "0 ricevute"
   },
   {
    "sezione": "feed",
    "nome": "san-pasquale-foto",
    "stato": "giallo",
-   "valore": "1517 min",
+   "valore": "1680 min",
    "dettaglio": "37 foto"
   },
   {
    "sezione": "build",
    "nome": "sito vs origine",
    "stato": "ok",
-   "valore": "main.a939d859.js / main.a939d859.js",
+   "valore": "main.8c92e816.js / main.8c92e816.js",
    "dettaglio": ""
   },
   {
    "sezione": "prerender",
    "nome": "snapshot vs vivo",
    "stato": "ok",
-   "valore": "main.a939d859.js / main.a939d859.js",
+   "valore": "main.8c92e816.js / main.8c92e816.js",
    "dettaglio": ""
   },
   {
    "sezione": "prerender",
    "nome": "bot allineato",
    "stato": "ok",
-   "valore": "main.a939d859.js",
+   "valore": "main.8c92e816.js",
    "dettaglio": ""
   },
   {
@@ -153,14 +153,14 @@
    "nome": "critici",
    "stato": "ok",
    "valore": "0",
-   "dettaglio": "4 controlli"
+   "dettaglio": "5 controlli"
   },
   {
    "sezione": "mail",
    "nome": "allarmi",
    "stato": "giallo",
    "valore": "5",
-   "dettaglio": "2026-11-13T18:35:58.701Z"
+   "dettaglio": "2026-11-13T21:05:57.564Z"
   },
   {
    "sezione": "sentinella",
@@ -181,7 +181,7 @@
    "nome": "run rossi (2h)",
    "stato": "ok",
    "valore": "1 isolati",
-   "dettaglio": "qa (una volta sola: race nota)"
+   "dettaglio": "warm-pages (una volta sola: race nota)"
   }
  ]
 }
