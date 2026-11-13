@@ -1,11 +1,11 @@
 {
-  "generato": "2026-11-12T22:15:52.266Z",
+  "generato": "2026-11-13T10:15:54.444Z",
   "controlli": 56,
   "critici": 0,
-  "alti": 3,
-  "medi": 0,
+  "alti": 2,
+  "medi": 1,
   "bassi": 0,
-  "qaRunRegistrato": false,
-  "qaRunDettaglio": "run 43315526852",
+  "qaRunRegistrato": true,
+  "qaRunDettaglio": "run 43325220212",
   "fonte": "audit interno (Mac) con token di regia"
 }
