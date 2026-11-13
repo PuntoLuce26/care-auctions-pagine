@@ -1,18 +1,18 @@
 {
  "meta": {
   "titolo": "NPL's — crediti in sofferenza e crediti in procedura (dati veri dal PVP)",
-  "generatoIl": "2026-11-12T12:56:44.062Z",
-  "aggiornato": "2026-11-12",
+  "generatoIl": "2026-11-13T12:23:20.986Z",
+  "aggiornato": "2026-11-13",
   "fonte": "PVP — Portale delle Vendite Pubbliche, Ministero della Giustizia (pvp.giustizia.it)",
   "query": "tipoLotto=VALORI-CREDITI",
   "licenza": "Dati pubblici del PVP (Portale delle Vendite Pubbliche, Ministero della Giustizia). Riuso consentito per finalità informative con citazione della fonte; nessun dato personale oltre a quanto già pubblico nel bando.",
   "metodo": "Classificazione conservativa dal testo pubblico del bando: NPL/sofferenza solo se dichiarati; crediti fiscali e titoli/quote esclusi (classi diverse, non NPL). Valore nominale solo se scritto nel bando.",
   "totale": 259,
-  "dichiaratoPVP": 1134,
+  "dichiaratoPVP": 1150,
   "esclusi": {
    "non-credito": 22,
-   "titoli-e-quote": 442,
-   "credito-fiscale": 411
+   "titoli-e-quote": 444,
+   "credito-fiscale": 425
   },
   "copertura": {
    "importo": {
@@ -36,8 +36,8 @@
    "NPL": 4
   },
   "perStato": {
-   "conclusa-esito-non-pubblicato": 211,
-   "in-programma": 25,
+   "conclusa-esito-non-pubblicato": 212,
+   "in-programma": 24,
    "deserta": 19,
    "aggiudicata": 4
   },
@@ -59,7 +59,7 @@
   "province": 39,
   "sommaPrezzoBase": 377362980,
   "freschezza": {
-   "ultimaRaccolta": "2026-11-12",
+   "ultimaRaccolta": "2026-11-13",
    "dataLottoPiuRecente": "2027-01-14",
    "dataLottoPiuVecchio": "2024-01-12"
   },
