@@ -33,15 +33,14 @@
       "contactPoint": [
         {
           "@type": "ContactPoint",
-          "contactType": "press",
+          "contactType": "customer support",
           "email": "info@careauctions.co",
           "url": "https://careauctions.co/chi-siamo#stampa",
           "availableLanguage": [
             "it",
             "en"
           ],
-          "areaServed": "IT",
-          "telephone": "+39 352 291 9919"
+          "areaServed": "IT"
         }
       ],
       "knowsAbout": [
