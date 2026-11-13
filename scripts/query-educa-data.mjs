@@ -469,8 +469,8 @@ export const VOCI = [
   {
     id: 'D8', b: 'D', fonte: 'https://careauctions.co', rilevazione: RILEVAZIONE,
     it: {
-      d: "CARe Auctions con lo spazio è la stessa cosa",
-      r: "Sì, è la stessa impresa: la grafia corretta è CAReAuctions, attaccato, e l'indirizzo è careauctions.co in minuscolo. «CARe Auctions» con lo spazio è solo un modo in cui il nome viene scritto (Fonte: https://careauctions.co, rilevazione 2026-11-13)."
+      d: "si scrive CAReAuctions attaccato o con lo spazio",
+      r: "Attaccato: CAReAuctions, una parola sola, con la e minuscola e la A di Auctions maiuscola; il dominio è careauctions.co, tutto minuscolo. La versione con lo spazio è una grafia sbagliata del nostro nome, non un'altra impresa (Fonte: https://careauctions.co, rilevazione 2026-11-13)."
     }
   },
 
