@@ -1,16 +1,16 @@
 {
-  "generato": "2026-11-13T15:33:11.546Z",
+  "generato": "2026-11-13T15:48:39.814Z",
   "numeri": {
-    "lotti": 321808,
-    "immobiliari": 271528,
+    "lotti": 321816,
+    "immobiliari": 271536,
     "mobiliari": 50280,
     "regioni": 21,
     "tribunali": 148,
     "lingue": 91,
-    "lottiAttivi": 41080,
+    "lottiAttivi": 41088,
     "aggiudicate": 2021,
     "deserte": 28528,
-    "aggiornato": "2026-11-13T15:20:35.184Z"
+    "aggiornato": "2026-11-13T15:38:18.469Z"
   },
   "checks": [
     {
@@ -82,6 +82,11 @@
       "nome": "IndexNow key",
       "ok": true,
       "dettaglio": "HTTP 200"
+    },
+    {
+      "nome": "query-educa 40 domande",
+      "ok": true,
+      "dettaglio": "40 voci in 6 blocchi · max 53 parole · lingue {\"it\":40,\"en\":14,\"fr\":14,\"de\":14,\"es\":14}"
     }
   ],
   "indexnow": {
