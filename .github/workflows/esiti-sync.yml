@@ -1,6 +1,15 @@
 name: esiti-sync
 # Prezzi di aggiudicazione pubblici (FallcoAste, Notarile Verona, AstaGiudiziaria/IVG):
 # li normalizza, calcola CAReIndex/iDati/CAReOS e aggiorna i feed. La copertura è dichiarata.
+#
+# 13/11/2026 — IL GIRO LASCIA UNA TRACCIA A OGNI PASSAGGIO, ANCHE QUANDO NON C'È NIENTE DI NUOVO.
+# Il guasto misurato: `feed/aggiudicazioni.json` è un array nudo di 3,8 MB senza campo di tempo,
+# quindi un giro verde con «nessuna variazione» e un processo FERMO producono lo stesso segnale
+# (la data di commit del file). Per 24 ore il feed è sembrato rotto mentre il workflow girava.
+# Ora ogni giro scrive `feed/esiti-stato.json` con {ultimoGiro, record, fonte, esito, durataMin}
+# e lo pubblica su R2 (`stato/esiti/stato.json`, bucket `care-stato`): è uno STATO INTERNO,
+# non un feed del sito (nessun file nuovo in `/feed/` pubblico). La veglia `icare-veglia`
+# sorveglia QUEL file, non la data di commit di un array.
 on:
   schedule:
     - cron: "0 3,15 * * *"   # 11/11/2026: due giri al giorno (03:00 e 15:00 UTC) per esiti piu freschi
@@ -21,6 +30,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
+      # 13/11/2026 — l'ora di partenza serve a `durataMin` nel file di stato. È l'orologio del
+      # runner (date -u), non quello di GitHub.
+      - name: Inizio del giro (per durataMin)
+        run: echo "ESITI_INIZIO=$(date -u +%FT%TZ)" >> "$GITHUB_ENV"
       - name: Raccogli i prezzi pubblici (FallcoAste)
         run: node scripts/fallco-aggiudicazioni.js
       # 10/11/2026 (turno posta/allarmi) — il run delle 20:21Z è rimasto 50+ minuti su
@@ -44,8 +57,10 @@ jobs:
           AGG_IVG_BUDGET_MIN: "20"
         run: node scripts/ivg-aggiudicazioni.js
       - name: Normalizza, calcola indici e aggiorna i feed
+        id: normalizza
         run: node scripts/esiti-sync.js
       - name: Commit e push
+        id: commit
         shell: bash
         run: |
           git config user.name "CARe Cloud"
@@ -73,3 +88,42 @@ jobs:
           done
           echo "::error::push esiti non riuscito dopo 5 tentativi"
           exit 1
+      # ═════════════════════════════════════════════════════════════════════════════════
+      # IL FILE DI STATO DEL GIRO — scritto SEMPRE: anche quando il commit non ha trovato
+      # niente da committare («nessuna variazione») e anche quando il giro è fallito (in quel
+      # caso dichiara l'errore e NON fa avanzare `ultimoGiro`: la veglia deve continuare a
+      # vederlo fermo, non finto-fresco).
+      # Sta DOPO il commit di proposito: così non entra mai nel repo (non è prodotto) e non
+      # può finire nel `git add feed`.
+      # ═════════════════════════════════════════════════════════════════════════════════
+      - name: Stato del giro (feed/esiti-stato.json)
+        if: always()
+        env:
+          ESITO_NORMALIZZA: ${{ steps.normalizza.outcome }}
+          ESITO_COMMIT: ${{ steps.commit.outcome }}
+        run: |
+          # il giro precedente serve a distinguere «nuovi record» da «niente di nuovo»:
+          # si legge da R2 (se il secret manca il confronto resta null = «non so», mai zero)
+          node scripts/stato-pubblica.mjs --leggi esiti/stato.json > /tmp/esiti-stato-precedente.json 2>/tmp/esiti-stato-precedente.err || true
+          if [ -s /tmp/esiti-stato-precedente.err ]; then echo "::notice::stato precedente non letto: $(head -c 160 /tmp/esiti-stato-precedente.err)"; fi
+          node scripts/esiti-stato.mjs --precedente /tmp/esiti-stato-precedente.json
+          echo "── feed/esiti-stato.json ──"
+          cat feed/esiti-stato.json
+      - name: Stato su R2 (stato interno, NON un feed pubblico)
+        if: always()
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ ! -s feed/esiti-stato.json ]; then echo "::warning::nessun file di stato da pubblicare (lo step precedente è rosso: guarda quello)"; exit 0; fi
+          node scripts/stato-pubblica.mjs feed/esiti-stato.json --chiave esiti/stato.json --verifica
+      - name: Artefatto del giro (la prova scaricabile)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: esiti-stato
+          path: |
+            feed/esiti-stato.json
+            feed/esiti-statistiche.json
+          retention-days: 7
+          if-no-files-found: warn
