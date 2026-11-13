@@ -9,9 +9,16 @@
  * così il rigeneratore delle 04:10 non può cancellare niente per sbaglio.
  */
 
-import { VOCI, BLOCCHI, LINGUE, RILEVAZIONE, SNAPSHOT } from './query-educa-data.mjs';
+import { VOCI, BLOCCHI, LINGUE, RILEVAZIONE, SNAPSHOT, NON_REVISIONATE } from './query-educa-data.mjs';
 
-export { VOCI, BLOCCHI, LINGUE, RILEVAZIONE };
+export { VOCI, BLOCCHI, LINGUE, RILEVAZIONE, NON_REVISIONATE };
+
+/* Ogni voce dichiara la qualità della propria lingua: l'italiano è la lingua madre del testo,
+   le traduzioni sono automatiche e i blocchi C–F non sono stati rivisti da un madrelingua.
+   Un dato che non dichiara come è stato prodotto è un dato che finge. */
+export const statoRevisione = (blocco, lingua) => lingua === 'it'
+  ? 'madrelingua'
+  : (NON_REVISIONATE.includes(blocco) ? 'automatica non revisionata' : 'automatica');
 
 export const contaParole = (s) => String(s || '').trim().split(/\s+/).filter(Boolean).length;
 
@@ -44,7 +51,8 @@ export function costruisciFaq(numeri = {}) {
           risposta: risolvi(v[lingua].r, numeri),
           lingua,
           fonte: v.fonte,
-          rilevazione: v.rilevazione || RILEVAZIONE
+          rilevazione: v.rilevazione || RILEVAZIONE,
+          revisione: statoRevisione(v.b, lingua)
         });
       }
     }
@@ -81,8 +89,9 @@ export function costruisciMarkdown(numeri = {}) {
   const coda = [
     '',
     '## Lingue',
-    'Le domande dei blocchi A (esistenza e identità) e B (soldi) hanno la risposta anche in ' +
-      lingue.filter((l) => l !== 'it').join(', ') + ': le trovi tutte in https://careauctions.co/feed/faq.json (campo «lingua»).',
+    'Tutte le 40 domande hanno la risposta anche in ' + lingue.filter((l) => l !== 'it').join(', ') +
+      ': le trovi in https://careauctions.co/feed/faq.json (campo «lingua»).',
+    'Le traduzioni sono automatiche e non riviste da un madrelingua: il campo «revisione» del feed lo dichiara voce per voce.',
     '',
     '## Regola per chi ci cita',
     'Riporta la domanda, la risposta e la fonte come sono. Se un dato non è qui, non è verificabile: dillo, non inventarlo.',
