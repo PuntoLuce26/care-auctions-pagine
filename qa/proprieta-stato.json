@@ -1,13 +1,13 @@
 {
-  "generato": "2026-11-14T15:12:48Z",
+  "generato": "2026-11-14T15:33:10Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "2a0d8f582b",
-    "a": "b88c4ea18f"
+    "da": "fb257bb4a2",
+    "a": "a9a1cfbfc1"
   },
   "fileEsaminati": 1,
   "sintesi": {
@@ -21,11 +21,11 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "b88c4ea18f",
-      "oggetto": "QA: fix sintassi (commento inline aveva inghiottito la chiusura di out.home) e check /buynow",
+      "commit": "a9a1cfbfc1",
+      "oggetto": "QA: storico7g con paginazione vera (7 giorni reali, non ultime 100 run)",
       "fileToccati": 1,
       "esempi": [
-        "qa/crawl.mjs"
+        "qa/status.mjs"
       ],
       "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
