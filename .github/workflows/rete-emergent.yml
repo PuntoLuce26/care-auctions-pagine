@@ -14,8 +14,9 @@ jobs:
         with: {node-version: "22"}
       - run: npm install --no-save playwright@latest
       - run: npx playwright install --with-deps chromium
-      - name: Gate HTTP/HTML
-        run: node rete/emergent-plus.mjs
+      - name: Gate HTTP/HTML + stato
+        env: {ONLY: emergent}
+        run: node rete/collaudo.mjs
       - name: Gate DOM renderizzato
         run: node rete/emergent-plus-dom.mjs
       - if: always()
