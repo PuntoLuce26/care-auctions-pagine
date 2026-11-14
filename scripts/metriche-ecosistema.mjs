@@ -27,6 +27,8 @@ const UA = 'Mozilla/5.0 (compatible; CARe-metriche/1.0; +https://careauctions.co
 const BASE = 'https://careauctions.co';
 const OUT = process.env.OUT_DIR || '.';
 const ora = new Date().toISOString();
+fs.mkdirSync(path.join(OUT, 'feed'), { recursive: true });
+fs.mkdirSync(path.join(OUT, 'metriche'), { recursive: true });
 
 async function kv(ns, key) {
   if (!CF) return null;
@@ -41,14 +43,19 @@ async function kv(ns, key) {
 
 async function kvKeys(ns, prefix) {
   if (!CF) return [];
+  const tutte = [];
+  let cursor = null;
   try {
-    const r = await fetch(`https://api.cloudflare.com/client/v4/accounts/${ACCOUNT}/storage/kv/namespaces/${ns}/keys?prefix=${encodeURIComponent(prefix)}&limit=1000`, {
-      headers: { Authorization: `Bearer ${CF}` },
-    });
-    if (!r.ok) return [];
-    const j = await r.json();
-    return (j.result || []).map(x => x.name);
-  } catch { return []; }
+    do {
+      const u = `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT}/storage/kv/namespaces/${ns}/keys?prefix=${encodeURIComponent(prefix)}&limit=1000` + (cursor ? `&cursor=${encodeURIComponent(cursor)}` : '');
+      const r = await fetch(u, { headers: { Authorization: `Bearer ${CF}` } });
+      if (!r.ok) break;
+      const j = await r.json();
+      tutte.push(...(j.result || []).map(x => x.name));
+      cursor = j.result_info && j.result_info.cursor ? j.result_info.cursor : null;
+    } while (cursor && tutte.length < 20000);
+    return tutte;
+  } catch { return tutte; }
 }
 
 async function r2(key) {
@@ -94,10 +101,14 @@ try {
   if (Object.keys(pv).length) {
     const s7 = sommaGiorni(pv, 7), s30 = sommaGiorni(pv, 30);
     const b7 = sommaGiorni(bt, 7), b30 = sommaGiorni(bt, 30);
-    const giorniTraffico = Object.keys(pv).sort().slice(-30).map(d => ({ data: d, pv: pv[d], bot: bt[d] || 0 }));
-    fs.writeFileSync(path.join(OUT, 'feed/traffico.json'), JSON.stringify({ generatoIl: ora, fonte: 'KV STATS — pv: e bt: (edge)', nota: 'Aggregato per giorno: pageview e bot. Non e il RUM per pagina, che resta interno.', giorni: giorniTraffico }, null, 2) + '\n');
+    const uv7 = {};
+    for (let i = 0; i < 7; i++) { const d = new Date(Date.now() - i * 86400000).toISOString().slice(0, 10); uv7[d] = (await kvKeys(KV_STATS, 'uv:' + d + ':')).length; }
+    const uvOggi = uv7[oggi] || 0;
+    const uv7tot = Object.values(uv7).reduce((a, b) => a + b, 0);
+    const giorniTraffico = Object.keys(pv).sort().slice(-30).map(d => ({ data: d, pv: pv[d], bot: bt[d] || 0, uv: uv7[d] || 0 }));
+    fs.writeFileSync(path.join(OUT, 'feed/traffico.json'), JSON.stringify({ generatoIl: ora, fonte: 'KV STATS — pv:, uv: e bt: (edge)', nota: 'Aggregato per giorno: pageview, utenti unici (hash giornaliero, 30 giorni) e bot. Non e il RUM per pagina, che resta interno.', giorni: giorniTraffico }, null, 2) + '\n');
     metriche.traffico = {
-      valore: { oggi: pv[oggi] ?? null, ultimi7g: s7.somma, ultimi30g: s30.giorniConDato >= 15 ? s30.somma : null, bot7g: b7.somma, bot30g: b30.giorniConDato >= 15 ? b30.somma : null },
+      valore: { oggi: pv[oggi] ?? null, uv_oggi: uvOggi, ultimi7g: s7.somma, uv_7g: uv7tot, ultimi30g: s30.giorniConDato >= 15 ? s30.somma : null, bot7g: b7.somma, bot30g: b30.giorniConDato >= 15 ? b30.somma : null },
       unita: 'visualizzazioni (pageview)',
       stato: s7.giorniConDato >= 5 ? 'parziale' : 'non_misurato',
       fonte: 'KV STATS — chiavi pv: e bt: (edge)',
@@ -199,11 +210,64 @@ try {
 }
 
 /* ---------- NON MISURATE (dichiarate, mai stimate) ---------- */
-metriche.conversione = { valore: null, unita: '%', stato: 'non_misurato', fonte: 'pratiche / signup', aggiornato: ora, nota: 'Nessun evento di conversione tracciato: da strumentare.' };
-metriche.churn = { valore: null, unita: '%', stato: 'non_misurato', fonte: 'abbonamenti', aggiornato: ora, nota: 'Nessun dato abbonamenti: da strumentare.' };
-metriche.nps = { valore: null, unita: 'punti', stato: 'non_misurato', fonte: 'survey', aggiornato: ora, nota: 'Nessun survey: da creare.' };
-metriche.cac = { valore: null, unita: 'EUR', stato: 'non_misurato', fonte: 'spesa / lead', aggiornato: ora, nota: 'Spesa e lead non collegati: da strumentare.' };
-for (const k of ['conversione', 'churn', 'nps', 'cac']) nonMisurate.push(k);
+/* ---------- CONVERSIONE (conteggi reali da KV) ---------- */
+try {
+  const utenti = await kvKeys(KV_TRAFFICO, 'utente:');
+  const chiaviPr = (await kvKeys(KV_TRAFFICO, 'pratica:')).filter(k => /^pratica:CR-/.test(k));
+  let reali = 0, test = 0, ult7 = 0;
+  const limite7 = Date.now() - 7 * 86400000;
+  for (const k of chiaviPr) {
+    const raw = await kv(KV_TRAFFICO, k);
+    if (!raw) continue;
+    let d; try { d = JSON.parse(raw); } catch { continue; }
+    if (d.test === true) { test++; continue; }
+    reali++;
+    if (d.creataAt && new Date(d.creataAt).getTime() >= limite7) ult7++;
+  }
+  metriche.conversione = {
+    valore: { account_totali: utenti.length, pratiche_totali: chiaviPr.length, pratiche_reali: reali, pratiche_test: test, pratiche_7g: ult7, tasso_pct: null },
+    unita: 'conteggi / %',
+    stato: 'parziale',
+    fonte: 'KV TRAFFICO — utente: e pratica: (timestamp creataAt)',
+    aggiornato: ora,
+    copertura: `${utenti.length} account, ${chiaviPr.length} pratiche (${reali} reali, ${test} test)`,
+    nota: 'Conteggi reali, non tasso: manca l abbinamento visita→evento. Nessuna pratica reale negli ultimi 7 giorni.',
+  };
+} catch (e) {
+  metriche.conversione = { valore: null, stato: 'non_misurato', fonte: 'KV utente/pratica', nota: String(e.message || e) };
+  nonMisurate.push('conversione');
+}
+
+/* ---------- CHURN (popolazione abbonamenti) ---------- */
+try {
+  const abbonamenti = await kvKeys(KV_TRAFFICO, 'abbonamento:');
+  metriche.churn = { valore: { abbonati_attivi: abbonamenti.length, churn_pct: null }, unita: '%', stato: 'parziale', fonte: 'KV TRAFFICO — abbonamento:', aggiornato: ora, copertura: `${abbonamenti.length} abbonamenti`, nota: 'Nessun abbonamento attivo: il churn non è applicabile (0/0), non è 0%.' };
+} catch (e) {
+  metriche.churn = { valore: null, stato: 'non_misurato', fonte: 'KV abbonamento', nota: String(e.message || e) };
+  nonMisurate.push('churn');
+}
+
+/* ---------- NPS (survey /nps) ---------- */
+try {
+  const chiaviNps = await kvKeys(KV_STATS, 'nps:');
+  const voti = [];
+  for (const k of chiaviNps) { const raw = await kv(KV_STATS, k); if (!raw) continue; try { const d = JSON.parse(raw); if (Number.isInteger(Number(d.voto))) voti.push(Number(d.voto)); } catch {} }
+  if (voti.length) {
+    const prom = voti.filter(v => v >= 9).length, det = voti.filter(v => v <= 6).length;
+    const nps = Math.round(100 * (prom - det) / voti.length);
+    metriche.nps = { valore: { risposte: voti.length, nps, promotori: prom, detrattori: det }, unita: 'punti', stato: 'misurato', fonte: 'KV STATS — nps: (survey /nps)', aggiornato: ora, copertura: `${voti.length} risposte`, nota: 'NPS calcolato sulle risposte reali.' };
+  } else {
+    metriche.nps = { valore: { risposte: 0, nps: null }, unita: 'punti', stato: 'non_misurato', fonte: 'KV STATS — nps: (survey /nps)', aggiornato: ora, copertura: '0 risposte', nota: 'Lo strumento è attivo su https://careauctions.co/nps: il numero arriva con la prima risposta.' };
+    nonMisurate.push('nps');
+  }
+} catch (e) {
+  metriche.nps = { valore: null, stato: 'non_misurato', fonte: 'KV nps', nota: String(e.message || e) };
+  nonMisurate.push('nps');
+}
+
+/* ---------- CAC (serve spesa marketing + lead) ---------- */
+metriche.cac = { valore: null, unita: 'EUR', stato: 'non_misurato', fonte: 'spesa marketing / lead', aggiornato: ora, nota: 'Nessun registro di spesa marketing: il CAC non è calcolabile. Non invento un denominatore.' };
+nonMisurate.push('cac');
 
 const stato = {
   generatoIl: ora,
