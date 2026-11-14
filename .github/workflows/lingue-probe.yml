@@ -1,0 +1,42 @@
+name: lingue-probe
+# Sonda temporanea: quali motori di traduzione sono raggiungibili dal runner cloud.
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Prova Workers AI via REST (llama) e il worker (m2m100)
+        env:
+          CF: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          REGIA: ${{ secrets.REGIA_KEY }}
+        run: |
+          node - <<'JS'
+          const ACCT = 'd5d20864ee7f83c32c9eeb5fcbda6edb';
+          const T = 'Santa Teresa Gallura, San Pasquale — 259.000 € in BuyNow · CAReAuctions';
+          const MODS = ['@cf/meta/llama-3.1-8b-instruct', '@cf/meta/llama-3.3-70b-instruct-fp8-fast', '@cf/mistralai/mistral-small-3.1-24b-instruct'];
+          (async () => {
+            console.log('CF token presente:', !!process.env.CF, '| REGIA presente:', !!process.env.REGIA);
+            for (const m of MODS) {
+              try {
+                const r = await fetch(`https://api.cloudflare.com/client/v4/accounts/${ACCT}/ai/run/${m}`, {
+                  method: 'POST', headers: { Authorization: 'Bearer ' + process.env.CF, 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ messages: [{ role: 'user', content: 'Translate to Irish (Gaeilge). Output only the translation.\n' + T }], max_tokens: 200, temperature: 0 })
+                });
+                const j = await r.json();
+                console.log('REST', m, '->', r.status, JSON.stringify(j).slice(0, 300));
+              } catch (e) { console.log('REST', m, 'ERR', e.message); }
+            }
+            // worker: m2m100 (per confermare il difetto) — chiave di regia dal secret
+            try {
+              const r = await fetch('https://icare-ai.misty-mode-1cbc.workers.dev', {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ azione: 'traduci', chiave: process.env.REGIA, testi: [T], da: 'it', a: 'ga' })
+              });
+              console.log('WORKER m2m100 ->', r.status, (await r.text()).slice(0, 300));
+            } catch (e) { console.log('WORKER ERR', e.message); }
+          })();
+          JS
