@@ -1,72 +1,28 @@
-name: uptime
-# 5.928 — monitor esterno indipendente dal nostro worker e dal Mac.
-# Se sito, rotte o feed non rispondono (o la build non è allineata) il job fallisce:
-# GitHub manda la mail. Nessun secret, nessun costo.
+name: uptime-probe
+# SLI continuo: una misura ogni 15 min, storico 7 giorni su R2 stato/uptime/stato.json.
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*/15 * * * *"
   workflow_dispatch:
+
 permissions:
   contents: read
+
 concurrency:
-  group: uptime
+  group: uptime-probe
   cancel-in-progress: false
+
 jobs:
-  check:
+  probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 6
+    timeout-minutes: 5
     steps:
-      - name: Sito, rotte e feed
-        shell: bash
-        run: |
-          set -u
-          UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36"
-          fail=0
-          check() {
-            local url="$1" min="${2:-200}" code size
-            for i in 1 2; do
-              code=$(curl -s -o /tmp/body -w "%{http_code}" -m 25 -A "$UA" "$url" || echo 000)
-              size=$(wc -c < /tmp/body | tr -d ' ')
-              if [ "$code" = "200" ] && [ "$size" -ge "$min" ]; then
-                echo "OK  $url  HTTP $code  ${size}B"; return 0
-              fi
-              sleep 5
-            done
-            echo "::error::KO $url  HTTP $code  ${size}B (atteso 200, min ${min}B)"
-            fail=1
-          }
-          check "https://careauctions.co/" 3000
-          check "https://careauctions.co/indice" 3000
-          check "https://careauctions.co/osservatorio" 3000
-          check "https://careauctions.co/dati" 3000
-                    check "https://puntoluce26.github.io/care-auctions-pagine/feed/statistiche.json" 200
-          check "https://puntoluce26.github.io/care-auctions-pagine/feed/esiti-monitor.json" 500
-          check "https://puntoluce26.github.io/care-auctions-pagine/feed/npl.json" 1000
-          echo "--- allineamento build ---"
-          h1=$(curl -s -m 25 -A "$UA" "https://careauctions.co/" | grep -o 'main\.[a-f0-9]*\.js' | head -1 || true)
-          h2=$(curl -s -m 25 -A "$UA" "https://care-aste.emergent.host/" | grep -o 'main\.[a-f0-9]*\.js' | head -1 || true)
-          echo "sito=$h1  origine=$h2"
-          if [ -z "$h1" ] || [ "$h1" != "$h2" ]; then
-            echo "::error::build non allineata tra sito e origine app"; fail=1
-          fi
-          exit "$fail"
-      - name: Freschezza feed (max 3 ore)
-        shell: bash
-        run: |
-          python3 - <<'PY'
-          import json, urllib.request, datetime
-          UA = {'User-Agent': 'Mozilla/5.0 (compatible; CARe uptime)'}
-          try:
-              d = json.load(urllib.request.urlopen(urllib.request.Request('https://puntoluce26.github.io/care-auctions-pagine/feed/statistiche.json', headers=UA), timeout=25))
-              ts = d.get('aggiornato') or d.get('generato')
-              t = datetime.datetime.fromisoformat(str(ts).replace('Z', '+00:00'))
-              age = (datetime.datetime.now(datetime.timezone.utc) - t).total_seconds() / 3600
-              print(f'feed aggiornato: {ts} ({age:.1f} ore fa)')
-              if age > 3:
-                  raise SystemExit('::error::feed fermo da più di 3 ore')
-          except SystemExit:
-              raise
-          except Exception as e:
-              print('::error::feed non leggibile:', e)
-              raise SystemExit(1)
-          PY
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Misura
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          BASE: https://careauctions.co
+        run: node scripts/uptime-probe.mjs
