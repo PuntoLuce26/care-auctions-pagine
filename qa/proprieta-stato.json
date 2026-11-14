@@ -1,13 +1,13 @@
 {
-  "generato": "2026-11-14T16:14:20Z",
+  "generato": "2026-11-14T17:07:05Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "d04b3640f5",
-    "a": "5fd1df4723"
+    "da": "4026dd1d94",
+    "a": "a7fef64d44"
   },
   "fileEsaminati": 1,
   "sintesi": {
@@ -21,11 +21,11 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "5fd1df4723",
-      "oggetto": "Metriche: workflow daily cruscotto unico (R2 completo + feed pubblico)",
+      "commit": "a7fef64d44",
+      "oggetto": "Rete+ v1: workflow dei 4 gate con collaudo",
       "fileToccati": 1,
       "esempi": [
-        ".github/workflows/metriche-ecosistema.yml"
+        ".github/workflows/rete-plus.yml"
       ],
       "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
