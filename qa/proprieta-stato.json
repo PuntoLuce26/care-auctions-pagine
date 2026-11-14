@@ -1,13 +1,13 @@
 {
-  "generato": "2026-11-14T14:09:44Z",
+  "generato": "2026-11-14T14:26:43Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "bbc4309c02",
-    "a": "89030836e0"
+    "da": "728a4a1248",
+    "a": "f8eac83c81"
   },
   "fileEsaminati": 1,
   "sintesi": {
@@ -21,8 +21,8 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "89030836e0",
-      "oggetto": "prerender: dispatch QA solo se non c e un QA negli ultimi 10 minuti",
+      "commit": "f8eac83c81",
+      "oggetto": "prerender: debounce QA 30 min (allineato allo schedule; stop cancellazioni da dispatch ravvicinati)",
       "fileToccati": 1,
       "esempi": [
         ".github/workflows/prerender.yml"
