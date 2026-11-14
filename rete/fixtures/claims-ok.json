@@ -1,0 +1,7 @@
+{
+  "claim": [
+    {"id": "qa-7g", "valore": "95,6%", "fonte": "https://careauctions.co/qa/stato.json", "misurato": "2026-11-14"},
+    {"id": "copertura", "valore": "100/153", "fonte": "https://careauctions.co/feed/esiti-monitor.json", "misurato": "2026-11-14"}
+  ],
+  "nonMisurate": ["conversione", "churn", "nps", "cac"]
+}
