@@ -1,0 +1,23 @@
+name: rete-green2
+on:
+  schedule: [{cron: "20 6 * * *"}]
+  workflow_dispatch:
+permissions: {contents: read}
+concurrency: {group: rete-green2, cancel-in-progress: false}
+jobs:
+  green2:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: "22"}
+      - env: {ONLY: green2}
+        run: node rete/collaudo.mjs
+      - name: Report corretto
+        run: node rete/green2-plus.mjs rete/fixtures/claims-ok.json --correggi
+      - run: test -f green2-report-corretto.md && grep -q "Claim verificati" green2-report-corretto.md
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with: {name: rete-green2-stato, path: "rete/stato.json
+green2-report-corretto.md", retention-days: 30}
