@@ -94,6 +94,8 @@ try {
   if (Object.keys(pv).length) {
     const s7 = sommaGiorni(pv, 7), s30 = sommaGiorni(pv, 30);
     const b7 = sommaGiorni(bt, 7), b30 = sommaGiorni(bt, 30);
+    const giorniTraffico = Object.keys(pv).sort().slice(-30).map(d => ({ data: d, pv: pv[d], bot: bt[d] || 0 }));
+    fs.writeFileSync(path.join(OUT, 'feed/traffico.json'), JSON.stringify({ generatoIl: ora, fonte: 'KV STATS — pv: e bt: (edge)', nota: 'Aggregato per giorno: pageview e bot. Non e il RUM per pagina, che resta interno.', giorni: giorniTraffico }, null, 2) + '\n');
     metriche.traffico = {
       valore: { oggi: pv[oggi] ?? null, ultimi7g: s7.somma, ultimi30g: s30.giorniConDato >= 15 ? s30.somma : null, bot7g: b7.somma, bot30g: b30.giorniConDato >= 15 ? b30.somma : null },
       unita: 'visualizzazioni (pageview)',
