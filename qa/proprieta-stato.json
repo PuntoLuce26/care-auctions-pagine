@@ -1,13 +1,13 @@
 {
-  "generato": "2026-11-14T08:51:57Z",
+  "generato": "2026-11-14T10:08:07Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "c693ed6b0f",
-    "a": "4374a54bc3"
+    "da": "52e1823066",
+    "a": "97f01dd2ef"
   },
   "fileEsaminati": 1,
   "sintesi": {
@@ -21,11 +21,11 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "4374a54bc3",
-      "oggetto": "annuncio: workflow rigenerazione lingue",
+      "commit": "97f01dd2ef",
+      "oggetto": "qa: ferma il circuito qa-mail-qa (niente sveglia, niente cancel, stato solo con report fresco)",
       "fileToccati": 1,
       "esempi": [
-        ".github/workflows/annuncio-lingue.yml"
+        ".github/workflows/qa.yml"
       ],
       "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
@@ -38,7 +38,7 @@
     "fonte": "file locale /tmp/care-workers/veglia/worker.js",
     "motivo": null,
     "nota": null,
-    "totaleProcessi": 17,
+    "totaleProcessi": 18,
     "duplicati": []
   },
   "rodaggio": {
