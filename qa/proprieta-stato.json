@@ -1,13 +1,13 @@
 {
-  "generato": "2026-11-14T17:51:07Z",
+  "generato": "2026-11-14T17:52:47Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "a83ada4e43",
-    "a": "9d776ac65e"
+    "da": "95d44c29f2",
+    "a": "59b2dac050"
   },
   "fileEsaminati": 1,
   "sintesi": {
@@ -21,11 +21,11 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "9d776ac65e",
-      "oggetto": "Rete+ EMERGENT: artifact DOM renderizzato",
+      "commit": "59b2dac050",
+      "oggetto": "Rete+ v2: README con 4 workflow indipendenti, black, report corretto, DOM",
       "fileToccati": 1,
       "esempi": [
-        ".github/workflows/rete-emergent.yml"
+        "rete/README.md"
       ],
       "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
