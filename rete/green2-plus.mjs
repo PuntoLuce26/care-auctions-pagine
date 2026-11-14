@@ -6,6 +6,7 @@
  */
 import fs from 'node:fs';
 const file = process.argv[2];
+const correggi = process.argv.includes('--correggi');
 if (!file || !fs.existsSync(file)) { console.error('GREEN2+: claims mancanti'); process.exit(2); }
 let d; try { d = JSON.parse(fs.readFileSync(file, 'utf8')); } catch (e) { console.error('GREEN2+: JSON non valido'); process.exit(2); }
 const claims = Array.isArray(d.claim) ? d.claim : [];
@@ -27,5 +28,13 @@ for (const c of claims.slice(0, 5)) {
   } catch { checks.push({ nome: (c.id || 'claim') + ': fonte raggiungibile', ok: false }); }
 }
 const verdetto = checks.every(c => c.ok) ? 'PASS' : 'FAIL';
-console.log(JSON.stringify({ gate: 'GREEN2+', claims: claims.length, checks, verdetto }, null, 2));
+if (correggi) {
+  const buone = claims.filter(c => c.valore != null && /^https:\/\//i.test(String(c.fonte || '')) && !Number.isNaN(new Date(c.misurato).getTime()));
+  const scartate = claims.filter(c => !buone.includes(c));
+  const md = ['# Report corretto da GREEN2+', '', '> Generato il ' + new Date().toISOString() + '. Solo i claim con valore, fonte https e data sono mantenuti.', '', '## Claim verificati', '', '| id | valore | fonte | misurato |', '|---|---|---|---|',
+    ...buone.map(c => '| ' + (c.id || '') + ' | ' + String(c.valore) + ' | ' + c.fonte + ' | ' + c.misurato + ' |'),
+    '', '## Claim rimossi', '', ...(scartate.length ? scartate.map(c => '- ' + (c.id || 'senza id') + ': fonte o data mancante') : ['- nessuno']), '', '## Non misurate dichiarate', '', ...((d.nonMisurate || []).map(x => '- ' + x))].join('\n') + '\n';
+  fs.writeFileSync('green2-report-corretto.md', md);
+}
+console.log(JSON.stringify({ gate: 'GREEN2+', claims: claims.length, checks, verdetto, corretto: correggi ? 'green2-report-corretto.md' : null }, null, 2));
 process.exit(verdetto === 'PASS' ? 0 : 2);
