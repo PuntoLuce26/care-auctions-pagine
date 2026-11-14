@@ -1,13 +1,13 @@
 {
-  "generato": "2026-11-14T17:52:47Z",
+  "generato": "2026-11-14T17:54:24Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "95d44c29f2",
-    "a": "59b2dac050"
+    "da": "cd75092c6c",
+    "a": "ec0f10883a"
   },
   "fileEsaminati": 1,
   "sintesi": {
@@ -21,11 +21,11 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "59b2dac050",
-      "oggetto": "Rete+ v2: README con 4 workflow indipendenti, black, report corretto, DOM",
+      "commit": "ec0f10883a",
+      "oggetto": "Metriche: conversione reale (pratiche/UV) e CAC da registro spesa",
       "fileToccati": 1,
       "esempi": [
-        "rete/README.md"
+        "scripts/metriche-ecosistema.mjs"
       ],
       "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
