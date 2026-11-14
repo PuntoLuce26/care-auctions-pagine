@@ -1,13 +1,13 @@
 {
-  "generato": "2026-11-14T10:08:07Z",
+  "generato": "2026-11-14T10:16:52Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "52e1823066",
-    "a": "97f01dd2ef"
+    "da": "867d27aba4",
+    "a": "61ec7a205b"
   },
   "fileEsaminati": 1,
   "sintesi": {
@@ -21,11 +21,11 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "97f01dd2ef",
-      "oggetto": "qa: ferma il circuito qa-mail-qa (niente sveglia, niente cancel, stato solo con report fresco)",
+      "commit": "61ec7a205b",
+      "oggetto": "qa: audit interno 2026-11-14T10:15:50.122Z",
       "fileToccati": 1,
       "esempi": [
-        ".github/workflows/qa.yml"
+        "qa/audit-interno.json"
       ],
       "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
