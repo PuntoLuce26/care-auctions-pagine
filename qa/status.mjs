@@ -2,6 +2,39 @@
 // Lo legge il workflow del Secondo Cervello per registrare ogni giro.
 import { readFileSync, writeFileSync } from 'node:fs';
 
+// 14/11/2026 — tasso di successo reale: i run CANCELLED sono duplicati di trigger
+// messi in coda, non verdetti QA. Il tasso si calcola sui run eseguiti (success+failure).
+async function storico7g() {
+  const repo = process.env.GITHUB_REPOSITORY;
+  const tok = process.env.GITHUB_TOKEN;
+  if (!repo || !tok) return null;
+  try {
+    const r = await fetch(`https://api.github.com/repos/${repo}/actions/workflows/qa.yml/runs?per_page=100`, {
+      headers: { Authorization: `Bearer ${tok}`, Accept: 'application/vnd.github+json', 'User-Agent': 'care-qa' },
+    });
+    if (!r.ok) return null;
+    const j = await r.json();
+    const since = Date.now() - 7 * 86400000;
+    const runs = (j.workflow_runs || []).filter(x => x.conclusion && new Date(x.created_at).getTime() >= since);
+    const c = { success: 0, failure: 0, cancelled: 0, other: 0 };
+    for (const x of runs) {
+      if (x.conclusion === 'success') c.success++;
+      else if (x.conclusion === 'failure') c.failure++;
+      else if (x.conclusion === 'cancelled') c.cancelled++;
+      else c.other++;
+    }
+    const eseguiti = c.success + c.failure;
+    const totale = runs.length;
+    return {
+      finestraGiorni: 7,
+      totale,
+      ...c,
+      tassoSuccessoEseguiti: eseguiti ? +(100 * c.success / eseguiti).toFixed(1) : null,
+      tassoSuccessoGrezzo: totale ? +(100 * c.success / totale).toFixed(1) : null,
+    };
+  } catch { return null; }
+}
+
 let report;
 try { report = JSON.parse(readFileSync('qa/out/report.json', 'utf8')); }
 catch (e) { console.error('stato: report non leggibile'); process.exit(0); }
@@ -15,6 +48,7 @@ const issues = (report.issues || []).slice(0, 120).map(i => ({
   suggestion: String(i.suggestion || '').slice(0, 240)
 }));
 
+const storico = await storico7g();
 const seo = report.seo || {};
 const logs = report.logs || {};
 const stato = {
@@ -27,6 +61,7 @@ const stato = {
   durationSec: report.durationSec,
   build: report.build,
   summary: report.summary,
+  storico7g: storico,
   issues,
   routes: (report.routes || []).map(r => ({
     route: r.route, viewport: r.viewport, http: r.http, text: r.text,
@@ -50,4 +85,18 @@ const stato = {
 };
 
 writeFileSync('qa/stato.json', JSON.stringify(stato, null, 2) + '\n', 'utf8');
+if (storico) {
+  const righe = [
+    '## QA — ultimi 7 giorni',
+    '',
+    `- Run totali: **${storico.totale}** — success ${storico.success}, failure ${storico.failure}, cancelled ${storico.cancelled}`,
+    `- Tasso sui run **eseguiti** (success+failure): **${storico.tassoSuccessoEseguiti}%**`,
+    `- Tasso grezzo (include cancellati): ${storico.tassoSuccessoGrezzo}%`,
+    '',
+    'I run cancellati sono duplicati di trigger messi in coda, non verdetti QA: non contano nel tasso eseguito.'
+  ].join('\n') + '\n';
+  writeFileSync('qa/out/storico7g.md', righe, 'utf8');
+  console.log(righe);
+}
+
 console.log('stato scritto: qa/stato.json', stato.summary);
