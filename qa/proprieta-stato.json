@@ -1,13 +1,13 @@
 {
-  "generato": "2026-11-14T06:42:16Z",
+  "generato": "2026-11-14T06:56:28Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "bb294041c9",
-    "a": "35b101ea67"
+    "da": "4f70aa527a",
+    "a": "3bc44e11c3"
   },
   "fileEsaminati": 1,
   "sintesi": {
@@ -21,11 +21,11 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "35b101ea67",
-      "oggetto": "feed: gsc.json aggiornato (2026-11-14T06:41:22.738Z)",
+      "commit": "3bc44e11c3",
+      "oggetto": "feed: bing.json aggiornato (2026-11-14T06:55:14.727Z)",
       "fileToccati": 1,
       "esempi": [
-        "feed/gsc.json"
+        "feed/bing.json"
       ],
       "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
