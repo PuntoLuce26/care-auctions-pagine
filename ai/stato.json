@@ -1,16 +1,16 @@
 {
-  "generato": "2026-11-13T16:01:27.924Z",
+  "generato": "2026-11-14T11:25:54.581Z",
   "numeri": {
-    "lotti": 321827,
-    "immobiliari": 271547,
-    "mobiliari": 50280,
+    "lotti": 321892,
+    "immobiliari": 271611,
+    "mobiliari": 50281,
     "regioni": 21,
     "tribunali": 148,
     "lingue": 91,
-    "lottiAttivi": 41097,
+    "lottiAttivi": 40222,
     "aggiudicate": 2021,
     "deserte": 28528,
-    "aggiornato": "2026-11-13T16:00:27.882Z"
+    "aggiornato": "2026-11-14T11:21:30.363Z"
   },
   "checks": [
     {
@@ -96,7 +96,7 @@
     {
       "nome": "query-educa 40 domande",
       "ok": true,
-      "dettaglio": "40 voci in 6 blocchi · max 53 parole · lingue {\"it\":40,\"en\":14,\"fr\":14,\"de\":14,\"es\":14}"
+      "dettaglio": "40 voci in 6 blocchi · max 53 parole · lingue {\"it\":40,\"en\":40,\"fr\":40,\"de\":40,\"es\":40}"
     }
   ],
   "indexnow": {
