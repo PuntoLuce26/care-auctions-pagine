@@ -1,37 +1,43 @@
 {
-  "generatoIl": "2026-11-14T17:08:50.953Z",
-  "fonte": "KV STATS — pv: e bt: (edge)",
-  "nota": "Aggregato per giorno: pageview e bot. Non e il RUM per pagina, che resta interno.",
+  "generatoIl": "2026-11-14T17:29:23.564Z",
+  "fonte": "KV STATS — pv:, uv: e bt: (edge)",
+  "nota": "Aggregato per giorno: pageview, utenti unici (hash giornaliero, 30 giorni) e bot. Non e il RUM per pagina, che resta interno.",
   "giorni": [
     {
       "data": "2026-11-09",
       "pv": 4595,
-      "bot": 9480
+      "bot": 9480,
+      "uv": 0
     },
     {
       "data": "2026-11-10",
       "pv": 2432,
-      "bot": 13944
+      "bot": 13944,
+      "uv": 0
     },
     {
       "data": "2026-11-11",
       "pv": 1996,
-      "bot": 19562
+      "bot": 19562,
+      "uv": 71
     },
     {
       "data": "2026-11-12",
       "pv": 2074,
-      "bot": 17954
+      "bot": 17954,
+      "uv": 392
     },
     {
       "data": "2026-11-13",
       "pv": 3670,
-      "bot": 15803
+      "bot": 15803,
+      "uv": 495
     },
     {
       "data": "2026-11-14",
-      "pv": 2656,
-      "bot": 12175
+      "pv": 2706,
+      "bot": 12410,
+      "uv": 433
     }
   ]
 }
