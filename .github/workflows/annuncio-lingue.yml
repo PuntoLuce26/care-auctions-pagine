@@ -1,0 +1,68 @@
+name: annuncio-lingue
+# 14/11/2026 — Rigenera le lingue dell'annuncio San Pasquale che il traduttore ha reso illeggibili.
+# Catena dei motori: llama via Workers AI (azione `traduci-llm`) → m2m100 → inglese dichiarato.
+# La verifica è dentro lo script: si scrive nel feed SOLO un titolo con «BuyNow» e «259».
+# Tutto in cloud: nessun passaggio dal Mac. La sitemap-buynow.xml dell'edge legge questo feed
+# e si aggiorna da sola (le lingue con titolo sano entrano, le altre restano fuori).
+on:
+  workflow_dispatch:
+    inputs:
+      lingue:
+        description: "lingue separate da virgola"
+        required: false
+        default: "ga,gu,km,lv,mg,my,ne,kn"
+      motore:
+        description: "auto | llm | m2m100 | inglese"
+        required: false
+        default: "auto"
+permissions:
+  contents: write
+concurrency:
+  group: annuncio-lingue
+  cancel-in-progress: false
+jobs:
+  rigenera:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Rigenera e verifica (llm -> m2m100 -> inglese)
+        env:
+          REGIA_KEY: ${{ secrets.REGIA_KEY }}
+          LINGUE: ${{ github.event.inputs.lingue }}
+          MOTORE: ${{ github.event.inputs.motore }}
+        run: node scripts/annuncio-lingue.mjs
+      - name: "Commit e push (merge -X ours: vince la run sui file generati)"
+        shell: bash
+        run: |
+          git config user.name "CARe Cloud"
+          git config user.email "cloud@careauctions.co"
+          git add feed/annuncio-san-pasquale-i18n.json feed/annuncio-san-pasquale-i18n-report.json
+          if git diff --cached --quiet; then echo "nessuna variazione"; exit 0; fi
+          git commit -m "annuncio: lingue rigenerate (llm -> m2m100 -> inglese) $(date -u +%FT%TZ)"
+          for i in 1 2 3 4 5; do
+            git fetch -q origin main
+            if git merge -q --no-edit -X ours FETCH_HEAD; then
+              if git push -q origin HEAD:main; then echo "push ok (tentativo $i)"; exit 0; fi
+            else
+              git merge --abort 2>/dev/null || true
+            fi
+            sleep 5
+          done
+          echo "::error::push fallito dopo 5 tentativi"; exit 1
+      - name: Prova sull'artefatto (le 8 pagine servite)
+        shell: bash
+        run: |
+          sleep 20
+          for L in $(echo "${{ github.event.inputs.lingue }}" | tr ',' ' '); do
+            T=$(curl -s -A "Mozilla/5.0" "https://careauctions.co/$L/buynow/san-pasquale" | grep -o '<title[^>]*>[^<]*' | head -1 | sed 's/<title[^>]*>//')
+            case "$T" in
+              *BuyNow*259*) echo "OK   $L  $T" ;;
+              *)            echo "KO   $L  $T" ;;
+            esac
+          done
