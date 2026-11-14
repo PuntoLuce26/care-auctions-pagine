@@ -1,13 +1,13 @@
 {
-  "generato": "2026-11-14T14:27:40Z",
+  "generato": "2026-11-14T14:46:14Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "b1e445c0a9",
-    "a": "186bfb85df"
+    "da": "cf81b19856",
+    "a": "633c87b018"
   },
   "fileEsaminati": 1,
   "sintesi": {
@@ -21,8 +21,8 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "186bfb85df",
-      "oggetto": "QA: home_links accetta URL assoluti (falso ALTO: la home linka https://careauctions.co/...)",
+      "commit": "633c87b018",
+      "oggetto": "QA: home_links accetta qualsiasi forma del link (relativo/assoluto/slash finale) — stop falso ALTO",
       "fileToccati": 1,
       "esempi": [
         "qa/crawl.mjs"
