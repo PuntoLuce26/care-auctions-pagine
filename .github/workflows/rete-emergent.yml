@@ -18,7 +18,12 @@ jobs:
         env: {ONLY: emergent}
         run: node rete/collaudo.mjs
       - name: Gate DOM renderizzato
-        run: node rete/emergent-plus-dom.mjs
+        run: node rete/emergent-plus-dom.mjs > rete/emergent-dom.json
       - if: always()
         uses: actions/upload-artifact@v4
-        with: {name: rete-emergent-stato, path: rete/stato.json, retention-days: 30}
+        with:
+          name: rete-emergent-stato
+          path: |
+            rete/stato.json
+            rete/emergent-dom.json
+          retention-days: 30
