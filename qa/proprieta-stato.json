@@ -1,13 +1,13 @@
 {
-  "generato": "2026-11-14T15:02:22Z",
+  "generato": "2026-11-14T15:12:48Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "785622cd17",
-    "a": "71a3a3b214"
+    "da": "2a0d8f582b",
+    "a": "b88c4ea18f"
   },
   "fileEsaminati": 1,
   "sintesi": {
@@ -21,8 +21,8 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "71a3a3b214",
-      "oggetto": "QA: home_links verifica il CTA /buynow (la home con ?qa= linka /buynow, non /buynow/san-pasquale)",
+      "commit": "b88c4ea18f",
+      "oggetto": "QA: fix sintassi (commento inline aveva inghiottito la chiusura di out.home) e check /buynow",
       "fileToccati": 1,
       "esempi": [
         "qa/crawl.mjs"
