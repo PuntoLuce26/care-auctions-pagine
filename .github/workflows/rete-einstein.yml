@@ -1,0 +1,19 @@
+name: rete-einstein
+on:
+  schedule: [{cron: "15 6 * * *"}]
+  workflow_dispatch:
+permissions: {contents: read}
+concurrency: {group: rete-einstein, cancel-in-progress: false}
+jobs:
+  einstein:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: "22"}
+      - env: {ONLY: einstein}
+        run: node rete/collaudo.mjs
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with: {name: rete-einstein-stato, path: rete/stato.json, retention-days: 30}
