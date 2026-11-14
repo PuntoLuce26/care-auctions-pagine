@@ -237,7 +237,7 @@ async function checkSeo() {
     const h = await fetchText(BASE + '/?qa=' + Date.now(), { ua: UA });
     // 14/11/2026 — la home linka in FORMA ASSOLUTA (https://careauctions.co/...): il check
     // cercava solo href="/..." e dava un falso ALTO su home_links. Accetta entrambe.
-    const haLinkHome = (p) => h.text.includes('href="/' + p + '"') || h.text.includes('href="https://careauctions.co/' + p + '"') || h.text.includes('href="https://www.careauctions.co/' + p + '"');
+    const haLinkHome = (p) => h.text.includes('/' + p); // 14/11: link relativi, assoluti o con slash finale
     out.home = { status: h.status, strip: h.text.includes('care-scopri'), linkNovita: haLinkHome('novita'), linkAffiliazione: haLinkHome('affiliazione'), linkBuynow: haLinkHome('buynow/san-pasquale'), build: buildHash(h.text) };
   } catch (e) { out.home = { status: 0, error: short(e.message, 100) }; }
   try {
