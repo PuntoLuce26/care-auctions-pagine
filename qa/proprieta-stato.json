@@ -1,13 +1,13 @@
 {
-  "generato": "2026-11-14T15:52:06Z",
+  "generato": "2026-11-14T16:14:20Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "f347c7076c",
-    "a": "dff20f7deb"
+    "da": "d04b3640f5",
+    "a": "5fd1df4723"
   },
   "fileEsaminati": 1,
   "sintesi": {
@@ -21,11 +21,11 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "dff20f7deb",
-      "oggetto": "QA: ripristinato report parsing (patch precedente lo aveva rimosso) + storico7g paginato vero",
+      "commit": "5fd1df4723",
+      "oggetto": "Metriche: workflow daily cruscotto unico (R2 completo + feed pubblico)",
       "fileToccati": 1,
       "esempi": [
-        "qa/status.mjs"
+        ".github/workflows/metriche-ecosistema.yml"
       ],
       "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
