@@ -1,0 +1,66 @@
+name: metriche-ecosistema
+# Cruscotto unico (14/11/2026): legge feed, R2, KV e QA, scrive metriche/stato.json
+# (privato, su R2) e feed/metriche-ecosistema.json (pubblico, senza cassa).
+# Regola: un dato assente resta non_misurato, mai stimato.
+on:
+  schedule:
+    - cron: "25 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: metriche-ecosistema
+  cancel-in-progress: false
+
+jobs:
+  metriche:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Costruisci il cruscotto
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: node scripts/metriche-ecosistema.mjs
+
+      - name: Pubblica il completo su R2 (privato)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: node scripts/stato-pubblica.mjs metriche/stato.json --verifica
+
+      - name: Artefatto del cruscotto
+        uses: actions/upload-artifact@v4
+        with:
+          name: metriche-ecosistema
+          path: |
+            metriche/stato.json
+            feed/metriche-ecosistema.json
+          retention-days: 30
+
+      - name: Committa il pubblico (senza cassa)
+        run: |
+          set -euo pipefail
+          git config user.name "CARe Metriche"
+          git config user.email "metriche@careauctions.co"
+          git add feed/metriche-ecosistema.json
+          if git diff --cached --quiet; then echo "nessuna variazione"; exit 0; fi
+          git commit -m "Metriche ecosistema $(date -u +%FT%TZ)"
+          for i in 1 2 3; do
+            git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            if git push; then echo "pubblicato"; exit 0; fi
+            sleep 4
+          done
+          echo "::error::push metriche fallito"; exit 1
+
+      - name: Riepilogo nel run
+        if: always()
+        run: |
+          if [ -f feed/metriche-ecosistema.json ]; then
+            node -e 'const j=require("./feed/metriche-ecosistema.json");for(const[k,v]of Object.entries(j.metriche))console.log(k.padEnd(20),v.stato,JSON.stringify(v.valore))'
+          fi
