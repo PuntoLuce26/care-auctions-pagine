@@ -19,5 +19,9 @@ jobs:
       - run: test -f green2-report-corretto.md && grep -q "Claim verificati" green2-report-corretto.md
       - if: always()
         uses: actions/upload-artifact@v4
-        with: {name: rete-green2-stato, path: "rete/stato.json
-green2-report-corretto.md", retention-days: 30}
+        with:
+          name: rete-green2-stato
+          path: |
+            rete/stato.json
+            green2-report-corretto.md
+          retention-days: 30
