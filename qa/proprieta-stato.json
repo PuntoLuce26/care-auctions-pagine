@@ -1,13 +1,13 @@
 {
-  "generato": "2026-11-14T17:31:29Z",
+  "generato": "2026-11-14T17:33:17Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "f15146e4d5",
-    "a": "b5ad5fe6a0"
+    "da": "85ceb0b583",
+    "a": "266af333f3"
   },
   "fileEsaminati": 1,
   "sintesi": {
@@ -21,11 +21,11 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "b5ad5fe6a0",
-      "oggetto": "Uptime: workflow probe 15 min",
+      "commit": "266af333f3",
+      "oggetto": "Metriche: uptime 7g da R2 + utenti unici/conversione/churn/NPS",
       "fileToccati": 1,
       "esempi": [
-        ".github/workflows/uptime.yml"
+        "scripts/metriche-ecosistema.mjs"
       ],
       "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
