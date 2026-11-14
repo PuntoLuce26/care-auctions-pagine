@@ -22,7 +22,7 @@ permissions:
 
 concurrency:
   group: qa
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   qa:
@@ -73,12 +73,12 @@ jobs:
       # Il file resta nel repo come copia congelata finché non lo si toglie; i lettori
       # (veglia, ai-sentinel, ronda, stato-unico, orchestra, ai-education, qa-sync) leggono da R2.
       - name: Scrivi lo stato del QA (niente commit)
-        if: always()
+        if: success()
         run: node qa/status.mjs
       # 12/11/2026 — lo stato del QA esce dal repo pubblico: va su R2 (care-stato) e si legge da lì.
       # Il commit sopra resta finché tutti i lettori non sono migrati (doppia scrittura).
       - name: Pubblica lo stato QA su R2
-        if: always()
+        if: success()
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: node scripts/stato-pubblica.mjs qa/stato.json --verifica
@@ -129,7 +129,9 @@ jobs:
       # mail -> qa/alert.mjs non partiva. Se qa gira (schedule 30 min + dispatch di
       # Emergent) e lo stato della posta è vecchio, qa sveglia mail-qa.
       - name: Sveglia mail-qa (se il monitor posta è fermo)
-        if: always()
+        # 14/11/2026 — DISATTIVATA: era il carburante del circuito qa ⇄ mail-qa.
+        # L'orologio della posta è la veglia (icare-veglia), non il QA.
+        if: ${{ false }}
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
