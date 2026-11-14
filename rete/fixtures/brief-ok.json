@@ -1,0 +1,10 @@
+{
+  "id": "RETE-VIDS-001",
+  "obiettivo": "Collaudare i 4 reel 4K prima della pubblicazione Instagram",
+  "artefatto": "/Users/gianlucagenco/Downloads/Instagram-4K/*.mp4",
+  "verifica": ["node rete/vids-plus.mjs /tmp/reel.mp4", "https://careauctions.co/qa/stato.json"],
+  "permessi": ["read-only"],
+  "scadenza": "2027-12-31",
+  "proprietario": "Sam iLuce iCARe",
+  "criteri": ["2160x3840", "30 fps", "muto", "H.264"]
+}
