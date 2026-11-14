@@ -9,13 +9,20 @@ async function storico7g() {
   const tok = process.env.GITHUB_TOKEN;
   if (!repo || !tok) return null;
   try {
-    const r = await fetch(`https://api.github.com/repos/${repo}/actions/workflows/qa.yml/runs?per_page=100`, {
-      headers: { Authorization: `Bearer ${tok}`, Accept: 'application/vnd.github+json', 'User-Agent': 'care-qa' },
-    });
-    if (!r.ok) return null;
-    const j = await r.json();
+    // 14/11/2026 — PAGINAZIONE VERA: una sola pagina da 100 copriva ~12 ore, non 7 giorni.
+    const tutte = [];
+    for (let pagina = 1; pagina <= 10; pagina++) {
+      const r = await fetch(`https://api.github.com/repos/${repo}/actions/workflows/qa.yml/runs?per_page=100&page=${pagina}`, {
+        headers: { Authorization: `Bearer ${tok}`, Accept: 'application/vnd.github+json', 'User-Agent': 'care-qa' },
+      });
+      if (!r.ok) break;
+      const j = await r.json();
+      const blocco = j.workflow_runs || [];
+      tutte.push(...blocco);
+      if (blocco.length < 100) break;
+    }
     const since = Date.now() - 7 * 86400000;
-    const runs = (j.workflow_runs || []).filter(x => x.conclusion && new Date(x.created_at).getTime() >= since);
+    const runs = tutte.filter(x => x.conclusion && new Date(x.created_at).getTime() >= since);
     const c = { success: 0, failure: 0, cancelled: 0, other: 0 };
     for (const x of runs) {
       if (x.conclusion === 'success') c.success++;
@@ -35,20 +42,6 @@ async function storico7g() {
   } catch { return null; }
 }
 
-let report;
-try { report = JSON.parse(readFileSync('qa/out/report.json', 'utf8')); }
-catch (e) { console.error('stato: report non leggibile'); process.exit(0); }
-
-const issues = (report.issues || []).slice(0, 120).map(i => ({
-  severity: i.severity,
-  type: i.type,
-  route: i.route || '',
-  viewport: i.viewport || '',
-  message: String(i.message || '').slice(0, 240),
-  suggestion: String(i.suggestion || '').slice(0, 240)
-}));
-
-const storico = await storico7g();
 const seo = report.seo || {};
 const logs = report.logs || {};
 const stato = {
