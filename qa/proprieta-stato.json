@@ -1,13 +1,13 @@
 {
-  "generato": "2026-11-14T17:07:05Z",
+  "generato": "2026-11-14T17:08:44Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "4026dd1d94",
-    "a": "a7fef64d44"
+    "da": "04d88ea48e",
+    "a": "c89ec2ac1c"
   },
   "fileEsaminati": 1,
   "sintesi": {
@@ -21,11 +21,11 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "a7fef64d44",
-      "oggetto": "Rete+ v1: workflow dei 4 gate con collaudo",
+      "commit": "c89ec2ac1c",
+      "oggetto": "Metriche: committa anche feed/traffico.json",
       "fileToccati": 1,
       "esempi": [
-        ".github/workflows/rete-plus.yml"
+        ".github/workflows/metriche-ecosistema.yml"
       ],
       "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
