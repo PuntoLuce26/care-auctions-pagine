@@ -1,9 +1,9 @@
 {
- "generato": "2026-11-14T11:36:00.245Z",
+ "generato": "2026-11-14T13:29:52.953Z",
  "semaforo": "giallo",
  "conteggi": {
-  "ok": 20,
-  "giallo": 4,
+  "ok": 21,
+  "giallo": 3,
   "rosso": 0,
   "non_verificabile": 0
  },
@@ -89,28 +89,28 @@
    "sezione": "feed",
    "nome": "statistiche",
    "stato": "ok",
-   "valore": "14 min",
-   "dettaglio": "321892 lotti"
+   "valore": "9 min",
+   "dettaglio": "321894 lotti"
   },
   {
    "sezione": "feed",
    "nome": "world",
    "stato": "giallo",
-   "valore": "2292 min",
+   "valore": "2406 min",
    "dettaglio": "33 paesi"
   },
   {
    "sezione": "feed",
    "nome": "ricevute",
    "stato": "ok",
-   "valore": "2657 min",
+   "valore": "2771 min",
    "dettaglio": "0 ricevute"
   },
   {
    "sezione": "feed",
    "nome": "san-pasquale-foto",
    "stato": "giallo",
-   "valore": "2530 min",
+   "valore": "2644 min",
    "dettaglio": "37 foto"
   },
   {
@@ -123,9 +123,9 @@
   {
    "sezione": "prerender",
    "nome": "snapshot vs vivo",
-   "stato": "giallo",
-   "valore": "main.1fa22cac.js / main.14cc4151.js",
-   "dettaglio": "drift: i crawler ricevono un bundle vecchio"
+   "stato": "ok",
+   "valore": "main.14cc4151.js / main.14cc4151.js",
+   "dettaglio": ""
   },
   {
    "sezione": "prerender",
@@ -159,8 +159,8 @@
    "sezione": "mail",
    "nome": "allarmi",
    "stato": "giallo",
-   "valore": "9",
-   "dettaglio": "2026-11-14T11:35:48.416Z"
+   "valore": "10",
+   "dettaglio": "2026-11-14T13:05:58.291Z"
   },
   {
    "sezione": "sentinella",
