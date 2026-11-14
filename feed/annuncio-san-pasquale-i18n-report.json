@@ -1,0 +1,176 @@
+{
+ "generatoIl": "2026-11-14T08:51:57.643Z",
+ "fonte": "Santa Teresa Gallura, San Pasquale — 259.000 € in BuyNow · CAReAuctions",
+ "motoreRichiesto": "auto",
+ "lingue": {
+  "ga": {
+   "lingua": "ga",
+   "motore": "inglese",
+   "ok": true,
+   "motivi": [
+    "llm → titolo: identico all'italiano",
+    "m2m100 → titolo: senza BuyNow"
+   ],
+   "tentativi": [
+    {
+     "modello": "@cf/meta/llama-3.1-8b-instruct",
+     "ok": false,
+     "errore": "5028: @cf/meta/infire-llama-3.1-8b-instruct was deprecated on 2026-05-30. See the model catalog for alternatives: https://developers.cloudflare.com/workers-ai/m"
+    },
+    {
+     "modello": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+     "ok": true,
+     "errore": null
+    }
+   ],
+   "titolo": "Santa Teresa Gallura, San Pasquale — €259,000 in BuyNow · CAReAuctions",
+   "prima": "Tá tús á chur amárach le hobair athchóirithe atá beartaithe ar 22 scoil a thóg Western Building Systems"
+  },
+  "gu": {
+   "lingua": "gu",
+   "motore": "llm:@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+   "ok": true,
+   "motivi": [],
+   "tentativi": [
+    {
+     "modello": "@cf/meta/llama-3.1-8b-instruct",
+     "ok": false,
+     "errore": "5028: @cf/meta/infire-llama-3.1-8b-instruct was deprecated on 2026-05-30. See the model catalog for alternatives: https://developers.cloudflare.com/workers-ai/m"
+    },
+    {
+     "modello": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+     "ok": true,
+     "errore": null
+    }
+   ],
+   "titolo": "સાન્તા તેરેસા ગલુરા, સાન પાસ્ક્વાલે — 259.000 € in BuyNow · CAReAuctions",
+   "prima": "આ પણ વાંચો: આંતરરાષ્ટ્રીય ક્રિકેટ ટીમના કેપ્ટન વિરાટ કોહલીને હરાવ્યું"
+  },
+  "km": {
+   "lingua": "km",
+   "motore": "llm:@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+   "ok": true,
+   "motivi": [],
+   "tentativi": [
+    {
+     "modello": "@cf/meta/llama-3.1-8b-instruct",
+     "ok": false,
+     "errore": "5028: @cf/meta/infire-llama-3.1-8b-instruct was deprecated on 2026-05-30. See the model catalog for alternatives: https://developers.cloudflare.com/workers-ai/m"
+    },
+    {
+     "modello": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+     "ok": true,
+     "errore": null
+    }
+   ],
+   "titolo": "សាន់តា ទេរេសា ហ្គាលូរា សាន ប៉ាសូកាល់ — 259.000 € នៅ BuyNow · CAReAuctions",
+   "prima": "ហ្វេសប៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុកហ្ស៊ុក"
+  },
+  "lv": {
+   "lingua": "lv",
+   "motore": "inglese",
+   "ok": true,
+   "motivi": [
+    "llm → titolo: identico all'italiano",
+    "m2m100 → titolo: senza BuyNow"
+   ],
+   "tentativi": [
+    {
+     "modello": "@cf/meta/llama-3.1-8b-instruct",
+     "ok": false,
+     "errore": "5028: @cf/meta/infire-llama-3.1-8b-instruct was deprecated on 2026-05-30. See the model catalog for alternatives: https://developers.cloudflare.com/workers-ai/m"
+    },
+    {
+     "modello": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+     "ok": true,
+     "errore": null
+    }
+   ],
+   "titolo": "Santa Teresa Gallura, San Pasquale — €259,000 in BuyNow · CAReAuctions",
+   "prima": "Tādēļ ir svarīgi atcerēties, ka šāda veida zāles ir efektīvas, jo tās ir efektīvas un efektīvas."
+  },
+  "mg": {
+   "lingua": "mg",
+   "motore": "inglese",
+   "ok": true,
+   "motivi": [
+    "llm → titolo: identico all'italiano",
+    "m2m100 → titolo: lunghezza; titolo: ripetizione"
+   ],
+   "tentativi": [
+    {
+     "modello": "@cf/meta/llama-3.1-8b-instruct",
+     "ok": false,
+     "errore": "5028: @cf/meta/infire-llama-3.1-8b-instruct was deprecated on 2026-05-30. See the model catalog for alternatives: https://developers.cloudflare.com/workers-ai/m"
+    },
+    {
+     "modello": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+     "ok": true,
+     "errore": null
+    }
+   ],
+   "titolo": "Santa Teresa Gallura, San Pasquale — €259,000 in BuyNow · CAReAuctions",
+   "prima": "Nandritra ny herinandro vitsivitsy taorian'ny nanombohan'ny fiandohan'ny fiandohan'ny fiandohan'ny fiandohan'ny fiandohan'ny fiandohan'ny fiandohan'ny fiandohan'ny fiandohan'ny fiandohan'ny fiandohan'ny fiandohan'ny fiandohan'ny fiandohan'ny fiandohan'ny fiandohan'ny fiandohana."
+  },
+  "my": {
+   "lingua": "my",
+   "motore": "llm:@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+   "ok": true,
+   "motivi": [],
+   "tentativi": [
+    {
+     "modello": "@cf/meta/llama-3.1-8b-instruct",
+     "ok": false,
+     "errore": "5028: @cf/meta/infire-llama-3.1-8b-instruct was deprecated on 2026-05-30. See the model catalog for alternatives: https://developers.cloudflare.com/workers-ai/m"
+    },
+    {
+     "modello": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+     "ok": true,
+     "errore": null
+    }
+   ],
+   "titolo": "စန္တာတယ်ရီဆာ ဂါလူရာ၊ ဆန်ပါစ္ကွာလီ — 259.000 € in BuyNow · CAReAuctions",
+   "prima": "မူပိုင်ခွင့်ပြုချက်များကိုဖန်တီးရန်အဘယ်သူမျှမသတ်မှတ်ချက်များကိုဖန်တီးပါ။"
+  },
+  "ne": {
+   "lingua": "ne",
+   "motore": "llm:@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+   "ok": true,
+   "motivi": [],
+   "tentativi": [
+    {
+     "modello": "@cf/meta/llama-3.1-8b-instruct",
+     "ok": false,
+     "errore": "5028: @cf/meta/infire-llama-3.1-8b-instruct was deprecated on 2026-05-30. See the model catalog for alternatives: https://developers.cloudflare.com/workers-ai/m"
+    },
+    {
+     "modello": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+     "ok": true,
+     "errore": null
+    }
+   ],
+   "titolo": "सान्टा टेरेसा गालुरा, सान पास्कuale — 259.000 € मा BuyNow · CAReAuctions",
+   "prima": "महरा पक्राउपछि पूर्व माओवादी नेताको टिप्पणी– सम्पत्ति, यौन र सत्ताबारे दृष्टिकोणकै समीक्षा जरुरी"
+  },
+  "kn": {
+   "lingua": "kn",
+   "motore": "llm:@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+   "ok": true,
+   "motivi": [],
+   "tentativi": [
+    {
+     "modello": "@cf/meta/llama-3.1-8b-instruct",
+     "ok": false,
+     "errore": "5028: @cf/meta/infire-llama-3.1-8b-instruct was deprecated on 2026-05-30. See the model catalog for alternatives: https://developers.cloudflare.com/workers-ai/m"
+    },
+    {
+     "modello": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+     "ok": true,
+     "errore": null
+    }
+   ],
+   "titolo": "ಸಾಂಟಾ ಟೆರೆಸಾ ಗಲ್ಲುರಾ, ಸನ್ ಪಾಸ್ಕ್ವಾಲೆ — 259.000 € in BuyNow · CAReAuctions",
+   "prima": "ಇನ್ಫೋಗ್ರಾಫಿಕ್ಸ್ CT17ಸುದ್ದಿಮನರಂಜನೆಸೌಂದರ್ಯ ಸ್ಫರ್ಧೆಗಳುಕ್ರೀಡೆವಾಣಿಜ್ಯದೇಶವಿಜಯ ಕರ್ನಾಟಕ » ದೇಶ-ವಿದೇಶ » ದೇಶ » Subscribe to BuyNow"
+  }
+ }
+}
