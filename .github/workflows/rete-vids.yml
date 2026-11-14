@@ -1,0 +1,20 @@
+name: rete-vids
+on:
+  schedule: [{cron: "10 6 * * *"}]
+  workflow_dispatch:
+permissions: {contents: read}
+concurrency: {group: rete-vids, cancel-in-progress: false}
+jobs:
+  vids:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: "22"}
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - env: {ONLY: vids, FFMPEG: ffmpeg, FFPROBE: ffprobe}
+        run: node rete/collaudo.mjs
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with: {name: rete-vids-stato, path: rete/stato.json, retention-days: 30}
