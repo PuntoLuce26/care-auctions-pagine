@@ -1,20 +1,20 @@
 {
-  "generatoIl": "2026-11-14T16:14:20.871Z",
+  "generatoIl": "2026-11-14T17:08:50.953Z",
   "workflow": "metriche-ecosistema.yml",
   "regola": "un dato assente è non_misurato, mai stimato",
   "metriche": {
     "traffico": {
       "valore": {
-        "oggi": 2566,
-        "ultimi7g": 17333,
+        "oggi": 2656,
+        "ultimi7g": 17423,
         "ultimi30g": null,
-        "bot7g": 88282,
+        "bot7g": 88918,
         "bot30g": null
       },
       "unita": "visualizzazioni (pageview)",
       "stato": "parziale",
       "fonte": "KV STATS — chiavi pv: e bt: (edge)",
-      "aggiornato": "2026-11-14T16:14:20.871Z",
+      "aggiornato": "2026-11-14T17:08:50.953Z",
       "copertura": "6/7 giorni con dato; 6/30",
       "nota": "Pageview, non utenti unici. Il feed visite-rum risponde 403: la fonte vera è il KV dell'edge. Bot contati a parte."
     },
@@ -23,17 +23,17 @@
       "unita": "EUR",
       "stato": "misurato_riservato",
       "fonte": "KV TRAFFICO torre:cassa",
-      "aggiornato": "2026-11-14T16:14:20.871Z",
+      "aggiornato": "2026-11-14T17:08:50.953Z",
       "nota": "Valore disponibile nel cruscotto interno (R2 privato), non pubblicato."
     },
     "uptime_sli": {
       "valore": {
         "sito_http": 200,
-        "ttfb_sito_ms": 217,
-        "ttfb_origine_ms": 380,
+        "ttfb_sito_ms": 181,
+        "ttfb_origine_ms": 286,
         "qa_7g_eseguiti_pct": 95.6,
-        "qa_7g_grezzo_pct": 51.8,
-        "qa_7g_success": 172,
+        "qa_7g_grezzo_pct": 52.1,
+        "qa_7g_success": 174,
         "qa_7g_failure": 8,
         "qa_7g_cancelled": 152,
         "qa_summary": {
@@ -43,12 +43,12 @@
           "low": 3,
           "total": 3
         },
-        "qa_generated_at": "2026-11-14T16:00:10.602Z"
+        "qa_generated_at": "2026-11-14T16:49:25.169Z"
       },
       "unita": "stato / ms / %",
       "stato": "parziale",
       "fonte": "R2 stato/qa + stato/perf + probe HTTP",
-      "aggiornato": "2026-11-14T16:14:20.871Z",
+      "aggiornato": "2026-11-14T17:08:50.953Z",
       "copertura": "QA 7 giorni + probe singolo; uptime continuo non misurato",
       "nota": "Il tasso QA buono è quello sui run eseguiti (cancellati esclusi). Uptime/SLI continuo non è strumentato."
     },
@@ -61,7 +61,7 @@
       "unita": "tribunali",
       "stato": "parziale",
       "fonte": "feed esiti-monitor.json + tribunali.json",
-      "aggiornato": "2026-11-14T16:14:20.871Z",
+      "aggiornato": "2026-11-14T17:08:50.953Z",
       "copertura": "100/153",
       "nota": "Copertura dei tribunali con almeno un esito pubblicato; non è copertura di tutti i lotti."
     },
@@ -70,7 +70,7 @@
       "unita": "%",
       "stato": "non_misurato",
       "fonte": "pratiche / signup",
-      "aggiornato": "2026-11-14T16:14:20.871Z",
+      "aggiornato": "2026-11-14T17:08:50.953Z",
       "nota": "Nessun evento di conversione tracciato: da strumentare."
     },
     "churn": {
@@ -78,7 +78,7 @@
       "unita": "%",
       "stato": "non_misurato",
       "fonte": "abbonamenti",
-      "aggiornato": "2026-11-14T16:14:20.871Z",
+      "aggiornato": "2026-11-14T17:08:50.953Z",
       "nota": "Nessun dato abbonamenti: da strumentare."
     },
     "nps": {
@@ -86,7 +86,7 @@
       "unita": "punti",
       "stato": "non_misurato",
       "fonte": "survey",
-      "aggiornato": "2026-11-14T16:14:20.871Z",
+      "aggiornato": "2026-11-14T17:08:50.953Z",
       "nota": "Nessun survey: da creare."
     },
     "cac": {
@@ -94,7 +94,7 @@
       "unita": "EUR",
       "stato": "non_misurato",
       "fonte": "spesa / lead",
-      "aggiornato": "2026-11-14T16:14:20.871Z",
+      "aggiornato": "2026-11-14T17:08:50.953Z",
       "nota": "Spesa e lead non collegati: da strumentare."
     }
   },
