@@ -1,9 +1,13 @@
 {
- "aggiornato": "2026-11-13T21:24:59.202Z",
- "rossi": [
-  "warm-pages#21"
- ],
+ "aggiornato": "2026-11-14T01:32:08.295Z",
+ "rossi": [],
  "issue": [
+  "[QA] Aggiornamento 2026-11-14",
+  "[QA] Allarme mail: 7 segnalazioni",
+  "[QA] Allarme mail: 7 segnalazioni",
+  "[QA] Allarme mail: 7 segnalazioni",
+  "[QA] Allarme mail: 7 segnalazioni",
+  "[QA] Allarme mail: 6 segnalazioni",
   "[QA] Allarme mail: 5 segnalazioni",
   "[QA] Allarme mail: 5 segnalazioni",
   "[QA] Allarme mail: 3 segnalazioni",
@@ -17,13 +21,7 @@
   "[QA] Allarme mail: 8 segnalazioni",
   "[QA] Allarme mail: 7 segnalazioni",
   "[QA] Allarme mail: 5 segnalazioni",
-  "[QA] Allarme AI: 1 anomalie",
-  "[QA] Allarme mail: 8 segnalazioni",
-  "[QA] Allarme AI: 1 anomalie",
-  "[QA] Allarme mail: 8 segnalazioni",
-  "[QA] Allarme mail: 8 segnalazioni",
-  "[QA] Allarme mail: 8 segnalazioni",
-  "[QA] Allarme mail: 5 segnalazioni"
+  "[QA] Allarme AI: 1 anomalie"
  ],
  "ultimaMail": "2026-11-13T21:24:59.799Z"
 }
