@@ -97,7 +97,7 @@ jobs:
           echo "::error::push fallito"; exit 1
 
 
-      - name: QA dopo la pubblicazione (debounce 10 min)
+      - name: QA dopo la pubblicazione (debounce 30 min)
         if: always()
         run: |
           ULTIMO=$(curl -sS -H "Authorization: Bearer ${{ github.token }}" \
@@ -106,7 +106,7 @@ jobs:
           if [ -n "$ULTIMO" ]; then
             ETA=$(( ( $(date -u +%s) - $(date -u -d "$ULTIMO" +%s) ) / 60 ))
             echo "ultimo QA: $ULTIMO (${ETA} min fa)"
-            if [ "$ETA" -lt 10 ]; then echo "QA recente: salto il dispatch"; exit 0; fi
+            if [ "$ETA" -lt 30 ]; then echo "QA recente: salto il dispatch"; exit 0; fi
           fi
           curl -sS -X POST \
             -H "Authorization: Bearer ${{ github.token }}" \
