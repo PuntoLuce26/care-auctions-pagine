@@ -89,6 +89,7 @@ function sommaGiorni(mappa, giorni) {
 
 const metriche = {};
 const nonMisurate = [];
+let uv7Tot = null;
 
 /* ---------- TRAFFICO (KV STATS) ---------- */
 try {
@@ -105,6 +106,7 @@ try {
     for (let i = 0; i < 7; i++) { const d = new Date(Date.now() - i * 86400000).toISOString().slice(0, 10); uv7[d] = (await kvKeys(KV_STATS, 'uv:' + d + ':')).length; }
     const uvOggi = uv7[oggi] || 0;
     const uv7tot = Object.values(uv7).reduce((a, b) => a + b, 0);
+    uv7Tot = uv7tot;
     const giorniTraffico = Object.keys(pv).sort().slice(-30).map(d => ({ data: d, pv: pv[d], bot: bt[d] || 0, uv: uv7[d] || 0 }));
     fs.writeFileSync(path.join(OUT, 'feed/traffico.json'), JSON.stringify({ generatoIl: ora, fonte: 'KV STATS — pv:, uv: e bt: (edge)', nota: 'Aggregato per giorno: pageview, utenti unici (hash giornaliero, 30 giorni) e bot. Non e il RUM per pagina, che resta interno.', giorni: giorniTraffico }, null, 2) + '\n');
     metriche.traffico = {
@@ -230,14 +232,15 @@ try {
     reali++;
     if (d.creataAt && new Date(d.creataAt).getTime() >= limite7) ult7++;
   }
+  const tasso7 = (uv7Tot && ult7 >= 0) ? +(100 * ult7 / uv7Tot).toFixed(2) : null;
   metriche.conversione = {
-    valore: { account_totali: utenti.length, pratiche_totali: chiaviPr.length, pratiche_reali: reali, pratiche_test: test, pratiche_7g: ult7, tasso_pct: null },
+    valore: { account_totali: utenti.length, pratiche_totali: chiaviPr.length, pratiche_reali: reali, pratiche_test: test, pratiche_7g: ult7, visitatori_unici_7g: uv7Tot, tasso_7g_pct: tasso7 },
     unita: 'conteggi / %',
-    stato: 'parziale',
-    fonte: 'KV TRAFFICO — utente: e pratica: (timestamp creataAt)',
+    stato: tasso7 != null ? 'misurato' : 'parziale',
+    fonte: 'KV TRAFFICO — utente: e pratica: (timestamp creataAt) + KV STATS uv:',
     aggiornato: ora,
-    copertura: `${utenti.length} account, ${chiaviPr.length} pratiche (${reali} reali, ${test} test)`,
-    nota: 'Conteggi reali, non tasso: manca l abbinamento visita→evento. Nessuna pratica reale negli ultimi 7 giorni.',
+    copertura: `${utenti.length} account, ${chiaviPr.length} pratiche (${reali} reali, ${test} test), ${uv7Tot} visitatori unici`,
+    nota: 'Tasso aggregato: pratiche reali ultimi 7 giorni / visitatori unici 7 giorni. Non è attribuzione per singola visita. Zero pratiche reali = 0,00%, non un numero inventato.',
   };
 } catch (e) {
   metriche.conversione = { valore: null, stato: 'non_misurato', fonte: 'KV utente/pratica', nota: String(e.message || e) };
@@ -271,9 +274,22 @@ try {
   nonMisurate.push('nps');
 }
 
-/* ---------- CAC (serve spesa marketing + lead) ---------- */
-metriche.cac = { valore: null, unita: 'EUR', stato: 'non_misurato', fonte: 'spesa marketing / lead', aggiornato: ora, nota: 'Nessun registro di spesa marketing: il CAC non è calcolabile. Non invento un denominatore.' };
-nonMisurate.push('cac');
+/* ---------- CAC (spesa marketing + lead) ---------- */
+try {
+  const chiaviSpesa = await kvKeys(KV_TRAFFICO, 'spesa:marketing:');
+  let spesa = 0;
+  for (const k of chiaviSpesa) { const raw = await kv(KV_TRAFFICO, k); if (!raw) continue; try { const d = JSON.parse(raw); spesa += Number(d.importo || d.eur || 0) || 0; } catch {} }
+  const lead = metriche.conversione?.valore?.pratiche_reali || 0;
+  if (chiaviSpesa.length && lead > 0) {
+    metriche.cac = { valore: { spesa_eur: +spesa.toFixed(2), lead, cac_eur: +(spesa / lead).toFixed(2) }, unita: 'EUR', stato: 'misurato', fonte: 'KV TRAFFICO — spesa:marketing: / pratiche reali', aggiornato: ora, copertura: `${chiaviSpesa.length} voci di spesa`, nota: 'CAC = spesa marketing / pratiche reali.' };
+  } else {
+    metriche.cac = { valore: { spesa_eur: chiaviSpesa.length ? +spesa.toFixed(2) : null, lead, cac_eur: null }, unita: 'EUR', stato: 'non_misurato', fonte: 'KV TRAFFICO — spesa:marketing:', aggiornato: ora, copertura: `${chiaviSpesa.length} voci di spesa`, nota: 'Manca la spesa marketing (o i lead): il CAC non è calcolabile. Non invento un denominatore.' };
+    nonMisurate.push('cac');
+  }
+} catch (e) {
+  metriche.cac = { valore: null, stato: 'non_misurato', fonte: 'KV spesa marketing', nota: String(e.message || e) };
+  nonMisurate.push('cac');
+}
 
 const stato = {
   generatoIl: ora,
