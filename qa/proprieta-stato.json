@@ -1,13 +1,13 @@
 {
-  "generato": "2026-11-14T11:30:18Z",
+  "generato": "2026-11-14T14:09:44Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "9fa98baf83",
-    "a": "bc37d0e24b"
+    "da": "bbc4309c02",
+    "a": "89030836e0"
   },
   "fileEsaminati": 1,
   "sintesi": {
@@ -21,11 +21,11 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "bc37d0e24b",
-      "oggetto": "feed: OMI → CAReIndex (omi-indice.json)",
+      "commit": "89030836e0",
+      "oggetto": "prerender: dispatch QA solo se non c e un QA negli ultimi 10 minuti",
       "fileToccati": 1,
       "esempi": [
-        "feed/omi-indice.json"
+        ".github/workflows/prerender.yml"
       ],
       "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
