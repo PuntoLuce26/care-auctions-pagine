@@ -4,7 +4,7 @@
  * Contratto: node vids-plus.mjs <file|url>; exit 0 PASS, 2 FAIL.
  * Richiede ffprobe (CI) o ffmpeg (fallback locale).
  */
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -43,6 +43,18 @@ function probe() {
 }
 
 const info = probe();
+function blackSeconds() {
+  try {
+    const r = spawnSync(FFMPEG, ['-hide_banner', '-i', src, '-vf', 'blackdetect=d=0.5:pix_th=0.10', '-an', '-f', 'null', '-'], { encoding: 'utf8' });
+    return parseBlack(String(r.stderr || '') + String(r.stdout || ''));
+  } catch (e) { return parseBlack(String(e.stderr || '')); }
+  function parseBlack(txt) {
+    let somma = 0; const re = /black_start:([\d.]+)\s+black_end:([\d.]+)/g; let m;
+    while ((m = re.exec(txt))) somma += Math.max(0, Number(m[2]) - Number(m[1]));
+    return +somma.toFixed(2);
+  }
+}
+const nero = blackSeconds();
 const checks = [
   { nome: 'durata >= 3s', ok: info.duration >= 3 },
   { nome: 'verticale (h > w)', ok: info.height > info.width },
@@ -50,6 +62,7 @@ const checks = [
   { nome: '30 fps', ok: Math.abs(info.fps - 30) <= 0.6 },
   { nome: 'H.264', ok: String(info.codec || '').toLowerCase() === 'h264' },
   { nome: 'muto (IG)', ok: info.audio === 0 },
+  { nome: 'nessun black-frame >= 0,5s', ok: nero < 0.5, black_seconds: nero },
 ];
 const verdetto = checks.every(c => c.ok) ? 'PASS' : 'FAIL';
 console.log(JSON.stringify({ gate: 'VIDS+', src: src0, info, checks, verdetto }, null, 2));
