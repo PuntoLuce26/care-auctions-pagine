@@ -1,13 +1,13 @@
 {
-  "generato": "2026-11-13T22:17:03Z",
+  "generato": "2026-11-14T06:42:16Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "3b0d30aa52",
-    "a": "1f9f796775"
+    "da": "bb294041c9",
+    "a": "35b101ea67"
   },
   "fileEsaminati": 1,
   "sintesi": {
@@ -21,11 +21,11 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "1f9f796775",
-      "oggetto": "qa: audit interno 2026-11-13T22:15:53.861Z",
+      "commit": "35b101ea67",
+      "oggetto": "feed: gsc.json aggiornato (2026-11-14T06:41:22.738Z)",
       "fileToccati": 1,
       "esempi": [
-        "qa/audit-interno.json"
+        "feed/gsc.json"
       ],
       "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
@@ -58,6 +58,13 @@
     },
     {
       "giorno": "2026-11-13",
+      "violazioni": 0,
+      "senzaAgente": 1,
+      "duplicati": 0,
+      "pulito": false
+    },
+    {
+      "giorno": "2026-11-14",
       "violazioni": 0,
       "senzaAgente": 1,
       "duplicati": 0,
