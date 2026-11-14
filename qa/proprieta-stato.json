@@ -1,15 +1,15 @@
 {
-  "generato": "2026-11-14T17:48:54Z",
+  "generato": "2026-11-14T17:50:05Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "2ff7445c8d",
-    "a": "1482c624ab"
+    "da": "b2ddc2a4e6",
+    "a": "1b67ee6185"
   },
-  "fileEsaminati": 0,
+  "fileEsaminati": 1,
   "sintesi": {
     "violazioni": 0,
     "violazioniDaCommit": 0,
@@ -21,10 +21,12 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "1482c624ab",
-      "oggetto": "Rete+ GREEN2: artifact multilinea corretto",
-      "fileToccati": 0,
-      "esempi": [],
+      "commit": "1b67ee6185",
+      "oggetto": "Rete+ GREEN2: artifact path multilinea",
+      "fileToccati": 1,
+      "esempi": [
+        ".github/workflows/rete-green2.yml"
+      ],
       "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
   ],
