@@ -1,21 +1,21 @@
-# RETE+ v1 — i quattro servizi, con collaudo
+# RETE+ v2 — quattro servizi indipendenti, con collaudo
 
-Non è la rete 10/10: è la **v1 funzionante** dei quattro + mancanti, ognuno con un contratto e un collaudo che prova anche i casi cattivi.
+Quattro workflow separati, ognuno con il proprio runner e il proprio schedule. Non è più un unico workflow condiviso.
 
-| Servizio | Cosa fa | Comando | Esito |
+| Servizio | Workflow | Cosa fa | Test |
 |---|---|---|---|
-| **VIDS+** | QA video: 4K verticale, 30 fps, H.264, muto, durata | `node rete/vids-plus.mjs <file\|URL>` | 0 PASS / 2 FAIL |
-| **EINSTEIN+** | gate del brief: campi, verifica eseguibile, permessi, scadenza, placeholder | `node rete/einstein-plus.mjs <brief.json>` | 0 PASS / 2 FAIL |
-| **GREEN2+** | verificatore anti-invenzione: ogni numero ha valore, fonte https raggiungibile e data | `node rete/green2-plus.mjs <claims.json>` | 0 PASS / 2 FAIL |
-| **EMERGENT+** | gate post-publish sull'artefatto: build, BuyNow, CTA iShop, /cerca 200, 37 foto San Pasquale 200 | `node rete/emergent-plus.mjs` | 0 PASS / 2 FAIL |
+| **VIDS+** | `rete-vids.yml` | 4K verticale, 30 fps, H.264, muto, durata, **black-frame ≥0,5s** | 3 casi (buono, 720p+audio, nero) |
+| **EINSTEIN+** | `rete-einstein.yml` | brief: campi, verifica eseguibile, permessi, scadenza, placeholder | 2 casi (valido, rotto) |
+| **GREEN2+** | `rete-green2.yml` | claim con valore+fonte https+data; **genera `green2-report-corretto.md`** | 2 casi (validi, senza fonte) |
+| **EMERGENT+** | `rete-emergent.yml` | HTTP/HTML **e DOM renderizzato** (Playwright): CTA, banner, BuyNow, 37 foto, viewer, errori JS, overflow | produzione |
 
-`node rete/collaudo.mjs` esegue **7 casi** (buoni e cattivi) e la produzione, e scrive `rete/stato.json`. Workflow: `.github/workflows/rete-plus.yml` (daily 06:40 UTC + manuale).
+Stati: artefatti `rete-*-stato` su ogni run. Schedule: 06:10, 06:15, 06:20, 06:40 UTC.
 
-## Cosa non è ancora
+## Cosa resta
 
-- I quattro servizi condividono lo stesso runner: non sono ancora infrastrutture indipendenti.
-- VIDS+ v1 controlla metadati e audio, non black-frame/qualità percettiva.
-- GREEN2+ v1 controlla le fonti dichiarate, non riscrive il report.
-- EMERGENT+ v1 controlla HTTP/HTML, non il DOM renderizzato con Playwright.
+- **Ridondanza geografica/provider**: i quattro servizi sono indipendenti tra loro ma girano tutti su GitHub Actions. Una seconda infrastruttura (altro provider/regione) non è stata creata.
+- VIDS+ controlla i black-frame, non la qualità percettiva.
+- GREEN2+ produce un report corretto, non modifica il file originale.
+- EMERGENT+ DOM copre le rotte chiave, non ogni pagina delle 91 lingue.
 
-Questi limiti sono dichiarati: la rete resta **PARZIALE** finché non hanno storico e ridondanza.
+Questi limiti sono dichiarati: 4 servizi su 4, limiti tecnici chiusi; la rete 10/10 richiede la ridondanza, non un'altra patch.
