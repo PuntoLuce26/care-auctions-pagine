@@ -154,6 +154,9 @@ try {
 try {
   const qa = await r2('stato/qa/stato.json');
   const perf = await r2('stato/perf/stato.json');
+  const uptime = await r2('stato/uptime/stato.json');
+  const upChecks = Array.isArray(uptime?.checks) ? uptime.checks : [];
+  const upOk = upChecks.filter(c => Number(c.status) === 200).length;
   const t0 = Date.now();
   let http = null;
   try { const rs = await fetch(BASE + '/?metriche=' + Date.now(), { headers: { 'User-Agent': UA } }); http = rs.status; } catch {}
@@ -171,6 +174,9 @@ try {
       qa_7g_cancelled: q7?.cancelled ?? null,
       qa_summary: qa?.summary ?? null,
       qa_generated_at: qa?.generatedAt ?? null,
+      uptime_7g_pct: upChecks.length ? +(100 * upOk / upChecks.length).toFixed(2) : null,
+      uptime_checks_7g: upChecks.length,
+      uptime_ok_7g: upOk,
     },
     unita: 'stato / ms / %',
     stato: (http === 200 && q7) ? 'parziale' : 'non_misurato',
