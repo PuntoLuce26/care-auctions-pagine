@@ -2,14 +2,12 @@
 // Lo legge il workflow del Secondo Cervello per registrare ogni giro.
 import { readFileSync, writeFileSync } from 'node:fs';
 
-// 14/11/2026 — tasso di successo reale: i run CANCELLED sono duplicati di trigger
-// messi in coda, non verdetti QA. Il tasso si calcola sui run eseguiti (success+failure).
+// 14/11/2026 — PAGINAZIONE VERA: una sola pagina da 100 copriva ~12 ore, non 7 giorni.
 async function storico7g() {
   const repo = process.env.GITHUB_REPOSITORY;
   const tok = process.env.GITHUB_TOKEN;
   if (!repo || !tok) return null;
   try {
-    // 14/11/2026 — PAGINAZIONE VERA: una sola pagina da 100 copriva ~12 ore, non 7 giorni.
     const tutte = [];
     for (let pagina = 1; pagina <= 10; pagina++) {
       const r = await fetch(`https://api.github.com/repos/${repo}/actions/workflows/qa.yml/runs?per_page=100&page=${pagina}`, {
@@ -42,6 +40,20 @@ async function storico7g() {
   } catch { return null; }
 }
 
+let report;
+try { report = JSON.parse(readFileSync('qa/out/report.json', 'utf8')); }
+catch (e) { console.error('stato: report non leggibile'); process.exit(0); }
+
+const issues = (report.issues || []).slice(0, 120).map(i => ({
+  severity: i.severity,
+  type: i.type,
+  route: i.route || '',
+  viewport: i.viewport || '',
+  message: String(i.message || '').slice(0, 240),
+  suggestion: String(i.suggestion || '').slice(0, 240)
+}));
+
+const storico = await storico7g();
 const seo = report.seo || {};
 const logs = report.logs || {};
 const stato = {
