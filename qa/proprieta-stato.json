@@ -1,13 +1,13 @@
 {
-  "generato": "2026-11-14T08:47:15Z",
+  "generato": "2026-11-14T08:51:57Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "a140d2afdc",
-    "a": "7369117f8e"
+    "da": "c693ed6b0f",
+    "a": "4374a54bc3"
   },
   "fileEsaminati": 1,
   "sintesi": {
@@ -21,11 +21,11 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "7369117f8e",
-      "oggetto": "lingue: sonda motori di traduzione (temporanea)",
+      "commit": "4374a54bc3",
+      "oggetto": "annuncio: workflow rigenerazione lingue",
       "fileToccati": 1,
       "esempi": [
-        ".github/workflows/lingue-probe.yml"
+        ".github/workflows/annuncio-lingue.yml"
       ],
       "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
