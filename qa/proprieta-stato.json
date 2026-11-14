@@ -1,13 +1,13 @@
 {
-  "generato": "2026-11-14T14:26:43Z",
+  "generato": "2026-11-14T14:27:40Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "728a4a1248",
-    "a": "f8eac83c81"
+    "da": "b1e445c0a9",
+    "a": "186bfb85df"
   },
   "fileEsaminati": 1,
   "sintesi": {
@@ -21,11 +21,11 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "f8eac83c81",
-      "oggetto": "prerender: debounce QA 30 min (allineato allo schedule; stop cancellazioni da dispatch ravvicinati)",
+      "commit": "186bfb85df",
+      "oggetto": "QA: home_links accetta URL assoluti (falso ALTO: la home linka https://careauctions.co/...)",
       "fileToccati": 1,
       "esempi": [
-        ".github/workflows/prerender.yml"
+        "qa/crawl.mjs"
       ],
       "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
