@@ -1,0 +1,9 @@
+{
+  "id": "BRIEF-ROTTO",
+  "obiettivo": "Fare una cosa",
+  "artefatto": "TBD",
+  "permessi": ["tutto"],
+  "scadenza": "2020-01-01",
+  "proprietario": "Sam",
+  "criteri": ["basta che funzioni"]
+}
