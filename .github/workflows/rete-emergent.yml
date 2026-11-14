@@ -1,0 +1,23 @@
+name: rete-emergent
+on:
+  schedule: [{cron: "40 6 * * *"}]
+  workflow_dispatch:
+permissions: {contents: read}
+concurrency: {group: rete-emergent, cancel-in-progress: false}
+jobs:
+  emergent:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: "22"}
+      - run: npm install --no-save playwright@latest
+      - run: npx playwright install --with-deps chromium
+      - name: Gate HTTP/HTML
+        run: node rete/emergent-plus.mjs
+      - name: Gate DOM renderizzato
+        run: node rete/emergent-plus-dom.mjs
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with: {name: rete-emergent-stato, path: rete/stato.json, retention-days: 30}
