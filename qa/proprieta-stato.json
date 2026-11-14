@@ -1,13 +1,13 @@
 {
-  "generato": "2026-11-14T15:33:10Z",
+  "generato": "2026-11-14T15:52:06Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "fb257bb4a2",
-    "a": "a9a1cfbfc1"
+    "da": "f347c7076c",
+    "a": "dff20f7deb"
   },
   "fileEsaminati": 1,
   "sintesi": {
@@ -21,8 +21,8 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "a9a1cfbfc1",
-      "oggetto": "QA: storico7g con paginazione vera (7 giorni reali, non ultime 100 run)",
+      "commit": "dff20f7deb",
+      "oggetto": "QA: ripristinato report parsing (patch precedente lo aveva rimosso) + storico7g paginato vero",
       "fileToccati": 1,
       "esempi": [
         "qa/status.mjs"
