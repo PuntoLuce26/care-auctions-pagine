@@ -235,7 +235,10 @@ async function checkSeo() {
   // home umana + home bot
   try {
     const h = await fetchText(BASE + '/?qa=' + Date.now(), { ua: UA });
-    out.home = { status: h.status, strip: h.text.includes('care-scopri'), linkNovita: h.text.includes('href="/novita"'), linkAffiliazione: h.text.includes('href="/affiliazione"'), linkBuynow: h.text.includes('href="/buynow/san-pasquale"'), build: buildHash(h.text) };
+    // 14/11/2026 — la home linka in FORMA ASSOLUTA (https://careauctions.co/...): il check
+    // cercava solo href="/..." e dava un falso ALTO su home_links. Accetta entrambe.
+    const haLinkHome = (p) => h.text.includes('href="/' + p + '"') || h.text.includes('href="https://careauctions.co/' + p + '"') || h.text.includes('href="https://www.careauctions.co/' + p + '"');
+    out.home = { status: h.status, strip: h.text.includes('care-scopri'), linkNovita: haLinkHome('novita'), linkAffiliazione: haLinkHome('affiliazione'), linkBuynow: haLinkHome('buynow/san-pasquale'), build: buildHash(h.text) };
   } catch (e) { out.home = { status: 0, error: short(e.message, 100) }; }
   try {
     const b = await fetchText(BASE + '/?qa=' + Date.now(), { ua: 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)' });
