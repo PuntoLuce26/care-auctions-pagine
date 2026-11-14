@@ -1,0 +1,71 @@
+{
+  "generatoIl": "2026-11-14T17:07:18.389Z",
+  "rete": "RETE+ v1",
+  "gate": 4,
+  "esiti": [
+    {
+      "gate": "VIDS+",
+      "caso": "buono.mp4",
+      "atteso": 0,
+      "esito": 0,
+      "ok": true,
+      "stdout": "{\n  \"gate\": \"VIDS+\",\n  \"src\": \"/tmp/rete-vids/buono.mp4\",\n  \"info\": {\n    \"width\": 2160,\n    \"height\": 3840,\n    \"fps\": 30,\n    \"codec\": \"h264\",\n    \"duration\": 3,\n    \"audio\": 0\n  },\n  \"checks\": [\n    {\n      \"nome\": \"durata >= 3s\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"verticale (h > w)\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"2160x3840 (4K IG)\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"30 fps\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"H.264\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"muto (IG)\",\n      \"ok\": true\n    }\n  ],\n  \"verdetto\": \"PASS\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "gate": "VIDS+",
+      "caso": "cattivo.mp4",
+      "atteso": 2,
+      "esito": 2,
+      "ok": true,
+      "stdout": "{\n  \"gate\": \"VIDS+\",\n  \"src\": \"/tmp/rete-vids/cattivo.mp4\",\n  \"info\": {\n    \"width\": 1280,\n    \"height\": 720,\n    \"fps\": 30,\n    \"codec\": \"h264\",\n    \"duration\": 3,\n    \"audio\": 1\n  },\n  \"checks\": [\n    {\n      \"nome\": \"durata >= 3s\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"verticale (h > w)\",\n      \"ok\": false\n    },\n    {\n      \"nome\": \"2160x3840 (4K IG)\",\n      \"ok\": false\n    },\n    {\n      \"nome\": \"30 fps\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"H.264\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"muto (IG)\",\n      \"ok\": false\n    }\n  ],\n  \"verdetto\": \"FAIL\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "gate": "EINSTEIN+",
+      "caso": "brief-ok.json",
+      "atteso": 0,
+      "esito": 0,
+      "ok": true,
+      "stdout": "{\n  \"gate\": \"EINSTEIN+\",\n  \"brief\": \"RETE-VIDS-001\",\n  \"checks\": [\n    {\n      \"nome\": \"campo id\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"campo obiettivo\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"campo artefatto\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"campo verifica\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"campo permessi\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"campo scadenza\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"campo proprietario\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"campo criteri\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"nessun placeholder\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"verifica eseguibile (comandi/URL)\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"permessi ammessi\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"scadenza valida e futura\",\n      \"ok\": true\n    }\n  ],\n  \"verdetto\": \"PASS\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "gate": "EINSTEIN+",
+      "caso": "brief-ko.json",
+      "atteso": 2,
+      "esito": 2,
+      "ok": true,
+      "stdout": "{\n  \"gate\": \"EINSTEIN+\",\n  \"brief\": \"BRIEF-ROTTO\",\n  \"checks\": [\n    {\n      \"nome\": \"campo id\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"campo obiettivo\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"campo artefatto\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"campo verifica\",\n      \"ok\": false\n    },\n    {\n      \"nome\": \"campo permessi\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"campo scadenza\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"campo proprietario\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"campo criteri\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"nessun placeholder\",\n      \"ok\": false\n    },\n    {\n      \"nome\": \"verifica eseguibile (comandi/URL)\",\n      \"ok\": false\n    },\n    {\n      \"nome\": \"permessi ammessi\",\n      \"ok\": false\n    },\n    {\n      \"nome\": \"scadenza valida e futura\",\n      \"ok\": false\n    }\n  ],\n  \"verdetto\": \"FAIL\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "gate": "GREEN2+",
+      "caso": "claims-ok.json",
+      "atteso": 0,
+      "esito": 0,
+      "ok": true,
+      "stdout": "{\n  \"gate\": \"GREEN2+\",\n  \"claims\": 2,\n  \"checks\": [\n    {\n      \"nome\": \"almeno un claim\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"qa-7g: valore\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"qa-7g: fonte https\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"qa-7g: data misura\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"copertura: valore\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"copertura: fonte https\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"copertura: data misura\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"non_misurate dichiarate\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"qa-7g: fonte raggiungibile\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"copertura: fonte raggiungibile\",\n      \"ok\": true\n    }\n  ],\n  \"verdetto\": \"PASS\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "gate": "GREEN2+",
+      "caso": "claims-ko.json",
+      "atteso": 2,
+      "esito": 2,
+      "ok": true,
+      "stdout": "{\n  \"gate\": \"GREEN2+\",\n  \"claims\": 1,\n  \"checks\": [\n    {\n      \"nome\": \"almeno un claim\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"inventato: valore\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"inventato: fonte https\",\n      \"ok\": false\n    },\n    {\n      \"nome\": \"inventato: data misura\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"non_misurate dichiarate\",\n      \"ok\": true\n    }\n  ],\n  \"verdetto\": \"FAIL\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "gate": "EMERGENT+",
+      "caso": "produzione",
+      "atteso": 0,
+      "esito": 0,
+      "ok": true,
+      "stdout": "{\n  \"gate\": \"EMERGENT+\",\n  \"checks\": [\n    {\n      \"nome\": \"home 200\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"build presente\",\n      \"ok\": true,\n      \"trovato\": [\n        \"main.14cc4151.js\"\n      ]\n    },\n    {\n      \"nome\": \"home statica contiene /buynow\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"home statica contiene Vai al negozio\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"/buynow 200\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"/buynow H1\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"/ishop 200\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"/ishop Vai al negozio\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"/cerca 200 (non 301)\",\n      \"ok\": true\n    },\n    {\n      \"nome\": \"San Pasquale >= 37 foto\",\n      \"ok\": true,\n      \"trovate\": 37\n    },\n    {\n      \"nome\": \"tutte le foto 200\",\n      \"ok\": true,\n      \"ko\": 0\n    }\n  ],\n  \"verdetto\": \"PASS\"\n}\n",
+      "stderr": ""
+    }
+  ],
+  "verdetto": "VERDE"
+}
