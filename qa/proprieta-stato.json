@@ -1,13 +1,13 @@
 {
-  "generato": "2026-11-14T17:08:44Z",
+  "generato": "2026-11-14T17:29:18Z",
   "schema": "proprieta-stato-v1",
   "regola": "un file ha un solo scrittore; chi non lo possiede deposita una richiesta (01-decisioni/PROPRIETA-FILE.md)",
   "guardiano": "guardiano-proprieta (.github/workflows/guardiano-proprieta.yml)",
   "repo": "PuntoLuce26/care-auctions-pagine",
   "commit": {
     "esaminati": 1,
-    "da": "04d88ea48e",
-    "a": "c89ec2ac1c"
+    "da": "06b0cc49f2",
+    "a": "16898501e3"
   },
   "fileEsaminati": 1,
   "sintesi": {
@@ -21,11 +21,11 @@
   "violazioniTroncate": 0,
   "commitSenzaAgente": [
     {
-      "commit": "c89ec2ac1c",
-      "oggetto": "Metriche: committa anche feed/traffico.json",
+      "commit": "16898501e3",
+      "oggetto": "Metriche: utenti unici 30gg, conversione/churn reali, NPS survey, feed traffico con UV",
       "fileToccati": 1,
       "esempi": [
-        ".github/workflows/metriche-ecosistema.yml"
+        "scripts/metriche-ecosistema.mjs"
       ],
       "comeSiRisolve": "aggiungere [agente:<nome>] alla prima riga del messaggio di commit"
     }
