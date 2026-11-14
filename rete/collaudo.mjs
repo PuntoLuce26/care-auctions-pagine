@@ -14,6 +14,8 @@ const TMP = '/tmp/rete-vids';
 const FFMPEG = process.env.FFMPEG || 'ffmpeg';
 fs.mkdirSync(TMP, { recursive: true });
 const esiti = [];
+const SOLO = String(process.env.ONLY || 'all').toLowerCase();
+const attivo = (g) => SOLO === 'all' || SOLO === g;
 function run(gate, script, args = [], atteso = 0) {
   const r = spawnSync(process.execPath, [path.join(DIR, script), ...args], { encoding: 'utf8', env: process.env, timeout: 120000 });
   const ok = r.status === atteso;
@@ -24,18 +26,26 @@ function run(gate, script, args = [], atteso = 0) {
 // Fixture video: buono 4K verticale muto 3s; cattivo 720p con audio.
 const buono = path.join(TMP, 'buono.mp4');
 const cattivo = path.join(TMP, 'cattivo.mp4');
-execFileSync(FFMPEG, ['-y', '-hide_banner', '-loglevel', 'error', '-f', 'lavfi', '-i', 'color=c=0x0F1E3A:s=2160x3840:d=3:r=30', '-c:v', 'libx264', '-preset', 'ultrafast', '-pix_fmt', 'yuv420p', '-an', buono], { stdio: 'ignore' });
-execFileSync(FFMPEG, ['-y', '-hide_banner', '-loglevel', 'error', '-f', 'lavfi', '-i', 'color=c=0x0F1E3A:s=1280x720:d=3:r=30', '-f', 'lavfi', '-i', 'sine=frequency=440:duration=3', '-shortest', '-c:v', 'libx264', '-preset', 'ultrafast', '-c:a', 'aac', cattivo], { stdio: 'ignore' });
+const nero = path.join(TMP, 'nero.mp4');
+if (attivo('vids')) {
+  execFileSync(FFMPEG, ['-y', '-hide_banner', '-loglevel', 'error', '-f', 'lavfi', '-i', 'color=c=0x0F1E3A:s=2160x3840:d=3:r=30', '-c:v', 'libx264', '-preset', 'ultrafast', '-pix_fmt', 'yuv420p', '-an', buono], { stdio: 'ignore' });
+  execFileSync(FFMPEG, ['-y', '-hide_banner', '-loglevel', 'error', '-f', 'lavfi', '-i', 'color=c=0x0F1E3A:s=1280x720:d=3:r=30', '-f', 'lavfi', '-i', 'sine=frequency=440:duration=3', '-shortest', '-c:v', 'libx264', '-preset', 'ultrafast', '-c:a', 'aac', cattivo], { stdio: 'ignore' });
+  execFileSync(FFMPEG, ['-y', '-hide_banner', '-loglevel', 'error', '-f', 'lavfi', '-i', 'color=c=black:s=2160x3840:d=3:r=30', '-c:v', 'libx264', '-preset', 'ultrafast', '-pix_fmt', 'yuv420p', '-an', nero], { stdio: 'ignore' });
+  run('VIDS+', 'vids-plus.mjs', [buono], 0);
+  run('VIDS+', 'vids-plus.mjs', [cattivo], 2);
+  run('VIDS+', 'vids-plus.mjs', [nero], 2);
+}
+if (attivo('einstein')) {
+  run('EINSTEIN+', 'einstein-plus.mjs', [path.join(FIX, 'brief-ok.json')], 0);
+  run('EINSTEIN+', 'einstein-plus.mjs', [path.join(FIX, 'brief-ko.json')], 2);
+}
+if (attivo('green2')) {
+  run('GREEN2+', 'green2-plus.mjs', [path.join(FIX, 'claims-ok.json')], 0);
+  run('GREEN2+', 'green2-plus.mjs', [path.join(FIX, 'claims-ko.json')], 2);
+}
+if (attivo('emergent')) run('EMERGENT+', 'emergent-plus.mjs', [], 0);
 
-run('VIDS+', 'vids-plus.mjs', [buono], 0);
-run('VIDS+', 'vids-plus.mjs', [cattivo], 2);
-run('EINSTEIN+', 'einstein-plus.mjs', [path.join(FIX, 'brief-ok.json')], 0);
-run('EINSTEIN+', 'einstein-plus.mjs', [path.join(FIX, 'brief-ko.json')], 2);
-run('GREEN2+', 'green2-plus.mjs', [path.join(FIX, 'claims-ok.json')], 0);
-run('GREEN2+', 'green2-plus.mjs', [path.join(FIX, 'claims-ko.json')], 2);
-run('EMERGENT+', 'emergent-plus.mjs', [], 0);
-
-const stato = { generatoIl: new Date().toISOString(), rete: 'RETE+ v1', gate: 4, esiti, verdetto: esiti.every(e => e.ok) ? 'VERDE' : 'ROSSO' };
+const stato = { generatoIl: new Date().toISOString(), rete: 'RETE+ v2', gate: new Set(esiti.map(e => e.gate)).size, esiti, verdetto: esiti.length > 0 && esiti.every(e => e.ok) ? 'VERDE' : 'ROSSO' };
 const uscita = path.join(process.cwd(), 'rete/stato.json');
 fs.mkdirSync(path.dirname(uscita), { recursive: true });
 fs.writeFileSync(uscita, JSON.stringify(stato, null, 2) + '\n');
