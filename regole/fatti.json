@@ -1,0 +1,154 @@
+{
+  "versione": "1.0",
+  "aggiornato": "2026-11-15",
+  "autore": "CAReAuctions — regia",
+  "canary": "care-canary-d2c32afaa5d5",
+  "scopo": "Registro delle fonti ammesse e dello schema obbligatorio di un fatto citabile. Il generatore scripts/fatti-genera.mjs legge questo file: se un fatto non rispetta lo schema, se una cifra non ha fonte, o se un campo chiama «sconto» quello che è lo scarto prezzo base → offerta minima, il generatore NON scrive ai/fatti.json né fatti/index.html ed esce con codice 1 elencando i rifiutati.",
+
+  "regola": {
+    "testo": "Mai un numero senza fonte dichiarata, data di rilevazione e copertura. Una frase autosufficiente per riga: la macchina che legge l'HTML deve poter citare il numero senza aprire altro.",
+    "perche": "Un assistente AI cita una pagina solo se dentro l'HTML servito trova una frase che contiene il numero, la fonte, la data di rilevazione e la copertura. Un numero dentro un'app JS non è citabile: il crawler vede un guscio.",
+    "corollari": [
+      "Un fatto senza copertura nel feed non si emette: si dichiara «non emesso» con il motivo.",
+      "La copertura può venire dal feed (preferito) oppure, quando il feed non la dichiara, dal blocco coperturaDichiarata di questo file: in quel caso il fatto lo registra nel campo coperturaFonte.",
+      "Lo scarto tra prezzo base e offerta minima si chiama «scarto base → minima»: è il pavimento legale del 25%, non uno sconto di mercato.",
+      "«Sconto» è ammesso solo se il confronto è contro un valore di mercato dichiarato (OMI)."
+    ]
+  },
+
+  "schemaFatto": {
+    "id": { "tipo": "string", "obbligatorio": true, "descrizione": "identificativo stabile kebab-case, unico nel file", "esempio": "catalogo-lotti-attivi" },
+    "frase": { "tipo": "string", "obbligatorio": true, "descrizione": "frase autosufficiente: numero + Fonte + Rilevazione + Copertura, in quest'ordine", "esempio": "Al 15/11/2026 ... Fonte: PVP — Portale delle Vendite Pubbliche. Rilevazione: 15/11/2026 07:12 UTC. Copertura: catalogo completo dei lotti pubblicati." },
+    "valore": { "tipo": "number", "obbligatorio": true, "descrizione": "il numero nudo, stesso valore che compare nella frase", "esempio": 321904 },
+    "unita": { "tipo": "string", "obbligatorio": true, "descrizione": "unità di misura o natura del numero (lotti, €, €/m², %, indice, lingue, comuni, tribunali, esiti)", "esempio": "lotti" },
+    "fonte": { "tipo": "string", "obbligatorio": true, "descrizione": "nome della fonte come va citata, preso dalle fonti ammesse", "esempio": "PVP — Portale delle Vendite Pubbliche" },
+    "url_fonte": { "tipo": "string (URL http/https)", "obbligatorio": true, "descrizione": "indirizzo della fonte: senza URL la frase non è verificabile", "esempio": "https://pvp.giustizia.it" },
+    "rilevazione": { "tipo": "string ISO 8601 con ora", "obbligatorio": true, "descrizione": "istante in cui il dato è stato rilevato (non la data di generazione della pagina)", "esempio": "2026-11-15T07:12:36.745Z" },
+    "copertura": { "tipo": "string", "obbligatorio": true, "descrizione": "che cosa copre il numero: perimetro, sottoinsieme, quota, periodo", "esempio": "catalogo completo dei lotti pubblicati" },
+    "feed": { "tipo": "string", "obbligatorio": true, "descrizione": "file da cui il fatto è derivato", "esempio": "feed/statistiche.json" },
+    "url_pagina": { "tipo": "string (URL http/https)", "obbligatorio": true, "descrizione": "pagina umana in cui il numero vive", "esempio": "https://careauctions.co/idati" },
+    "coperturaFonte": { "tipo": "string", "obbligatorio": false, "descrizione": "«feed» se la copertura è dichiarata dal feed, «regole-dichiarata» se viene dal blocco coperturaDichiarata di questo file" },
+    "domanda": { "tipo": "string", "obbligatorio": false, "descrizione": "la domanda a cui il fatto risponde, usata nel FAQPage del JSON-LD" }
+  },
+
+  "regoleDiRifiuto": [
+    { "codice": "FATTO-INCOMPLETO", "condizione": "manca fonte, url_fonte, rilevazione o copertura", "azione": "rifiuta il fatto; nessun file scritto; exit 1" },
+    { "codice": "RILEVAZIONE-NON-ISO", "condizione": "rilevazione non è un istante ISO 8601 con ora", "azione": "rifiuta il fatto; nessun file scritto; exit 1" },
+    { "codice": "CIFRA-SENZA-FONTE", "condizione": "la frase contiene una cifra e non contiene «Fonte:»", "azione": "rifiuta il fatto; nessun file scritto; exit 1" },
+    { "codice": "SCONTO-AL-POSTO-DI-SCARTO", "condizione": "un fatto è chiamato «sconto» senza confronto di mercato (OMI) dichiarato, oppure un feed espone un campo «sconto…» senza dichiarare il confronto OMI/mercato", "azione": "rifiuta il fatto e il feed; exit 1; la cura è rinominare in scarto_base_minima" },
+    { "codice": "COPERTURA-ASSENTE", "condizione": "un candidato fatto non ha copertura né nel feed né in coperturaDichiarata", "azione": "non emette il fatto; lo elenca in meta.nonEmessi con il motivo" },
+    { "codice": "VALORE-NON-NUMERICO", "condizione": "valore non è un numero finito", "azione": "rifiuta il fatto; exit 1" }
+  ],
+
+  "nomiVietati": {
+    "sconto": {
+      "significatoVietato": "scarto tra prezzo base d'asta e offerta minima (base − 25% = minima): è il pavimento legale dell'offerta, non un ribasso di mercato",
+      "campoCorretto": "scarto_base_minima",
+      "deroga": "«sconto» è ammesso solo se il confronto è dichiarato contro il valore di mercato OMI (es. scontoMedianoPct di feed/confronto-mercato.json, il cui metodo dichiara il confronto con i valori OMI)"
+    }
+  },
+
+  "fonti": [
+    {
+      "id": "pvp",
+      "nome": "PVP — Portale delle Vendite Pubbliche",
+      "ente": "Ministero della Giustizia",
+      "url": "https://pvp.giustizia.it",
+      "tipo": "pubblico",
+      "usataIn": ["feed/statistiche.json", "feed/tribunali.json", "feed/careindex-serie.json", "feed/confronto-mercato.json"],
+      "nota": "I conteggi del catalogo e gli esiti pubblicati dal portale. L'API pubblica di ricerca restituisce il campo esito sempre null (verifica di progetto del 6/11/2026): i conteggi degli esiti si pubblicano solo se il feed che li espone dichiara fonte, rilevazione e copertura."
+    },
+    {
+      "id": "omi",
+      "nome": "OMI — Agenzia delle Entrate",
+      "ente": "Agenzia delle Entrate (Osservatorio del Mercato Immobiliare)",
+      "url": "https://www1.agenziaentrate.gov.it/servizi/geopoi_omi/",
+      "tipo": "pubblico",
+      "licenza": "CC-BY 4.0 (dichiarata in feed/omi-indice.json meta.fonte)",
+      "usataIn": ["feed/omi-indice.json", "feed/confronto-mercato.json"],
+      "nota": "Solo aggregati: i valori OMI di dettaglio restano interni (regola di progetto 5.874). Si pubblicano la copertura e le mediane aggregate."
+    },
+    {
+      "id": "careindex",
+      "nome": "CAReIndex — elaborazione CAReAuctions su prezzi base PVP",
+      "ente": "CAReAuctions",
+      "url": "https://careauctions.co/ca-re-index",
+      "tipo": "interno",
+      "usataIn": ["feed/careindex-serie.json"],
+      "nota": "prezzoMq = media di prezzo base / superficie dei lotti residenziali con superficie dichiarata; si usa sempre il prezzo base, mai la minima."
+    },
+    {
+      "id": "fallcoaste",
+      "nome": "FallcoAste — fallcoaste.it",
+      "ente": "portale privato",
+      "url": "https://www.fallcoaste.it",
+      "tipo": "privato",
+      "usataIn": ["feed/esiti-statistiche.json", "feed/esiti-monitor.json", "feed/tribunali.json"],
+      "nota": "Portale privato che ripubblica aste: NON è il PVP e va citato separatamente (fonteNota di feed/esiti-monitor.json, 13/11/2026)."
+    },
+    {
+      "id": "notarile-verona",
+      "nome": "Notarile Verona (aste notarili)",
+      "ente": "aste notarili di Verona",
+      "url": "https://www.fallcoaste.it",
+      "tipo": "privato",
+      "usataIn": ["feed/esiti-statistiche.json"],
+      "nota": "Fonte secondaria degli esiti immobiliari (52 esiti, 13%). Il feed non dichiara un URL proprio: si cita l'aggregatore."
+    },
+    {
+      "id": "i18n-care",
+      "nome": "Traduzioni CAReAuctions",
+      "ente": "CAReAuctions",
+      "url": "https://careauctions.co/ilive",
+      "tipo": "interno",
+      "usataIn": ["feed/pagine91.json"],
+      "nota": "Le lingue sono tradotte una per una, non da un'euristica (nota di feed/pagine91.json)."
+    }
+  ],
+
+  "feedAmmessi": [
+    { "file": "feed/statistiche.json", "ruolo": "catalogo lotti PVP: totale, prezzo base medio immobiliare, scarto base → minima", "fonte": "pvp" },
+    { "file": "feed/tribunali.json", "ruolo": "tribunali con lotti aperti e con esiti", "fonte": "pvp" },
+    { "file": "feed/careindex-serie.json", "ruolo": "indice e prezzo al m² dei lotti residenziali", "fonte": "pvp" },
+    { "file": "feed/esiti-statistiche.json", "ruolo": "esiti immobiliari con prezzo finale (copertura dichiarata dal feed)", "fonte": "fallcoaste" },
+    { "file": "feed/confronto-mercato.json", "ruolo": "Sconto Reale Certificato: aste contro valori di mercato OMI", "fonte": "omi" },
+    { "file": "feed/omi-indice.json", "ruolo": "copertura e mediane OMI", "fonte": "omi" },
+    { "file": "feed/pagine91.json", "ruolo": "lingue servite e tradotte", "fonte": "i18n-care" }
+  ],
+
+  "coperturaDichiarata": [
+    {
+      "feed": "feed/statistiche.json",
+      "campo": "totale",
+      "copertura": "catalogo completo dei lotti pubblicati",
+      "motivo": "feed/statistiche.json dichiara fonte e rilevazione ma non un campo «copertura»; la copertura del totale è il catalogo intero, ed è dichiarata qui perché il fatto di punta (quante aste ci sono in Italia) non resti senza copertura. Se il generatore del feed scriverà «copertura», questa riga non serve più e il fatto passerà a coperturaFonte: feed.",
+      "dichiarataIl": "2026-11-15"
+    },
+    {
+      "feed": "feed/statistiche.json",
+      "campo": "prezzoMedioImm",
+      "copertura": "lotti immobiliari del catalogo PVP con prezzo base d'asta dichiarato",
+      "motivo": "stessa ragione: il feed non porta un campo copertura. La media è sul prezzo base, mai sull'offerta minima.",
+      "dichiarataIl": "2026-11-15"
+    },
+    {
+      "feed": "feed/statistiche.json",
+      "campo": "scartoBaseMinimaMedioImm",
+      "copertura": "lotti immobiliari del catalogo PVP su cui lo scarto tra prezzo base e offerta minima è calcolabile",
+      "motivo": "stessa ragione. Il campo è già nominato «scartoBaseMinima…» e non «sconto»: è il pavimento legale del 25%, non un ribasso di mercato.",
+      "dichiarataIl": "2026-11-15"
+    }
+  ],
+
+  "url": {
+    "paginaFatti": "https://careauctions.co/fatti",
+    "datiJson": "https://careauctions.co/ai/fatti.json",
+    "pagineDati": [
+      { "nome": "iDati", "url": "https://careauctions.co/idati" },
+      { "nome": "Aggiudicazioni", "url": "https://careauctions.co/aggiudicazioni" },
+      { "nome": "CAReIndex", "url": "https://careauctions.co/ca-re-index" },
+      { "nome": "Sconto Reale Certificato", "url": "https://careauctions.co/sconto-reale-certificato" },
+      { "nome": "oCARe", "url": "https://careauctions.co/osservatorio" }
+    ]
+  }
+}
