@@ -1,0 +1,81 @@
+name: rapporto
+
+# Il rapporto trimestrale aperto di CAReAuctions: una pagina statica e un CSV di soli
+# aggregati comunali, a un indirizzo stabile che resta valido.
+# Gira da solo, a Mac spento: 1 gennaio / 1 aprile / 1 luglio / 1 ottobre, più a comando
+# (workflow_dispatch) e su repository_dispatch di tipo `rapporto-giro`.
+# Se il cancello dello script rifiuta un fatto (fonte, rilevazione o copertura mancanti)
+# il job fallisce e nessun file viene scritto: meglio un errore che un numero senza fonte.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '15 3 1 1,4,7,10 *'   # 03:15 UTC del 1° gennaio, aprile, luglio, ottobre
+  repository_dispatch:
+    types: [rapporto-giro]
+
+permissions:
+  contents: write
+
+# un solo rapporto alla volta: due run che scrivono gli stessi due file si scontrerebbero sul push
+concurrency:
+  group: rapporto
+  cancel-in-progress: false
+
+jobs:
+  rapporto:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: controlla lo script
+        run: node --check scripts/rapporto-trimestrale.mjs
+
+      - name: prova il cancello — deve rifiutare (exit 1, nessun file scritto)
+        run: |
+          set +e
+          node scripts/rapporto-trimestrale.mjs --autotest
+          CODICE=$?
+          set -e
+          echo "exit dell'autotest: $CODICE"
+          if [ "$CODICE" -ne 1 ]; then
+            echo "::error::il cancello non ha rifiutato un fatto senza fonte (exit $CODICE)"
+            exit 1
+          fi
+          echo "cancello verificato: rifiuto con exit 1, nessun file scritto"
+
+      - name: genera il rapporto
+        run: node scripts/rapporto-trimestrale.mjs
+
+      - name: mostra l'esito
+        run: |
+          echo "pagina: $(wc -c < rapporto/2026-Q4.html) byte"
+          echo "csv: $(wc -l < rapporto/2026-Q4.csv) righe (intestazione inclusa)"
+          grep -o '"dateModified": "[^"]*"' rapporto/2026-Q4.html | head -1
+
+      - name: commit e push (race-safe)
+        run: |
+          git config user.name "Sam CARe"
+          git config user.email "sam@careauctions.co"
+          git add rapporto/2026-Q4.html rapporto/2026-Q4.csv
+          if git diff --cached --quiet; then
+            echo "nessuna variazione: i due file sono identici al giro precedente"
+            exit 0
+          fi
+          git commit -m "Rapporto trimestrale 2026-Q4: pagina + CSV ($(date -u +%FT%TZ))"
+          for i in 1 2 3 4 5; do
+            if git pull --rebase --autostash origin main && git push origin HEAD:main; then
+              echo "pushato al tentativo $i"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::error::push fallito dopo 5 tentativi"
+          exit 1
