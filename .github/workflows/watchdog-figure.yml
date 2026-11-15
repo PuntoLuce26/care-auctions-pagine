@@ -1,0 +1,63 @@
+name: watchdog figure -> rerender
+
+# Quando un feed di cifre cambia, le pagine salvate restano indietro e il build
+# di Emergent si ferma (gli è successo il 15/11 con confronto-mercato: 40,7% -> 40,5%).
+# Questo watchdog scatta AL CAMBIO del file e chiede il rerender, così il fermo
+# non arriva per sorpresa.
+
+on:
+  push:
+    paths:
+      - 'feed/confronto-mercato.json'
+      - 'feed/statistiche.json'
+      - 'feed/careindex-serie.json'
+      - 'feed/esiti-statistiche.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: watchdog-figure
+  cancel-in-progress: false
+
+jobs:
+  rerender:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Chi ha cambiato il feed e cosa
+        run: |
+          echo "file toccati in questo push:"
+          echo '${{ toJSON(github.event.commits) }}' | head -c 400 || true
+
+      - name: Chiedi il rerender delle pagine (prerender)
+        env:
+          GH: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -e
+          # id del workflow prerender nel repo; si risolve per nome, così non si sbaglia numero
+          ID=$(curl -sS -H "Authorization: Bearer $GH" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/$REPO/actions/workflows" \
+            | python3 -c "import sys,json;ws=json.load(sys.stdin)['workflows'];print(next((w['id'] for w in ws if w['path'].endswith('prerender.yml')),''))")
+          if [ -z "$ID" ]; then echo "::error::workflow prerender.yml non trovato"; exit 1; fi
+          echo "prerender id=$ID"
+          CODE=$(curl -sS -o /dev/null -w '%{http_code}' -X POST \
+            -H "Authorization: Bearer $GH" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/$REPO/actions/workflows/$ID/dispatches" \
+            -d '{"ref":"main"}')
+          echo "dispatch HTTP $CODE"
+          if [ "$CODE" != "204" ]; then echo "::error::dispatch rifiutato ($CODE)"; exit 1; fi
+
+      - name: Attesa breve e verifica che la run sia partita
+        env:
+          GH: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          sleep 20
+          N=$(curl -sS -H "Authorization: Bearer $GH" "https://api.github.com/repos/$REPO/actions/runs?per_page=5" \
+            | python3 -c "import sys,json;print(sum(1 for r in json.load(sys.stdin)['workflow_runs'] if 'prerender' in r['path']))")
+          echo "run prerender recenti: $N"
+          if [ "$N" = "0" ]; then echo "::error::nessuna run prerender partita"; exit 1; fi
