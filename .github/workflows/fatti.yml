@@ -1,0 +1,110 @@
+name: Fatti citabili
+
+# Genera il livello di dati citabile da una macchina: ai/fatti.json (fatti con fonte,
+# rilevazione e copertura) e fatti/index.html (pagina statica, una frase per riga, + JSON-LD).
+#
+# PERCHÉ: un assistente AI cita una pagina solo se dentro l'HTML servito trova una frase
+# autosufficiente con il numero, la fonte, la data di rilevazione e la copertura. Oggi i
+# nostri numeri vivono in un'app JS: il crawler vede un guscio. Questo workflow pubblica
+# le stesse cifre come testo statico, e RIFIUTA di pubblicare un numero senza fonte.
+#
+# ADDITIVO: file nuovo. Non modifica feed-sync.yml, qa.yml, prerender.yml, verifica-canonical.yml
+# né altri workflow esistenti.
+#
+# ESITO VISIBILE: se scripts/fatti-genera.mjs esce con 1 (un fatto senza fonte, o uno scarto
+# base→minima chiamato «sconto») il job fallisce e NESSUN file viene scritto: il rifiuto
+# deve essere visibile, non silenzioso.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 5 * * *"
+  repository_dispatch:
+    types: [fatti-giro]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fatti-citabili
+  cancel-in-progress: false
+
+jobs:
+  genera:
+    name: Genera ai/fatti.json e fatti/index.html
+    runs-on: ubuntu-latest
+    # Il timeout sta sul job: GitHub non accetta `timeout-minutes` a livello di workflow.
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Autotest — un fatto senza fonte deve essere rifiutato (exit 1)
+        run: |
+          set +e
+          node scripts/fatti-genera.mjs --autotest > autotest.log 2>&1
+          codice=$?
+          set -e
+          cat autotest.log
+          if [ "$codice" -ne 1 ]; then
+            echo "::error::autotest: su una fixture senza fonte il generatore doveva uscire con 1, è uscito con $codice"
+            exit 1
+          fi
+          echo "AUTOTEST OK — exit 1 come atteso, nessun file scritto"
+
+      - name: Genera i fatti
+        run: node scripts/fatti-genera.mjs
+
+      - name: Verifica gli artefatti (fatti senza fonte, testo visibile, JSON-LD)
+        run: node scripts/fatti-verifica.mjs
+
+      - name: Committa ai/fatti.json e fatti/index.html
+        run: |
+          set -euo pipefail
+          git config user.name "careauctions-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add ai/fatti.json fatti/index.html
+          if git diff --cached --quiet; then
+            echo "Nessuna variazione nei fatti: nessun commit."
+            exit 0
+          fi
+          git commit -m "Fatti citabili: generati ai/fatti.json e fatti/index.html"
+          for tentativo in 1 2 3 4 5; do
+            if git push; then
+              echo "push riuscito al tentativo $tentativo"
+              exit 0
+            fi
+            echo "push respinto, riallineo (tentativo $tentativo)"
+            git pull --rebase --autostash origin main || true
+            sleep 5
+          done
+          echo "::error::push non riuscito dopo 5 tentativi"
+          exit 1
+
+      - name: Riepilogo
+        if: always()
+        run: |
+          if [ -f ai/fatti.json ]; then
+            node -e 'const d=require("./ai/fatti.json"); console.log(`fatti: ${d.fatti.length} · non emessi: ${d.meta.nonEmessi.length} · generato: ${d.meta.generato} · canary: ${d.meta.canary}`);'
+          fi
+          if [ -f autotest.log ]; then
+            echo "--- autotest.log (prime righe) ---"
+            head -20 autotest.log
+          fi
+
+      - name: Carica gli artefatti
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fatti-citabili
+          path: |
+            ai/fatti.json
+            fatti/index.html
+          if-no-files-found: warn
