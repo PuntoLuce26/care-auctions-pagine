@@ -163,6 +163,7 @@ const giorniOut = [...perGiorno.keys()].sort().map(d => [d, [...perGiorno.get(d)
 const dateEsiti = esiti.map(e => e[0]).sort();
 const regioniEsiti = [...new Set(tribNomi.map(t => tribReg[t]).filter(Boolean))].sort();
 const monitor = {
+  meta: { canary: 'care-canary-d2c32afaa5d5', canaryNota: 'valore di riconoscimento della copia dei dati' },
   generato: new Date().toISOString(),
   // 13/11/2026 — ETICHETTA CORRETTA. Non era il PVP: questi esiti sono i record
   // `fonte:"fallcoaste"` dell'archivio, con il loro campo "Miglior offerta" (FallcoAste).
