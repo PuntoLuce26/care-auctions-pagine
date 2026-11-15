@@ -7,6 +7,10 @@ const https = require('https');
 const { fileDaCancellare, scegliEsiti, FONTI_PUBBLICHE } = require('./feed-regole');
 const { ricalcolaPartecipazione } = require('./andamento-partecipazione');
 
+// 15/11/2026 — CANARY dei feed: valore di riconoscimento della copia dei dati, scritto dal
+// GENERATORE (mai patchato nel JSON: un valore messo a mano sparisce al primo giro di dati).
+const CANARY = 'care-canary-d2c32afaa5d5';
+const CANARY_NOTA = 'valore di riconoscimento della copia dei dati';
 const MODE = process.env.MODE || 'inc';
 const PAGINE = MODE === 'full' ? 99999 : 40;
 const SIZE = 100;
@@ -214,7 +218,7 @@ async function main(){
       const arr=tutti.filter(a=>a.regione===r); const m=med(arr);
       perRegione[r]={lotti:arr.length,prezzoMedio:m.prezzo,scartoBaseMinimaMedio:m.scartoBaseMinima};
     }
-    const completo={ data:new Date().toISOString().slice(0,10), totaleLotti:tutti.length,
+    const completo={ meta:{ canary:CANARY, canaryNota:CANARY_NOTA }, data:new Date().toISOString().slice(0,10), totaleLotti:tutti.length,
       settori:{ immobiliare:{lotti:imm.length,prezzoMedio:mi.prezzo,scartoBaseMinimaMedio:mi.scartoBaseMinima,categorie:{IMMOBILIARE:imm.length}},
                 mobiliare:{lotti:mob.length,prezzoMedio:mm.prezzo,scartoBaseMinimaMedio:mm.scartoBaseMinima,categorie:{MOBILIARE:mob.length}} },
       bandePrezzo:bande, perRegione };
@@ -257,6 +261,7 @@ async function main(){
       // non cambia la data: resta quella dell'ultima misura vera.
       const aggEsiti = new Date().toISOString();
       fs.writeFileSync(path.join(FEED, 'andamento-esiti.json'), JSON.stringify({
+        meta: { canary: CANARY, canaryNota: CANARY_NOTA },
         generato: aggEsiti,
         fonte: FONTI_PUBBLICHE.pvp,
         rilevazione: aggEsiti,
@@ -315,6 +320,7 @@ async function main(){
     // Un numero senza fonte e data non si pubblica: il sito nasconde ciò che il feed non dichiara.
     statOut.fonte = FONTI_PUBBLICHE.pvp;
     statOut.rilevazione = statOut.aggiornato;
+    statOut.meta = { canary: CANARY, canaryNota: CANARY_NOTA };
     if (esitiMotivo) statOut.esitiMotivo = esitiMotivo;
     if (esitiUltimaRilevazione) statOut.esitiUltimaRilevazione = esitiUltimaRilevazione;
     fs.writeFileSync(path.join(FEED, 'statistiche.json'), JSON.stringify(statOut));
