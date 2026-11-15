@@ -95,6 +95,16 @@ jobs:
           fs.writeFileSync('feed/aggiudicazioni-indice.json', JSON.stringify(out, null, 0));
           console.log('indice aggiudicazioni:', n, 'record');
           JS
+      # 15/11/2026 — IL BATTITO DELL'ARCHIVIO AGGIUDICAZIONI (difetto 1 del 15/11).
+      # feed/aggiudicazioni.json e' un ARRAY nudo: non puo' portare un campo data senza
+      # rompere i 10 lettori del repo e l'edge (che lo leggono come array). Il tempo vive
+      # quindi in feed/aggiudicazioni-stato.json, scritto a OGNI giro anche a zero
+      # variazioni: aggiornato = ultimo giro, ultimoCambio = ultima variazione reale.
+      # Prima di oggi un giro verde senza movimenti e un generatore fermo producevano lo
+      # stesso segnale (la data di commit del file): 70,1 h indistinguibili.
+      - name: Battito archivio aggiudicazioni (anche a zero variazioni)
+        if: always()
+        run: node scripts/aggiudicazioni-merge.js battito || echo "battito aggiudicazioni non scritto"
       - name: commit e push
         run: |
           git config user.name "Sam CARe"
