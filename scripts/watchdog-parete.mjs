@@ -174,6 +174,29 @@ async function gh(percorso, metodo = 'GET', corpo) {
 const dormi = (ms) => new Promise((r) => setTimeout(r, ms));
 
 /**
+ * La issue [ALLARME] aperta, se c'è. Si rilegge una seconda volta dopo 2 s quando la prima
+ * lettura non trova nulla: l'indice delle issue di GitHub è in ritardo di qualche secondo dopo
+ * una scrittura (misurato il 15/11/2026 su un repo appena creato, issue creata e lista vuota per
+ * ~3 s). Senza la rilettura un falso vuoto aprirebbe una SECONDA issue: due allarmi per lo
+ * stesso guasto sono peggio di nessun allarme.
+ */
+async function cercaAperta(repo) {
+  const leggi = async () => {
+    const r = await gh(`/repos/${repo}/issues?state=open&per_page=100`);
+    if (r.stato !== 200) throw new Error(`elenco issue HTTP ${r.stato}`);
+    return (r.json || []).filter(
+      (i) => !i.pull_request && typeof i.title === 'string' && i.title.trim() === TITOLO_ISSUE,
+    );
+  };
+  let trovate = await leggi();
+  if (!trovate.length) {
+    await dormi(2000);
+    trovate = await leggi();
+  }
+  return trovate[0] || null;
+}
+
+/**
  * UNA sola issue. Si cerca per titolo esatto (non per etichetta: un'etichetta assente fa
  * fallire la creazione con 422 e l'allarme si perderebbe). Se la parete è viva e l'issue è
  * aperta, si commenta «rientrato» e si chiude.
@@ -181,11 +204,7 @@ const dormi = (ms) => new Promise((r) => setTimeout(r, ms));
 export async function gestisciIssue({ stato, corpo }) {
   const repo = process.env.GITHUB_REPOSITORY;
   if (!repo) throw new Error('GITHUB_REPOSITORY assente');
-  const elenco = await gh(`/repos/${repo}/issues?state=open&per_page=100`);
-  if (elenco.stato !== 200) throw new Error(`elenco issue HTTP ${elenco.stato}`);
-  const aperta = (elenco.json || []).find(
-    (i) => !i.pull_request && typeof i.title === 'string' && i.title.trim() === TITOLO_ISSUE,
-  );
+  const aperta = await cercaAperta(repo);
 
   if (stato.ok) {
     if (!aperta) return { azione: 'nessuna', dettaglio: 'parete viva, nessuna issue aperta' };
