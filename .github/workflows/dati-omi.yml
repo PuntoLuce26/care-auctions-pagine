@@ -1,0 +1,77 @@
+name: dati-omi
+
+# Rigenera i feed OMI in CLOUD dal dataset su R2 (bucket care-dati), senza il Mac.
+#
+# Perché esiste: fino al 15/11/2026 feed/aste-zone.json e feed/omi-indice.json si potevano
+# rigenerare solo dal Mac, dove stava il dataset OMI da 81 MB. I generatori avevano già il
+# canary scritto dentro (aste-zone.mjs, omi-stats.mjs) ma i FILE erano fermi al giro prima:
+# canary assente sull'artefatto. Ora il dataset è su R2 e questo workflow è il giro che li
+# riscrive. Non tocca nessun altro feed.
+
+on:
+  schedule:
+    - cron: '20 4 * * *'   # ogni giorno alle 04:20 UTC, dopo il full del feed
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dati-omi
+  cancel-in-progress: false
+
+jobs:
+  omi:
+    name: dataset R2 -> feed OMI
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      R2_ACCOUNT: d5d20864ee7f83c32c9eeb5fcbda6edb
+      R2_BUCKET: care-dati
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Sintassi degli script
+        run: |
+          node --check scripts/omi-r2-scarica.mjs
+          node --check scripts/omi-stats.mjs
+          node --check scripts/omi-tipologie.mjs
+          node --check scripts/aste-zone.mjs
+
+      - name: Scarica il dataset OMI da R2 (care-dati)
+        run: node scripts/omi-r2-scarica.mjs /tmp/omi-agg /tmp/omi-dataset.json
+
+      - name: Rigenera i feed OMI
+        run: |
+          node scripts/omi-stats.mjs /tmp/omi-agg feed
+          OMI_DATASET=/tmp/omi-dataset.json node scripts/omi-tipologie.mjs
+          OMI_DATASET=/tmp/omi-dataset.json node scripts/aste-zone.mjs
+
+      - name: Verifica che il canary sia nei file rigenerati
+        run: |
+          for f in feed/omi-indice.json feed/omi-tipologie.json feed/aste-zone.json; do
+            if grep -q "care-canary-d2c32afaa5d5" "$f"; then echo "OK $f"; else echo "NO $f"; exit 1; fi
+          done
+
+      - name: Commit (race-safe)
+        run: |
+          git config user.name "care-bot"
+          git config user.email "bot@careauctions.co"
+          git add feed/omi-indice.json feed/omi-comuni.json feed/omi-stato.json feed/omi-tipologie.json feed/aste-zone.json
+          if git diff --cached --quiet; then echo "nessuna modifica: nessun commit"; exit 0; fi
+          git commit -m "Dati OMI: rigenerazione da dataset su R2 (canary nei generatori)"
+          for i in 1 2 3 4 5; do
+            if git push; then echo "push ok al tentativo $i"; exit 0; fi
+            echo "push respinto, riallineo (tentativo $i)"
+            git pull --rebase --autostash || true
+          done
+          echo "push fallito dopo 5 tentativi"; exit 1

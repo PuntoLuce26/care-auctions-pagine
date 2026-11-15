@@ -1,0 +1,61 @@
+name: ipartner-regole
+
+# Rigenera feed/ipartner-regole.json con il suo generatore.
+#
+# Perché esiste: fino al 15/11/2026 quel feed non aveva NESSUN generatore nel repo (verificato:
+# "ipartner" compare solo in ai-education.js come riferimento). Era nato fuori dal repo, quindi
+# il canary messo a mano il 12/11 non aveva un posto dove sopravvivere. Ora il generatore sta in
+# scripts/ipartner-regole.mjs: verifica la forma, conserva i contenuti (le regole del legame sono
+# una decisione del committente, non un calcolo) e scrive data + valore di riconoscimento.
+
+on:
+  schedule:
+    - cron: '15 5 * * *'   # ogni giorno alle 05:15 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ipartner-regole
+  cancel-in-progress: false
+
+jobs:
+  regole:
+    name: generatore -> feed/ipartner-regole.json
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Sintassi
+        run: node --check scripts/ipartner-regole.mjs
+
+      - name: Rigenera
+        run: node scripts/ipartner-regole.mjs
+
+      - name: Verifica che il canary sia nel file
+        run: |
+          if grep -q "care-canary-d2c32afaa5d5" feed/ipartner-regole.json; then echo "OK canary"; else echo "NO canary"; exit 1; fi
+
+      - name: Commit (race-safe)
+        run: |
+          git config user.name "care-bot"
+          git config user.email "bot@careauctions.co"
+          git add feed/ipartner-regole.json
+          if git diff --cached --quiet; then echo "nessuna modifica: nessun commit"; exit 0; fi
+          git commit -m "Feed iPartner regole: rigenerato dal generatore (canary)"
+          for i in 1 2 3 4 5; do
+            if git push; then echo "push ok al tentativo $i"; exit 0; fi
+            echo "push respinto, riallineo (tentativo $i)"
+            git pull --rebase --autostash || true
+          done
+          echo "push fallito dopo 5 tentativi"; exit 1

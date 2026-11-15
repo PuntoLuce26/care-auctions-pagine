@@ -37,9 +37,13 @@ for (const [cod, v] of Object.entries(zoneIdx.comuni)) codPerNome.set(String(v.n
 let omiZone = new Map();   // codcom -> linkZona -> {min,max,mediano,stato}
 // Rilevazione OMI: il semestre e l'istante in cui il dataset OMI è stato raccolto (meta.generatoIl).
 let rilevazioneOmi = null;
-let rilevazioneOmiMotivo = 'il dataset OMI locale non è leggibile in questa esecuzione: i valori di zona restano fuori dal feed';
+let rilevazioneOmiMotivo = 'il dataset OMI (R2 care-dati → OMI_DATASET, oppure il percorso locale) non è leggibile in questa esecuzione: i valori di zona restano fuori dal feed';
 try {
-  const ds = JSON.parse(fs.readFileSync('puntoluce/dati/omi/omi-dataset.json', 'utf8'));
+  // 15/11/2026 — IL DATASET OMI NON STA SOLO SUL MAC. Il dataset (81 MB) vive su R2 nel bucket
+  // `care-dati` (dati/omi/omi-dataset.json); il runner lo scarica e passa il percorso in OMI_DATASET.
+  // Il percorso locale resta come fallback: sul Mac lo script funziona come prima.
+  const OMI_DATASET = process.env.OMI_DATASET || 'puntoluce/dati/omi/omi-dataset.json';
+  const ds = JSON.parse(fs.readFileSync(OMI_DATASET, 'utf8'));
   const sem = Object.keys(ds.meta.semestri || []).length ? ds.meta.semestri[ds.meta.semestri.length - 1] : null;
   for (const [istat, c] of Object.entries(ds.comuni || {})) {
     const s = sem ? c.semestri?.[sem] : null; if (!s) continue;
