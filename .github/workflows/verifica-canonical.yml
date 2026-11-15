@@ -59,11 +59,11 @@ jobs:
           npx playwright install --with-deps chromium || \
             (echo "install fallito, riprovo tra 15s"; sleep 15; npx playwright install --with-deps chromium)
 
-      # L'exit code dello script (1 = almeno una riga KO) viene raccolto qui e propagato
-      # all'esito del job dall'ultimo step: il commit del JSON deve avvenire anche in FAIL.
+      # Lo script esce 1 se c'è almeno una riga KO: qui l'exit code È l'esito del job
+      # (nessun continue-on-error che possa mascherare il rosso). Gli step successivi sono
+      # `if: always()` proprio perché il commit di qa/canonical.json deve avvenire anche in FAIL.
       - name: Matrice canonical × locale
         id: matrice
-        continue-on-error: true
         run: node qa/canonical-matrix.mjs
 
       - name: Riepilogo della matrice nel run
@@ -116,13 +116,14 @@ jobs:
           fi
           echo "qa/canonical.json committato: $(git rev-parse --short HEAD)"
 
-      # Propaga l'esito dello script come esito del job: KO ⇒ job rosso.
+      # Ribadisce l'esito dello script (già propagato dallo step della matrice) e lo rende
+      # esplicito anche quando lo script non è arrivato a scrivere il JSON.
       - name: Esito finale (exit code della matrice)
         if: always()
         run: |
           ESITO="${{ steps.matrice.outcome }}"
           echo "Esito di qa/canonical-matrix.mjs: $ESITO"
-          if [ "$ESITO" != "success" ]; then
+          if [ "$ESITO" = "failure" ]; then
             echo "::error::Matrice canonical × locale FAIL — vedere qa/canonical.json (righe KO in evidenza)"
             exit 1
           fi
