@@ -40,20 +40,72 @@ jobs:
       # (garanzia piu' debole: un run verde non dice che il gate abbia davvero guardato oggi).
       # `if: always()`: il battito si scrive ANCHE se il gate e' rosso — un supervisore rotto
       # deve restare misurabile, altrimenti il guasto sparisce insieme al suo stato.
+      # ── FRESCHEZZA (15/11/2026) ───────────────────────────────────────────────────
+      # Il file di stato minuscolo che rende MISURABILE l'età di questo supervisore: prima
+      # l'artefatto era solo un allegato di run (`rete/<nome>-stato`), e l'età non si poteva
+      # leggere con l'API dei commit. `if: always()`: il battito si scrive ANCHE se il gate è
+      # rosso — un supervisore rotto deve restare misurabile, altrimenti il guasto sparisce
+      # insieme al suo stato.
+      #
+      # SCRITTURA VIA API CONTENTS, NON CON `git push`. Prima versione (misurata, run
+      # 43695590720): `git commit` riusciva, `git pull --rebase` su un clone shallow usciva
+      # 128 e `bash -e` uccideva lo step — il commit restava nel runner e il file non arrivava
+      # mai. Qui non c'è rebase: si legge lo sha del file, si scrive, se lo sha è cambiato si
+      # rilegge e si ritenta. Nessuna storia git da riconciliare, nessun checkout da rifare.
       - name: Stato minuscolo (freschezza)
         if: always()
         env:
           ESITO: ${{ steps.gate.outcome }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
         run: |
-          node -e 'const fs=require("fs");const o={supervisore:"rete-emergent",ultimoGiro:new Date().toISOString(),runId:Number(process.env.GITHUB_RUN_ID||0),esito:process.env.ESITO||"sconosciuto"};try{const j=JSON.parse(fs.readFileSync("rete/stato.json","utf8"));o.ok=j.ok??null;o.controlli=Array.isArray(j.controlli)?j.controlli.length:(Array.isArray(j.risultati)?j.risultati.length:null);}catch(e){o.ok=null;}fs.writeFileSync("rete/emergent.json",JSON.stringify(o,null,1)+"\n");'
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add rete/emergent.json
-          if git diff --cached --quiet; then echo "invariato"; exit 0; fi
-          git commit -m "stato: rete-emergent (freschezza, run $GITHUB_RUN_ID)"
-          for i in 1 2 3 4 5; do
-            git pull -q --rebase origin main 2>/dev/null || { git rebase --abort 2>/dev/null; true; }
-            git push origin HEAD:main && exit 0
-            sleep 5
-          done
-          echo "::error::stato rete-emergent non pushato dopo 5 tentativi"; exit 1
+          node -e '
+            const fs = require("fs");
+            const b64 = (s) => Buffer.from(s, "utf8").toString("base64");
+            const api = async (p, m, b) => {
+              const r = await fetch("https://api.github.com" + p, {
+                method: m,
+                headers: {
+                  Authorization: "Bearer " + process.env.GH_TOKEN,
+                  Accept: "application/vnd.github+json",
+                  "User-Agent": "freschezza/1.0",
+                  "X-GitHub-Api-Version": "2022-11-28",
+                  "Content-Type": "application/json",
+                },
+                body: b ? JSON.stringify(b) : undefined,
+              });
+              const t = await r.text();
+              let j = null;
+              try { j = t ? JSON.parse(t) : null; } catch (e) {}
+              return { stato: r.status, j: j };
+            };
+            const o = {
+              supervisore: "rete-emergent",
+              ultimoGiro: new Date().toISOString(),
+              runId: Number(process.env.GITHUB_RUN_ID || 0),
+              esito: process.env.ESITO || "sconosciuto",
+            };
+            try {
+              const j = JSON.parse(fs.readFileSync("rete/stato.json", "utf8"));
+              o.ok = j.ok === undefined ? null : j.ok;
+              o.controlli = Array.isArray(j.controlli) ? j.controlli.length : (Array.isArray(j.risultati) ? j.risultati.length : null);
+            } catch (e) { o.ok = null; }
+            const contenuto = JSON.stringify(o, null, 1) + "\n";
+            const percorso = "rete/emergent.json";
+            (async () => {
+              for (let i = 1; i <= 5; i++) {
+                const g = await api("/repos/" + process.env.REPO + "/contents/" + percorso + "?ref=main", "GET");
+                const corpo = { message: "stato: " + o.supervisore + " (freschezza, run " + o.runId + ")", content: b64(contenuto), branch: "main" };
+                if (g.stato === 200 && g.j && g.j.sha) corpo.sha = g.j.sha;
+                const p = await api("/repos/" + process.env.REPO + "/contents/" + percorso, "PUT", corpo);
+                if (p.stato === 200 || p.stato === 201) {
+                  console.log("stato scritto: " + percorso + " · commit " + String((p.j && p.j.commit && p.j.commit.sha) || "").slice(0, 8));
+                  process.exit(0);
+                }
+                console.log("tentativo " + i + " HTTP " + p.stato + " " + String((p.j && p.j.message) || ""));
+                await new Promise((r) => setTimeout(r, 2000 * i));
+              }
+              console.error("::error::stato non scritto dopo 5 tentativi: " + percorso);
+              process.exit(1);
+            })();
+          '
