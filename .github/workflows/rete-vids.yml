@@ -6,7 +6,7 @@ on:
   # diradata (la chiama la veglia, cron Cloudflare */5, quando l'ultimo giro è troppo vecchio).
   repository_dispatch:
     types: [rete-vids-giro]
-permissions: {contents: read}
+permissions: {contents: write}
 concurrency: {group: rete-vids, cancel-in-progress: false}
 jobs:
   vids:
@@ -18,7 +18,33 @@ jobs:
         with: {node-version: "22"}
       - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
       - env: {ONLY: vids, FFMPEG: ffmpeg, FFPROBE: ffprobe}
+        id: gate
         run: node rete/collaudo.mjs
       - if: always()
         uses: actions/upload-artifact@v4
         with: {name: rete-vids-stato, path: rete/stato.json, retention-days: 30}
+
+      # ── FRESCHEZZA (15/11/2026) ───────────────────────────────────────────────────
+      # Il gate collaudo di rete-vids gira una volta al giorno; questa riga e il suo battito.
+      # Prima di questo passo l'artefatto era SOLO l'allegato di run: la sua eta' non era
+      # misurabile con l'API dei commit, e la veglia poteva guardare soltanto l'ultima run
+      # (garanzia piu' debole: un run verde non dice che il gate abbia davvero guardato oggi).
+      # `if: always()`: il battito si scrive ANCHE se il gate e' rosso — un supervisore rotto
+      # deve restare misurabile, altrimenti il guasto sparisce insieme al suo stato.
+      - name: Stato minuscolo (freschezza)
+        if: always()
+        env:
+          ESITO: ${{ steps.gate.outcome }}
+        run: |
+          node -e 'const fs=require("fs");const o={supervisore:"rete-vids",ultimoGiro:new Date().toISOString(),runId:Number(process.env.GITHUB_RUN_ID||0),esito:process.env.ESITO||"sconosciuto"};try{const j=JSON.parse(fs.readFileSync("rete/stato.json","utf8"));o.ok=j.ok??null;o.controlli=Array.isArray(j.controlli)?j.controlli.length:(Array.isArray(j.risultati)?j.risultati.length:null);}catch(e){o.ok=null;}fs.writeFileSync("rete/vids.json",JSON.stringify(o,null,1)+"\n");'
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add rete/vids.json
+          if git diff --cached --quiet; then echo "invariato"; exit 0; fi
+          git commit -m "stato: rete-vids (freschezza, run $GITHUB_RUN_ID)"
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main 2>/dev/null || { git rebase --abort 2>/dev/null; true; }
+            git push origin HEAD:main && exit 0
+            sleep 5
+          done
+          echo "::error::stato rete-vids non pushato dopo 5 tentativi"; exit 1
