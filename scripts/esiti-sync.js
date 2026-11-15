@@ -6,6 +6,9 @@
 const fs = require('fs');
 const path = require('path');
 const FEED = path.join(process.cwd(), 'feed');
+// 15/11/2026 — CANARY dei feed: scritto dal GENERATORE, mai patchato nel JSON.
+const CANARY = 'care-canary-d2c32afaa5d5';
+const CANARY_NOTA = 'valore di riconoscimento della copia dei dati';
 const OUT = { esiti: path.join(FEED, 'esiti-statistiche.json'), indice: path.join(FEED, 'ca-re-index-esiti.json'), report: path.join(FEED, 'esiti-report.json') };
 const read = (p, d) => { try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch (e) { return d; } };
 const w = (p, o) => fs.writeFileSync(p, JSON.stringify(o));
@@ -94,9 +97,9 @@ const regioneDi = (t, mappa) => (mappa && mappa[t]) || null;
   // `generato` e' quindi quello della misura, non un'ora messa a caso su dati vecchi.
   const rilevazione = new Date().toISOString();
   const rilevazioneNota = 'istante della normalizzazione nella stessa run della raccolta: fallco-aggiudicazioni.js e ivg-aggiudicazioni.js girano pochi minuti prima, in questo stesso job';
-  const stat = { generato: rilevazione, categoria: 'immobiliare', tutti: allAwards, fonte: fonteArr, fonteTesto, fonteUrl: fonteArr.length === 1 ? fonteArr[0].url : null, fontiSenzaUrl, rilevazione, rilevazioneNota, copertura, nazionale: { conteggio: lista.length, mediana, media, min: prezzi[0] || null, max: prezzi[prezzi.length - 1] || null }, fonti, perAnno: sint(perAnno), perMese: sint(perMese), perTribunale: sint(perTrib), perRegione: sint(perReg), limiti: ['Non tutte le aste pubblicano il prezzo finale: la copertura è dichiarata', 'Il prezzo base non è disponibile per tutti i record: lo sconto base→aggiudicazione è calcolato solo dove esiste', 'Le aste mobiliari senza tribunale sono escluse da questo indice'] };
+  const stat = { meta: { canary: CANARY, canaryNota: CANARY_NOTA }, generato: rilevazione, categoria: 'immobiliare', tutti: allAwards, fonte: fonteArr, fonteTesto, fonteUrl: fonteArr.length === 1 ? fonteArr[0].url : null, fontiSenzaUrl, rilevazione, rilevazioneNota, copertura, nazionale: { conteggio: lista.length, mediana, media, min: prezzi[0] || null, max: prezzi[prezzi.length - 1] || null }, fonti, perAnno: sint(perAnno), perMese: sint(perMese), perTribunale: sint(perTrib), perRegione: sint(perReg), limiti: ['Non tutte le aste pubblicano il prezzo finale: la copertura è dichiarata', 'Il prezzo base non è disponibile per tutti i record: lo sconto base→aggiudicazione è calcolato solo dove esiste', 'Le aste mobiliari senza tribunale sono escluse da questo indice'] };
   w(OUT.esiti, stat);
-  w(OUT.indice, { generato: stat.generato, indice: { conteggio: lista.length, mediana, media }, copertura, perTribunale: stat.perTribunale, perRegione: stat.perRegione, fonte: fonteArr, fonteTesto, rilevazione, rilevazioneNota, nota: 'CAReIndex — prezzi di aggiudicazione reali, con copertura dichiarata' });
+  w(OUT.indice, { meta: { canary: CANARY, canaryNota: CANARY_NOTA }, generato: stat.generato, indice: { conteggio: lista.length, mediana, media }, copertura, perTribunale: stat.perTribunale, perRegione: stat.perRegione, fonte: fonteArr, fonteTesto, rilevazione, rilevazioneNota, nota: 'CAReIndex — prezzi di aggiudicazione reali, con copertura dichiarata' });
   w(OUT.report, { generato: stat.generato, recordTotale: tutti.length, awards: allAwards, immobiliari: lista.length, scartati: tutti.length - lista.length, fonti, fonte: fonteArr, fonteTesto, rilevazione, rilevazioneNota, copertura, esempi: lista.slice(-3) });
   // aggiorna statistiche senza inventare: aggiudicate = award reali; deserte/sospese restano dalla rilevazione precedente
   const stats = read(path.join(FEED, 'statistiche.json'), {});
@@ -108,9 +111,10 @@ const regioneDi = (t, mappa) => (mappa && mappa[t]) || null;
   stats.esitiFonte = fonteTesto;
   stats.esitiCopertura = Object.assign({}, copertura, { esiti: allAwards, immobiliari: lista.length, giorni: giorniCop });
   stats.esitiMotivo = null;
+  stats.meta = Object.assign({}, stats.meta || {}, { canary: CANARY, canaryNota: CANARY_NOTA });
   stats.esitiUltimaRilevazione = { data: al || new Date().toISOString().slice(0, 10), aggiudicate: allAwards, immobiliari: lista.length, deserte: nuoveEsiti.deserte, sospese: nuoveEsiti.sospese, verificati: lista.length + nuoveEsiti.deserte + nuoveEsiti.sospese, nota: 'prezzi di aggiudicazione pubblici: ' + allAwards + ' (immobiliari ' + lista.length + ') con copertura ' + dal + ' → ' + al };
   w(path.join(FEED, 'statistiche.json'), stats);
-  w(path.join(FEED, 'andamento-esiti.json'), { generato: stat.genero || stat.generato, esiti: nuoveEsiti, copertura: Object.assign({}, copertura, { esiti: allAwards, immobiliari: lista.length, giorni: giorniCop }), nota: 'esiti reali da fonti pubbliche — copertura dichiarata, nessun numero inventato' });
-  w(path.join(FEED, 'esiti-monitor.json'), Object.assign({}, monOld, { generato: stat.generato, copertura: Object.assign({}, monOld.copertura || {}, copertura, { esiti: allAwards, immobiliari: lista.length, giorni: giorniCop }), nota: 'Aggiornato da esiti-sync: ' + allAwards + ' prezzi (immobiliari ' + lista.length + ') di aggiudicazione pubblici; fonti ' + JSON.stringify(fonti) }));
+  w(path.join(FEED, 'andamento-esiti.json'), { meta: { canary: CANARY, canaryNota: CANARY_NOTA }, generato: stat.genero || stat.generato, esiti: nuoveEsiti, copertura: Object.assign({}, copertura, { esiti: allAwards, immobiliari: lista.length, giorni: giorniCop }), nota: 'esiti reali da fonti pubbliche — copertura dichiarata, nessun numero inventato' });
+  w(path.join(FEED, 'esiti-monitor.json'), Object.assign({}, monOld, { meta: Object.assign({}, monOld.meta || {}, { canary: CANARY, canaryNota: CANARY_NOTA }), generato: stat.generato, copertura: Object.assign({}, monOld.copertura || {}, copertura, { esiti: allAwards, immobiliari: lista.length, giorni: giorniCop }), nota: 'Aggiornato da esiti-sync: ' + allAwards + ' prezzi (immobiliari ' + lista.length + ') di aggiudicazione pubblici; fonti ' + JSON.stringify(fonti) }));
   console.log('ESITI', allAwards, 'totali; immobiliari', lista.length, 'prezzi; mediana', mediana, 'media', media, 'copertura', dal, '→', al, 'tribunali', copertura.tribunali, 'fonti', fonti);
 })();
