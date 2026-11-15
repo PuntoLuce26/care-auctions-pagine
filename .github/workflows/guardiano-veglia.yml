@@ -1,0 +1,166 @@
+name: guardiano-veglia
+
+# CHI GUARDA IL GUARDIANO — creato il 15/11/2026.
+#
+# La veglia Cloudflare (`icare-veglia`, cron */5) misura la freschezza dei supervisori: se un
+# supervisore tace, lei lo dice e lo sveglia. Ma se si ferma LEI, nessuno se ne accorge — e un
+# worker che risponde 200 con il cron spento è il modo peggiore di fallire (trappola misurata
+# il 12/11/2026). Questo workflow vive su un'ALTRA piattaforma (GitHub Actions) e guarda il
+# battito della veglia: se `ultimoGiro` è più vecchio di 30 minuti apre/aggiorna UNA issue
+# `[VEGLIA]` — una sola, aggiornata a ogni giro, mai una per giro — e scrive il suo stato in
+# `stato/guardiano-veglia.json`, che è a sua volta un artefatto misurabile (la veglia
+# sorveglia anche questo workflow: è l'undicesima voce del registro).
+#
+# FONTE DELLA VERITÀ: GET https://icare-veglia.misty-mode-1cbc.workers.dev/salute → `ultimoGiro`.
+# Endpoint pubblico di sola lettura: qui non serve nessun secret (solo il GITHUB_TOKEN del repo
+# per l'issue e per il commit).
+
+on:
+  schedule:
+    # Ogni 2 ore, minuto 17: sfalsato dagli altri cron del repo (che partono a :00, :05, :30).
+    - cron: "17 */2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: guardiano-veglia
+  cancel-in-progress: false
+
+jobs:
+  guardia:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      VEGLIA_URL: https://icare-veglia.misty-mode-1cbc.workers.dev
+      SOGLIA_MIN: "30"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # 1) MISURA. Scrive lo stato su file SEMPRE (anche se la veglia non risponde), perché
+      #    «non ho potuto leggere» è un esito, non un'assenza: senza il file, il guardiano
+      #    diventerebbe l'ennesimo processo che tace quando si rompe.
+      - name: Legge /salute della veglia e scrive lo stato
+        id: check
+        run: |
+          node -e '
+            const fs = require("fs");
+            const soglia = Number(process.env.SOGLIA_MIN || 30);
+            const base = { ultimoGiro: new Date().toISOString(), sogliaMin: soglia, runId: Number(process.env.GITHUB_RUN_ID || 0) };
+            const scrivi = (o) => {
+              fs.writeFileSync("stato/guardiano-veglia.json", JSON.stringify(o, null, 1) + "\n");
+              const g = (k, v) => fs.appendFileSync(process.env.GITHUB_OUTPUT, k + "=" + String(v).replace(/\n/g, " ") + "\n");
+              g("stato", o.stato); g("motivo", o.motivo); g("etaMin", o.veglia.etaMin ?? ""); g("salute", JSON.stringify(o.veglia));
+            };
+            (async () => {
+              let r, j;
+              try {
+                r = await fetch(process.env.VEGLIA_URL + "/salute", { headers: { "User-Agent": "guardiano-veglia/1.0" } });
+                j = r.ok ? await r.json() : null;
+              } catch (e) {
+                scrivi({ ...base, stato: "irraggiungibile", motivo: "rete: " + String(e && e.message || e).slice(0, 120), veglia: { ok: false, ultimoGiro: null, etaMin: null } });
+                return;
+              }
+              if (!j || !j.ultimoGiro) {
+                scrivi({ ...base, stato: "ferma", motivo: "la veglia risponde " + r.status + " ma non dichiara `ultimoGiro` (mai girata o KV vuoto)", veglia: { ok: false, ultimoGiro: null, etaMin: null, processi: j && j.processi } });
+                return;
+              }
+              const eta = Math.round(((Date.now() - Date.parse(j.ultimoGiro)) / 60000) * 10) / 10;
+              const totale = j.totali || null;
+              const sup = Array.isArray(j.supervisori) ? j.supervisori.map((v) => ({ nome: v.nome, stato: v.stato, etaMin: v.etaMin, sogliaMin: v.sogliaMin, sveglieOggi: v.sveglieOggi, ultimoEsito: v.ultimoEsito })) : [];
+              scrivi({ ...base, stato: eta > soglia ? "ferma" : "ok", motivo: eta > soglia ? "ultimo giro " + eta + " min fa > soglia " + soglia : "", veglia: { ok: true, ultimoGiro: j.ultimoGiro, etaMin: eta, sogliaMin: soglia, processi: j.processi, dispatchOggi: j.dispatchOggi, totali: totale, supervisori: sup } });
+            })();
+          '
+
+      # 2) UNA SOLA ISSUE. Si cerca per titolo (non per etichetta: un'etichetta assente fa
+      #    fallire la creazione con 422 e l'allarme si perderebbe). Se la veglia è sana e
+      #    un'issue [VEGLIA] è aperta, si commenta «rientrato» e si chiude.
+      - name: Issue [VEGLIA] — aperta o aggiornata, mai una per giro
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          STATO: ${{ steps.check.outputs.stato }}
+          MOTIVO: ${{ steps.check.outputs.motivo }}
+          ETA_MIN: ${{ steps.check.outputs.etaMin }}
+          SALUTE: ${{ steps.check.outputs.salute }}
+          REPO: ${{ github.repository }}
+        run: |
+          node -e '
+            const H = { Authorization: "Bearer " + process.env.GH_TOKEN, Accept: "application/vnd.github+json", "User-Agent": "guardiano-veglia/1.0", "X-GitHub-Api-Version": "2022-11-28", "Content-Type": "application/json" };
+            const TITOLO = "[VEGLIA] la veglia dei supervisori è ferma";
+            const api = async (p, metodo, corpo) => {
+              const r = await fetch("https://api.github.com" + p, { method: metodo || "GET", headers: H, body: corpo ? JSON.stringify(corpo) : undefined });
+              const t = await r.text();
+              let j = null; try { j = t ? JSON.parse(t) : null; } catch (e) {}
+              return { stato: r.status, j };
+            };
+            (async () => {
+              const stato = process.env.STATO || "sconosciuto";
+              let salute = {}; try { salute = JSON.parse(process.env.SALUTE || "{}"); } catch (e) {}
+              const sup = Array.isArray(salute.supervisori) ? salute.supervisori : [];
+              const righe = sup.length
+                ? ["| supervisore | stato | età | soglia | sveglie oggi | ultimo esito |", "|---|---|---|---|---|---|"].concat(
+                    sup.map((v) => "| " + v.nome + " | " + v.stato + " | " + (v.etaMin === null || v.etaMin === undefined ? "—" : Math.round(v.etaMin) + " min") + " | " + v.sogliaMin + " min | " + (v.sveglieOggi ?? 0) + " | " + (v.ultimoEsito || "—") + " |"))
+                : ["_La veglia non ha risposto: la tabella dei supervisori non è disponibile._"];
+              const corpo = [
+                "**Guardiano della veglia** — rilevazione del " + new Date().toISOString(),
+                "",
+                "- esito: **" + stato + "**",
+                "- motivo: " + (process.env.MOTIVO || "—"),
+                "- ultimo battito della veglia: " + (salute.ultimoGiro || "non letto") + (process.env.ETA_MIN ? " (età " + process.env.ETA_MIN + " min)" : ""),
+                "- soglia: 30 minuti · fonte: `icare-veglia` `/salute`",
+                "",
+                ...righe,
+                "",
+                "---",
+                "Se il battito è fermo da più di 30 minuti: il cron Cloudflare della veglia non sta girando.",
+                "Prima di intervenire, controllare `GET /accounts/<acc>/workers/scripts/icare-veglia/schedules` (un cron spento non si vede in nessuna risposta HTTP).",
+                "Questa issue è UNA sola: viene aggiornata a ogni giro, non duplicata.",
+              ].join("\n");
+              const elenco = await api("/repos/" + process.env.REPO + "/issues?state=open&per_page=100");
+              const aperta = (elenco.j || []).find((i) => typeof i.title === "string" && i.title.indexOf("[VEGLIA]") === 0);
+              if (stato === "ok") {
+                if (aperta) {
+                  await api("/repos/" + process.env.REPO + "/issues/" + aperta.number + "/comments", "POST", { body: "Rientrato: la veglia ha battuto a " + (salute.ultimoGiro || "?") + " (età " + process.env.ETA_MIN + " min, soglia 30). Chiudo." });
+                  await api("/repos/" + process.env.REPO + "/issues/" + aperta.number, "PATCH", { state: "closed" });
+                  console.log("veglia sana: issue #" + aperta.number + " chiusa");
+                } else {
+                  console.log("veglia sana, nessuna issue aperta");
+                }
+                return;
+              }
+              if (aperta) {
+                const r = await api("/repos/" + process.env.REPO + "/issues/" + aperta.number, "PATCH", { body: corpo });
+                console.log("issue #" + aperta.number + " aggiornata · HTTP " + r.stato);
+              } else {
+                const r = await api("/repos/" + process.env.REPO + "/issues", "POST", { title: TITOLO, body: corpo });
+                console.log("issue creata: #" + (r.j && r.j.number) + " · HTTP " + r.stato);
+                if (r.stato >= 400) process.exitCode = 1;
+              }
+            })();
+          '
+
+      # 3) COMMIT dello stato. È l'artefatto che rende misurabile QUESTO workflow: se il
+      #    guardiano smette di girare, la veglia lo vede dalla sua età (undicesima voce).
+      - name: Commit stato/guardiano-veglia.json
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add stato/guardiano-veglia.json
+          if git diff --cached --quiet; then echo "invariato"; exit 0; fi
+          git commit -m "stato: guardiano-veglia (${{ steps.check.outputs.stato }} · run $GITHUB_RUN_ID)"
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main 2>/dev/null || { git rebase --abort 2>/dev/null; true; }
+            git push origin HEAD:main && exit 0
+            sleep 5
+          done
+          echo "::error::stato/guardiano-veglia.json non pushato dopo 5 tentativi"; exit 1
