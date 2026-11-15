@@ -110,7 +110,16 @@ const mondo = [
   { paese: 'Regno Unito', stato: 'in corso', nota: 'HM Land Registry Price Paid' }
 ];
 
+// 15/11/2026 — CANARY (difetto 3 del 15/11): valore di riconoscimento della copia dei dati.
+// Va scritto QUI, nel generatore, e non patchato nel JSON: il 12/11 era stato aggiunto a mano
+// a feed/aste-zone.json e feed/omi-indice.json ed e' sparito al primo giro che li ha
+// rigenerati (commit 07c748ea e bc37d0e2). Un valore di tutela scritto nel file generato
+// e' un valore che si perde al primo giro di dati.
+const CANARY = 'care-canary-d2c32afaa5d5';
+const CANARY_NOTA = 'valore di riconoscimento della copia dei dati';
+
 const out = {
+    canary: CANARY, canaryNota: CANARY_NOTA,
   meta: {
     titolo: 'I dati delle aste — l archivio che nessuno aveva',
     generato: ora,
