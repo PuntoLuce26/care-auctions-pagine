@@ -19,6 +19,7 @@
 // Si autolimita a un giro ogni 12 h (la data cambia, il contenuto no).
 import fs from 'node:fs';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 
 const FEED = process.env.FEED_DIR || 'feed';
 const FILE = path.join(FEED, 'pagine91.json');
@@ -43,9 +44,9 @@ const conStampa = lingue.filter(k => dati[k] && dati[k].stampa).length;
 if (lingue.length < 80) { console.log('pagine91: solo ' + lingue.length + ' lingue — non scrivo (un file troncato sarebbe peggio di un file vecchio)'); process.exit(0); }
 
 // ultimoCambio: si conserva, e avanza solo se i contenuti sono davvero diversi
-const impronta = (o) => { const c = {}; for (const k of Object.keys(o)) if (k !== '_meta') c[k] = o[k]; return JSON.stringify(c); };
+const impronta = (o) => { const c = {}; for (const k of Object.keys(o)) if (k !== '_meta') c[k] = o[k]; return createHash('sha256').update(JSON.stringify(c)).digest('hex').slice(0, 16); };
 const prima = meta.impronta || null;
-const ora = impronta(dati);
+const ora = impronta(dati);   // hash del contenuto (non una copia: peserebbe il doppio del file)
 const cambiato = !prima || prima !== ora;
 
 const out = Object.assign({}, dati, {
