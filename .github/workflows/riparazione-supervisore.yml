@@ -1,0 +1,125 @@
+name: riparazione-supervisore
+
+# RIPARAZIONE RESA VISIBILE — creato il 15/11/2026.
+#
+# PERCHÉ: la veglia `icare-veglia` sveglia il supervisore stantio. Se il supervisore si sveglia
+# e NON scrive, la voce passa da «stantio» a «svegliato» e l'allarme resta muto: nessuno ripara.
+# Questo workflow è il passo 3 della scala di escalation. La veglia lo chiama con
+# `repository_dispatch` tipo `ripara-supervisore` e payload `{nome, repo, workflow, artefatto}`.
+#
+# COSA FA: legge l'ultima run fallita (o l'ultima completata, se le run sono verdi e l'artefatto
+# è fermo), scarica il log e cerca l'ERRORE VERO, scrive `stato/riparazione/<nome>.json`, e apre
+# UNA issue `[RIPARAZIONE] <nome>` — aggiornandola se esiste già (anche se era chiusa).
+#
+# COSA NON FA: NON applica patch. La riparazione è del proprietario di quel workflow: un
+# guardiano che ripara da solo nasconde il guasto dentro di sé.
+#
+# ADDITIVO: file nuovo e indipendente. Non modifica qa.yml, prerender.yml, feed-sync.yml né altri.
+#
+# ESITO: il job è verde quando la riparazione è stata RESA VISIBILE (issue aperta o aggiornata) e
+# `stato/riparazione/<nome>.json` è stato scritto. Il rosso significa «non ho potuto rendere
+# visibile», non «il supervisore è rotto».
+
+on:
+  repository_dispatch:
+    types: [ripara-supervisore]
+  workflow_dispatch:
+    inputs:
+      nome:
+        description: "voce della veglia (es. verifica-canonical)"
+        required: true
+        type: string
+      repo:
+        description: "repo del workflow sorvegliato"
+        required: false
+        type: string
+        default: "PuntoLuce26/care-auctions-pagine"
+      workflow:
+        description: "file del workflow sorvegliato (es. verifica-canonical.yml)"
+        required: true
+        type: string
+      artefatto:
+        description: "percorso dell'artefatto sorvegliato (es. qa/canonical.json)"
+        required: false
+        type: string
+        default: ""
+
+permissions:
+  contents: write
+  issues: write
+  actions: read
+
+concurrency:
+  group: riparazione-supervisore
+  cancel-in-progress: false
+
+jobs:
+  ripara:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # Il payload del repository_dispatch e gli input del workflow_dispatch arrivano qui:
+      # un solo posto in cui si legge il contratto della veglia.
+      - name: Leggi il payload della veglia
+        run: |
+          NOME="${{ github.event.client_payload.nome || inputs.nome }}"
+          REPO="${{ github.event.client_payload.repo || inputs.repo }}"
+          WF="${{ github.event.client_payload.workflow || inputs.workflow }}"
+          ART="${{ github.event.client_payload.artefatto || inputs.artefatto }}"
+          MOTIVO="${{ github.event.client_payload.motivo }}"
+          ETA="${{ github.event.client_payload.etaMinuti }}"
+          SOGLIA="${{ github.event.client_payload.sogliaMin }}"
+          if [ -z "$NOME" ]; then
+            echo "::error::payload senza 'nome': non so quale voce riparare"
+            exit 1
+          fi
+          {
+            echo "RIP_NOME=$NOME"
+            echo "RIP_REPO=${REPO:-PuntoLuce26/care-auctions-pagine}"
+            echo "RIP_WORKFLOW=$WF"
+            echo "RIP_ARTEFATTO=$ART"
+            echo "RIP_MOTIVO=$MOTIVO"
+            echo "RIP_ETA=$ETA"
+            echo "RIP_SOGLIA=$SOGLIA"
+          } >> "$GITHUB_ENV"
+          echo "voce: $NOME · workflow: $WF · artefatto: $ART"
+
+      - name: Leggi l'ultima run, il log, e apri/aggiorna UNA issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/riparazione-supervisore.mjs
+
+      # Lo stato è un ARTEFATTO del giro: si committa SEMPRE, anche se l'issue non è stata aperta
+      # (un referto che dice «non ho potuto leggere il log» è più utile del silenzio).
+      - name: Commit stato/riparazione/<nome>.json
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add stato/riparazione
+          if git diff --cached --quiet; then
+            echo "stato/riparazione invariato: nessun commit"
+            exit 0
+          fi
+          git commit -m "riparazione: stato per ${RIP_NOME}"
+          PUSH_OK=0
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main 2>/dev/null || { git rebase --abort 2>/dev/null; true; }
+            if git push origin HEAD:main; then PUSH_OK=1; break; fi
+            sleep 4
+          done
+          if [ "$PUSH_OK" -ne 1 ]; then
+            echo "::error::push di stato/riparazione non riuscito dopo 5 tentativi"
+            exit 1
+          fi
+          echo "committato: $(git rev-parse --short HEAD)"
