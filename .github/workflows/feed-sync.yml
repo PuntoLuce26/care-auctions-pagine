@@ -59,6 +59,10 @@ jobs:
           # Lo script si autolimita a un giro ogni 20 h (la serie e' giornaliera): gli shard
           # regionali sono gia' nel checkout, quindi legge i file locali senza scaricare nulla.
           node scripts/careindex-serie.mjs || echo "careindex serie: non rigenerata"
+          # 15/11/2026 — difetto 4: feed/pagine91.json non aveva alcun campo data ed era
+          # fermo da 144,8 h. Nessun generatore nel repo lo toccava: questo e' il custode,
+          # verifica la forma (91 lingue con ilive+stampa), conserva il contenuto e batte la data.
+          node scripts/pagine91-aggiorna.mjs || echo "pagine91: non aggiornato"
           # 5.915: report mensile certificato, una volta al giorno (ore 02 UTC)
           if [ "$H" = "02" ]; then node scripts/report-mensile.js || echo "report mensile: non generato"; fi
           if [ "$MODE" = "full" ]; then
