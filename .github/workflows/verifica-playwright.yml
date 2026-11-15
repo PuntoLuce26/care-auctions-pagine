@@ -76,9 +76,10 @@ jobs:
       - name: Stato minuscolo (freschezza)
         if: always()
         env:
-          ESITO: { rotte: "${{ steps.rotte.outcome }}", lingue: "${{ steps.lingue.outcome }}" }
+          ESITO_ROTTE: ${{ steps.rotte.outcome }}
+          ESITO_LINGUE: ${{ steps.lingue.outcome }}
         run: |
-          node -e 'const fs=require("fs");const o={supervisore:"verifica-playwright",ultimoGiro:new Date().toISOString(),runId:Number(process.env.GITHUB_RUN_ID||0),esito:process.env.ESITO||"sconosciuto"};try{const j=JSON.parse(fs.readFileSync("rete/stato.json","utf8"));o.ok=j.ok??null;o.controlli=Array.isArray(j.controlli)?j.controlli.length:(Array.isArray(j.risultati)?j.risultati.length:null);}catch(e){o.ok=null;}fs.writeFileSync("perf/verifica-playwright.json",JSON.stringify(o,null,1)+"\n");'
+          node -e 'const fs=require("fs");const o={supervisore:"verifica-playwright",ultimoGiro:new Date().toISOString(),runId:Number(process.env.GITHUB_RUN_ID||0),esito:"rotte="+(process.env.ESITO_ROTTE||"?")+" lingue="+(process.env.ESITO_LINGUE||"?")};try{const j=JSON.parse(fs.readFileSync("rete/stato.json","utf8"));o.ok=j.ok??null;o.controlli=Array.isArray(j.controlli)?j.controlli.length:(Array.isArray(j.risultati)?j.risultati.length:null);}catch(e){o.ok=null;}fs.writeFileSync("perf/verifica-playwright.json",JSON.stringify(o,null,1)+"\n");'
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add perf/verifica-playwright.json
