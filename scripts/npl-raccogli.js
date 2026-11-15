@@ -329,6 +329,8 @@ function conta(arr, f) {
   const sommaBase = lotti.reduce((s, x) => s + (x.prezzoBase || 0), 0);
 
   const meta = {
+    canary: 'care-canary-d2c32afaa5d5',
+    canaryNota: 'valore di riconoscimento della copia dei dati',
     titolo: "NPL's — crediti in sofferenza e crediti in procedura (dati veri dal PVP)",
     generatoIl: new Date().toISOString(),
     aggiornato: oggi,
@@ -378,6 +380,8 @@ function conta(arr, f) {
   const fiscDate = fiscali.map(x => x.data).filter(Boolean).sort();
 
   const metaFiscali = {
+    canary: 'care-canary-d2c32afaa5d5',
+    canaryNota: 'valore di riconoscimento della copia dei dati',
     titolo: 'Crediti fiscali',
     sottotitolo: 'Crediti d\'imposta e tributari ceduti nelle procedure concorsuali (dati veri dal PVP)',
     generatoIl: new Date().toISOString(),
