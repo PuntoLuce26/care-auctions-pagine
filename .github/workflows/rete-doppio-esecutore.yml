@@ -1,0 +1,109 @@
+name: rete-doppio-esecutore
+
+# RETE+ — DOPPIO ESECUTORE (il pezzo che rende la ridondanza vera)
+#
+# Esegue lo STESSO lavoro ffmpeg su due esecutori indipendenti e confronta gli esiti:
+#   A) GitHub Actions — ffmpeg del runner (esecutore storico)
+#   B) Cloudflare Containers — container `esecutore-b` con ffmpeg (seconda infrastruttura)
+#
+# Scrive `rete/doppio-esecutore.json`:
+#   { eseguito, A:{sha,versione,durataMs}, B:{sha,versione,durataMs}, verdetto, cadenza }
+# Verdetto: COERENTE (sha uguali) · INCOERENTE (sha diversi, si dichiara con le due
+# versioni di ffmpeg) · B_NON_DISPONIBILE (nessuna ridondanza: 0 esecutori su 2).
+#
+# Il job FALLISCE (rosso) se l'esecutore B non risponde: con un solo esecutore la
+# ridondanza è 0 su 1 e il rosso è l'informazione giusta, non un guasto del workflow.
+#
+# Comando:
+#   GH_TOKEN=$(cat careauctions/.tools/github-token.txt) gh workflow run rete-doppio-esecutore.yml \
+#     -R PuntoLuce26/care-auctions-pagine -f esecutore_b_url=https://esecutore-b.<sub>.workers.dev
+
+on:
+  workflow_dispatch:
+    inputs:
+      esecutore_b_url:
+        description: 'URL base dell esecutore B (vuoto = si usa rete/esecutore-b.json)'
+        type: string
+        required: false
+        default: ''
+  schedule:
+    # una volta al giorno; la cadenza dichiarata nel referto è questa
+    - cron: '0 4 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: rete-doppio-esecutore
+  cancel-in-progress: false
+
+jobs:
+  doppio:
+    name: A (actions) vs B (containers)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      ESECUTORE_B_URL: ${{ inputs.esecutore_b_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: ffmpeg dell'esecutore A (versione misurata)
+        run: |
+          set -euo pipefail
+          ffmpeg -version | head -1
+          node --check scripts/rete-doppio-esecutore.mjs
+
+      - name: Esegui lo stesso lavoro su A e su B
+        id: esegui
+        continue-on-error: true
+        run: |
+          set +e
+          node scripts/rete-doppio-esecutore.mjs
+          echo "exit=$?" >> "$GITHUB_OUTPUT"
+
+      - name: Commit rete/doppio-esecutore.json (race-safe)
+        run: |
+          set -euo pipefail
+          if [ -z "$(git status --porcelain rete/doppio-esecutore.json)" ]; then
+            echo "nessuna variazione da committare"
+            exit 0
+          fi
+          git config user.name "rete-doppio-esecutore[bot]"
+          git config user.email "info@puntoluce26.com"
+          git add rete/doppio-esecutore.json
+          git commit -m "rete: doppio esecutore $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3 4 5; do
+            if git push; then
+              echo "pushato al tentativo $i"
+              exit 0
+            fi
+            git pull --rebase --autostash
+          done
+          echo "KO: push non riuscito dopo 5 tentativi"
+          exit 1
+
+      - name: Artefatto del giro
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rete-doppio-esecutore
+          path: rete/doppio-esecutore.json
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Verdetto
+        run: |
+          set -euo pipefail
+          node -e 'const j=require("./rete/doppio-esecutore.json");console.log("VERDETTO:", j.verdetto);console.log("A:", j.A.sha, j.A.versione);console.log("B:", j.B.sha, j.B.versione||"", j.B.errore||"")'
+          ESITO="${{ steps.esegui.outputs.exit }}"
+          echo "exit del dispatcher: $ESITO"
+          if [ "$ESITO" != "0" ]; then
+            echo "KO: la Rete+ non ha girato su due esecutori (exit $ESITO). Con un solo esecutore la ridondanza è 0 su 2."
+            exit 1
+          fi
