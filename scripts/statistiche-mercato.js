@@ -195,7 +195,13 @@ const topCategorie = [...categorie.entries()].sort((a, b) => b[1] - a[1]);
 const TOTCAT = topCategorie.reduce((s, [, n]) => s + n, 0);
 
 const nomiGiorni = ['domenica', 'lunedi', 'martedi', 'mercoledi', 'giovedi', 'venerdi', 'sabato'];
+// 15/11/2026 — CANARY (difetto 3 del 15/11): valore di riconoscimento della copia dei dati.
+// Nel generatore, non nel JSON: un valore patchato nel file generato si perde al primo giro.
+const CANARY = 'care-canary-d2c32afaa5d5';
+const CANARY_NOTA = 'valore di riconoscimento della copia dei dati';
+
 const out = {
+    canary: CANARY, canaryNota: CANARY_NOTA,
   meta: {
     generato: new Date().toISOString(),
     fonte: FONTE,
