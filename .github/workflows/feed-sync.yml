@@ -55,6 +55,10 @@ jobs:
           node scripts/numeri-vivi.js || echo "numeri vivi: non rigenerati in questo giro"
           node scripts/statistiche-mercato.js || echo "statistiche mercato: non aggiornate in questo giro"
           node scripts/idmap-sitemap.js || echo "idmap/citymap/sitemap: non rigenerati in questo giro"
+          # 15/11/2026 — difetto 5: /ca-re-index chiede /feed/careindex-serie.json e riceveva 404.
+          # Lo script si autolimita a un giro ogni 20 h (la serie e' giornaliera): gli shard
+          # regionali sono gia' nel checkout, quindi legge i file locali senza scaricare nulla.
+          node scripts/careindex-serie.mjs || echo "careindex serie: non rigenerata"
           # 5.915: report mensile certificato, una volta al giorno (ore 02 UTC)
           if [ "$H" = "02" ]; then node scripts/report-mensile.js || echo "report mensile: non generato"; fi
           if [ "$MODE" = "full" ]; then
