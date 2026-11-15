@@ -1,0 +1,90 @@
+name: indexnow-priorita
+# Spintex ESPLICITO delle ~200 URL che contano su IndexNow (Bing & co.).
+# Perche': scripts/indexnow-daily.mjs spinge 10.000 URL al giorno A ROTAZIONE (dispersione su
+# un catalogo di decine di migliaia di URL). ChatGPT search e Perplexity si appoggiano in larga
+# parte all'indice di Bing: servono poche pagine giuste, spedite esplicitamente e VERIFICATE.
+#
+# Regola: si spedisce solo una URL che risponde 200, non e' noindex e ha la canonica coerente.
+# Quelle che falliscono NON si spediscono e finiscono dichiarate in stato/indexnow-priorita.json.
+#
+# Cosa questo workflow NON puo' dire: se Bing le ha INDICIZZATE. IndexNow restituisce 200/202
+# ("accettate"): l'indicizzazione si misura solo con la Bing Webmaster API (serve una API key,
+# che nel repo non c'e').
+
+on:
+  schedule:
+    - cron: '20 6 * * *'   # ogni giorno alle 06:20 UTC (dopo indexnow-daily delle 05:30)
+  workflow_dispatch: {}
+  repository_dispatch:
+    types: [indexnow-priorita-giro]
+
+permissions:
+  contents: write
+
+# un solo giro alla volta: due run che scrivono lo stesso stato si scontrerebbero sul push
+concurrency:
+  group: indexnow-priorita
+  cancel-in-progress: false
+
+jobs:
+  indexnow-priorita:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: controlla lo script
+        run: node --check scripts/indexnow-priorita.mjs
+
+      - name: costruisce, verifica e spedisce le URL prioritarie
+        run: node scripts/indexnow-priorita.mjs
+
+      - name: mostra l'esito nel log
+        run: |
+          echo "--- stato/indexnow-priorita.json ---"
+          head -40 stato/indexnow-priorita.json
+          node -e '
+            const j = JSON.parse(require("fs").readFileSync("stato/indexnow-priorita.json","utf8"));
+            console.log("");
+            console.log("totale      :", j.totale);
+            console.log("verificate  :", j.verificate);
+            console.log("selezionate :", j.selezionate);
+            console.log("inviate     :", j.inviate);
+            console.log("httpStatus  :", j.httpStatus);
+            console.log("scartate    :", j.scartate.length);
+            console.log("gia oggi    :", j.giaInviateOggi);
+            if (j.inviate === 0 && j.giaInviateOggi === 0) { console.error("nessuna URL inviata: giro da considerare fallito"); process.exit(1); }
+          '
+
+      - name: commit e push (race-safe)
+        run: |
+          git config user.name "Sam CARe"
+          git config user.email "sam@careauctions.co"
+          git add stato/indexnow-priorita.json
+          if git diff --cached --quiet; then
+            echo "nessuna variazione: lo stato di oggi e' gia' registrato"
+            exit 0
+          fi
+          git commit -m "IndexNow priorita: giro $(date -u +%FT%TZ)"
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null
+            if git push; then echo "push ok al tentativo $i"; exit 0; fi
+            sleep 4
+          done
+          echo "push fallito dopo 5 tentativi" >&2
+          exit 1
+
+      - name: allega lo stato
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: indexnow-priorita-${{ github.run_id }}
+          path: stato/indexnow-priorita.json
+          if-no-files-found: warn
+          retention-days: 30
