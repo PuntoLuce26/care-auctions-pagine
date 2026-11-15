@@ -25,6 +25,14 @@
 //   node scripts/rete-doppio-esecutore.mjs
 //   ESECUTORE_B_URL=https://... node scripts/rete-doppio-esecutore.mjs
 //   node scripts/rete-doppio-esecutore.mjs --url=https://... --out=percorso.json
+//
+// CHIAVE DI REGIA (15/11/2026) — /lavoro dell'esecutore B non è più pubblico:
+// il Worker lo apre solo con l'header `X-Regia`, confrontato a tempo costante con
+// `env.REGIA_KEY`. Questo script legge la chiave dal secret GitHub REGIA_KEY
+// (arriva come variabile d'ambiente del workflow, mai scritta nel repo) e la mette
+// nell'header. Se la variabile non c'è NON si inventa nulla: il record dichiara
+// `chiave-di-regia-assente` e il verdetto resta B_NON_DISPONIBILE.
+// `/salute` resta pubblica (è il controllo di vita): viene chiamata senza header.
 
 import { execFile } from 'node:child_process';
 import { createHash } from 'node:crypto';
@@ -122,6 +130,17 @@ async function lavoroB(url) {
   if (!url) {
     return { eseguito: false, esecutore: 'cloudflare-containers', errore: 'url-non-configurata' };
   }
+  // Chiave di regia dal secret GitHub (variabile d'ambiente del workflow), mai nel repo.
+  const regia = String(process.env.REGIA_KEY || '').trim();
+  if (!regia) {
+    return {
+      eseguito: false,
+      esecutore: 'cloudflare-containers',
+      url,
+      errore: 'chiave-di-regia-assente',
+      dettaglio: 'secret REGIA_KEY non presente nell\'ambiente del workflow: /lavoro risponde 403 e il dispatcher non ha una chiave da mandare',
+    };
+  }
   const t0 = Date.now();
   let salute;
   try {
@@ -138,7 +157,8 @@ async function lavoroB(url) {
   try {
     const r = await fetch(`${url.replace(/\/+$/, '')}/lavoro`, {
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
+      // `X-Regia`: senza questo header il Worker risponde 403 per costruzione.
+      headers: { 'content-type': 'application/json', 'X-Regia': regia },
       body: JSON.stringify({ job: 'default' }),
       signal: AbortSignal.timeout(TIMEOUT_HTTP_MS),
     });
@@ -146,12 +166,19 @@ async function lavoroB(url) {
     let j;
     try { j = JSON.parse(testo); } catch { return { eseguito: false, url, errore: 'risposta-non-json', dettaglio: testo.slice(0, 300) }; }
     if (r.status !== 200 || !j.ok) {
-      return { eseguito: false, esecutore: 'cloudflare-containers', url, errore: `lavoro-http-${r.status}`, dettaglio: testo.slice(0, 300) };
+      return {
+        eseguito: false,
+        esecutore: 'cloudflare-containers',
+        url,
+        errore: r.status === 403 ? 'lavoro-403-chiave-di-regia' : `lavoro-http-${r.status}`,
+        dettaglio: testo.slice(0, 300),
+      };
     }
     return {
       eseguito: true,
       esecutore: 'cloudflare-containers',
       url,
+      autenticazione: 'header X-Regia (secret REGIA_KEY)',
       sha: j.sha256,
       versione: j.ffmpeg,
       durataMs: j.durataMs,
@@ -180,6 +207,7 @@ const out = {
   cadenza: 'giornaliera (schedule 0 4 * * *) + workflow_dispatch',
   lavoro: JOB,
   confronto: 'sha256 dei byte RGB24 del frame a 0,5 s (320x240x3 = 230.400 byte)',
+  regia: 'header X-Regia con la chiave dal secret GitHub REGIA_KEY (mai scritta nel repo)',
   A,
   B,
   verdetto: v,
