@@ -2,6 +2,10 @@ name: rete-emergent
 on:
   schedule: [{cron: "40 6 * * *"}]
   workflow_dispatch:
+  # 15/11/2026 — la schedule dichiarata è la via normale; questa è la rete che non viene
+  # diradata (la chiama la veglia, cron Cloudflare */5, quando l'ultimo giro è troppo vecchio).
+  repository_dispatch:
+    types: [rete-emergent-giro]
 permissions: {contents: read}
 concurrency: {group: rete-emergent, cancel-in-progress: false}
 jobs:
