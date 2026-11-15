@@ -1,0 +1,71 @@
+name: watchdog-parete
+
+# AVVISA SE LA PARETE iCAReWall SMETTE DI PUBBLICARE — creato il 15/11/2026.
+#
+# PERCHÉ: il 15/11/2026 si è scoperto che la parete era ferma dal 10/11 04:00Z, quattro giorni
+# senza pubblicare, con i giri del cron "chiusi" e nessun allarme. Nessuno se n'era accorto.
+# Questo controllo non si fida del log di chi pubblica: legge la parete vera e misura l'età del
+# pensiero più recente.
+#
+# COSA FA (scripts/watchdog-parete.mjs):
+#   1. GET https://care-aste.emergent.host/api/battito?lang=it e ?lang=en;
+#   2. prende il messaggio più recente e usa il campo `data` (ISO 8601) — l'id `B<epoch-ms>` è
+#      la riserva se `data` manca (verificato: coincidono al millisecondo);
+#   3. età > 8 h → apre o AGGIORNA una sola issue «[ALLARME] iCAReWall ferma da più di 8 ore»
+#      con ora dell'ultimo messaggio, lingua, età in ore e testo dell'ultimo pensiero;
+#   4. parete viva (età ≤ 8 h) e issue aperta → la chiude da sola con un commento «rientrato»;
+#   5. scrive stato/parete.json = { controllatoIl, ultimoMessaggio, lingua, etaOre, ok } con la
+#      Contents API e lo sha corrente (file piccolo: niente clone da ~790 MB).
+#
+# ESITO DEL JOB: resta VERDE anche quando l'allarme è acceso — l'allarme è l'issue, non un job
+# rosso ogni 2 ore (che spegnerebbe l'attenzione dopo un giorno). Diventa ROSSO solo se la misura
+# non si può fare o registrare (parete illeggibile, issue non creabile, stato non scrivibile):
+# «non ho potuto leggere» è un guasto, non un silenzio da nascondere.
+#
+# ADDITIVO: file nuovo. Non modifica edge/worker.js, ai-proxy/worker.js, le pagine del sito né
+# altri workflow, e non pubblica nulla sulla parete (solo GET).
+
+on:
+  schedule:
+    # Ogni 2 ore (come da incarico). GitHub dirada le schedule: la cadenza vera va sempre letta
+    # dalle run reali, mai dal cron dichiarato qui.
+    - cron: "0 */2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write # stato/parete.json via Contents API
+  issues: write # apertura / aggiornamento / chiusura della issue [ALLARME]
+
+# Un giro alla volta: due run sovrapposte potrebbero aprire due issue o sovrascriversi lo stato.
+concurrency:
+  group: watchdog-parete
+  cancel-in-progress: false
+
+jobs:
+  parete:
+    runs-on: ubuntu-latest
+    # Il limite sta sul JOB: `timeout-minutes` a livello di workflow non è una chiave prevista e
+    # fa rifiutare il file al parse (run con 0 job in 0,0 s, il guasto che non si vede).
+    timeout-minutes: 10
+    steps:
+      - name: Checkout (solo il file del watchdog)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          # Il repo ha ~348.000 file / ~177 MB di artefatto: scaricarlo intero ogni 2 ore è
+          # inutile qui. Serve un file solo, quindi checkout sparso senza cone mode.
+          sparse-checkout: scripts/watchdog-parete.mjs
+          sparse-checkout-cone-mode: false
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # Un solo passo di sostanza: lo script fa lettura, giudizio, issue, stato e riepilogo nel
+      # run (GITHUB_STEP_SUMMARY). L'exit code È l'esito: 0 = misura fatta e registrata,
+      # 1 = non si è potuto misurare o scrivere.
+      - name: Legge la parete, apre/chiude la issue, scrive stato/parete.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/watchdog-parete.mjs
