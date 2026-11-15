@@ -19,6 +19,17 @@
 //   INCOERENTE         → sha256 diversi (dichiarato, con le DUE versioni di ffmpeg)
 //   B_NON_DISPONIBILE  → il container non ha risposto: la ridondanza è 0 su 1, dichiarato
 //
+// PARITÀ DELLE VERSIONI (15/11/2026) — lo sha uguale NON basta:
+// due build diverse di ffmpeg possono produrre gli stessi byte su un lavoro semplice e
+// divergere su un lavoro sensibile alla versione. Quindi il record DICHIARA le versioni:
+//   versioneA, versioneB   → il token di versione (es. `n8.1.3-35-gf1acb0a266-20261114`)
+//   paritaVersioni         → true solo se i due token sono identici
+//   avvisoParita           → null se uguali; altrimenti il testo che dice che il confronto
+//                            sha non è una prova di parità (il verdetto resta com'è: il
+//                            verdetto misura l'esecuzione, la parità misura il binario)
+//   pin                    → il pin atteso (build statica BtbN, tag immutabile + sha256)
+//                            e se ciascun esecutore lo rispetta.
+//
 // Scrive `rete/doppio-esecutore.json` (e lo stampa). Zero dipendenze: solo Node 22 + ffmpeg.
 //
 // Uso:
@@ -198,9 +209,62 @@ function verdetto(A, B) {
   return A.sha && B.sha && A.sha === B.sha ? 'COERENTE' : 'INCOERENTE';
 }
 
+// Il pin atteso: la STESSA build statica su entrambi gli esecutori.
+// A = workflow rete-doppio-esecutore.yml · B = care-workers/esecutore-b/Dockerfile.
+const PIN = {
+  ffmpeg: 'n8.1.3-35-gf1acb0a266-20261114',
+  url: 'https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2026-11-14-12-37/ffmpeg-n8.1.3-35-gf1acb0a266-linux64-gpl-8.1.tar.xz',
+  sha256: 'b8277443ba6332534c1cdb272f7bfa8322905f22d08208f5db0b56bc17b5fb3e',
+  dove: 'rete-doppio-esecutore.yml (A) + care-workers/esecutore-b/Dockerfile (B)',
+  checksum:
+    'sha256 del tarball verificato sia in build (sha256sum -c) sia confrontato con checksums.sha256 pubblicato nella release il 15/11/2026',
+};
+
+// Dalla riga intera (`ffmpeg version X Copyright ...`) si tiene il solo token di
+// versione: il resto è copyright e non identifica la build.
+function versioneNormalizzata(v) {
+  if (!v) return null;
+  const m = /ffmpeg\s+version\s+(\S+)/i.exec(String(v));
+  const t = (m ? m[1] : String(v).trim()) || '';
+  return t || null;
+}
+
+function leggiParita(A, B) {
+  const versioneA = versioneNormalizzata(A.versione);
+  const versioneB = versioneNormalizzata(B.versione);
+  let paritaVersioni;
+  let avvisoParita;
+  if (versioneA && versioneB) {
+    paritaVersioni = versioneA === versioneB;
+    avvisoParita = paritaVersioni ? null : 'versioni diverse: il confronto sha non è una prova di parità';
+  } else {
+    // Se una delle due versioni non è dichiarata non si può affermare la parità.
+    paritaVersioni = false;
+    avvisoParita = 'versioni non dichiarate da entrambi gli esecutori: il confronto sha non è una prova di parità';
+  }
+  return {
+    versioneA,
+    versioneB,
+    paritaVersioni,
+    avvisoParita,
+    pin: {
+      atteso: PIN.ffmpeg,
+      url: PIN.url,
+      sha256: PIN.sha256,
+      dove: PIN.dove,
+      verificato: PIN.checksum,
+      rispettato: {
+        A: versioneA === PIN.ffmpeg,
+        B: versioneB === PIN.ffmpeg,
+      },
+    },
+  };
+}
+
 const url = await leggiConfig();
 const [A, B] = await Promise.all([lavoroA(), lavoroB(url)]);
 const v = verdetto(A, B);
+const parita = leggiParita(A, B);
 
 const out = {
   eseguito: new Date().toISOString(),
@@ -211,6 +275,11 @@ const out = {
   A,
   B,
   verdetto: v,
+  versioneA: parita.versioneA,
+  versioneB: parita.versioneB,
+  paritaVersioni: parita.paritaVersioni,
+  avvisoParita: parita.avvisoParita,
+  pin: parita.pin,
   nota:
     v === 'COERENTE'
       ? 'stesso lavoro, stesso esito sui due esecutori: la ridondanza è verificata, non dichiarata'
@@ -228,6 +297,10 @@ await writeFile(percorso, JSON.stringify(out, null, 2) + '\n');
 console.log(`A (github-actions)      sha=${A.sha || '-'} ${A.durataMs != null ? A.durataMs + ' ms' : ''} ${A.versione || A.errore || ''}`);
 console.log(`B (cloudflare-container) sha=${B.sha || '-'} ${B.durataMs != null ? B.durataMs + ' ms' : ''} ${B.versione || B.errore || ''}`);
 console.log(`VERDETTO: ${v}`);
+console.log(
+  `PARITÀ VERSIONI: ${parita.paritaVersioni ? 'SÌ' : 'NO'} · A=${parita.versioneA || '-'} · B=${parita.versioneB || '-'}`
+);
+if (parita.avvisoParita) console.log(`AVVISO PARITÀ: ${parita.avvisoParita}`);
 console.log(`scritto: ${percorso}`);
 
 if (!A.eseguito) process.exit(1);
