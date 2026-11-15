@@ -78,6 +78,9 @@ async function lavoroA() {
   const frame = join(dir, 'frame.rgb');
   try {
     const ver = await esegui('ffmpeg', ['-version'], 15_000);
+    if (ver.err && (ver.err.code === 'ENOENT' || /ENOENT|not found/i.test(String(ver.err.message)))) {
+      return { eseguito: false, esecutore: 'github-actions', errore: 'ffmpeg-assente', dettaglio: 'ffmpeg non è installato su questo esecutore', versione: null };
+    }
     const versione = ver.err ? null : ver.stdout.split('\n')[0].trim();
 
     const t0 = Date.now();
@@ -163,7 +166,8 @@ async function lavoroB(url) {
 }
 
 function verdetto(A, B) {
-  if (!A.eseguito || !B.eseguito) return 'B_NON_DISPONIBILE';
+  if (!A.eseguito) return 'A_NON_ESEGUITO';
+  if (!B.eseguito) return 'B_NON_DISPONIBILE';
   return A.sha && B.sha && A.sha === B.sha ? 'COERENTE' : 'INCOERENTE';
 }
 
@@ -182,7 +186,9 @@ const out = {
   nota:
     v === 'COERENTE'
       ? 'stesso lavoro, stesso esito sui due esecutori: la ridondanza è verificata, non dichiarata'
-      : v === 'INCOERENTE'
+      : v === 'A_NON_ESEGUITO'
+        ? 'esecutore A (GitHub Actions) non ha eseguito il lavoro: il confronto non esiste. Motivo esatto in A.errore.'
+        : v === 'INCOERENTE'
         ? 'sha256 diversi: gli esecutori NON sono equivalenti su questo lavoro. Le due versioni di ffmpeg sono nel record. Un verdetto INCOERENTE non si nasconde e non si "aggiusta": si dichiara.'
         : 'esecutore B non disponibile: la Rete+ ha UN solo esecutore su due, cioè ridondanza 0 su 1. Il motivo esatto è nel campo B.errore.',
 };
