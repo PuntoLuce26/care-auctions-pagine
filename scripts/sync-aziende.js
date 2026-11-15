@@ -165,6 +165,8 @@ function mappa(x) {
   const perTipo = {};
   for (const x of attive) perTipo[x.tipo] = (perTipo[x.tipo] || 0) + 1;
   const meta = {
+    canary: 'care-canary-d2c32afaa5d5',
+    canaryNota: 'valore di riconoscimento della copia dei dati',
     titolo: 'Aste di aziende, quote societarie e crediti — dati veri dal PVP',
     generatoIl: new Date().toISOString(),
     dataRaccolta: oggi,
