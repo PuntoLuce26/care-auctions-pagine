@@ -264,7 +264,9 @@ function corpoIssue({ run, esitoRun, motivoRun, errore, proposta }) {
   righe.push(`| repo del workflow | \`${REPO_SORVEGLIATO}\` |`);
   righe.push(`| workflow | \`${WORKFLOW || 'non dichiarato'}\` |`);
   righe.push(`| artefatto sorvegliato | \`${ARTEFATTO || 'non dichiarato'}\` |`);
-  righe.push(`| esito della veglia | **${esitoRun}** |`);
+  // il campo dice da dove viene l'esito (la SCELTA della run), non confonderlo con l'esito della
+  // veglia: la veglia ha misurato `svegliato-invano`, il workflow legge la run che ne è la causa.
+  righe.push(`| esito della lettura della run | **${esitoRun}** |`);
   righe.push(`| età artefatto / soglia | ${ETA === null ? '—' : ETA + ' min'} / ${SOGLIA === null ? '—' : SOGLIA + ' min'} |`);
   if (run) {
     righe.push(`| ultima run | [${run.id}](${run.html_url}) · ${run.conclusion || run.status} · ${run.created_at} |`);
