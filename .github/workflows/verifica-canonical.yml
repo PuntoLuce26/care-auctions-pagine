@@ -1,0 +1,129 @@
+name: verifica-canonical
+
+# Verifica automatica del canonical × locale su careauctions.co — creato il 15/11/2026.
+#
+# PERCHÉ: l'app riscrive <link rel="canonical"> nel DOM aggiungendo ?lang=<lingua-ui>
+# quando la lingua del browser non è italiano. L'HTML server-side è corretto, quindi il
+# difetto si vede solo con un browser vero, dopo il mount. Fino a oggi nessun controllo
+# automatico rifaceva la matrice dopo un publish di Emergent: questo workflow la rifà a
+# ogni publish (repository_dispatch), a mano (workflow_dispatch) e ogni 3 ore (schedule).
+#
+# ADDITIVO: questo file è nuovo e indipendente. Non modifica qa.yml, prerender.yml,
+# feed-sync.yml né altri workflow esistenti.
+#
+# ESITO: il job fallisce (conclusion failure) se almeno una riga della matrice è KO.
+# La verità sta nell'artefatto qa/canonical.json committato, non nel log.
+
+on:
+  repository_dispatch:
+    types: [emergent-published]
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */3 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: verifica-canonical
+  cancel-in-progress: false
+
+jobs:
+  canonical:
+    runs-on: ubuntu-latest
+    # Il limite di 20 minuti sta sul job: GitHub NON accetta `timeout-minutes` a livello
+    # di workflow (chiave non prevista → workflow rifiutato al parse, 0 job in 0,0 s).
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # Stesso metodo di qa.yml (non inventato): cache dei browser + npm i playwright
+      # con --no-save + install con un secondo tentativo. Qui serve solo Chromium.
+      - name: Cache Playwright
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: canonical-pw-${{ runner.os }}-1.63.0
+
+      - name: Installa Playwright (Chromium)
+        run: |
+          npm i playwright@1.63.0 --no-save
+          npx playwright install --with-deps chromium || \
+            (echo "install fallito, riprovo tra 15s"; sleep 15; npx playwright install --with-deps chromium)
+
+      # L'exit code dello script (1 = almeno una riga KO) viene raccolto qui e propagato
+      # all'esito del job dall'ultimo step: il commit del JSON deve avvenire anche in FAIL.
+      - name: Matrice canonical × locale
+        id: matrice
+        continue-on-error: true
+        run: node qa/canonical-matrix.mjs
+
+      - name: Riepilogo della matrice nel run
+        if: always()
+        run: |
+          if [ ! -f qa/canonical.json ]; then
+            echo "::error::qa/canonical.json non prodotto: la matrice non è stata misurata"
+            exit 0
+          fi
+          node -e '
+            const fs = require("fs");
+            const j = JSON.parse(fs.readFileSync("qa/canonical.json", "utf8"));
+            const righe = j.righe || [];
+            const ko = righe.filter((r) => !r.ok);
+            const out = [];
+            out.push("## Canonical × locale — " + j.verdetto);
+            out.push("");
+            out.push("- generatoIl: " + j.generatoIl);
+            out.push("- build: " + (j.build || "non letta"));
+            out.push("- righe: " + j.totale + " · KO: " + j.ko);
+            if (ko.length) {
+              out.push("");
+              out.push("| rotta | locale | canonical | data-lp | motivo |");
+              out.push("|---|---|---|---|---|");
+              for (const r of ko) out.push("| " + r.rotta + " | " + r.locale + " | " + (r.canonical || "(nessuno)") + " | " + r.dataLp + " | " + (r.motivo || "") + " |");
+            }
+            fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, out.join("\n") + "\n");
+          '
+
+      - name: Commit qa/canonical.json se cambiato
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add qa/canonical.json
+          if git diff --cached --quiet; then
+            echo "qa/canonical.json invariato: nessun commit"
+            exit 0
+          fi
+          git commit -m "canonical: verifica automatica"
+          PUSH_OK=0
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main 2>/dev/null || { git rebase --abort 2>/dev/null; true; }
+            if git push origin HEAD:main; then PUSH_OK=1; break; fi
+            sleep 4
+          done
+          if [ "$PUSH_OK" -ne 1 ]; then
+            echo "::error::push di qa/canonical.json non riuscito dopo 5 tentativi"
+            exit 1
+          fi
+          echo "qa/canonical.json committato: $(git rev-parse --short HEAD)"
+
+      # Propaga l'esito dello script come esito del job: KO ⇒ job rosso.
+      - name: Esito finale (exit code della matrice)
+        if: always()
+        run: |
+          ESITO="${{ steps.matrice.outcome }}"
+          echo "Esito di qa/canonical-matrix.mjs: $ESITO"
+          if [ "$ESITO" != "success" ]; then
+            echo "::error::Matrice canonical × locale FAIL — vedere qa/canonical.json (righe KO in evidenza)"
+            exit 1
+          fi
+          echo "Matrice canonical × locale PASS: nessuna riga KO"
