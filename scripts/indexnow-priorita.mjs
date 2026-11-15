@@ -157,12 +157,15 @@ function oggiUTC() {
 }
 
 function leggiStatoPrecedente(percorso) {
-  if (!existsSync(percorso)) return { perGiorno: {} };
+  if (!existsSync(percorso)) return { perGiorno: {}, storicoInvii: [] };
   try {
     const j = JSON.parse(readFileSync(percorso, 'utf8'));
-    return { perGiorno: j && typeof j.perGiorno === 'object' && j.perGiorno ? j.perGiorno : {} };
+    return {
+      perGiorno: j && typeof j.perGiorno === 'object' && j.perGiorno ? j.perGiorno : {},
+      storicoInvii: Array.isArray(j && j.storicoInvii) ? j.storicoInvii : [],
+    };
   } catch {
-    return { perGiorno: {} };
+    return { perGiorno: {}, storicoInvii: [] };
   }
 }
 
@@ -302,6 +305,15 @@ async function costruisciLista() {
   const giorni = Object.keys(perGiorno).sort().slice(-GIORNI_STORICO);
   const perGiornoPulito = Object.fromEntries(giorni.map((g) => [g, perGiorno[g]]));
 
+  // storico degli invii: si aggiunge una voce SOLO se questo giro ha spedito davvero.
+  // Serve perche' il giro di dedupe successivo scrive inviate: 0 — senza storico la prova
+  // dell'invio vero (quante URL, con che codice) si perderebbe nel file.
+  const storicoInvii = Array.isArray(precedente.storicoInvii) ? [...precedente.storicoInvii] : [];
+  if (!DRY && inviate > 0) {
+    storicoInvii.push({ eseguito, giorno, inviate, httpStatus, verificate: buone.length, scartate: scartate.length });
+  }
+  const storicoPulito = storicoInvii.slice(-GIORNI_STORICO);
+
   const stato = {
     eseguito,
     host: HOST,
@@ -311,7 +323,9 @@ async function costruisciLista() {
     verificate: buone.length,
     selezionate: listaFinale.length,
     inviate: DRY ? 0 : inviate,
+    inviateOggi: (perGiornoPulito[giorno] || []).length,
     giaInviateOggi,
+    storicoInvii: storicoPulito,
     httpStatus: DRY ? null : httpStatus,
     risposte,
     scartate,
