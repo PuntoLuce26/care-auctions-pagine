@@ -53,6 +53,7 @@ const feed = {
   fonte: FONTE,
   rilevazione: raccolta,
   meta: {
+    canary: 'care-canary-d2c32afaa5d5', canaryNota: 'valore di riconoscimento della copia dei dati',
     titolo: 'Mercato libero — indice dei prezzi delle abitazioni',
     fonte: FONTE,
     fonteTesto: 'Eurostat, House price index (prc_hpi_q). ISTAT alimenta Eurostat: la serie primaria è ISTAT.',
