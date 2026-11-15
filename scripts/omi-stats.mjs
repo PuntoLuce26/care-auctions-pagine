@@ -112,7 +112,16 @@ comuni.sort((a, b) => b.zone - a.zone || a.comune.localeCompare(b.comune));
 
 // tipologie (nazionali, per semestre): ricavate ricontando le cache? non ci sono nei cache → si omettono qui
 fs.mkdirSync(outDir, { recursive: true });
+// 15/11/2026 — CANARY (difetto 3 del 15/11): valore di riconoscimento della copia dei dati.
+// Va scritto QUI, nel generatore, e non patchato nel JSON: il 12/11 era stato aggiunto a mano
+// a feed/aste-zone.json e feed/omi-indice.json ed e' sparito al primo giro che li ha
+// rigenerati (commit 07c748ea e bc37d0e2). Un valore di tutela scritto nel file generato
+// e' un valore che si perde al primo giro di dati.
+const CANARY = 'care-canary-d2c32afaa5d5';
+const CANARY_NOTA = 'valore di riconoscimento della copia dei dati';
+
 const meta = {
+  canary: CANARY, canaryNota: CANARY_NOTA,
   titolo: 'CAReIndex — statistiche OMI', fonte: 'Agenzia delle Entrate – OMI (CC-BY 4.0)',
   nota: 'Mediane e indici elaborati da CAReAuctions sui dati semestrali OMI. Suddivisione OMI: area territoriale → regione → provincia → comune → zona (fascia, microzona).',
   metodo: 'Mediana di zona calcolata per comune e poi mediana dei comuni: ogni comune pesa uguale, così una città con cento zone non schiaccia il resto del Paese.',
