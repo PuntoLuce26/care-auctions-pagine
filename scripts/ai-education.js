@@ -116,15 +116,29 @@ const fetched = async (u, opt) => { try { const r = await fetch(u, { headers: { 
   const key = 'b2c9e4a7f3d15e6b8a0c4d2f6e8a1c3d';
   const keyr = await fetched('https://careauctions.co/' + key + '.txt');
   add('IndexNow key', keyr.ok, 'HTTP ' + keyr.status);
-  let indexnow = { inviati: 0, stato: 'saltato' };
+  // 15/11/2026 — UNA SOLA VERITA' (difetto 6 del 15/11/2026).
+  // L'invio IndexNow vero lo fa scripts/idmap-sitemap.js dentro feed-sync: 10.000 URL al
+  // giorno a rotazione, e scrive feed/indexnow.json. Questo script mandava un SECONDO lotto
+  // di 100 URL e riportava 100 in ai/stato.json: due numeri veri e diversi per lo stesso
+  // fatto (100 contro 10.000), e nessuno dei due diceva quale fosse la fonte.
+  // Da qui NON si invia piu' niente: si LEGGE la fonte vera e la si dichiara.
+  let indexnow = { inviati: null, stato: 'feed non leggibile', fonte: 'feed/indexnow.json' };
   try {
-    const sm0 = await fetched('https://careauctions.co/sitemap-aste-it-0.xml');
-    const urls = [...(sm0.text.match(/<loc>([^<]+)<\/loc>/g) || [])].slice(0, 100).map(x => x.replace(/<\/?loc>/g, ''));
-    if (urls.length) {
-      const r = await fetch('https://api.indexnow.org/indexnow', { method: 'POST', headers: { 'Content-Type': 'application/json; charset=utf-8', 'User-Agent': UA }, body: JSON.stringify({ host: 'careauctions.co', key, keyLocation: 'https://careauctions.co/' + key + '.txt', urlList: urls }) });
-      indexnow = { inviati: urls.length, stato: 'HTTP ' + r.status };
-    }
-  } catch (e) { indexnow = { inviati: 0, stato: 'errore: ' + e.message }; }
+    const st = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'feed', 'indexnow.json'), 'utf8'));
+    indexnow = {
+      inviati: Number(st.inviati || 0),
+      giorno: st.giorno || null,
+      quando: st.quando || null,
+      prossimo: (st.prossimo === undefined ? null : st.prossimo),
+      stato: 'letto',
+      fonte: 'feed/indexnow.json',
+      inviatoDa: 'scripts/idmap-sitemap.js (dentro il workflow feed-sync)',
+      nota: 'unico invio IndexNow del progetto: 10.000 URL al giorno a rotazione sulle pagine asta',
+    };
+  } catch (e) {
+    indexnow = { inviati: null, stato: 'feed/indexnow.json non leggibile: ' + String(e.message || e).slice(0, 80), fonte: 'feed/indexnow.json' };
+  }
+  add('IndexNow (feed/indexnow.json)', indexnow.stato === 'letto' && Number(indexnow.inviati) > 0, 'inviati ' + indexnow.inviati + ' · giorno ' + indexnow.giorno);
   // 13/11/2026 — query-educa: una sola fonte (scripts/query-educa-data.mjs), due formati macchina.
   if (QUERY_EDUCA) {
     try {
