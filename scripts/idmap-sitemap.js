@@ -292,7 +292,9 @@ console.log('sitemap dinamiche:', nCh, 'shard da', CH, '|', ids.length, 'id |', 
   const perId = [...ids].sort((a, b) => Number(b) - Number(a));
   const urls = perId.map((id) => 'https://careauctions.co/asta-procedura/it/asta-' + id + '.html');
   const start = Math.min(Number(stato.prossimo || 0), Math.max(0, urls.length - 1));
-  const batch = urls.slice(start, start + 10000);
+  // 15/11/2026 - da 10.000 a 250 al giorno: un milione di invii in un mese ha prodotto
+  // 0 scansioni e 0 indicizzazioni (dato Bing IndexNow). Il volume non era la leva.
+  const batch = urls.slice(start, start + 250);
   let ok = false;
   try {
     const r = await fetch('https://api.indexnow.org/indexnow', {
