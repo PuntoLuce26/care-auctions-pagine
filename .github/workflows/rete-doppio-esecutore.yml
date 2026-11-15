@@ -56,7 +56,16 @@ jobs:
       - name: ffmpeg dell'esecutore A (versione misurata)
         run: |
           set -euo pipefail
-          ffmpeg -version | head -1
+          # Il runner ubuntu-latest del 15/11/2026 NON ha ffmpeg (verificato: exit 127).
+          # L'esecutore A resta "il ffmpeg del runner": se manca, lo si installa sul runner
+          # e la versione installata è quella che il record dichiara.
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            echo "ffmpeg assente sull'immagine del runner: installo il pacchetto ubuntu"
+            sudo apt-get update -qq
+            sudo apt-get install -y --no-install-recommends ffmpeg >/dev/null
+          fi
+          ffmpeg -version > /tmp/ff-a.txt 2>&1
+          head -n 1 /tmp/ff-a.txt
           node --check scripts/rete-doppio-esecutore.mjs
 
       - name: Esegui lo stesso lavoro su A e su B
