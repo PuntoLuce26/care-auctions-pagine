@@ -6,7 +6,7 @@ on:
     - cron: "*/30 * * * *"
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 concurrency:
   group: verifica-playwright
   cancel-in-progress: false
@@ -35,8 +35,10 @@ jobs:
             npx playwright install chromium
           }
       - name: Rotte e stabilità (Playwright)
+        id: rotte
         run: node scripts/verifica-playwright.mjs --wait=2500 --out=/tmp/verifica.json
       - name: Lingue — tutte le 20 del sito
+        id: lingue
         shell: bash
         run: |
           # 5.953 — il vecchio controllo cercava hreflang sulle pagine lotto, che ora non
@@ -63,3 +65,28 @@ jobs:
             fi
           done
           exit "$fail"
+
+      # ── FRESCHEZZA (15/11/2026) ───────────────────────────────────────────────────
+      # Il gate Playwright ha DUE passi che possono fallire separatamente: si registrano entrambi.
+      # Prima di questo passo l'artefatto era SOLO l'allegato di run: la sua eta' non era
+      # misurabile con l'API dei commit, e la veglia poteva guardare soltanto l'ultima run
+      # (garanzia piu' debole: un run verde non dice che il gate abbia davvero guardato oggi).
+      # `if: always()`: il battito si scrive ANCHE se il gate e' rosso — un supervisore rotto
+      # deve restare misurabile, altrimenti il guasto sparisce insieme al suo stato.
+      - name: Stato minuscolo (freschezza)
+        if: always()
+        env:
+          ESITO: { rotte: "${{ steps.rotte.outcome }}", lingue: "${{ steps.lingue.outcome }}" }
+        run: |
+          node -e 'const fs=require("fs");const o={supervisore:"verifica-playwright",ultimoGiro:new Date().toISOString(),runId:Number(process.env.GITHUB_RUN_ID||0),esito:process.env.ESITO||"sconosciuto"};try{const j=JSON.parse(fs.readFileSync("rete/stato.json","utf8"));o.ok=j.ok??null;o.controlli=Array.isArray(j.controlli)?j.controlli.length:(Array.isArray(j.risultati)?j.risultati.length:null);}catch(e){o.ok=null;}fs.writeFileSync("perf/verifica-playwright.json",JSON.stringify(o,null,1)+"\n");'
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add perf/verifica-playwright.json
+          if git diff --cached --quiet; then echo "invariato"; exit 0; fi
+          git commit -m "stato: verifica-playwright (freschezza, run $GITHUB_RUN_ID)"
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main 2>/dev/null || { git rebase --abort 2>/dev/null; true; }
+            git push origin HEAD:main && exit 0
+            sleep 5
+          done
+          echo "::error::stato verifica-playwright non pushato dopo 5 tentativi"; exit 1
