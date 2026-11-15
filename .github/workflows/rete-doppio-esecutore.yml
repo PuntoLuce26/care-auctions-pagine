@@ -44,6 +44,10 @@ jobs:
     timeout-minutes: 15
     env:
       ESECUTORE_B_URL: ${{ inputs.esecutore_b_url }}
+      # Chiave di regia: il dispatcher la manda come header X-Regia a /lavoro
+      # dell'esecutore B (il Worker la confronta a tempo costante con env.REGIA_KEY).
+      # Secret di repo: non compare né nel codice né nei log.
+      REGIA_KEY: ${{ secrets.REGIA_KEY }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -67,6 +71,12 @@ jobs:
           ffmpeg -version > /tmp/ff-a.txt 2>&1
           head -n 1 /tmp/ff-a.txt
           node --check scripts/rete-doppio-esecutore.mjs
+          # Presenza della chiave di regia (il valore non si stampa mai).
+          if [ -z "${REGIA_KEY:-}" ]; then
+            echo "ATTENZIONE: secret REGIA_KEY assente — /lavoro dell'esecutore B risponderà 403 e il record dichiarerà B_NON_DISPONIBILE (chiave-di-regia-assente)."
+          else
+            echo "chiave di regia presente (valore non stampato): verrà inviata come header X-Regia"
+          fi
 
       - name: Esegui lo stesso lavoro su A e su B
         id: esegui
