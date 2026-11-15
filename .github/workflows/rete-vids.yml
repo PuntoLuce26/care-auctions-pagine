@@ -2,6 +2,10 @@ name: rete-vids
 on:
   schedule: [{cron: "10 6 * * *"}]
   workflow_dispatch:
+  # 15/11/2026 — la schedule dichiarata è la via normale; questa è la rete che non viene
+  # diradata (la chiama la veglia, cron Cloudflare */5, quando l'ultimo giro è troppo vecchio).
+  repository_dispatch:
+    types: [rete-vids-giro]
 permissions: {contents: read}
 concurrency: {group: rete-vids, cancel-in-progress: false}
 jobs:
