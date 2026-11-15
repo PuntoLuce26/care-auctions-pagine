@@ -232,7 +232,7 @@ for (const [cs, arr] of cityLots) {
   attivi.sort((a, b) => String(a.d).localeCompare(String(b.d)));
   cittaOut[cs] = attivi.slice(0, 12);
 }
-try { fs.writeFileSync(path.join(FEED, 'citta-top.json'), JSON.stringify({ generato: new Date().toISOString(), citta: cittaOut })); } catch (e) { console.log('citta-top: non scritto', e.message); }
+try { fs.writeFileSync(path.join(FEED, 'citta-top.json'), JSON.stringify({ meta: { canary: 'care-canary-d2c32afaa5d5', canaryNota: 'valore di riconoscimento della copia dei dati' }, generato: new Date().toISOString(), citta: cittaOut })); } catch (e) { console.log('citta-top: non scritto', e.message); }
 console.log('citta-top.json:', Object.keys(cittaOut).length, 'citta con almeno 10 lotti attivi');
 
 // --- sitemap-locali.xml rigenerata (la vecchia era ferma al 25/10 e conteneva varianti /en-us duplicate)
@@ -264,6 +264,8 @@ for (let i = 0; i < nCh; i++) {
 for (const f of fs.readdirSync(idsDir)) { const m = /^shard-(\d+)\.json$/.exec(f); if (m && Number(m[1]) >= nCh) fs.unlinkSync(path.join(idsDir, f)); }
 const LINGUE = ['it', 'en', 'de', 'es', 'fr', 'ja', 'ru', 'zh', 'pt', 'nl', 'pl', 'ar', 'hi', 'ko', 'uk', 'vi', 'ro', 'tl', 'el', 'sv'];
 const metaSitemap = {
+  canary: 'care-canary-d2c32afaa5d5',
+  canaryNota: 'valore di riconoscimento della copia dei dati',
   generato: new Date().toISOString(),
   totale: ids.length,
   perShard: CH,
