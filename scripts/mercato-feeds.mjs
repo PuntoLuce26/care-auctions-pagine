@@ -40,6 +40,7 @@ const asteTrend = {
   fonte: FONTI.pvp,
   rilevazione: rilevazioneTrend,
   meta: {
+    canary: 'care-canary-d2c32afaa5d5', canaryNota: 'valore di riconoscimento della copia dei dati',
     titolo: 'Aste giudiziarie — giorno per giorno',
     fonte: FONTI.pvp,
     fonteTesto: 'PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia) e fonti pubbliche delle aste',
