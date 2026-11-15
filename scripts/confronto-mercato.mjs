@@ -257,6 +257,8 @@ async function main() {
   // (ultimi 8192 byte) senza fare JSON.parse di tutto il feed sul piano Free del worker.
   const out = {
     meta: {
+      canary: 'care-canary-d2c32afaa5d5',
+      canaryNota: 'valore di riconoscimento della copia dei dati (scritto dal generatore, mai patchato nel JSON)',
       titolo: 'Lo Sconto Reale Certificato — i prezzi delle aste confrontati con il valore di mercato OMI',
       rilevazione,
       generatoIl: rilevazione,
