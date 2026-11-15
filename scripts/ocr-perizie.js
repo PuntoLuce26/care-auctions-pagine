@@ -9,6 +9,10 @@ const https = require('https');
 const FEED = 'feed/foto-procedure.json';
 const OUT = 'feed/perizie-ocr.json';
 const STATO = 'feed/ocr-stato.json';
+// 15/11/2026 — CANARY: ocr-stato.json porta il valore di riconoscimento scritto dal generatore.
+// perizie-ocr.json resta un ARRAY nudo (lo leggono 10 script + l'app come lista): la forma non si tocca.
+const CANARY = 'care-canary-d2c32afaa5d5';
+const CANARY_NOTA = 'valore di riconoscimento della copia dei dati';
 const N = Number(process.env.OCR_N || 80);
 
 function scarica(url, redirect = 0) {
@@ -100,7 +104,7 @@ function estraiMq(t) {
     fatti.add(x.key); ok++;
     if ((i + 1) % 10 === 0) console.log('fatte:', i + 1, '/', giro.length, '| mq trovati:', mqTrovati);
   }
-  stato = { fatti: Array.from(fatti), aggiornato: new Date().toISOString(), ultimoGiro: giro.length };
+  stato = { meta: { canary: CANARY, canaryNota: CANARY_NOTA }, fatti: Array.from(fatti), aggiornato: new Date().toISOString(), ultimoGiro: giro.length };
   fs.writeFileSync(STATO, JSON.stringify(stato));
   fs.writeFileSync(OUT, JSON.stringify(out));
   console.log('FINE OCR: processate', ok, '| con mq:', mqTrovati, '| errori:', errori, '| totale risultati:', out.length, '| restano:', Math.max(0, coda.length - giro.length));
