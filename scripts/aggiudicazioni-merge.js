@@ -46,12 +46,15 @@ function mergeRecords(file, nuovi, opts = {}) {
     else { m.set(k, Object.assign({}, m.get(k), y)); aggiornati++; }
   }
   const fuori = [...m.values()];
-  if (!fuori.length) { log('aggiudicazioni: nessun record — file lasciato com\'era (' + vecchi.length + ')'); return { prima, dopo: vecchi.length, aggiunti: 0, scritto: false }; }
-  if (fuori.length < prima) { log('aggiudicazioni: il merge accorcia (' + prima + ' -> ' + fuori.length + ') — NON scrivo'); return { prima, dopo: prima, aggiunti, scritto: false }; }
+  if (!fuori.length) { log('aggiudicazioni: nessun record — file lasciato com\'era (' + vecchi.length + ')'); battito(file, { log }); return { prima, dopo: vecchi.length, aggiunti: 0, scritto: false }; }
+  if (fuori.length < prima) { log('aggiudicazioni: il merge accorcia (' + prima + ' -> ' + fuori.length + ') — NON scrivo'); battito(file, { log }); return { prima, dopo: prima, aggiunti, scritto: false }; }
   fs.writeFileSync(file, JSON.stringify(fuori));
   const perFonte = {};
   for (const x of fuori) perFonte[(x && x.fonte) || '?'] = (perFonte[(x && x.fonte) || '?'] || 0) + 1;
   log('aggiudicazioni.json: ' + fuori.length + ' record (prima ' + prima + ', +' + aggiunti + ' nuovi, ' + aggiornati + ' aggiornati) — fonti: ' + JSON.stringify(perFonte));
+  // il battito si scrive DOPO l'archivio: se il processo muore prima, il file di stato
+  // non racconta un giro che non e' finito.
+  battito(file, { log, variazioni: { aggiunti, aggiornati } });
   return { prima, dopo: fuori.length, aggiunti, scritto: true };
 }
 
@@ -76,16 +79,64 @@ function daIvg(arr) {
     .map(x => ({ id: x.id, titolo: x.titolo, prezzo: x.prezzo, url: x.url, fonte: 'ivg' }));
 }
 
+// 15/11/2026 — IL BATTITO (difetto 1: aggiudicazioni.json fermo da 70,1 h).
+// ---------------------------------------------------------------------------
+// MISURA: al 15/11 il file era fermo al commit ea3f195b del 12/11 08:50:40Z = 70,1 h,
+// mentre R2 stato/esiti/stato.json diceva esito:"nessuna-variazione" con 18.368 record:
+// un giro verde che non scrive e un processo fermo producevano lo STESSO segnale.
+// PERCHE' NON SI METTE `aggiornato` DENTRO aggiudicazioni.json: il file e' un ARRAY nudo
+// e 10 script del repo (esiti-sync, dati-indice, numeri-vivi, meccanismi-dati, esiti-stato,
+// ai-education, idmap-sitemap, esiti-ritirati, feed-regole, sync-feed) piu' l'edge
+// (careauctions/edge/worker.js:2201) lo leggono come array: un oggetto con un campo data
+// li romperebbe in silenzio (read(..., []) restituirebbe [] e i numeri sparirebbero).
+// CURA: il battito vive in un file GEMELLO scritto dallo stesso generatore a ogni giro,
+// anche a zero variazioni — cosi' "nessun movimento" e "giro non passato" si distinguono.
+//   aggiornato   = quando ha girato il merge (il battito)
+//   ultimoCambio = quando l'archivio e' cambiato davvero (0 = nessuna variazione reale)
+const CANARY = 'care-canary-d2c32afaa5d5';
+
+function battito(file, opts = {}) {
+  const log = opts.log || (() => {});
+  const statoFile = path.join(path.dirname(file), 'aggiudicazioni-stato.json');
+  const rec = leggi(file);
+  let prezzoTotale = 0, conPrezzo = 0;
+  for (const x of rec) { const p = Number(x && x.prezzo); if (p > 0) { prezzoTotale += p; conPrezzo++; } }
+  let prev = {};
+  try { prev = JSON.parse(fs.readFileSync(statoFile, 'utf8')) || {}; } catch (e) {}
+  const v = opts.variazioni || { aggiunti: 0, aggiornati: 0 };
+  const cambiato = ((v.aggiunti || 0) + (v.aggiornati || 0)) > 0;
+  const aggiornato = new Date().toISOString();
+  const stato = {
+    aggiornato,
+    ultimoCambio: cambiato ? aggiornato : (prev.ultimoCambio || null),
+    esito: cambiato ? 'scritto' : 'nessuna-variazione',
+    record: rec.length,
+    conPrezzo,
+    prezzoTotale: Math.round(prezzoTotale),
+    variazioni: v,
+    fonte: 'feed/aggiudicazioni.json',
+    generatore: 'scripts/aggiudicazioni-merge.js',
+    nota: 'Il file aggiudicazioni.json e\' un array nudo (10 lettori nel repo + l\'edge lo leggono come array): la data vive qui. aggiornato = ultimo giro del generatore; ultimoCambio = ultima variazione reale dei dati (null = nessuna da quando esiste questo file).',
+    meta: { canary: CANARY, canaryNota: 'valore di riconoscimento della copia dei dati' },
+  };
+  fs.writeFileSync(statoFile, JSON.stringify(stato));
+  log('aggiudicazioni-stato.json: ' + stato.esito + ' · ' + stato.record + ' record · aggiornato ' + stato.aggiornato);
+  return stato;
+}
+
 if (require.main === module) {
   const [tipo, input, out] = process.argv.slice(2);
   const file = out || FILE_FEED;
   const log = (m) => console.log(m);
-  if (!tipo) { console.log('uso: node scripts/aggiudicazioni-merge.js fallco|ivg <file-raccolta> [feed/aggiudicazioni.json]'); process.exit(0); }
+  if (!tipo) { console.log('uso: node scripts/aggiudicazioni-merge.js fallco|ivg <file-raccolta> [feed/aggiudicazioni.json] | battito'); process.exit(0); }
+  // 15/11/2026 — modo "battito": si chiama a ogni giro di feed-sync, anche quando non c'e'
+  // niente da unire, e scrive solo feed/aggiudicazioni-stato.json (l'archivio non si tocca).
+  if (tipo === 'battito') { const s = battito(file, { log }); console.log(JSON.stringify({ esito: s.esito, record: s.record, aggiornato: s.aggiornato, ultimoCambio: s.ultimoCambio })); process.exit(0); }
   let j = null;
   try { j = JSON.parse(fs.readFileSync(input, 'utf8')); }
-  catch (e) { console.log('aggiudicazioni: raccolta ' + tipo + ' non leggibile (' + e.message.slice(0, 60) + ') — archivio intatto'); process.exit(0); }
+  catch (e) { console.log('aggiudicazioni: raccolta ' + tipo + ' non leggibile (' + e.message.slice(0, 60) + ') — archivio intatto'); battito(file, { log }); process.exit(0); }
   const nuovi = tipo === 'fallco' ? daFallco(j) : tipo === 'ivg' ? daIvg(j) : [];
-  if (!nuovi.length) { console.log('aggiudicazioni: la raccolta ' + tipo + ' non ha voci utili — archivio intatto'); process.exit(0); }
+  if (!nuovi.length) { console.log('aggiudicazioni: la raccolta ' + tipo + ' non ha voci utili — archivio intatto'); battito(file, { log }); process.exit(0); }
   const esitoMerge = mergeRecords(file, nuovi, { log });
   // 13/11/2026 — la DATA VERA DELLA RACCOLTA non deve piu' perdersi. Il collettore
   // (scripts/fallco-aggiudicazioni.js) scrive raccolto_il sull'oggetto /tmp/aggiudicazioni-fallco.json,
@@ -115,4 +166,4 @@ if (require.main === module) {
   } catch (e) { console.log('aggiudicazioni-meta: non scritto (' + e.message.slice(0, 60) + ')'); }
 }
 
-module.exports = { mergeRecords, daFallco, daIvg, chiave };
+module.exports = { mergeRecords, daFallco, daIvg, chiave, battito };
