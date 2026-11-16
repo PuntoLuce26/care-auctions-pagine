@@ -1,10 +1,10 @@
 # Esiti delle aste immobiliari italiane — CAReAuctions
 # Fonte: esiti reali delle aste italiane — nessun numero inventato
-# Rilevazione: 2026-11-15T07:38:45.625Z
-# Copertura dichiarata: 31265 lotti con un esito VERO (aggiudicata, deserta, sospesa) su 321036 lotti a catalogo (9.7%) · 294133 lotti senza esito pubblicato (non contati come deserte)
+# Rilevazione: 2026-11-16T07:46:52.724Z
+# Copertura dichiarata: 30978 lotti con un esito VERO (aggiudicata, deserta, sospesa) su 320534 lotti a catalogo (9.7%) · 293772 lotti senza esito pubblicato (non contati come deserte)
 # Avvertenza: gli esiti non sono nell'API pubblica del PVP; si contano dalle fonti autorizzate che li pubblicano. Un esito mancante non è un'asta deserta.
 stato,esiti,quota_pct_sugli_esiti,totale_lotti_catalogo,rilevazione,fonte
-aggiudicate,1918,6.1,321036,2026-11-15T07:38:45.625Z,PVP e portali autorizzati
-deserte,28608,91.5,321036,2026-11-15T07:38:45.625Z,PVP e portali autorizzati
-sospese,739,2.4,321036,2026-11-15T07:38:45.625Z,PVP e portali autorizzati
-nonPubblicato,294133,0.0,321036,2026-11-15T07:38:45.625Z,senza esito pubblicato — non e un esito
+aggiudicate,1918,6.2,320534,2026-11-16T07:46:52.724Z,PVP e portali autorizzati
+deserte,28330,91.5,320534,2026-11-16T07:46:52.724Z,PVP e portali autorizzati
+sospese,730,2.4,320534,2026-11-16T07:46:52.724Z,PVP e portali autorizzati
+nonPubblicato,293772,0.0,320534,2026-11-16T07:46:52.724Z,senza esito pubblicato — non e un esito
