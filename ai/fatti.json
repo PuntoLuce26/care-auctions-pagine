@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generato": "2026-11-15T08:03:40.081Z",
+    "generato": "2026-11-16T13:50:11.921Z",
     "canary": "care-canary-d2c32afaa5d5",
     "regola": "Mai un numero senza fonte dichiarata, data di rilevazione e copertura. Una frase autosufficiente per riga: la macchina che legge l'HTML deve poter citare il numero senza aprire altro.",
     "schema": "regole/fatti.json#schemaFatto",
@@ -45,7 +45,7 @@
       {
         "file": "feed/confronto-mercato.json",
         "da": "locale",
-        "scontoDichiarato": 7420
+        "scontoDichiarato": 8936
       },
       {
         "file": "feed/omi-indice.json",
@@ -79,11 +79,6 @@
         "feed": "feed/statistiche.json"
       },
       {
-        "id": "esiti-monitor-aggiudicazioni",
-        "motivo": "feed/esiti-monitor.json dichiara rilevazione: null (il campo rilevazioneMotivo spiega che l'archivio aggiudicazioni non conserva l'istante di raccolta): la data di generazione non è la data di rilevazione, quindi il fatto non si emette. Cura: scripts/aggiudicazioni-merge.js deve scrivere l'istante di raccolta (feed/aggiudicazioni-meta.json).",
-        "feed": "feed/esiti-monitor.json"
-      },
-      {
         "id": "aste-immobiliari-totale",
         "motivo": "feed/indice.json espone immobiliari: 271623 ma non dichiara fonte, rilevazione né copertura, e il numero non si ricava per sottrazione (il totale comprende i mobiliari): non emesso finché il feed non dichiara fonte e copertura",
         "feed": "feed/indice.json"
@@ -93,48 +88,48 @@
   "fatti": [
     {
       "id": "catalogo-lotti-attivi",
-      "frase": "Al 15/11/2026 le aste giudiziarie attive pubblicate in Italia (immobiliari e mobiliari) sono 321.904. Fonte: PVP — Portale delle Vendite Pubbliche. Rilevazione: 15/11/2026 07:12 UTC. Copertura: catalogo completo dei lotti pubblicati.",
-      "valore": 321904,
+      "frase": "Al 16/11/2026 le aste giudiziarie attive pubblicate in Italia (immobiliari e mobiliari) sono 320.565. Fonte: PVP — Portale delle Vendite Pubbliche. Rilevazione: 16/11/2026 13:37 UTC. Copertura: catalogo completo dei lotti pubblicati.",
+      "valore": 320565,
       "unita": "lotti",
       "fonte": "PVP — Portale delle Vendite Pubbliche",
       "url_fonte": "https://pvp.giustizia.it",
-      "rilevazione": "2026-11-15T07:12:36.745Z",
+      "rilevazione": "2026-11-16T13:37:52.267Z",
       "copertura": "catalogo completo dei lotti pubblicati",
       "coperturaFonte": "regole-dichiarata",
       "feed": "feed/statistiche.json",
       "url_pagina": "https://careauctions.co/idati",
       "domanda": "Quante aste giudiziarie ci sono in Italia?",
-      "etaOre": 0.9
+      "etaOre": 0.2
     },
     {
       "id": "prezzo-base-medio-immobiliare",
-      "frase": "Al 15/11/2026 il prezzo base medio dei lotti immobiliari in catalogo è di 166.013 €. Fonte: PVP — Portale delle Vendite Pubbliche. Rilevazione: 15/11/2026 07:12 UTC. Copertura: lotti immobiliari del catalogo PVP con prezzo base d'asta dichiarato.",
-      "valore": 166013,
+      "frase": "Al 16/11/2026 il prezzo base medio dei lotti immobiliari in catalogo è di 165.971 €. Fonte: PVP — Portale delle Vendite Pubbliche. Rilevazione: 16/11/2026 13:37 UTC. Copertura: lotti immobiliari del catalogo PVP con prezzo base d'asta dichiarato.",
+      "valore": 165971,
       "unita": "€",
       "fonte": "PVP — Portale delle Vendite Pubbliche",
       "url_fonte": "https://pvp.giustizia.it",
-      "rilevazione": "2026-11-15T07:12:36.745Z",
+      "rilevazione": "2026-11-16T13:37:52.267Z",
       "copertura": "lotti immobiliari del catalogo PVP con prezzo base d'asta dichiarato",
       "coperturaFonte": "regole-dichiarata",
       "feed": "feed/statistiche.json",
       "url_pagina": "https://careauctions.co/idati",
       "domanda": "Qual è il prezzo base medio delle aste immobiliari in Italia?",
-      "etaOre": 0.9
+      "etaOre": 0.2
     },
     {
       "id": "scarto-base-minima-medio-immobiliare",
-      "frase": "Al 15/11/2026 lo scarto medio tra prezzo base d'asta e offerta minima sui lotti immobiliari è del 24% (è il pavimento legale dell'offerta, non uno sconto di mercato). Fonte: PVP — Portale delle Vendite Pubbliche. Rilevazione: 15/11/2026 07:12 UTC. Copertura: lotti immobiliari del catalogo PVP su cui lo scarto tra prezzo base e offerta minima è calcolabile.",
+      "frase": "Al 16/11/2026 lo scarto medio tra prezzo base d'asta e offerta minima sui lotti immobiliari è del 24% (è il pavimento legale dell'offerta, non uno sconto di mercato). Fonte: PVP — Portale delle Vendite Pubbliche. Rilevazione: 16/11/2026 13:37 UTC. Copertura: lotti immobiliari del catalogo PVP su cui lo scarto tra prezzo base e offerta minima è calcolabile.",
       "valore": 24,
       "unita": "%",
       "fonte": "PVP — Portale delle Vendite Pubbliche",
       "url_fonte": "https://pvp.giustizia.it",
-      "rilevazione": "2026-11-15T07:12:36.745Z",
+      "rilevazione": "2026-11-16T13:37:52.267Z",
       "copertura": "lotti immobiliari del catalogo PVP su cui lo scarto tra prezzo base e offerta minima è calcolabile",
       "coperturaFonte": "regole-dichiarata",
       "feed": "feed/statistiche.json",
       "url_pagina": "https://careauctions.co/ca-re-index",
       "domanda": "Quanto vale lo scarto tra prezzo base e offerta minima in un'asta giudiziaria?",
-      "etaOre": 0.9
+      "etaOre": 0.2
     },
     {
       "id": "tribunali-con-lotti-attivi",
@@ -149,7 +144,7 @@
       "feed": "feed/tribunali.json",
       "url_pagina": "https://careauctions.co/idati",
       "domanda": "Quanti tribunali hanno aste immobiliari ancora aperte in Italia?",
-      "etaOre": 64.9
+      "etaOre": 94.7
     },
     {
       "id": "tribunali-con-esiti",
@@ -164,202 +159,202 @@
       "feed": "feed/tribunali.json",
       "url_pagina": "https://careauctions.co/aggiudicazioni",
       "domanda": "Quanti tribunali hanno almeno un'aggiudicazione pubblicata?",
-      "etaOre": 64.9
+      "etaOre": 94.7
     },
     {
       "id": "careindex-indice-ultimo-punto",
-      "frase": "Al 15/11/2026 l'indice CAReIndex del prezzo base al metro quadro dei lotti residenziali è 149,3 nell'ultimo punto disponibile (10/11/2026), con base 100 nel primo punto (30/04/2026). Fonte: PVP — Portale delle Vendite Pubbliche. Rilevazione: 15/11/2026 07:44 UTC. Copertura: serie di 90 giorni dal 30/04/2026 al 10/11/2026, costruita su 1.543 lotti residenziali con superficie dichiarata su 12.093 residenziali letti (12,8%): i lotti senza superficie non si stimano e restano fuori.",
-      "valore": 149.3,
+      "frase": "Al 16/11/2026 l'indice CAReIndex del prezzo base al metro quadro dei lotti residenziali è 154,8 nell'ultimo punto disponibile (15/11/2026), con base 100 nel primo punto (13/07/2026). Fonte: PVP — Portale delle Vendite Pubbliche. Rilevazione: 16/11/2026 03:44 UTC. Copertura: serie di 90 giorni dal 13/07/2026 al 15/11/2026, costruita su 21.899 lotti residenziali con superficie dichiarata su 162.188 residenziali letti (13,5%): i lotti senza superficie non si stimano e restano fuori.",
+      "valore": 154.8,
       "unita": "indice (base 100)",
       "fonte": "PVP — Portale delle Vendite Pubbliche",
       "url_fonte": "https://pvp.giustizia.it",
-      "rilevazione": "2026-11-15T07:44:14.493Z",
-      "copertura": "serie di 90 giorni dal 30/04/2026 al 10/11/2026, costruita su 1.543 lotti residenziali con superficie dichiarata su 12.093 residenziali letti (12,8%): i lotti senza superficie non si stimano e restano fuori",
+      "rilevazione": "2026-11-16T03:44:38.171Z",
+      "copertura": "serie di 90 giorni dal 13/07/2026 al 15/11/2026, costruita su 21.899 lotti residenziali con superficie dichiarata su 162.188 residenziali letti (13,5%): i lotti senza superficie non si stimano e restano fuori",
       "coperturaFonte": "feed",
       "feed": "feed/careindex-serie.json",
       "url_pagina": "https://careauctions.co/ca-re-index",
       "domanda": "Come si muove il prezzo base al metro quadro delle aste immobiliari?",
-      "etaOre": 0.3
+      "etaOre": 10.1
     },
     {
       "id": "careindex-prezzo-mq-ultimo-punto",
-      "frase": "Al 15/11/2026 il prezzo base al metro quadro dei lotti residenziali nell'ultimo punto della serie è di 1.978 €/m². Fonte: PVP — Portale delle Vendite Pubbliche. Rilevazione: 15/11/2026 07:44 UTC. Copertura: serie di 90 giorni dal 30/04/2026 al 10/11/2026, costruita su 1.543 lotti residenziali con superficie dichiarata su 12.093 residenziali letti (12,8%): i lotti senza superficie non si stimano e restano fuori.",
-      "valore": 1978,
+      "frase": "Al 16/11/2026 il prezzo base al metro quadro dei lotti residenziali nell'ultimo punto della serie è di 1.365 €/m². Fonte: PVP — Portale delle Vendite Pubbliche. Rilevazione: 16/11/2026 03:44 UTC. Copertura: serie di 90 giorni dal 13/07/2026 al 15/11/2026, costruita su 21.899 lotti residenziali con superficie dichiarata su 162.188 residenziali letti (13,5%): i lotti senza superficie non si stimano e restano fuori.",
+      "valore": 1365,
       "unita": "€/m²",
       "fonte": "PVP — Portale delle Vendite Pubbliche",
       "url_fonte": "https://pvp.giustizia.it",
-      "rilevazione": "2026-11-15T07:44:14.493Z",
-      "copertura": "serie di 90 giorni dal 30/04/2026 al 10/11/2026, costruita su 1.543 lotti residenziali con superficie dichiarata su 12.093 residenziali letti (12,8%): i lotti senza superficie non si stimano e restano fuori",
+      "rilevazione": "2026-11-16T03:44:38.171Z",
+      "copertura": "serie di 90 giorni dal 13/07/2026 al 15/11/2026, costruita su 21.899 lotti residenziali con superficie dichiarata su 162.188 residenziali letti (13,5%): i lotti senza superficie non si stimano e restano fuori",
       "coperturaFonte": "feed",
       "feed": "feed/careindex-serie.json",
       "url_pagina": "https://careauctions.co/ca-re-index",
       "domanda": "Qual è il prezzo base al metro quadro delle aste residenziali?",
-      "etaOre": 0.3
+      "etaOre": 10.1
     },
     {
       "id": "careindex-prezzo-mq-primo-punto",
-      "frase": "Al 15/11/2026 il prezzo base al metro quadro dei lotti residenziali nel primo punto della serie è di 1.325 €/m². Fonte: PVP — Portale delle Vendite Pubbliche. Rilevazione: 15/11/2026 07:44 UTC. Copertura: serie di 90 giorni dal 30/04/2026 al 10/11/2026, costruita su 1.543 lotti residenziali con superficie dichiarata su 12.093 residenziali letti (12,8%): i lotti senza superficie non si stimano e restano fuori.",
-      "valore": 1325,
+      "frase": "Al 16/11/2026 il prezzo base al metro quadro dei lotti residenziali nel primo punto della serie è di 882 €/m². Fonte: PVP — Portale delle Vendite Pubbliche. Rilevazione: 16/11/2026 03:44 UTC. Copertura: serie di 90 giorni dal 13/07/2026 al 15/11/2026, costruita su 21.899 lotti residenziali con superficie dichiarata su 162.188 residenziali letti (13,5%): i lotti senza superficie non si stimano e restano fuori.",
+      "valore": 882,
       "unita": "€/m²",
       "fonte": "PVP — Portale delle Vendite Pubbliche",
       "url_fonte": "https://pvp.giustizia.it",
-      "rilevazione": "2026-11-15T07:44:14.493Z",
-      "copertura": "serie di 90 giorni dal 30/04/2026 al 10/11/2026, costruita su 1.543 lotti residenziali con superficie dichiarata su 12.093 residenziali letti (12,8%): i lotti senza superficie non si stimano e restano fuori",
+      "rilevazione": "2026-11-16T03:44:38.171Z",
+      "copertura": "serie di 90 giorni dal 13/07/2026 al 15/11/2026, costruita su 21.899 lotti residenziali con superficie dichiarata su 162.188 residenziali letti (13,5%): i lotti senza superficie non si stimano e restano fuori",
       "coperturaFonte": "feed",
       "feed": "feed/careindex-serie.json",
       "url_pagina": "https://careauctions.co/ca-re-index",
       "domanda": "Da quale prezzo al metro quadro parte la serie CAReIndex?",
-      "etaOre": 0.3
+      "etaOre": 10.1
     },
     {
       "id": "careindex-lotti-con-superficie",
-      "frase": "Al 15/11/2026 i lotti residenziali con superficie dichiarata che alimentano la serie CAReIndex sono 1.543 su 12.093 lotti residenziali letti. Fonte: PVP — Portale delle Vendite Pubbliche. Rilevazione: 15/11/2026 07:44 UTC. Copertura: serie di 90 giorni dal 30/04/2026 al 10/11/2026, costruita su 1.543 lotti residenziali con superficie dichiarata su 12.093 residenziali letti (12,8%): i lotti senza superficie non si stimano e restano fuori.",
-      "valore": 1543,
+      "frase": "Al 16/11/2026 i lotti residenziali con superficie dichiarata che alimentano la serie CAReIndex sono 21.899 su 162.188 lotti residenziali letti. Fonte: PVP — Portale delle Vendite Pubbliche. Rilevazione: 16/11/2026 03:44 UTC. Copertura: serie di 90 giorni dal 13/07/2026 al 15/11/2026, costruita su 21.899 lotti residenziali con superficie dichiarata su 162.188 residenziali letti (13,5%): i lotti senza superficie non si stimano e restano fuori.",
+      "valore": 21899,
       "unita": "lotti",
       "fonte": "PVP — Portale delle Vendite Pubbliche",
       "url_fonte": "https://pvp.giustizia.it",
-      "rilevazione": "2026-11-15T07:44:14.493Z",
-      "copertura": "serie di 90 giorni dal 30/04/2026 al 10/11/2026, costruita su 1.543 lotti residenziali con superficie dichiarata su 12.093 residenziali letti (12,8%): i lotti senza superficie non si stimano e restano fuori",
+      "rilevazione": "2026-11-16T03:44:38.171Z",
+      "copertura": "serie di 90 giorni dal 13/07/2026 al 15/11/2026, costruita su 21.899 lotti residenziali con superficie dichiarata su 162.188 residenziali letti (13,5%): i lotti senza superficie non si stimano e restano fuori",
       "coperturaFonte": "feed",
       "feed": "feed/careindex-serie.json",
       "url_pagina": "https://careauctions.co/ca-re-index",
       "domanda": "Su quanti lotti è calcolato il CAReIndex?",
-      "etaOre": 0.3
+      "etaOre": 10.1
     },
     {
       "id": "esiti-immobiliari-con-prezzo-finale",
-      "frase": "Al 15/11/2026 gli esiti immobiliari con prezzo finale di aggiudicazione pubblicato sono 388 su 4.376 esiti immobiliari raccolti. Fonte: FallcoAste — fallcoaste.it e Notarile Verona (aste notarili). Rilevazione: 15/11/2026 03:18 UTC. Copertura: esiti immobiliari con prezzo finale di aggiudicazione pubblicato: 388 esiti dal 29/09/2020 al 11/11/2026, 44 tribunali, 14 regioni; non tutte le aste pubblicano il prezzo finale, i lotti senza prezzo base restano fuori.",
-      "valore": 388,
+      "frase": "Al 16/11/2026 gli esiti immobiliari con prezzo finale di aggiudicazione pubblicato sono 409 su 4.806 esiti immobiliari raccolti. Fonte: FallcoAste — fallcoaste.it e Notarile Verona (aste notarili). Rilevazione: 16/11/2026 10:57 UTC. Copertura: esiti immobiliari con prezzo finale di aggiudicazione pubblicato: 409 esiti dal 29/09/2020 al 14/11/2026, 48 tribunali, 15 regioni; non tutte le aste pubblicano il prezzo finale, i lotti senza prezzo base restano fuori.",
+      "valore": 409,
       "unita": "esiti",
       "fonte": "FallcoAste — fallcoaste.it e Notarile Verona (aste notarili)",
       "url_fonte": "https://www.fallcoaste.it",
-      "rilevazione": "2026-11-15T03:18:40.628Z",
-      "copertura": "esiti immobiliari con prezzo finale di aggiudicazione pubblicato: 388 esiti dal 29/09/2020 al 11/11/2026, 44 tribunali, 14 regioni; non tutte le aste pubblicano il prezzo finale, i lotti senza prezzo base restano fuori",
+      "rilevazione": "2026-11-16T10:57:37.503Z",
+      "copertura": "esiti immobiliari con prezzo finale di aggiudicazione pubblicato: 409 esiti dal 29/09/2020 al 14/11/2026, 48 tribunali, 15 regioni; non tutte le aste pubblicano il prezzo finale, i lotti senza prezzo base restano fuori",
       "coperturaFonte": "feed",
       "feed": "feed/esiti-statistiche.json",
       "url_pagina": "https://careauctions.co/aggiudicazioni",
       "domanda": "Quante aste immobiliari hanno un prezzo di aggiudicazione pubblicato?",
-      "etaOre": 4.7
+      "etaOre": 2.9
     },
     {
       "id": "esiti-immobiliari-tribunali",
-      "frase": "Al 15/11/2026 i tribunali coperti dall'archivio degli esiti immobiliari con prezzo finale sono 44 in 14 regioni. Fonte: FallcoAste — fallcoaste.it e Notarile Verona (aste notarili). Rilevazione: 15/11/2026 03:18 UTC. Copertura: esiti immobiliari con prezzo finale di aggiudicazione pubblicato: 388 esiti dal 29/09/2020 al 11/11/2026, 44 tribunali, 14 regioni; non tutte le aste pubblicano il prezzo finale, i lotti senza prezzo base restano fuori.",
-      "valore": 44,
+      "frase": "Al 16/11/2026 i tribunali coperti dall'archivio degli esiti immobiliari con prezzo finale sono 48 in 15 regioni. Fonte: FallcoAste — fallcoaste.it e Notarile Verona (aste notarili). Rilevazione: 16/11/2026 10:57 UTC. Copertura: esiti immobiliari con prezzo finale di aggiudicazione pubblicato: 409 esiti dal 29/09/2020 al 14/11/2026, 48 tribunali, 15 regioni; non tutte le aste pubblicano il prezzo finale, i lotti senza prezzo base restano fuori.",
+      "valore": 48,
       "unita": "tribunali",
       "fonte": "FallcoAste — fallcoaste.it e Notarile Verona (aste notarili)",
       "url_fonte": "https://www.fallcoaste.it",
-      "rilevazione": "2026-11-15T03:18:40.628Z",
-      "copertura": "esiti immobiliari con prezzo finale di aggiudicazione pubblicato: 388 esiti dal 29/09/2020 al 11/11/2026, 44 tribunali, 14 regioni; non tutte le aste pubblicano il prezzo finale, i lotti senza prezzo base restano fuori",
+      "rilevazione": "2026-11-16T10:57:37.503Z",
+      "copertura": "esiti immobiliari con prezzo finale di aggiudicazione pubblicato: 409 esiti dal 29/09/2020 al 14/11/2026, 48 tribunali, 15 regioni; non tutte le aste pubblicano il prezzo finale, i lotti senza prezzo base restano fuori",
       "coperturaFonte": "feed",
       "feed": "feed/esiti-statistiche.json",
       "url_pagina": "https://careauctions.co/aggiudicazioni",
       "domanda": "Quanti tribunali compaiono nell'archivio degli esiti con prezzo finale?",
-      "etaOre": 4.7
+      "etaOre": 2.9
     },
     {
       "id": "esiti-prezzo-finale-mediano",
-      "frase": "Al 15/11/2026 il prezzo finale mediano delle aggiudicazioni immobiliari è di 37.063 €. Fonte: FallcoAste — fallcoaste.it e Notarile Verona (aste notarili). Rilevazione: 15/11/2026 03:18 UTC. Copertura: esiti immobiliari con prezzo finale di aggiudicazione pubblicato: 388 esiti dal 29/09/2020 al 11/11/2026, 44 tribunali, 14 regioni; non tutte le aste pubblicano il prezzo finale, i lotti senza prezzo base restano fuori.",
-      "valore": 37063,
+      "frase": "Al 16/11/2026 il prezzo finale mediano delle aggiudicazioni immobiliari è di 35.500 €. Fonte: FallcoAste — fallcoaste.it e Notarile Verona (aste notarili). Rilevazione: 16/11/2026 10:57 UTC. Copertura: esiti immobiliari con prezzo finale di aggiudicazione pubblicato: 409 esiti dal 29/09/2020 al 14/11/2026, 48 tribunali, 15 regioni; non tutte le aste pubblicano il prezzo finale, i lotti senza prezzo base restano fuori.",
+      "valore": 35500,
       "unita": "€",
       "fonte": "FallcoAste — fallcoaste.it e Notarile Verona (aste notarili)",
       "url_fonte": "https://www.fallcoaste.it",
-      "rilevazione": "2026-11-15T03:18:40.628Z",
-      "copertura": "esiti immobiliari con prezzo finale di aggiudicazione pubblicato: 388 esiti dal 29/09/2020 al 11/11/2026, 44 tribunali, 14 regioni; non tutte le aste pubblicano il prezzo finale, i lotti senza prezzo base restano fuori",
+      "rilevazione": "2026-11-16T10:57:37.503Z",
+      "copertura": "esiti immobiliari con prezzo finale di aggiudicazione pubblicato: 409 esiti dal 29/09/2020 al 14/11/2026, 48 tribunali, 15 regioni; non tutte le aste pubblicano il prezzo finale, i lotti senza prezzo base restano fuori",
       "coperturaFonte": "feed",
       "feed": "feed/esiti-statistiche.json",
       "url_pagina": "https://careauctions.co/aggiudicazioni",
       "domanda": "Qual è il prezzo finale mediano di aggiudicazione di un'asta immobiliare?",
-      "etaOre": 4.7
+      "etaOre": 2.9
     },
     {
       "id": "sconto-reale-mediano-nazionale",
-      "frase": "Al 13/11/2026 lo sconto mediano dei prezzi base d'asta rispetto ai valori di mercato OMI è del 40,7%. Fonte: OMI — Agenzia delle Entrate (valori di mercato) e PVP — Portale delle Vendite Pubbliche (prezzi base). Rilevazione: 13/11/2026 06:05 UTC. Copertura: lotti residenziali a piena proprietà con superficie dichiarata e comune con valori OMI: 30.388 lotti confrontabili su 145.028 residenziali; 1.854 comuni pubblicati su 6.161 con valori OMI; semestre OMI 1° semestre 2026.",
-      "valore": 40.7,
+      "frase": "Al 16/11/2026 lo sconto mediano dei prezzi base d'asta rispetto ai valori di mercato OMI è del 40,5%. Fonte: OMI — Agenzia delle Entrate (valori di mercato) e PVP — Portale delle Vendite Pubbliche (prezzi base). Rilevazione: 16/11/2026 12:04 UTC. Copertura: lotti residenziali a piena proprietà con superficie dichiarata e comune con valori OMI: 33.937 lotti confrontabili su 144.593 residenziali; 2.233 comuni pubblicati su 7.862 con valori OMI; semestre OMI 1° semestre 2026.",
+      "valore": 40.5,
       "unita": "%",
       "fonte": "OMI — Agenzia delle Entrate (valori di mercato) e PVP — Portale delle Vendite Pubbliche (prezzi base)",
       "url_fonte": "https://www1.agenziaentrate.gov.it/servizi/geopoi_omi/",
-      "rilevazione": "2026-11-13T06:05:53.848Z",
-      "copertura": "lotti residenziali a piena proprietà con superficie dichiarata e comune con valori OMI: 30.388 lotti confrontabili su 145.028 residenziali; 1.854 comuni pubblicati su 6.161 con valori OMI; semestre OMI 1° semestre 2026",
+      "rilevazione": "2026-11-16T12:04:36.442Z",
+      "copertura": "lotti residenziali a piena proprietà con superficie dichiarata e comune con valori OMI: 33.937 lotti confrontabili su 144.593 residenziali; 2.233 comuni pubblicati su 7.862 con valori OMI; semestre OMI 1° semestre 2026",
       "coperturaFonte": "feed",
       "feed": "feed/confronto-mercato.json",
       "url_pagina": "https://careauctions.co/sconto-reale-certificato",
       "domanda": "Quanto costano meno le aste rispetto ai valori di mercato OMI?",
-      "etaOre": 50
+      "etaOre": 1.8
     },
     {
       "id": "sconto-reale-conservativo-nazionale",
-      "frase": "Al 13/11/2026 lo sconto mediano calcolato contro la zona OMI più economica del comune è del 20,5%. Fonte: OMI — Agenzia delle Entrate (valori di mercato) e PVP — Portale delle Vendite Pubbliche (prezzi base). Rilevazione: 13/11/2026 06:05 UTC. Copertura: lotti residenziali a piena proprietà con superficie dichiarata e comune con valori OMI: 30.388 lotti confrontabili su 145.028 residenziali; 1.854 comuni pubblicati su 6.161 con valori OMI; semestre OMI 1° semestre 2026.",
-      "valore": 20.5,
+      "frase": "Al 16/11/2026 lo sconto mediano calcolato contro la zona OMI più economica del comune è del 21%. Fonte: OMI — Agenzia delle Entrate (valori di mercato) e PVP — Portale delle Vendite Pubbliche (prezzi base). Rilevazione: 16/11/2026 12:04 UTC. Copertura: lotti residenziali a piena proprietà con superficie dichiarata e comune con valori OMI: 33.937 lotti confrontabili su 144.593 residenziali; 2.233 comuni pubblicati su 7.862 con valori OMI; semestre OMI 1° semestre 2026.",
+      "valore": 21,
       "unita": "%",
       "fonte": "OMI — Agenzia delle Entrate (valori di mercato) e PVP — Portale delle Vendite Pubbliche (prezzi base)",
       "url_fonte": "https://www1.agenziaentrate.gov.it/servizi/geopoi_omi/",
-      "rilevazione": "2026-11-13T06:05:53.848Z",
-      "copertura": "lotti residenziali a piena proprietà con superficie dichiarata e comune con valori OMI: 30.388 lotti confrontabili su 145.028 residenziali; 1.854 comuni pubblicati su 6.161 con valori OMI; semestre OMI 1° semestre 2026",
+      "rilevazione": "2026-11-16T12:04:36.442Z",
+      "copertura": "lotti residenziali a piena proprietà con superficie dichiarata e comune con valori OMI: 33.937 lotti confrontabili su 144.593 residenziali; 2.233 comuni pubblicati su 7.862 con valori OMI; semestre OMI 1° semestre 2026",
       "coperturaFonte": "feed",
       "feed": "feed/confronto-mercato.json",
       "url_pagina": "https://careauctions.co/sconto-reale-certificato",
       "domanda": "Qual è lo sconto delle aste calcolato nel modo più prudente?",
-      "etaOre": 50
+      "etaOre": 1.8
     },
     {
       "id": "omi-comuni-con-quotazioni",
-      "frase": "Al 14/11/2026 i comuni con quotazioni OMI disponibili sono 7.887. Fonte: OMI — Agenzia delle Entrate. Rilevazione: 14/11/2026 11:29 UTC. Copertura: 7.887 comuni con quotazioni OMI, 103 province, 21 regioni, 5 aree, semestri 2004/1–2026/1.",
+      "frase": "Al 16/11/2026 i comuni con quotazioni OMI disponibili sono 7.887. Fonte: OMI — Agenzia delle Entrate. Rilevazione: 16/11/2026 12:57 UTC. Copertura: 7.887 comuni con quotazioni OMI, 103 province, 21 regioni, 5 aree, semestri 2004/1–2026/1.",
       "valore": 7887,
       "unita": "comuni",
       "fonte": "OMI — Agenzia delle Entrate",
       "url_fonte": "https://www1.agenziaentrate.gov.it/servizi/geopoi_omi/",
-      "rilevazione": "2026-11-14T11:29:12.273Z",
+      "rilevazione": "2026-11-16T12:57:28.313Z",
       "copertura": "7.887 comuni con quotazioni OMI, 103 province, 21 regioni, 5 aree, semestri 2004/1–2026/1",
       "coperturaFonte": "feed",
       "feed": "feed/omi-indice.json",
       "url_pagina": "https://careauctions.co/osservatorio",
       "domanda": "Su quanti comuni italiani esistono quotazioni OMI?",
-      "etaOre": 20.6
+      "etaOre": 0.9
     },
     {
       "id": "omi-mediana-nazionale-ultimo-semestre",
-      "frase": "Al 14/11/2026 il valore mediano al metro quadro delle quotazioni OMI residenziali nazionali è di 775 €/m² nel semestre 2026/1. Fonte: OMI — Agenzia delle Entrate. Rilevazione: 14/11/2026 11:29 UTC. Copertura: 7.887 comuni con quotazioni OMI, 103 province, 21 regioni, 5 aree, semestri 2004/1–2026/1.",
+      "frase": "Al 16/11/2026 il valore mediano al metro quadro delle quotazioni OMI residenziali nazionali è di 775 €/m² nel semestre 2026/1. Fonte: OMI — Agenzia delle Entrate. Rilevazione: 16/11/2026 12:57 UTC. Copertura: 7.887 comuni con quotazioni OMI, 103 province, 21 regioni, 5 aree, semestri 2004/1–2026/1.",
       "valore": 775,
       "unita": "€/m²",
       "fonte": "OMI — Agenzia delle Entrate",
       "url_fonte": "https://www1.agenziaentrate.gov.it/servizi/geopoi_omi/",
-      "rilevazione": "2026-11-14T11:29:12.273Z",
+      "rilevazione": "2026-11-16T12:57:28.313Z",
       "copertura": "7.887 comuni con quotazioni OMI, 103 province, 21 regioni, 5 aree, semestri 2004/1–2026/1",
       "coperturaFonte": "feed",
       "feed": "feed/omi-indice.json",
       "url_pagina": "https://careauctions.co/osservatorio",
       "domanda": "Qual è il valore mediano OMI al metro quadro in Italia?",
-      "etaOre": 20.6
+      "etaOre": 0.9
     },
     {
       "id": "omi-indice-nazionale-ultimo-semestre",
-      "frase": "Al 14/11/2026 l'indice nazionale dei valori OMI è 104 nel semestre 2026/1 (base 100 nel semestre 2004/1). Fonte: OMI — Agenzia delle Entrate. Rilevazione: 14/11/2026 11:29 UTC. Copertura: 7.887 comuni con quotazioni OMI, 103 province, 21 regioni, 5 aree, semestri 2004/1–2026/1.",
+      "frase": "Al 16/11/2026 l'indice nazionale dei valori OMI è 104 nel semestre 2026/1 (base 100 nel semestre 2004/1). Fonte: OMI — Agenzia delle Entrate. Rilevazione: 16/11/2026 12:57 UTC. Copertura: 7.887 comuni con quotazioni OMI, 103 province, 21 regioni, 5 aree, semestri 2004/1–2026/1.",
       "valore": 104,
       "unita": "indice (base 100)",
       "fonte": "OMI — Agenzia delle Entrate",
       "url_fonte": "https://www1.agenziaentrate.gov.it/servizi/geopoi_omi/",
-      "rilevazione": "2026-11-14T11:29:12.273Z",
+      "rilevazione": "2026-11-16T12:57:28.313Z",
       "copertura": "7.887 comuni con quotazioni OMI, 103 province, 21 regioni, 5 aree, semestri 2004/1–2026/1",
       "coperturaFonte": "feed",
       "feed": "feed/omi-indice.json",
       "url_pagina": "https://careauctions.co/osservatorio",
       "domanda": "Come sono cambiati i valori OMI in Italia?",
-      "etaOre": 20.6
+      "etaOre": 0.9
     },
     {
       "id": "lingue-servite",
-      "frase": "Al 15/11/2026 le lingue servite da careauctions.co sono 91, ognuna tradotta una per una per le pagine /ilive e /stampa. Fonte: Traduzioni CAReAuctions. Rilevazione: 15/11/2026 07:44 UTC. Copertura: 91 lingue con la pagina /ilive e 91 con /stampa tradotte una per una (nessun fallback automatico).",
+      "frase": "Al 16/11/2026 le lingue servite da careauctions.co sono 91, ognuna tradotta una per una per le pagine /ilive e /stampa. Fonte: Traduzioni CAReAuctions. Rilevazione: 16/11/2026 08:36 UTC. Copertura: 91 lingue con la pagina /ilive e 91 con /stampa tradotte una per una (nessun fallback automatico).",
       "valore": 91,
       "unita": "lingue",
       "fonte": "Traduzioni CAReAuctions",
       "url_fonte": "https://careauctions.co/ilive",
-      "rilevazione": "2026-11-15T07:44:28.026Z",
+      "rilevazione": "2026-11-16T08:36:39.999Z",
       "copertura": "91 lingue con la pagina /ilive e 91 con /stampa tradotte una per una (nessun fallback automatico)",
       "coperturaFonte": "feed",
       "feed": "feed/pagine91.json",
       "url_pagina": "https://careauctions.co/ilive",
       "domanda": "In quante lingue è pubblicato il sito?",
-      "etaOre": 0.3
+      "etaOre": 5.2
     }
   ]
 }
