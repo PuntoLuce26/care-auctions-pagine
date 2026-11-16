@@ -49,9 +49,9 @@ jobs:
           head -40 "$F"
 
       - name: niente commit nel repo pubblico (16/11)
-        # Il QUADRO contiene stato interno: NON si committa piu in un repo pubblico.
-        # Il report resta disponibile come artifact della run (scaricabile da Gianluca).
-        run: echo "report generato: sara allegato come artifact, nessun commit"
+        # Il QUADRO contiene stato interno e non va committato in un repo pubblico.
+        # Il report resta disponibile come artifact della run.
+        run: echo 'report generato, sara allegato come artifact, nessun commit'
 
       - name: allega il report
         if: always()
