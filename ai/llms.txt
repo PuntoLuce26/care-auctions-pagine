@@ -31,7 +31,6 @@ Domande frequenti, con risposte verificabili: https://careauctions.co/feed/faq.j
 - idati: https://careauctions.co/idati
 - careindex: https://careauctions.co/ca-re-index
 - aggiudicazioni: https://careauctions.co/aggiudicazioni
-- metodo: https://careauctions.co/metodo
 - novita: https://careauctions.co/novita
 - buynow: https://careauctions.co/buynow/san-pasquale
 - icare: https://careauctions.co/icare
