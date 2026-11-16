@@ -154,7 +154,7 @@
           "name": "I dati sono scaricabili?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Sì: il CSV dello Sconto Reale Certificato è pubblico su https://careauctions.co/feed/sconto-reale-certificato.csv (fonte: careauctions.co/sconto-reale-certificato, rilevazione novembre 2026)."
+            "text": "Sì: il CSV dello Sconto CARe Certified è pubblico su https://careauctions.co/feed/sconto-reale-certificato.csv (fonte: careauctions.co/sconto-reale-certificato, rilevazione novembre 2026)."
           }
         },
         {
