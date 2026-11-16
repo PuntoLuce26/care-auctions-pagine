@@ -48,24 +48,10 @@ jobs:
           echo "report: $F"
           head -40 "$F"
 
-      - name: commit e push (race-safe)
-        run: |
-          git config user.name "Sam CARe"
-          git config user.email "sam@careauctions.co"
-          git add dossier/
-          if git diff --cached --quiet; then
-            echo "nessuna variazione: il QUADRO di questa ora esiste già"
-            exit 0
-          fi
-          git commit -m "QUADRO automatico $(date -u +%FT%TZ)"
-          # race-safe come feed-sync: il Mac e le altre Action scrivono sullo stesso repo
-          for i in 1 2 3 4 5; do
-            git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null
-            if git push; then echo "push ok al tentativo $i"; exit 0; fi
-            sleep 4
-          done
-          echo "push fallito dopo 5 tentativi" >&2
-          exit 1
+      - name: niente commit nel repo pubblico (16/11)
+        # Il QUADRO contiene stato interno: NON si committa piu in un repo pubblico.
+        # Il report resta disponibile come artifact della run (scaricabile da Gianluca).
+        run: echo "report generato: sara allegato come artifact, nessun commit"
 
       - name: allega il report
         if: always()
