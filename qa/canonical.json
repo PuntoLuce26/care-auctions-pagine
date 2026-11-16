@@ -1,0 +1,169 @@
+{
+  "generatoIl": "2026-11-16T23:39:56.412Z",
+  "build": "05789d8f",
+  "righe": [
+    {
+      "rotta": "/",
+      "locale": "it-IT",
+      "canonical": "https://careauctions.co/",
+      "dataLp": false,
+      "ok": true,
+      "motivo": ""
+    },
+    {
+      "rotta": "/chi-siamo",
+      "locale": "it-IT",
+      "canonical": "https://careauctions.co/chi-siamo",
+      "dataLp": false,
+      "ok": true,
+      "motivo": ""
+    },
+    {
+      "rotta": "/contatti",
+      "locale": "it-IT",
+      "canonical": "https://careauctions.co/contatti",
+      "dataLp": false,
+      "ok": true,
+      "motivo": ""
+    },
+    {
+      "rotta": "/metodo",
+      "locale": "it-IT",
+      "canonical": null,
+      "dataLp": false,
+      "ok": false,
+      "motivo": "HTTP 404 su https://careauctions.co/metodo"
+    },
+    {
+      "rotta": "/dati",
+      "locale": "it-IT",
+      "canonical": "https://careauctions.co/dati",
+      "dataLp": false,
+      "ok": true,
+      "motivo": ""
+    },
+    {
+      "rotta": "/sconto-reale-certificato",
+      "locale": "it-IT",
+      "canonical": "https://careauctions.co/sconto-reale-certificato",
+      "dataLp": false,
+      "ok": true,
+      "motivo": ""
+    },
+    {
+      "rotta": "/guida-definitiva-asta",
+      "locale": "it-IT",
+      "canonical": "https://careauctions.co/guida-definitiva-asta",
+      "dataLp": false,
+      "ok": true,
+      "motivo": ""
+    },
+    {
+      "rotta": "/glossario-aste",
+      "locale": "it-IT",
+      "canonical": "https://careauctions.co/glossario-aste",
+      "dataLp": false,
+      "ok": true,
+      "motivo": ""
+    },
+    {
+      "rotta": "/guide/it/comprare-casa-allasta",
+      "locale": "it-IT",
+      "canonical": "https://careauctions.co/guide/it/comprare-casa-allasta",
+      "dataLp": false,
+      "ok": true,
+      "motivo": ""
+    },
+    {
+      "rotta": "/aste/1822566",
+      "locale": "it-IT",
+      "canonical": null,
+      "dataLp": false,
+      "ok": false,
+      "motivo": "page.goto: Timeout 45000ms exceeded. Call log: - navigating to \"https://careauctions.co/aste/1822566\", waiting until \"networkidle\""
+    },
+    {
+      "rotta": "/",
+      "locale": "en-US",
+      "canonical": "https://careauctions.co/",
+      "dataLp": false,
+      "ok": true,
+      "motivo": ""
+    },
+    {
+      "rotta": "/chi-siamo",
+      "locale": "en-US",
+      "canonical": "https://careauctions.co/chi-siamo",
+      "dataLp": false,
+      "ok": true,
+      "motivo": ""
+    },
+    {
+      "rotta": "/contatti",
+      "locale": "en-US",
+      "canonical": "https://careauctions.co/contatti",
+      "dataLp": false,
+      "ok": true,
+      "motivo": ""
+    },
+    {
+      "rotta": "/metodo",
+      "locale": "en-US",
+      "canonical": null,
+      "dataLp": false,
+      "ok": false,
+      "motivo": "HTTP 404 su https://careauctions.co/metodo"
+    },
+    {
+      "rotta": "/dati",
+      "locale": "en-US",
+      "canonical": "https://careauctions.co/dati",
+      "dataLp": false,
+      "ok": true,
+      "motivo": ""
+    },
+    {
+      "rotta": "/sconto-reale-certificato",
+      "locale": "en-US",
+      "canonical": "https://careauctions.co/sconto-reale-certificato",
+      "dataLp": false,
+      "ok": true,
+      "motivo": ""
+    },
+    {
+      "rotta": "/guida-definitiva-asta",
+      "locale": "en-US",
+      "canonical": "https://careauctions.co/guida-definitiva-asta",
+      "dataLp": false,
+      "ok": true,
+      "motivo": ""
+    },
+    {
+      "rotta": "/glossario-aste",
+      "locale": "en-US",
+      "canonical": "https://careauctions.co/glossario-aste",
+      "dataLp": false,
+      "ok": true,
+      "motivo": ""
+    },
+    {
+      "rotta": "/guide/it/comprare-casa-allasta",
+      "locale": "en-US",
+      "canonical": "https://careauctions.co/guide/it/comprare-casa-allasta",
+      "dataLp": false,
+      "ok": true,
+      "motivo": ""
+    },
+    {
+      "rotta": "/aste/1822566",
+      "locale": "en-US",
+      "canonical": null,
+      "dataLp": false,
+      "ok": false,
+      "motivo": "page.goto: Timeout 45000ms exceeded. Call log: - navigating to \"https://careauctions.co/aste/1822566\", waiting until \"networkidle\""
+    }
+  ],
+  "ko": 4,
+  "totale": 20,
+  "verdetto": "FAIL"
+}
