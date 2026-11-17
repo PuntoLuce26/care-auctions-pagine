@@ -1,10 +1,10 @@
 {
- "generato": "2026-11-17T02:26:22.032Z",
+ "generato": "2026-11-17T05:11:27.189Z",
  "semaforo": "rosso",
  "conteggi": {
-  "ok": 16,
-  "giallo": 3,
-  "rosso": 5,
+  "ok": 18,
+  "giallo": 2,
+  "rosso": 4,
   "non_verificabile": 0
  },
  "voci": [
@@ -96,42 +96,42 @@
    "sezione": "feed",
    "nome": "world",
    "stato": "rosso",
-   "valore": "6062 min",
+   "valore": "6227 min",
    "dettaglio": "33 paesi"
   },
   {
    "sezione": "feed",
    "nome": "ricevute",
    "stato": "ok",
-   "valore": "6428 min",
+   "valore": "6593 min",
    "dettaglio": "0 ricevute"
   },
   {
    "sezione": "feed",
    "nome": "san-pasquale-foto",
    "stato": "rosso",
-   "valore": "6300 min",
+   "valore": "6465 min",
    "dettaglio": "37 foto"
   },
   {
    "sezione": "build",
    "nome": "sito vs origine",
    "stato": "ok",
-   "valore": "main.05789d8f.js / main.05789d8f.js",
+   "valore": "main.bacb4ba8.js / main.bacb4ba8.js",
    "dettaglio": ""
   },
   {
    "sezione": "prerender",
    "nome": "snapshot vs vivo",
    "stato": "ok",
-   "valore": "main.05789d8f.js / main.05789d8f.js",
+   "valore": "main.bacb4ba8.js / main.bacb4ba8.js",
    "dettaglio": ""
   },
   {
    "sezione": "prerender",
    "nome": "bot allineato",
    "stato": "ok",
-   "valore": "main.05789d8f.js",
+   "valore": "main.bacb4ba8.js",
    "dettaglio": ""
   },
   {
@@ -151,16 +151,16 @@
   {
    "sezione": "qa",
    "nome": "critici",
-   "stato": "rosso",
-   "valore": "24",
-   "dettaglio": "67 controlli"
+   "stato": "ok",
+   "valore": "0",
+   "dettaglio": "43 controlli"
   },
   {
    "sezione": "mail",
    "nome": "allarmi",
    "stato": "giallo",
-   "valore": "12",
-   "dettaglio": "2026-11-17T02:21:11.384Z"
+   "valore": "13",
+   "dettaglio": "2026-11-17T04:51:19.058Z"
   },
   {
    "sezione": "sentinella",
@@ -179,9 +179,9 @@
   {
    "sezione": "github",
    "nome": "run rossi (2h)",
-   "stato": "giallo",
-   "valore": "1 workflow con 2+ fallimenti",
-   "dettaglio": "qa"
+   "stato": "ok",
+   "valore": "2 isolati",
+   "dettaglio": "icarewall · ronda-notturna (una volta sola: race nota)"
   }
  ]
 }
