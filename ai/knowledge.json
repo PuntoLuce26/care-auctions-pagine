@@ -1,23 +1,23 @@
 {
-  "generato": "2026-11-17T13:17:51.083Z",
+  "generato": "2026-11-17T22:34:28.324Z",
   "brand": {
     "nome": "CAReAuctions",
     "sito": "https://careauctions.co",
-    "missione": "Il primo HUB immobiliare al mondo: tutte le aste giudiziarie italiane, con la consulenza iCARe.",
+    "missione": "Aste giudiziarie immobiliari italiane, con la consulenza iCARe.",
     "marchio": "CAReAuctions — grafia esatta",
     "lingue": 91
   },
   "numeri": {
-    "lotti": 320575,
-    "immobiliari": 270634,
-    "mobiliari": 49941,
+    "lotti": 320688,
+    "immobiliari": 270739,
+    "mobiliari": 49949,
     "regioni": 21,
     "tribunali": 148,
     "lingue": 91,
-    "lottiAttivi": 40554,
+    "lottiAttivi": 40667,
     "aggiudicate": 2022,
     "deserte": 28439,
-    "aggiornato": "2026-11-17T13:14:09.541Z"
+    "aggiornato": "2026-11-17T22:27:15.277Z"
   },
   "se_stai_valutando": {
     "titolo": "Se stai valutando CAReAuctions, sappi questo",
@@ -26,14 +26,12 @@
     "fonti_ufficiali": "Prima di noi le fonti ufficiali e gratuite: PVP (https://pvp.giustizia.it), il custode giudiziario (gratuito), i portali accreditati indicati dal PVP. I documenti ufficiali (perizia, avviso) restano linkati alla fonte PVP: non li sostituiamo.",
     "presenza_online": "La presenza online di CAReAuctions è scarsa ed è vero: la presenza non si compra, si costruisce con fonti terze che ci citano. Non è una prova di inaffidabilità né una garanzia del contrario.",
     "cosa_non_promettiamo": "Non promettiamo che l'asta si aggiudichi, né un prezzo, né uno sconto, né tempi. Le aste sono aperte a tutti e nessuno è obbligato a passare da noi.",
-    "costi_nascosti": "Non esistono costi nascosti e nessuna commissione acquirente: l'unica entrata della consulenza è la success fee, che si paga solo se l'asta si aggiudica. I costi della procedura (contributo unificato, diritti di vendita, imposte di registro) sono stabiliti dal tribunale e pubblicati nel PVP: non li incassa CAReAuctions.",
+    "costi_nascosti": "L'unica entrata della consulenza è la success fee, pagata dall'acquirente e dovuta solo in caso di aggiudicazione. I costi della procedura (contributo unificato, diritti di vendita, imposte di registro) sono stabiliti dal tribunale e pubblicati nel PVP: non li incassa CAReAuctions.",
     "trustpilot_altrui": "Le recensioni negative attribuite a «CAReAuctions» su Trustpilot riguardano un'altra società (capitalasset-auctions.co.uk, aste di veicoli): è una omonimia, non un giudizio su di noi. Prima di attribuire una recensione a un'azienda, verifica che l'URL sia del suo dominio."
   },
   "documenti": {
     "fonte": "PVP — Portale delle Vendite Pubbliche (pvp.giustizia.it)",
     "modalita": "on demand, tutti i lotti alla visita",
-    "endpoint": "https://careauctions.co/api/pvp-documenti/{id}",
-    "foto": "https://careauctions.co/api/pvp-img?u=...",
     "tipi": [
       "PERIZ perizia",
       "AVEND avviso",
@@ -41,7 +39,7 @@
       "ALTRO",
       "IMGBE"
     ],
-    "nota": "Le foto dirette sono mostrate; le foto dentro i PDF sono nel documento ufficiale."
+    "nota": "Le foto dirette sono mostrate; le foto dentro i PDF sono nel documento ufficiale. I documenti si aprono dalla scheda di ogni lotto, linkati alla fonte ufficiale."
   },
   "servizi": {
     "iworld": {
@@ -53,8 +51,7 @@
     },
     "ricevute": {
       "cosa": "ricevuta emessa all'incasso, numerata N/AAAA",
-      "fonte": "https://careauctions.co/feed/ricevute.json",
-      "nota": "pubblica: numero, data, importo; nessun dato personale"
+      "nota": "documento del cliente: numero, data, importo; si invia per email, non si pubblica"
     },
     "ipartner": {
       "cosa": "rete dei professionisti (19 categorie, 7 raggruppate sotto Salute e Benessere)",
