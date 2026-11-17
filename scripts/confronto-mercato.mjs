@@ -118,6 +118,112 @@ function mqDa(desc) {
   return null;
 }
 
+// ─────────────── 0) GUARDIA ANTI-REGRESSIONE (17/11/2026) ───────────────
+// Perché esiste: il 17/11/2026 questo workflow ha pubblicato DUE VOLTE un feed
+// PEGGIORE del precedente — 31.767 lotti / 2.117 comuni contro 33.937 / 2.233,
+// perché nella KV mancavano i valori OMI di 4 province. Un feed peggiore non deve
+// MAI andare live: se il nuovo cala oltre il ricambio fisiologico del catalogo non
+// si scrive, e il precedente (già live, quello buono) resta al suo posto.
+// Esce con codice 0: non c'è un guasto da riparare, c'è una pubblicazione da evitare.
+// Il ricambio vero del 17/11 (run #8) è stato −1 comune (-4 usciti, +3 entrati, tutti
+// con 3 lotti, soglia MIN_LOTTI_COMUNE=3): deve passare. La regressione −116 comuni
+// e −2.170 lotti deve essere rifiutata.
+const GUARDIA = {
+  file: process.env.GUARDIA_FILE || 'feed/confronto-mercato-guardia.json',
+  url: process.env.GUARDIA_URL || 'https://raw.githubusercontent.com/PuntoLuce26/care-auctions-pagine/main/feed/confronto-mercato.json',
+  maxCaloLotti: Number(process.env.GUARDIA_MAX_LOTTI || 50),
+  maxCaloComuni: Number(process.env.GUARDIA_MAX_COMUNI || 20),
+};
+
+function scriviStatoGuardia(stato) {
+  try {
+    fs.writeFileSync(GUARDIA.file, JSON.stringify(stato));
+  } catch (e) {
+    // il file di stato è un diario, non una condizione: se non si scrive, non si blocca nulla
+    console.error('GUARDIA: stato non scrivibile su', GUARDIA.file, '—', e.message);
+  }
+}
+
+function cavalcaPrecedente(d, da) {
+  const lotti = Number(d && d.nazionale && d.nazionale.lotti);
+  const comuni = Array.isArray(d && d.comuni)
+    ? d.comuni.length
+    : Number(d && d.meta && d.meta.copertura && d.meta.copertura.comuniPubblicati);
+  if (Number.isFinite(lotti) && lotti > 0 && Number.isFinite(comuni) && comuni > 0) return { lotti, comuni, da };
+  return null;
+}
+
+async function leggiPrecedente() {
+  // 1) il feed LIVE servito dalla raw: è il "precedente" vero, quello che gli utenti leggono
+  try {
+    const r = await fetch(GUARDIA.url, { headers: { 'User-Agent': 'CARe-guardia-feed' }, cache: 'no-store' });
+    if (r.ok) {
+      const p = cavalcaPrecedente(await r.json(), 'raw');
+      if (p) return p;
+    } else {
+      console.error('GUARDIA: raw HTTP', r.status);
+    }
+  } catch (e) {
+    console.error('GUARDIA: raw non leggibile —', e.message);
+  }
+  // 2) la copia nel checkout (a questo punto della main il file NON è ancora stato riscritto)
+  try {
+    if (fs.existsSync(OUT)) {
+      const p = cavalcaPrecedente(JSON.parse(fs.readFileSync(OUT, 'utf8')), 'checkout');
+      if (p) return p;
+    }
+  } catch (e) {
+    console.error('GUARDIA: copia locale non leggibile —', e.message);
+  }
+  return null;   // non valutabile: si scrive comunque, e lo si dichiara
+}
+
+async function guardia(nuovo, anteprima) {
+  const quando = new Date().toISOString();
+  const precedente = await leggiPrecedente();
+  const stato = {
+    rifiutato: false,
+    guardia: 'valutata',
+    motivo: null,
+    nuovo: { lotti: nuovo.lotti, comuni: nuovo.comuni },
+    precedente: precedente ? { lotti: precedente.lotti, comuni: precedente.comuni } : null,
+    soglie: { maxCaloLotti: GUARDIA.maxCaloLotti, maxCaloComuni: GUARDIA.maxCaloComuni },
+    fontePrecedente: precedente ? precedente.da : null,
+    quando,
+  };
+
+  if (!precedente) {
+    // Regola ferma: un errore di rete NON blocca la scrittura, ma resta scritto che la guardia non ha giudicato.
+    stato.guardia = 'non valutabile';
+    stato.motivo = 'feed precedente non leggibile (rete o file assente): si scrive comunque, guardia non valutabile';
+    if (!anteprima) scriviStatoGuardia(stato);
+    console.log('GUARDIA: non valutabile (precedente non leggibile) — si scrive comunque · nuovo', nuovo.lotti, 'lotti /', nuovo.comuni, 'comuni');
+    return { rifiutato: false, stato };
+  }
+
+  const caloLotti = precedente.lotti - nuovo.lotti;
+  const caloComuni = precedente.comuni - nuovo.comuni;
+  const regLotti = nuovo.lotti < precedente.lotti - GUARDIA.maxCaloLotti;
+  const regComuni = nuovo.comuni < precedente.comuni - GUARDIA.maxCaloComuni;
+
+  if (regLotti || regComuni) {
+    const motivo = 'GUARDIA: regressione rifiutata (lotti ' + nuovo.lotti + ' < ' + precedente.lotti + '-' + GUARDIA.maxCaloLotti
+      + ' | comuni ' + nuovo.comuni + ' < ' + precedente.comuni + '-' + GUARDIA.maxCaloComuni + ')';
+    stato.rifiutato = true;
+    stato.motivo = motivo;
+    if (!anteprima) scriviStatoGuardia(stato);
+    console.log(motivo);
+    console.log('GUARDIA: lotti ' + (caloLotti > 0 ? '−' + caloLotti : '+' + (-caloLotti))
+      + ' · comuni ' + (caloComuni > 0 ? '−' + caloComuni : '+' + (-caloComuni))
+      + ' · precedente da ' + precedente.da + ' · il feed NON viene scritto');
+    return { rifiutato: true, stato };
+  }
+
+  if (!anteprima) scriviStatoGuardia(stato);
+  console.log('GUARDIA: ok · nuovo', nuovo.lotti, 'lotti /', nuovo.comuni, 'comuni · precedente', precedente.lotti, 'lotti /', precedente.comuni, 'comuni (da ' + precedente.da + ')');
+  return { rifiutato: false, stato };
+}
+
 async function main() {
   // L'OMI si legge PRIMA DI TUTTO: se non risponde si esce senza toccare il file.
   const omi = await leggiOmi();
@@ -281,10 +387,21 @@ async function main() {
     rilevazione,
   };
 
+  // ─────── 4) GUARDIA: si pubblica solo un feed non peggiore del precedente ───────
+  // Va QUI, subito prima della scrittura: è l'ultimo cancello tra il calcolo e il file.
+  const verdetto = await guardia({ lotti: nazionale.lotti, comuni: comuni.length }, DRY);
+
   const testo = JSON.stringify(out);
   if (DRY) {
+    if (verdetto.rifiutato) console.log('DRY (anteprima): la guardia avrebbe RIFIUTATO la scrittura — il feed non sarebbe stato toccato');
     fs.writeFileSync('confronto-mercato.dry.json', testo);
     console.log('DRY (feed non scritto) · nazionale', JSON.stringify(nazionale), '· comuni', comuni.length, '· KB', (testo.length / 1024).toFixed(1));
+    return;
+  }
+  if (verdetto.rifiutato) {
+    // Codice 0 deliberato: la run resta verde (nessuna emergenza), il file live non viene toccato.
+    console.log('GUARDIA: il file NON è stato scritto — resta live il feed precedente (' + verdetto.stato.precedente.lotti + ' lotti / '
+      + verdetto.stato.precedente.comuni + ' comuni). Motivo in ' + GUARDIA.file + '.');
     return;
   }
   fs.writeFileSync(OUT, testo);
