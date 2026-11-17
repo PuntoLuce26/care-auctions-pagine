@@ -3,44 +3,44 @@
   "canary": "care-canary-d2c32afaa5d5",
   "canaryNota": "valore di riconoscimento della copia dei dati",
   "titolo": "NPL's — crediti in sofferenza e crediti in procedura (dati veri dal PVP)",
-  "generatoIl": "2026-11-16T12:56:16.455Z",
-  "aggiornato": "2026-11-16",
+  "generatoIl": "2026-11-17T13:39:41.317Z",
+  "aggiornato": "2026-11-17",
   "fonte": "PVP — Portale delle Vendite Pubbliche, Ministero della Giustizia (pvp.giustizia.it)",
   "query": "tipoLotto=VALORI-CREDITI",
   "licenza": "Dati pubblici del PVP (Portale delle Vendite Pubbliche, Ministero della Giustizia). Riuso consentito per finalità informative con citazione della fonte; nessun dato personale oltre a quanto già pubblico nel bando.",
   "metodo": "Classificazione conservativa dal testo pubblico del bando: NPL/sofferenza solo se dichiarati; crediti fiscali e titoli/quote esclusi (classi diverse, non NPL). Valore nominale solo se scritto nel bando.",
-  "totale": 256,
-  "dichiaratoPVP": 1131,
+  "totale": 255,
+  "dichiaratoPVP": 1129,
   "esclusi": {
    "non-credito": 22,
-   "titoli-e-quote": 440,
+   "titoli-e-quote": 439,
    "credito-fiscale": 413
   },
   "copertura": {
    "importo": {
     "con": 45,
-    "su": 256,
+    "su": 255,
     "pct": 17.6
    },
    "regione": {
-    "con": 188,
-    "su": 256,
-    "pct": 73.4
+    "con": 187,
+    "su": 255,
+    "pct": 73.3
    },
    "tribunale": {
-    "con": 254,
-    "su": 256,
+    "con": 253,
+    "su": 255,
     "pct": 99.2
    }
   },
   "perTipo": {
-   "credito": 252,
+   "credito": 251,
    "NPL": 4
   },
   "perStato": {
    "conclusa-esito-non-pubblicato": 210,
    "in-programma": 24,
-   "deserta": 17,
+   "deserta": 16,
    "aggiudicata": 5
   },
   "fasceImportoNominale": {
@@ -52,16 +52,16 @@
   },
   "fascePrezzoBase": {
    "10k-50k": 83,
-   "fino-10k": 69,
+   "fino-10k": 68,
    "50k-250k": 32,
    "250k-1M": 29,
    "oltre-1M": 23
   },
   "regioni": 16,
   "province": 39,
-  "sommaPrezzoBase": 377313158,
+  "sommaPrezzoBase": 377304158,
   "freschezza": {
-   "ultimaRaccolta": "2026-11-16",
+   "ultimaRaccolta": "2026-11-17",
    "dataLottoPiuRecente": "2027-01-14",
    "dataLottoPiuVecchio": "2024-01-12"
   },
@@ -74,7 +74,7 @@
   "Lombardia": 16,
   "Calabria": 13,
   "Emilia-Romagna": 11,
-  "Piemonte": 10,
+  "Piemonte": 9,
   "Veneto": 7,
   "Sardegna": 7,
   "Marche": 3,
@@ -91,8 +91,8 @@
   "Pistoia": 15,
   "Milano": 11,
   "Bologna": 10,
-  "Torino": 7,
   "Cosenza": 6,
+  "Torino": 6,
   "Sassari": 5,
   "Catanzaro": 4,
   "Lucca": 4,
