@@ -1,6 +1,6 @@
 {
-  "generatoIl": "2026-11-17T05:52:35.273Z",
-  "build": "bacb4ba8",
+  "generatoIl": "2026-11-17T15:18:59.342Z",
+  "build": "fce14d28",
   "righe": [
     {
       "rotta": "/",
@@ -29,10 +29,10 @@
     {
       "rotta": "/metodo",
       "locale": "it-IT",
-      "canonical": null,
+      "canonical": "https://careauctions.co/metodo",
       "dataLp": false,
-      "ok": false,
-      "motivo": "HTTP 404 su https://careauctions.co/metodo"
+      "ok": true,
+      "motivo": ""
     },
     {
       "rotta": "/dati",
@@ -77,10 +77,10 @@
     {
       "rotta": "/aste/1822566",
       "locale": "it-IT",
-      "canonical": "https://careauctions.co/aste/1822566",
+      "canonical": null,
       "dataLp": false,
-      "ok": true,
-      "motivo": ""
+      "ok": false,
+      "motivo": "page.goto: Timeout 45000ms exceeded. Call log: - navigating to \"https://careauctions.co/aste/1822566\", waiting until \"networkidle\""
     },
     {
       "rotta": "/",
@@ -109,10 +109,10 @@
     {
       "rotta": "/metodo",
       "locale": "en-US",
-      "canonical": null,
+      "canonical": "https://careauctions.co/metodo",
       "dataLp": false,
-      "ok": false,
-      "motivo": "HTTP 404 su https://careauctions.co/metodo"
+      "ok": true,
+      "motivo": ""
     },
     {
       "rotta": "/dati",
@@ -157,10 +157,10 @@
     {
       "rotta": "/aste/1822566",
       "locale": "en-US",
-      "canonical": "https://careauctions.co/aste/1822566",
+      "canonical": null,
       "dataLp": false,
-      "ok": true,
-      "motivo": ""
+      "ok": false,
+      "motivo": "page.goto: Timeout 45000ms exceeded. Call log: - navigating to \"https://careauctions.co/aste/1822566\", waiting until \"networkidle\""
     }
   ],
   "ko": 2,
