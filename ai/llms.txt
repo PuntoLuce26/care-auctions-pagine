@@ -15,11 +15,11 @@
 ## Domande frequenti
 Domande frequenti, con risposte verificabili: https://careauctions.co/feed/faq.json
 
-## Numeri aggiornati (2026-11-16)
-- Lotti: 320539 (immobiliari 270556, mobiliari 49983)
-- Lotti attivi in sitemap: 39916
+## Numeri aggiornati (2026-11-17)
+- Lotti: 320575 (immobiliari 270634, mobiliari 49941)
+- Lotti attivi in sitemap: 40554
 - Regioni: 21 · Tribunali: 148 · Lingue: 91
-- Esiti: 1918 aggiudicate, 28330 deserte
+- Esiti: 2022 aggiudicate, 28439 deserte
 
 ## Pagine principali
 - iworld: https://careauctions.co/iworld
@@ -31,6 +31,7 @@ Domande frequenti, con risposte verificabili: https://careauctions.co/feed/faq.j
 - idati: https://careauctions.co/idati
 - careindex: https://careauctions.co/ca-re-index
 - aggiudicazioni: https://careauctions.co/aggiudicazioni
+- metodo: https://careauctions.co/metodo
 - novita: https://careauctions.co/novita
 - buynow: https://careauctions.co/buynow/san-pasquale
 - icare: https://careauctions.co/icare

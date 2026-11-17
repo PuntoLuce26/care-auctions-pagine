@@ -1,0 +1,121 @@
+{
+  "generato": "2026-11-17T13:17:51.083Z",
+  "numeri": {
+    "lotti": 320575,
+    "immobiliari": 270634,
+    "mobiliari": 49941,
+    "regioni": 21,
+    "tribunali": 148,
+    "lingue": 91,
+    "lottiAttivi": 40554,
+    "aggiudicate": 2022,
+    "deserte": 28439,
+    "aggiornato": "2026-11-17T13:14:09.541Z"
+  },
+  "checks": [
+    {
+      "nome": "AI GPTBot llms",
+      "ok": true,
+      "dettaglio": "HTTP 200"
+    },
+    {
+      "nome": "AI ClaudeBot llms",
+      "ok": true,
+      "dettaglio": "HTTP 200"
+    },
+    {
+      "nome": "AI PerplexityBot llms",
+      "ok": true,
+      "dettaglio": "HTTP 200"
+    },
+    {
+      "nome": "AI Google-Extended llms",
+      "ok": true,
+      "dettaglio": "HTTP 200"
+    },
+    {
+      "nome": "AI Bingbot llms",
+      "ok": true,
+      "dettaglio": "HTTP 200"
+    },
+    {
+      "nome": "robots AI",
+      "ok": true,
+      "dettaglio": "HTTP 200"
+    },
+    {
+      "nome": "llms.txt",
+      "ok": true,
+      "dettaglio": "HTTP 200"
+    },
+    {
+      "nome": "ai chi-siamo",
+      "ok": true,
+      "dettaglio": "HTTP 200"
+    },
+    {
+      "nome": "ai organization schema",
+      "ok": true,
+      "dettaglio": "HTTP 200"
+    },
+    {
+      "nome": "ai knowledge",
+      "ok": true,
+      "dettaglio": "HTTP 200"
+    },
+    {
+      "nome": "sitemap",
+      "ok": true,
+      "dettaglio": "HTTP 200"
+    },
+    {
+      "nome": "schema home",
+      "ok": true,
+      "dettaglio": "HTTP 200"
+    },
+    {
+      "nome": "iCARe success fee 200k",
+      "ok": false,
+      "dettaglio": "autenticazione richiesta"
+    },
+    {
+      "nome": "i18n fr",
+      "ok": true,
+      "dettaglio": "HTTP 200 · 4183 chiavi"
+    },
+    {
+      "nome": "PVP documenti",
+      "ok": true,
+      "dettaglio": "HTTP 200 · 12 allegati"
+    },
+    {
+      "nome": "IndexNow key",
+      "ok": true,
+      "dettaglio": "HTTP 200"
+    },
+    {
+      "nome": "IndexNow (feed/indexnow.json)",
+      "ok": true,
+      "dettaglio": "inviati 250 · giorno 2026-11-17"
+    },
+    {
+      "nome": "query-educa 40 domande",
+      "ok": true,
+      "dettaglio": "40 voci in 6 blocchi · max 53 parole · lingue {\"it\":40,\"en\":40,\"fr\":40,\"de\":40,\"es\":40}"
+    }
+  ],
+  "indexnow": {
+    "inviati": 250,
+    "giorno": "2026-11-17",
+    "quando": "2026-11-17T00:03:05.586Z",
+    "prossimo": 20500,
+    "stato": "letto",
+    "fonte": "feed/indexnow.json",
+    "inviatoDa": "scripts/idmap-sitemap.js (dentro il workflow feed-sync)",
+    "nota": "unico invio IndexNow del progetto: 10.000 URL al giorno a rotazione sulle pagine asta"
+  },
+  "ok": false,
+  "chat": {
+    "risposta": ""
+  }
+}
