@@ -1,5 +1,5 @@
 {
- "generato": "2026-11-17T14:29:02.029Z",
+ "generato": "2026-11-17T14:56:02.845Z",
  "fonte": [
   {
    "nome": "Portale delle Vendite Pubbliche (Ministero della Giustizia)",
@@ -17,10 +17,10 @@
    "ruolo": "aggiudicazioni dei fallimenti"
   }
  ],
- "rilevazione": "2026-11-17T14:29:02.029Z",
+ "rilevazione": "2026-11-17T14:56:02.845Z",
  "rilevazioneLeggibile": "17/11/2026",
- "totaleCatalogo": 320596,
- "tipoLottoSomma": 322992,
+ "totaleCatalogo": 320602,
+ "tipoLottoSomma": 323004,
  "tipi": [
   {
    "slug": "immobiliare",
@@ -28,7 +28,7 @@
    "chiave": "tipoLotto",
    "valore": "IMMOBILI",
    "nota": "Case, terreni, negozi, capannoni: i lotti immobiliari del catalogo.",
-   "lotti": 270691,
+   "lotti": 270699,
    "quotaPct": 83.8,
    "url": "/aste-categoria/it/immobiliare.html"
   },
@@ -38,7 +38,7 @@
    "chiave": "tipoLotto",
    "valore": "MOBILI",
    "nota": "Auto, macchinari, arredi: i lotti mobiliari, spesso dentro la stessa procedura.",
-   "lotti": 50026,
+   "lotti": 50030,
    "quotaPct": 15.5,
    "url": "/aste-categoria/it/mobiliare.html"
   },
@@ -58,7 +58,7 @@
    "slug": "abitazione-tipo-civ",
    "nome": "Abitazione tipo civ",
    "categoria": "ABITAZIONE_TIPO_CIV",
-   "lotti": 47324,
+   "lotti": 47327,
    "quotaPct": 14.8,
    "url": "/aste-categoria/it/abitazione-tipo-civ.html"
   },
