@@ -1,23 +1,23 @@
 {
   "ok": false,
-  "aggiornato": "2026-11-17T19:47:24.378Z",
+  "aggiornato": "2026-11-17T23:31:28.374Z",
   "base": "https://careauctions.co",
-  "run": "44162033859",
+  "run": "44199848323",
   "checks": [
     {
       "id": "icare_success_fee",
-      "ok": false,
-      "det": "HTTP 401"
+      "ok": true,
+      "det": "HTTP 200"
     },
     {
       "id": "icare_perimetro",
-      "ok": false,
-      "det": "HTTP 401"
+      "ok": true,
+      "det": "HTTP 200"
     },
     {
       "id": "icare_registrato",
-      "ok": false,
-      "det": "HTTP 401"
+      "ok": true,
+      "det": "HTTP 200"
     },
     {
       "id": "cervello_json",
@@ -27,7 +27,7 @@
     {
       "id": "ai_knowledge",
       "ok": true,
-      "det": "HTTP 200 · 5923B"
+      "det": "HTTP 200 · 5775B"
     },
     {
       "id": "ai_education_stato",
@@ -42,22 +42,22 @@
     {
       "id": "traduzioni_stato",
       "ok": true,
-      "det": "HTTP 200 · età 0.4g"
+      "det": "HTTP 200 · età 0.5g"
     },
     {
       "id": "qa_stato",
       "ok": false,
-      "det": "R2 · 0C/36A · 0.0h"
+      "det": "R2 · 0C/21A · 0.3h"
     },
     {
       "id": "mail_stato",
       "ok": true,
-      "det": "R2 · età 0.1h"
+      "det": "R2 · età 0.4h"
     },
     {
       "id": "perf_stato",
       "ok": true,
-      "det": "R2 · p95 0ms · età 0.2g"
+      "det": "R2 · p95 0ms · età 0.1g"
     },
     {
       "id": "worker_ai_stato",
@@ -76,8 +76,8 @@
     },
     {
       "id": "icarewall",
-      "ok": false,
-      "det": "HTTP 403"
+      "ok": true,
+      "det": "HTTP 200"
     },
     {
       "id": "app_ci",
@@ -87,25 +87,10 @@
     {
       "id": "qa_workflow",
       "ok": true,
-      "det": "HTTP 200 · in_progress"
+      "det": "HTTP 200 · success"
     }
   ],
   "anomalie": [
-    {
-      "componente": "ai",
-      "gravita": "high",
-      "oggetto": "icare_success_fee: HTTP 401"
-    },
-    {
-      "componente": "ai",
-      "gravita": "high",
-      "oggetto": "icare_perimetro: HTTP 401"
-    },
-    {
-      "componente": "ai",
-      "gravita": "high",
-      "oggetto": "icare_registrato: HTTP 401"
-    },
     {
       "componente": "ai",
       "gravita": "high",
@@ -119,12 +104,7 @@
     {
       "componente": "ai",
       "gravita": "high",
-      "oggetto": "qa_stato: R2 · 0C/36A · 0.0h"
-    },
-    {
-      "componente": "ai",
-      "gravita": "high",
-      "oggetto": "icarewall: HTTP 403"
+      "oggetto": "qa_stato: R2 · 0C/21A · 0.3h"
     }
   ]
 }
