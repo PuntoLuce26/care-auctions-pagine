@@ -1,8 +1,8 @@
 {
   "ok": false,
-  "aggiornato": "2026-11-17T14:43:25.684Z",
+  "aggiornato": "2026-11-17T19:47:24.378Z",
   "base": "https://careauctions.co",
-  "run": "44105935247",
+  "run": "44162033859",
   "checks": [
     {
       "id": "icare_success_fee",
@@ -42,22 +42,22 @@
     {
       "id": "traduzioni_stato",
       "ok": true,
-      "det": "HTTP 200 · età 0.2g"
+      "det": "HTTP 200 · età 0.4g"
     },
     {
       "id": "qa_stato",
       "ok": false,
-      "det": "R2 · 0C/13A · 0.3h"
+      "det": "R2 · 0C/36A · 0.0h"
     },
     {
       "id": "mail_stato",
       "ok": true,
-      "det": "R2 · età 0.4h"
+      "det": "R2 · età 0.1h"
     },
     {
       "id": "perf_stato",
       "ok": true,
-      "det": "R2 · p95 0ms · età 0.0g"
+      "det": "R2 · p95 0ms · età 0.2g"
     },
     {
       "id": "worker_ai_stato",
@@ -76,8 +76,8 @@
     },
     {
       "id": "icarewall",
-      "ok": true,
-      "det": "HTTP 200"
+      "ok": false,
+      "det": "HTTP 403"
     },
     {
       "id": "app_ci",
@@ -87,7 +87,7 @@
     {
       "id": "qa_workflow",
       "ok": true,
-      "det": "HTTP 200 · success"
+      "det": "HTTP 200 · in_progress"
     }
   ],
   "anomalie": [
@@ -119,7 +119,12 @@
     {
       "componente": "ai",
       "gravita": "high",
-      "oggetto": "qa_stato: R2 · 0C/13A · 0.3h"
+      "oggetto": "qa_stato: R2 · 0C/36A · 0.0h"
+    },
+    {
+      "componente": "ai",
+      "gravita": "high",
+      "oggetto": "icarewall: HTTP 403"
     }
   ]
 }
