@@ -1,23 +1,23 @@
 {
-  "generatoIl": "2026-11-16T13:48:47.661Z",
+  "generatoIl": "2026-11-17T14:40:43.939Z",
   "workflow": "metriche-ecosistema.yml",
   "regola": "un dato assente è non_misurato, mai stimato",
   "metriche": {
     "traffico": {
       "valore": {
-        "oggi": 1784,
-        "uv_oggi": 194,
-        "ultimi7g": 21459,
-        "uv_7g": 1413,
+        "oggi": 2446,
+        "uv_oggi": 252,
+        "ultimi7g": 23084,
+        "uv_7g": 1235,
         "ultimi30g": null,
-        "bot7g": 100141,
+        "bot7g": 94503,
         "bot30g": null
       },
       "unita": "visualizzazioni (pageview)",
       "stato": "parziale",
       "fonte": "KV STATS — chiavi pv: e bt: (edge)",
-      "aggiornato": "2026-11-16T13:48:47.661Z",
-      "copertura": "7/7 giorni con dato; 8/30",
+      "aggiornato": "2026-11-17T14:40:43.939Z",
+      "copertura": "7/7 giorni con dato; 9/30",
       "nota": "Pageview, non utenti unici. Il feed visite-rum risponde 403: la fonte vera è il KV dell'edge. Bot contati a parte."
     },
     "ricavi": {
@@ -25,49 +25,49 @@
       "unita": "EUR",
       "stato": "misurato_riservato",
       "fonte": "KV TRAFFICO torre:cassa",
-      "aggiornato": "2026-11-16T13:48:47.661Z",
+      "aggiornato": "2026-11-17T14:40:43.939Z",
       "nota": "Valore disponibile nel cruscotto interno (R2 privato), non pubblicato."
     },
     "uptime_sli": {
       "valore": {
         "sito_http": 200,
-        "ttfb_sito_ms": 181,
-        "ttfb_origine_ms": 147,
-        "qa_7g_eseguiti_pct": 87.2,
-        "qa_7g_grezzo_pct": 57.5,
-        "qa_7g_success": 260,
-        "qa_7g_failure": 38,
-        "qa_7g_cancelled": 154,
+        "ttfb_sito_ms": 310,
+        "ttfb_origine_ms": 710,
+        "qa_7g_eseguiti_pct": 81.4,
+        "qa_7g_grezzo_pct": 55.6,
+        "qa_7g_success": 288,
+        "qa_7g_failure": 66,
+        "qa_7g_cancelled": 164,
         "qa_summary": {
-          "critical": 1,
-          "high": 2,
-          "medium": 1,
-          "low": 3,
-          "total": 7
+          "critical": 0,
+          "high": 13,
+          "medium": 2,
+          "low": 5,
+          "total": 20
         },
-        "qa_generated_at": "2026-11-16T13:44:53.955Z",
+        "qa_generated_at": "2026-11-17T14:27:10.142Z",
         "uptime_7g_pct": 100,
-        "uptime_checks_7g": 9,
-        "uptime_ok_7g": 9
+        "uptime_checks_7g": 12,
+        "uptime_ok_7g": 12
       },
       "unita": "stato / ms / %",
       "stato": "parziale",
       "fonte": "R2 stato/qa + stato/perf + probe HTTP",
-      "aggiornato": "2026-11-16T13:48:47.661Z",
+      "aggiornato": "2026-11-17T14:40:43.939Z",
       "copertura": "QA 7 giorni + probe singolo; uptime continuo non misurato",
       "nota": "Il tasso QA buono è quello sui run eseguiti (cancellati esclusi). Uptime/SLI continuo non è strumentato."
     },
     "copertura_tribunale": {
       "valore": {
-        "con_esiti": 102,
+        "con_esiti": 103,
         "totali": 153,
-        "pct": 66.7
+        "pct": 67.3
       },
       "unita": "tribunali",
       "stato": "parziale",
       "fonte": "feed esiti-monitor.json + tribunali.json",
-      "aggiornato": "2026-11-16T13:48:47.661Z",
-      "copertura": "102/153",
+      "aggiornato": "2026-11-17T14:40:43.939Z",
+      "copertura": "103/153",
       "nota": "Copertura dei tribunali con almeno un esito pubblicato; non è copertura di tutti i lotti."
     },
     "conversione": {
@@ -77,14 +77,14 @@
         "pratiche_reali": 1,
         "pratiche_test": 3,
         "pratiche_7g": 0,
-        "visitatori_unici_7g": 1413,
+        "visitatori_unici_7g": 1235,
         "tasso_7g_pct": 0
       },
       "unita": "conteggi / %",
       "stato": "misurato",
       "fonte": "KV TRAFFICO — utente: e pratica: (timestamp creataAt) + KV STATS uv:",
-      "aggiornato": "2026-11-16T13:48:47.661Z",
-      "copertura": "1 account, 4 pratiche (1 reali, 3 test), 1413 visitatori unici",
+      "aggiornato": "2026-11-17T14:40:43.939Z",
+      "copertura": "1 account, 4 pratiche (1 reali, 3 test), 1235 visitatori unici",
       "nota": "Tasso aggregato: pratiche reali ultimi 7 giorni / visitatori unici 7 giorni. Non è attribuzione per singola visita. Zero pratiche reali = 0,00%, non un numero inventato."
     },
     "churn": {
@@ -95,7 +95,7 @@
       "unita": "%",
       "stato": "parziale",
       "fonte": "KV TRAFFICO — abbonamento:",
-      "aggiornato": "2026-11-16T13:48:47.661Z",
+      "aggiornato": "2026-11-17T14:40:43.939Z",
       "copertura": "0 abbonamenti",
       "nota": "Nessun abbonamento attivo: il churn non è applicabile (0/0), non è 0%."
     },
@@ -107,7 +107,7 @@
       "unita": "punti",
       "stato": "non_misurato",
       "fonte": "KV STATS — nps: (survey /nps)",
-      "aggiornato": "2026-11-16T13:48:47.661Z",
+      "aggiornato": "2026-11-17T14:40:43.939Z",
       "copertura": "0 risposte",
       "nota": "Lo strumento è attivo su https://careauctions.co/nps: il numero arriva con la prima risposta."
     },
@@ -120,7 +120,7 @@
       "unita": "EUR",
       "stato": "non_misurato",
       "fonte": "KV TRAFFICO — spesa:marketing:",
-      "aggiornato": "2026-11-16T13:48:47.661Z",
+      "aggiornato": "2026-11-17T14:40:43.939Z",
       "copertura": "0 voci di spesa",
       "nota": "Manca la spesa marketing (o i lead): il CAC non è calcolabile. Non invento un denominatore."
     }
