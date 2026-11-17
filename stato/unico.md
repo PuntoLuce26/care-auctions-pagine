@@ -1,6 +1,6 @@
 # Stato CAReAuctions — ROSSO
 
-> 2026-11-17T13:46:44.300Z · 18 ok · 2 gialli · 4 rossi · 0 non verificabili
+> 2026-11-17T16:31:41.891Z · 18 ok · 2 gialli · 4 rossi · 0 non verificabili
 
 ## rotte
 
@@ -18,19 +18,19 @@
 
 ## feed
 
-- · **statistiche** — 16 min · 320587 lotti
-- X **world** — 6743 min · 33 paesi
-- · **ricevute** — 7108 min · 0 ricevute
-- X **san-pasquale-foto** — 6980 min · 37 foto
+- · **statistiche** — 10 min · 320655 lotti
+- X **world** — 6908 min · 33 paesi
+- · **ricevute** — 7273 min · 0 ricevute
+- X **san-pasquale-foto** — 7145 min · 37 foto
 
 ## build
 
-- · **sito vs origine** — main.98b60ffd.js / main.98b60ffd.js
+- · **sito vs origine** — main.fce14d28.js / main.fce14d28.js
 
 ## prerender
 
-- · **snapshot vs vivo** — main.98b60ffd.js / main.98b60ffd.js
-- · **bot allineato** — main.98b60ffd.js
+- · **snapshot vs vivo** — main.fce14d28.js / main.fce14d28.js
+- · **bot allineato** — main.fce14d28.js
 
 ## worker
 
@@ -39,15 +39,15 @@
 
 ## qa
 
-- · **critici** — 0 · 20 controlli
+- · **critici** — 0 · 41 controlli
 
 ## mail
 
-- ! **allarmi** — 9 · 2026-11-17T13:21:34.555Z
+- ! **allarmi** — 14 · 2026-11-17T16:21:35.613Z
 
 ## sentinella
 
-- ! **ok** — 7 anomalie vere · 1 note dichiarate, ignorate
+- ! **ok** — 5 anomalie vere · 1 note dichiarate, ignorate
 
 ## perf
 
@@ -55,7 +55,7 @@
 
 ## github
 
-- · **run rossi (2h)** — 2 isolati · iCARe brain · metodo-guard (una volta sola: race nota)
+- · **run rossi (2h)** — 2 isolati · rete-emergent · rete-green2 (una volta sola: race nota)
 
 
 _Generato da scripts/stato-unico.mjs. Un solo stato, un solo posto: se una sonda non risponde la dichiara non verificabile, mai rotta._
