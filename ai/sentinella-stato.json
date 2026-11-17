@@ -1,0 +1,110 @@
+{
+  "ok": false,
+  "aggiornato": "2026-11-17T02:24:36.335Z",
+  "base": "https://careauctions.co",
+  "run": "44002599180",
+  "checks": [
+    {
+      "id": "icare_success_fee",
+      "ok": true,
+      "det": "HTTP 200"
+    },
+    {
+      "id": "icare_perimetro",
+      "ok": true,
+      "det": "HTTP 200"
+    },
+    {
+      "id": "icare_registrato",
+      "ok": true,
+      "det": "HTTP 200"
+    },
+    {
+      "id": "cervello_json",
+      "ok": false,
+      "det": "HTTP 404 · età 999.0g"
+    },
+    {
+      "id": "ai_knowledge",
+      "ok": true,
+      "det": "HTTP 200 · 5923B"
+    },
+    {
+      "id": "ai_education_stato",
+      "ok": false,
+      "det": "HTTP 404"
+    },
+    {
+      "id": "llms_txt",
+      "ok": true,
+      "det": "HTTP 200"
+    },
+    {
+      "id": "traduzioni_stato",
+      "ok": true,
+      "det": "HTTP 200 · età 0.7g"
+    },
+    {
+      "id": "qa_stato",
+      "ok": false,
+      "det": "R2 · 24C/33A · 0.0h"
+    },
+    {
+      "id": "mail_stato",
+      "ok": true,
+      "det": "R2 · età 0.1h"
+    },
+    {
+      "id": "perf_stato",
+      "ok": true,
+      "det": "R2 · p95 0ms · età 0.2g"
+    },
+    {
+      "id": "worker_ai_stato",
+      "ok": true,
+      "det": "HTTP 200"
+    },
+    {
+      "id": "ponte_cloud_revisione",
+      "ok": true,
+      "det": "HTTP 200"
+    },
+    {
+      "id": "voce_tts",
+      "ok": true,
+      "det": "HTTP 200"
+    },
+    {
+      "id": "icarewall",
+      "ok": true,
+      "det": "HTTP 200"
+    },
+    {
+      "id": "app_ci",
+      "ok": true,
+      "det": "non verificabile: repo privato care-aste-app invisibile al GITHUB_TOKEN (serve un PAT)"
+    },
+    {
+      "id": "qa_workflow",
+      "ok": true,
+      "det": "HTTP 200 · in_progress"
+    }
+  ],
+  "anomalie": [
+    {
+      "componente": "ai",
+      "gravita": "high",
+      "oggetto": "cervello_json: HTTP 404 · età 999.0g"
+    },
+    {
+      "componente": "ai",
+      "gravita": "high",
+      "oggetto": "ai_education_stato: HTTP 404"
+    },
+    {
+      "componente": "ai",
+      "gravita": "high",
+      "oggetto": "qa_stato: R2 · 24C/33A · 0.0h"
+    }
+  ]
+}
