@@ -1,5 +1,5 @@
 {
- "generato": "2026-11-16T12:05:51.044Z",
+ "generato": "2026-11-17T14:29:02.029Z",
  "fonte": [
   {
    "nome": "Portale delle Vendite Pubbliche (Ministero della Giustizia)",
@@ -17,10 +17,10 @@
    "ruolo": "aggiudicazioni dei fallimenti"
   }
  ],
- "rilevazione": "2026-11-16T12:05:51.044Z",
- "rilevazioneLeggibile": "16/11/2026",
- "totaleCatalogo": 320534,
- "tipoLottoSomma": 322923,
+ "rilevazione": "2026-11-17T14:29:02.029Z",
+ "rilevazioneLeggibile": "17/11/2026",
+ "totaleCatalogo": 320596,
+ "tipoLottoSomma": 322992,
  "tipi": [
   {
    "slug": "immobiliare",
@@ -28,7 +28,7 @@
    "chiave": "tipoLotto",
    "valore": "IMMOBILI",
    "nota": "Case, terreni, negozi, capannoni: i lotti immobiliari del catalogo.",
-   "lotti": 270599,
+   "lotti": 270691,
    "quotaPct": 83.8,
    "url": "/aste-categoria/it/immobiliare.html"
   },
@@ -38,7 +38,7 @@
    "chiave": "tipoLotto",
    "valore": "MOBILI",
    "nota": "Auto, macchinari, arredi: i lotti mobiliari, spesso dentro la stessa procedura.",
-   "lotti": 50054,
+   "lotti": 50026,
    "quotaPct": 15.5,
    "url": "/aste-categoria/it/mobiliare.html"
   },
@@ -48,7 +48,7 @@
    "chiave": "tipoLotto",
    "valore": "AZIENDE",
    "nota": "Complessi aziendali, quote societarie e crediti.",
-   "lotti": 2270,
+   "lotti": 2275,
    "quotaPct": 0.7,
    "url": "/aste-categoria/it/aziende.html"
   }
@@ -58,7 +58,7 @@
    "slug": "abitazione-tipo-civ",
    "nome": "Abitazione tipo civ",
    "categoria": "ABITAZIONE_TIPO_CIV",
-   "lotti": 47310,
+   "lotti": 47324,
    "quotaPct": 14.8,
    "url": "/aste-categoria/it/abitazione-tipo-civ.html"
   },
@@ -66,7 +66,7 @@
    "slug": "appartamento",
    "nome": "Appartamento",
    "categoria": "APPARTAMENTO",
-   "lotti": 35889,
+   "lotti": 35941,
    "quotaPct": 11.2,
    "url": "/aste-categoria/it/appartamento.html"
   },
@@ -74,7 +74,7 @@
    "slug": "abitazione-tipo-eco",
    "nome": "Abitazione tipo eco",
    "categoria": "ABITAZIONE_TIPO_ECO",
-   "lotti": 30031,
+   "lotti": 30033,
    "quotaPct": 9.4,
    "url": "/aste-categoria/it/abitazione-tipo-eco.html"
   },
@@ -82,7 +82,7 @@
    "slug": "terreno",
    "nome": "Terreno",
    "categoria": "TERRENO",
-   "lotti": 28639,
+   "lotti": 28662,
    "quotaPct": 8.9,
    "url": "/aste-categoria/it/terreno.html"
   },
@@ -90,7 +90,7 @@
    "slug": "abitazione-tipo-pop",
    "nome": "Abitazione tipo pop",
    "categoria": "ABITAZIONE_TIPO_POP",
-   "lotti": 12529,
+   "lotti": 12528,
    "quotaPct": 3.9,
    "url": "/aste-categoria/it/abitazione-tipo-pop.html"
   },
@@ -98,7 +98,7 @@
    "slug": "posto-auto",
    "nome": "Posto auto",
    "categoria": "POSTO_AUTO",
-   "lotti": 10229,
+   "lotti": 10226,
    "quotaPct": 3.2,
    "url": "/aste-categoria/it/posto-auto.html"
   },
@@ -106,8 +106,8 @@
    "slug": "garage-autorimessa",
    "nome": "Garage autorimessa",
    "categoria": "GARAGE_AUTORIMESSA",
-   "lotti": 9826,
-   "quotaPct": 3.1,
+   "lotti": 9775,
+   "quotaPct": 3,
    "url": "/aste-categoria/it/garage-autorimessa.html"
   },
   {
@@ -115,14 +115,14 @@
    "nome": "Fabbricati commerciali",
    "categoria": "FABBRICATI_COMMERCIALI",
    "lotti": 8816,
-   "quotaPct": 2.8,
+   "quotaPct": 2.7,
    "url": "/aste-categoria/it/fabbricati-commerciali.html"
   },
   {
    "slug": "stalle-scuderie-rimesse",
    "nome": "Stalle scuderie rimesse",
    "categoria": "STALLE_SCUDERIE_RIMESSE",
-   "lotti": 7615,
+   "lotti": 7604,
    "quotaPct": 2.4,
    "url": "/aste-categoria/it/stalle-scuderie-rimesse.html"
   },
@@ -130,7 +130,7 @@
    "slug": "magazzini-e-deposito",
    "nome": "Magazzini e deposito",
    "categoria": "MAGAZZINI_E_DEPOSITO",
-   "lotti": 7337,
+   "lotti": 7346,
    "quotaPct": 2.3,
    "url": "/aste-categoria/it/magazzini-e-deposito.html"
   },
@@ -146,7 +146,7 @@
    "slug": "negozi-botteghe",
    "nome": "Negozi botteghe",
    "categoria": "NEGOZI_BOTTEGHE",
-   "lotti": 6232,
+   "lotti": 6239,
    "quotaPct": 1.9,
    "url": "/aste-categoria/it/negozi-botteghe.html"
   }
@@ -156,8 +156,8 @@
    "slug": "fallimentare",
    "nome": "Aste fallimentari",
    "url": "/aste-categoria/it/fallimentare.html",
-   "aggiudicazioniFallimento": 5187,
-   "aggiudicazioniRegistrate": 18817,
+   "aggiudicazioniFallimento": 5392,
+   "aggiudicazioniRegistrate": 19031,
    "lottiAziendeQuoteCrediti": null,
    "nota": "Il PVP non espone un filtro pubblico per tipo di procedura: i fallimenti si contano da ciò che le fonti pubblicano. FallcoAste pubblica gli esiti dei fallimenti; il catalogo PVP pubblica i lotti di aziende, quote e crediti."
   }
