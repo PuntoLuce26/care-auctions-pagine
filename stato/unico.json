@@ -1,5 +1,5 @@
 {
- "generato": "2026-11-17T11:03:02.653Z",
+ "generato": "2026-11-17T13:46:44.300Z",
  "semaforo": "rosso",
  "conteggi": {
   "ok": 18,
@@ -89,49 +89,49 @@
    "sezione": "feed",
    "nome": "statistiche",
    "stato": "ok",
-   "valore": "4 min",
-   "dettaglio": "320423 lotti"
+   "valore": "16 min",
+   "dettaglio": "320587 lotti"
   },
   {
    "sezione": "feed",
    "nome": "world",
    "stato": "rosso",
-   "valore": "6579 min",
+   "valore": "6743 min",
    "dettaglio": "33 paesi"
   },
   {
    "sezione": "feed",
    "nome": "ricevute",
    "stato": "ok",
-   "valore": "6945 min",
+   "valore": "7108 min",
    "dettaglio": "0 ricevute"
   },
   {
    "sezione": "feed",
    "nome": "san-pasquale-foto",
    "stato": "rosso",
-   "valore": "6817 min",
+   "valore": "6980 min",
    "dettaglio": "37 foto"
   },
   {
    "sezione": "build",
    "nome": "sito vs origine",
    "stato": "ok",
-   "valore": "main.bacb4ba8.js / main.bacb4ba8.js",
+   "valore": "main.98b60ffd.js / main.98b60ffd.js",
    "dettaglio": ""
   },
   {
    "sezione": "prerender",
    "nome": "snapshot vs vivo",
    "stato": "ok",
-   "valore": "main.bacb4ba8.js / main.bacb4ba8.js",
+   "valore": "main.98b60ffd.js / main.98b60ffd.js",
    "dettaglio": ""
   },
   {
    "sezione": "prerender",
    "nome": "bot allineato",
    "stato": "ok",
-   "valore": "main.bacb4ba8.js",
+   "valore": "main.98b60ffd.js",
    "dettaglio": ""
   },
   {
@@ -153,14 +153,14 @@
    "nome": "critici",
    "stato": "ok",
    "valore": "0",
-   "dettaglio": "42 controlli"
+   "dettaglio": "20 controlli"
   },
   {
    "sezione": "mail",
    "nome": "allarmi",
    "stato": "giallo",
    "valore": "9",
-   "dettaglio": "2026-11-17T10:52:54.684Z"
+   "dettaglio": "2026-11-17T13:21:34.555Z"
   },
   {
    "sezione": "sentinella",
@@ -180,8 +180,8 @@
    "sezione": "github",
    "nome": "run rossi (2h)",
    "stato": "ok",
-   "valore": "0 isolati",
-   "dettaglio": ""
+   "valore": "2 isolati",
+   "dettaglio": "iCARe brain · metodo-guard (una volta sola: race nota)"
   }
  ]
 }

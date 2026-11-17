@@ -1,6 +1,6 @@
 # Stato CAReAuctions — ROSSO
 
-> 2026-11-17T11:03:02.653Z · 18 ok · 2 gialli · 4 rossi · 0 non verificabili
+> 2026-11-17T13:46:44.300Z · 18 ok · 2 gialli · 4 rossi · 0 non verificabili
 
 ## rotte
 
@@ -18,19 +18,19 @@
 
 ## feed
 
-- · **statistiche** — 4 min · 320423 lotti
-- X **world** — 6579 min · 33 paesi
-- · **ricevute** — 6945 min · 0 ricevute
-- X **san-pasquale-foto** — 6817 min · 37 foto
+- · **statistiche** — 16 min · 320587 lotti
+- X **world** — 6743 min · 33 paesi
+- · **ricevute** — 7108 min · 0 ricevute
+- X **san-pasquale-foto** — 6980 min · 37 foto
 
 ## build
 
-- · **sito vs origine** — main.bacb4ba8.js / main.bacb4ba8.js
+- · **sito vs origine** — main.98b60ffd.js / main.98b60ffd.js
 
 ## prerender
 
-- · **snapshot vs vivo** — main.bacb4ba8.js / main.bacb4ba8.js
-- · **bot allineato** — main.bacb4ba8.js
+- · **snapshot vs vivo** — main.98b60ffd.js / main.98b60ffd.js
+- · **bot allineato** — main.98b60ffd.js
 
 ## worker
 
@@ -39,11 +39,11 @@
 
 ## qa
 
-- · **critici** — 0 · 42 controlli
+- · **critici** — 0 · 20 controlli
 
 ## mail
 
-- ! **allarmi** — 9 · 2026-11-17T10:52:54.684Z
+- ! **allarmi** — 9 · 2026-11-17T13:21:34.555Z
 
 ## sentinella
 
@@ -55,7 +55,7 @@
 
 ## github
 
-- · **run rossi (2h)** — 0 isolati
+- · **run rossi (2h)** — 2 isolati · iCARe brain · metodo-guard (una volta sola: race nota)
 
 
 _Generato da scripts/stato-unico.mjs. Un solo stato, un solo posto: se una sonda non risponde la dichiara non verificabile, mai rotta._
