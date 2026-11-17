@@ -1,7 +1,7 @@
 {
  "supervisore": "verifica-playwright",
- "ultimoGiro": "2026-11-17T00:56:47.780Z",
- "runId": 43991388483,
- "esito": "rotte=success lingue=failure",
+ "ultimoGiro": "2026-11-17T08:39:46.192Z",
+ "runId": 44048366495,
+ "esito": "rotte=success lingue=success",
  "ok": null
 }
