@@ -1,11 +1,22 @@
 {
- "aggiornato": "2026-11-17T01:56:40.580Z",
+ "aggiornato": "2026-11-17T09:52:52.731Z",
  "rossi": [
-  "qa-orchestra#23",
-  "qa#494",
-  "verifica-playwright#189"
+  "rete-emergent#10",
+  "rete-green2#11"
  ],
  "issue": [
+  "[QA] Allarme mail: 8 segnalazioni",
+  "[QA] Allarme mail: 8 segnalazioni",
+  "[QA] Allarme mail: 8 segnalazioni",
+  "[QA] Allarme mail: 8 segnalazioni",
+  "[QA] Allarme mail: 9 segnalazioni",
+  "[QA] Allarme mail: 10 segnalazioni",
+  "[QA] Allarme mail: 10 segnalazioni",
+  "[QA] Allarme mail: 11 segnalazioni",
+  "[QA] Allarme mail: 13 segnalazioni",
+  "[QA] Allarme mail: 13 segnalazioni",
+  "[QA] Aggiornamento 2026-11-17",
+  "[QA] Allarme mail: 12 segnalazioni",
   "[QA] Allarme mail: 13 segnalazioni",
   "[QA] Allarme mail: 12 segnalazioni",
   "[QA] Allarme mail: 12 segnalazioni",
@@ -13,19 +24,7 @@
   "[QA] Allarme mail: 11 segnalazioni",
   "[QA] Allarme mail: 10 segnalazioni",
   "[QA] Allarme mail: 10 segnalazioni",
-  "[QA] Allarme mail: 9 segnalazioni",
-  "[QA] Allarme mail: 10 segnalazioni",
-  "[QA] Allarme mail: 7 segnalazioni",
-  "[QA] Aggiornamento 2026-11-16",
-  "[QA] Allarme mail: 8 segnalazioni",
-  "[QA] Allarme mail: 8 segnalazioni",
-  "[QA] Allarme mail: 9 segnalazioni",
-  "[QA] Allarme mail: 9 segnalazioni",
-  "[QA] Allarme mail: 9 segnalazioni",
-  "[QA] Allarme mail: 9 segnalazioni",
-  "[QA] Allarme mail: 9 segnalazioni",
-  "[QA] Allarme AI: 2 anomalie",
-  "[QA] Allarme mail: 11 segnalazioni"
+  "[QA] Allarme mail: 9 segnalazioni"
  ],
- "ultimaMail": "2026-11-17T01:56:41.385Z"
+ "ultimaMail": "2026-11-17T09:52:53.336Z"
 }
