@@ -203,7 +203,7 @@ console.log('esiti-monitor.json:', esiti.length, 'esiti,', tribNomi.length, 'tri
 // I lotti scaduti (nel feed dal 2019) restano navigabili ma fuori dal sitemap: erano 6,4M di URL
 // (322.815 lotti x 20 lingue) che Google respingeva in blocco ("scansionate, non indicizzate").
 const LIMITE_MS = Date.now() - 45 * 86400000;
-const LIMITE_MAX = Date.parse('2030-12-31T00:00:00Z');
+const LIMITE_MAX = Date.now() + 3 * 365 * 86400000;
 const ids = [];
 let nScaduti = 0, nSenzaData = 0;
 for (const id of live.keys()) {
