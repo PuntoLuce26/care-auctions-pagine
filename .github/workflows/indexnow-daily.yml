@@ -1,8 +1,6 @@
 name: indexnow-daily
-# 5.9 — bombardamento quotidiano: sitemap -> IndexNow (Bing, Yandex, Seznam...)
+# Manuale: sitemap completa -> IndexNow. NON schedulato: il giro quotidiano e' indexnow-priorita (poche URL verificate).
 on:
-  schedule:
-    - cron: '30 5 * * *'
   workflow_dispatch: {}
 permissions:
   contents: read
