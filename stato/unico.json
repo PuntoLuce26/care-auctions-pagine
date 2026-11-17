@@ -1,10 +1,10 @@
 {
- "generato": "2026-11-17T19:50:50.778Z",
+ "generato": "2026-11-17T22:36:06.754Z",
  "semaforo": "rosso",
  "conteggi": {
-  "ok": 18,
+  "ok": 16,
   "giallo": 2,
-  "rosso": 4,
+  "rosso": 6,
   "non_verificabile": 0
  },
  "voci": [
@@ -89,49 +89,49 @@
    "sezione": "feed",
    "nome": "statistiche",
    "stato": "ok",
-   "valore": "16 min",
-   "dettaglio": "320685 lotti"
+   "valore": "9 min",
+   "dettaglio": "320688 lotti"
   },
   {
    "sezione": "feed",
    "nome": "world",
    "stato": "rosso",
-   "valore": "7107 min",
+   "valore": "7272 min",
    "dettaglio": "33 paesi"
   },
   {
    "sezione": "feed",
    "nome": "ricevute",
-   "stato": "ok",
-   "valore": "7472 min",
-   "dettaglio": "0 ricevute"
+   "stato": "rosso",
+   "valore": "410",
+   "dettaglio": ""
   },
   {
    "sezione": "feed",
    "nome": "san-pasquale-foto",
    "stato": "rosso",
-   "valore": "7345 min",
+   "valore": "7510 min",
    "dettaglio": "37 foto"
   },
   {
    "sezione": "build",
    "nome": "sito vs origine",
    "stato": "ok",
-   "valore": "main.fce14d28.js / main.fce14d28.js",
+   "valore": "main.a63a2b3d.js / main.a63a2b3d.js",
    "dettaglio": ""
   },
   {
    "sezione": "prerender",
    "nome": "snapshot vs vivo",
    "stato": "ok",
-   "valore": "main.fce14d28.js / main.fce14d28.js",
+   "valore": "main.a63a2b3d.js / main.a63a2b3d.js",
    "dettaglio": ""
   },
   {
    "sezione": "prerender",
    "nome": "bot allineato",
    "stato": "ok",
-   "valore": "main.fce14d28.js",
+   "valore": "main.a63a2b3d.js",
    "dettaglio": ""
   },
   {
@@ -151,16 +151,16 @@
   {
    "sezione": "qa",
    "nome": "critici",
-   "stato": "ok",
-   "valore": "0",
-   "dettaglio": "42 controlli"
+   "stato": "rosso",
+   "valore": "3",
+   "dettaglio": "27 controlli"
   },
   {
    "sezione": "mail",
    "nome": "allarmi",
    "stato": "giallo",
-   "valore": "10",
-   "dettaglio": "2026-11-17T19:39:06.471Z"
+   "valore": "9",
+   "dettaglio": "2026-11-17T22:06:39.107Z"
   },
   {
    "sezione": "sentinella",
@@ -180,8 +180,8 @@
    "sezione": "github",
    "nome": "run rossi (2h)",
    "stato": "ok",
-   "valore": "0 isolati",
-   "dettaglio": ""
+   "valore": "2 isolati",
+   "dettaglio": "qa · icarewall (una volta sola: race nota)"
   }
  ]
 }
