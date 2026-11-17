@@ -1,5 +1,5 @@
 {
- "generato": "2026-11-17T05:11:27.189Z",
+ "generato": "2026-11-17T07:56:22.634Z",
  "semaforo": "rosso",
  "conteggi": {
   "ok": 18,
@@ -89,28 +89,28 @@
    "sezione": "feed",
    "nome": "statistiche",
    "stato": "ok",
-   "valore": "2 min",
-   "dettaglio": "320707 lotti"
+   "valore": "11 min",
+   "dettaglio": "320713 lotti"
   },
   {
    "sezione": "feed",
    "nome": "world",
    "stato": "rosso",
-   "valore": "6227 min",
+   "valore": "6392 min",
    "dettaglio": "33 paesi"
   },
   {
    "sezione": "feed",
    "nome": "ricevute",
    "stato": "ok",
-   "valore": "6593 min",
+   "valore": "6758 min",
    "dettaglio": "0 ricevute"
   },
   {
    "sezione": "feed",
    "nome": "san-pasquale-foto",
    "stato": "rosso",
-   "valore": "6465 min",
+   "valore": "6630 min",
    "dettaglio": "37 foto"
   },
   {
@@ -153,14 +153,14 @@
    "nome": "critici",
    "stato": "ok",
    "valore": "0",
-   "dettaglio": "43 controlli"
+   "dettaglio": "42 controlli"
   },
   {
    "sezione": "mail",
    "nome": "allarmi",
    "stato": "giallo",
-   "valore": "13",
-   "dettaglio": "2026-11-17T04:51:19.058Z"
+   "valore": "8",
+   "dettaglio": "2026-11-17T07:51:22.373Z"
   },
   {
    "sezione": "sentinella",
@@ -180,8 +180,8 @@
    "sezione": "github",
    "nome": "run rossi (2h)",
    "stato": "ok",
-   "valore": "2 isolati",
-   "dettaglio": "icarewall · ronda-notturna (una volta sola: race nota)"
+   "valore": "0 isolati",
+   "dettaglio": ""
   }
  ]
 }
