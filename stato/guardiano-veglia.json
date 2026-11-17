@@ -1,0 +1,115 @@
+{
+ "ultimoGiro": "2026-11-17T02:56:06.679Z",
+ "sogliaMin": 30,
+ "runId": 44006436603,
+ "stato": "ok",
+ "motivo": "",
+ "veglia": {
+  "ok": true,
+  "ultimoGiro": "2026-11-17T02:55:10.464Z",
+  "etaMin": 0.9,
+  "sogliaMin": 30,
+  "processi": 29,
+  "dispatchOggi": 22,
+  "totali": {
+   "vivi": 5,
+   "soloVerde": 0,
+   "stantii": 0,
+   "mai": 6,
+   "nonMisurabili": 0,
+   "riuscite": 0,
+   "svegliatiInVano": 0,
+   "riparazioniAperte": 0
+  },
+  "supervisori": [
+   {
+    "nome": "sam-plus",
+    "stato": "vivo",
+    "etaMin": 178.6,
+    "sogliaMin": 420,
+    "sveglieOggi": 0,
+    "ultimoEsito": "repository_dispatch sam-plus-giro · HTTP 204"
+   },
+   {
+    "nome": "sam-plus-v2",
+    "stato": "vivo",
+    "etaMin": 1529.9,
+    "sogliaMin": 1728,
+    "sveglieOggi": 0,
+    "ultimoEsito": null
+   },
+   {
+    "nome": "anti-bugie",
+    "stato": "vivo",
+    "etaMin": 700.3,
+    "sogliaMin": 1800,
+    "sveglieOggi": 0,
+    "ultimoEsito": "repository_dispatch anti-bugie-giro · HTTP 204"
+   },
+   {
+    "nome": "rete-vids",
+    "stato": "mai",
+    "etaMin": null,
+    "sogliaMin": 1800,
+    "sveglieOggi": 0,
+    "ultimoEsito": "repository_dispatch rete-vids-giro · HTTP 204"
+   },
+   {
+    "nome": "rete-einstein",
+    "stato": "mai",
+    "etaMin": null,
+    "sogliaMin": 1800,
+    "sveglieOggi": 0,
+    "ultimoEsito": "repository_dispatch rete-einstein-giro · HTTP 204"
+   },
+   {
+    "nome": "rete-green2",
+    "stato": "mai",
+    "etaMin": null,
+    "sogliaMin": 1800,
+    "sveglieOggi": 0,
+    "ultimoEsito": "repository_dispatch rete-green2-giro · HTTP 204"
+   },
+   {
+    "nome": "rete-emergent",
+    "stato": "mai",
+    "etaMin": null,
+    "sogliaMin": 1800,
+    "sveglieOggi": 0,
+    "ultimoEsito": "repository_dispatch rete-emergent-giro · HTTP 204"
+   },
+   {
+    "nome": "emergent-watch",
+    "stato": "mai",
+    "etaMin": null,
+    "sogliaMin": 720,
+    "sveglieOggi": 0,
+    "ultimoEsito": "HTTP 204"
+   },
+   {
+    "nome": "verifica-playwright",
+    "stato": "vivo",
+    "etaMin": 118.4,
+    "sogliaMin": 720,
+    "sveglieOggi": 0,
+    "ultimoEsito": "HTTP 204"
+   },
+   {
+    "nome": "verifica-canonical",
+    "stato": "vivo",
+    "etaMin": 195.2,
+    "sogliaMin": 480,
+    "sveglieOggi": 0,
+    "ultimoEsito": "HTTP 204"
+   },
+   {
+    "nome": "guardiano-veglia",
+    "stato": "mai",
+    "etaMin": null,
+    "sogliaMin": 150,
+    "sveglieOggi": 0,
+    "ultimoEsito": "HTTP 204"
+   }
+  ]
+ }
+}
