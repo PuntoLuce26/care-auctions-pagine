@@ -112,10 +112,10 @@ async function main(){
   } else {
     for(let p=0;p<PAGINE;p++) pagine.push(p);
   }
-  const lotti=[]; const visti=new Set(); const esitiAcc={aggiudicate:0,deserte:0,sospese:0,nonPubblicato:0};
+  const lotti=[]; const quarantena=[]; const visti=new Set(); const esitiAcc={aggiudicate:0,deserte:0,sospese:0,nonPubblicato:0};
   for(let i=0;i<pagine.length;i+=2){
     const [a,b]=await Promise.all([get('https://pvp.giustizia.it/ric-496b258c-986a1b71/ric-ms/ricerca/vendite?page='+pagine[i]+'&size='+SIZE+'&language=it&sort=dataOraVendita%2Cdesc'), pagine[i+1]!==undefined?get('https://pvp.giustizia.it/ric-496b258c-986a1b71/ric-ms/ricerca/vendite?page='+pagine[i+1]+'&size='+SIZE+'&language=it&sort=dataOraVendita%2Cdesc'):Promise.resolve({s:0,t:''})]);
-    for(const r of [a,b]){ if(r.s===200){ try{ const j=JSON.parse(r.t); if(j.body&&Array.isArray(j.body.content)) for(const x of j.body.content){ if(x&&x.id!=null&&!visti.has(String(x.id))){ visti.add(String(x.id)); const tL=String(x.tipoLotto||''); if(tL==='IMMOBILI'||tL==='MOBILI') lotti.push(mappa(x)); const es=String(x.esito||''); if(es==='AGGIU')esitiAcc.aggiudicate++; else if(es==='ASDES')esitiAcc.deserte++; else if(es==='SOSPE')esitiAcc.sospese++; else esitiAcc.nonPubblicato++; } } }catch(e){} } }
+    for(const r of [a,b]){ if(r.s===200){ try{ const j=JSON.parse(r.t); if(j.body&&Array.isArray(j.body.content)) for(const x of j.body.content){ if(x&&x.id!=null&&!visti.has(String(x.id))){ visti.add(String(x.id)); const tL=String(x.tipoLotto||''); if(tL==='IMMOBILI'||tL==='MOBILI'){ const _l=mappa(x); const _d=String(_l.dataAsta||'').slice(0,10); if(/^\d{4}-\d{2}-\d{2}$/.test(_d)){ const _t=Date.parse(_d+'T00:00:00Z'); const _max=Date.now()+3*365*86400000; if(_t>_max||_t<Date.parse('2000-01-01T00:00:00Z')){ quarantena.push({id:_l.id,dataAsta:_d,motivo:_t>_max?'data futura oltre 3 anni':'data prima del 2000'}); } else { lotti.push(_l); } } else { lotti.push(_l); } } const es=String(x.esito||''); if(es==='AGGIU')esitiAcc.aggiudicate++; else if(es==='ASDES')esitiAcc.deserte++; else if(es==='SOSPE')esitiAcc.sospese++; else esitiAcc.nonPubblicato++; } } }catch(e){} } }
     await dormi(200);
     if(lotti.length&&lotti.length%2000===0) console.log('raccolti:',lotti.length);
   }
@@ -324,6 +324,7 @@ async function main(){
     if (esitiMotivo) statOut.esitiMotivo = esitiMotivo;
     if (esitiUltimaRilevazione) statOut.esitiUltimaRilevazione = esitiUltimaRilevazione;
     fs.writeFileSync(path.join(FEED, 'statistiche.json'), JSON.stringify(statOut));
+    fs.writeFileSync(path.join(FEED, 'quarantena.json'), JSON.stringify({ generato: new Date().toISOString(), regola: 'dataAsta > oggi+3 anni oppure < 2000-01-01', lotti: quarantena }));
     console.log('statistiche.json sempre aggiornato');
   } catch (eS) { console.log('statistiche: errore', eS.message); }
   if(MODE==='full'){
