@@ -203,6 +203,7 @@ console.log('esiti-monitor.json:', esiti.length, 'esiti,', tribNomi.length, 'tri
 // I lotti scaduti (nel feed dal 2019) restano navigabili ma fuori dal sitemap: erano 6,4M di URL
 // (322.815 lotti x 20 lingue) che Google respingeva in blocco ("scansionate, non indicizzate").
 const LIMITE_MS = Date.now() - 45 * 86400000;
+const LIMITE_MAX = Date.parse('2030-12-31T00:00:00Z');
 const ids = [];
 let nScaduti = 0, nSenzaData = 0;
 for (const id of live.keys()) {
@@ -211,7 +212,7 @@ for (const id of live.keys()) {
   let ok = true;
   if (/^\d{4}-\d{2}-\d{2}$/.test(d)) {
     const t = Date.parse(d + 'T00:00:00Z');
-    if (!isNaN(t)) ok = t >= LIMITE_MS;
+    if (!isNaN(t)) ok = t >= LIMITE_MS && t <= LIMITE_MAX;
   } else nSenzaData++;
   if (ok) ids.push(id); else nScaduti++;
 }
@@ -245,7 +246,7 @@ const regDaProv = new Set();
 for (const m of provVotes.values()) for (const r of Object.keys(m)) regDaProv.add(slugify(r));
 const righeLoc = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'];
 const oggiS = new Date().toISOString().slice(0, 10);
-const addU = (u) => { righeLoc.push('<url><loc>https://careauctions.co' + u + '</loc><lastmod>' + oggiS + '</lastmod></url>'); };
+const addU = (u) => { righeLoc.push('<url><loc>https://careauctions.co' + u + '</loc></url>'); };
 for (const cs of Object.keys(cittaOut)) for (const lg of SEO_LANG) addU('/case-asta-' + cs + (lg === 'it' ? '' : '/' + lg));
 for (const ps of provCount.keys()) for (const lg of SEO_LANG) addU('/aste-' + ps + (lg === 'it' ? '' : '/' + lg));
 for (const rs of regDaProv) if (rs) for (const lg of SEO_LANG) addU('/aste-' + rs + (lg === 'it' ? '' : '/' + lg));
