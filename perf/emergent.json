@@ -1,0 +1,1 @@
+{"aggiornato":"2026-11-17T03:41:18.193Z","nota":"TTFB misurato da GitHub Actions (3 campioni, mediana). Il CPU/memoria interni di Emergent non sono esposti.","punti":[{"t":"2026-11-17T03:41:18.193Z","origine":{"stato":200,"ttfb":360,"kb":232,"bundle":"main.bacb4ba8.js"},"sito":{"stato":200,"ttfb":176,"kb":243}}]}
