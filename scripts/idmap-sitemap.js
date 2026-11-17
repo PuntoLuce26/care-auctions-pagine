@@ -202,16 +202,18 @@ console.log('esiti-monitor.json:', esiti.length, 'esiti,', tribNomi.length, 'tri
 // 5.950 — SITEMAP DA DIETA: solo lotti attivi, ognuno col suo lastmod.
 // I lotti scaduti (nel feed dal 2019) restano navigabili ma fuori dal sitemap: erano 6,4M di URL
 // (322.815 lotti x 20 lingue) che Google respingeva in blocco ("scansionate, non indicizzate").
-// 17/11/2026 — la finestra dei lotti già conclusi è GIORNI_DOPO_ASTA_SITEMAP (default 0 = solo dataAsta >= oggi).
+// 17/11/2026 — la finestra dei lotti già conclusi è GIORNI_DOPO_ASTA_SITEMAP (un numero, non due).
 const LIMITE_MS = Date.now() - 45 * 86400000;
-// 17/11/2026 — la finestra dei lotti GIÀ CONCLUSI dentro le sitemap diventa un numero esplicito.
-// Prima era fissa a 45 giorni e viveva dentro LIMITE_MS, condiviso con gli hub città: un solo
-// numero governava due cose diverse. Il 17/11 l'audit ha misurato 12 <loc> su 30 (40%) con data
-// d'asta PASSATA: nei fatti il filtro esisteva (45 giorni), il cap a 3 anni da solo non escludeva
-// nulla. Ordine del 17/11: nelle sitemap SOLO dataAsta >= oggi → 0 giorni qui sotto.
-// Per tornare al comportamento del 17/11 (direttiva 5.950): SITEMAP_GIORNI_DOPO_ASTA=45.
-// Gli hub città (citta-top.json) restano volutamente su LIMITE_MS: non è questa la sede per cambiarli.
-const GIORNI_DOPO_ASTA_SITEMAP = Number(process.env.SITEMAP_GIORNI_DOPO_ASTA ?? 0);
+// 18/11/2026 — DECISIONE DI GIANLUCA: si torna a 45 giorni indietro, com'era prima della prova.
+// Motivo (sue parole): un lotto aggiudicato due settimane fa è ancora cercato e ha link in entrata;
+// togliere 16.791 URL riduce la copertura sulle pagine che hanno già autorità. La prova «solo
+// dataAsta >= oggi» è durata poche ore il 17/11 sera (sitemap 40.666 → 23.875 <loc>, 5 → 3 shard).
+// LA LEVA È QUESTO NUMERO, e nient'altro:
+//   SITEMAP_GIORNI_DOPO_ASTA=45  → lotti conclusi da al massimo 45 giorni  (DEFAULT, attuale)
+//   SITEMAP_GIORNI_DOPO_ASTA=30  → finestra di 30 giorni
+//   SITEMAP_GIORNI_DOPO_ASTA=0   → solo lotti con dataAsta >= oggi (le aste di oggi restano dentro)
+// Gli hub città (citta-top.json) hanno la LORO finestra (LIMITE_MS, 45 giorni) e non si toccano da qui.
+const GIORNI_DOPO_ASTA_SITEMAP = Number(process.env.SITEMAP_GIORNI_DOPO_ASTA ?? 45);
 // IL CONFINE È LA MEZZANOTTE DI OGGI, non l'istante di esecuzione: con Date.now() un lotto che si
 // vende OGGI verrebbe escluso (la sua data è mezzanotte, che è < adesso). "dataAsta >= oggi" deve
 // tenere dentro le aste di oggi, che sono le più vive di tutte.
