@@ -2,26 +2,26 @@
  "nome": "Sconto Reale Certificato",
  "definizione": "La mediana di quanto il prezzo base d'asta sta sotto il valore di mercato OMI del comune, misurata sui lotti residenziali con la superficie dichiarata.",
  "numero": {
-  "valorePct": 39.9,
+  "valorePct": 40.5,
   "etichetta": "Sconto Reale Certificato — mediana nazionale",
   "formula": "1 − (prezzo base d'asta al mq) / (valore OMI al mq del comune)",
   "usaPrezzo": "prezzo base d'asta (mai l'offerta minima: lo scarto base→minima è il pavimento legale del 25%, non uno sconto di mercato)"
  },
  "intervallo": {
-  "p25Pct": 7.4,
-  "p75Pct": 61.5,
-  "conservativoPct": 19.5
+  "p25Pct": 8.7,
+  "p75Pct": 61.7,
+  "conservativoPct": 21.1
  },
  "copertura": {
-  "lottiConfrontabili": 31767,
-  "lottiConMq": 33611,
-  "lottiResidenziali": 144666,
-  "comuniPubblicati": 2117,
-  "comuniConOmi": 7686,
+  "lottiConfrontabili": 33975,
+  "lottiConMq": 35864,
+  "lottiResidenziali": 144675,
+  "comuniPubblicati": 2232,
+  "comuniConOmi": 7862,
   "semestreOmi": "1° semestre 2026",
-  "percentualeLottiConMq": 23.2
+  "percentualeLottiConMq": 24.8
  },
- "prezzoMqMedioAste": 607,
+ "prezzoMqMedioAste": 617,
  "fonte": [
   {
    "nome": "Portale delle Vendite Pubbliche (Ministero della Giustizia)",
@@ -34,13 +34,13 @@
    "ruolo": "valori di mercato OMI (mediana delle zone del comune)"
   }
  ],
- "rilevazione": "2026-11-17T14:54:52.373Z",
+ "rilevazione": "2026-11-17T15:23:40.847Z",
  "rilevazioneLeggibile": "17/11/2026",
  "cadenza": "settimanale, lunedì 03:30 (workflow confronto-mercato.yml)",
- "generatoIl": "2026-11-17T14:56:02.778Z",
+ "generatoIl": "2026-11-17T15:25:01.744Z",
  "metodo": "Per ogni lotto residenziale a piena proprietà con la superficie in mq pubblicata nella descrizione della fonte, prezzo al mq = prezzo base / mq, confrontato con i valori OMI residenziali del comune (mediana delle zone). Sconto reale = mediana di 1 - prezzo al mq / valore OMI. scontoConservativoPct confronta con la zona OMI PIÙ ECONOMICA del comune (il confronto più prudente possibile). Esclusi i lotti in quota, nuda proprietà e usufrutto (il prezzo è di una parte, la superficie del tutto). Entrano solo i comuni con almeno 3 lotti confrontabili. Si usa SEMPRE il prezzo base d asta, mai l offerta minima: lo scarto base→minima è il pavimento legale del 25%, non uno sconto di mercato.",
  "nota": "I valori OMI restano interni: pubblichiamo solo la NOSTRA metrica e il prezzo al mq delle aste. Nessun numero inventato; i lotti senza superficie dichiarata non entrano. Se la sorgente OMI non risponde questo file non viene riscritto.",
- "fraseCitabile": "Secondo lo Sconto Reale Certificato di CAReAuctions, il prezzo base delle case all'asta in Italia è in mediana il 39,9% sotto il valore di mercato OMI, su 31.767 lotti confrontabili in 2117 comuni (rilevazione 17/11/2026; fonti: PVP del Ministero della Giustizia e OMI dell'Agenzia delle Entrate).",
+ "fraseCitabile": "Secondo lo Sconto Reale Certificato di CAReAuctions, il prezzo base delle case all'asta in Italia è in mediana il 40,5% sotto il valore di mercato OMI, su 33.975 lotti confrontabili in 2232 comuni (rilevazione 17/11/2026; fonti: PVP del Ministero della Giustizia e OMI dell'Agenzia delle Entrate).",
  "citareCome": "CAReAuctions — «Sconto Reale Certificato», rilevazione del 17/11/2026 — https://careauctions.co/sconto-reale-certificato",
  "pagina": "https://careauctions.co/sconto-reale-certificato",
  "csv": "https://careauctions.co/feed/sconto-reale-certificato.csv",
