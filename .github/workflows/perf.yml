@@ -21,22 +21,33 @@ jobs:
           node-version: "22"
       - name: Test carico e performance
         run: node scripts/perf-test.js
-      # 12/11/2026 — lo STATO INTERNO esce dal repo pubblico: va su R2 (bucket care-stato),
-      # letto da lì dai consumatori (icare-veglia via binding, script via API). Il commit qui
-      # resta FINCHÉ tutti i lettori non sono migrati: doppia scrittura, nessun lettore cieco.
+      # 12/11/2026 — lo STATO INTERNO esce dal repo pubblico: va su R2 (bucket care-stato).
+      # 18/11/2026 — ALLINEAMENTO DEI DUE PERCORSI (la run 44098137968 del 17/11 falliva qui):
+      # `scripts/perf-test.js` produce `perf/stato-test.json` (il test di carico), mentre
+      # `perf/stato.json` è lo stato SINTETICO scritto da `emergent-watch.mjs` (un altro scrittore,
+      # un altro schema, un'altra chiave R2: stato/perf/stato.json). Questo step pubblicava
+      # `perf/stato.json`, cioè un file che questo workflow non produce (e che, se esistesse,
+      # sovrascriverebbe quello dell'altro scrittore). Ora pubblica il file che esiste davvero
+      # → chiave `stato/perf/stato-test.json`, coerente con la convenzione `stato/<area>/<file>`.
+      # Se il produttore non scrive il file, si esce 1 con un messaggio chiaro (non un errore di upload).
       - name: Pubblica lo stato su R2
         if: always()
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-        run: node scripts/stato-pubblica.mjs perf/stato.json --verifica
+        run: |
+          if [ ! -f perf/stato-test.json ]; then
+            echo "::error::file di stato non prodotto da perf-test.js (perf/stato-test.json assente): controllare lo step «Test carico e performance»"
+            exit 1
+          fi
+          node scripts/stato-pubblica.mjs perf/stato-test.json --verifica
       - name: Commit perf
         if: always()
         shell: bash
         run: |
           git config user.name "CARe Cloud"
           git config user.email "cloud@careauctions.co"
-          # 12/11/2026 — perf/stato.json è stato interno e vive su R2 (caricato sopra).
-          # Qui resta solo l'artefatto del test di carico.
+          # 18/11/2026 — perf/stato-test.json è l'artefatto del test di carico: pubblicato su R2
+          # (stato/perf/stato-test.json, step sopra) e committato qui come storia.
           git add perf/stato-test.json
           if git diff --cached --quiet; then echo "nessuna variazione"; exit 0; fi
           git commit -m "perf: carico e performance ($(date -u +%FT%TZ))"
