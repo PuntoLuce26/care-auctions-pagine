@@ -1,10 +1,10 @@
 {
- "generato": "2026-11-17T22:36:06.754Z",
+ "generato": "2026-11-18T01:21:36.848Z",
  "semaforo": "rosso",
  "conteggi": {
-  "ok": 16,
+  "ok": 17,
   "giallo": 2,
-  "rosso": 6,
+  "rosso": 5,
   "non_verificabile": 0
  },
  "voci": [
@@ -89,14 +89,14 @@
    "sezione": "feed",
    "nome": "statistiche",
    "stato": "ok",
-   "valore": "9 min",
-   "dettaglio": "320688 lotti"
+   "valore": "2 min",
+   "dettaglio": "320706 lotti"
   },
   {
    "sezione": "feed",
    "nome": "world",
    "stato": "rosso",
-   "valore": "7272 min",
+   "valore": "7438 min",
    "dettaglio": "33 paesi"
   },
   {
@@ -110,7 +110,7 @@
    "sezione": "feed",
    "nome": "san-pasquale-foto",
    "stato": "rosso",
-   "valore": "7510 min",
+   "valore": "7675 min",
    "dettaglio": "37 foto"
   },
   {
@@ -151,22 +151,22 @@
   {
    "sezione": "qa",
    "nome": "critici",
-   "stato": "rosso",
-   "valore": "3",
-   "dettaglio": "27 controlli"
+   "stato": "ok",
+   "valore": "0",
+   "dettaglio": "10 controlli"
   },
   {
    "sezione": "mail",
    "nome": "allarmi",
    "stato": "giallo",
    "valore": "9",
-   "dettaglio": "2026-11-17T22:06:39.107Z"
+   "dettaglio": "2026-11-18T01:06:34.146Z"
   },
   {
    "sezione": "sentinella",
    "nome": "ok",
    "stato": "giallo",
-   "valore": "6 anomalie vere",
+   "valore": "2 anomalie vere",
    "dettaglio": "1 note dichiarate, ignorate"
   },
   {
@@ -180,8 +180,8 @@
    "sezione": "github",
    "nome": "run rossi (2h)",
    "stato": "ok",
-   "valore": "2 isolati",
-   "dettaglio": "qa · icarewall (una volta sola: race nota)"
+   "valore": "0 isolati",
+   "dettaglio": ""
   }
  ]
 }
