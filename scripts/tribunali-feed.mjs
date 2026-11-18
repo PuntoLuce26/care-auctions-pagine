@@ -71,13 +71,12 @@ const vecchi = new Map(((precedente && precedente.tribunali) || []).map((x) => [
 const tribunali = [...per.entries()]
   .map(([tribunale, e]) => {
     const v = vecchi.get(norm(tribunale)) || {};
-    const rec = { tribunale, lottiAperti: e.lottiAperti };
-    // si ereditano SOLO i campi valorizzati nel file precedente; `totale` è escluso per scelta:
-    // in questo perimetro non ha una fonte (un numero vecchio senza fonte è peggio di un campo assente)
-    for (const campo of ['regione', 'prezzoBaseMedio', 'aggiudicazioni', 'prezzoAggMedio']) {
-      if (v[campo] !== undefined && v[campo] !== null && v[campo] !== '') rec[campo] = v[campo];
-    }
-    rec.slug = v.slug || slug(tribunale);
+    // SCHEMA 2 (deciso dal Lead, 18/11/2026): garantiti `tribunale` (MAIUSCOLO), `slug` (minuscolo),
+    // `lottiAperti` (intero ≥ 0). `regione` è OPZIONALE: si omette se sconosciuta, mai null.
+    // `totale`, `prezzoBaseMedio`, `aggiudicazioni`, `prezzoAggMedio` sono FUORI CONTRATTO: non si
+    // scrivono finché non c'è un valore vero (e se torneranno, si riportano CON I VALORI e `schema` sale).
+    const rec = { tribunale: norm(tribunale), slug: v.slug || slug(tribunale), lottiAperti: Number(e.lottiAperti) || 0 };
+    if (v.regione) rec.regione = v.regione;
     return rec;
   })
   .sort((a, b) => b.lottiAperti - a.lottiAperti || a.tribunale.localeCompare(b.tribunale));
@@ -99,11 +98,10 @@ if (sommaPrima && somma < sommaPrima * FATTORE_GUARDIA) {
 }
 
 const out = {
+  schema: 2,
   aggiornato: new Date().toISOString(),
-  fonte: 'feed/aste-indice/*.json (indice lotti) + feed/statistiche.json',
-  copertura: `${tribunali.length} tribunali · ${attivi} con almeno un lotto aperto · ${somma} lotti aperti`,
+  copertura: `${tribunali.length} tribunali · ${attivi} con almeno un lotto aperto · ${somma} lotti aperti (lotti immobiliari con asta non ancora svolta)`,
   tribunali,
-  nota: 'Rigenerato a ogni giro di feed-sync (18/11/2026). Perimetro: lotti immobiliari con asta non ancora svolta (residenziale-comune × comune-tribunale). regione/prezzoBaseMedio/aggiudicazioni/prezzoAggMedio sono ereditati dal file precedente SOLO dove valorizzati; se manca la fonte la chiave non si scrive (mai null). totale non è in questo contratto.',
 };
 fs.mkdirSync('feed', { recursive: true });
 fs.writeFileSync(OUT, JSON.stringify(out, null, 1) + '\n');

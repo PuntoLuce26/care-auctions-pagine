@@ -194,6 +194,10 @@ async function main(){
   console.log('rimossi da PVP in questo giro completo:', rimossi);
   indice.totali=esistenti.size+nuovi;
   }
+  // 18/11/2026 — `generato` dentro l'indice: è la fonte dei due numeri più visibili del sito
+  // (`totali` e `immobiliari`) e senza data la config pubblica era costretta a dichiarare la più
+  // vecchia delle altre fonti. Si riscrive a ogni giro che tocca il file.
+  indice.generato = new Date().toISOString();
   fs.writeFileSync(path.join(FEED,'indice.json'),JSON.stringify(indice));
   console.log('indice aggiornato: totali',indice.totali,'(nuovi inseriti:',nuovi+')');
   // ESITI RITIRATI — C, 6/11/2026: toglie gli esiti scritti su un incrocio per id non valido

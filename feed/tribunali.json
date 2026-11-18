@@ -1,997 +1,898 @@
 {
- "aggiornato": "2026-11-18T16:41:38.494Z",
- "fonte": "feed/aste-indice/*.json (indice lotti) + feed/statistiche.json",
- "copertura": "149 tribunali · 149 con almeno un lotto aperto · 17086 lotti aperti",
+ "schema": 2,
+ "aggiornato": "2026-11-18T16:49:23.750Z",
+ "copertura": "149 tribunali · 149 con almeno un lotto aperto · 17086 lotti aperti (lotti immobiliari con asta non ancora svolta)",
  "tribunali": [
   {
    "tribunale": "ROMA",
+   "slug": "roma",
    "lottiAperti": 456,
-   "regione": "Lazio",
-   "aggiudicazioni": 342,
-   "slug": "roma"
+   "regione": "Lazio"
   },
   {
    "tribunale": "COSENZA",
+   "slug": "cosenza",
    "lottiAperti": 424,
-   "regione": "Calabria",
-   "aggiudicazioni": 11,
-   "slug": "cosenza"
+   "regione": "Calabria"
   },
   {
    "tribunale": "CAGLIARI",
+   "slug": "cagliari",
    "lottiAperti": 366,
-   "regione": "Sardegna",
-   "aggiudicazioni": 7,
-   "slug": "cagliari"
+   "regione": "Sardegna"
   },
   {
    "tribunale": "PERUGIA",
+   "slug": "perugia",
    "lottiAperti": 360,
-   "regione": "Umbria",
-   "aggiudicazioni": 11,
-   "slug": "perugia"
+   "regione": "Umbria"
   },
   {
    "tribunale": "CATANIA",
+   "slug": "catania",
    "lottiAperti": 340,
-   "regione": "Sicilia",
-   "aggiudicazioni": 6,
-   "slug": "catania"
+   "regione": "Sicilia"
   },
   {
    "tribunale": "FERMO",
+   "slug": "fermo",
    "lottiAperti": 330,
-   "regione": "Marche",
-   "aggiudicazioni": 21,
-   "slug": "fermo"
+   "regione": "Marche"
   },
   {
    "tribunale": "FOGGIA",
+   "slug": "foggia",
    "lottiAperti": 312,
-   "regione": "Puglia",
-   "aggiudicazioni": 24,
-   "slug": "foggia"
+   "regione": "Puglia"
   },
   {
    "tribunale": "BARI",
+   "slug": "bari",
    "lottiAperti": 309,
-   "regione": "Puglia",
-   "aggiudicazioni": 3,
-   "slug": "bari"
+   "regione": "Puglia"
   },
   {
    "tribunale": "TORINO",
+   "slug": "torino",
    "lottiAperti": 287,
-   "regione": "Piemonte",
-   "aggiudicazioni": 233,
-   "slug": "torino"
+   "regione": "Piemonte"
   },
   {
    "tribunale": "AGRIGENTO",
+   "slug": "agrigento",
    "lottiAperti": 283,
-   "regione": "Sicilia",
-   "slug": "agrigento"
+   "regione": "Sicilia"
   },
   {
    "tribunale": "SIRACUSA",
+   "slug": "siracusa",
    "lottiAperti": 273,
-   "regione": "Sicilia",
-   "aggiudicazioni": 11,
-   "slug": "siracusa"
+   "regione": "Sicilia"
   },
   {
    "tribunale": "FIRENZE",
+   "slug": "firenze",
    "lottiAperti": 270,
-   "regione": "Toscana",
-   "aggiudicazioni": 463,
-   "slug": "firenze"
+   "regione": "Toscana"
   },
   {
    "tribunale": "TARANTO",
+   "slug": "taranto",
    "lottiAperti": 265,
-   "regione": "Puglia",
-   "aggiudicazioni": 16,
-   "slug": "taranto"
+   "regione": "Puglia"
   },
   {
    "tribunale": "ALESSANDRIA",
+   "slug": "alessandria",
    "lottiAperti": 264,
-   "regione": "Piemonte",
-   "aggiudicazioni": 15,
-   "slug": "alessandria"
+   "regione": "Piemonte"
   },
   {
    "tribunale": "TIVOLI",
+   "slug": "tivoli",
    "lottiAperti": 253,
-   "regione": "Lazio",
-   "aggiudicazioni": 5,
-   "slug": "tivoli"
+   "regione": "Lazio"
   },
   {
    "tribunale": "MACERATA",
+   "slug": "macerata",
    "lottiAperti": 250,
-   "regione": "Marche",
-   "aggiudicazioni": 13,
-   "slug": "macerata"
+   "regione": "Marche"
   },
   {
    "tribunale": "MILANO",
+   "slug": "milano",
    "lottiAperti": 233,
-   "regione": "Lombardia",
-   "aggiudicazioni": 268,
-   "slug": "milano"
+   "regione": "Lombardia"
   },
   {
    "tribunale": "LECCE",
+   "slug": "lecce",
    "lottiAperti": 202,
-   "regione": "Puglia",
-   "slug": "lecce"
+   "regione": "Puglia"
   },
   {
    "tribunale": "VELLETRI",
+   "slug": "velletri",
    "lottiAperti": 200,
-   "regione": "Lazio",
-   "aggiudicazioni": 18,
-   "slug": "velletri"
+   "regione": "Lazio"
   },
   {
    "tribunale": "ASTI",
+   "slug": "asti",
    "lottiAperti": 199,
-   "regione": "Piemonte",
-   "aggiudicazioni": 3,
-   "slug": "asti"
+   "regione": "Piemonte"
   },
   {
    "tribunale": "BRESCIA",
+   "slug": "brescia",
    "lottiAperti": 193,
-   "regione": "Lombardia",
-   "aggiudicazioni": 107,
-   "slug": "brescia"
+   "regione": "Lombardia"
   },
   {
    "tribunale": "BERGAMO",
+   "slug": "bergamo",
    "lottiAperti": 187,
-   "regione": "Lombardia",
-   "aggiudicazioni": 46,
-   "slug": "bergamo"
+   "regione": "Lombardia"
   },
   {
    "tribunale": "IVREA",
+   "slug": "ivrea",
    "lottiAperti": 186,
-   "regione": "Piemonte",
-   "aggiudicazioni": 5,
-   "slug": "ivrea"
+   "regione": "Piemonte"
   },
   {
    "tribunale": "MONZA",
+   "slug": "monza",
    "lottiAperti": 186,
-   "regione": "Lombardia",
-   "aggiudicazioni": 1,
-   "slug": "monza"
+   "regione": "Lombardia"
   },
   {
    "tribunale": "MESSINA",
+   "slug": "messina",
    "lottiAperti": 183,
-   "regione": "Sicilia",
-   "slug": "messina"
+   "regione": "Sicilia"
   },
   {
-   "tribunale": "Napoli nord in Aversa",
-   "lottiAperti": 181,
-   "slug": "napoli-nord-in-aversa"
+   "tribunale": "NAPOLI NORD IN AVERSA",
+   "slug": "napoli-nord-in-aversa",
+   "lottiAperti": 181
   },
   {
    "tribunale": "PISA",
+   "slug": "pisa",
    "lottiAperti": 181,
-   "regione": "Toscana",
-   "aggiudicazioni": 55,
-   "slug": "pisa"
+   "regione": "Toscana"
   },
   {
    "tribunale": "PESCARA",
+   "slug": "pescara",
    "lottiAperti": 180,
-   "regione": "Abruzzo",
-   "aggiudicazioni": 3,
-   "slug": "pescara"
+   "regione": "Abruzzo"
   },
   {
    "tribunale": "CUNEO",
+   "slug": "cuneo",
    "lottiAperti": 176,
-   "regione": "Piemonte",
-   "aggiudicazioni": 10,
-   "slug": "cuneo"
+   "regione": "Piemonte"
   },
   {
    "tribunale": "TEMPIO PAUSANIA",
+   "slug": "tempio-pausania",
    "lottiAperti": 174,
-   "regione": "Sardegna",
-   "aggiudicazioni": 2,
-   "slug": "tempio-pausania"
+   "regione": "Sardegna"
   },
   {
    "tribunale": "PAVIA",
+   "slug": "pavia",
    "lottiAperti": 169,
-   "regione": "Lombardia",
-   "aggiudicazioni": 33,
-   "slug": "pavia"
+   "regione": "Lombardia"
   },
   {
    "tribunale": "GROSSETO",
+   "slug": "grosseto",
    "lottiAperti": 167,
-   "regione": "Toscana",
-   "aggiudicazioni": 8,
-   "slug": "grosseto"
+   "regione": "Toscana"
   },
   {
    "tribunale": "LATINA",
+   "slug": "latina",
    "lottiAperti": 166,
-   "regione": "Lazio",
-   "aggiudicazioni": 8,
-   "slug": "latina"
+   "regione": "Lazio"
   },
   {
    "tribunale": "PALERMO",
+   "slug": "palermo",
    "lottiAperti": 164,
-   "regione": "Sicilia",
-   "aggiudicazioni": 11,
-   "slug": "palermo"
+   "regione": "Sicilia"
   },
   {
    "tribunale": "SIENA",
+   "slug": "siena",
    "lottiAperti": 164,
-   "regione": "Toscana",
-   "aggiudicazioni": 81,
-   "slug": "siena"
+   "regione": "Toscana"
   },
   {
    "tribunale": "VITERBO",
+   "slug": "viterbo",
    "lottiAperti": 162,
-   "regione": "Lazio",
-   "aggiudicazioni": 5,
-   "slug": "viterbo"
+   "regione": "Lazio"
   },
   {
    "tribunale": "CATANZARO",
+   "slug": "catanzaro",
    "lottiAperti": 158,
-   "regione": "Calabria",
-   "aggiudicazioni": 3,
-   "slug": "catanzaro"
+   "regione": "Calabria"
   },
   {
    "tribunale": "GENOVA",
+   "slug": "genova",
    "lottiAperti": 157,
-   "regione": "Liguria",
-   "aggiudicazioni": 84,
-   "slug": "genova"
+   "regione": "Liguria"
   },
   {
    "tribunale": "POTENZA",
+   "slug": "potenza",
    "lottiAperti": 156,
-   "regione": "Basilicata",
-   "slug": "potenza"
+   "regione": "Basilicata"
   },
   {
    "tribunale": "ENNA",
+   "slug": "enna",
    "lottiAperti": 153,
-   "regione": "Sicilia",
-   "slug": "enna"
+   "regione": "Sicilia"
   },
   {
    "tribunale": "NAPOLI",
+   "slug": "napoli",
    "lottiAperti": 152,
-   "regione": "Campania",
-   "aggiudicazioni": 35,
-   "slug": "napoli"
+   "regione": "Campania"
   },
   {
    "tribunale": "ANCONA",
+   "slug": "ancona",
    "lottiAperti": 151,
-   "regione": "Marche",
-   "aggiudicazioni": 4,
-   "slug": "ancona"
+   "regione": "Marche"
   },
   {
    "tribunale": "CALTAGIRONE",
+   "slug": "caltagirone",
    "lottiAperti": 150,
-   "regione": "Sicilia",
-   "slug": "caltagirone"
+   "regione": "Sicilia"
   },
   {
    "tribunale": "SALERNO",
+   "slug": "salerno",
    "lottiAperti": 148,
-   "regione": "Campania",
-   "aggiudicazioni": 18,
-   "slug": "salerno"
+   "regione": "Campania"
   },
   {
    "tribunale": "ASCOLI PICENO",
+   "slug": "ascoli-piceno",
    "lottiAperti": 147,
-   "regione": "Marche",
-   "slug": "ascoli-piceno"
+   "regione": "Marche"
   },
   {
    "tribunale": "BENEVENTO",
+   "slug": "benevento",
    "lottiAperti": 147,
-   "regione": "Campania",
-   "aggiudicazioni": 27,
-   "slug": "benevento"
+   "regione": "Campania"
   },
   {
    "tribunale": "VERBANIA",
+   "slug": "verbania",
    "lottiAperti": 147,
-   "regione": "Piemonte",
-   "aggiudicazioni": 4,
-   "slug": "verbania"
+   "regione": "Piemonte"
   },
   {
    "tribunale": "RAGUSA",
+   "slug": "ragusa",
    "lottiAperti": 143,
-   "regione": "Sicilia",
-   "slug": "ragusa"
+   "regione": "Sicilia"
   },
   {
    "tribunale": "SPOLETO",
+   "slug": "spoleto",
    "lottiAperti": 143,
-   "regione": "Umbria",
-   "aggiudicazioni": 3,
-   "slug": "spoleto"
+   "regione": "Umbria"
   },
   {
    "tribunale": "PISTOIA",
+   "slug": "pistoia",
    "lottiAperti": 142,
-   "regione": "Toscana",
-   "aggiudicazioni": 33,
-   "slug": "pistoia"
+   "regione": "Toscana"
   },
   {
    "tribunale": "AREZZO",
+   "slug": "arezzo",
    "lottiAperti": 138,
-   "regione": "Toscana",
-   "aggiudicazioni": 24,
-   "slug": "arezzo"
+   "regione": "Toscana"
   },
   {
    "tribunale": "AVELLINO",
+   "slug": "avellino",
    "lottiAperti": 138,
-   "regione": "Campania",
-   "aggiudicazioni": 4,
-   "slug": "avellino"
+   "regione": "Campania"
   },
   {
    "tribunale": "CIVITAVECCHIA",
+   "slug": "civitavecchia",
    "lottiAperti": 135,
-   "regione": "Lazio",
-   "aggiudicazioni": 6,
-   "slug": "civitavecchia"
+   "regione": "Lazio"
   },
   {
    "tribunale": "PALMI",
+   "slug": "palmi",
    "lottiAperti": 135,
-   "regione": "Calabria",
-   "slug": "palmi"
+   "regione": "Calabria"
   },
   {
    "tribunale": "VICENZA",
+   "slug": "vicenza",
    "lottiAperti": 130,
-   "regione": "Veneto",
-   "aggiudicazioni": 43,
-   "slug": "vicenza"
+   "regione": "Veneto"
   },
   {
    "tribunale": "CREMONA",
+   "slug": "cremona",
    "lottiAperti": 127,
-   "regione": "Lombardia",
-   "aggiudicazioni": 97,
-   "slug": "cremona"
+   "regione": "Lombardia"
   },
   {
    "tribunale": "PADOVA",
+   "slug": "padova",
    "lottiAperti": 123,
-   "regione": "Veneto",
-   "aggiudicazioni": 27,
-   "slug": "padova"
+   "regione": "Veneto"
   },
   {
    "tribunale": "TERMINI IMERESE",
+   "slug": "termini-imerese",
    "lottiAperti": 123,
-   "regione": "Sicilia",
-   "aggiudicazioni": 3,
-   "slug": "termini-imerese"
+   "regione": "Sicilia"
   },
   {
    "tribunale": "FORLI'",
-   "lottiAperti": 117,
-   "slug": "forli"
+   "slug": "forli",
+   "lottiAperti": 117
   },
   {
    "tribunale": "TERAMO",
+   "slug": "teramo",
    "lottiAperti": 116,
-   "regione": "Abruzzo",
-   "aggiudicazioni": 1,
-   "slug": "teramo"
+   "regione": "Abruzzo"
   },
   {
    "tribunale": "VERCELLI",
+   "slug": "vercelli",
    "lottiAperti": 116,
-   "regione": "Piemonte",
-   "aggiudicazioni": 11,
-   "slug": "vercelli"
+   "regione": "Piemonte"
   },
   {
    "tribunale": "FROSINONE",
+   "slug": "frosinone",
    "lottiAperti": 114,
-   "regione": "Lazio",
-   "aggiudicazioni": 64,
-   "slug": "frosinone"
+   "regione": "Lazio"
   },
   {
    "tribunale": "MANTOVA",
+   "slug": "mantova",
    "lottiAperti": 109,
-   "regione": "Lombardia",
-   "aggiudicazioni": 53,
-   "slug": "mantova"
+   "regione": "Lombardia"
   },
   {
    "tribunale": "MATERA",
+   "slug": "matera",
    "lottiAperti": 108,
-   "regione": "Basilicata",
-   "aggiudicazioni": 2,
-   "slug": "matera"
+   "regione": "Basilicata"
   },
   {
    "tribunale": "TRAPANI",
+   "slug": "trapani",
    "lottiAperti": 108,
-   "regione": "Sicilia",
-   "aggiudicazioni": 2,
-   "slug": "trapani"
+   "regione": "Sicilia"
   },
   {
    "tribunale": "ROVIGO",
+   "slug": "rovigo",
    "lottiAperti": 106,
-   "regione": "Veneto",
-   "aggiudicazioni": 54,
-   "slug": "rovigo"
+   "regione": "Veneto"
   },
   {
    "tribunale": "CASSINO",
+   "slug": "cassino",
    "lottiAperti": 101,
-   "regione": "Lazio",
-   "aggiudicazioni": 2,
-   "slug": "cassino"
+   "regione": "Lazio"
   },
   {
    "tribunale": "CHIETI",
+   "slug": "chieti",
    "lottiAperti": 97,
-   "regione": "Abruzzo",
-   "slug": "chieti"
+   "regione": "Abruzzo"
   },
   {
    "tribunale": "L'AQUILA",
+   "slug": "l-aquila",
    "lottiAperti": 96,
-   "regione": "Abruzzo",
-   "slug": "l-aquila"
+   "regione": "Abruzzo"
   },
   {
    "tribunale": "SANTA MARIA CAPUA VETERE",
+   "slug": "santa-maria-capua-vetere",
    "lottiAperti": 96,
-   "regione": "Campania",
-   "aggiudicazioni": 3,
-   "slug": "santa-maria-capua-vetere"
+   "regione": "Campania"
   },
   {
    "tribunale": "URBINO",
+   "slug": "urbino",
    "lottiAperti": 91,
-   "regione": "Marche",
-   "aggiudicazioni": 5,
-   "slug": "urbino"
+   "regione": "Marche"
   },
   {
    "tribunale": "VERONA",
+   "slug": "verona",
    "lottiAperti": 91,
-   "regione": "Veneto",
-   "aggiudicazioni": 64,
-   "slug": "verona"
+   "regione": "Veneto"
   },
   {
    "tribunale": "RIETI",
+   "slug": "rieti",
    "lottiAperti": 90,
-   "regione": "Lazio",
-   "aggiudicazioni": 2,
-   "slug": "rieti"
+   "regione": "Lazio"
   },
   {
    "tribunale": "MODENA",
+   "slug": "modena",
    "lottiAperti": 89,
-   "regione": "Emilia-Romagna",
-   "aggiudicazioni": 169,
-   "slug": "modena"
+   "regione": "Emilia-Romagna"
   },
   {
    "tribunale": "NOVARA",
+   "slug": "novara",
    "lottiAperti": 87,
-   "regione": "Piemonte",
-   "aggiudicazioni": 20,
-   "slug": "novara"
+   "regione": "Piemonte"
   },
   {
    "tribunale": "TREVISO",
+   "slug": "treviso",
    "lottiAperti": 87,
-   "regione": "Veneto",
-   "aggiudicazioni": 31,
-   "slug": "treviso"
+   "regione": "Veneto"
   },
   {
    "tribunale": "BOLOGNA",
+   "slug": "bologna",
    "lottiAperti": 86,
-   "regione": "Emilia-Romagna",
-   "aggiudicazioni": 114,
-   "slug": "bologna"
+   "regione": "Emilia-Romagna"
   },
   {
    "tribunale": "BUSTO ARSIZIO",
+   "slug": "busto-arsizio",
    "lottiAperti": 86,
-   "regione": "Lombardia",
-   "aggiudicazioni": 189,
-   "slug": "busto-arsizio"
+   "regione": "Lombardia"
   },
   {
    "tribunale": "LAMEZIA TERME",
+   "slug": "lamezia-terme",
    "lottiAperti": 86,
-   "regione": "Calabria",
-   "slug": "lamezia-terme"
+   "regione": "Calabria"
   },
   {
    "tribunale": "VENEZIA",
+   "slug": "venezia",
    "lottiAperti": 85,
-   "regione": "Veneto",
-   "aggiudicazioni": 132,
-   "slug": "venezia"
+   "regione": "Veneto"
   },
   {
    "tribunale": "LOCRI",
+   "slug": "locri",
    "lottiAperti": 84,
-   "regione": "Calabria",
-   "slug": "locri"
+   "regione": "Calabria"
   },
   {
    "tribunale": "TRANI",
+   "slug": "trani",
    "lottiAperti": 82,
-   "regione": "Puglia",
-   "aggiudicazioni": 5,
-   "slug": "trani"
+   "regione": "Puglia"
   },
   {
    "tribunale": "AVEZZANO",
+   "slug": "avezzano",
    "lottiAperti": 80,
-   "regione": "Abruzzo",
-   "slug": "avezzano"
+   "regione": "Abruzzo"
   },
   {
    "tribunale": "PIACENZA",
+   "slug": "piacenza",
    "lottiAperti": 80,
-   "regione": "Emilia-Romagna",
-   "aggiudicazioni": 54,
-   "slug": "piacenza"
+   "regione": "Emilia-Romagna"
   },
   {
    "tribunale": "LAGONEGRO",
+   "slug": "lagonegro",
    "lottiAperti": 79,
-   "regione": "Basilicata",
-   "slug": "lagonegro"
+   "regione": "Basilicata"
   },
   {
    "tribunale": "NOCERA INFERIORE",
+   "slug": "nocera-inferiore",
    "lottiAperti": 79,
-   "regione": "Campania",
-   "slug": "nocera-inferiore"
+   "regione": "Campania"
   },
   {
    "tribunale": "TERNI",
+   "slug": "terni",
    "lottiAperti": 79,
-   "regione": "Umbria",
-   "aggiudicazioni": 64,
-   "slug": "terni"
+   "regione": "Umbria"
   },
   {
    "tribunale": "BRINDISI",
+   "slug": "brindisi",
    "lottiAperti": 76,
-   "regione": "Puglia",
-   "slug": "brindisi"
+   "regione": "Puglia"
   },
   {
    "tribunale": "CAMPOBASSO",
+   "slug": "campobasso",
    "lottiAperti": 75,
-   "regione": "Molise",
-   "slug": "campobasso"
+   "regione": "Molise"
   },
   {
    "tribunale": "GELA",
+   "slug": "gela",
    "lottiAperti": 75,
-   "regione": "Sicilia",
-   "slug": "gela"
+   "regione": "Sicilia"
   },
   {
    "tribunale": "LIVORNO",
+   "slug": "livorno",
    "lottiAperti": 75,
-   "regione": "Toscana",
-   "aggiudicazioni": 44,
-   "slug": "livorno"
+   "regione": "Toscana"
   },
   {
    "tribunale": "PESARO",
+   "slug": "pesaro",
    "lottiAperti": 71,
-   "regione": "Marche",
-   "slug": "pesaro"
+   "regione": "Marche"
   },
   {
    "tribunale": "CALTANISSETTA",
+   "slug": "caltanissetta",
    "lottiAperti": 70,
-   "regione": "Sicilia",
-   "aggiudicazioni": 3,
-   "slug": "caltanissetta"
+   "regione": "Sicilia"
   },
   {
    "tribunale": "LODI",
+   "slug": "lodi",
    "lottiAperti": 70,
-   "regione": "Lombardia",
-   "aggiudicazioni": 15,
-   "slug": "lodi"
+   "regione": "Lombardia"
   },
   {
    "tribunale": "NUORO",
+   "slug": "nuoro",
    "lottiAperti": 70,
-   "regione": "Sardegna",
-   "slug": "nuoro"
+   "regione": "Sardegna"
   },
   {
    "tribunale": "REGGIO CALABRIA",
+   "slug": "reggio-calabria",
    "lottiAperti": 70,
-   "regione": "Calabria",
-   "slug": "reggio-calabria"
+   "regione": "Calabria"
   },
   {
    "tribunale": "CASTROVILLARI",
+   "slug": "castrovillari",
    "lottiAperti": 65,
-   "regione": "Calabria",
-   "slug": "castrovillari"
+   "regione": "Calabria"
   },
   {
    "tribunale": "PATTI",
+   "slug": "patti",
    "lottiAperti": 65,
-   "regione": "Sicilia",
-   "slug": "patti"
+   "regione": "Sicilia"
   },
   {
    "tribunale": "SULMONA",
+   "slug": "sulmona",
    "lottiAperti": 65,
-   "regione": "Abruzzo",
-   "slug": "sulmona"
+   "regione": "Abruzzo"
   },
   {
    "tribunale": "BARCELLONA POZZO DI GOTTO",
+   "slug": "barcellona-pozzo-di-gotto",
    "lottiAperti": 63,
-   "regione": "Sicilia",
-   "slug": "barcellona-pozzo-di-gotto"
+   "regione": "Sicilia"
   },
   {
    "tribunale": "LUCCA",
+   "slug": "lucca",
    "lottiAperti": 63,
-   "regione": "Toscana",
-   "aggiudicazioni": 51,
-   "slug": "lucca"
+   "regione": "Toscana"
   },
   {
    "tribunale": "FERRARA",
+   "slug": "ferrara",
    "lottiAperti": 61,
-   "regione": "Emilia-Romagna",
-   "slug": "ferrara"
+   "regione": "Emilia-Romagna"
   },
   {
    "tribunale": "VARESE",
+   "slug": "varese",
    "lottiAperti": 61,
-   "regione": "Lombardia",
-   "aggiudicazioni": 56,
-   "slug": "varese"
+   "regione": "Lombardia"
   },
   {
    "tribunale": "LECCO",
+   "slug": "lecco",
    "lottiAperti": 60,
-   "regione": "Lombardia",
-   "slug": "lecco"
+   "regione": "Lombardia"
   },
   {
    "tribunale": "COMO",
+   "slug": "como",
    "lottiAperti": 58,
-   "regione": "Lombardia",
-   "aggiudicazioni": 15,
-   "slug": "como"
+   "regione": "Lombardia"
   },
   {
    "tribunale": "RAVENNA",
+   "slug": "ravenna",
    "lottiAperti": 56,
-   "regione": "Emilia-Romagna",
-   "aggiudicazioni": 32,
-   "slug": "ravenna"
+   "regione": "Emilia-Romagna"
   },
   {
    "tribunale": "CROTONE",
+   "slug": "crotone",
    "lottiAperti": 55,
-   "regione": "Calabria",
-   "slug": "crotone"
+   "regione": "Calabria"
   },
   {
    "tribunale": "NOLA",
+   "slug": "nola",
    "lottiAperti": 53,
-   "regione": "Campania",
-   "aggiudicazioni": 2,
-   "slug": "nola"
+   "regione": "Campania"
   },
   {
    "tribunale": "SONDRIO",
+   "slug": "sondrio",
    "lottiAperti": 53,
-   "regione": "Lombardia",
-   "aggiudicazioni": 1,
-   "slug": "sondrio"
+   "regione": "Lombardia"
   },
   {
    "tribunale": "ORISTANO",
+   "slug": "oristano",
    "lottiAperti": 52,
-   "regione": "Sardegna",
-   "slug": "oristano"
+   "regione": "Sardegna"
   },
   {
    "tribunale": "VIBO VALENTIA",
+   "slug": "vibo-valentia",
    "lottiAperti": 52,
-   "regione": "Calabria",
-   "slug": "vibo-valentia"
+   "regione": "Calabria"
   },
   {
    "tribunale": "SCIACCA",
+   "slug": "sciacca",
    "lottiAperti": 50,
-   "regione": "Sicilia",
-   "slug": "sciacca"
+   "regione": "Sicilia"
   },
   {
    "tribunale": "TRENTO",
+   "slug": "trento",
    "lottiAperti": 50,
-   "regione": "Trentino-Alto Adige",
-   "aggiudicazioni": 2,
-   "slug": "trento"
+   "regione": "Trentino-Alto Adige"
   },
   {
    "tribunale": "PRATO",
+   "slug": "prato",
    "lottiAperti": 49,
-   "regione": "Toscana",
-   "aggiudicazioni": 63,
-   "slug": "prato"
+   "regione": "Toscana"
   },
   {
    "tribunale": "SASSARI",
+   "slug": "sassari",
    "lottiAperti": 49,
-   "regione": "Sardegna",
-   "aggiudicazioni": 15,
-   "slug": "sassari"
+   "regione": "Sardegna"
   },
   {
    "tribunale": "UDINE",
+   "slug": "udine",
    "lottiAperti": 48,
-   "regione": "Friuli-Venezia Giulia",
-   "aggiudicazioni": 264,
-   "slug": "udine"
+   "regione": "Friuli-Venezia Giulia"
   },
   {
    "tribunale": "RIMINI",
+   "slug": "rimini",
    "lottiAperti": 43,
-   "regione": "Emilia-Romagna",
-   "aggiudicazioni": 5,
-   "slug": "rimini"
+   "regione": "Emilia-Romagna"
   },
   {
    "tribunale": "IMPERIA",
+   "slug": "imperia",
    "lottiAperti": 39,
-   "regione": "Liguria",
-   "aggiudicazioni": 13,
-   "slug": "imperia"
+   "regione": "Liguria"
   },
   {
    "tribunale": "ISERNIA",
+   "slug": "isernia",
    "lottiAperti": 39,
-   "regione": "Molise",
-   "slug": "isernia"
+   "regione": "Molise"
   },
   {
    "tribunale": "VALLO DELLA LUCANIA",
+   "slug": "vallo-della-lucania",
    "lottiAperti": 39,
-   "regione": "Campania",
-   "slug": "vallo-della-lucania"
+   "regione": "Campania"
   },
   {
    "tribunale": "LA SPEZIA",
+   "slug": "la-spezia",
    "lottiAperti": 36,
-   "regione": "Liguria",
-   "aggiudicazioni": 17,
-   "slug": "la-spezia"
+   "regione": "Liguria"
   },
   {
    "tribunale": "LANCIANO",
+   "slug": "lanciano",
    "lottiAperti": 36,
-   "regione": "Abruzzo",
-   "slug": "lanciano"
+   "regione": "Abruzzo"
   },
   {
    "tribunale": "PAOLA",
+   "slug": "paola",
    "lottiAperti": 36,
-   "regione": "Calabria",
-   "aggiudicazioni": 4,
-   "slug": "paola"
+   "regione": "Calabria"
   },
   {
    "tribunale": "BELLUNO",
+   "slug": "belluno",
    "lottiAperti": 35,
-   "regione": "Veneto",
-   "aggiudicazioni": 5,
-   "slug": "belluno"
+   "regione": "Veneto"
   },
   {
-   "tribunale": "ENNA ex Tribunale di NICOSIA",
+   "tribunale": "ENNA EX TRIBUNALE DI NICOSIA",
+   "slug": "enna-ex-tribunale-di-nicosia",
    "lottiAperti": 33,
-   "regione": "Sicilia",
-   "slug": "enna-ex-tribunale-di-nicosia"
+   "regione": "Sicilia"
   },
   {
    "tribunale": "VASTO",
+   "slug": "vasto",
    "lottiAperti": 33,
-   "regione": "Abruzzo",
-   "slug": "vasto"
+   "regione": "Abruzzo"
   },
   {
    "tribunale": "BIELLA",
+   "slug": "biella",
    "lottiAperti": 32,
-   "regione": "Piemonte",
-   "aggiudicazioni": 2,
-   "slug": "biella"
+   "regione": "Piemonte"
   },
   {
    "tribunale": "PORDENONE",
+   "slug": "pordenone",
    "lottiAperti": 31,
-   "regione": "Friuli-Venezia Giulia",
-   "aggiudicazioni": 7,
-   "slug": "pordenone"
+   "regione": "Friuli-Venezia Giulia"
   },
   {
    "tribunale": "SAVONA",
+   "slug": "savona",
    "lottiAperti": 31,
-   "regione": "Liguria",
-   "aggiudicazioni": 3,
-   "slug": "savona"
+   "regione": "Liguria"
   },
   {
    "tribunale": "REGGIO EMILIA",
+   "slug": "reggio-emilia",
    "lottiAperti": 30,
-   "regione": "Emilia-Romagna",
-   "aggiudicazioni": 27,
-   "slug": "reggio-emilia"
+   "regione": "Emilia-Romagna"
   },
   {
    "tribunale": "LARINO",
+   "slug": "larino",
    "lottiAperti": 29,
-   "regione": "Molise",
-   "slug": "larino"
+   "regione": "Molise"
   },
   {
    "tribunale": "AOSTA",
+   "slug": "aosta",
    "lottiAperti": 23,
-   "regione": "Valle d'Aosta",
-   "aggiudicazioni": 4,
-   "slug": "aosta"
+   "regione": "Valle d'Aosta"
   },
   {
    "tribunale": "PARMA",
+   "slug": "parma",
    "lottiAperti": 20,
-   "regione": "Emilia-Romagna",
-   "aggiudicazioni": 56,
-   "slug": "parma"
+   "regione": "Emilia-Romagna"
   },
   {
-   "tribunale": "LAGONEGRO ex Tribunale di SALA CONSILINA",
+   "tribunale": "LAGONEGRO EX TRIBUNALE DI SALA CONSILINA",
+   "slug": "lagonegro-ex-tribunale-di-sala-consilina",
    "lottiAperti": 19,
-   "regione": "Campania",
-   "slug": "lagonegro-ex-tribunale-di-sala-consilina"
+   "regione": "Campania"
   },
   {
    "tribunale": "MASSA",
+   "slug": "massa",
    "lottiAperti": 19,
-   "regione": "Toscana",
-   "aggiudicazioni": 17,
-   "slug": "massa"
+   "regione": "Toscana"
   },
   {
    "tribunale": "BOLZANO",
+   "slug": "bolzano",
    "lottiAperti": 18,
-   "regione": "Trentino-Alto Adige",
-   "slug": "bolzano"
+   "regione": "Trentino-Alto Adige"
   },
   {
-   "tribunale": "POTENZA ex Tribunale di MELFI",
+   "tribunale": "POTENZA EX TRIBUNALE DI MELFI",
+   "slug": "potenza-ex-tribunale-di-melfi",
    "lottiAperti": 18,
-   "regione": "Basilicata",
-   "slug": "potenza-ex-tribunale-di-melfi"
+   "regione": "Basilicata"
   },
   {
    "tribunale": "ROVERETO",
+   "slug": "rovereto",
    "lottiAperti": 18,
-   "regione": "Trentino-Alto Adige",
-   "aggiudicazioni": 10,
-   "slug": "rovereto"
+   "regione": "Trentino-Alto Adige"
   },
   {
    "tribunale": "TORRE ANNUNZIATA",
+   "slug": "torre-annunziata",
    "lottiAperti": 18,
-   "regione": "Campania",
-   "slug": "torre-annunziata"
+   "regione": "Campania"
   },
   {
    "tribunale": "MARSALA",
+   "slug": "marsala",
    "lottiAperti": 16,
-   "regione": "Sicilia",
-   "aggiudicazioni": 2,
-   "slug": "marsala"
+   "regione": "Sicilia"
   },
   {
    "tribunale": "GORIZIA",
+   "slug": "gorizia",
    "lottiAperti": 15,
-   "regione": "Friuli-Venezia Giulia",
-   "aggiudicazioni": 24,
-   "slug": "gorizia"
+   "regione": "Friuli-Venezia Giulia"
   },
   {
    "tribunale": "LANUSEI",
+   "slug": "lanusei",
    "lottiAperti": 10,
-   "regione": "Sardegna",
-   "slug": "lanusei"
+   "regione": "Sardegna"
   },
   {
-   "tribunale": "PAVIA ex Tribunale di VIGEVANO",
+   "tribunale": "PAVIA EX TRIBUNALE DI VIGEVANO",
+   "slug": "pavia-ex-tribunale-di-vigevano",
    "lottiAperti": 10,
-   "regione": "Lombardia",
-   "slug": "pavia-ex-tribunale-di-vigevano"
+   "regione": "Lombardia"
   },
   {
-   "tribunale": "UDINE ex Tribunale di TOLMEZZO",
+   "tribunale": "UDINE EX TRIBUNALE DI TOLMEZZO",
+   "slug": "udine-ex-tribunale-di-tolmezzo",
    "lottiAperti": 5,
-   "regione": "Friuli-Venezia Giulia",
-   "slug": "udine-ex-tribunale-di-tolmezzo"
+   "regione": "Friuli-Venezia Giulia"
   },
   {
    "tribunale": "TRIESTE",
+   "slug": "trieste",
    "lottiAperti": 4,
-   "regione": "Friuli-Venezia Giulia",
-   "aggiudicazioni": 3,
-   "slug": "trieste"
+   "regione": "Friuli-Venezia Giulia"
   },
   {
-   "tribunale": "Corte d'Appello - Bologna",
-   "lottiAperti": 3,
-   "slug": "corte-d-appello-bologna"
+   "tribunale": "CORTE D'APPELLO - BOLOGNA",
+   "slug": "corte-d-appello-bologna",
+   "lottiAperti": 3
   },
   {
-   "tribunale": "AVELLINO ex Tribunale di SANT'ANGELO DEI LOMBARDI",
+   "tribunale": "AVELLINO EX TRIBUNALE DI SANT'ANGELO DEI LOMBARDI",
+   "slug": "avellino-ex-tribunale-di-sant-angelo-dei-lombardi",
    "lottiAperti": 2,
-   "regione": "Campania",
-   "slug": "avellino-ex-tribunale-di-sant-angelo-dei-lombardi"
+   "regione": "Campania"
   },
   {
-   "tribunale": "FOGGIA ex Tribunale di LUCERA",
+   "tribunale": "FOGGIA EX TRIBUNALE DI LUCERA",
+   "slug": "foggia-ex-tribunale-di-lucera",
    "lottiAperti": 2,
-   "regione": "Puglia",
-   "slug": "foggia-ex-tribunale-di-lucera"
+   "regione": "Puglia"
   },
   {
-   "tribunale": "BENEVENTO ex Tribunale di ARIANO IRPINO",
+   "tribunale": "BENEVENTO EX TRIBUNALE DI ARIANO IRPINO",
+   "slug": "benevento-ex-tribunale-di-ariano-irpino",
    "lottiAperti": 1,
-   "regione": "Puglia",
-   "slug": "benevento-ex-tribunale-di-ariano-irpino"
+   "regione": "Puglia"
   }
- ],
- "nota": "Rigenerato a ogni giro di feed-sync (18/11/2026). Perimetro: lotti immobiliari con asta non ancora svolta (residenziale-comune × comune-tribunale). regione/prezzoBaseMedio/aggiudicazioni/prezzoAggMedio sono ereditati dal file precedente SOLO dove valorizzati; se manca la fonte la chiave non si scrive (mai null). totale non è in questo contratto."
+ ]
 }
