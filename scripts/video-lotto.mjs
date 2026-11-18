@@ -391,7 +391,15 @@ async function main() {
     if (voceFile) {
       const muto = f.file.replace(/\.mp4$/, '-muto.mp4');
       fs.renameSync(f.file, muto);
-      sh('ffmpeg', ['-y', '-i', muto, '-i', voceFile, '-c:v', 'copy', '-c:a', 'aac', '-b:a', '128k', '-shortest', '-movflags', '+faststart', f.file]);
+      // 18/11/2026 — MUX CHE NON TAGLIA NIENTE. Con `-shortest` da solo il video verrebbe troncato
+      // alla durata della voce (misurato: 35,7 s di montaggio tagliati a 15 s). Quindi: l'audio si
+      // PADDA a silenzio (apad) fino alla durata del video, e se la voce fosse più lunga si estende
+      // il video con l'ultimo fotogramma (tpad). `-shortest` chiude al flusso più lungo fra i due.
+      const extra = voceDurata && voceDurata > durata ? Number((voceDurata - durata + 0.3).toFixed(2)) : 0;
+      const argsMux = ['-y', '-i', muto, '-i', voceFile, '-c:v', 'libx264', '-crf', '23', '-preset', 'veryfast', '-c:a', 'aac', '-b:a', '128k', '-af', 'apad'];
+      if (extra > 0) argsMux.push('-vf', `tpad=stop_mode=clone:stop_duration=${extra}`);
+      argsMux.push('-shortest', '-movflags', '+faststart', f.file);
+      sh('ffmpeg', argsMux);
       fs.rmSync(muto, { force: true });
       const audio = ff('ffprobe', ['-v', 'error', '-select_streams', 'a', '-show_entries', 'stream=codec_name', '-of', 'json', f.file]);
       const nAudio = (JSON.parse(audio).streams || []).length;
@@ -399,9 +407,12 @@ async function main() {
       const dVideo = Number(pr2.format.duration);
       console.log(`  audio: ${nAudio} stream · durata finale ${dVideo.toFixed(2)} s (voce ${voceDurata} s)`);
       if (nAudio !== 1) throw new Error('il video ' + f.nome + ' non ha esattamente 1 stream audio');
-      if (voceDurata && Math.abs(dVideo - voceDurata) > 0.5 && Math.abs(dVideo - durata) > 0.5) {
-        throw new Error('durata video/voce disallineata di oltre 0,5 s (' + dVideo + ' vs ' + voceDurata + ')');
+      const attesa = Math.max(durata, voceDurata || 0);
+      if (Math.abs(dVideo - attesa) > 0.5) {
+        throw new Error(`durata finale ${dVideo.toFixed(2)} s ≠ attesa ${attesa.toFixed(2)} s (±0,5)`);
       }
+      // e la voce non deve essere tagliata a metà: l'audio dura almeno quanto la voce
+      if (voceDurata && dVideo + 0.05 < voceDurata) throw new Error('la voce è più lunga del video: verrebbe tagliata');
     }
     const size = fs.statSync(f.file).size;
     const probe = JSON.parse(ff('ffprobe', ['-v', 'error', '-show_entries', 'format=duration:stream=width,height', '-of', 'json', f.file]));
