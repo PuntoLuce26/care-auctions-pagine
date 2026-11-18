@@ -278,7 +278,6 @@ const out = {
   A,
   B,
   verdetto: v,
-  nota: v === 'B_NON_CONFIGURATO' ? 'esecutore B non configurato: nessun container' : null,
   versioneA: parita.versioneA,
   versioneB: parita.versioneB,
   paritaVersioni: parita.paritaVersioni,
@@ -291,6 +290,8 @@ const out = {
         ? 'esecutore A (GitHub Actions) non ha eseguito il lavoro: il confronto non esiste. Motivo esatto in A.errore.'
         : v === 'INCOERENTE'
         ? 'sha256 diversi: gli esecutori NON sono equivalenti su questo lavoro. Le due versioni di ffmpeg sono nel record. Un verdetto INCOERENTE non si nasconde e non si "aggiusta": si dichiara.'
+        : v === 'B_NON_CONFIGURATO'
+        ? 'esecutore B non configurato: nessun container (protezione non attiva, allarme pending su R2 stato/allarmi/rete-doppio-esecutore.json).'
         : 'esecutore B non disponibile: la Rete+ ha UN solo esecutore su due, cioè ridondanza 0 su 1. Il motivo esatto è nel campo B.errore.',
 };
 
