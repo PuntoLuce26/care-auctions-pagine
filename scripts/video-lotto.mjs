@@ -400,13 +400,20 @@ async function main() {
     console.log(`  R2 ${f.chiave}: ${f.byteR2} B`);
   }
 
-  const posterByte = await r2put(`video/${ID}/poster.jpg`, posterFile, 'image/jpeg');
-  console.log(`  R2 video/${ID}/poster.jpg: ${posterByte} B`);
+  await r2put(`video/${ID}/poster.jpg`, posterFile, 'image/jpeg');
+  // 18/11/2026 — I BYTE SI LEGGONO DA R2, non dal file locale: la meta dichiarava 266/380 B in più
+  // del file realmente servito, e un player che usa `byte` per la barra arriva al 100% e resta lì.
+  // Qui si rilegge l'oggetto appena scritto: quello che la meta dichiara è quello che il player scarica.
+  const posterByte = await r2size(`video/${ID}/poster.jpg`);
+  const byteVert = await r2size(`video/${ID}/vertical.mp4`);
+  const byteOrizz = await r2size(`video/${ID}/orizzontale.mp4`);
+  console.log(`  R2 (misurato adesso): poster ${posterByte} B · verticale ${byteVert} B · orizzontale ${byteOrizz} B`);
+  if (!posterByte || !byteVert || !byteOrizz) throw new Error('oggetti non leggibili su R2 dopo l upload');
 
   const meta = {
     lottoId: ID,
     durata,
-    byte: Object.fromEntries(formati.map((f) => [f.nome, f.byte])),
+    byte: { verticale: byteVert, orizzontale: byteOrizz },
     formato: Object.fromEntries(formati.map((f) => [f.nome, { risoluzione: f.risoluzione, durata: f.durata, chiave: f.chiave }])),
     generato: new Date().toISOString(),
     fotoUsate: usate.map((u) => ({ nome: u.nome, w: u.w, h: u.h, fonte: u.fonte || 'allegato PVP' })),
@@ -437,10 +444,30 @@ async function main() {
   }
 
   // verifica finale sull'artefatto: durata, risoluzione e byte su R2
-  const verticale = await r2size(`video/${ID}/vertical.mp4`);
-  const orizzontale = await r2size(`video/${ID}/orizzontale.mp4`);
-  const poster = await r2size(`video/${ID}/poster.jpg`);
-  console.log(`  verifica poster su R2: ${poster} B`);
+  const verticale = byteVert;
+  const orizzontale = byteOrizz;
+  const poster = posterByte;
+  // 18/11/2026 — LA PROVA È LA ROTTA PUBBLICA, non R2: `meta.byte` deve combaciare col Content-Length
+  // servito a chi guarda. Se non combacia, il giro è rosso (la meta non è un'etichetta decorativa).
+  const contentLength = async (url) => {
+    const r = await fetch(url, { method: 'HEAD', headers: { 'User-Agent': 'care-video-lotto/1.0' } });
+    return { stato: r.status, tipo: r.headers.get('content-type'), byte: Number(r.headers.get('content-length') || 0) };
+  };
+  const cls = {
+    verticale: await contentLength(`${BASE}/video/${ID}?f=vertical`),
+    orizzontale: await contentLength(`${BASE}/video/${ID}?f=orizzontale`),
+    poster: await contentLength(`${BASE}/video/${ID}?poster=1`),
+  };
+  console.log('  rotta pubblica: ' + JSON.stringify(cls));
+  const incoerenti = [];
+  if (cls.verticale.byte && cls.verticale.byte !== meta.byte.verticale) incoerenti.push(`verticale meta ${meta.byte.verticale} ≠ rotta ${cls.verticale.byte}`);
+  if (cls.orizzontale.byte && cls.orizzontale.byte !== meta.byte.orizzontale) incoerenti.push(`orizzontale meta ${meta.byte.orizzontale} ≠ rotta ${cls.orizzontale.byte}`);
+  if (cls.poster.byte && cls.poster.byte !== meta.posterByte) incoerenti.push(`poster meta ${meta.posterByte} ≠ rotta ${cls.poster.byte}`);
+  if (incoerenti.length) {
+    console.error('::error title=video-lotto::meta e rotta pubblica NON combaciano — ' + incoerenti.join(' · '));
+    console.error('  (se la rotta non è ancora deployata per questo lotto, i campi a 0 sono tollerati: nessun confronto possibile)');
+    if (incoerenti.some((x) => /≠ rotta [1-9]/.test(x))) process.exitCode = 1;
+  }
   if (!poster || poster > 200 * 1024) {
     console.error('::error title=video-lotto::poster assente o oltre 200 KB su R2');
     process.exitCode = 1;
