@@ -205,6 +205,20 @@ async function main() {
   const data = L && L.d ? 'Data asta: ' + L.d.split('-').reverse().join('/') : '';
   const fonte = 'Fonte: PVP — ' + (tribunale || 'Tribunale');
 
+  // v1 — POSTER (anteprima del player, senza scaricare il video): prima foto usata, lato 1080,
+  // JPEG q85, sotto 200 KB. Se sfora si abbassa la qualità e si ritenta (una volta sola per passo).
+  const posterFile = `${OUT}/poster.jpg`;
+  {
+    const scala = 'scale=1080:1080:force_original_aspect_ratio=decrease:flags=lanczos';
+    for (const q of [3, 6, 10]) {
+      sh('ffmpeg', ['-y', '-i', usate[0].file, '-vf', scala, '-q:v', String(q), '-frames:v', '1', posterFile]);
+      const b = fs.statSync(posterFile).size;
+      console.log(`  poster: q${q} → ${b} B`);
+      if (b <= 200 * 1024) break;
+    }
+    if (fs.statSync(posterFile).size > 200 * 1024) throw new Error('poster oltre 200 KB anche a qualità bassa');
+  }
+
   // v1 — CREDITI FONTI nel video (da dove viene ogni foto) e SOTTOTITOLI BRUCIATI (leggibili senza audio).
   const daPdfN = usate.filter((u) => String(u.fonte || '').startsWith('perizia')).length;
   const crediti = daPdfN ? `Foto: perizia PDF (${daPdfN} immagini)` : 'Foto: allegati PVP';
@@ -280,6 +294,9 @@ async function main() {
     console.log(`  R2 ${f.chiave}: ${f.byteR2} B`);
   }
 
+  const posterByte = await r2put(`video/${ID}/poster.jpg`, posterFile, 'image/jpeg');
+  console.log(`  R2 video/${ID}/poster.jpg: ${posterByte} B`);
+
   const meta = {
     lottoId: ID,
     durata,
@@ -288,6 +305,11 @@ async function main() {
     generato: new Date().toISOString(),
     fotoUsate: usate.map((u) => ({ nome: u.nome, w: u.w, h: u.h, fonte: u.fonte || 'allegato PVP' })),
     crediti,
+    // il player monta subito l'anteprima senza scaricare il video; `posterKey` è la chiave R2,
+    // così l'edge può servirlo anche da un'altra rotta se la forma con query non piace.
+    poster: `https://careauctions.co/video/${ID}?poster=1`,
+    posterKey: `video/${ID}/poster.jpg`,
+    posterByte,
     sottotitoli: righeVoce.length,
     voce: 'non inclusa: v1 senza endpoint TTS HTTP (vedi referto)',
     fonte: fonte,
@@ -300,7 +322,14 @@ async function main() {
   // verifica finale sull'artefatto: durata, risoluzione e byte su R2
   const verticale = await r2size(`video/${ID}/vertical.mp4`);
   const orizzontale = await r2size(`video/${ID}/orizzontale.mp4`);
-  console.log(JSON.stringify({ esito: 'ok', meta, r2: { verticale, orizzontale } }, null, 1));
+  const poster = await r2size(`video/${ID}/poster.jpg`);
+  console.log(`  verifica poster su R2: ${poster} B`);
+  if (!poster || poster > 200 * 1024) {
+    console.error('::error title=video-lotto::poster assente o oltre 200 KB su R2');
+    process.exitCode = 1;
+    return;
+  }
+  console.log(JSON.stringify({ esito: 'ok', meta, r2: { verticale, orizzontale, poster } }, null, 1));
   if (!verticale || verticale <= 500 * 1024 || !orizzontale || orizzontale <= 500 * 1024) {
     console.error('::error title=video-lotto::file su R2 assenti o sotto 500 KB');
     process.exitCode = 1;
