@@ -62,20 +62,23 @@ const per = new Map();
   console.log(`comuni: ${comuni.length} · senza tribunale in mappa: ${senzaTribunale} lotti esclusi`);
 }
 
-const vecchi = new Map(((precedente && precedente.tribunali) || []).map((x) => [x.tribunale, x]));
+// 19/11/2026 — l'eredità NON combaciava: il file vecchio scrive «Roma», la mappa dei comuni «ROMA».
+// La chiave si normalizza (maiuscolo) e i campi si ereditano davvero. Se un campo era valorizzato e
+// oggi non ha una fonte, la CHIAVE NON SI SCRIVE (meglio assente che null: un null dove prima c'era
+// un valore è una regressione silenziosa per chi legge).
+const norm = (s) => String(s || '').toUpperCase().trim();
+const vecchi = new Map(((precedente && precedente.tribunali) || []).map((x) => [norm(x.tribunale), x]));
 const tribunali = [...per.entries()]
   .map(([tribunale, e]) => {
-    const v = vecchi.get(tribunale) || {};
-    return {
-      tribunale,
-      regione: v.regione || null,
-      lottiAperti: e.lottiAperti,
-      totale: (vecchi.get(tribunale) || {}).totale || null,
-      prezzoBaseMedio: v.prezzoBaseMedio || null,
-      aggiudicazioni: v.aggiudicazioni || null,
-      prezzoAggMedio: v.prezzoAggMedio || null,
-      slug: v.slug || slug(tribunale),
-    };
+    const v = vecchi.get(norm(tribunale)) || {};
+    const rec = { tribunale, lottiAperti: e.lottiAperti };
+    // si ereditano SOLO i campi valorizzati nel file precedente; `totale` è escluso per scelta:
+    // in questo perimetro non ha una fonte (un numero vecchio senza fonte è peggio di un campo assente)
+    for (const campo of ['regione', 'prezzoBaseMedio', 'aggiudicazioni', 'prezzoAggMedio']) {
+      if (v[campo] !== undefined && v[campo] !== null && v[campo] !== '') rec[campo] = v[campo];
+    }
+    rec.slug = v.slug || slug(tribunale);
+    return rec;
   })
   .sort((a, b) => b.lottiAperti - a.lottiAperti || a.tribunale.localeCompare(b.tribunale));
 
@@ -100,7 +103,7 @@ const out = {
   fonte: 'feed/aste-indice/*.json (indice lotti) + feed/statistiche.json',
   copertura: `${tribunali.length} tribunali · ${attivi} con almeno un lotto aperto · ${somma} lotti aperti`,
   tribunali,
-  nota: 'Rigenerato a ogni giro di feed-sync (18/11/2026). regione/aggiudicazioni/prezzoAggMedio restano dal file precedente finché non hanno una fonte in questo giro: non si inventano.',
+  nota: 'Rigenerato a ogni giro di feed-sync (18/11/2026). Perimetro: lotti immobiliari con asta non ancora svolta (residenziale-comune × comune-tribunale). regione/prezzoBaseMedio/aggiudicazioni/prezzoAggMedio sono ereditati dal file precedente SOLO dove valorizzati; se manca la fonte la chiave non si scrive (mai null). totale non è in questo contratto.',
 };
 fs.mkdirSync('feed', { recursive: true });
 fs.writeFileSync(OUT, JSON.stringify(out, null, 1) + '\n');
