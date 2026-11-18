@@ -1,0 +1,14 @@
+{
+  "generato": "2026-11-18T09:56:37.574Z",
+  "controlli": 7,
+  "critici": 0,
+  "alti": 0,
+  "medi": 0,
+  "bassi": 0,
+  "nonVerificabili": "0/7",
+  "errori5xxEdge": 0,
+  "qaRunRegistrato": null,
+  "cadenzaOre": 12,
+  "cassaUltimaRiga": "2026-11-13,22681.91,-74.46,0,0,\"CASSA 13/11 — SALDI REALI dichiarati da Gianluca: Revolut Dario 21.704,49 + Revolut Gianluca 5,32 + Banca Sella -27,91 + Finom Business 1.000,01 = 22681.91 disponibili. Delta -74.46 da 22756.37 (Revolut Dario in calo di 74,46). IN ARRIVO su Banca Sella: fattura Polin-AC +1.874,00 (non ancora incassata, fuori dal saldo).\",\"registro manuale (Gianluca)\"",
+  "fonte": "presidio locale (Mac) — i 7 check che non possono stare in cloud"
+}
