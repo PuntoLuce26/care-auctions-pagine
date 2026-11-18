@@ -205,7 +205,10 @@ async function lavoroB(url) {
 
 function verdetto(A, B) {
   if (!A.eseguito) return 'A_NON_ESEGUITO';
-  if (!B.eseguito) return 'B_NON_DISPONIBILE';
+  // 18/11/2026 — «B non è configurato» NON è «B è guasto»: senza container il run notturno rosso non
+  // misura un guasto, misura un'assenza. Verdetto distinto, esito 0 e una riga esplicita nel record;
+  // la protezione mancante finisce su R2 (stato/allarmi/rete-doppio-esecutore.json, livello pending).
+  if (!B.eseguito) return B.errore === 'url-non-configurata' ? 'B_NON_CONFIGURATO' : 'B_NON_DISPONIBILE';
   return A.sha && B.sha && A.sha === B.sha ? 'COERENTE' : 'INCOERENTE';
 }
 
@@ -275,6 +278,7 @@ const out = {
   A,
   B,
   verdetto: v,
+  nota: v === 'B_NON_CONFIGURATO' ? 'esecutore B non configurato: nessun container' : null,
   versioneA: parita.versioneA,
   versioneB: parita.versioneB,
   paritaVersioni: parita.paritaVersioni,
@@ -304,4 +308,5 @@ if (parita.avvisoParita) console.log(`AVVISO PARITÀ: ${parita.avvisoParita}`);
 console.log(`scritto: ${percorso}`);
 
 if (!A.eseguito) process.exit(1);
-process.exit(B.eseguito ? 0 : 2);
+// B_NON_CONFIGURATO (nessun container) esce 0: è un'assenza dichiarata, non un guasto.
+process.exit(B.eseguito || v === 'B_NON_CONFIGURATO' ? 0 : 2);

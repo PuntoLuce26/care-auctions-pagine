@@ -130,6 +130,38 @@ jobs:
           echo "KO: push non riuscito dopo 5 tentativi"
           exit 1
 
+      # 18/11/2026 — «B non configurato» NON è un guasto ma nemmeno una cosa da dimenticare: il record
+      # lo dice (verdetto B_NON_CONFIGURATO + nota) e questa riga lo mette su R2 stato/allarmi/… con
+      # livello `pending`, così la protezione mancante resta sul radar finché il container non esiste.
+      - name: Se B non è configurato, allarme pending su R2
+        if: always()
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          [ -f rete/doppio-esecutore.json ] || { echo "nessun record, niente allarme"; exit 0; }
+          V=$(node -e 'try{console.log(require("./rete/doppio-esecutore.json").verdetto||"")}catch(e){console.log("")}')
+          if [ "$V" != "B_NON_CONFIGURATO" ]; then echo "verdetto $V: nessun allarme pending"; exit 0; fi
+          node --input-type=module -e '
+            import { writeFileSync } from "node:fs";
+            import { leggiStato, pubblicaStato } from "./scripts/stato-pubblica.mjs";
+            const prev = await leggiStato("allarmi/rete-doppio-esecutore.json");
+            const vecchi = prev && prev.ok && prev.json && Array.isArray(prev.json.allarmi) ? prev.json.allarmi : [];
+            const runId = process.env.GITHUB_RUN_ID || null;
+            const voce = {
+              generato: new Date().toISOString(),
+              workflow: "rete-doppio-esecutore",
+              livello: "pending",
+              messaggio: "esecutore B non configurato: protezione non attiva",
+              runId,
+              runUrl: runId ? `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${runId}` : null,
+            };
+            const allarmi = [voce, ...vecchi].slice(0, 20);
+            writeFileSync("/tmp/allarme-rete.json", JSON.stringify({ ...voce, allarmi }, null, 1) + "\n");
+            const pub = await pubblicaStato("/tmp/allarme-rete.json", { chiave: "allarmi/rete-doppio-esecutore.json" });
+            console.log("allarme pending registrato:", (pub && pub.key) || "stato/allarmi/rete-doppio-esecutore.json", "·", allarmi.length, "voci");
+          '
+
       - name: Artefatto del giro
         if: always()
         uses: actions/upload-artifact@v4
