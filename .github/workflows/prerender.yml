@@ -106,7 +106,13 @@ jobs:
           # PUBBLICAZIONE, quindi parte solo se la build servita è cambiata rispetto all'ultima QA
           # conclusa. Vale SOLO per questo dispatch: lo `schedule` resta com'è, perché serve a
           # controllare anche feed e contenuti che cambiano senza una build nuova.
-          SERVITA=$(curl -sS -H 'User-Agent: careauctions-gate/1.0' https://careauctions.co/ | grep -o 'main\.[A-Za-z0-9_-]*\.js' | head -1 || true)
+          # 18/11/2026 — la home NON espone sempre il bundle nell'HTML statico (l'app lo carica dopo):
+          # si provano più pagine e si prende la prima che lo cita. Misurato: /idati lo cita sempre.
+          SERVITA=""
+          for P in / /idati /osservatorio /aggiudicazioni; do
+            SERVITA=$(curl -sS -H 'User-Agent: careauctions-gate/1.0' "https://careauctions.co$P" | grep -o 'main\.[A-Za-z0-9_-]*\.js' | head -1 || true)
+            [ -n "$SERVITA" ] && break
+          done
           if [ -n "${CLOUDFLARE_API_TOKEN:-}" ] && [ -n "$SERVITA" ]; then
             ULTIMA=$(curl -sS -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
               "https://api.cloudflare.com/client/v4/accounts/d5d20864ee7f83c32c9eeb5fcbda6edb/r2/buckets/care-stato/objects/stato/qa/stato.json" \
