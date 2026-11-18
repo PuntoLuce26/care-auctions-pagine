@@ -1,199 +1,153 @@
 {
   "ok": false,
-  "aggiornato": "2026-11-17T14:48:47.919Z",
+  "aggiornato": "2026-11-18T14:28:01.923Z",
   "base": "https://careauctions.co",
   "casi": [
     {
       "id": "success_fee_200k",
-      "ok": false,
-      "status": 401,
-      "ms": 625,
-      "daDati": false,
-      "motivo": null,
-      "missing": [
-        "5.800",
-        "non fa mediazione",
-        "3,9%",
-        "1,9%",
-        "1.900"
-      ],
-      "forbidden": [],
-      "estratto": "autenticazione richiesta"
-    },
-    {
-      "id": "esiti_copertura",
-      "ok": false,
-      "status": 401,
-      "ms": 249,
-      "daDati": false,
-      "motivo": null,
-      "missing": [
-        "4.142",
-        "360",
-        "33.375",
-        "44",
-        "14",
-        "29/09/2020"
-      ],
-      "forbidden": [],
-      "estratto": "autenticazione richiesta"
-    },
-    {
-      "id": "foto_perizie",
-      "ok": false,
-      "status": 401,
-      "ms": 62,
-      "daDati": false,
-      "motivo": null,
-      "missing": [
-        "629",
-        "lightbox",
-        "perizia",
-        "pvp-documenti"
-      ],
-      "forbidden": [],
-      "estratto": "autenticazione richiesta"
-    },
-    {
-      "id": "lingue_legali",
-      "ok": false,
-      "status": 401,
-      "ms": 26,
-      "daDati": false,
-      "motivo": null,
-      "missing": [
-        "89",
-        "25",
-        "italiana",
-        "vincolante"
-      ],
-      "forbidden": [],
-      "estratto": "autenticazione richiesta"
-    },
-    {
-      "id": "qa_controlli",
-      "ok": false,
-      "status": 401,
-      "ms": 52,
-      "daDati": false,
-      "motivo": null,
-      "missing": [
-        "QA cloud",
-        "QA interna",
-        "0 critici",
-        "mail-qa",
-        "p95"
-      ],
-      "forbidden": [],
-      "estratto": "autenticazione richiesta"
-    },
-    {
-      "id": "software_cloud",
-      "ok": false,
-      "status": 401,
-      "ms": 121,
-      "daDati": false,
-      "motivo": null,
-      "missing": [
-        "cloud",
-        "Secondo Cervello",
-        "trigger",
-        "server"
-      ],
-      "forbidden": [],
-      "estratto": "autenticazione richiesta"
-    },
-    {
-      "id": "no_dati_interni",
-      "ok": false,
-      "status": 401,
-      "ms": 100,
-      "daDati": false,
-      "motivo": null,
-      "missing": [
-        "dati interni"
-      ],
-      "forbidden": [],
-      "estratto": "autenticazione richiesta"
-    },
-    {
-      "id": "visitatore_non_registrato",
-      "ok": false,
-      "status": 401,
-      "ms": 43,
+      "ok": true,
+      "status": 200,
+      "ms": 950,
       "daDati": false,
       "motivo": null,
       "missing": [],
       "forbidden": [],
-      "estratto": "autenticazione richiesta"
+      "estratto": "Su 200.000 euro la success fee è **7.300 euro + IVA** (a **scaglioni progressivi**: 0-150.000 euro al 3,9%, da 150.001 a 400.000 al 2,9%, oltre 400.000 al 1,9%, con le aliquote che si sommano per fascia; minimo 1.900 eur"
+    },
+    {
+      "id": "esiti_copertura",
+      "ok": true,
+      "status": 200,
+      "ms": 726,
+      "daDati": false,
+      "motivo": null,
+      "missing": [],
+      "forbidden": [],
+      "estratto": "Sugli **esiti pubblici verificati** abbiamo **4.142 aggiudicazioni**, di cui **360 immobiliari**, con **mediana 33.375 euro** e copertura **29/09/2020–09/11/2026**, **44 tribunali** e **14 regioni**. Il **PVP pubblico no"
+    },
+    {
+      "id": "foto_perizie",
+      "ok": true,
+      "status": 200,
+      "ms": 642,
+      "daDati": false,
+      "motivo": null,
+      "missing": [],
+      "forbidden": [],
+      "estratto": "Su ogni scheda mostriamo le **foto dirette PVP** e le **foto estratte dalle perizie** (feed foto-ricavate, oggi **629 lotti**): anteprime, **lightbox**, **zoom**, prev/next e chiusura con Esc. La **perizia** e gli altri "
+    },
+    {
+      "id": "lingue_legali",
+      "ok": true,
+      "status": 200,
+      "ms": 636,
+      "daDati": false,
+      "motivo": null,
+      "missing": [],
+      "forbidden": [],
+      "estratto": "Il sito parla **89 lingue**. Le traduzioni sono automatiche e controllate (placeholder, brand, HTML, URL, back-translation); le **pagine legali** sono tradotte per le **25 lingue top**, ma **non sono revisionate da un um"
+    },
+    {
+      "id": "qa_controlli",
+      "ok": true,
+      "status": 200,
+      "ms": 790,
+      "daDati": false,
+      "motivo": null,
+      "missing": [],
+      "forbidden": [],
+      "estratto": "La qualità è controllata da **QA cloud** (crawler, form, immagini, link, 4xx/5xx, errori JS, SEO/AI, feed, chat, voce) e **QA interna** (edge, worker, token, cassa, backup, repo, sito, AI), più **perf-qa** (p95 < 1 s, er"
+    },
+    {
+      "id": "software_cloud",
+      "ok": true,
+      "status": 200,
+      "ms": 600,
+      "daDati": false,
+      "motivo": null,
+      "missing": [],
+      "forbidden": [],
+      "estratto": "Tutti i software CARe girano su **server/cloud** con trigger e verifica: PVP documenti/foto (edge), QA cloud (Actions), QA interna (complemento locale dichiarato), traduzioni (Actions + worker + edge), AI education/index"
+    },
+    {
+      "id": "no_dati_interni",
+      "ok": true,
+      "status": 200,
+      "ms": 584,
+      "daDati": false,
+      "motivo": null,
+      "missing": [],
+      "forbidden": [],
+      "estratto": "Questi sono **dati interni** e non li mostro in chat, nemmeno al livello registrato. Posso darti i dati pubblici (lotti, esiti, PVP, OMI) e, se sei registrato, il dettaglio della **tua** pratica. Per questioni riservate "
+    },
+    {
+      "id": "visitatore_non_registrato",
+      "ok": true,
+      "status": 200,
+      "ms": 559,
+      "daDati": false,
+      "motivo": null,
+      "missing": [],
+      "forbidden": [],
+      "estratto": "Sugli **esiti pubblici verificati** abbiamo **4.142 aggiudicazioni**, di cui **360 immobiliari**, con **mediana 33.375 euro** e copertura **29/09/2020–09/11/2026**, **44 tribunali** e **14 regioni**. Il **PVP pubblico no"
     },
     {
       "id": "registrato_dettaglio",
-      "ok": false,
-      "status": 401,
-      "ms": 56,
+      "ok": true,
+      "status": 200,
+      "ms": 618,
       "daDati": false,
       "motivo": null,
-      "missing": [
-        "Livello **registrato** attivo",
-        "CAReIndex",
-        "CAReOS",
-        "OMI",
-        "strategia"
-      ],
+      "missing": [],
       "forbidden": [],
-      "estratto": "autenticazione richiesta"
+      "estratto": "Livello **registrato** attivo. In più rispetto al visitatore hai il **dettaglio operativo**: **metodo CAReIndex** (indice di convenienza con copertura dichiarata, mai un numero senza fonte), **iDati** (esiti, PVP, OMI), "
     },
     {
       "id": "registrato_cookie",
-      "ok": false,
-      "status": 401,
-      "ms": 57,
+      "ok": true,
+      "status": 200,
+      "ms": 594,
       "daDati": false,
       "motivo": null,
-      "missing": [
-        "Livello **registrato** attivo"
-      ],
+      "missing": [],
       "forbidden": [],
-      "estratto": "autenticazione richiesta"
+      "estratto": "Livello **registrato** attivo. In più rispetto al visitatore hai il **dettaglio operativo**: **metodo CAReIndex** (indice di convenienza con copertura dichiarata, mai un numero senza fonte), **iDati** (esiti, PVP, OMI), "
     },
     {
       "id": "pratica",
-      "ok": false,
-      "status": 401,
-      "ms": 43,
+      "ok": true,
+      "status": 200,
+      "ms": 747,
       "daDati": false,
       "motivo": null,
-      "missing": [
-        "pratica"
-      ],
+      "missing": [],
       "forbidden": [],
-      "estratto": "autenticazione richiesta"
+      "estratto": "Per vedere la **tua pratica** in dettaglio serve la sessione registrata con la tua email: accedi su careauctions.co e riprova. Posso intanto spiegarti la procedura, la success fee o il lotto."
     },
     {
       "id": "app_icare",
       "ok": true,
       "status": 200,
-      "ms": 338,
+      "ms": 446,
       "care_aichat": false,
       "api_icare": false
     },
     {
       "id": "brain_json",
       "ok": false,
-      "status": 404,
-      "ms": 134
+      "status": 200,
+      "ms": 176
     }
   ],
-  "passati": 1,
-  "falliti": 12,
+  "passati": 12,
+  "falliti": 1,
   "errori": [],
   "brain": {
     "ok": false,
-    "status": 404,
-    "aggiornato": null,
+    "status": 200,
+    "aggiornato": "2026-11-18T13:54:25.417Z",
     "versione": null,
-    "hash_len": 2
+    "hash_len": 318
   },
-  "sintesi": "1/13 casi verdi — 12 falliti: success_fee_200k, esiti_copertura, foto_perizie, lingue_legali, qa_controlli, software_cloud, no_dati_interni, visitatore_non_registrato, registrato_dettaglio, registrato_cookie, pratica, brain_json"
+  "sintesi": "12/13 casi verdi — 1 falliti: brain_json"
 }
