@@ -10,6 +10,17 @@ on:
   push:
     paths:
       - "qa/**"
+      # 18/11/2026 — AFFAMATO DALLE PROPRIE ESECUZIONI. Gli altri workflow committano file di STATO
+      # dentro qa/ (canonical.json, orchestra.*, ronda-notturna.json, audit-interno.json): ogni commit
+      # faceva partire un QA che il push successivo cancellava mentre era in coda. Misurato: cinque
+      # run in sette minuti, tutte pending o cancelled, e lo stato QA fermo dalle 09:58Z. Si escludono
+      # i file generati: il QA riparte per codice, schedule e dispatch, non per un cambio di stato.
+      - "!qa/canonical.json"
+      - "!qa/orchestra.json"
+      - "!qa/orchestra.md"
+      - "!qa/ronda-notturna.json"
+      - "!qa/stato.json"
+      - "!qa/audit-interno.json"
       - "scripts/verifica-playwright.mjs"
       - ".github/workflows/qa.yml"
       # 14/11/2026 — rimosso "prerender/**": ogni rigenerazione degli snapshot faceva
