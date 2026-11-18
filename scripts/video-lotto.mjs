@@ -30,7 +30,7 @@ const OUT = process.env.VIDEO_OUT || 'video-out';
 const DURATA_FOTO = 4; // secondi per foto
 const XFADE = 0.6;
 const MAX_FOTO = 8;
-const MIN_LATO = 800;
+const MIN_LATO = Number(process.env.VIDEO_MIN_LATO || 800); // soglia lato corto (override dichiarato: VIDEO_MIN_LATO)
 const MIN_FOTO = 3;
 const FONT_CANDIDATI = [
   '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',
@@ -120,6 +120,7 @@ async function main() {
   const L = await lotto;
   if (!L) console.log('  ! lotto assente dall indice: titolo/tribunale dal documento PVP');
 
+  if (MIN_LATO !== 800) console.log('  ! VIDEO_MIN_LATO=' + MIN_LATO + ' (override dichiarato: la soglia di prodotto è 800)');
   // 2) allegati e foto
   const doc = await (await fetch(`${BASE}/api/pvp-documenti/${ID}`)).json();
   if (!doc || !doc.ok || !Array.isArray(doc.allegati)) throw new Error('documenti non leggibili per il lotto ' + ID);

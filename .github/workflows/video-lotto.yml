@@ -53,6 +53,9 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           LOTTO_ID: ${{ github.event.inputs.lottoId }}
+          # soglia di prodotto: lato corto >= 800 px. L'override esiste per il collaudo su lotti le
+          # cui foto sono più piccole (misurato: le ALTRO del PVP sono 577×433) e va dichiarato.
+          VIDEO_MIN_LATO: ${{ vars.VIDEO_MIN_LATO || '800' }}
         run: |
           set -euo pipefail
           export PATH="$HOME/ffmpeg-pin/bin:$PATH"
