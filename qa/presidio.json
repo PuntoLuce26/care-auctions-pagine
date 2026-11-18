@@ -1,27 +1,9 @@
 {
- "aggiornato": "2026-11-17T18:50:54.271Z",
- "rossi": [],
- "issue": [
-  "[QA] Allarme mail: 12 segnalazioni",
-  "[QA] Allarme mail: 14 segnalazioni",
-  "[QA] Allarme mail: 15 segnalazioni",
-  "[QA] Allarme mail: 15 segnalazioni",
-  "[QA] Allarme mail: 14 segnalazioni",
-  "[QA] Allarme mail: 13 segnalazioni",
-  "[QA] Allarme mail: 13 segnalazioni",
-  "[QA] Allarme mail: 12 segnalazioni",
-  "[QA] iCARe collaudo fallito",
-  "[QA] Allarme AI: 6 anomalie",
-  "[QA] Allarme mail: 10 segnalazioni",
-  "[QA] Allarme mail: 9 segnalazioni",
-  "[QA] Allarme mail: 9 segnalazioni",
-  "[QA] Allarme mail: 9 segnalazioni",
-  "[QA] Allarme mail: 9 segnalazioni",
-  "[QA] Allarme AI: 8 anomalie",
-  "[QA] Allarme mail: 9 segnalazioni",
-  "[QA] Allarme mail: 9 segnalazioni",
-  "[QA] Allarme mail: 9 segnalazioni",
-  "[QA] Allarme mail: 9 segnalazioni"
+ "aggiornato": "2026-11-18T01:25:20.593Z",
+ "rossi": [
+  "visite-rum#15",
+  "qa-orchestra#25"
  ],
- "ultimaMail": "2026-11-17T09:52:53.336Z"
+ "issue": [],
+ "ultimaMail": "2026-11-18T01:25:21.240Z"
 }
