@@ -138,5 +138,14 @@ const out = {
   mondo
 };
 
-fs.writeFileSync(OUT, JSON.stringify(out));
+// 18/11/2026 — FORMA DEL MARCHIO SCRITTA ALLA FONTE (non rattoppata in lettura).
+// «CARe Auctions» con lo spazio non deve finire nei feed: li leggono direttamente altre app,
+// partner e crawler dati, che non passano dall'edge e quindi non vedono la correzione in uscita.
+const normalizzaMarchio = (v) => {
+  if (typeof v === 'string') return v.replace(/CARe\s+Auctions/g, 'CAReAuctions');
+  if (Array.isArray(v)) return v.map(normalizzaMarchio);
+  if (v && typeof v === 'object') { const o = {}; for (const k of Object.keys(v)) o[k] = normalizzaMarchio(v[k]); return o; }
+  return v;
+};
+fs.writeFileSync(OUT, JSON.stringify(normalizzaMarchio(out)));
 console.log('dati-indice.json:', dataset.length, 'dataset ·', VERSIONE, '·', (fs.statSync(OUT).size / 1024).toFixed(1) + ' KB');
