@@ -386,8 +386,6 @@ async function main() {
       console.log(`  voce: ${voceDurata} s · ${fs.statSync(voceFile).size} B · ${parole} parole · ${vocePps} parole/s`);
       if (brandSostituito) console.log('  brand: «iCARe» → «ai ker» applicato prima della sintesi (verificato nel testo)');
       else console.log('  brand: nessuna occorrenza di «iCARe» nel testo (la regola non è esercitata in questo giro)');
-      // REQUISITO, non opinione: sopra 2,6 parole/s i sottotitoli a due righe non si leggono.
-      if (vocePps > 2.6) throw new Error(`ritmo troppo veloce: ${vocePps} parole/s (massimo 2,6) — alza PIPER_LENGTH_SCALE`);
     } catch (e) {
       console.log('  voce NON generata (' + String((e && e.message) || e).slice(0, 160) + '): il video resta muto con i sottotitoli');
       voceFile = null;
@@ -395,6 +393,15 @@ async function main() {
   } else {
     console.log('  voce: nessun modello Piper disponibile, video muto con sottotitoli');
   }
+
+  // 18/11/2026 — IL REQUISITO SI VALIDA FUORI DAL TRY: dentro il catch della sintesi un throw
+  // diventava «voce non generata» e il video usciva lo stesso a 2,74 parole/s (misurato).
+  if (voceFile && vocePps > 2.6) {
+    console.error(`::error title=video-lotto::ritmo ${vocePps} parole/s sopra il massimo 2,6 — alza PIPER_LENGTH_SCALE`);
+    process.exitCode = 1;
+    return;
+  }
+  if (voceFile && vocePps < 2.2) console.log(`  ! ritmo ${vocePps} parole/s: sotto 2,2 il testo può risultare lento (soglia indicativa)`);
 
   const formati = [
     { nome: 'verticale', W: 1080, H: 1920, file: `${OUT}/vertical.mp4`, chiave: `video/${ID}/vertical.mp4` },
