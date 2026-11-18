@@ -1,5 +1,5 @@
 {
- "generato": "2026-11-18T07:26:59.014Z",
+ "generato": "2026-11-18T10:02:48.722Z",
  "semaforo": "rosso",
  "conteggi": {
   "ok": 17,
@@ -89,14 +89,14 @@
    "sezione": "feed",
    "nome": "statistiche",
    "stato": "ok",
-   "valore": "10 min",
-   "dettaglio": "320711 lotti"
+   "valore": "1 min",
+   "dettaglio": "320260 lotti"
   },
   {
    "sezione": "feed",
    "nome": "world",
    "stato": "rosso",
-   "valore": "7803 min",
+   "valore": "7959 min",
    "dettaglio": "33 paesi"
   },
   {
@@ -110,28 +110,28 @@
    "sezione": "feed",
    "nome": "san-pasquale-foto",
    "stato": "rosso",
-   "valore": "8041 min",
+   "valore": "8197 min",
    "dettaglio": "37 foto"
   },
   {
    "sezione": "build",
    "nome": "sito vs origine",
    "stato": "ok",
-   "valore": "main.a63a2b3d.js / main.a63a2b3d.js",
+   "valore": "main.14609058.js / main.14609058.js",
    "dettaglio": ""
   },
   {
    "sezione": "prerender",
    "nome": "snapshot vs vivo",
    "stato": "ok",
-   "valore": "main.a63a2b3d.js / main.a63a2b3d.js",
+   "valore": "main.14609058.js / main.14609058.js",
    "dettaglio": ""
   },
   {
    "sezione": "prerender",
    "nome": "bot allineato",
    "stato": "ok",
-   "valore": "main.a63a2b3d.js",
+   "valore": "main.14609058.js",
    "dettaglio": ""
   },
   {
@@ -153,14 +153,14 @@
    "nome": "critici",
    "stato": "ok",
    "valore": "0",
-   "dettaglio": "7 controlli"
+   "dettaglio": "5 controlli"
   },
   {
    "sezione": "mail",
    "nome": "allarmi",
    "stato": "giallo",
-   "valore": "7",
-   "dettaglio": "2026-11-18T07:21:45.601Z"
+   "valore": "6",
+   "dettaglio": "2026-11-18T09:45:16.250Z"
   },
   {
    "sezione": "sentinella",
@@ -180,8 +180,8 @@
    "sezione": "github",
    "nome": "run rossi (2h)",
    "stato": "ok",
-   "valore": "2 isolati",
-   "dettaglio": "aggiornamento-mail · ronda-notturna (una volta sola: race nota)"
+   "valore": "0 isolati",
+   "dettaglio": ""
   }
  ]
 }
