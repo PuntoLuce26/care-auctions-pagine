@@ -36,11 +36,28 @@ if (process.env.QA_SKIP_DOPPIONI !== '0' && process.env.CLOUDFLARE_API_TOKEN) {
         if (buildStato === servita && etaOre >= 0 && etaOre < 3) {
           // 18/11/2026 — NON si esce a mani vuote: gli step successivi (status, gate, R2) il report
           // lo leggono. Si scrive un report MINIMALE ma valido, con `skipped:true` e il motivo.
+          // Report minimale ma COMPLETO di ciò che serve a chi legge dopo: chi ha deciso lo skip, su
+          // quale build, contro quale verifica precedente, e come forzare un giro pieno. Gli array
+          // vuoti (routes/smoke/issues) non sono un difetto: il crawl non è stato eseguito, e il
+          // `skipped:true` lo dichiara a ogni consumatore (status, gate, R2, storico).
           const reportSkip = {
             skipped: true,
             motivo: 'build già verificata',
+            nota: 'La guardia anti-doppione ha evitato un crawl completo: la stessa build era già stata verificata da meno di 3 ore. Non è un guasto e non manca nessun controllo: il giro è stato dichiarato inutile prima di spendere 3-4 minuti di runner.',
             build: { sito: servita, origine: servita },
             ultimaRun: st.runId || null,
+            ultimaVerifica: {
+              runId: st.runId || null,
+              runUrl: st.runUrl || null,
+              generatedAt: st.generatedAt || null,
+              etaOre: Number(etaOre.toFixed(2)),
+              build: buildStato,
+              summary: st.summary || null,
+              issues: (st.issues || []).length,
+            },
+            sogliaOre: 3,
+            comeForzare: 'QA_SKIP_DOPPIONI=0 nello step, oppure workflow_dispatch dopo una nuova build servita',
+            controlli: { crawl: 'saltato (guardia)', logscan: 'saltato (guardia)', seo: 'saltato (guardia)' },
             generatoDa: 'guardia anti-doppione',
             generatedAt: new Date().toISOString(),
             base: base,
