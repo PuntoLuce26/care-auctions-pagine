@@ -38,7 +38,7 @@ const post = (body) => req(BASE + '/api/icare', { method: 'POST', headers: { 'Co
 (async () => {
   // 1. iCARe success fee
   const fee = await post({ messaggio: 'Quanto costa la success fee su 200.000 euro?', lingua: 'it' });
-  ck('icare_success_fee', fee.status === 200 && /5\.800/.test(fee.text), 'HTTP ' + fee.status);
+  ck('icare_success_fee', fee.status === 200 && /7\.?300/.test(fee.text) && /400\.000/.test(fee.text) && !/5\.800/.test(fee.text), 'HTTP ' + fee.status);
   // 2. iCARe perimetro legale
   const per = await post({ messaggio: 'Erbbaurecht tedesco: come funziona?', lingua: 'it' });
   ck('icare_perimetro', per.status === 200 && /non (e|è) il nostro campo|non.*campo/i.test(per.text), 'HTTP ' + per.status);
