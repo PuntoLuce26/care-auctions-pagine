@@ -124,14 +124,49 @@ async function main() {
   const generato = iso();
   let totale = 0;
   let shardBytesMax = 0;
+  let cambiati = 0;
   for (let n = 0; n < SHARD; n++) {
     const chiave = hh(n);
     const lotti = shards.get(chiave) || {};
     const conteggio = Object.keys(lotti).length;
-    const testo = JSON.stringify({ generato, n: conteggio, lotti });
-    fs.writeFileSync(path.join(OUT, chiave + '.json'), testo + '\n');
-    shardBytesMax = Math.max(shardBytesMax, Buffer.byteLength(testo));
+    const file = path.join(OUT, chiave + '.json');
     totale += conteggio;
+
+    // 18/11/2026 — UN GIRO SENZA NOVITÀ NON DEVE COSTARE 40 MB DI COMMIT.
+    // Se il contenuto (i lotti) di questo shard è identico a quello già su disco, il file NON si
+    // riscrive: resta la `generato` del giorno in cui è cambiato davvero. Così git vede solo i file
+    // che cambiano e `_meta.json` (che invece si scrive sempre, per tenere fresca la freschezza).
+    let scrivi = true;
+    let byte = 0;
+    try {
+      const vecchio = JSON.parse(fs.readFileSync(file, 'utf8'));
+      if (vecchio && JSON.stringify(vecchio.lotti) === JSON.stringify(lotti)) {
+        scrivi = false;
+        byte = Buffer.byteLength(JSON.stringify(vecchio));
+      }
+    } catch {
+      /* file assente o illeggibile: si riscrive */
+    }
+    if (scrivi) {
+      const testo = JSON.stringify({ generato, n: conteggio, lotti });
+      fs.writeFileSync(file, testo + '\n');
+      byte = Buffer.byteLength(testo);
+      cambiati += 1;
+    } else {
+      // garantisce lo schema anche su un file vecchio senza `n` (non riscritto)
+      try {
+        const vecchio = JSON.parse(fs.readFileSync(file, 'utf8'));
+        if (vecchio.n !== conteggio) {
+          const testo = JSON.stringify({ generato: vecchio.generato || generato, n: conteggio, lotti });
+          fs.writeFileSync(file, testo + '\n');
+          byte = Buffer.byteLength(testo);
+          cambiati += 1;
+        }
+      } catch {
+        /* niente */
+      }
+    }
+    shardBytesMax = Math.max(shardBytesMax, byte);
   }
 
   const completo = errori.length === 0 && letti === file.length;
@@ -149,7 +184,7 @@ async function main() {
   };
   fs.writeFileSync(path.join(OUT, '_meta.json'), JSON.stringify(meta, null, 1) + '\n');
 
-  console.log(`scritti ${SHARD} shard · totale ${totale} · shardBytesMax ${(shardBytesMax / 1048576).toFixed(2)} MB · minAsta ${minAsta} · maxAsta ${maxAsta}`);
+  console.log(`shard riscritti ${cambiati}/${SHARD} (gli altri sono identici: non si toccano) · totale ${totale} · shardBytesMax ${(shardBytesMax / 1048576).toFixed(2)} MB · minAsta ${minAsta} · maxAsta ${maxAsta}`);
   if (errori.length) {
     console.error(`completo:false — ${errori.length} file non letti:`);
     for (const e of errori.slice(0, 10)) console.error('  - ' + e);

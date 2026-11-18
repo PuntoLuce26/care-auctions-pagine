@@ -64,7 +64,12 @@ jobs:
           git config user.email "cloud@careauctions.co"
           git add feed/aste-indice
           if git diff --cached --quiet; then echo "nessuna variazione"; exit 0; fi
-          git commit -m "aste-indice: shard rigenerati"
+          # 18/11/2026 — se è cambiata solo la _meta (shard identici) il messaggio lo dice
+          if [ "$(git diff --cached --name-only | wc -l | tr -d ' ')" = "1" ] && git diff --cached --name-only | grep -q '^feed/aste-indice/_meta.json$'; then
+            git commit -m "aste-indice: solo _meta (shard invariati)"
+          else
+            git commit -m "aste-indice: shard rigenerati"
+          fi
           for i in 1 2 3 4 5; do
             git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
             if git push; then echo "pubblicato al tentativo $i"; exit 0; fi
