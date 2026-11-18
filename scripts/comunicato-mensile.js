@@ -91,7 +91,7 @@ const eur = (v) => (v == null ? null : Number(v).toLocaleString('it-IT', { style
   ${heroUrl ? `<img class="hero" src="${heroUrl}" alt="Comunicato ${mese} — immagine a tema" />` : ''}
   <p class="lead">I numeri del mercato delle aste immobiliari italiane, dai sistemi CARe.</p>
   <table>${righeValide.map(([k, v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join('')}</table>
-  <p class="nota">Fonti: PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia), Agenzia delle Entrate — OMI, CAReIndex. Metodo e copertura: careauctions.co/metodo. Success fee 3,9% / 2,9% / 1,9%, minimo 1.900 €, entro 24 ore dall'aggiudicazione.</p>
+  <p class="nota">Fonti: PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia), Agenzia delle Entrate — OMI, CAReIndex. Metodo e copertura: careauctions.co/metodo. Success fee a scaglioni progressivi 3,9% / 2,9% / 1,9% (minimo 1.900 € + IVA), entro 24 ore dall'aggiudicazione.</p>
   <p class="firma">CAReAuctions · Italian Property Auctions</p>
 </div></body></html>`;
   fs.mkdirSync('comunicati', { recursive: true });
