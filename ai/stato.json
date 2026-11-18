@@ -1,16 +1,16 @@
 {
-  "generato": "2026-11-17T23:24:06.760Z",
+  "generato": "2026-11-18T00:49:03.798Z",
   "numeri": {
-    "lotti": 320688,
-    "immobiliari": 270739,
+    "lotti": 320696,
+    "immobiliari": 270747,
     "mobiliari": 49949,
     "regioni": 21,
     "tribunali": 148,
     "lingue": 91,
-    "lottiAttivi": 40672,
+    "lottiAttivi": 40669,
     "aggiudicate": 2022,
     "deserte": 28439,
-    "aggiornato": "2026-11-17T23:13:18.303Z"
+    "aggiornato": "2026-11-18T00:45:22.186Z"
   },
   "checks": [
     {
@@ -76,7 +76,7 @@
     {
       "nome": "iCARe success fee 200k",
       "ok": false,
-      "dettaglio": "autenticazione richiesta"
+      "dettaglio": "CAReAuctions **non fa mediazione** e non prende provvigioni: è **consulente di parte** del compratore. Si paga una **success fee solo se l’asta si aggiudica**: "
     },
     {
       "nome": "i18n fr",
@@ -96,19 +96,19 @@
     {
       "nome": "IndexNow (feed/indexnow.json)",
       "ok": true,
-      "dettaglio": "inviati 250 · giorno 2026-11-17"
+      "dettaglio": "inviati 250 · giorno 2026-11-18"
     },
     {
       "nome": "query-educa 40 domande",
       "ok": true,
-      "dettaglio": "40 voci in 6 blocchi · max 53 parole · lingue {\"it\":40,\"en\":40,\"fr\":40,\"de\":40,\"es\":40}"
+      "dettaglio": "40 voci in 6 blocchi · max 57 parole · lingue {\"it\":40,\"en\":40,\"fr\":40,\"de\":40,\"es\":40}"
     }
   ],
   "indexnow": {
     "inviati": 250,
-    "giorno": "2026-11-17",
-    "quando": "2026-11-17T00:03:05.586Z",
-    "prossimo": 20500,
+    "giorno": "2026-11-18",
+    "quando": "2026-11-18T00:00:25.894Z",
+    "prossimo": 20750,
     "stato": "letto",
     "fonte": "feed/indexnow.json",
     "inviatoDa": "scripts/idmap-sitemap.js (dentro il workflow feed-sync)",
@@ -116,6 +116,6 @@
   },
   "ok": false,
   "chat": {
-    "risposta": ""
+    "risposta": "CAReAuctions **non fa mediazione** e non prende provvigioni: è **consulente di parte** del compratore. Si paga una **success fee solo se l’asta si aggiudica**: **3,9%** fino a 150.000 euro, **2,9%** da 150.001 a 400.000 euro, **1,9%** oltre 400.000 euro — aliquote **progressive**, sommate per fascia — con un **minimo di 1.900 euro + IVA** (950 + IVA con lo sconto 50%), entro 24 ore dall’aggiudicazione. Se non compri, non paghi la success fee."
   }
 }
