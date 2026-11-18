@@ -1,20 +1,20 @@
 {
- "ultimoGiro": "2026-11-18T07:28:00.770Z",
+ "ultimoGiro": "2026-11-18T17:15:30.813Z",
  "sogliaMin": 30,
- "runId": 44258926832,
+ "runId": 44356489589,
  "stato": "ok",
  "motivo": "",
  "veglia": {
   "ok": true,
-  "ultimoGiro": "2026-11-18T07:25:10.520Z",
-  "etaMin": 2.8,
+  "ultimoGiro": "2026-11-18T17:15:10.446Z",
+  "etaMin": 0.4,
   "sogliaMin": 30,
   "processi": 29,
-  "dispatchOggi": 44,
+  "dispatchOggi": 103,
   "totali": {
    "vivi": 9,
-   "soloVerde": 0,
-   "stantii": 2,
+   "soloVerde": 1,
+   "stantii": 1,
    "mai": 0,
    "nonMisurabili": 0,
    "riuscite": 0,
@@ -25,7 +25,7 @@
    {
     "nome": "sam-plus",
     "stato": "stantio",
-    "etaMin": 425.7,
+    "etaMin": 460.3,
     "sogliaMin": 420,
     "sveglieOggi": 0,
     "ultimoEsito": "repository_dispatch sam-plus-giro · HTTP 204"
@@ -33,7 +33,7 @@
    {
     "nome": "sam-plus-v2",
     "stato": "vivo",
-    "etaMin": 256.2,
+    "etaMin": 846.2,
     "sogliaMin": 1728,
     "sveglieOggi": 0,
     "ultimoEsito": null
@@ -41,7 +41,7 @@
    {
     "nome": "anti-bugie",
     "stato": "vivo",
-    "etaMin": 942.4,
+    "etaMin": 112.5,
     "sogliaMin": 1800,
     "sveglieOggi": 0,
     "ultimoEsito": null
@@ -49,7 +49,7 @@
    {
     "nome": "rete-vids",
     "stato": "vivo",
-    "etaMin": 930.1,
+    "etaMin": 102.4,
     "sogliaMin": 1800,
     "sveglieOggi": 0,
     "ultimoEsito": "repository_dispatch rete-vids-giro · HTTP 204"
@@ -57,7 +57,7 @@
    {
     "nome": "rete-einstein",
     "stato": "vivo",
-    "etaMin": 928.9,
+    "etaMin": 100.6,
     "sogliaMin": 1800,
     "sveglieOggi": 0,
     "ultimoEsito": "repository_dispatch rete-einstein-giro · HTTP 204"
@@ -65,7 +65,7 @@
    {
     "nome": "rete-green2",
     "stato": "vivo",
-    "etaMin": 919.9,
+    "etaMin": 92.2,
     "sogliaMin": 1800,
     "sveglieOggi": 0,
     "ultimoEsito": "repository_dispatch rete-green2-giro · HTTP 204"
@@ -73,7 +73,7 @@
    {
     "nome": "rete-emergent",
     "stato": "vivo",
-    "etaMin": 896.6,
+    "etaMin": 71.7,
     "sogliaMin": 1800,
     "sveglieOggi": 0,
     "ultimoEsito": "repository_dispatch rete-emergent-giro · HTTP 204"
@@ -81,7 +81,7 @@
    {
     "nome": "emergent-watch",
     "stato": "vivo",
-    "etaMin": 244.8,
+    "etaMin": 314.4,
     "sogliaMin": 720,
     "sveglieOggi": 0,
     "ultimoEsito": "HTTP 204"
@@ -89,7 +89,7 @@
    {
     "nome": "verifica-playwright",
     "stato": "vivo",
-    "etaMin": 423.2,
+    "etaMin": 27.4,
     "sogliaMin": 720,
     "sveglieOggi": 0,
     "ultimoEsito": "HTTP 204"
@@ -97,15 +97,15 @@
    {
     "nome": "verifica-canonical",
     "stato": "vivo",
-    "etaMin": 425.7,
+    "etaMin": 109,
     "sogliaMin": 480,
     "sveglieOggi": 0,
-    "ultimoEsito": "HTTP 204"
+    "ultimoEsito": null
    },
    {
     "nome": "guardiano-veglia",
-    "stato": "stantio",
-    "etaMin": 541.8,
+    "stato": "solo-verde",
+    "etaMin": 587.2,
     "sogliaMin": 150,
     "sveglieOggi": 0,
     "ultimoEsito": "HTTP 204"
