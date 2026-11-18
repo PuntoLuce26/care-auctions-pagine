@@ -97,9 +97,28 @@ jobs:
           echo "::error::push fallito"; exit 1
 
 
-      - name: QA dopo la pubblicazione (debounce 30 min)
+      - name: QA dopo la pubblicazione (gate sulla build + debounce 30 min)
         if: always()
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
+          # 18/11/2026 — GATE SULLA BUILD: il dispatch `emergent-published` esiste per verificare una
+          # PUBBLICAZIONE, quindi parte solo se la build servita è cambiata rispetto all'ultima QA
+          # conclusa. Vale SOLO per questo dispatch: lo `schedule` resta com'è, perché serve a
+          # controllare anche feed e contenuti che cambiano senza una build nuova.
+          SERVITA=$(curl -sS -H 'User-Agent: careauctions-gate/1.0' https://careauctions.co/ | grep -o 'main\.[A-Za-z0-9_-]*\.js' | head -1 || true)
+          if [ -n "${CLOUDFLARE_API_TOKEN:-}" ] && [ -n "$SERVITA" ]; then
+            ULTIMA=$(curl -sS -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+              "https://api.cloudflare.com/client/v4/accounts/d5d20864ee7f83c32c9eeb5fcbda6edb/r2/buckets/care-stato/objects/stato/qa/stato.json" \
+              | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{try{const j=JSON.parse(s);console.log((j.build&&j.build.sito)||"")}catch(e){console.log("")}})' || true)
+            echo "build servita: $SERVITA · ultima QA: ${ULTIMA:-nessuna}"
+            if [ "$SERVITA" = "$ULTIMA" ]; then
+              echo "build invariata dall'ultima QA: salto il dispatch (una pubblicazione non c'è stata)"
+              exit 0
+            fi
+          else
+            echo "gate sulla build non applicabile (token o build mancanti): si passa al debounce"
+          fi
           ULTIMO=$(curl -sS -H "Authorization: Bearer ${{ github.token }}" \
             "https://api.github.com/repos/${{ github.repository }}/actions/workflows/qa.yml/runs?status=completed&per_page=1" \
             | jq -r '.workflow_runs[0].created_at // empty')

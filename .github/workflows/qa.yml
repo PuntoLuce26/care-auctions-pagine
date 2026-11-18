@@ -5,6 +5,12 @@ on:
   schedule:
     - cron: "*/30 * * * *"
   workflow_dispatch:
+    inputs:
+      forza:
+        description: 'Forza il QA completo anche se la build è già stata verificata'
+        type: choice
+        options: ["no", "si"]
+        default: "no"
   repository_dispatch:
     types: [emergent-published, qa-run, email-alert, ai-alert]
   push:
@@ -73,6 +79,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          QA_SKIP_DOPPIONI: ${{ github.event.inputs.forza == 'si' && '0' || '1' }}
         run: node qa/run.mjs
 
       - name: Riepilogo nel run

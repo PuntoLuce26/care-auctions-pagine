@@ -392,8 +392,16 @@ export async function runCrawl() {
     }
     if (p.pageErrors?.length) add({ severity: 'critical', type: 'pageerror', route: p.route, viewport: p.viewport, message: p.pageErrors[0] });
     if (p.consoleErrors?.length) add({ severity: 'high', type: 'console_error', route: p.route, viewport: p.viewport, message: p.consoleErrors[0] });
+    // 18/11/2026 — TRANSIENTI DI PUBLISH, non guasti: se la pagina cita una build DIVERSA da quella
+    // servita ora, un 404 sul bundle citato o un 5xx su /api/* sono l'effetto del publish in corso
+    // (l'HTML viene dalla cache, il bundle nuovo non c'è ancora o il relay è in riavvio). Diventano
+    // una voce INFORMATIVA; restano alti solo a build stabile, dove sono guasti veri.
+    const buildCambiata = !!(p.build && p.buildCorrente && p.build !== p.buildCorrente);
     const ownBad = (p.badResponses || []).filter(b => b.status >= 400 && sameOrigin(b.url, BASE) && !/favicon/.test(b.url));
-    if (ownBad.length) add({ severity: 'high', type: 'risorsa_4xx', route: p.route, viewport: p.viewport, message: ownBad.slice(0, 3).map(b => b.status + ' ' + b.url).join(' | ') });
+    const transitori = buildCambiata ? ownBad.filter(b => b.status >= 500 || /main\.[A-Za-z0-9_-]+\.js/.test(b.url)) : [];
+    const veri = ownBad.filter(b => !transitori.includes(b));
+    if (veri.length) add({ severity: 'high', type: 'risorsa_4xx', route: p.route, viewport: p.viewport, message: veri.slice(0, 3).map(b => b.status + ' ' + b.url).join(' | ') });
+    if (transitori.length) add({ severity: 'low', type: 'transitorio_publish', route: p.route, viewport: p.viewport, message: 'publish in corso (build pagina ' + p.build + ' ≠ build servita ' + p.buildCorrente + '): ' + transitori.slice(0, 3).map(b => b.status + ' ' + b.url).join(' | ') });
     if (p.images?.realBroken?.length) add({ severity: 'high', type: 'immagine_rotta', route: p.route, viewport: p.viewport, message: p.images.realBroken.slice(0, 4).map(i => i.src).join(' | '), suggestion: 'Verificare che i file esistano nel deploy e che il percorso non cambi dopo una pubblicazione.' });
     if (p.forms?.invalid?.length) add({ severity: 'low', type: 'form_invalid', route: p.route, viewport: p.viewport, message: 'campi obbligatori non compilati dal QA (atteso per consenso/date): ' + p.forms.invalid.slice(0, 6).join(', '), suggestion: 'Verificare che il form sia compilabile e che i campi obbligatori abbiano un messaggio chiaro.' });
     if (p.clickErrors?.length) add({ severity: 'high', type: 'click_error', route: p.route, viewport: p.viewport, message: p.clickErrors[0] });
