@@ -1,7 +1,15 @@
 name: qa-presidio
+# 18/11/2026 — GitHub dirada le schedule: il cron `0 */3 * * *` ha saltato il giro delle 12:00Z
+# (ultima run schedulata 08:40Z, poi solo dispatch manuali) e il payload QA è rimasto fermo.
+# Quindi: si aggiunge un trigger su push in qa/ e una seconda finestra la sera; in alcuni giorni
+# girerà 3-4 volte, ed è accettato.
 on:
   schedule:
     - cron: "0 */3 * * *"
+    - cron: "0 18 * * *"
+  push:
+    paths:
+      - "qa/**"
   workflow_dispatch:
 permissions:
   contents: write

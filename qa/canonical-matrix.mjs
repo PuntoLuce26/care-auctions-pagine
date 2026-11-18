@@ -55,6 +55,7 @@ const LOCALI = ['it-IT', 'en-US'];
 const VIEWPORT = { width: 1366, height: 768 };
 const NAV_TIMEOUT_MS = 45000;
 const ATTESA_POST_MOUNT_MS = 2000;
+const ATTESA_CANONICAL_MS = 15000; // attesa mirata del canonical dopo il mount (sostituisce networkidle)
 const PAUSA_TRA_ROTTE_MS = 800;
 const OUT_FILE = path.join(path.dirname(fileURLToPath(import.meta.url)), 'canonical.json');
 
@@ -84,12 +85,21 @@ async function render(context, rotta) {
   const url = BASE_URL + rotta;
   const pagina = await context.newPage();
   try {
-    const risposta = await pagina.goto(url, { waitUntil: 'networkidle', timeout: NAV_TIMEOUT_MS });
+    // 18/11/2026 — NON si aspetta 'networkidle': la pagina del lotto (shell ~240 KB + polling dell'app)
+    // non ci arriva MAI e il goto andava in timeout (2 KO su /aste/1822566, misurati il 18/11). Si aspettano
+    // gli eventi DOM e poi il canonical con un'attesa MIRATA: il controllo resta severo (canonical
+    // obbligatorio), ma non dipende più da una condizione che quella pagina non soddisfa.
+    const risposta = await pagina.goto(url, { waitUntil: 'domcontentloaded', timeout: NAV_TIMEOUT_MS });
     if (risposta && risposta.status() >= 400) {
       return { errore: `HTTP ${risposta.status()} su ${url}` };
     }
     // L'app riscrive il canonical dopo il mount: senza questa attesa si misura l'HTML
     // server-side, che è corretto, e il difetto diventa invisibile.
+    await pagina
+      .waitForFunction(() => !!document.querySelector('link[rel="canonical"]'), { timeout: ATTESA_CANONICAL_MS })
+      .catch(() => {
+        /* niente canonical entro il tempo: la riga dirà «nessun canonical», che è il KO vero */
+      });
     await pagina.waitForTimeout(ATTESA_POST_MOUNT_MS);
     return await pagina.evaluate(() => {
       const link = document.querySelector('link[rel="canonical"]');

@@ -24,7 +24,21 @@ async function j(u) { const t = await get(u); if (!t) return null; try { return 
   const copertura = (es && (es.copertura || es.periodo)) || '2020-09-29/2026-11-09';
   const trib = (es && (es.tribunali || es.tribunaliDistinti)) || 44;
   const reg = (es && (es.regioni || es.regioniDistinte)) || 14;
-  const brain = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'ai', 'cervello.json'), 'utf8'));
+  // 18/11/2026 — il file può NON esistere (primo giro, o repo ripulito): prima si faceva readFileSync
+  // e la run moriva con ENOENT (run 44311940592). Si parte da uno scheletro documentato, così il primo
+  // giro SCRIVE il cervello invece di fallire.
+  const fileCervello = path.join(__dirname, '..', 'ai', 'cervello.json');
+  let brain;
+  try {
+    brain = JSON.parse(fs.readFileSync(fileCervello, 'utf8'));
+  } catch (e) {
+    console.log('ai/cervello.json assente o illeggibile (' + String((e && e.code) || e) + '): parto dallo scheletro');
+    brain = { aggiornato: now.toISOString(), pubblico: { dati: {}, pvp: {} }, fonti: [] };
+  }
+  if (!brain.pubblico) brain.pubblico = {};
+  if (!brain.pubblico.dati) brain.pubblico.dati = {};
+  if (!brain.pubblico.pvp) brain.pubblico.pvp = {};
+  if (!Array.isArray(brain.fonti)) brain.fonti = [];
   brain.aggiornato = now.toISOString();
   brain.pubblico.dati.lotti_banca_dati = Number(lotti) || brain.pubblico.dati.lotti_banca_dati;
   brain.pubblico.dati.esiti_verificati = Number(esiti) || brain.pubblico.dati.esiti_verificati;
