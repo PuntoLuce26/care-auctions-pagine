@@ -53,6 +53,14 @@ const lenti = ultimi.filter((p) => p.origine.ttfb > 2500).length;
 const giu = ultimi.filter((p) => p.origine.stato !== 200).length;
 const stato = {
   aggiornato: OGGI,
+  // 18/11/2026 — LA CADENZA È UN DATO DEL PAYLOAD, non una soglia nel codice del check.
+  // Dichiarata qui dal generatore, con il valore MISURATO sugli intervalli di perf/emergent.json
+  // (17→18/11/2026: 0,99 h · 5,4 h · 8,1 h · 9,2 h → mediana 8,1 h): emergent-watch.yml ha cron
+  // `*/15` ma GitHub lo dirada, quindi la raccolta effettiva è ~8 h, non 15 min.
+  // Chi legge calcola la soglia: cadenzaOre × 1,5 (minimo cadenzaOre + 2 h). Per cambiarla:
+  // PERF_CADENZA_ORE=<ore> nel workflow, senza toccare né il produttore né il check.
+  cadenzaOre: Number(process.env.PERF_CADENZA_ORE || 8),
+  cadenzaNota: 'dichiarata dal generatore; intervalli misurati 1–9,2 h (mediana 8,1 h) perché GitHub dirada il cron */15',
   origine_ttfb_ultimo: origine.ttfbMedian,
   origine_ttfb_max_8: Math.max(...ultimi.map((p) => p.origine.ttfb)),
   sito_ttfb_ultimo: sito.ttfbMedian,
