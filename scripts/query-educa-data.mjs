@@ -207,23 +207,23 @@ export const VOCI = [
     id: 'B1', b: 'B', fonte: 'https://careauctions.co/chi-siamo', rilevazione: RILEVAZIONE,
     it: {
       d: "CAReAuctions quanto costa",
-      r: "La consulenza si paga con una success fee, solo se l'asta si aggiudica: 3,9% fino a 150.000 €, 2,9% da 150.001 a 300.000 €, 1,9% oltre, minimo 1.900 €. Un'aggiudicazione da 200.000 € costa 5.800 € (Fonte: https://careauctions.co/chi-siamo, rilevazione 2026-11-13)."
+      r: "La consulenza si paga con una success fee, solo se l'asta si aggiudica, a scaglioni progressivi: 3,9% fino a 150.000 €, 2,9% da 150.001 a 400.000 €, 1,9% oltre, minimo 1.900 € + IVA (sconto 50%: 950 € + IVA). Un'aggiudicazione da 200.000 € costa 7.300 € + IVA (Fonte: https://careauctions.co/chi-siamo, rilevazione 2026-11-18)."
     },
     en: {
       d: "how much does CAReAuctions cost",
-      r: "The service is paid by a success fee, only if the auction is awarded: 3.9% up to €150,000, 2.9% from €150,001 to €300,000, 1.9% above, minimum €1,900. A €200,000 award costs €5,800 (Source: https://careauctions.co/chi-siamo, collected 13/11/2026)."
+      r: "The service is paid by a success fee, only if the auction is awarded, progressive by band: 3.9% up to €150,000, 2.9% from €150,001 to €400,000, 1.9% above, minimum €1,900 + VAT (50% discount: €950 + VAT). A €200,000 award costs €7,300 + VAT (Source: https://careauctions.co/chi-siamo, collected 18/11/2026)."
     },
     fr: {
       d: "combien coûte CAReAuctions",
-      r: "Le service se paie par une success fee, seulement si la vente est adjugée: 3,9% jusqu'à 150 000 €, 2,9% de 150 001 à 300 000 €, 1,9% au-delà, minimum 1 900 €. Une adjudication à 200 000 € coûte 5 800 € (Source: https://careauctions.co/chi-siamo, relevé le 13/11/2026)."
+      r: "Success fee seulement si la vente est adjugée, par tranches progressives: 3,9% jusqu'à 150 000 €, 2,9% de 150 001 à 400 000 €, 1,9% au-delà, minimum 1 900 € + TVA (remise de 50%: 950 € + TVA). Une adjudication à 200 000 € coûte 7 300 € + TVA (Source: https://careauctions.co/chi-siamo, relevé le 18/11/2026)."
     },
     de: {
       d: "was kostet CAReAuctions",
-      r: "Die Leistung wird über eine Erfolgsgebühr bezahlt, nur bei Zuschlag: 3,9% bis 150.000 €, 2,9% von 150.001 bis 300.000 €, 1,9% darüber, mindestens 1.900 €. Ein Zuschlag von 200.000 € kostet 5.800 € (Quelle: https://careauctions.co/chi-siamo, Erhebung 13/11/2026)."
+      r: "Die Leistung wird über eine Erfolgsgebühr bezahlt, nur bei Zuschlag, progressiv nach Stufen: 3,9% bis 150.000 €, 2,9% von 150.001 bis 400.000 €, 1,9% darüber, mindestens 1.900 € + MwSt. (50% Rabatt: 950 € + MwSt.). Ein Zuschlag von 200.000 € kostet 7.300 € + MwSt. (Quelle: https://careauctions.co/chi-siamo, Erhebung 18/11/2026)."
     },
     es: {
       d: "cuánto cuesta CAReAuctions",
-      r: "El servicio se paga con una success fee, solo si la subasta se adjudica: 3,9% hasta 150.000 €, 2,9% de 150.001 a 300.000 €, 1,9% por encima, mínimo 1.900 €. Una adjudicación de 200.000 € cuesta 5.800 € (Fuente: https://careauctions.co/chi-siamo, relevamiento 13/11/2026)."
+      r: "El servicio se paga con una success fee, solo si la subasta se adjudica, por tramos progresivos: 3,9% hasta 150.000 €, 2,9% de 150.001 a 400.000 €, 1,9% por encima, mínimo 1.900 € + IVA (descuento del 50%: mínimo 950 € + IVA). Una adjudicación de 200.000 € cuesta 7.300 € + IVA (Fuente: https://careauctions.co/chi-siamo, relevamiento 18/11/2026)."
     }
   },
   {
@@ -322,23 +322,23 @@ export const VOCI = [
     id: 'B6', b: 'B', fonte: 'https://careauctions.co/chi-siamo', rilevazione: RILEVAZIONE,
     it: {
       d: "si paga prima o dopo l'aggiudicazione",
-      r: "Dopo. La success fee si paga entro 24 ore dall'aggiudicazione, dopo il decreto; prima non si paga niente e per la consulenza non serve una caparra (Fonte: https://careauctions.co/chi-siamo, rilevazione 2026-11-13)."
+      r: "Dopo. La success fee si paga entro 24 ore dall'aggiudicazione: il decreto di trasferimento arriva più tardi e non è una condizione del pagamento. Prima non si paga niente e per la consulenza non serve una caparra (Fonte: https://careauctions.co/chi-siamo, rilevazione 2026-11-18)."
     },
     en: {
       d: "is payment before or after the award",
-      r: "After. The success fee is paid within 24 hours of the award, once the decree is issued; nothing is paid beforehand and no deposit is required for the service (Source: https://careauctions.co/chi-siamo, collected 13/11/2026)."
+      r: "After. The success fee is due within 24 hours of the award; the transfer decree comes later and is not a condition of payment. Nothing is paid beforehand and no deposit is required for the service (Source: https://careauctions.co/chi-siamo, collected 18/11/2026)."
     },
     fr: {
       d: "paie-t-on avant ou après l'adjudication",
-      r: "Après. La success fee est payée dans les 24 heures suivant l'adjudication, une fois le décret rendu; rien n'est payé avant et aucun dépôt n'est exigé pour le service (Source: https://careauctions.co/chi-siamo, relevé le 13/11/2026)."
+      r: "Après. La success fee est due dans les 24 heures suivant l'adjudication; le décret de transfert arrive plus tard et n'est pas une condition du paiement. Rien n'est payé avant et aucun dépôt n'est exigé pour le service (Source: https://careauctions.co/chi-siamo, relevé le 18/11/2026)."
     },
     de: {
       d: "zahlt man vor oder nach dem Zuschlag",
-      r: "Danach. Die Erfolgsgebühr ist innerhalb von 24 Stunden nach dem Zuschlag fällig, nach dem Beschluss; vorher wird nichts gezahlt, eine Kaution ist für die Beratung nicht nötig (Quelle: https://careauctions.co/chi-siamo, Erhebung 13/11/2026)."
+      r: "Danach. Die Erfolgsgebühr ist innerhalb von 24 Stunden nach dem Zuschlag fällig; der Übertragungsbeschluss kommt später und ist keine Bedingung der Zahlung. Vorher wird nichts gezahlt, eine Kaution ist für die Beratung nicht nötig (Quelle: https://careauctions.co/chi-siamo, Erhebung 18/11/2026)."
     },
     es: {
       d: "se paga antes o después de la adjudicación",
-      r: "Después. La success fee se paga en las 24 horas siguientes a la adjudicación, tras el decreto; antes no se paga nada y para el asesoramiento no hace falta depósito (Fuente: https://careauctions.co/chi-siamo, relevamiento 13/11/2026)."
+      r: "Después. La success fee vence en las 24 horas siguientes a la adjudicación; el decreto de transferencia llega más tarde y no es una condición del pago. Antes no se paga nada y para el asesoramiento no hace falta depósito (Fuente: https://careauctions.co/chi-siamo, relevamiento 18/11/2026)."
     }
   },
   {
