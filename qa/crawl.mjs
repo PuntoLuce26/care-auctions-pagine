@@ -8,6 +8,12 @@ import {
 } from './config.mjs';
 import { buildHash, fetchJson, fetchText, makeIssue, sameOrigin, short, ageHours } from './lib.mjs';
 
+// 18/11/2026 — WHITELIST TECNICA (non un silenziamento): il beacon RUM di Cloudflare
+// (`https://careauctions.co/cdn-cgi/rum`, `cloudflareinsights.com`) lo inietta il NOSTRO edge:
+// non è una risorsa della pagina e non è un guasto del sito. Va escluso dal conteggio delle
+// risorse ≥400 e dagli errori di console che lo riguardano — ma SOLO lui.
+const BEACON = /cdn-cgi|cloudflareinsights/i;
+
 const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36';
 
 async function launch(browserName) {
@@ -96,11 +102,12 @@ async function crawlOne(browser, route, vp) {
   const ctx = await browser.newContext(ctxOpts(vp));
   const page = await ctx.newPage();
   const errs = [], consoleErrs = [], badResp = [], failed = [], clickErrors = [];
-  let http = null, loadMs = null;
+  let http = null, loadMs = null, beacon = 0;
   page.on('pageerror', e => errs.push(short(e.message, 200)));
-  page.on('console', m => { if (m.type() === 'error' && !/cdn-cgi/i.test(m.text())) consoleErrs.push(short(m.text(), 200)); });
-  page.on('response', r => { try { if (r.status() >= 400 && !/cdn-cgi/i.test(r.url())) badResp.push({ status: r.status(), url: r.url() }); } catch (e) {} });
-  page.on('requestfailed', r => { if (!/cdn-cgi/i.test(r.url())) failed.push({ url: r.url(), error: (r.failure()?.errorText) || 'failed' }); });
+  page.on('console', m => { if (m.type() === 'error' && !BEACON.test(m.text())) consoleErrs.push(short(m.text(), 200)); });
+  // le richieste del beacon si contano e NON entrano mai fra le risorse rotte
+  page.on('response', r => { try { const u = r.url(); if (BEACON.test(u)) { beacon++; return; } if (r.status() >= 400) badResp.push({ status: r.status(), url: u }); } catch (e) {} });
+  page.on('requestfailed', r => { if (!BEACON.test(r.url())) failed.push({ url: r.url(), error: (r.failure()?.errorText) || 'failed' }); });
 
   try {
     const t0 = Date.now();
@@ -149,7 +156,7 @@ async function crawlOne(browser, route, vp) {
   } catch (e) {
     return {
       route: route.path, name: route.name, viewport: vp.name, http, loadMs,
-      pageErrors: errs, consoleErrors: consoleErrs, badResponses: badResp, requestFailed: failed,
+      pageErrors: errs, consoleErrors: consoleErrs, badResponses: badResp, requestFailed: failed, beacon,
       fatal: short(e.message, 220), links: []
     };
   } finally {
@@ -312,8 +319,13 @@ export async function runCrawl() {
     if (!p.http) add({ severity: 'critical', type: 'http_none', route: p.route, viewport: p.viewport, message: 'nessuna risposta HTTP' });
     if ((p.text || 0) < 80) add({ severity: 'critical', type: 'pagina_vuota', route: p.route, viewport: p.viewport, message: `testo ${p.text || 0} caratteri` });
     if (p.pageErrors?.length) add({ severity: 'critical', type: 'pageerror', route: p.route, viewport: p.viewport, message: p.pageErrors[0] });
-    if (p.consoleErrors?.length) add({ severity: 'high', type: 'console_error', route: p.route, viewport: p.viewport, message: p.consoleErrors[0] });
     const ownBad = (p.badResponses || []).filter(b => b.status >= 400 && sameOrigin(b.url, BASE) && !/favicon/.test(b.url));
+    // Il browser registra per il beacon un «Failed to load resource» SENZA l'URL: qui si scarta quel
+    // messaggio SOLO se sulla pagina l'unico problema è il beacon (nessuna risorsa nostra ≥400, nessuna
+    // richiesta fallita). Se c'è anche un solo guasto vero, l'errore di console resta e grida.
+    const altriGuasti = ownBad.length > 0 || (p.badResponses || []).some(b => b.status >= 400) || (p.requestFailed || []).length > 0;
+    const consoleReali = (p.consoleErrors || []).filter(t => !(/failed to load resource/i.test(t) && (p.beacon || 0) > 0 && !altriGuasti));
+    if (consoleReali.length) add({ severity: 'high', type: 'console_error', route: p.route, viewport: p.viewport, message: consoleReali[0] });
     if (ownBad.length) add({ severity: 'high', type: 'risorsa_4xx', route: p.route, viewport: p.viewport, message: ownBad.slice(0, 3).map(b => b.status + ' ' + b.url).join(' | ') });
     if (p.images?.realBroken?.length) add({ severity: 'high', type: 'immagine_rotta', route: p.route, viewport: p.viewport, message: p.images.realBroken.slice(0, 4).map(i => i.src).join(' | '), suggestion: 'Verificare che i file esistano nel deploy e che il percorso non cambi dopo una pubblicazione.' });
     if (p.forms?.invalid?.length) add({ severity: 'low', type: 'form_invalid', route: p.route, viewport: p.viewport, message: 'campi obbligatori non compilati dal QA (atteso per consenso/date): ' + p.forms.invalid.slice(0, 6).join(', '), suggestion: 'Verificare che il form sia compilabile e che i campi obbligatori abbiano un messaggio chiaro.' });
