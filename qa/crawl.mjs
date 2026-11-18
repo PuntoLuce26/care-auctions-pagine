@@ -98,6 +98,23 @@ async function fillForms(page, collected) {
   }
 }
 
+// 18/11/2026 — BUILD CORRENTE del sito, letta una volta per giro. Serve a distinguere un guasto
+// vero da un publish in corso: se la pagina è bianca ma cita una build DIVERSA da quella servita ora,
+// siamo nel mezzo di una pubblicazione (il 18/11 alle 13:50 è successo esattamente questo).
+let BUILD_CORRENTE = null;
+async function buildCorrente() {
+  if (BUILD_CORRENTE !== null) return BUILD_CORRENTE;
+  try {
+    const r = await fetch(BASE + '/', { headers: { 'User-Agent': UA } });
+    const testo = await r.text();
+    const m = testo.match(/main\.([A-Za-z0-9_-]+)\.js/);
+    BUILD_CORRENTE = m ? m[1] : '';
+  } catch (e) {
+    BUILD_CORRENTE = '';
+  }
+  return BUILD_CORRENTE;
+}
+
 async function crawlOne(browser, route, vp) {
   const ctx = await browser.newContext(ctxOpts(vp));
   const page = await ctx.newPage();
@@ -113,7 +130,21 @@ async function crawlOne(browser, route, vp) {
     consoleErrs.push(short(testo, 200));
   });
   // le richieste del beacon si contano e NON entrano mai fra le risorse rotte
-  page.on('response', r => { try { const u = r.url(); if (BEACON.test(u)) { beacon++; return; } if (r.status() >= 400) badResp.push({ status: r.status(), url: u }); } catch (e) {} });
+  let docCache = null, docAge = null;
+  page.on('response', r => {
+    try {
+      const u = r.url();
+      if (BEACON.test(u)) { beacon++; return; }
+      // 18/11/2026 — si guardano gli header del DOCUMENTO: `cf-cache-status: HIT` o un `age` alto con
+      // il bundle citato a 404 significano «HTML in cache, attesa del TTL», non «sito rotto».
+      if (r.request().resourceType() === 'document') {
+        const h = r.headers() || {};
+        docCache = h['cf-cache-status'] || null;
+        docAge = h['age'] || null;
+      }
+      if (r.status() >= 400) badResp.push({ status: r.status(), url: u });
+    } catch (e) {}
+  });
   page.on('requestfailed', r => { if (!BEACON.test(r.url())) failed.push({ url: r.url(), error: (r.failure()?.errorText) || 'failed' }); });
 
   try {
@@ -142,12 +173,35 @@ async function crawlOne(browser, route, vp) {
         rootText: root ? (root.innerText || '').length : null,
         h1: [...document.querySelectorAll('h1')].map(h => (h.innerText || '').trim()).filter(Boolean).slice(0, 3),
         canonical: document.querySelector('link[rel="canonical"]')?.href || '',
+        build: (() => { const s = document.querySelector('script[src*="/static/js/main."]'); const m = s && (s.getAttribute('src') || '').match(/main\.([A-Za-z0-9_-]+)\.js/); return m ? m[1] : null; })(),
         robots: document.querySelector('meta[name="robots"]')?.content || '',
         images: { total: imgs.length, broken: imgs.filter(i => !i.ok).slice(0, 20) },
         forms: document.querySelectorAll('form').length,
         buttons: document.querySelectorAll('button').length
       };
     });
+
+    // 18/11/2026 — TRE ESITI PER UNA PAGINA SENZA TESTO (prima erano tutti «pagina_vuota»):
+    //   · publish-in-corso → la pagina cita una build diversa da quella servita ora: si aspetta e si dice;
+    //   · attesa-ttl      → HTML servito dalla cache (HIT/age alto) con il bundle citato a 404: warn;
+    //   · guasto          → testo assente con la build corrente: allarme vero.
+    const textPrima = meta.text;
+    let textFinale = meta.text;
+    if (textFinale < 80) {
+      // attesa mirata: l'app può montare dopo (fino a 8 s), poi si riclassifica
+      for (let i = 0; i < 16 && textFinale < 80; i += 1) {
+        await page.waitForTimeout(500);
+        textFinale = await page.evaluate(() => (document.body?.innerText || '').length).catch(() => textFinale);
+      }
+    }
+    const bc = await buildCorrente();
+    const bundleCitato404 = (badResp || []).some((b) => meta.build && b.status >= 400 && String(b.url).includes('main.' + meta.build));
+    let classificazioneVuoto = 'ok';
+    if (textFinale < 80) {
+      if (meta.build && bc && meta.build !== bc) classificazioneVuoto = 'publish-in-corso';
+      else if (bundleCitato404 && (docCache === 'HIT' || Number(docAge) > 60)) classificazioneVuoto = 'attesa-ttl';
+      else classificazioneVuoto = 'guasto';
+    }
 
     const collected = { forms: { total: meta.forms, filled: 0, invalid: [] }, clickErrors };
     if (!FAST) await fillForms(page, collected);
@@ -156,7 +210,8 @@ async function crawlOne(browser, route, vp) {
 
     return {
       route: route.path, name: route.name, viewport: vp.name, http, loadMs, clicked,
-      ...meta, forms: collected.forms, consoleErrors: consoleErrs, pageErrors: errs,
+      ...meta, text: textFinale, textPrima, buildCorrente: bc, classificazioneVuoto, docCache, docAge,
+      forms: collected.forms, consoleErrors: consoleErrs, pageErrors: errs,
       badResponses: badResp, requestFailed: failed, clickErrors, clickSkipped: collected.clickSkipped || 0,
       links: links.filter(u => sameOrigin(u, BASE)).slice(0, 80)
     };
@@ -328,7 +383,13 @@ export async function runCrawl() {
     if (p.http && p.http >= 500) add({ severity: 'critical', type: 'http_5xx', route: p.route, viewport: p.viewport, message: `HTTP ${p.http}` });
     else if (p.http && p.http >= 400) add({ severity: 'high', type: 'http_4xx', route: p.route, viewport: p.viewport, message: `HTTP ${p.http}` });
     if (!p.http) add({ severity: 'critical', type: 'http_none', route: p.route, viewport: p.viewport, message: 'nessuna risposta HTTP' });
-    if ((p.text || 0) < 80) add({ severity: 'critical', type: 'pagina_vuota', route: p.route, viewport: p.viewport, message: `testo ${p.text || 0} caratteri` });
+    if ((p.text || 0) < 80) {
+      const cls = p.classificazioneVuoto || 'guasto';
+      const dettaglio = `testo ${p.text || 0} caratteri · build pagina ${p.build || '?'} · build servita ${p.buildCorrente || '?'}` + (p.docCache ? ` · cache ${p.docCache}${p.docAge ? ' age ' + p.docAge + 's' : ''}` : '');
+      if (cls === 'publish-in-corso') add({ severity: 'low', type: 'publish_in_corso', route: p.route, viewport: p.viewport, message: 'publish in corso (' + dettaglio + '): la pagina è bianca perché la build è cambiata durante il giro, non è un guasto' });
+      else if (cls === 'attesa-ttl') add({ severity: 'medium', type: 'bundle_attesa_ttl', route: p.route, viewport: p.viewport, message: 'bundle non ancora servito, attesa TTL (' + dettaglio + ')' });
+      else add({ severity: 'critical', type: 'pagina_vuota', route: p.route, viewport: p.viewport, message: dettaglio });
+    }
     if (p.pageErrors?.length) add({ severity: 'critical', type: 'pageerror', route: p.route, viewport: p.viewport, message: p.pageErrors[0] });
     if (p.consoleErrors?.length) add({ severity: 'high', type: 'console_error', route: p.route, viewport: p.viewport, message: p.consoleErrors[0] });
     const ownBad = (p.badResponses || []).filter(b => b.status >= 400 && sameOrigin(b.url, BASE) && !/favicon/.test(b.url));
@@ -349,7 +410,7 @@ export async function runCrawl() {
     for (const r of s.routes) {
       if (r.http !== 200) add({ severity: 'high', type: 'smoke_http', route: r.route, viewport: s.browser, message: `HTTP ${r.http}` });
       if (r.pageErrors?.length) add({ severity: 'high', type: 'smoke_js', route: r.route, viewport: s.browser, message: r.pageErrors[0] });
-      if ((r.text || 0) < 80) add({ severity: 'high', type: 'smoke_vuota', route: r.route, viewport: s.browser, message: `testo ${r.text} caratteri` });
+      if ((r.text || 0) < 80) add({ severity: 'high', type: 'smoke_vuota', route: r.route, viewport: s.browser, message: `testo ${r.text} caratteri · build citata ${r.build || '?'}` });
     }
   }
 
