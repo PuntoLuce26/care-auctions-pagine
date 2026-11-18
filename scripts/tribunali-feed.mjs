@@ -33,20 +33,33 @@ const precedente = (() => {
   try { return JSON.parse(fs.readFileSync(OUT, 'utf8')); } catch { return null; }
 })();
 
-const per = new Map(); // tribunale → {lottiAperti, totale, slug}
-for (let n = 0; n < SHARD; n += 1) {
-  const chiave = n.toString(16).padStart(2, '0');
-  const r = await fetch(`${RAW}aste-indice/${chiave}.json?ts=${Date.now()}`);
-  if (!r.ok) { console.error(`::error title=tribunali::shard ${chiave} non leggibile (HTTP ${r.status})`); process.exit(1); }
-  const j = await r.json();
-  for (const lotto of Object.values(j.lotti || {})) {
-    const tr = String(lotto.tr || '').replace(/^Tribunale di\s+/i, '').trim();
-    if (!tr) continue;
-    const e = per.get(tr) || { lottiAperti: 0, totale: 0 };
-    e.totale += 1;
-    if (lotto.d && lotto.d >= oggi) e.lottiAperti += 1;
-    per.set(tr, e);
+// FONTE ESATTA (18/11/2026): `residenziale-comune.json` = lotti IMMOBILIARI con asta non ancora
+// svolta, per comune (è lo stesso perimetro del file originale: 16.853 lotti il 12/11) e
+// `comune-tribunale.json` = mappa "Comune|Provincia" → [tribunali] (si prende il primo, come la
+// tabella del 12/11: «comuni con più tribunali assegnati al primo della lista»).
+const per = new Map();
+{
+  const [rc, ct] = await Promise.all([
+    fetch(`${RAW}residenziale-comune.json?ts=${Date.now()}`),
+    fetch(`${RAW}comune-tribunale.json?ts=${Date.now()}`),
+  ]);
+  if (!rc.ok || !ct.ok) {
+    console.error(`::error title=tribunali::fonti non leggibili (residenziale-comune ${rc.status}, comune-tribunale ${ct.status})`);
+    process.exit(1);
   }
+  const comuni = (await rc.json()).comuni || [];
+  const mappa = (await ct.json()).comuni || {};
+  let senzaTribunale = 0;
+  for (const c of comuni) {
+    const chiave = `${c.comune}|${c.prov}`;
+    const trib = (mappa[chiave] || [])[0];
+    const aperti = Number(c.totImmobiliari || 0);
+    if (!trib) { senzaTribunale += aperti; continue; }
+    const e = per.get(trib) || { lottiAperti: 0 };
+    e.lottiAperti += aperti;
+    per.set(trib, e);
+  }
+  console.log(`comuni: ${comuni.length} · senza tribunale in mappa: ${senzaTribunale} lotti esclusi`);
 }
 
 const vecchi = new Map(((precedente && precedente.tribunali) || []).map((x) => [x.tribunale, x]));
@@ -57,6 +70,7 @@ const tribunali = [...per.entries()]
       tribunale,
       regione: v.regione || null,
       lottiAperti: e.lottiAperti,
+      totale: (vecchi.get(tribunale) || {}).totale || null,
       prezzoBaseMedio: v.prezzoBaseMedio || null,
       aggiudicazioni: v.aggiudicazioni || null,
       prezzoAggMedio: v.prezzoAggMedio || null,

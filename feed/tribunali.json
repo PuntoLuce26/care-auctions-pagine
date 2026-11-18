@@ -1,1 +1,1498 @@
-{"aggiornato":"2026-11-12T15:11:11.479Z","fonte":"PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia) · feed CAReAuctions: residenziale-comune, comune-tribunale, esiti-monitor, geo-province","copertura":"153 tribunali · lottiAperti: lotti immobiliari con asta non ancora svolta da residenziale-comune (rilevazione 2026-11-12T13:54:27.972Z; 16853 lotti assegnati su 16884, 31 non mappati; 4496 lotti di comuni con più tribunali assegnati al primo della lista) · aggiudicazioni e prezzoAggMedio: esiti-monitor 2026-09-29→2026-11-12 (4324 esiti: 4166 attribuiti a 100 tribunali, 158 senza tribunale nel monitor — €860901 — esclusi dalla tabella) · prezzoAggMedio = media dei prezzi finali pubblicati, tutti i tipi, nessun filtro categoria · regione: esiti-monitor o derivazione provincia→regione da geo-province · prezzoBaseMedio: non disponibile (nessun feed aggrega il prezzo base per tribunale)","tribunali":[{"tribunale":"Roma","regione":"Lazio","lottiAperti":456,"prezzoBaseMedio":null,"aggiudicazioni":342,"prezzoAggMedio":null},{"tribunale":"Cosenza","regione":"Calabria","lottiAperti":423,"prezzoBaseMedio":null,"aggiudicazioni":11,"prezzoAggMedio":null},{"tribunale":"Cagliari","regione":"Sardegna","lottiAperti":373,"prezzoBaseMedio":null,"aggiudicazioni":7,"prezzoAggMedio":null},{"tribunale":"Perugia","regione":"Umbria","lottiAperti":354,"prezzoBaseMedio":null,"aggiudicazioni":11,"prezzoAggMedio":null},{"tribunale":"Fermo","regione":"Marche","lottiAperti":340,"prezzoBaseMedio":null,"aggiudicazioni":21,"prezzoAggMedio":null},{"tribunale":"Catania","regione":"Sicilia","lottiAperti":322,"prezzoBaseMedio":null,"aggiudicazioni":6,"prezzoAggMedio":null},{"tribunale":"Foggia","regione":"Puglia","lottiAperti":303,"prezzoBaseMedio":null,"aggiudicazioni":24,"prezzoAggMedio":null},{"tribunale":"Bari","regione":"Puglia","lottiAperti":296,"prezzoBaseMedio":null,"aggiudicazioni":3,"prezzoAggMedio":null},{"tribunale":"Torino","regione":"Piemonte","lottiAperti":281,"prezzoBaseMedio":null,"aggiudicazioni":233,"prezzoAggMedio":null},{"tribunale":"Siracusa","regione":"Sicilia","lottiAperti":276,"prezzoBaseMedio":null,"aggiudicazioni":11,"prezzoAggMedio":null},{"tribunale":"Alessandria","regione":"Piemonte","lottiAperti":270,"prezzoBaseMedio":null,"aggiudicazioni":15,"prezzoAggMedio":null},{"tribunale":"Macerata","regione":"Marche","lottiAperti":261,"prezzoBaseMedio":null,"aggiudicazioni":13,"prezzoAggMedio":null},{"tribunale":"Agrigento","regione":"Sicilia","lottiAperti":251,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Taranto","regione":"Puglia","lottiAperti":247,"prezzoBaseMedio":null,"aggiudicazioni":16,"prezzoAggMedio":null},{"tribunale":"Firenze","regione":"Toscana","lottiAperti":246,"prezzoBaseMedio":null,"aggiudicazioni":463,"prezzoAggMedio":null},{"tribunale":"Tivoli","regione":"Lazio","lottiAperti":238,"prezzoBaseMedio":null,"aggiudicazioni":5,"prezzoAggMedio":null},{"tribunale":"Milano","regione":"Lombardia","lottiAperti":229,"prezzoBaseMedio":null,"aggiudicazioni":268,"prezzoAggMedio":null},{"tribunale":"Brescia","regione":"Lombardia","lottiAperti":207,"prezzoBaseMedio":null,"aggiudicazioni":107,"prezzoAggMedio":null},{"tribunale":"Messina","regione":"Sicilia","lottiAperti":203,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Pavia","regione":"Lombardia","lottiAperti":202,"prezzoBaseMedio":null,"aggiudicazioni":33,"prezzoAggMedio":null},{"tribunale":"Velletri","regione":"Lazio","lottiAperti":196,"prezzoBaseMedio":null,"aggiudicazioni":18,"prezzoAggMedio":null},{"tribunale":"Lecce","regione":"Puglia","lottiAperti":195,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Bergamo","regione":"Lombardia","lottiAperti":191,"prezzoBaseMedio":null,"aggiudicazioni":46,"prezzoAggMedio":null},{"tribunale":"Tempio Pausania","regione":"Sardegna","lottiAperti":190,"prezzoBaseMedio":null,"aggiudicazioni":2,"prezzoAggMedio":null},{"tribunale":"Asti","regione":"Piemonte","lottiAperti":188,"prezzoBaseMedio":null,"aggiudicazioni":3,"prezzoAggMedio":null},{"tribunale":"Monza","regione":"Lombardia","lottiAperti":188,"prezzoBaseMedio":null,"aggiudicazioni":1,"prezzoAggMedio":null},{"tribunale":"Napoli Nord","regione":"Campania","lottiAperti":188,"prezzoBaseMedio":null,"aggiudicazioni":5,"prezzoAggMedio":null},{"tribunale":"Pescara","regione":"Abruzzo","lottiAperti":186,"prezzoBaseMedio":null,"aggiudicazioni":3,"prezzoAggMedio":null},{"tribunale":"Pisa","regione":"Toscana","lottiAperti":180,"prezzoBaseMedio":null,"aggiudicazioni":55,"prezzoAggMedio":null},{"tribunale":"Ivrea","regione":"Piemonte","lottiAperti":177,"prezzoBaseMedio":null,"aggiudicazioni":5,"prezzoAggMedio":null},{"tribunale":"Grosseto","regione":"Toscana","lottiAperti":171,"prezzoBaseMedio":null,"aggiudicazioni":8,"prezzoAggMedio":null},{"tribunale":"Palermo","regione":"Sicilia","lottiAperti":170,"prezzoBaseMedio":null,"aggiudicazioni":11,"prezzoAggMedio":null},{"tribunale":"Ancona","regione":"Marche","lottiAperti":169,"prezzoBaseMedio":null,"aggiudicazioni":4,"prezzoAggMedio":null},{"tribunale":"Viterbo","regione":"Lazio","lottiAperti":167,"prezzoBaseMedio":null,"aggiudicazioni":5,"prezzoAggMedio":null},{"tribunale":"Catanzaro","regione":"Calabria","lottiAperti":162,"prezzoBaseMedio":null,"aggiudicazioni":3,"prezzoAggMedio":null},{"tribunale":"Enna","regione":"Sicilia","lottiAperti":161,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Potenza","regione":"Basilicata","lottiAperti":160,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Latina","regione":"Lazio","lottiAperti":159,"prezzoBaseMedio":null,"aggiudicazioni":8,"prezzoAggMedio":null},{"tribunale":"Siena","regione":"Toscana","lottiAperti":158,"prezzoBaseMedio":null,"aggiudicazioni":81,"prezzoAggMedio":null},{"tribunale":"Genova","regione":"Liguria","lottiAperti":153,"prezzoBaseMedio":null,"aggiudicazioni":84,"prezzoAggMedio":null},{"tribunale":"Salerno","regione":"Campania","lottiAperti":147,"prezzoBaseMedio":null,"aggiudicazioni":18,"prezzoAggMedio":null},{"tribunale":"Pistoia","regione":"Toscana","lottiAperti":146,"prezzoBaseMedio":null,"aggiudicazioni":33,"prezzoAggMedio":null},{"tribunale":"Napoli","regione":"Campania","lottiAperti":145,"prezzoBaseMedio":null,"aggiudicazioni":35,"prezzoAggMedio":null},{"tribunale":"Caltagirone","regione":"Sicilia","lottiAperti":144,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Ragusa","regione":"Sicilia","lottiAperti":143,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Cremona","regione":"Lombardia","lottiAperti":141,"prezzoBaseMedio":null,"aggiudicazioni":97,"prezzoAggMedio":null},{"tribunale":"Spoleto","regione":"Umbria","lottiAperti":141,"prezzoBaseMedio":null,"aggiudicazioni":3,"prezzoAggMedio":null},{"tribunale":"Civitavecchia","regione":"Lazio","lottiAperti":140,"prezzoBaseMedio":null,"aggiudicazioni":6,"prezzoAggMedio":null},{"tribunale":"Benevento","regione":"Campania","lottiAperti":137,"prezzoBaseMedio":null,"aggiudicazioni":27,"prezzoAggMedio":null},{"tribunale":"Vicenza","regione":"Veneto","lottiAperti":136,"prezzoBaseMedio":null,"aggiudicazioni":43,"prezzoAggMedio":null},{"tribunale":"Verbania","regione":"Piemonte","lottiAperti":132,"prezzoBaseMedio":null,"aggiudicazioni":4,"prezzoAggMedio":null},{"tribunale":"Arezzo","regione":"Toscana","lottiAperti":129,"prezzoBaseMedio":null,"aggiudicazioni":24,"prezzoAggMedio":null},{"tribunale":"Avellino","regione":"Campania","lottiAperti":124,"prezzoBaseMedio":null,"aggiudicazioni":4,"prezzoAggMedio":null},{"tribunale":"Padova","regione":"Veneto","lottiAperti":122,"prezzoBaseMedio":null,"aggiudicazioni":27,"prezzoAggMedio":null},{"tribunale":"Cuneo","regione":"Piemonte","lottiAperti":120,"prezzoBaseMedio":null,"aggiudicazioni":10,"prezzoAggMedio":null},{"tribunale":"Locri","regione":"Calabria","lottiAperti":113,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Rovigo","regione":"Veneto","lottiAperti":111,"prezzoBaseMedio":null,"aggiudicazioni":54,"prezzoAggMedio":null},{"tribunale":"Palmi","regione":"Calabria","lottiAperti":110,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Rieti","regione":"Lazio","lottiAperti":109,"prezzoBaseMedio":null,"aggiudicazioni":2,"prezzoAggMedio":null},{"tribunale":"Vercelli","regione":"Piemonte","lottiAperti":108,"prezzoBaseMedio":null,"aggiudicazioni":11,"prezzoAggMedio":null},{"tribunale":"Teramo","regione":"Abruzzo","lottiAperti":107,"prezzoBaseMedio":null,"aggiudicazioni":1,"prezzoAggMedio":null},{"tribunale":"Cassino","regione":"Lazio","lottiAperti":105,"prezzoBaseMedio":null,"aggiudicazioni":2,"prezzoAggMedio":null},{"tribunale":"Frosinone","regione":"Lazio","lottiAperti":104,"prezzoBaseMedio":null,"aggiudicazioni":64,"prezzoAggMedio":null},{"tribunale":"Matera","regione":"Basilicata","lottiAperti":103,"prezzoBaseMedio":null,"aggiudicazioni":2,"prezzoAggMedio":null},{"tribunale":"Piacenza","regione":"Emilia-Romagna","lottiAperti":103,"prezzoBaseMedio":null,"aggiudicazioni":54,"prezzoAggMedio":null},{"tribunale":"Forlì","regione":"Emilia-Romagna","lottiAperti":101,"prezzoBaseMedio":null,"aggiudicazioni":98,"prezzoAggMedio":null},{"tribunale":"Trapani","regione":"Sicilia","lottiAperti":100,"prezzoBaseMedio":null,"aggiudicazioni":2,"prezzoAggMedio":null},{"tribunale":"Santa Maria Capua Vetere","regione":"Campania","lottiAperti":97,"prezzoBaseMedio":null,"aggiudicazioni":3,"prezzoAggMedio":null},{"tribunale":"Termini Imerese","regione":"Sicilia","lottiAperti":97,"prezzoBaseMedio":null,"aggiudicazioni":3,"prezzoAggMedio":null},{"tribunale":"L'Aquila","regione":"Abruzzo","lottiAperti":96,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Mantova","regione":"Lombardia","lottiAperti":95,"prezzoBaseMedio":null,"aggiudicazioni":53,"prezzoAggMedio":null},{"tribunale":"Treviso","regione":"Veneto","lottiAperti":95,"prezzoBaseMedio":null,"aggiudicazioni":31,"prezzoAggMedio":null},{"tribunale":"Verona","regione":"Veneto","lottiAperti":95,"prezzoBaseMedio":null,"aggiudicazioni":64,"prezzoAggMedio":null},{"tribunale":"Urbino","regione":"Marche","lottiAperti":91,"prezzoBaseMedio":null,"aggiudicazioni":5,"prezzoAggMedio":null},{"tribunale":"Brindisi","regione":"Puglia","lottiAperti":89,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Chieti","regione":"Abruzzo","lottiAperti":88,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Lamezia Terme","regione":"Calabria","lottiAperti":84,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Pesaro","regione":"Marche","lottiAperti":81,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Trani","regione":"Puglia","lottiAperti":81,"prezzoBaseMedio":null,"aggiudicazioni":5,"prezzoAggMedio":null},{"tribunale":"Novara","regione":"Piemonte","lottiAperti":79,"prezzoBaseMedio":null,"aggiudicazioni":20,"prezzoAggMedio":null},{"tribunale":"Modena","regione":"Emilia-Romagna","lottiAperti":78,"prezzoBaseMedio":null,"aggiudicazioni":169,"prezzoAggMedio":null},{"tribunale":"Bologna","regione":"Emilia-Romagna","lottiAperti":76,"prezzoBaseMedio":null,"aggiudicazioni":114,"prezzoAggMedio":null},{"tribunale":"Campobasso","regione":"Molise","lottiAperti":76,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Nocera Inferiore","regione":"Campania","lottiAperti":76,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Busto Arsizio","regione":"Lombardia","lottiAperti":75,"prezzoBaseMedio":null,"aggiudicazioni":189,"prezzoAggMedio":null},{"tribunale":"Lagonegro","regione":"Basilicata","lottiAperti":75,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Castrovillari","regione":"Calabria","lottiAperti":74,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Gela","regione":"Sicilia","lottiAperti":74,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Livorno","regione":"Toscana","lottiAperti":74,"prezzoBaseMedio":null,"aggiudicazioni":44,"prezzoAggMedio":null},{"tribunale":"Venezia","regione":"Veneto","lottiAperti":74,"prezzoBaseMedio":null,"aggiudicazioni":132,"prezzoAggMedio":null},{"tribunale":"Barcellona Pozzo di Gotto","regione":"Sicilia","lottiAperti":73,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Terni","regione":"Umbria","lottiAperti":73,"prezzoBaseMedio":null,"aggiudicazioni":64,"prezzoAggMedio":null},{"tribunale":"Avezzano","regione":"Abruzzo","lottiAperti":72,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Nuoro","regione":"Sardegna","lottiAperti":69,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Reggio Calabria","regione":"Calabria","lottiAperti":68,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Ascoli Piceno","regione":"Marche","lottiAperti":67,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Caltanissetta","regione":"Sicilia","lottiAperti":66,"prezzoBaseMedio":null,"aggiudicazioni":3,"prezzoAggMedio":null},{"tribunale":"Patti","regione":"Sicilia","lottiAperti":65,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Sulmona","regione":"Abruzzo","lottiAperti":65,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Ferrara","regione":"Emilia-Romagna","lottiAperti":64,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Lecco","regione":"Lombardia","lottiAperti":64,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Lodi","regione":"Lombardia","lottiAperti":63,"prezzoBaseMedio":null,"aggiudicazioni":15,"prezzoAggMedio":null},{"tribunale":"Lucca","regione":"Toscana","lottiAperti":63,"prezzoBaseMedio":null,"aggiudicazioni":51,"prezzoAggMedio":null},{"tribunale":"Ravenna","regione":"Emilia-Romagna","lottiAperti":61,"prezzoBaseMedio":null,"aggiudicazioni":32,"prezzoAggMedio":null},{"tribunale":"Varese","regione":"Lombardia","lottiAperti":59,"prezzoBaseMedio":null,"aggiudicazioni":56,"prezzoAggMedio":null},{"tribunale":"Prato","regione":"Toscana","lottiAperti":58,"prezzoBaseMedio":null,"aggiudicazioni":63,"prezzoAggMedio":null},{"tribunale":"Nola","regione":"Campania","lottiAperti":56,"prezzoBaseMedio":null,"aggiudicazioni":2,"prezzoAggMedio":null},{"tribunale":"Como","regione":"Lombardia","lottiAperti":55,"prezzoBaseMedio":null,"aggiudicazioni":15,"prezzoAggMedio":null},{"tribunale":"Sondrio","regione":"Lombardia","lottiAperti":53,"prezzoBaseMedio":null,"aggiudicazioni":1,"prezzoAggMedio":null},{"tribunale":"Crotone","regione":"Calabria","lottiAperti":52,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Rimini","regione":"Emilia-Romagna","lottiAperti":52,"prezzoBaseMedio":null,"aggiudicazioni":5,"prezzoAggMedio":null},{"tribunale":"Trento","regione":"Trentino-Alto Adige","lottiAperti":51,"prezzoBaseMedio":null,"aggiudicazioni":2,"prezzoAggMedio":null},{"tribunale":"Vibo Valentia","regione":"Calabria","lottiAperti":50,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Udine","regione":"Friuli-Venezia Giulia","lottiAperti":49,"prezzoBaseMedio":null,"aggiudicazioni":264,"prezzoAggMedio":null},{"tribunale":"Oristano","regione":"Sardegna","lottiAperti":46,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Imperia","regione":"Liguria","lottiAperti":45,"prezzoBaseMedio":null,"aggiudicazioni":13,"prezzoAggMedio":null},{"tribunale":"Sassari","regione":"Sardegna","lottiAperti":42,"prezzoBaseMedio":null,"aggiudicazioni":15,"prezzoAggMedio":null},{"tribunale":"Biella","regione":"Piemonte","lottiAperti":41,"prezzoBaseMedio":null,"aggiudicazioni":2,"prezzoAggMedio":null},{"tribunale":"Sciacca","regione":"Sicilia","lottiAperti":41,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Aosta","regione":"Valle d'Aosta","lottiAperti":39,"prezzoBaseMedio":null,"aggiudicazioni":4,"prezzoAggMedio":null},{"tribunale":"Reggio Emilia","regione":"Emilia-Romagna","lottiAperti":39,"prezzoBaseMedio":null,"aggiudicazioni":27,"prezzoAggMedio":null},{"tribunale":"Vallo della Lucania","regione":"Campania","lottiAperti":39,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Isernia","regione":"Molise","lottiAperti":37,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Pordenone","regione":"Friuli-Venezia Giulia","lottiAperti":36,"prezzoBaseMedio":null,"aggiudicazioni":7,"prezzoAggMedio":null},{"tribunale":"Belluno","regione":"Veneto","lottiAperti":35,"prezzoBaseMedio":null,"aggiudicazioni":5,"prezzoAggMedio":null},{"tribunale":"Paola","regione":"Calabria","lottiAperti":35,"prezzoBaseMedio":null,"aggiudicazioni":4,"prezzoAggMedio":null},{"tribunale":"Massa","regione":"Toscana","lottiAperti":34,"prezzoBaseMedio":null,"aggiudicazioni":17,"prezzoAggMedio":null},{"tribunale":"La Spezia","regione":"Liguria","lottiAperti":33,"prezzoBaseMedio":null,"aggiudicazioni":17,"prezzoAggMedio":null},{"tribunale":"Larino","regione":"Molise","lottiAperti":33,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Lanciano","regione":"Abruzzo","lottiAperti":32,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Savona","regione":"Liguria","lottiAperti":32,"prezzoBaseMedio":null,"aggiudicazioni":3,"prezzoAggMedio":null},{"tribunale":"Vasto","regione":"Abruzzo","lottiAperti":28,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Rovereto","regione":"Trentino-Alto Adige","lottiAperti":27,"prezzoBaseMedio":null,"aggiudicazioni":10,"prezzoAggMedio":null},{"tribunale":"Torre Annunziata","regione":"Campania","lottiAperti":22,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Parma","regione":"Emilia-Romagna","lottiAperti":20,"prezzoBaseMedio":null,"aggiudicazioni":56,"prezzoAggMedio":null},{"tribunale":"Potenza ex Tribunale di Melfi","regione":"Basilicata","lottiAperti":20,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Bolzano","regione":"Trentino-Alto Adige","lottiAperti":18,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Marsala","regione":"Sicilia","lottiAperti":15,"prezzoBaseMedio":null,"aggiudicazioni":2,"prezzoAggMedio":null},{"tribunale":"Gorizia","regione":"Friuli-Venezia Giulia","lottiAperti":13,"prezzoBaseMedio":null,"aggiudicazioni":24,"prezzoAggMedio":null},{"tribunale":"Enna ex Tribunale di Nicosia","regione":"Sicilia","lottiAperti":11,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Lagonegro ex Tribunale di Sala Consilina","regione":"Campania","lottiAperti":10,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Pavia ex Tribunale di Vigevano","regione":"Lombardia","lottiAperti":10,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Lanusei","regione":"Sardegna","lottiAperti":9,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Udine ex Tribunale di Tolmezzo","regione":"Friuli-Venezia Giulia","lottiAperti":5,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Trieste","regione":"Friuli-Venezia Giulia","lottiAperti":4,"prezzoBaseMedio":null,"aggiudicazioni":3,"prezzoAggMedio":null},{"tribunale":"Avellino ex Tribunale di Sant'angelo dei Lombardi","regione":"Campania","lottiAperti":3,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Foggia ex Tribunale di Lucera","regione":"Puglia","lottiAperti":2,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Benevento ex Tribunale di Ariano Irpino","regione":"Puglia","lottiAperti":1,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Alessandria ex Tribunale di Tortona","regione":"Piemonte","lottiAperti":null,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Cremona ex Tribunale di Crema","regione":"Lombardia","lottiAperti":null,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Macerata ex Tribunale di Camerino","regione":"Marche","lottiAperti":null,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Ragusa ex Tribunale di Modica","regione":"Sicilia","lottiAperti":null,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null},{"tribunale":"Terni ex Tribunale di Orvieto","regione":"Umbria","lottiAperti":null,"prezzoBaseMedio":null,"aggiudicazioni":null,"prezzoAggMedio":null}],"nota":"aggiudicazioni: tutti i tipi di bene (immobiliare + mobiliare), come pubblicati dal portale. prezzoAggMedio: null perché la media senza filtro categoria mescola auto e immobili e non è un prezzo medio di aggiudicazione immobiliare; si valorizza quando esisterà il filtro per tribunale."}
+{
+ "aggiornato": "2026-11-18T16:40:09.268Z",
+ "fonte": "feed/aste-indice/*.json (indice lotti) + feed/statistiche.json",
+ "copertura": "149 tribunali · 149 con almeno un lotto aperto · 17086 lotti aperti",
+ "tribunali": [
+  {
+   "tribunale": "ROMA",
+   "regione": null,
+   "lottiAperti": 456,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "roma"
+  },
+  {
+   "tribunale": "COSENZA",
+   "regione": null,
+   "lottiAperti": 424,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "cosenza"
+  },
+  {
+   "tribunale": "CAGLIARI",
+   "regione": null,
+   "lottiAperti": 366,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "cagliari"
+  },
+  {
+   "tribunale": "PERUGIA",
+   "regione": null,
+   "lottiAperti": 360,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "perugia"
+  },
+  {
+   "tribunale": "CATANIA",
+   "regione": null,
+   "lottiAperti": 340,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "catania"
+  },
+  {
+   "tribunale": "FERMO",
+   "regione": null,
+   "lottiAperti": 330,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "fermo"
+  },
+  {
+   "tribunale": "FOGGIA",
+   "regione": null,
+   "lottiAperti": 312,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "foggia"
+  },
+  {
+   "tribunale": "BARI",
+   "regione": null,
+   "lottiAperti": 309,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "bari"
+  },
+  {
+   "tribunale": "TORINO",
+   "regione": null,
+   "lottiAperti": 287,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "torino"
+  },
+  {
+   "tribunale": "AGRIGENTO",
+   "regione": null,
+   "lottiAperti": 283,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "agrigento"
+  },
+  {
+   "tribunale": "SIRACUSA",
+   "regione": null,
+   "lottiAperti": 273,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "siracusa"
+  },
+  {
+   "tribunale": "FIRENZE",
+   "regione": null,
+   "lottiAperti": 270,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "firenze"
+  },
+  {
+   "tribunale": "TARANTO",
+   "regione": null,
+   "lottiAperti": 265,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "taranto"
+  },
+  {
+   "tribunale": "ALESSANDRIA",
+   "regione": null,
+   "lottiAperti": 264,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "alessandria"
+  },
+  {
+   "tribunale": "TIVOLI",
+   "regione": null,
+   "lottiAperti": 253,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "tivoli"
+  },
+  {
+   "tribunale": "MACERATA",
+   "regione": null,
+   "lottiAperti": 250,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "macerata"
+  },
+  {
+   "tribunale": "MILANO",
+   "regione": null,
+   "lottiAperti": 233,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "milano"
+  },
+  {
+   "tribunale": "LECCE",
+   "regione": null,
+   "lottiAperti": 202,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "lecce"
+  },
+  {
+   "tribunale": "VELLETRI",
+   "regione": null,
+   "lottiAperti": 200,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "velletri"
+  },
+  {
+   "tribunale": "ASTI",
+   "regione": null,
+   "lottiAperti": 199,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "asti"
+  },
+  {
+   "tribunale": "BRESCIA",
+   "regione": null,
+   "lottiAperti": 193,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "brescia"
+  },
+  {
+   "tribunale": "BERGAMO",
+   "regione": null,
+   "lottiAperti": 187,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "bergamo"
+  },
+  {
+   "tribunale": "IVREA",
+   "regione": null,
+   "lottiAperti": 186,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "ivrea"
+  },
+  {
+   "tribunale": "MONZA",
+   "regione": null,
+   "lottiAperti": 186,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "monza"
+  },
+  {
+   "tribunale": "MESSINA",
+   "regione": null,
+   "lottiAperti": 183,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "messina"
+  },
+  {
+   "tribunale": "Napoli nord in Aversa",
+   "regione": null,
+   "lottiAperti": 181,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "napoli-nord-in-aversa"
+  },
+  {
+   "tribunale": "PISA",
+   "regione": null,
+   "lottiAperti": 181,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "pisa"
+  },
+  {
+   "tribunale": "PESCARA",
+   "regione": null,
+   "lottiAperti": 180,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "pescara"
+  },
+  {
+   "tribunale": "CUNEO",
+   "regione": null,
+   "lottiAperti": 176,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "cuneo"
+  },
+  {
+   "tribunale": "TEMPIO PAUSANIA",
+   "regione": null,
+   "lottiAperti": 174,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "tempio-pausania"
+  },
+  {
+   "tribunale": "PAVIA",
+   "regione": null,
+   "lottiAperti": 169,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "pavia"
+  },
+  {
+   "tribunale": "GROSSETO",
+   "regione": null,
+   "lottiAperti": 167,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "grosseto"
+  },
+  {
+   "tribunale": "LATINA",
+   "regione": null,
+   "lottiAperti": 166,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "latina"
+  },
+  {
+   "tribunale": "PALERMO",
+   "regione": null,
+   "lottiAperti": 164,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "palermo"
+  },
+  {
+   "tribunale": "SIENA",
+   "regione": null,
+   "lottiAperti": 164,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "siena"
+  },
+  {
+   "tribunale": "VITERBO",
+   "regione": null,
+   "lottiAperti": 162,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "viterbo"
+  },
+  {
+   "tribunale": "CATANZARO",
+   "regione": null,
+   "lottiAperti": 158,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "catanzaro"
+  },
+  {
+   "tribunale": "GENOVA",
+   "regione": null,
+   "lottiAperti": 157,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "genova"
+  },
+  {
+   "tribunale": "POTENZA",
+   "regione": null,
+   "lottiAperti": 156,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "potenza"
+  },
+  {
+   "tribunale": "ENNA",
+   "regione": null,
+   "lottiAperti": 153,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "enna"
+  },
+  {
+   "tribunale": "NAPOLI",
+   "regione": null,
+   "lottiAperti": 152,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "napoli"
+  },
+  {
+   "tribunale": "ANCONA",
+   "regione": null,
+   "lottiAperti": 151,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "ancona"
+  },
+  {
+   "tribunale": "CALTAGIRONE",
+   "regione": null,
+   "lottiAperti": 150,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "caltagirone"
+  },
+  {
+   "tribunale": "SALERNO",
+   "regione": null,
+   "lottiAperti": 148,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "salerno"
+  },
+  {
+   "tribunale": "ASCOLI PICENO",
+   "regione": null,
+   "lottiAperti": 147,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "ascoli-piceno"
+  },
+  {
+   "tribunale": "BENEVENTO",
+   "regione": null,
+   "lottiAperti": 147,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "benevento"
+  },
+  {
+   "tribunale": "VERBANIA",
+   "regione": null,
+   "lottiAperti": 147,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "verbania"
+  },
+  {
+   "tribunale": "RAGUSA",
+   "regione": null,
+   "lottiAperti": 143,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "ragusa"
+  },
+  {
+   "tribunale": "SPOLETO",
+   "regione": null,
+   "lottiAperti": 143,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "spoleto"
+  },
+  {
+   "tribunale": "PISTOIA",
+   "regione": null,
+   "lottiAperti": 142,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "pistoia"
+  },
+  {
+   "tribunale": "AREZZO",
+   "regione": null,
+   "lottiAperti": 138,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "arezzo"
+  },
+  {
+   "tribunale": "AVELLINO",
+   "regione": null,
+   "lottiAperti": 138,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "avellino"
+  },
+  {
+   "tribunale": "CIVITAVECCHIA",
+   "regione": null,
+   "lottiAperti": 135,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "civitavecchia"
+  },
+  {
+   "tribunale": "PALMI",
+   "regione": null,
+   "lottiAperti": 135,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "palmi"
+  },
+  {
+   "tribunale": "VICENZA",
+   "regione": null,
+   "lottiAperti": 130,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "vicenza"
+  },
+  {
+   "tribunale": "CREMONA",
+   "regione": null,
+   "lottiAperti": 127,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "cremona"
+  },
+  {
+   "tribunale": "PADOVA",
+   "regione": null,
+   "lottiAperti": 123,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "padova"
+  },
+  {
+   "tribunale": "TERMINI IMERESE",
+   "regione": null,
+   "lottiAperti": 123,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "termini-imerese"
+  },
+  {
+   "tribunale": "FORLI'",
+   "regione": null,
+   "lottiAperti": 117,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "forli"
+  },
+  {
+   "tribunale": "TERAMO",
+   "regione": null,
+   "lottiAperti": 116,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "teramo"
+  },
+  {
+   "tribunale": "VERCELLI",
+   "regione": null,
+   "lottiAperti": 116,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "vercelli"
+  },
+  {
+   "tribunale": "FROSINONE",
+   "regione": null,
+   "lottiAperti": 114,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "frosinone"
+  },
+  {
+   "tribunale": "MANTOVA",
+   "regione": null,
+   "lottiAperti": 109,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "mantova"
+  },
+  {
+   "tribunale": "MATERA",
+   "regione": null,
+   "lottiAperti": 108,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "matera"
+  },
+  {
+   "tribunale": "TRAPANI",
+   "regione": null,
+   "lottiAperti": 108,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "trapani"
+  },
+  {
+   "tribunale": "ROVIGO",
+   "regione": null,
+   "lottiAperti": 106,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "rovigo"
+  },
+  {
+   "tribunale": "CASSINO",
+   "regione": null,
+   "lottiAperti": 101,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "cassino"
+  },
+  {
+   "tribunale": "CHIETI",
+   "regione": null,
+   "lottiAperti": 97,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "chieti"
+  },
+  {
+   "tribunale": "L'AQUILA",
+   "regione": null,
+   "lottiAperti": 96,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "l-aquila"
+  },
+  {
+   "tribunale": "SANTA MARIA CAPUA VETERE",
+   "regione": null,
+   "lottiAperti": 96,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "santa-maria-capua-vetere"
+  },
+  {
+   "tribunale": "URBINO",
+   "regione": null,
+   "lottiAperti": 91,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "urbino"
+  },
+  {
+   "tribunale": "VERONA",
+   "regione": null,
+   "lottiAperti": 91,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "verona"
+  },
+  {
+   "tribunale": "RIETI",
+   "regione": null,
+   "lottiAperti": 90,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "rieti"
+  },
+  {
+   "tribunale": "MODENA",
+   "regione": null,
+   "lottiAperti": 89,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "modena"
+  },
+  {
+   "tribunale": "NOVARA",
+   "regione": null,
+   "lottiAperti": 87,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "novara"
+  },
+  {
+   "tribunale": "TREVISO",
+   "regione": null,
+   "lottiAperti": 87,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "treviso"
+  },
+  {
+   "tribunale": "BOLOGNA",
+   "regione": null,
+   "lottiAperti": 86,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "bologna"
+  },
+  {
+   "tribunale": "BUSTO ARSIZIO",
+   "regione": null,
+   "lottiAperti": 86,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "busto-arsizio"
+  },
+  {
+   "tribunale": "LAMEZIA TERME",
+   "regione": null,
+   "lottiAperti": 86,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "lamezia-terme"
+  },
+  {
+   "tribunale": "VENEZIA",
+   "regione": null,
+   "lottiAperti": 85,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "venezia"
+  },
+  {
+   "tribunale": "LOCRI",
+   "regione": null,
+   "lottiAperti": 84,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "locri"
+  },
+  {
+   "tribunale": "TRANI",
+   "regione": null,
+   "lottiAperti": 82,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "trani"
+  },
+  {
+   "tribunale": "AVEZZANO",
+   "regione": null,
+   "lottiAperti": 80,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "avezzano"
+  },
+  {
+   "tribunale": "PIACENZA",
+   "regione": null,
+   "lottiAperti": 80,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "piacenza"
+  },
+  {
+   "tribunale": "LAGONEGRO",
+   "regione": null,
+   "lottiAperti": 79,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "lagonegro"
+  },
+  {
+   "tribunale": "NOCERA INFERIORE",
+   "regione": null,
+   "lottiAperti": 79,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "nocera-inferiore"
+  },
+  {
+   "tribunale": "TERNI",
+   "regione": null,
+   "lottiAperti": 79,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "terni"
+  },
+  {
+   "tribunale": "BRINDISI",
+   "regione": null,
+   "lottiAperti": 76,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "brindisi"
+  },
+  {
+   "tribunale": "CAMPOBASSO",
+   "regione": null,
+   "lottiAperti": 75,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "campobasso"
+  },
+  {
+   "tribunale": "GELA",
+   "regione": null,
+   "lottiAperti": 75,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "gela"
+  },
+  {
+   "tribunale": "LIVORNO",
+   "regione": null,
+   "lottiAperti": 75,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "livorno"
+  },
+  {
+   "tribunale": "PESARO",
+   "regione": null,
+   "lottiAperti": 71,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "pesaro"
+  },
+  {
+   "tribunale": "CALTANISSETTA",
+   "regione": null,
+   "lottiAperti": 70,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "caltanissetta"
+  },
+  {
+   "tribunale": "LODI",
+   "regione": null,
+   "lottiAperti": 70,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "lodi"
+  },
+  {
+   "tribunale": "NUORO",
+   "regione": null,
+   "lottiAperti": 70,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "nuoro"
+  },
+  {
+   "tribunale": "REGGIO CALABRIA",
+   "regione": null,
+   "lottiAperti": 70,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "reggio-calabria"
+  },
+  {
+   "tribunale": "CASTROVILLARI",
+   "regione": null,
+   "lottiAperti": 65,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "castrovillari"
+  },
+  {
+   "tribunale": "PATTI",
+   "regione": null,
+   "lottiAperti": 65,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "patti"
+  },
+  {
+   "tribunale": "SULMONA",
+   "regione": null,
+   "lottiAperti": 65,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "sulmona"
+  },
+  {
+   "tribunale": "BARCELLONA POZZO DI GOTTO",
+   "regione": null,
+   "lottiAperti": 63,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "barcellona-pozzo-di-gotto"
+  },
+  {
+   "tribunale": "LUCCA",
+   "regione": null,
+   "lottiAperti": 63,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "lucca"
+  },
+  {
+   "tribunale": "FERRARA",
+   "regione": null,
+   "lottiAperti": 61,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "ferrara"
+  },
+  {
+   "tribunale": "VARESE",
+   "regione": null,
+   "lottiAperti": 61,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "varese"
+  },
+  {
+   "tribunale": "LECCO",
+   "regione": null,
+   "lottiAperti": 60,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "lecco"
+  },
+  {
+   "tribunale": "COMO",
+   "regione": null,
+   "lottiAperti": 58,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "como"
+  },
+  {
+   "tribunale": "RAVENNA",
+   "regione": null,
+   "lottiAperti": 56,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "ravenna"
+  },
+  {
+   "tribunale": "CROTONE",
+   "regione": null,
+   "lottiAperti": 55,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "crotone"
+  },
+  {
+   "tribunale": "NOLA",
+   "regione": null,
+   "lottiAperti": 53,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "nola"
+  },
+  {
+   "tribunale": "SONDRIO",
+   "regione": null,
+   "lottiAperti": 53,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "sondrio"
+  },
+  {
+   "tribunale": "ORISTANO",
+   "regione": null,
+   "lottiAperti": 52,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "oristano"
+  },
+  {
+   "tribunale": "VIBO VALENTIA",
+   "regione": null,
+   "lottiAperti": 52,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "vibo-valentia"
+  },
+  {
+   "tribunale": "SCIACCA",
+   "regione": null,
+   "lottiAperti": 50,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "sciacca"
+  },
+  {
+   "tribunale": "TRENTO",
+   "regione": null,
+   "lottiAperti": 50,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "trento"
+  },
+  {
+   "tribunale": "PRATO",
+   "regione": null,
+   "lottiAperti": 49,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "prato"
+  },
+  {
+   "tribunale": "SASSARI",
+   "regione": null,
+   "lottiAperti": 49,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "sassari"
+  },
+  {
+   "tribunale": "UDINE",
+   "regione": null,
+   "lottiAperti": 48,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "udine"
+  },
+  {
+   "tribunale": "RIMINI",
+   "regione": null,
+   "lottiAperti": 43,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "rimini"
+  },
+  {
+   "tribunale": "IMPERIA",
+   "regione": null,
+   "lottiAperti": 39,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "imperia"
+  },
+  {
+   "tribunale": "ISERNIA",
+   "regione": null,
+   "lottiAperti": 39,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "isernia"
+  },
+  {
+   "tribunale": "VALLO DELLA LUCANIA",
+   "regione": null,
+   "lottiAperti": 39,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "vallo-della-lucania"
+  },
+  {
+   "tribunale": "LA SPEZIA",
+   "regione": null,
+   "lottiAperti": 36,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "la-spezia"
+  },
+  {
+   "tribunale": "LANCIANO",
+   "regione": null,
+   "lottiAperti": 36,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "lanciano"
+  },
+  {
+   "tribunale": "PAOLA",
+   "regione": null,
+   "lottiAperti": 36,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "paola"
+  },
+  {
+   "tribunale": "BELLUNO",
+   "regione": null,
+   "lottiAperti": 35,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "belluno"
+  },
+  {
+   "tribunale": "ENNA ex Tribunale di NICOSIA",
+   "regione": null,
+   "lottiAperti": 33,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "enna-ex-tribunale-di-nicosia"
+  },
+  {
+   "tribunale": "VASTO",
+   "regione": null,
+   "lottiAperti": 33,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "vasto"
+  },
+  {
+   "tribunale": "BIELLA",
+   "regione": null,
+   "lottiAperti": 32,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "biella"
+  },
+  {
+   "tribunale": "PORDENONE",
+   "regione": null,
+   "lottiAperti": 31,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "pordenone"
+  },
+  {
+   "tribunale": "SAVONA",
+   "regione": null,
+   "lottiAperti": 31,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "savona"
+  },
+  {
+   "tribunale": "REGGIO EMILIA",
+   "regione": null,
+   "lottiAperti": 30,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "reggio-emilia"
+  },
+  {
+   "tribunale": "LARINO",
+   "regione": null,
+   "lottiAperti": 29,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "larino"
+  },
+  {
+   "tribunale": "AOSTA",
+   "regione": null,
+   "lottiAperti": 23,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "aosta"
+  },
+  {
+   "tribunale": "PARMA",
+   "regione": null,
+   "lottiAperti": 20,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "parma"
+  },
+  {
+   "tribunale": "LAGONEGRO ex Tribunale di SALA CONSILINA",
+   "regione": null,
+   "lottiAperti": 19,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "lagonegro-ex-tribunale-di-sala-consilina"
+  },
+  {
+   "tribunale": "MASSA",
+   "regione": null,
+   "lottiAperti": 19,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "massa"
+  },
+  {
+   "tribunale": "BOLZANO",
+   "regione": null,
+   "lottiAperti": 18,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "bolzano"
+  },
+  {
+   "tribunale": "POTENZA ex Tribunale di MELFI",
+   "regione": null,
+   "lottiAperti": 18,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "potenza-ex-tribunale-di-melfi"
+  },
+  {
+   "tribunale": "ROVERETO",
+   "regione": null,
+   "lottiAperti": 18,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "rovereto"
+  },
+  {
+   "tribunale": "TORRE ANNUNZIATA",
+   "regione": null,
+   "lottiAperti": 18,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "torre-annunziata"
+  },
+  {
+   "tribunale": "MARSALA",
+   "regione": null,
+   "lottiAperti": 16,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "marsala"
+  },
+  {
+   "tribunale": "GORIZIA",
+   "regione": null,
+   "lottiAperti": 15,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "gorizia"
+  },
+  {
+   "tribunale": "LANUSEI",
+   "regione": null,
+   "lottiAperti": 10,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "lanusei"
+  },
+  {
+   "tribunale": "PAVIA ex Tribunale di VIGEVANO",
+   "regione": null,
+   "lottiAperti": 10,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "pavia-ex-tribunale-di-vigevano"
+  },
+  {
+   "tribunale": "UDINE ex Tribunale di TOLMEZZO",
+   "regione": null,
+   "lottiAperti": 5,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "udine-ex-tribunale-di-tolmezzo"
+  },
+  {
+   "tribunale": "TRIESTE",
+   "regione": null,
+   "lottiAperti": 4,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "trieste"
+  },
+  {
+   "tribunale": "Corte d'Appello - Bologna",
+   "regione": null,
+   "lottiAperti": 3,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "corte-d-appello-bologna"
+  },
+  {
+   "tribunale": "AVELLINO ex Tribunale di SANT'ANGELO DEI LOMBARDI",
+   "regione": null,
+   "lottiAperti": 2,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "avellino-ex-tribunale-di-sant-angelo-dei-lombardi"
+  },
+  {
+   "tribunale": "FOGGIA ex Tribunale di LUCERA",
+   "regione": null,
+   "lottiAperti": 2,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "foggia-ex-tribunale-di-lucera"
+  },
+  {
+   "tribunale": "BENEVENTO ex Tribunale di ARIANO IRPINO",
+   "regione": null,
+   "lottiAperti": 1,
+   "totale": null,
+   "prezzoBaseMedio": null,
+   "aggiudicazioni": null,
+   "prezzoAggMedio": null,
+   "slug": "benevento-ex-tribunale-di-ariano-irpino"
+  }
+ ],
+ "nota": "Rigenerato a ogni giro di feed-sync (18/11/2026). regione/aggiudicazioni/prezzoAggMedio restano dal file precedente finché non hanno una fonte in questo giro: non si inventano."
+}
