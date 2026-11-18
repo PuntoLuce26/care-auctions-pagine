@@ -113,6 +113,26 @@ jobs:
       - name: Battito archivio aggiudicazioni (anche a zero variazioni)
         if: always()
         run: node scripts/aggiudicazioni-merge.js battito || echo "battito aggiudicazioni non scritto"
+      # 18/11/2026 — GUARDIA MARCA: «CARe Auctions» con lo spazio aveva rivestito tre sorgenti
+      # (sorgente edge, pagine statiche, feed). Nei feed si blocca qui: sono letti direttamente da
+      # altre app e crawler, che non passano dall'edge e non vedono la correzione in uscita.
+      # Se la forma sbagliata ricompare, il giro FALLISCE e non committa (niente toppa silenziosa).
+      - name: Guardia marchio — «CARe Auctions» nei feed
+        run: |
+          node -e '
+          const fs = require("fs");
+          const files = ["feed/emozioni91.json", "feed/pagine91.json", "feed/dati-indice.json"];
+          let ko = 0;
+          for (const f of files) {
+            let t = "";
+            try { t = fs.readFileSync(f, "utf8"); } catch (e) { console.log("non leggibile:", f); continue; }
+            const n = (t.match(/CARe\s+Auctions/g) || []).length;
+            console.log(f + " → " + n + " occorrenze di «CARe Auctions»");
+            if (n > 0) { ko++; console.log("::error::" + f + " contiene «CARe Auctions» con lo spazio (" + n + ")"); }
+          }
+          process.exit(ko ? 1 : 0);
+          '
+
       - name: commit e push
         run: |
           git config user.name "Sam CARe"
