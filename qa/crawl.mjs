@@ -14,7 +14,7 @@ import { buildHash, fetchJson, fetchText, makeIssue, sameOrigin, short, ageHours
 // risorse ≥400 e dagli errori di console che lo riguardano — ma SOLO lui.
 const BEACON = /cdn-cgi|cloudflareinsights/i;
 
-const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36';
+const UA = 'CARe-QA/1.0 (+https://careauctions.co)';  // 18/11/2026 — il QA si firma: non deve piu' contarsi come un visitatore Chrome/macOS (le visite RUM erano per il 96% i nostri crawler)
 
 async function launch(browserName) {
   const type = { chromium, firefox, webkit }[browserName];
