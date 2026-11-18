@@ -138,7 +138,9 @@ async function main() {
   const meta = {
     generato,
     totale,
-    shard: SHARD,
+    // "hex2" = gli shard sono (Number(id) % 64) scritti in esadecimale minuscolo a 2 cifre
+    shard: 'hex2',
+    shardCount: SHARD,
     fonte: 'feed/*-imm-*.json',
     completo,
     minAsta,

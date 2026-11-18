@@ -52,7 +52,7 @@ jobs:
           for (const f of fs.readdirSync("feed/aste-indice")) { byte += fs.statSync("feed/aste-indice/" + f).size; file++; }
           console.log("meta:", JSON.stringify(meta));
           console.log("file:", file, "· byte totali:", byte, "(" + (byte / 1048576).toFixed(2) + " MB)");
-          if (meta.shard !== 64) { console.error("::error::shard attesi 64, trovati " + meta.shard); process.exit(1); }
+          if (meta.shard !== "hex2" || meta.shardCount !== 64) { console.error("::error::contratto shard non rispettato: shard=" + meta.shard + " shardCount=" + meta.shardCount); process.exit(1); }
           if (meta.shardBytesMax > 1.5 * 1024 * 1024) { console.error("::error::shard oltre 1,5 MB (" + meta.shardBytesMax + ")"); process.exit(1); }
           if (meta.completo !== true) { console.error("::error::completo non true"); process.exit(1); }
           '
