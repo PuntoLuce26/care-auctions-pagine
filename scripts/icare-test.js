@@ -7,7 +7,7 @@ const BASE = process.env.ICARE_BASE || 'https://careauctions.co';
 const API = BASE + '/api/icare';
 const BRAIN = 'https://careauctions.co/ai/cervello.json';
 const casi = [
-  { id: 'success_fee_200k', q: 'Quanto costa la success fee su 200.000 euro?', must: ['5.800', 'non fa mediazione', '3,9%', '1,9%', '1.900'] },
+  { id: 'success_fee_200k', q: 'Quanto costa la success fee su 200.000 euro?', must: ['7.300', '400.000', 'progressiv', 'non fa mediazione', '3,9%', '1,9%', '1.900'] },
   { id: 'esiti_copertura', q: 'Quanti esiti avete e con quale copertura?', must: ['4.142', '360', '33.375', '44', '14', '29/09/2020'] },
   { id: 'foto_perizie', q: 'Le foto delle perizie e i documenti PVP?', must: ['629', 'lightbox', 'perizia', 'pvp-documenti'] },
   { id: 'lingue_legali', q: 'Quante lingue parla il sito e le pagine legali sono tradotte?', must: ['89', '25', 'italiana', 'vincolante'] },
