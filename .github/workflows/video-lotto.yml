@@ -14,11 +14,6 @@ on:
         description: 'ID del lotto (es. 1822566)'
         required: true
         type: string
-      minLato:
-        description: 'Soglia lato corto in px (default 800 = regola di prodotto)'
-        required: false
-        type: string
-        default: '800'
 
 permissions:
   contents: read
@@ -40,6 +35,12 @@ jobs:
         with:
           node-version: '22'
 
+      - name: poppler-utils (pdfimages per le immagini delle perizie)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq poppler-utils
+          pdfimages -v 2>&1 | head -n 1
+
       - name: ffmpeg PINNATO (stessa build dell'esecutore A)
         run: |
           set -euo pipefail
@@ -58,9 +59,6 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           LOTTO_ID: ${{ github.event.inputs.lottoId }}
-          # soglia di prodotto: lato corto >= 800 px. L'override esiste per il collaudo su lotti le
-          # cui foto sono più piccole (misurato: le ALTRO del PVP sono 577×433) e va dichiarato.
-          VIDEO_MIN_LATO: ${{ github.event.inputs.minLato || '800' }}
         run: |
           set -euo pipefail
           export PATH="$HOME/ffmpeg-pin/bin:$PATH"

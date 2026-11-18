@@ -27,10 +27,11 @@ const RAW = 'https://raw.githubusercontent.com/PuntoLuce26/care-auctions-pagine/
 const ACC = 'd5d20864ee7f83c32c9eeb5fcbda6edb';
 const BUCKET = 'care-stato';
 const OUT = process.env.VIDEO_OUT || 'video-out';
-const DURATA_FOTO = 4; // secondi per foto
+const DURATA_FOTO = Number(process.env.VIDEO_DURATA_FOTO || 4.5); // v1: 4,5 s per foto (testo leggibile)
 const XFADE = 0.6;
-const MAX_FOTO = 8;
-const MIN_LATO = Number(process.env.VIDEO_MIN_LATO || 800); // soglia lato corto (override dichiarato: VIDEO_MIN_LATO)
+const MAX_FOTO = Number(process.env.VIDEO_MAX_FOTO || 10); // oltre 10 il video annoia
+const MIN_LATO = Number(process.env.VIDEO_MIN_LATO || 560); // fallback allegati: 560 px (upscale Lanczos)
+const MIN_LATO_PDF = Number(process.env.VIDEO_MIN_LATO_PDF || 800); // immagini da perizia: 800 px
 const MIN_FOTO = 3;
 const FONT_CANDIDATI = [
   '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',
@@ -89,7 +90,7 @@ function scriviTesto(file, righe) {
   return file.replace(/\\/g, '/').replace(/:/g, '\\:');
 }
 
-function filtriDrawtext({ W, H, durata, titolo, tribunale, prezzo, data, fonte }) {
+function filtriDrawtext({ W, H, durata, titolo, tribunale, prezzo, data, fonte, crediti }) {
   const f = font();
   if (!f) {
     console.warn('  ! nessun font trovato: si procede SENZA sovraimpressioni (dichiarato in meta.json)');
@@ -99,9 +100,11 @@ function filtriDrawtext({ W, H, durata, titolo, tribunale, prezzo, data, fonte }
   const t2 = scriviTesto(`${OUT}/t2.txt`, [prezzo, data, fonte]);
   const comune = `fontfile=${f}:fontcolor=white:box=1:boxcolor=black@0.55:boxborderw=18`;
   const apertura = `drawtext=${comune}:textfile='${t1}':fontsize=${Math.round(W * 0.045)}:x=(w-text_w)/2:y=h*0.70:enable='between(t,0,3.4)'`;
-  const chiusura = `drawtext=${comune}:textfile='${t2}':fontsize=${Math.round(W * 0.038)}:x=(w-text_w)/2:y=h*0.62:enable='between(t,${Math.max(0, durata - 4).toFixed(2)},${durata.toFixed(2)})'`;
+  const chiusura = `drawtext=${comune}:textfile='${t2}':fontsize=${Math.round(W * 0.038)}:x=(w-text_w)/2:y=h*0.55:enable='between(t,${Math.max(0, durata - 5).toFixed(2)},${durata.toFixed(2)})'`;
+  const creditiTxt = scriviTesto(`${OUT}/t3.txt`, [crediti]);
+  const creditiFilter = `drawtext=${comune}:textfile='${creditiTxt}':fontsize=${Math.round(W * 0.026)}:x=(w-text_w)/2:y=h*0.68:enable='between(t,${Math.max(0, durata - 5).toFixed(2)},${durata.toFixed(2)})'`;
   const marchio = `drawtext=fontfile=${f}:text='CAReAuctions':fontcolor=white@0.85:fontsize=${Math.round(W * 0.026)}:x=w-text_w-24:y=h-text_h-20`;
-  return { filter: [apertura, chiusura, marchio].join(','), nota: 'sovraimpressioni con ' + f };
+  return { filter: [apertura, chiusura, creditiFilter, marchio].join(','), nota: 'sovraimpressioni con ' + f + ' · crediti fonti nel video' };
 }
 
 async function main() {
@@ -120,7 +123,42 @@ async function main() {
   const L = await lotto;
   if (!L) console.log('  ! lotto assente dall indice: titolo/tribunale dal documento PVP');
 
-  if (MIN_LATO !== 800) console.log('  ! VIDEO_MIN_LATO=' + MIN_LATO + ' (override dichiarato: la soglia di prodotto è 800)');
+  if (MIN_LATO !== 560) console.log('  ! VIDEO_MIN_LATO=' + MIN_LATO + ' (override dichiarato: la soglia di prodotto per gli allegati è 560)');
+  // 1-bis) v1 — IMMAGINI DENTRO LA PERIZIA PDF (la strada vera: nel PDF sono grandi).
+  // poppler-utils è presente nel runner (lo usa già l'OCR delle perizie). Si estraggono con
+  // `pdfimages -png`, si scartano le < 800 px e quelle che sono timbri/firme/righe, si tiene
+  // l'ordine delle pagine. Se non resta niente utile, si ricade sulle foto degli allegati (560 px).
+  const daPdf = [];
+  const perizia = (doc.allegati || []).find((a) => String(a.t || '').toUpperCase() === 'PERIZ' && /\.pdf$/i.test(String(a.n || a.u || '')));
+  if (perizia) {
+    try {
+      const pdfFile = `${OUT}/perizia.pdf`;
+      const rPdf = await fetch(perizia.u, { headers: { 'User-Agent': 'care-video-lotto/1.0' } });
+      if (!rPdf.ok) throw new Error('HTTP ' + rPdf.status);
+      fs.writeFileSync(pdfFile, Buffer.from(await rPdf.arrayBuffer()));
+      const lista = ff('pdfimages', ['-list', pdfFile]);
+      const pagine = lista.split('\n').slice(2).map((l) => l.trim().split(/\s+/)).filter((c) => c.length > 3).map((c) => Number(c[0]));
+      ff('pdfimages', ['-png', '-f', '1', '-l', '40', pdfFile, `${OUT}/pdfimg`]);
+      const estratti = fs.readdirSync(OUT).filter((f) => /^pdfimg-\d+\.png$/.test(f)).sort();
+      console.log(`  perizia: ${estratti.length} immagini estratte dal PDF`);
+      estratti.forEach((f, i) => {
+        const file = `${OUT}/${f}`;
+        const byte = fs.statSync(file).size;
+        const { w, h } = dimensioni(file);
+        const pagina = pagine[i] || null;
+        const ratio = w && h ? Math.max(w, h) / Math.min(w, h) : 99;
+        // timbri/firme/righe: molto piccoli, o molto allungati, o quasi monocromatici (PNG minuscolo)
+        if (!w || !h || Math.min(w, h) < MIN_LATO_PDF) { fs.rmSync(file, { force: true }); return; }
+        if (ratio > 4) { fs.rmSync(file, { force: true }); return; }
+        if (byte < 30 * 1024) { fs.rmSync(file, { force: true }); return; } // timbro/scritta: pochi byte
+        daPdf.push({ file, nome: `pdf-pagina-${pagina || '?'}`, w, h, byte, fonte: `perizia PDF, pagina ${pagina || '?'}` });
+      });
+      console.log(`  perizia: ${daPdf.length} immagini utili (>= ${MIN_LATO_PDF} px, non timbri)`);
+    } catch (e) {
+      console.log('  perizia non estraibile (' + String((e && e.message) || e).slice(0, 140) + '): si usano le foto degli allegati');
+    }
+  }
+
   // 2) allegati e foto
   const doc = await (await fetch(`${BASE}/api/pvp-documenti/${ID}`)).json();
   if (!doc || !doc.ok || !Array.isArray(doc.allegati)) throw new Error('documenti non leggibili per il lotto ' + ID);
@@ -128,6 +166,11 @@ async function main() {
   console.log(`  allegati: ${doc.allegati.length} · immagini candidate: ${candidati.length}`);
 
   const usate = [];
+  for (const f of daPdf) {
+    if (usate.length >= MAX_FOTO) break;
+    console.log(`  + uso ${f.nome} (${f.w}x${f.h}, ${f.byte} B) — ${f.fonte}`);
+    usate.push(f);
+  }
   for (const a of candidati) {
     if (usate.length >= MAX_FOTO) break;
     const file = `${OUT}/foto-${usate.length + 1}.jpg`;
@@ -140,8 +183,8 @@ async function main() {
         fs.rmSync(file, { force: true });
         continue;
       }
-      console.log(`  + uso ${a.n} (${w}x${h}, ${byte} B)`);
-      usate.push({ file, nome: a.n, w, h, byte });
+      console.log(`  + uso ${a.n} (${w}x${h}, ${byte} B) — allegato`);
+      usate.push({ file, nome: a.n, w, h, byte, fonte: 'allegato PVP: ' + a.n });
     } catch (e) {
       console.log(`  - scarto ${a.n}: ${String((e && e.message) || e).slice(0, 140)}`);
     }
@@ -161,13 +204,41 @@ async function main() {
   const data = L && L.d ? 'Data asta: ' + L.d.split('-').reverse().join('/') : '';
   const fonte = 'Fonte: PVP — ' + (tribunale || 'Tribunale');
 
+  // v1 — CREDITI FONTI nel video (da dove viene ogni foto) e SOTTOTITOLI BRUCIATI (leggibili senza audio).
+  const daPdfN = usate.filter((u) => String(u.fonte || '').startsWith('perizia')).length;
+  const crediti = daPdfN ? `Foto: perizia PDF (${daPdfN} immagini)` : 'Foto: allegati PVP';
+  const righeVoce = [
+    titolo + '.',
+    tribunale ? tribunale + '.' : '',
+    prezzo ? prezzo + '.' : '',
+    data ? data + '.' : '',
+    fonte + '.',
+    crediti + '.',
+  ].filter(Boolean);
+  const srt = `${OUT}/subs.srt`;
+  {
+    const passo = durata / righeVoce.length;
+    const ts = (x) => {
+      const ms = Math.max(0, Math.round(x * 1000));
+      const hh = String(Math.floor(ms / 3600000)).padStart(2, '0');
+      const mm = String(Math.floor((ms % 3600000) / 60000)).padStart(2, '0');
+      const ss = String(Math.floor((ms % 60000) / 1000)).padStart(2, '0');
+      return `${hh}:${mm}:${ss},${String(ms % 1000).padStart(3, '0')}`;
+    };
+    fs.writeFileSync(
+      srt,
+      righeVoce.map((r, i) => `${i + 1}\n${ts(i * passo)} --> ${ts((i + 1) * passo - 0.05)}\n${r}\n`).join('\n'),
+    );
+    console.log(`  sottotitoli: ${righeVoce.length} righe · ${crediti}`);
+  }
+
   const formati = [
     { nome: 'verticale', W: 1080, H: 1920, file: `${OUT}/vertical.mp4`, chiave: `video/${ID}/vertical.mp4` },
     { nome: 'orizzontale', W: 1920, H: 1080, file: `${OUT}/orizzontale.mp4`, chiave: `video/${ID}/orizzontale.mp4` },
   ];
 
   for (const f of formati) {
-    const { filter: draw, nota } = filtriDrawtext({ W: f.W, H: f.H, durata, titolo, tribunale, prezzo, data, fonte });
+    const { filter: draw, nota } = filtriDrawtext({ W: f.W, H: f.H, durata, titolo, tribunale, prezzo, data, fonte, crediti });
     if (nota) console.log('  ' + nota);
 
     const args = ['-y'];
@@ -176,7 +247,7 @@ async function main() {
     usate.forEach((u, i) => {
       const grande = f.W > f.H ? `${f.W * 2}:${f.H * 2}` : `${f.W * 2}:${f.H * 2}`;
       catena.push(
-        `[${i}:v]scale=${grande}:force_original_aspect_ratio=increase,crop=${f.W * 2}:${f.H * 2},` +
+        `[${i}:v]scale=${grande}:force_original_aspect_ratio=increase:flags=lanczos,crop=${f.W * 2}:${f.H * 2},unsharp=5:5:0.6,` +
           `zoompan=z='min(1.0+0.08*on/${DURATA_FOTO * 30},1.08)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=${DURATA_FOTO * 30}:s=${f.W}x${f.H}:fps=30,` +
           `setsar=1,format=yuv420p[v${i}]`,
       );
@@ -188,7 +259,7 @@ async function main() {
       catena.push(`[${ultimo}][v${i}]xfade=transition=fade:duration=${XFADE}:offset=${off}[${label}]`);
       ultimo = label;
     }
-    catena.push(`[${ultimo}]${draw ? draw + ',' : ''}format=yuv420p[vout]`);
+    catena.push(`[${ultimo}]${draw ? draw + ',' : ''}subtitles='${srt.replace(/\\/g, '/')}':force_style='FontName=DejaVu Sans,Fontsize=${Math.round(f.W * 0.032)},PrimaryColour=&H00FFFFFF,OutlineColour=&H00000000,BorderStyle=1,Outline=2,Shadow=0,Alignment=2,MarginV=${Math.round(f.H * 0.12)}',format=yuv420p[vout]`);
 
     args.push('-filter_complex', catena.join(';'), '-map', '[vout]', '-t', String(durata),
       '-c:v', 'libx264', '-crf', '23', '-preset', 'medium', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', f.file);
@@ -214,7 +285,10 @@ async function main() {
     byte: Object.fromEntries(formati.map((f) => [f.nome, f.byte])),
     formato: Object.fromEntries(formati.map((f) => [f.nome, { risoluzione: f.risoluzione, durata: f.durata, chiave: f.chiave }])),
     generato: new Date().toISOString(),
-    fotoUsate: usate.map((u) => ({ nome: u.nome, w: u.w, h: u.h })),
+    fotoUsate: usate.map((u) => ({ nome: u.nome, w: u.w, h: u.h, fonte: u.fonte || 'allegato PVP' })),
+    crediti,
+    sottotitoli: righeVoce.length,
+    voce: 'non inclusa: v1 senza endpoint TTS HTTP (vedi referto)',
     fonte: fonte,
     testata: { titolo, tribunale, prezzo, data },
     note: 'video cinematico (Ken Burns, dissolvenze 0,6 s), nessuna musica, nessun volto, nessun logo di terzi',
