@@ -1,6 +1,6 @@
 {
-  "generatoIl": "2026-11-18T10:58:52.262Z",
-  "build": "14609058",
+  "generatoIl": "2026-11-18T13:56:07.762Z",
+  "build": "df672caa",
   "righe": [
     {
       "rotta": "/",
@@ -77,10 +77,10 @@
     {
       "rotta": "/aste/1822566",
       "locale": "it-IT",
-      "canonical": null,
+      "canonical": "https://careauctions.co/aste/1822566",
       "dataLp": false,
-      "ok": false,
-      "motivo": "page.goto: Timeout 45000ms exceeded. Call log: - navigating to \"https://careauctions.co/aste/1822566\", waiting until \"networkidle\""
+      "ok": true,
+      "motivo": ""
     },
     {
       "rotta": "/",
@@ -157,13 +157,13 @@
     {
       "rotta": "/aste/1822566",
       "locale": "en-US",
-      "canonical": null,
+      "canonical": "https://careauctions.co/aste/1822566",
       "dataLp": false,
-      "ok": false,
-      "motivo": "page.goto: Timeout 45000ms exceeded. Call log: - navigating to \"https://careauctions.co/aste/1822566\", waiting until \"networkidle\""
+      "ok": true,
+      "motivo": ""
     }
   ],
-  "ko": 2,
+  "ko": 0,
   "totale": 20,
-  "verdetto": "FAIL"
+  "verdetto": "PASS"
 }
