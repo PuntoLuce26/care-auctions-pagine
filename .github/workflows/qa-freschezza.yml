@@ -1,0 +1,32 @@
+name: qa-freschezza
+# 18/11/2026 — watchdog della freschezza del presidio QA.
+# Un payload che dice «0 critici» può essere vecchio e riferito a una build che non è più quella
+# servita: uno stato fermo che SEMBRA fresco è peggio di uno assente.
+# Soglie: > 6 h (2 × cadenza 3 h) → attenzione; > 9 h (3 × cadenza) → ALLARME + exit 1.
+# Payload assente/illeggibile → «non verificabile» (mai un rosso senza prova).
+# Allarme scritto in R2 stato/allarmi/qa-freschezza.json (ultimi 20). Niente issue.
+on:
+  schedule:
+    - cron: "0 */2 * * *"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: qa-freschezza
+  cancel-in-progress: false
+jobs:
+  freschezza:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Età del payload QA, coerenza con la build servita, allarme su R2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: node qa/freschezza-presidio.mjs
