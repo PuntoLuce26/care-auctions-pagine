@@ -81,14 +81,26 @@ function add(nome, livello, dettaglio) { C.push({ nome, livello, ok: livello ===
   const inizio = iso();
 
   // ── 1. Rotte del sito ───────────────────────────────────────────────────────
+  // 18/11/2026 — /qa/stato.json esce dall'elenco: lo stato QA vive su R2 e la rotta pubblica
+  // risponde 410 di proposito (non è un guasto). Restano tutte le altre.
   const ROTTE = ['/', '/idati', '/osservatorio', '/aggiudicazioni', '/ilive', '/novita', '/termini', '/privacy',
-    '/cookie', '/affiliazione', '/buynow/san-pasquale', '/ishop', '/compra-ora', '/qa/stato.json',
+    '/cookie', '/affiliazione', '/buynow/san-pasquale', '/ishop', '/compra-ora',
     '/feed/statistiche.json', '/llms.txt', '/ai/knowledge.json', '/stato', '/robots.txt', '/sitemap.xml'];
-  const esitiRotte = await Promise.all(ROTTE.map(async (p) => ({ p, r: await http(BASE + p, { timeout: 15000 }) })));
-  const rotteKO = esitiRotte.filter((x) => x.r.status !== 200);
-  add('sito: ' + (ROTTE.length - rotteKO.length) + '/' + ROTTE.length + ' rotte 200',
+  // 18/11/2026 — si segue UN solo redirect e si contano come OK i 2xx-3xx: /compra-ora risponde 301
+  // verso /buynow per scelta, non per guasto (il vecchio check lo contava KO a ogni giro).
+  const statoRotta = async (percorso) => {
+    const r = await http(BASE + percorso, { timeout: 15000 });
+    if (r.status >= 300 && r.status < 400 && r.location) {
+      const dopo = await http(new URL(r.location, BASE).toString(), { timeout: 15000 });
+      return { ...r, status: dopo.status, finale: dopo.status, via: r.status };
+    }
+    return r;
+  };
+  const esitiRotte = await Promise.all(ROTTE.map(async (p) => ({ p, r: await statoRotta(p) })));
+  const rotteKO = esitiRotte.filter((x) => !(x.r.status >= 200 && x.r.status < 400));
+  add('sito: ' + (ROTTE.length - rotteKO.length) + '/' + ROTTE.length + ' rotte ok (2xx-3xx, 1 redirect)',
     rotteKO.length ? 'problemi' : 'ok',
-    rotteKO.length ? rotteKO.map((x) => x.p + '→' + (x.r.status || 'errore')).join(', ') : 'tutte 200');
+    rotteKO.length ? rotteKO.map((x) => x.p + '→' + (x.r.status || 'errore')).join(', ') : 'tutte ok');
 
   // ── 2. Feed vivo e non svuotato ─────────────────────────────────────────────
   const st = await json('/feed/statistiche.json');

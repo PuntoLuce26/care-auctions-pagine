@@ -9,7 +9,6 @@ on:
 
 permissions:
   contents: read
-  issues: write
 
 concurrency:
   group: aggiornamento-mail
@@ -35,15 +34,34 @@ jobs:
       - name: Riepilogo nel run
         if: always()
         run: cat /tmp/aggiornamento.txt >> "$GITHUB_STEP_SUMMARY" || true
-      - name: Recapito su issue (se non c'è l'email)
+      # 18/11/2026 — NIENTE ISSUE: il repo pubblico le ha disabilitate (CL-50, fuga di dati interni).
+      # Il recapito va su R2 `care-stato` → stato/allarmi/aggiornamento-mail.json (ultimi 20),
+      # forma {generato, workflow, livello, messaggio, runId, runUrl}, e finisce in coda al digest.
+      - name: Allarme su R2 (niente issue)
         if: always()
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
-          TITLE="[QA] Aggiornamento $(date -u +%Y-%m-%d)"
-          NUM=$(gh issue list --state open --search "$TITLE in:title" --json number,title --jq ".[] | select(.title==\"$TITLE\") | .number" | head -1)
-          if [ -n "$NUM" ]; then
-            gh issue comment "$NUM" --body-file /tmp/aggiornamento.txt
-          else
-            gh issue create --title "$TITLE" --body-file /tmp/aggiornamento.txt
-          fi
+          set -euo pipefail
+          node --input-type=module -e '
+            import { readFileSync, writeFileSync, existsSync } from "node:fs";
+            import { leggiStato, pubblicaStato } from "./scripts/stato-pubblica.mjs";
+            const esito = process.env.ESITO_DIGEST || "sconosciuto";
+            const testo = existsSync("/tmp/aggiornamento.txt") ? readFileSync("/tmp/aggiornamento.txt", "utf8") : "";
+            const prev = await leggiStato("allarmi/aggiornamento-mail.json");
+            const vecchi = prev && prev.ok && prev.json && Array.isArray(prev.json.allarmi) ? prev.json.allarmi : [];
+            const runId = process.env.GITHUB_RUN_ID || null;
+            const voce = {
+              generato: new Date().toISOString(),
+              workflow: "aggiornamento-mail",
+              livello: esito === "ok" ? "ok" : "attenzione",
+              messaggio: (testo.split("\n").find(l => l.trim()) || "digest QA").slice(0, 300),
+              runId,
+              runUrl: runId ? `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${runId}` : null,
+            };
+            const allarmi = [voce, ...vecchi].slice(0, 20);
+            writeFileSync("/tmp/allarme-aggiornamento-mail.json", JSON.stringify({ ...voce, allarmi }, null, 1) + "\n");
+            const pub = await pubblicaStato("/tmp/allarme-aggiornamento-mail.json", { chiave: "allarmi/aggiornamento-mail.json" });
+            writeFileSync("/tmp/aggiornamento.txt", testo + "\nAllarme registrato su R2: stato/allarmi/aggiornamento-mail.json (" + allarmi.length + " voci)\n");
+            console.log("allarme registrato su R2 ·", (pub && pub.key) || "stato/allarmi/aggiornamento-mail.json", "·", allarmi.length, "voci");
+          '

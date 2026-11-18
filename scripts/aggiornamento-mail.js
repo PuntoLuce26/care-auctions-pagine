@@ -40,6 +40,19 @@ async function statoDaR2(percorso) {
   righe.push('');
   righe.push(ko.length ? 'Da fare: ' + ko.slice(0, 2).map((c) => c.nome).join(', ') : 'Nessun intervento richiesto.');
   righe.push('— aggiornamento automatico CARe (cloud)');
+  // 18/11/2026 — in coda al digest: gli allarmi registrati su R2 (niente issue sul repo pubblico,
+  // che ha le Issues disabilitate). L'allarme di QUESTO giro entra nel digest del giro successivo.
+  try {
+    const al = await statoDaR2('allarmi/aggiornamento-mail.json');
+    const lista = al && Array.isArray(al.allarmi) ? al.allarmi.slice(0, 5) : [];
+    if (lista.length) {
+      righe.push('');
+      righe.push('Allarmi registrati (ultimi ' + lista.length + ', da R2):');
+      for (const a of lista) righe.push('- ' + (a.generato || '?') + ' · ' + (a.livello || '?') + ' · ' + String(a.messaggio || '').slice(0, 90));
+    }
+  } catch (e) {
+    /* gli allarmi non devono mai far fallire il digest */
+  }
   const body = righe.join('\n');
   const subject = 'CARe — QA ' + o.esito + ' · ' + ora;
 

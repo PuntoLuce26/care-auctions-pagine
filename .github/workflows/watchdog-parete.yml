@@ -54,7 +54,9 @@ jobs:
           fetch-depth: 1
           # Il repo ha ~348.000 file / ~177 MB di artefatto: scaricarlo intero ogni 2 ore è
           # inutile qui. Serve un file solo, quindi checkout sparso senza cone mode.
-          sparse-checkout: scripts/watchdog-parete.mjs
+          sparse-checkout: |
+            scripts/watchdog-parete.mjs
+            scripts/stato-pubblica.mjs
           sparse-checkout-cone-mode: false
 
       - name: Setup Node 22
@@ -65,7 +67,9 @@ jobs:
       # Un solo passo di sostanza: lo script fa lettura, giudizio, issue, stato e riepilogo nel
       # run (GITHUB_STEP_SUMMARY). L'exit code È l'esito: 0 = misura fatta e registrata,
       # 1 = non si è potuto misurare o scrivere.
-      - name: Legge la parete, apre/chiude la issue, scrive stato/parete.json
+      # 18/11/2026 — niente issue (repo pubblico con Issues disabilitate, CL-50): l'allarme va su R2.
+      - name: Legge la parete, registra l'allarme su R2, scrive stato/parete.json
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: node scripts/watchdog-parete.mjs

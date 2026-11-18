@@ -57,7 +57,9 @@ function valida(d, provenienza) {
   }
   if (!d.giorni || typeof d.giorni !== 'object' || Array.isArray(d.giorni)) throw new Error(`${provenienza}: «giorni» assente`);
   const chiavi = Object.keys(d.giorni);
-  if (chiavi.length === 0) throw new Error(`${provenienza}: «giorni» vuoto — raccolta non attiva, non pubblico`);
+  // 18/11/2026 — «giorni vuoto» NON è un guasto: è «nessun dato». Si dichiara e si esce 0,
+  // invece di far fallire il workflow a ogni giro (la raccolta vera è un problema a parte).
+  if (chiavi.length === 0) return { giorni: 0, pv: 0, visite: 0, vuoto: true };
   if (!d.totale || typeof d.totale.visite !== 'number' || typeof d.totale.pv !== 'number') {
     throw new Error(`${provenienza}: «totale» non numerico`);
   }
@@ -95,6 +97,11 @@ async function main() {
   let d = a.j.dati;
   let v = valida(d, 'KV visite_rum');
   console.log(`KV: aggiornato ${d.aggiornato} · ${v.giorni} giorni · ${v.visite} visite · ${v.pv} pv`);
+  if (v.vuoto) {
+    console.log('raccolta: nessun dato (Cloudflare Web Analytics)');
+    console.log('::notice title=visite-rum::raccolta: nessun dato (Cloudflare Web Analytics) — non pubblico, esco 0');
+    return;
+  }
 
   const etaMin = Math.round((Date.now() - Date.parse(d.aggiornato)) / 60000);
   if (etaMin > STALE_MIN) {
@@ -110,6 +117,11 @@ async function main() {
     d = a.j.dati;
     v = valida(d, 'KV visite_rum dopo la forzatura');
     console.log(`KV dopo la forzatura: aggiornato ${d.aggiornato} · ${v.giorni} giorni · ${v.visite} visite · ${v.pv} pv`);
+    if (v.vuoto) {
+      console.log('raccolta: nessun dato (Cloudflare Web Analytics)');
+      console.log('::notice title=visite-rum::raccolta: nessun dato (Cloudflare Web Analytics) dopo la forzatura — non pubblico, esco 0');
+      return;
+    }
   }
 
   const out = {

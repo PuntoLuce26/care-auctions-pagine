@@ -8,7 +8,7 @@
  * del worker che pubblica: legge la parete vera.
  *
  * SCHEMA REALE DELLA RISPOSTA (ispezionato il 15/11/2026, NON inventato):
- *   GET https://care-aste.emergent.host/api/battito?lang=it
+ *   GET https://careauctions.co/api/battito?lang=it
  *   → { "messaggi": [ { id, nome, nazione, citta, data, lingua, originale, testo, tradotto, fissatoIl } ],
  *       "fissato": null, "aggiornato": "2026-11-15T14:51:03.711770+00:00" }
  *   - i messaggi sono ordinati dal più recente al più vecchio (verificato);
@@ -41,7 +41,9 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-const API_BASE = 'https://care-aste.emergent.host/api/battito';
+// 18/11/2026 — la parete si legge dalla ROTTA PUBBLICA: l'origine care-aste.emergent.host risponde
+// 403 agli anonimi (era il falso «parete illeggibile» di ogni giro). Rotta pubblica: 200, ~16 KB.
+const API_BASE = 'https://careauctions.co/api/battito';
 const LINGUE = ['it', 'en'];
 const SOGLIA_ORE = 8;
 const TITOLO_ISSUE = '[ALLARME] iCAReWall ferma da più di 8 ore';
@@ -138,7 +140,7 @@ export function corpoIssue({ stato, nuovo, lette, adesso }) {
     `Aperta o aggiornata da \`.github/workflows/watchdog-parete.yml\` (cron ogni 2 ore). ` +
       `Si chiude da sola quando la parete torna a pubblicare entro ${SOGLIA_ORE} ore: non va chiusa a mano.`,
     `Pareti interrogate: ${[...new Set(lette.map((l) => l.parete))].map((p) => '?lang=' + p).join(' · ')} — ` +
-      '`https://care-aste.emergent.host/api/battito`.',
+      '`https://careauctions.co/api/battito`.',
   );
   return righe.join('\n');
 }
@@ -174,58 +176,35 @@ async function gh(percorso, metodo = 'GET', corpo) {
 const dormi = (ms) => new Promise((r) => setTimeout(r, ms));
 
 /**
- * La issue [ALLARME] aperta, se c'è. Si rilegge una seconda volta dopo 2 s quando la prima
- * lettura non trova nulla: l'indice delle issue di GitHub è in ritardo di qualche secondo dopo
- * una scrittura (misurato il 15/11/2026 su un repo appena creato, issue creata e lista vuota per
- * ~3 s). Senza la rilettura un falso vuoto aprirebbe una SECONDA issue: due allarmi per lo
- * stesso guasto sono peggio di nessun allarme.
+ * 18/11/2026 — NIENTE ISSUE. Le Issues di `care-auctions-pagine` sono disabilitate di proposito
+ * (CL-50: le issue pubbliche avevano nomi di repo private, email e hash di build). L'allarme va
+ * su R2 `care-stato` → `stato/allarmi/watchdog-parete.json`, forma {generato, workflow, livello,
+ * messaggio, runId, runUrl} con gli ultimi 20 in `allarmi`. Nessuna scrittura su repo pubblici.
  */
-async function cercaAperta(repo) {
-  const leggi = async () => {
-    const r = await gh(`/repos/${repo}/issues?state=open&per_page=100`);
-    if (r.stato !== 200) throw new Error(`elenco issue HTTP ${r.stato}`);
-    return (r.json || []).filter(
-      (i) => !i.pull_request && typeof i.title === 'string' && i.title.trim() === TITOLO_ISSUE,
-    );
+export async function gestisciAllarme({ stato, corpo }) {
+  const mod = await import('./stato-pubblica.mjs');
+  const prev = await mod.leggiStato('allarmi/watchdog-parete.json');
+  const vecchi = prev && prev.ok && prev.json && Array.isArray(prev.json.allarmi) ? prev.json.allarmi : [];
+  const runId = process.env.GITHUB_RUN_ID || null;
+  const runUrl = runId && process.env.GITHUB_SERVER_URL && process.env.GITHUB_REPOSITORY
+    ? `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${runId}`
+    : null;
+  const voce = {
+    generato: new Date().toISOString(),
+    workflow: 'watchdog-parete',
+    livello: stato.ok ? 'ok' : 'allarme',
+    messaggio: String(corpo || '').replace(/\s+/g, ' ').slice(0, 300),
+    runId,
+    runUrl,
   };
-  let trovate = await leggi();
-  if (!trovate.length) {
-    await dormi(2000);
-    trovate = await leggi();
-  }
-  return trovate[0] || null;
-}
-
-/**
- * UNA sola issue. Si cerca per titolo esatto (non per etichetta: un'etichetta assente fa
- * fallire la creazione con 422 e l'allarme si perderebbe). Se la parete è viva e l'issue è
- * aperta, si commenta «rientrato» e si chiude.
- */
-export async function gestisciIssue({ stato, corpo }) {
-  const repo = process.env.GITHUB_REPOSITORY;
-  if (!repo) throw new Error('GITHUB_REPOSITORY assente');
-  const aperta = await cercaAperta(repo);
-
-  if (stato.ok) {
-    if (!aperta) return { azione: 'nessuna', dettaglio: 'parete viva, nessuna issue aperta' };
-    await gh(`/repos/${repo}/issues/${aperta.number}/comments`, 'POST', {
-      body:
-        `Rientrato: la parete ha pubblicato a **${stato.ultimoMessaggio}** ` +
-        `(età ${ore(stato.etaOre)} h, soglia ${SOGLIA_ORE} h). Chiudo da solo.`,
-    });
-    const chiusa = await gh(`/repos/${repo}/issues/${aperta.number}`, 'PATCH', { state: 'closed' });
-    if (chiusa.stato >= 400) throw new Error(`chiusura issue #${aperta.number} HTTP ${chiusa.stato}`);
-    return { azione: 'chiusa', dettaglio: `issue #${aperta.number} chiusa` };
-  }
-
-  if (aperta) {
-    const r = await gh(`/repos/${repo}/issues/${aperta.number}`, 'PATCH', { body: corpo });
-    if (r.stato >= 400) throw new Error(`aggiornamento issue #${aperta.number} HTTP ${r.stato}`);
-    return { azione: 'aggiornata', dettaglio: `issue #${aperta.number} aggiornata` };
-  }
-  const r = await gh(`/repos/${repo}/issues`, 'POST', { title: TITOLO_ISSUE, body: corpo });
-  if (r.stato >= 400) throw new Error(`creazione issue HTTP ${r.stato}: ${JSON.stringify(r.json).slice(0, 200)}`);
-  return { azione: 'aperta', dettaglio: `issue #${r.json && r.json.number} aperta` };
+  const allarmi = [voce, ...vecchi].slice(0, 20);
+  const tmp = '/tmp/allarme-watchdog-parete.json';
+  writeFileSync(tmp, JSON.stringify({ ...voce, allarmi }, null, 1) + '\n');
+  const pub = await mod.pubblicaStato(tmp, { chiave: 'allarmi/watchdog-parete.json' });
+  return {
+    azione: stato.ok ? 'rientro' : 'allarme',
+    dettaglio: `R2 stato/allarmi/watchdog-parete.json · ${allarmi.length} voci` + (pub && pub.key ? ` · ${pub.key}` : ''),
+  };
 }
 
 // ---------------------------------------------------------------- stato/parete.json
@@ -339,7 +318,7 @@ export async function main(argv = process.argv) {
   let erroreIssue = null;
   if (!opt.prova) {
     try {
-      esitoIssue = await gestisciIssue({ stato, corpo });
+      esitoIssue = await gestisciAllarme({ stato, corpo });
     } catch (e) {
       erroreIssue = e;
       console.log(`[issue] ERRORE ${String((e && e.message) || e)}`);
@@ -373,7 +352,7 @@ export async function main(argv = process.argv) {
       `- lingua: ${stato.lingua}`,
       `- età: ${stato.etaOre === null ? 'non calcolabile' : ore(stato.etaOre) + ' h'} (soglia ${SOGLIA_ORE} h)`,
       `- esito: **${stato.ok ? 'OK — parete viva' : 'ALLARME — parete ferma'}**`,
-      `- issue: ${esitoIssue.azione} (${esitoIssue.dettaglio})`,
+      `- allarme R2: ${esitoIssue.azione} (${esitoIssue.dettaglio})`,
       `- stato: ${esitoStato.modo} (${esitoStato.dettaglio})`,
     ];
     if (errori.length) righe.push(`- letture fallite: ${errori.join(' · ')}`);

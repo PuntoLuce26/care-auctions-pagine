@@ -38,6 +38,8 @@ jobs:
         run: |
           git config user.name "CARe Cloud"
           git config user.email "cloud@careauctions.co"
+          # 18/11/2026 — se la raccolta è vuota lo script non scrive: nessun file, nessun commit
+          if [ ! -f feed/visite-rum.json ]; then echo "nessun feed scritto (raccolta senza dati)"; exit 0; fi
           git add feed/visite-rum.json
           git diff --cached --quiet && echo "nessuna variazione" && exit 0
           git commit -m "visite-rum: feed dalla KV $(date -u +%FT%TZ)"
@@ -56,7 +58,8 @@ jobs:
           console.log("giorni:", giorni.length, "visite:", d.totale.visite, "pv:", d.totale.pv);
           const eta = (Date.now() - Date.parse(d.aggiornato)) / 60000;
           if (!Number.isFinite(eta) || eta < 0) { console.error("::error::aggiornato non valido"); process.exit(1); }
-          if (giorni.length === 0) { console.error("::error::giorni vuoto"); process.exit(1); }
+          // 18/11/2026 — «nessun dato» non è un guasto: verde con nota (la raccolta è seguita a parte)
+          if (giorni.length === 0) { console.log("raccolta: nessun dato (Cloudflare Web Analytics) — niente da pubblicare"); process.exit(0); }
           if (typeof d.totale.visite !== "number" || typeof d.totale.pv !== "number") { console.error("::error::totale non numerico"); process.exit(1); }
           console.log("::notice title=visite-rum::artefatto ok");
           '
