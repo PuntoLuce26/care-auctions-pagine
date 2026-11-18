@@ -443,6 +443,10 @@ async function pubblicaStatoPubblico() {
     // La cadenza dichiarata del presidio cloud: chi legge calcola da sé se è fresco
     // (stato fermo da più di 2 × cadenzaOre = peggio di uno stato assente).
     cadenzaOre: 3,
+    // 18/11/2026 — SU QUALE BUILD è stato misurato questo «0 critici»: senza, fra due giorni
+    // non si sa se riguardava la build vecchia o la nuova (misurare l'artefatto, non il log).
+    sitoBuild: hb || null,
+    prerenderAllineato: !!(pb && pb === ob),
     fonte: 'presidio cloud (GitHub Actions, qa-presidio.yml)',
   };
   const H = { ...GH_H, 'Content-Type': 'application/json' };
