@@ -1,6 +1,6 @@
 {
- "generato": "2026-11-18T09:30:34.332Z",
- "totale": 320232,
+ "generato": "2026-11-18T09:38:05.176Z",
+ "totale": 320252,
  "shard": "hex2",
  "shardCount": 64,
  "fonte": "feed/*-imm-*.json",
