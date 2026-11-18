@@ -56,7 +56,10 @@ const intervalliOre = (() => {
   const ts = storico.map((p) => Date.parse(p && p.t)).filter(Boolean);
   const d = [];
   for (let i = 1; i < ts.length; i++) d.push((ts[i] - ts[i - 1]) / 3600000);
-  return d;
+  // I giri MANUALI (workflow_dispatch a pochi minuti di distanza) non sono la cadenza dello
+  // scheduler: li conto a parte e li escludo da mediana/massimo, altrimenti un dispatch di prova
+  // abbassa la mediana e fa sembrare la raccolta più frequente di quello che è.
+  return { regolari: d.filter((x) => x >= 1), manuali: d.filter((x) => x < 1).length };
 })();
 const medianaOre = (a) => {
   if (!a.length) return null;
@@ -64,8 +67,8 @@ const medianaOre = (a) => {
   return b.length % 2 ? b[m] : (b[m - 1] + b[m]) / 2;
 };
 const r1 = (v) => (v === null || v === undefined || !isFinite(v) ? null : Math.round(v * 10) / 10);
-const cadenzaMedianaH = r1(medianaOre(intervalliOre));
-const cadenzaMassimoH = intervalliOre.length ? r1(Math.max(...intervalliOre)) : null;
+const cadenzaMedianaH = r1(medianaOre(intervalliOre.regolari));
+const cadenzaMassimoH = intervalliOre.regolari.length ? r1(Math.max(...intervalliOre.regolari)) : null;
 
 // stato sintetico per il quadro/QA
 const ultimi = storico.slice(-8);
@@ -80,7 +83,8 @@ const stato = {
   // Chi legge calcola la soglia: cadenzaOre × 1,5 (minimo cadenzaOre + 2 h). Per cambiarla:
   // PERF_CADENZA_ORE=<ore> nel workflow, senza toccare né il produttore né il check.
   cadenzaOre: Number(process.env.PERF_CADENZA_ORE || 8),
-  cadenzaOsservazioni: intervalliOre.length,
+  cadenzaOsservazioni: intervalliOre.regolari.length,
+  cadenzaGiriManuali: intervalliOre.manuali,
   cadenzaMedianaH,
   cadenzaMassimoH,
   cadenzaNota: 'dichiarata dal generatore (cadenzaOre); mediana e massimo sono MISURATI sugli intervalli di perf/emergent.json; GitHub dirada il cron */15',
