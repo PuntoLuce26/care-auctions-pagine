@@ -34,8 +34,24 @@ if (process.env.QA_SKIP_DOPPIONI !== '0' && process.env.CLOUDFLARE_API_TOKEN) {
         const etaOre = (Date.now() - Date.parse(st.generatedAt || 0)) / 3600000;
         const buildStato = (st.build && st.build.sito) || null;
         if (buildStato === servita && etaOre >= 0 && etaOre < 3) {
-          writeFileSync(OUT + '/skip.json', JSON.stringify({ motivo: 'build già verificata', build: servita, orePrima: Number(etaOre.toFixed(2)), runIdPrecedente: st.runId || null }, null, 1) + '\n');
-          console.log(`build già verificata: ${servita} · ${etaOre.toFixed(1)} h fa (run ${st.runId || '?'}) — esco 0 senza ricrawlare`);
+          // 18/11/2026 — NON si esce a mani vuote: gli step successivi (status, gate, R2) il report
+          // lo leggono. Si scrive un report MINIMALE ma valido, con `skipped:true` e il motivo.
+          const reportSkip = {
+            skipped: true,
+            motivo: 'build già verificata',
+            build: { sito: servita, origine: servita },
+            ultimaRun: st.runId || null,
+            generatoDa: 'guardia anti-doppione',
+            generatedAt: new Date().toISOString(),
+            base: base,
+            durationSec: Math.round((Date.now() - started.getTime()) / 1000),
+            routes: [],
+            smoke: [],
+            summary: { critical: 0, high: 0, medium: 0, low: 0, total: 0 },
+            issues: [],
+          };
+          writeFileSync(OUT + '/report.json', JSON.stringify(reportSkip, null, 1) + '\n');
+          console.log(`build già verificata: ${servita} · ${etaOre.toFixed(1)} h fa (run ${st.runId || '?'}) — report minimale scritto, esco 0 senza ricrawlare`);
           process.exit(0);
         }
         console.log(`guardia doppioni: build servita ${servita} · build verificata ${buildStato || '?'} · ${etaOre.toFixed(1)} h fa → si esegue il QA completo`);

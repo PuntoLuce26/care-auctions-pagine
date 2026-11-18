@@ -5,8 +5,16 @@ import { readFileSync } from 'node:fs';
 
 let report;
 try { report = JSON.parse(readFileSync('qa/out/report.json', 'utf8')); }
-catch (e) { console.log('::error::QA report non leggibile'); process.exit(1); }
+catch (e) {
+  if (String(e && e.code) === 'ENOENT') { console.log('::error::QA report ASSENTE: la pipeline non ha prodotto qa/out/report.json'); process.exit(2); }
+  console.log('::error::QA report non leggibile'); process.exit(1);
+}
 
+// 18/11/2026 — build già verificata: non c'è niente da valutare, e non è un guasto.
+if (report.skipped === true) {
+  console.log('QA gate: ' + String(report.motivo || 'build già verificata') + ' — nessun gate da applicare (skipped)');
+  process.exit(0);
+}
 const s = report.summary || {};
 const critical = Number(s.critical || 0);
 const high = Number(s.high || 0);

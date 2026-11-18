@@ -42,7 +42,13 @@ async function storico7g() {
 
 let report;
 try { report = JSON.parse(readFileSync('qa/out/report.json', 'utf8')); }
-catch (e) { console.error('stato: report non leggibile'); process.exit(0); }
+catch (e) {
+  // 18/11/2026 — distinguere i due casi: report ASSENTE (errore di pipeline, exit 2) da report
+  // illeggibile (una scelta: lo skip della guardia, exit 0). Prima era 0 per entrambi e il guasto
+  // spariva; il gate poi falliva con un messaggio che non c'entrava.
+  if (String(e && e.code) === 'ENOENT') { console.error('stato: report ASSENTE (qa/out/report.json non esiste) — errore di pipeline'); process.exit(2); }
+  console.error('stato: report non leggibile'); process.exit(0);
+}
 
 const issues = (report.issues || []).slice(0, 120).map(i => ({
   severity: i.severity,
@@ -58,6 +64,8 @@ const seo = report.seo || {};
 const logs = report.logs || {};
 const stato = {
   generatedAt: report.generatedAt,
+  skipped: report.skipped === true,
+  motivoSkip: report.skipped === true ? String(report.motivo || 'build già verificata') : null,
   runId: process.env.GITHUB_RUN_ID || '',
   runUrl: process.env.GITHUB_RUN_ID
     ? `${process.env.GITHUB_SERVER_URL || 'https://github.com'}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`
