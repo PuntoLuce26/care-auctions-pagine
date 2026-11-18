@@ -3,72 +3,72 @@
   "canary": "care-canary-d2c32afaa5d5",
   "canaryNota": "valore di riconoscimento della copia dei dati",
   "titolo": "NPL's — crediti in sofferenza e crediti in procedura (dati veri dal PVP)",
-  "generatoIl": "2026-11-17T13:39:41.317Z",
-  "aggiornato": "2026-11-17",
+  "generatoIl": "2026-11-18T13:13:08.801Z",
+  "aggiornato": "2026-11-18",
   "fonte": "PVP — Portale delle Vendite Pubbliche, Ministero della Giustizia (pvp.giustizia.it)",
   "query": "tipoLotto=VALORI-CREDITI",
   "licenza": "Dati pubblici del PVP (Portale delle Vendite Pubbliche, Ministero della Giustizia). Riuso consentito per finalità informative con citazione della fonte; nessun dato personale oltre a quanto già pubblico nel bando.",
   "metodo": "Classificazione conservativa dal testo pubblico del bando: NPL/sofferenza solo se dichiarati; crediti fiscali e titoli/quote esclusi (classi diverse, non NPL). Valore nominale solo se scritto nel bando.",
-  "totale": 255,
-  "dichiaratoPVP": 1129,
+  "totale": 256,
+  "dichiaratoPVP": 1131,
   "esclusi": {
    "non-credito": 22,
-   "titoli-e-quote": 439,
-   "credito-fiscale": 413
+   "titoli-e-quote": 438,
+   "credito-fiscale": 415
   },
   "copertura": {
    "importo": {
-    "con": 45,
-    "su": 255,
-    "pct": 17.6
+    "con": 46,
+    "su": 256,
+    "pct": 18
    },
    "regione": {
-    "con": 187,
-    "su": 255,
-    "pct": 73.3
+    "con": 188,
+    "su": 256,
+    "pct": 73.4
    },
    "tribunale": {
-    "con": 253,
-    "su": 255,
+    "con": 254,
+    "su": 256,
     "pct": 99.2
    }
   },
   "perTipo": {
-   "credito": 251,
+   "credito": 252,
    "NPL": 4
   },
   "perStato": {
    "conclusa-esito-non-pubblicato": 210,
    "in-programma": 24,
-   "deserta": 16,
+   "deserta": 17,
    "aggiudicata": 5
   },
   "fasceImportoNominale": {
    "fino-10k": 12,
-   "10k-50k": 10,
+   "10k-50k": 11,
    "oltre-1M": 9,
    "250k-1M": 9,
    "50k-250k": 5
   },
   "fascePrezzoBase": {
    "10k-50k": 83,
-   "fino-10k": 68,
+   "fino-10k": 69,
    "50k-250k": 32,
    "250k-1M": 29,
    "oltre-1M": 23
   },
   "regioni": 16,
   "province": 39,
-  "sommaPrezzoBase": 377304158,
+  "sommaPrezzoBase": 377308994,
   "freschezza": {
-   "ultimaRaccolta": "2026-11-17",
+   "ultimaRaccolta": "2026-11-18",
    "dataLottoPiuRecente": "2027-01-14",
    "dataLottoPiuVecchio": "2024-01-12"
   },
   "nota": "Nessun numero inventato: i campi mancanti restano null e non vanno mostrati. Prezzo base = base d'asta del bando, NON il valore nominale del credito."
  },
  "perRegione": {
-  "Lazio": 54,
+  "Lazio": 55,
   "Sicilia": 32,
   "Toscana": 25,
   "Lombardia": 16,
@@ -86,7 +86,7 @@
   "Campania": 1
  },
  "perProvincia": {
-  "Roma": 54,
+  "Roma": 55,
   "Palermo": 29,
   "Pistoia": 15,
   "Milano": 11,
