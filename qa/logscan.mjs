@@ -59,18 +59,26 @@ export async function runLogScan() {
     const r = await fetchText(ORIGIN + '/', { ua: UA });
     return { ok: r.status === 200, status: r.status, detail: (r.text.match(/main\.[a-f0-9]{8}\.js/) || ['no build'])[0] };
   }));
+  // 18/11/2026 — il check deve chiamare la ROTTA PUBBLICA, non l'origine: `icare-ai.…workers.dev`
+  // risponde 401 agli anonimi per progetto (era il falso «chat iCARe HTTP 401»). Stessa classe di
+  // errore già corretta in internal-audit.
   checks.push(await checkService('chat iCARe', async () => {
-    const r = await fetch('https://icare-ai.misty-mode-1cbc.workers.dev', {
+    const r = await fetch(BASE + '/api/icare', {
       method: 'POST', headers: { 'content-type': 'application/json', 'User-Agent': 'CARe-QA/1.0' },
       body: JSON.stringify({ azione: 'ai-chat', messaggio: 'ciao', lingua: 'it' }),
       signal: AbortSignal.timeout(25000)
     });
     const t = await r.text();
-    return { ok: r.ok && t.length > 20, status: r.status, detail: short(t, 80) };
+    let j = null; try { j = JSON.parse(t); } catch (e) {}
+    const risposta = (j && (j.risposta || j.testo)) || '';
+    return { ok: r.status === 200 && String(risposta).length > 10, status: r.status, detail: short(risposta || t, 80) };
   }));
+  // 18/11/2026 — stessa classe: l'origine risponde 403 agli anonimi, la parete pubblica vive su
+  // careauctions.co/api/battito (200, JSON con messaggi[]).
   checks.push(await checkService('iCAReWall API', async () => {
-    const r = await fetchText(ORIGIN + '/api/battito?lang=it', { ua: UA });
-    return { ok: r.status === 200, status: r.status, detail: `${r.text.length} byte` };
+    const r = await fetchText(BASE + '/api/battito?lang=it', { ua: UA });
+    let n = null; try { const j = JSON.parse(r.text); n = Array.isArray(j.messaggi) ? j.messaggi.length : null; } catch (e) {}
+    return { ok: r.status === 200 && n !== null, status: r.status, detail: `${r.text.length} byte · ${n === null ? 'JSON non valido' : n + ' messaggi'}` };
   }));
   checks.push(await checkService('voce TTS', async () => {
     const r = await fetchText(BASE + '/voce/tts-worker.js');

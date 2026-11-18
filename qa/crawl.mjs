@@ -104,7 +104,14 @@ async function crawlOne(browser, route, vp) {
   const errs = [], consoleErrs = [], badResp = [], failed = [], clickErrors = [];
   let http = null, loadMs = null, beacon = 0;
   page.on('pageerror', e => errs.push(short(e.message, 200)));
-  page.on('console', m => { if (m.type() === 'error' && !BEACON.test(m.text())) consoleErrs.push(short(m.text(), 200)); });
+  page.on('console', m => {
+    if (m.type() !== 'error') return;
+    const testo = String(m.text() || '');
+    let loc = ''; try { loc = (m.location && m.location() && m.location().url) || ''; } catch (e) {}
+    // il beacon RUM si riconosce dalla SUA location (misurato il 18/11: m.location().url = cdn-cgi/rum)
+    if (BEACON.test(testo) || BEACON.test(loc)) { beacon++; return; }
+    consoleErrs.push(short(testo, 200));
+  });
   // le richieste del beacon si contano e NON entrano mai fra le risorse rotte
   page.on('response', r => { try { const u = r.url(); if (BEACON.test(u)) { beacon++; return; } if (r.status() >= 400) badResp.push({ status: r.status(), url: u }); } catch (e) {} });
   page.on('requestfailed', r => { if (!BEACON.test(r.url())) failed.push({ url: r.url(), error: (r.failure()?.errorText) || 'failed' }); });
@@ -271,8 +278,12 @@ async function checkFeed() {
     out.statistiche = { status: s.status, aggiornato: s.json?.aggiornato || null, totale: s.json?.totale || null, ageHours: ageHours(s.json?.aggiornato) };
   } catch (e) { out.statistiche = { status: 0, error: short(e.message, 100) }; }
   try {
-    const a = await fetchJson(BASE + '/feed/aggiudicazioni.json');
-    out.aggiudicazioni = { status: a.status, count: Array.isArray(a.json) ? a.json.length : null };
+    // 18/11/2026 — «vuoto» NON si deduce da un parse fallito. Il file è un array di ~19.000 record
+    // (~4 MB): si rilegge una volta e si tiene il numero di byte scaricati, così un corpo troncato
+    // si distingue da un file vuoto (era il falso «aggiudicazioni.json vuoto»).
+    let a = await fetchJson(BASE + '/feed/aggiudicazioni.json', { timeout: 60000 });
+    if (!Array.isArray(a.json)) a = await fetchJson(BASE + '/feed/aggiudicazioni.json', { timeout: 60000 });
+    out.aggiudicazioni = { status: a.status, count: Array.isArray(a.json) ? a.json.length : null, bytes: String(a.text || '').length };
   } catch (e) { out.aggiudicazioni = { status: 0, error: short(e.message, 100) }; }
   try { const st = await fetchText(BASE + '/stato'); out.stato = { status: st.status, ok: st.status === 200 }; }
   catch (e) { out.stato = { status: 0, error: short(e.message, 100) }; }
@@ -319,13 +330,8 @@ export async function runCrawl() {
     if (!p.http) add({ severity: 'critical', type: 'http_none', route: p.route, viewport: p.viewport, message: 'nessuna risposta HTTP' });
     if ((p.text || 0) < 80) add({ severity: 'critical', type: 'pagina_vuota', route: p.route, viewport: p.viewport, message: `testo ${p.text || 0} caratteri` });
     if (p.pageErrors?.length) add({ severity: 'critical', type: 'pageerror', route: p.route, viewport: p.viewport, message: p.pageErrors[0] });
+    if (p.consoleErrors?.length) add({ severity: 'high', type: 'console_error', route: p.route, viewport: p.viewport, message: p.consoleErrors[0] });
     const ownBad = (p.badResponses || []).filter(b => b.status >= 400 && sameOrigin(b.url, BASE) && !/favicon/.test(b.url));
-    // Il browser registra per il beacon un «Failed to load resource» SENZA l'URL: qui si scarta quel
-    // messaggio SOLO se sulla pagina l'unico problema è il beacon (nessuna risorsa nostra ≥400, nessuna
-    // richiesta fallita). Se c'è anche un solo guasto vero, l'errore di console resta e grida.
-    const altriGuasti = ownBad.length > 0 || (p.badResponses || []).some(b => b.status >= 400) || (p.requestFailed || []).length > 0;
-    const consoleReali = (p.consoleErrors || []).filter(t => !(/failed to load resource/i.test(t) && (p.beacon || 0) > 0 && !altriGuasti));
-    if (consoleReali.length) add({ severity: 'high', type: 'console_error', route: p.route, viewport: p.viewport, message: consoleReali[0] });
     if (ownBad.length) add({ severity: 'high', type: 'risorsa_4xx', route: p.route, viewport: p.viewport, message: ownBad.slice(0, 3).map(b => b.status + ' ' + b.url).join(' | ') });
     if (p.images?.realBroken?.length) add({ severity: 'high', type: 'immagine_rotta', route: p.route, viewport: p.viewport, message: p.images.realBroken.slice(0, 4).map(i => i.src).join(' | '), suggestion: 'Verificare che i file esistano nel deploy e che il percorso non cambi dopo una pubblicazione.' });
     if (p.forms?.invalid?.length) add({ severity: 'low', type: 'form_invalid', route: p.route, viewport: p.viewport, message: 'campi obbligatori non compilati dal QA (atteso per consenso/date): ' + p.forms.invalid.slice(0, 6).join(', '), suggestion: 'Verificare che il form sia compilabile e che i campi obbligatori abbiano un messaggio chiaro.' });
@@ -363,7 +369,16 @@ export async function runCrawl() {
 
   if (!feed.statistiche?.totale) add({ severity: 'critical', type: 'feed_statistiche', route: 'feed', viewport: '', message: 'statistiche.json vuoto o non leggibile' });
   else if ((feed.statistiche.ageHours ?? 0) > 2) add({ severity: 'critical', type: 'feed_fermo', route: 'feed', viewport: '', message: `statistiche ferme da ${feed.statistiche.ageHours} ore` });
-  if (!feed.aggiudicazioni?.count) add({ severity: 'high', type: 'feed_aggiudicazioni', route: 'feed', viewport: '', message: 'aggiudicazioni.json vuoto' });
+  if (!feed.aggiudicazioni?.count) {
+    // Vuoto = corpo davvero vuoto o file non raggiungibile (HIGH). Corpo scaricato ma non leggibile =
+    // troncamento/rete (MEDIUM, tipo diverso): non è un file vuoto e non deve gridare «vuoto».
+    const agg = feed.aggiudicazioni || {};
+    if ((agg.bytes || 0) > 1000) {
+      add({ severity: 'medium', type: 'feed_aggiudicazioni_illeggibile', route: 'feed', viewport: '', message: `aggiudicazioni.json scaricato (${agg.bytes} byte) ma JSON non leggibile: file NON vuoto (corpo troncato o errore di rete)` });
+    } else {
+      add({ severity: 'high', type: 'feed_aggiudicazioni', route: 'feed', viewport: '', message: `aggiudicazioni.json vuoto o non raggiungibile (HTTP ${agg.status || 0} · ${agg.bytes || 0} byte)` });
+    }
+  }
 
   const summary = { critical: 0, high: 0, medium: 0, low: 0, total: issues.length };
   for (const i of issues) summary[i.severity] = (summary[i.severity] || 0) + 1;
