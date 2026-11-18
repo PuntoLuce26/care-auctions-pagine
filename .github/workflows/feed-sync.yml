@@ -62,6 +62,11 @@ jobs:
           # 15/11/2026 — difetto 4: feed/pagine91.json non aveva alcun campo data ed era
           # fermo da 144,8 h. Nessun generatore nel repo lo toccava: questo e' il custode,
           # verifica la forma (91 lingue con ilive+stampa), conserva il contenuto e batte la data.
+          # 18/11/2026 — tribunali.json era scritto una volta sola il 12/11 e nessuno lo rigenerava:
+          # il numero «tribunali con almeno un lotto aperto» invecchiava in silenzio. Ora si ricalcola
+          # a ogni giro, con la guardia anti-troncamento dentro lo script (esce 1 e non scrive se il
+          # numero di tribunali o la somma dei lotti aperti crolla).
+          node scripts/tribunali-feed.mjs || echo "::warning title=tribunali::feed non rigenerato in questo giro (guardia o errore)"
           node scripts/pagine91-aggiorna.mjs || echo "pagine91: non aggiornato"
           # 5.915: report mensile certificato, una volta al giorno (ore 02 UTC)
           if [ "$H" = "02" ]; then node scripts/report-mensile.js || echo "report mensile: non generato"; fi
