@@ -1,37 +1,37 @@
-# QA Orchestra — 2026-11-18T00:39:45.666Z
+# QA Orchestra — 2026-11-18T15:15:31.178Z
 
-**Esito: PROBLEMI** · 29 controlli eseguiti · 4 non passati (1 gravi, 3 avvisi) · 2 non verificabili
+**Esito: TUTTO OK** · 29 controlli eseguiti · 0 non passati (0 gravi, 0 avvisi) · 2 non verificabili
 
 | Controllo | Esito | Dettaglio |
 |---|---|---|
-| sito / | ok | HTTP 200 · 854 ms |
-| sito /idati | ok | HTTP 200 · 208 ms |
-| sito /osservatorio | ok | HTTP 200 · 206 ms |
-| sito /aggiudicazioni | ok | HTTP 200 · 166 ms |
-| sito /ilive | ok | HTTP 200 · 185 ms |
-| build sito = origine | ok | main.a63a2b3d.js / main.a63a2b3d.js |
-| qa/stato.json | ok | run 44205104125 · 0.5 h fa · 0C/16A |
-| QA recente (<8 h) | ok | 0.5 h |
+| sito / | ok | HTTP 200 · 761 ms |
+| sito /idati | ok | HTTP 200 · 633 ms |
+| sito /osservatorio | ok | HTTP 200 · 95 ms |
+| sito /aggiudicazioni | ok | HTTP 200 · 51 ms |
+| sito /ilive | ok | HTTP 200 · 109 ms |
+| build sito = origine | ok | main.3a575662.js / main.3a575662.js |
+| qa/stato.json | ok | run 44328058750 · 0.3 h fa · 0C/1A |
+| QA recente (<8 h) | ok | 0.3 h |
 | QA senza critici | ok | 0 critici |
-| registrazione QA (audit interno) | **KO** | registrato · 2.4 h fa · run 44186744194 |
-| feed statistiche | ok | 320690 lotti · 0.2 h fa |
-| feed aggiudicazioni | ok | 19031 record |
-| esiti prezzi | ok | 4998 prezzi · [object Object] |
-| AI education | **KO** | 18 controlli |
-| AI/SEO /llms.txt | ok | HTTP 200 · 154 ms |
-| AI/SEO /robots.txt | ok | HTTP 200 · 81 ms |
-| AI/SEO /sitemap.xml | ok | HTTP 200 · 142 ms |
-| traduzioni stato | ok | lingue 89 · 2026-11-17T10:56:33.567Z |
+| registrazione QA (audit interno) | n/v | non verificabile · run 44328058750 · NON VERIFICABILE: nessun qa-sync dopo il run (ultimo 2026-11-18T14:40:17Z) |
+| feed statistiche | ok | 320334 lotti · 0.2 h fa |
+| feed aggiudicazioni | ok | 19064 record |
+| esiti prezzi | ok | 5027 prezzi · [object Object] |
+| AI education | ok | 18 controlli · 18 ok |
+| AI/SEO /llms.txt | ok | HTTP 200 · 203 ms |
+| AI/SEO /robots.txt | ok | HTTP 200 · 22 ms |
+| AI/SEO /sitemap.xml | ok | HTTP 200 · 58 ms |
+| traduzioni stato | ok | lingue 89 · 2026-11-18T10:29:03.537Z |
 | i18n fr | ok | 4183 chiavi |
 | PVP documenti | ok | 2 allegati |
-| iCARe chat | **KO** | HTTP 401 |
-| iCAReWall | **KO** | HTTP 403 |
+| iCARe chat | ok | HTTP 200 · 729 caratteri · listino 7.300 |
+| iCAReWall | ok | HTTP 200 · 40 messaggi |
 | voce TTS | ok | HTTP 200 |
-| posta: ultima scansione (<6 h) | ok | 0.1 h · 7 allarmi |
-| run QA cloud | n/v | in corso · 2026-11-18T00:36:39Z |
-| run feed-sync | n/v | in corso · 2026-11-18T00:39:39Z |
-| run traduzioni | ok | success · 2026-11-17T10:55:16Z |
-| run AI education | ok | success · 2026-11-17T23:22:52Z |
-| run esiti-sync | ok | success · 2026-11-17T22:45:24Z |
-| app Emergent /idati | ok | HTTP 200 · main.a63a2b3d.js |
+| posta: ultima scansione (<6 h) | ok | 0.5 h · 13 allarmi |
+| run QA cloud | ok | success · 2026-11-18T14:46:59Z |
+| run feed-sync | n/v | in corso · 2026-11-18T15:14:39Z |
+| run traduzioni | ok | success · 2026-11-18T10:27:28Z |
+| run AI education | ok | success · 2026-11-18T12:58:55Z |
+| run esiti-sync | ok | success · 2026-11-18T11:00:28Z |
+| app Emergent /idati | ok | HTTP 200 · main.3a575662.js |
 | Pages serve i feed | ok | HTTP 200 |
