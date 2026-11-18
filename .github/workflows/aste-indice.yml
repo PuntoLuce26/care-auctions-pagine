@@ -1,0 +1,90 @@
+name: aste-indice
+# Indice dei lotti COMPATTO per l'edge (64 shard + _meta.json), ricostruito dai 106 file regionali.
+#
+# PERCHÉ ESISTE (18/11/2026): l'API item dell'app sbaglia (/api/aste/item/4647423 → 404 su un lotto
+# che esiste) e per Googlebot quella pagina esce col titolo della home. L'edge legge questi shard
+# dalla raw (cache 60 s) e può rispondere con titolo/città/tribunale/prezzo/data — o con un 404
+# VERO solo quando _meta.completo è true.
+#
+# Regole: il commit avviene SOLO se lo script esce 0 (completo:true E totale >= 300.000): un indice
+# a metà non si pubblica mai, perché autorizzerebbe 404 falsi. Nessun file viene cancellato.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */6 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: aste-indice
+  cancel-in-progress: false
+
+jobs:
+  genera:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout solo dello stretto necessario (niente 348.000 file)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            scripts/aste-indice.mjs
+            feed/indice.json
+            feed/aste-indice
+          sparse-checkout-cone-mode: false
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Genera i 64 shard dai file regionali
+        run: node scripts/aste-indice.mjs
+
+      - name: Misura l'artefatto
+        run: |
+          node -e '
+          const fs = require("fs");
+          const meta = JSON.parse(fs.readFileSync("feed/aste-indice/_meta.json", "utf8"));
+          let byte = 0, file = 0;
+          for (const f of fs.readdirSync("feed/aste-indice")) { byte += fs.statSync("feed/aste-indice/" + f).size; file++; }
+          console.log("meta:", JSON.stringify(meta));
+          console.log("file:", file, "· byte totali:", byte, "(" + (byte / 1048576).toFixed(2) + " MB)");
+          if (meta.shard !== 64) { console.error("::error::shard attesi 64, trovati " + meta.shard); process.exit(1); }
+          if (meta.shardBytesMax > 1.5 * 1024 * 1024) { console.error("::error::shard oltre 1,5 MB (" + meta.shardBytesMax + ")"); process.exit(1); }
+          if (meta.completo !== true) { console.error("::error::completo non true"); process.exit(1); }
+          '
+
+      - name: Committa gli shard (race-safe)
+        run: |
+          set -e
+          git config user.name "CARe Cloud"
+          git config user.email "cloud@careauctions.co"
+          git add feed/aste-indice
+          if git diff --cached --quiet; then echo "nessuna variazione"; exit 0; fi
+          git commit -m "aste-indice: shard rigenerati"
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            if git push; then echo "pubblicato al tentativo $i"; exit 0; fi
+            sleep 4
+          done
+          echo "::error::push fallito dopo 5 tentativi"
+          exit 1
+
+      - name: Verifica sull'artefatto committato
+        run: |
+          set -e
+          for i in 1 2 3 4 5 6 7 8 9 10; do
+            M=$(curl -s "https://raw.githubusercontent.com/PuntoLuce26/care-auctions-pagine/main/feed/aste-indice/_meta.json?ts=$(date +%s)" || true)
+            if echo "$M" | grep -q '"completo": *true'; then
+              echo "raw: $M"
+              echo "$M" | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{const j=JSON.parse(s);console.log("totale:",j.totale,"· shardBytesMax:",j.shardBytesMax,"· generato:",j.generato);})'
+              exit 0
+            fi
+            echo "raw non ancora aggiornata (tentativo $i), attendo 20 s"
+            sleep 20
+          done
+          echo "::error::_meta.json su raw non riporta completo:true"
+          exit 1

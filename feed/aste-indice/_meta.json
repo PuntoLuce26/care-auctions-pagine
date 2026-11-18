@@ -1,0 +1,10 @@
+{
+ "generato": "2026-11-18T09:21:10.846Z",
+ "totale": 320232,
+ "shard": 64,
+ "fonte": "feed/*-imm-*.json",
+ "completo": true,
+ "minAsta": "2010-03-13",
+ "maxAsta": "2029-02-28",
+ "shardBytesMax": 680763
+}
