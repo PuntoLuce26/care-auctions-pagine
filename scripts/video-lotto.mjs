@@ -328,7 +328,8 @@ async function main() {
     tribunale ? `${tribunale}.` : '',
     prezzoParole ? `Prezzo base ${prezzoParole}, come risulta dal P V P.` : '',
     dataParole ? `Data dell'asta: ${dataParole}.` : '',
-    'Foto e dati vengono dal P V P: la fonte è indicata nel video.',
+    'Il video raccoglie le immagini pubblicate dal P V P per questa procedura: nessuna è nostra, ogni foto porta la sua fonte.',
+    'Per i documenti e le date ufficiali dell\'asta si consulta la scheda del lotto sul sito, dove la fonte di ogni dato è indicata accanto al numero.',
   ].filter(Boolean).join(' ').replace(/iCARe/g, 'ai ker');
 
   let voceFile = null;
