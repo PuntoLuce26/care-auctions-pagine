@@ -90,12 +90,13 @@ function scriviTesto(file, righe) {
   return file.replace(/\\/g, '/').replace(/:/g, '\\:');
 }
 
-function filtriDrawtext({ W, H, durata, titolo, tribunale, prezzo, data, fonte, crediti }) {
+function filtriDrawtext({ W, H, durata, titolo, tribunale, prezzo, data, fonte, crediti, fonteLineaTesto }) {
   const f = font();
   if (!f) {
     console.warn('  ! nessun font trovato: si procede SENZA sovraimpressioni (dichiarato in meta.json)');
     return { filter: '', nota: 'sovraimpressioni saltate: nessun font' };
   }
+  const fonteTxt = scriviTesto(`${OUT}/t-fonte.txt`, [fonteLineaTesto]);
   const t1 = scriviTesto(`${OUT}/t1.txt`, [titolo, tribunale]);
   const t2 = scriviTesto(`${OUT}/t2.txt`, [prezzo, data, fonte]);
   const comune = `fontfile=${f}:fontcolor=white:box=1:boxcolor=black@0.55:boxborderw=18`;
@@ -103,8 +104,22 @@ function filtriDrawtext({ W, H, durata, titolo, tribunale, prezzo, data, fonte, 
   const chiusura = `drawtext=${comune}:textfile='${t2}':fontsize=${Math.round(W * 0.038)}:x=(w-text_w)/2:y=h*0.55:enable='between(t,${Math.max(0, durata - 5).toFixed(2)},${durata.toFixed(2)})'`;
   const creditiTxt = scriviTesto(`${OUT}/t3.txt`, [crediti]);
   const creditiFilter = `drawtext=${comune}:textfile='${creditiTxt}':fontsize=${Math.round(W * 0.026)}:x=(w-text_w)/2:y=h*0.68:enable='between(t,${Math.max(0, durata - 5).toFixed(2)},${durata.toFixed(2)})'`;
-  const marchio = `drawtext=fontfile=${f}:text='CAReAuctions':fontcolor=white@0.85:fontsize=${Math.round(W * 0.026)}:x=w-text_w-24:y=h-text_h-20`;
-  return { filter: [apertura, chiusura, creditiFilter, marchio].join(','), nota: 'sovraimpressioni con ' + f + ' · crediti fonti nel video' };
+  // REGOLA GENERALE (18/11/2026): OGNI IMMAGINE CHE NON È NOSTRA PORTA LA SUA FONTE, SEMPRE VISIBILE
+  // NEL VIDEO — non solo nella chiusura e non solo nel meta.json. È la stessa regola delle foto sul
+  // sito: la fonte è la condizione che rende lecita la pubblicazione, quindi sta in sovraimpressione
+  // per tutta la durata, piccola e discreta (bianco al 65% con ombra per le foto chiare).
+  const fontFonte = Math.round(W * 0.0125); // 1080×1920 → 14 px · 1920×1080 → 24? no: vedi sotto
+  const fs1 = W === 1080 ? 13 : 16; // come da indicazione: 10-14 sul verticale, 14-18 sull'orizzontale
+  const fs2 = W === 1080 ? 11 : 13; // firma più piccola della fonte
+  const fonteLinea = `drawtext=fontfile=${f}:textfile='${fonteTxt}':fontcolor=white@0.65:shadowcolor=black@0.55:shadowx=1:shadowy=1:fontsize=${fs1}:x=24:y=h-text_h-24`;
+  const marchio = `drawtext=fontfile=${f}:text='CAReAuctions':fontcolor=white@0.65:shadowcolor=black@0.55:shadowx=1:shadowy=1:fontsize=${fs2}:x=w-text_w-24:y=h-text_h-24`;
+  // i sottotitoli stanno SOPRA la fonte, con 12 px di margine fra le due righe
+  const margineSub = Math.round(fs1 * 1.6 + 24 + 12);
+  return {
+    filter: [apertura, chiusura, fonteLinea, marchio, creditiFilter].join(','),
+    margineSub,
+    nota: `sovraimpressioni con ${f} · fonte persistente ${fs1}px · firma ${fs2}px · sottotitoli a ${margineSub}px dal basso`,
+  };
 }
 
 
@@ -276,6 +291,9 @@ async function main() {
   // v1 — CREDITI FONTI nel video (da dove viene ogni foto) e SOTTOTITOLI BRUCIATI (leggibili senza audio).
   const daPdfN = usate.filter((u) => String(u.fonte || '').startsWith('perizia')).length;
   const crediti = daPdfN ? `Foto: perizia PDF (${daPdfN} immagini)` : 'Foto: allegati PVP';
+  // la riga persistente: se le foto vengono dagli allegati lo dice, altrimenti cita il PVP
+  const soloAllegati = usate.every((u) => String(u.fonte || '').startsWith('allegato'));
+  const fonteLineaTesto = (soloAllegati ? 'Foto: allegati PVP' : 'Fonte: PVP') + (tribunale ? ' — ' + tribunale : '');
   const righeVoce = [
     titolo + '.',
     tribunale ? tribunale + '.' : '',
@@ -343,7 +361,7 @@ async function main() {
   ];
 
   for (const f of formati) {
-    const { filter: draw, nota } = filtriDrawtext({ W: f.W, H: f.H, durata, titolo, tribunale, prezzo, data, fonte, crediti });
+    const { filter: draw, nota, margineSub } = filtriDrawtext({ W: f.W, H: f.H, durata, titolo, tribunale, prezzo, data, fonte, crediti, fonteLineaTesto });
     if (nota) console.log('  ' + nota);
 
     const args = ['-y'];
@@ -364,7 +382,7 @@ async function main() {
       catena.push(`[${ultimo}][v${i}]xfade=transition=fade:duration=${XFADE}:offset=${off}[${label}]`);
       ultimo = label;
     }
-    catena.push(`[${ultimo}]${draw ? draw + ',' : ''}subtitles='${srt.replace(/\\/g, '/')}':force_style='FontName=DejaVu Sans,Fontsize=${Math.round(f.W * 0.032)},PrimaryColour=&H00FFFFFF,OutlineColour=&H00000000,BorderStyle=1,Outline=2,Shadow=0,Alignment=2,MarginV=${Math.round(f.H * 0.12)}',format=yuv420p[vout]`);
+    catena.push(`[${ultimo}]${draw ? draw + ',' : ''}subtitles='${srt.replace(/\\/g, '/')}':force_style='FontName=DejaVu Sans,Fontsize=${Math.round(f.W * 0.032)},PrimaryColour=&H00FFFFFF,OutlineColour=&H00000000,BorderStyle=1,Outline=2,Shadow=0,Alignment=2,MarginV=${margineSub}',format=yuv420p[vout]`);
 
     args.push('-filter_complex', catena.join(';'), '-map', '[vout]', '-t', String(durata),
       '-c:v', 'libx264', '-crf', '23', '-preset', 'medium', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', f.file);
@@ -418,6 +436,7 @@ async function main() {
     generato: new Date().toISOString(),
     fotoUsate: usate.map((u) => ({ nome: u.nome, w: u.w, h: u.h, fonte: u.fonte || 'allegato PVP' })),
     crediti,
+    creditInVideo: true,
     // il player monta subito l'anteprima senza scaricare il video; `posterKey` è la chiave R2,
     // così l'edge può servirlo anche da un'altra rotta se la forma con query non piace.
     poster: `https://careauctions.co/video/${ID}?poster=1`,
