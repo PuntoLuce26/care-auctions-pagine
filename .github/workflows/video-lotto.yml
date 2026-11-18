@@ -60,23 +60,17 @@ jobs:
           ffmpeg -version | head -n 1
           ffprobe -version | head -n 1
 
-      - name: Python 3.11 (piper-phonemize non ha wheel per 3.12)
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
       - name: Piper it_IT (voce del sito) — modello PINNATO con sha256
         run: |
           set -euo pipefail
-          python -m pip install --quiet 'piper-tts==1.2.0'
+          python3 -m pip install --quiet 'piper-tts==1.2.0'
           mkdir -p /tmp/piper
           B="https://huggingface.co/rhasspy/piper-voices/resolve/main/it/it_IT/paola/medium"
           curl -fsSL -o /tmp/piper/it_IT-paola-medium.onnx "$B/it_IT-paola-medium.onnx"
           curl -fsSL -o /tmp/piper/it_IT-paola-medium.onnx.json "$B/it_IT-paola-medium.onnx.json"
           echo "f9b8658aa8c01f8280aa88488f6e7643a639b6225a81514c40440a01f6364a20  /tmp/piper/it_IT-paola-medium.onnx" | sha256sum -c -
           echo "10e46e8534dd2d4051f1534ba6542f189f854454acea44a6d45ff464a83260fa  /tmp/piper/it_IT-paola-medium.onnx.json" | sha256sum -c -
-          python -c 'import piper; print("piper", getattr(piper, "__version__", "?"))'
-          ls -la /tmp/piper
+          piper --version || true
 
       - name: Genera i due video e pubblicali su R2
         env:
