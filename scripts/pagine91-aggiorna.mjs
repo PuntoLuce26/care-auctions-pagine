@@ -69,5 +69,14 @@ const out = Object.assign({}, dati, {
 // _meta resta in testa al file: si ricostruisce l'oggetto con _meta primo
 const finale = { _meta: out._meta };
 for (const k of lingue) finale[k] = out[k];
-fs.writeFileSync(FILE, JSON.stringify(finale));
+// 18/11/2026 — FORMA DEL MARCHIO SCRITTA ALLA FONTE (non rattoppata in lettura).
+// «CARe Auctions» con lo spazio non deve finire nei feed: li leggono direttamente altre app,
+// partner e crawler dati, che non passano dall'edge e quindi non vedono la correzione in uscita.
+const normalizzaMarchio = (v) => {
+  if (typeof v === 'string') return v.replace(/CARe\s+Auctions/g, 'CAReAuctions');
+  if (Array.isArray(v)) return v.map(normalizzaMarchio);
+  if (v && typeof v === 'object') { const o = {}; for (const k of Object.keys(v)) o[k] = normalizzaMarchio(v[k]); return o; }
+  return v;
+};
+fs.writeFileSync(FILE, JSON.stringify(normalizzaMarchio(finale)));
 console.log('pagine91: ' + lingue.length + ' lingue (ilive ' + conIlive + ', stampa ' + conStampa + ') · aggiornato ' + ORA + ' · ' + (cambiato ? 'contenuto nuovo' : 'nessuna variazione di contenuto'));
