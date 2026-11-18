@@ -1,5 +1,5 @@
 {
-  "generatoIl": "2026-11-17T14:40:43.939Z",
+  "generatoIl": "2026-11-18T14:17:03.206Z",
   "fonte": "KV STATS — pv:, uv: e bt: (edge)",
   "nota": "Aggregato per giorno: pageview, utenti unici (hash giornaliero, 30 giorni) e bot. Non e il RUM per pagina, che resta interno.",
   "giorni": [
@@ -37,7 +37,7 @@
       "data": "2026-11-14",
       "pv": 3792,
       "bot": 16385,
-      "uv": 170
+      "uv": 114
     },
     {
       "data": "2026-11-15",
@@ -53,9 +53,15 @@
     },
     {
       "data": "2026-11-17",
-      "pv": 2446,
-      "bot": 5676,
-      "uv": 252
+      "pv": 3728,
+      "bot": 9008,
+      "uv": 508
+    },
+    {
+      "data": "2026-11-18",
+      "pv": 1996,
+      "bot": 3934,
+      "uv": 410
     }
   ]
 }
