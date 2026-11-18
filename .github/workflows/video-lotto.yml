@@ -69,6 +69,53 @@ jobs:
           export PATH="$HOME/ffmpeg-pin/bin:$PATH"
           node scripts/video-lotto.mjs "$LOTTO_ID"
 
+      # ────────────────────────────────────────────────────────────────────────────────────────
+      # VOCE ITALIANA (18/11/2026) — Piper it_IT, PINNATO (versione + sha256, mai «latest»).
+      # Workers AI non ha una voce italiana (melotts: en/es/fr/jp/kr/zh · deepgram: inglese), quindi
+      # l'italiano passa da qui. L'azione `tts` del worker resta per inglese, test e usi web.
+      # ────────────────────────────────────────────────────────────────────────────────────────
+      - name: Piper it_IT PINNATO (binario + voce, sha256 verificato)
+        run: |
+          set -euo pipefail
+          PIPER_URL="https://github.com/rhasspy/piper/releases/download/2023.11.14-2/piper_linux_x86_64.tar.gz"
+          PIPER_SHA256="a50cb45f355b7af1f6d758c1b360717877ba0a398cc8cbe6d2a7a3a26e225992"
+          VOCE_URL="https://huggingface.co/rhasspy/piper-voices/resolve/main/it/it_IT/paola/medium/it_IT-paola-medium.onnx"
+          VOCE_SHA256="f9b8658aa8c01f8280aa88488f6e7643a639b6225a81514c40440a01f6364a20"
+          VOCE_CFG_URL="https://huggingface.co/rhasspy/piper-voices/resolve/main/it/it_IT/paola/medium/it_IT-paola-medium.onnx.json"
+          VOCE_CFG_SHA256="10e46e8534dd2d4051f1534ba6542f189f854454acea44a6d45ff464a83260fa"
+          curl -fsSL --retry 3 --retry-delay 2 "$PIPER_URL" -o /tmp/piper.tar.gz
+          echo "$PIPER_SHA256  /tmp/piper.tar.gz" | sha256sum -c -
+          mkdir -p "$HOME/piper-bin" "$HOME/piper-voce"
+          tar -xzf /tmp/piper.tar.gz -C "$HOME/piper-bin" --strip-components=1
+          curl -fsSL --retry 3 --retry-delay 2 "$VOCE_URL" -o "$HOME/piper-voce/it_IT-paola-medium.onnx"
+          curl -fsSL --retry 3 --retry-delay 2 "$VOCE_CFG_URL" -o "$HOME/piper-voce/it_IT-paola-medium.onnx.json"
+          echo "$VOCE_SHA256  $HOME/piper-voce/it_IT-paola-medium.onnx" | sha256sum -c -
+          echo "$VOCE_CFG_SHA256  $HOME/piper-voce/it_IT-paola-medium.onnx.json" | sha256sum -c -
+          chmod +x "$HOME/piper-bin/piper"
+          "$HOME/piper-bin/piper" --version 2>&1 | head -n 2 || true
+
+      - name: Voce italiana + mux audio/video + ripubblicazione su R2
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          LOTTO_ID: ${{ github.event.inputs.lottoId }}
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/ffmpeg-pin/bin:$PATH"
+          export PIPER_DIR="$HOME/piper-bin"
+          export VOICE="$HOME/piper-voce/it_IT-paola-medium.onnx"
+          node scripts/video-voce.mjs "$LOTTO_ID"
+
+      - name: Artefatto voce (campione 15 s + meta, per l'ascolto)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: video-voce
+          path: |
+            video-out/campione-15s.wav
+            video-out/voce-meta.json
+          if-no-files-found: warn
+          retention-days: 30
+
       - name: Riepilogo e meta nell artefatto — i video restano su R2
         if: always()
         run: |
