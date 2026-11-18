@@ -264,7 +264,9 @@ const righeLoc = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http
 const oggiS = new Date().toISOString().slice(0, 10);
 const addU = (u) => { righeLoc.push('<url><loc>https://careauctions.co' + u + '</loc></url>'); };
 for (const cs of Object.keys(cittaOut)) for (const lg of SEO_LANG) addU('/case-asta-' + cs + (lg === 'it' ? '' : '/' + lg));
-for (const ps of provCount.keys()) for (const lg of SEO_LANG) addU('/aste-' + ps + (lg === 'it' ? '' : '/' + lg));
+// 18/11/2026 — le province che hanno gia' un hub citta' (/case-asta-<slug>) fanno 301 su /aste-<prov>:
+// non si dichiarano in sitemap (misurato: 98 su 130). Restano solo quelle che rispondono 200.
+for (const ps of provCount.keys()) { if (cityCount.has(ps)) continue; for (const lg of SEO_LANG) addU('/aste-' + ps + (lg === 'it' ? '' : '/' + lg)); }
 for (const rs of regDaProv) if (rs) for (const lg of SEO_LANG) addU('/aste-' + rs + (lg === 'it' ? '' : '/' + lg));
 righeLoc.push('</urlset>');
 try { fs.writeFileSync(path.join(ROOT, 'sitemap-locali.xml'), righeLoc.join('\n')); } catch (e) { console.log('sitemap-locali: non scritta', e.message); }
