@@ -14,6 +14,38 @@ mkdirSync(OUT, { recursive: true });
 const started = new Date();
 console.log('QA CAReAuctions — inizio', started.toISOString());
 
+// (c) 18/11/2026 — GUARDIA ANTI-DOPPIONE. Emergent pubblica poche volte al giorno ma i trigger
+// (repository_dispatch, push, schedule) possono arrivare in raffica: la stessa build verificata da
+// meno di 3 ore non si ricrawla (18 rotte desktop + 6 mobile = 3-4 minuti di runner per nulla).
+// Se l'ultima QA conclusa riguarda la STESSA build servita ora, si esce 0 in pochi secondi.
+if (process.env.QA_SKIP_DOPPIONI !== '0' && process.env.CLOUDFLARE_API_TOKEN) {
+  try {
+    const base = process.env.QA_BASE || 'https://careauctions.co';
+    const html = await (await fetch(base + '/?ts=' + Date.now(), { headers: { 'User-Agent': 'care-qa-guardia/1.0' } })).text();
+    const m = html.match(/main\.([A-Za-z0-9_-]+)\.js/);
+    const servita = m ? 'main.' + m[1] + '.js' : null;
+    if (servita) {
+      const r = await fetch(
+        'https://api.cloudflare.com/client/v4/accounts/d5d20864ee7f83c32c9eeb5fcbda6edb/r2/buckets/care-stato/objects/stato/qa/stato.json',
+        { headers: { Authorization: 'Bearer ' + process.env.CLOUDFLARE_API_TOKEN, 'User-Agent': 'care-qa-guardia/1.0' } },
+      );
+      if (r.ok) {
+        const st = await r.json();
+        const etaOre = (Date.now() - Date.parse(st.generatedAt || 0)) / 3600000;
+        const buildStato = (st.build && st.build.sito) || null;
+        if (buildStato === servita && etaOre >= 0 && etaOre < 3) {
+          writeFileSync(OUT + '/skip.json', JSON.stringify({ motivo: 'build già verificata', build: servita, orePrima: Number(etaOre.toFixed(2)), runIdPrecedente: st.runId || null }, null, 1) + '\n');
+          console.log(`build già verificata: ${servita} · ${etaOre.toFixed(1)} h fa (run ${st.runId || '?'}) — esco 0 senza ricrawlare`);
+          process.exit(0);
+        }
+        console.log(`guardia doppioni: build servita ${servita} · build verificata ${buildStato || '?'} · ${etaOre.toFixed(1)} h fa → si esegue il QA completo`);
+      }
+    }
+  } catch (e) {
+    console.log('guardia doppioni non eseguibile (' + String((e && e.message) || e) + '): si esegue il QA completo');
+  }
+}
+
 let crawl;
 try {
   crawl = await runCrawl();

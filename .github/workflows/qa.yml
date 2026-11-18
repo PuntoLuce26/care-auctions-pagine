@@ -33,8 +33,13 @@ permissions:
   issues: write
   actions: write
 
+# (b) 18/11/2026 — GRUPPI SEPARATI PER TIPO DI ARRIVO. Con un gruppo solo GitHub tiene UNA run in coda
+# e la sostituisce a ogni nuovo arrivo: se gli arrivi sono più frequenti della durata (3-4 min), il QA
+# NON PARTE MAI. Misurato nelle 48 h precedenti: 163 run, 36 cancellate prima di iniziare, 109 arrivi
+# da repository_dispatch (pubblicazione). Ora un dispatch di pubblicazione non può cancellare la run
+# schedulata, e viceversa.
 concurrency:
-  group: qa
+  group: qa-${{ github.event_name == 'schedule' && 'schedulato' || github.event_name == 'workflow_dispatch' && 'umano' || 'pubblicazione' }}-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -67,6 +72,7 @@ jobs:
           QA_BASE: https://careauctions.co
           GITHUB_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY: ${{ github.repository }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: node qa/run.mjs
 
       - name: Riepilogo nel run
