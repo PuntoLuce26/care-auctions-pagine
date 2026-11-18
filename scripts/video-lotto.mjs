@@ -124,6 +124,9 @@ async function main() {
   if (!L) console.log('  ! lotto assente dall indice: titolo/tribunale dal documento PVP');
 
   if (MIN_LATO !== 560) console.log('  ! VIDEO_MIN_LATO=' + MIN_LATO + ' (override dichiarato: la soglia di prodotto per gli allegati è 560)');
+  const doc = await (await fetch(`${BASE}/api/pvp-documenti/${ID}`)).json();
+  if (!doc || !doc.ok || !Array.isArray(doc.allegati)) throw new Error('documenti non leggibili per il lotto ' + ID);
+
   // 1-bis) v1 — IMMAGINI DENTRO LA PERIZIA PDF (la strada vera: nel PDF sono grandi).
   // poppler-utils è presente nel runner (lo usa già l'OCR delle perizie). Si estraggono con
   // `pdfimages -png`, si scartano le < 800 px e quelle che sono timbri/firme/righe, si tiene
@@ -160,8 +163,6 @@ async function main() {
   }
 
   // 2) allegati e foto
-  const doc = await (await fetch(`${BASE}/api/pvp-documenti/${ID}`)).json();
-  if (!doc || !doc.ok || !Array.isArray(doc.allegati)) throw new Error('documenti non leggibili per il lotto ' + ID);
   const candidati = doc.allegati.filter((a) => /\.(jpe?g|png|webp)$/i.test(String(a.n || a.u || '')));
   console.log(`  allegati: ${doc.allegati.length} · immagini candidate: ${candidati.length}`);
 
