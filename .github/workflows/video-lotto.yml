@@ -77,12 +77,20 @@ jobs:
           curl -fsSL -o /tmp/piper/it_IT-paola-medium.onnx.json "$B/it_IT-paola-medium.onnx.json"
           echo "f9b8658aa8c01f8280aa88488f6e7643a639b6225a81514c40440a01f6364a20  /tmp/piper/it_IT-paola-medium.onnx" | sha256sum -c -
           echo "10e46e8534dd2d4051f1534ba6542f189f854454acea44a6d45ff464a83260fa  /tmp/piper/it_IT-paola-medium.onnx.json" | sha256sum -c -
-          piper --version || true
+          python -c "import piper; print('piper-tts installato')"
 
       - name: Genera i due video e pubblicali su R2
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           LOTTO_ID: ${{ github.event.inputs.lottoId }}
+          VIDEO_MIN_LATO: ${{ github.event.inputs.minLato || '560' }}
+          # 18/11/2026 — la voce: il passo di sintesi vive QUI (il workflow è di questo agente).
+          # «iCARe» → «ai ker» è applicato nello script prima della sintesi, come nell'azione tts.
+          PIPER_BIN: piper
+          PIPER_MODEL: /tmp/piper/it_IT-paola-medium.onnx
+          PIPER_CONFIG: /tmp/piper/it_IT-paola-medium.onnx.json
+          PIPER_MODELLO: it_IT-paola-medium
+          PIPER_LENGTH_SCALE: '1.05'
         run: |
           set -euo pipefail
           export PATH="$HOME/ffmpeg-pin/bin:$PATH"
