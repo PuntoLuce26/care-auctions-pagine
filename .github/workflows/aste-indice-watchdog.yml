@@ -1,0 +1,48 @@
+name: aste-indice-watchdog
+# Sorveglia la meta dell'indice lotti: freschezza (warn 12 h, allarme 18 h, caduta del 404 a 24 h)
+# e COERENZA (completo:true + totale>0 + shardCount 64 + i 64 shard che esistono davvero).
+#
+# PERCHÉ: l'edge dà il 404 vero solo con meta più fresca di 24 h. Se due giri del generatore
+# falliscono, il 404 smette di funzionare e senza questo watchdog nessuno se ne accorgerebbe.
+# Soglie concordate con rotte-edge (che le ha verificate nel ramo edge).
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 */3 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: aste-indice-watchdog
+  cancel-in-progress: false
+
+jobs:
+  guarda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout (solo lo stretto necessario)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            scripts/aste-indice-watchdog.mjs
+            scripts/stato-pubblica.mjs
+          sparse-checkout-cone-mode: false
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Controlla la meta dell'indice
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: node scripts/aste-indice-watchdog.mjs
+
+      - name: Riepilogo nel run
+        if: always()
+        run: |
+          cat /tmp/allarme-aste-indice.json >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || echo "nessun allarme scritto" >> "$GITHUB_STEP_SUMMARY"
