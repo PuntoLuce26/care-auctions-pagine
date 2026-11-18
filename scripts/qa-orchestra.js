@@ -107,7 +107,7 @@ const tsa = (u) => u + (u.includes('?') ? '&' : '?') + 'ts=' + Date.now();
   });
   let risposta = '';
   try { risposta = await chat.r.text(); } catch (e) {}
-  add('iCARe chat', chat.ok && /5\.?800/.test(risposta), chat.ok ? ('HTTP 200 · ' + (/5\.?800/.test(risposta) ? 'risponde 5.800' : 'risposta senza importo')) : 'HTTP ' + chat.status, 'alta');
+  add('iCARe chat', chat.ok && /7\.?300/.test(risposta), chat.ok ? ('HTTP 200 · ' + (/7\.?300/.test(risposta) ? 'risponde 7.300' : 'risposta senza il listino nuovo (7.300)')) : 'HTTP ' + chat.status, 'alta');
   const wall = await get('https://care-aste.emergent.host/api/battito?lang=it');
   add('iCAReWall', wall.ok, 'HTTP ' + wall.status, 'media');
   const voce = await get(BASE + '/voce/tts-worker.js');
