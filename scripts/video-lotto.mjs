@@ -142,8 +142,17 @@ async function main() {
       const lista = ff('pdfimages', ['-list', pdfFile]);
       const pagine = lista.split('\n').slice(2).map((l) => l.trim().split(/\s+/)).filter((c) => c.length > 3).map((c) => Number(c[0]));
       ff('pdfimages', ['-png', '-f', '1', '-l', '40', pdfFile, `${OUT}/pdfimg`]);
-      const estratti = fs.readdirSync(OUT).filter((f) => /^pdfimg-\d+\.png$/.test(f)).sort();
-      console.log(`  perizia: ${estratti.length} immagini estratte dal PDF`);
+      const tuttiEstratti = fs.readdirSync(OUT).filter((f) => /^pdfimg-\d+\.png$/.test(f)).sort();
+      console.log(`  perizia: ${tuttiEstratti.length} immagini estratte dal PDF`);
+      // 18/11/2026 — MISURATO: la perizia di 1822566 è una scansione a strisce → pdfimages tira fuori
+      // 38.216 PNG e nessuno utile. Oltre 200 immagini il PDF non è una raccolta di foto: si salta
+      // la via perizia e si ricade sugli allegati (la decisione resta nel log).
+      if (tuttiEstratti.length > 200) {
+        console.log('  perizia: scansione a strisce (' + tuttiEstratti.length + ' immagini) — non è una raccolta di foto, salto la via PDF');
+        for (const f of tuttiEstratti) fs.rmSync(`${OUT}/${f}`, { force: true });
+        throw new Error('pdf-scansione');
+      }
+      const estratti = tuttiEstratti;
       estratti.forEach((f, i) => {
         const file = `${OUT}/${f}`;
         const byte = fs.statSync(file).size;
@@ -179,8 +188,10 @@ async function main() {
       const urlImg = `${BASE}/api/pvp-img?u=${encodeURIComponent(a.u)}`;
       const byte = await scarica(urlImg, file);
       const { w, h } = dimensioni(file);
-      if (!w || !h || Math.min(w, h) < MIN_LATO) {
-        console.log(`  - scarto ${a.n} (${w}x${h}, lato corto < ${MIN_LATO}) [${byte} B]`);
+      // 18/11/2026 — la soglia si misura sul LATO LUNGO: le foto PVP tipiche sono 577×433, e con
+      // il lato corto a 560 nessuna passerebbe mai (misurato: 433 < 560). 577 ≥ 560 → passa.
+      if (!w || !h || Math.max(w, h) < MIN_LATO) {
+        console.log(`  - scarto ${a.n} (${w}x${h}, lato lungo < ${MIN_LATO}) [${byte} B]`);
         fs.rmSync(file, { force: true });
         continue;
       }
