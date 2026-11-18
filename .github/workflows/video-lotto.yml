@@ -14,6 +14,11 @@ on:
         description: 'ID del lotto (es. 1822566)'
         required: true
         type: string
+      minLato:
+        description: 'Soglia lato corto per le FOTO degli allegati (default 560 = regola di prodotto)'
+        required: false
+        type: string
+        default: '560'
 
 permissions:
   contents: read
