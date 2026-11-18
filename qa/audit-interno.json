@@ -1,15 +1,16 @@
 {
-  "generato": "2026-11-18T09:48:04.354Z",
-  "controlli": 58,
+  "generato": "2026-11-18T09:55:02.186Z",
+  "controlli": 51,
   "critici": 0,
   "alti": 0,
   "medi": 0,
   "bassi": 0,
   "qaRunRegistrato": true,
-  "qaRunVerificabile": true,
-  "qaRunMotivo": "",
-  "nonVerificabili": "0/58",
+  "qaRunVerificabile": false,
+  "qaRunMotivo": "run 44278892277 · NON VERIFICABILE: nessun qa-sync dopo il run (ultimo 2026-11-18T09:36:30Z)",
+  "nonVerificabili": "4/51",
   "errori5xxEdge": 0,
-  "qaRunDettaglio": "run 44275059979",
-  "fonte": "audit interno (Mac) con token di regia"
+  "qaRunDettaglio": "run 44278892277 · NON VERIFICABILE: nessun qa-sync dopo il run (ultimo 2026-11-18T09:36:30Z)",
+  "cadenzaOre": 3,
+  "fonte": "presidio cloud (GitHub Actions, qa-presidio.yml)"
 }
