@@ -134,7 +134,7 @@ function numInParole(n) {
     const d = Math.floor(x / 10);
     const u = x % 10;
     let s = decine[d];
-    if (u === 1 || u === 8) s = s.slice(0, -1);
+    if (u === 1 || u === 8) s = s.slice(0, -1); // ventuno, ventotto
     return s + unita[u];
   };
   const sotto1000 = (x) => {
@@ -148,21 +148,47 @@ function numInParole(n) {
   };
   const gruppi = [];
   let resto = num;
-  const scala = ['', 'mila', 'milione', 'miliardo'];
   let i = 0;
-  while (resto > 0 && i < scala.length) {
+  while (resto > 0) {
     const g = resto % 1000;
     if (g) {
-      let parola = g === 1 && i === 1 ? '' : sotto1000(g);
-      if (i === 1) parola += 'mila';
-      else if (i === 2) parola += g === 1 ? 'milione' : 'milioni';
-      else if (i === 3) parola += g === 1 ? 'miliardo' : 'miliardi';
-      gruppi.unshift(parola);
+      if (i === 0) gruppi.unshift(sotto1000(g));
+      else if (i === 1) gruppi.unshift(g === 1 ? 'mille' : sotto1000(g) + 'mila');
+      else if (i === 2) gruppi.unshift(g === 1 ? 'un milione' : sotto1000(g) + ' milioni');
+      else if (i === 3) gruppi.unshift(g === 1 ? 'un miliardo' : sotto1000(g) + ' miliardi');
     }
     resto = Math.floor(resto / 1000);
     i += 1;
   }
   return gruppi.join(' ').replace(/\s+/g, ' ').trim();
+}
+
+
+// 18/11/2026 — IL TITOLO DI CATALOGO NON È UNA FRASE: «ABITAZIONE_TIPO_SIGN · Itri (Latina)» letto
+// alla lettera diventa «abitazione tipo sign» con l'underscore. Qui si umanizza SOLO per la voce
+// (il video e il meta tengono il titolo originale): niente invenzioni, solo le etichette note.
+function titoloPerVoce(titolo) {
+  const mappa = {
+    ABITAZIONE_TIPO_SIGN: 'appartamento di tipo signorile',
+    ABITAZIONE_TIPO_ECO: 'appartamento di tipo economico',
+    ABITAZIONE_TIPO_POP: 'appartamento di tipo popolare',
+    NEGOZI_BOTTEGHE: 'negozio',
+    BENE_GENERICO: 'bene immobiliare',
+    TERRENO: 'terreno',
+    CAPANNONE: 'capannone',
+  };
+  const [testa, ...resto] = String(titolo || '').split('·').map((x) => x.trim());
+  const testaUmana = mappa[testa] || testa.replace(/_/g, ' ').toLowerCase().replace(/\s+/g, ' ');
+  const coda = resto.join(' ').replace(/\s+/g, ' ').trim();
+  return (testaUmana + (coda ? ', ' + coda : '')).trim();
+}
+
+
+// 18/11/2026 — nella VOCE il tribunale si legge, non si scandisce: «Tribunale di CASSINO» diventa
+// «Tribunale di Cassino» (solo l'iniziale maiuscola). Nel video e nel meta resta la forma del feed.
+function tribunalePerVoce(tr) {
+  return String(tr || '')
+    .replace(/\btribunale di ([a-zà-ù' ]+)/gi, (m, citta) => 'Tribunale di ' + citta.trim().toLowerCase().replace(/(^|\s)([a-zà-ù])/g, (x, sp, c) => sp + c.toUpperCase()));
 }
 
 async function main() {
@@ -322,32 +348,46 @@ async function main() {
   // v1 — LA VOCE: testo 20-25 s, tono sobrio, numeri letti a parole e sempre con la fonte accanto.
   // «iCARe» → «ai ker» prima della sintesi (stessa sostituzione dell'azione tts del worker).
   const prezzoParole = L && L.pb ? numInParole(L.pb) + ' euro' : '';
-  const dataParole = L && L.d ? (() => { const [a, m, g] = L.d.split('-'); return `${Number(g)} ${['', 'gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'][Number(m)]} ${a}`; })() : '';
-  const testoVoce = [
-    `${titolo}.`,
-    tribunale ? `${tribunale}.` : '',
+  const dataParole = L && L.d ? (() => { const [a, m, g] = L.d.split('-'); return `${numInParole(Number(g))} ${['', 'gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'][Number(m)]} ${numInParole(Number(a))}`; })() : '';
+  const titoloVoce = titoloPerVoce(titolo);
+  const testoBase = [
+    `${titoloVoce}.`,
+    tribunale ? `${tribunalePerVoce(tribunale)}.` : '',
     prezzoParole ? `Prezzo base ${prezzoParole}, come risulta dal P V P.` : '',
     dataParole ? `Data dell'asta: ${dataParole}.` : '',
-    'Il video raccoglie le immagini pubblicate dal P V P per questa procedura: nessuna è nostra, ogni foto porta la sua fonte.',
-    'Per i documenti e le date ufficiali dell\'asta si consulta la scheda del lotto sul sito, dove la fonte di ogni dato è indicata accanto al numero.',
-  ].filter(Boolean).join(' ').replace(/iCARe/g, 'ai ker');
+    'iCARe, l\'assistente di CAReAuctions, raccoglie le immagini pubblicate dal P V P per questa procedura: nessuna è nostra, ogni foto porta la sua fonte.',
+    'Documenti e date ufficiali si trovano nella scheda del lotto.',
+  ].filter(Boolean).join(' ');
+  // REGOLA DI BRAND (18/11/2026): «iCARe» si pronuncia «ai ker» in ogni lingua — stessa sostituzione
+  // dell'azione tts del worker, fatta PRIMA della sintesi (mai dopo: il motore leggerebbe «i-care»).
+  const brandSostituito = /iCARe/.test(testoBase);
+  const testoVoce = testoBase.replace(/iCARe/g, 'ai ker');
 
   let voceFile = null;
   let voceDurata = null;
+  let voceParole = null;
+  let vocePps = null;
   if (process.env.PIPER_MODEL && fs.existsSync(process.env.PIPER_MODEL) && process.env.PIPER_BIN !== 'no') {
     try {
       voceFile = `${OUT}/voice.wav`;
       fs.writeFileSync(`${OUT}/voce.txt`, testoVoce + '\n');
       const piper = process.env.PIPER_BIN || 'piper';
       console.log(`  voce: sintesi con ${piper} · modello ${process.env.PIPER_MODELLO || 'it_IT-paola-medium'}`);
-      execFileSync(piper, ['-m', process.env.PIPER_MODEL, '-c', process.env.PIPER_CONFIG, '-f', voceFile, '--length_scale', process.env.PIPER_LENGTH_SCALE || '1.05'], {
+      execFileSync(piper, ['-m', process.env.PIPER_MODEL, '-c', process.env.PIPER_CONFIG, '-f', voceFile, '--length_scale', process.env.PIPER_LENGTH_SCALE || '1.30'], {
         input: testoVoce + '\n',
         stdio: ['pipe', 'pipe', 'pipe'],
         maxBuffer: 32 * 1024 * 1024,
       });
       const pr = JSON.parse(ff('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'json', voceFile]));
       voceDurata = Number(Number(pr.format.duration).toFixed(2));
-      console.log(`  voce: ${voceDurata} s · ${fs.statSync(voceFile).size} B`);
+      const parole = testoVoce.split(/\s+/).filter(Boolean).length;
+      voceParole = parole;
+      vocePps = Number((parole / (voceDurata || 1)).toFixed(2));
+      console.log(`  voce: ${voceDurata} s · ${fs.statSync(voceFile).size} B · ${parole} parole · ${vocePps} parole/s`);
+      if (brandSostituito) console.log('  brand: «iCARe» → «ai ker» applicato prima della sintesi (verificato nel testo)');
+      else console.log('  brand: nessuna occorrenza di «iCARe» nel testo (la regola non è esercitata in questo giro)');
+      // REQUISITO, non opinione: sopra 2,6 parole/s i sottotitoli a due righe non si leggono.
+      if (vocePps > 2.6) throw new Error(`ritmo troppo veloce: ${vocePps} parole/s (massimo 2,6) — alza PIPER_LENGTH_SCALE`);
     } catch (e) {
       console.log('  voce NON generata (' + String((e && e.message) || e).slice(0, 160) + '): il video resta muto con i sottotitoli');
       voceFile = null;
