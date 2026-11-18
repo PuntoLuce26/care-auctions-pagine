@@ -73,9 +73,16 @@ const tsa = (u) => u + (u.includes('?') ? '&' : '?') + 'ts=' + Date.now();
   // 3b. Registrazione dei run QA nel Secondo Cervello (via stato pubblico dell'audit interno)
   const aud = await json(tsa(RAW + '/qa/audit-interno.json'));
   const audAge = aud.json && aud.json.generato ? (Date.now() - Date.parse(aud.json.generato)) / 3600e3 : 999;
-  add('registrazione QA (audit interno)', !!(aud.json && aud.json.qaRunRegistrato),
-      aud.json ? ('registrato · ' + Math.round(audAge * 10) / 10 + ' h fa · ' + String(aud.json.qaRunDettaglio || '')) : 'audit interno non ha ancora pubblicato lo stato',
-      'media');
+  // 18/11/2026 — TRE STATI, non due (regola watchdog dell'11/11): se l'audit interno dichiara che
+  // nessun qa-sync è ancora passato dopo l'ultimo run QA, la registrazione NON è verificabile e non
+  // va contata come KO. Lo stato arriva da qa/audit-interno.json (qaRunVerificabile / qaRunRegistrato).
+  const audNV = !!(aud.json && (aud.json.qaRunVerificabile === false || aud.json.qaRunRegistrato === null));
+  add('registrazione QA (audit interno)',
+      audNV ? true : !!(aud.json && aud.json.qaRunRegistrato),
+      audNV
+        ? ('non verificabile · ' + String(aud.json.qaRunMotivo || aud.json.qaRunDettaglio || 'nessun qa-sync dopo l\'ultimo run QA'))
+        : (aud.json ? ('registrato · ' + Math.round(audAge * 10) / 10 + ' h fa · ' + String(aud.json.qaRunDettaglio || '')) : 'audit interno non ha ancora pubblicato lo stato'),
+      'media', audNV);
   // 4. Feed
   const st = await json(tsa(RAW + '/feed/statistiche.json'));
   const stAge = st.json && st.json.aggiornato ? (Date.now() - Date.parse(st.json.aggiornato)) / 3600e3 : 999;
@@ -86,7 +93,10 @@ const tsa = (u) => u + (u.includes('?') ? '&' : '?') + 'ts=' + Date.now();
   add('esiti prezzi', es.ok && es.json && (es.json.tutti || 0) > 100, es.json ? (es.json.tutti || 0) + ' prezzi · ' + (es.json.copertura || '') : 'HTTP ' + es.status, 'media');
   // 5. AI education + llms
   const ai = await json(tsa(RAW + '/ai/stato.json'));
-  add('AI education', ai.ok && ai.json && ai.json.ok !== false, ai.json ? (ai.json.checks ? ai.json.checks.length : (ai.json.ok ? 'ok' : '?')) + ' controlli' : 'HTTP ' + ai.status, 'media');
+  const aiCk = Array.isArray(ai.json && ai.json.checks) ? ai.json.checks : null;
+  const aiKo = aiCk ? aiCk.filter((c) => !c.ok) : [];
+  add('AI education', ai.ok && ai.json && ai.json.ok !== false,
+      aiCk ? (aiCk.length + ' controlli · ' + (aiCk.length - aiKo.length) + ' ok' + (aiKo.length ? ' · KO: ' + aiKo.map((c) => c.nome).join(', ') : '')) : ('HTTP ' + ai.status), 'media');
   for (const p of ['/llms.txt', '/robots.txt', '/sitemap.xml']) {
     const g = await get(BASE + p);
     add('AI/SEO ' + p, g.ok, 'HTTP ' + g.status + ' · ' + g.ms + ' ms', 'media');
@@ -101,15 +111,23 @@ const tsa = (u) => u + (u.includes('?') ? '&' : '?') + 'ts=' + Date.now();
   const pvp = await json(BASE + '/api/pvp-documenti/512400');
   add('PVP documenti', pvp.ok && pvp.json, pvp.json ? ((pvp.json.allegati || []).length) + ' allegati' : 'HTTP ' + pvp.status, 'media');
   // 9. iCARe chat + wall + voce
-  const chat = await get('https://icare-ai.misty-mode-1cbc.workers.dev', {
+  // 18/11/2026 — SI CHIAMANO LE ROTTE PUBBLICHE, NON LE ORIGINI. Le origini sono chiuse agli anonimi:
+  // icare-ai.misty-mode-1cbc.workers.dev risponde 401 e care-aste.emergent.host/api/battito 403 →
+  // due KO falsi a ogni giro. Le rotte del sito servono gli stessi dati e sono misurabili.
+  const chat = await get(BASE + '/api/icare', {
     method: 'POST', headers: Object.assign({ 'Content-Type': 'application/json' }, UA),
     body: JSON.stringify({ azione: 'ai-chat', messaggio: 'Quanto costa la success fee su 200.000 euro?', lingua: 'it' }),
   });
-  let risposta = '';
-  try { risposta = await chat.r.text(); } catch (e) {}
-  add('iCARe chat', chat.ok && /7\.?300/.test(risposta), chat.ok ? ('HTTP 200 · ' + (/7\.?300/.test(risposta) ? 'risponde 7.300' : 'risposta senza il listino nuovo (7.300)')) : 'HTTP ' + chat.status, 'alta');
-  const wall = await get('https://care-aste.emergent.host/api/battito?lang=it');
-  add('iCAReWall', wall.ok, 'HTTP ' + wall.status, 'media');
+  let risposta = '', chatJson = null;
+  try { const testo = await chat.r.text(); try { chatJson = JSON.parse(testo); } catch (e) {} risposta = String((chatJson && chatJson.risposta) || testo || ''); } catch (e) {}
+  // OK = 200 + una risposta vera. Il listino non fa fallire il check (cambierebbe ad ogni listino):
+  // resta nel dettaglio come informazione, così si vede subito se la chat dice ancora il prezzo vecchio.
+  add('iCARe chat', chat.ok && risposta.trim().length > 0,
+    chat.ok ? ('HTTP 200 · ' + risposta.trim().length + ' caratteri' + (/7\.?300/.test(risposta) ? ' · listino 7.300' : ' · ATTENZIONE: la risposta non cita 7.300')) : 'HTTP ' + chat.status, 'alta');
+  const wall = await json(BASE + '/api/battito?lang=it');
+  const wallMessaggi = wall.json && (wall.json.messaggi || wall.json.messages);
+  add('iCAReWall', wall.ok && Array.isArray(wallMessaggi) && wallMessaggi.length > 0,
+    wall.ok ? ('HTTP 200 · ' + (Array.isArray(wallMessaggi) ? wallMessaggi.length : 0) + ' messaggi') : 'HTTP ' + wall.status, 'media');
   const voce = await get(BASE + '/voce/tts-worker.js');
   add('voce TTS', voce.ok, 'HTTP ' + voce.status, 'bassa');
   // 10. Posta (stato) + run GitHub
