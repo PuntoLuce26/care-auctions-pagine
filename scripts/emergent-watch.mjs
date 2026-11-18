@@ -47,6 +47,26 @@ storico.push(punto);
 storico = storico.slice(-500);
 fs.writeFileSync(file, JSON.stringify({ aggiornato: OGGI, nota: 'TTFB misurato da GitHub Actions (3 campioni, mediana). Il CPU/memoria interni di Emergent non sono esposti.', punti: storico }));
 
+// 18/11/2026 — la cadenza si DICHIARA qui e si MISURA qui: il check non deduce niente.
+// Il valore dichiarato (cadenzaOre) è la cadenza attesa; mediana e massimo degli intervalli
+// viaggiano nel payload come PROVENIENZA, così chi legge la soglia sa su quante osservazioni è basata.
+// Regola (Lead 18/11): la soglia si mette SOPRA IL MASSIMO OSSERVATO, non sopra la mediana —
+// altrimenti si misura il ritardo di GitHub, non un nostro guasto.
+const intervalliOre = (() => {
+  const ts = storico.map((p) => Date.parse(p && p.t)).filter(Boolean);
+  const d = [];
+  for (let i = 1; i < ts.length; i++) d.push((ts[i] - ts[i - 1]) / 3600000);
+  return d;
+})();
+const medianaOre = (a) => {
+  if (!a.length) return null;
+  const b = [...a].sort((x, y) => x - y), m = Math.floor(b.length / 2);
+  return b.length % 2 ? b[m] : (b[m - 1] + b[m]) / 2;
+};
+const r1 = (v) => (v === null || v === undefined || !isFinite(v) ? null : Math.round(v * 10) / 10);
+const cadenzaMedianaH = r1(medianaOre(intervalliOre));
+const cadenzaMassimoH = intervalliOre.length ? r1(Math.max(...intervalliOre)) : null;
+
 // stato sintetico per il quadro/QA
 const ultimi = storico.slice(-8);
 const lenti = ultimi.filter((p) => p.origine.ttfb > 2500).length;
@@ -60,7 +80,10 @@ const stato = {
   // Chi legge calcola la soglia: cadenzaOre × 1,5 (minimo cadenzaOre + 2 h). Per cambiarla:
   // PERF_CADENZA_ORE=<ore> nel workflow, senza toccare né il produttore né il check.
   cadenzaOre: Number(process.env.PERF_CADENZA_ORE || 8),
-  cadenzaNota: 'dichiarata dal generatore; intervalli misurati 1–9,2 h (mediana 8,1 h) perché GitHub dirada il cron */15',
+  cadenzaOsservazioni: intervalliOre.length,
+  cadenzaMedianaH,
+  cadenzaMassimoH,
+  cadenzaNota: 'dichiarata dal generatore (cadenzaOre); mediana e massimo sono MISURATI sugli intervalli di perf/emergent.json; GitHub dirada il cron */15',
   origine_ttfb_ultimo: origine.ttfbMedian,
   origine_ttfb_max_8: Math.max(...ultimi.map((p) => p.origine.ttfb)),
   sito_ttfb_ultimo: sito.ttfbMedian,
