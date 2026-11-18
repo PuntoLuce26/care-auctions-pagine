@@ -82,6 +82,12 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           LOTTO_ID: ${{ github.event.inputs.lottoId }}
+          VIDEO_MIN_LATO: ${{ github.event.inputs.minLato || '560' }}
+          PIPER_BIN: piper
+          PIPER_MODEL: /tmp/piper/it_IT-paola-medium.onnx
+          PIPER_CONFIG: /tmp/piper/it_IT-paola-medium.onnx.json
+          PIPER_MODELLO: it_IT-paola-medium
+          PIPER_LENGTH_SCALE: '1.45'
         run: |
           set -euo pipefail
           export PATH="$HOME/ffmpeg-pin/bin:$PATH"
