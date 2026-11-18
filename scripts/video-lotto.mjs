@@ -107,6 +107,49 @@ function filtriDrawtext({ W, H, durata, titolo, tribunale, prezzo, data, fonte, 
   return { filter: [apertura, chiusura, creditiFilter, marchio].join(','), nota: 'sovraimpressioni con ' + f + ' · crediti fonti nel video' };
 }
 
+
+// 18/11/2026 — il prezzo nella voce si legge A PAROLE: «1.086.080» detto a cifre dal TTS suona male.
+function numInParole(n) {
+  const num = Math.round(Number(n) || 0);
+  if (!num) return 'zero';
+  const unita = ['', 'uno', 'due', 'tre', 'quattro', 'cinque', 'sei', 'sette', 'otto', 'nove', 'dieci', 'undici', 'dodici', 'tredici', 'quattordici', 'quindici', 'sedici', 'diciassette', 'diciotto', 'diciannove'];
+  const decine = ['', '', 'venti', 'trenta', 'quaranta', 'cinquanta', 'sessanta', 'settanta', 'ottanta', 'novanta'];
+  const sotto100 = (x) => {
+    if (x < 20) return unita[x];
+    const d = Math.floor(x / 10);
+    const u = x % 10;
+    let s = decine[d];
+    if (u === 1 || u === 8) s = s.slice(0, -1);
+    return s + unita[u];
+  };
+  const sotto1000 = (x) => {
+    const c = Math.floor(x / 100);
+    const r = x % 100;
+    let s = '';
+    if (c === 1) s = 'cento';
+    else if (c > 1) s = unita[c] + 'cento';
+    if (r) s += sotto100(r);
+    return s;
+  };
+  const gruppi = [];
+  let resto = num;
+  const scala = ['', 'mila', 'milione', 'miliardo'];
+  let i = 0;
+  while (resto > 0 && i < scala.length) {
+    const g = resto % 1000;
+    if (g) {
+      let parola = g === 1 && i === 1 ? '' : sotto1000(g);
+      if (i === 1) parola += 'mila';
+      else if (i === 2) parola += g === 1 ? 'milione' : 'milioni';
+      else if (i === 3) parola += g === 1 ? 'miliardo' : 'miliardi';
+      gruppi.unshift(parola);
+    }
+    resto = Math.floor(resto / 1000);
+    i += 1;
+  }
+  return gruppi.join(' ').replace(/\s+/g, ' ').trim();
+}
+
 async function main() {
   if (!ID) throw new Error('manca il lottoId (argomento o LOTTO_ID)');
   fs.mkdirSync(OUT, { recursive: true });
@@ -258,6 +301,42 @@ async function main() {
     console.log(`  sottotitoli: ${righeVoce.length} righe · ${crediti}`);
   }
 
+  // v1 — LA VOCE: testo 20-25 s, tono sobrio, numeri letti a parole e sempre con la fonte accanto.
+  // «iCARe» → «ai ker» prima della sintesi (stessa sostituzione dell'azione tts del worker).
+  const prezzoParole = L && L.pb ? numInParole(L.pb) + ' euro' : '';
+  const dataParole = L && L.d ? (() => { const [a, m, g] = L.d.split('-'); return `${Number(g)} ${['', 'gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'][Number(m)]} ${a}`; })() : '';
+  const testoVoce = [
+    `${titolo}.`,
+    tribunale ? `${tribunale}.` : '',
+    prezzoParole ? `Prezzo base ${prezzoParole}, come risulta dal P V P.` : '',
+    dataParole ? `Data dell'asta: ${dataParole}.` : '',
+    'Foto e dati vengono dal P V P: la fonte è indicata nel video.',
+  ].filter(Boolean).join(' ').replace(/iCARe/g, 'ai ker');
+
+  let voceFile = null;
+  let voceDurata = null;
+  if (process.env.PIPER_MODEL && fs.existsSync(process.env.PIPER_MODEL) && process.env.PIPER_BIN !== 'no') {
+    try {
+      voceFile = `${OUT}/voice.wav`;
+      fs.writeFileSync(`${OUT}/voce.txt`, testoVoce + '\n');
+      const piper = process.env.PIPER_BIN || 'piper';
+      console.log(`  voce: sintesi con ${piper} · modello ${process.env.PIPER_MODELLO || 'it_IT-paola-medium'}`);
+      execFileSync(piper, ['-m', process.env.PIPER_MODEL, '-c', process.env.PIPER_CONFIG, '-f', voceFile, '--length_scale', process.env.PIPER_LENGTH_SCALE || '1.05'], {
+        input: testoVoce + '\n',
+        stdio: ['pipe', 'pipe', 'pipe'],
+        maxBuffer: 32 * 1024 * 1024,
+      });
+      const pr = JSON.parse(ff('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'json', voceFile]));
+      voceDurata = Number(Number(pr.format.duration).toFixed(2));
+      console.log(`  voce: ${voceDurata} s · ${fs.statSync(voceFile).size} B`);
+    } catch (e) {
+      console.log('  voce NON generata (' + String((e && e.message) || e).slice(0, 160) + '): il video resta muto con i sottotitoli');
+      voceFile = null;
+    }
+  } else {
+    console.log('  voce: nessun modello Piper disponibile, video muto con sottotitoli');
+  }
+
   const formati = [
     { nome: 'verticale', W: 1080, H: 1920, file: `${OUT}/vertical.mp4`, chiave: `video/${ID}/vertical.mp4` },
     { nome: 'orizzontale', W: 1920, H: 1080, file: `${OUT}/orizzontale.mp4`, chiave: `video/${ID}/orizzontale.mp4` },
@@ -290,6 +369,22 @@ async function main() {
     args.push('-filter_complex', catena.join(';'), '-map', '[vout]', '-t', String(durata),
       '-c:v', 'libx264', '-crf', '23', '-preset', 'medium', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', f.file);
     sh('ffmpeg', args);
+    // mux: se c'è la voce si aggiunge l'audio con -shortest e si verifica che resti UN solo stream audio
+    if (voceFile) {
+      const muto = f.file.replace(/\.mp4$/, '-muto.mp4');
+      fs.renameSync(f.file, muto);
+      sh('ffmpeg', ['-y', '-i', muto, '-i', voceFile, '-c:v', 'copy', '-c:a', 'aac', '-b:a', '128k', '-shortest', '-movflags', '+faststart', f.file]);
+      fs.rmSync(muto, { force: true });
+      const audio = ff('ffprobe', ['-v', 'error', '-select_streams', 'a', '-show_entries', 'stream=codec_name', '-of', 'json', f.file]);
+      const nAudio = (JSON.parse(audio).streams || []).length;
+      const pr2 = JSON.parse(ff('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'json', f.file]));
+      const dVideo = Number(pr2.format.duration);
+      console.log(`  audio: ${nAudio} stream · durata finale ${dVideo.toFixed(2)} s (voce ${voceDurata} s)`);
+      if (nAudio !== 1) throw new Error('il video ' + f.nome + ' non ha esattamente 1 stream audio');
+      if (voceDurata && Math.abs(dVideo - voceDurata) > 0.5 && Math.abs(dVideo - durata) > 0.5) {
+        throw new Error('durata video/voce disallineata di oltre 0,5 s (' + dVideo + ' vs ' + voceDurata + ')');
+      }
+    }
     const size = fs.statSync(f.file).size;
     const probe = JSON.parse(ff('ffprobe', ['-v', 'error', '-show_entries', 'format=duration:stream=width,height', '-of', 'json', f.file]));
     const st = (probe.streams || [])[0] || {};
@@ -322,13 +417,24 @@ async function main() {
     posterKey: `video/${ID}/poster.jpg`,
     posterByte,
     sottotitoli: righeVoce.length,
-    voce: 'non inclusa: v1 senza endpoint TTS HTTP (vedi referto)',
+    voce: voceFile
+      ? { motore: 'piper', modello: process.env.PIPER_MODELLO || 'it_IT-paola-medium', durata: voceDurata, testo: testoVoce }
+      : { motore: null, modello: null, durata: null, motivo: 'modello Piper non disponibile: video muto con sottotitoli' },
     fonte: fonte,
     testata: { titolo, tribunale, prezzo, data },
     note: 'video cinematico (Ken Burns, dissolvenze 0,6 s), nessuna musica, nessun volto, nessun logo di terzi',
   };
   fs.writeFileSync(`${OUT}/meta.json`, JSON.stringify(meta, null, 1) + '\n');
   await r2put(`video/${ID}/meta.json`, `${OUT}/meta.json`, 'application/json; charset=utf-8');
+
+  // campione da ascoltare (12 s di voce) — serve al Lead per giudicare il timbro
+  let campione = null;
+  if (voceFile) {
+    const camp = `${OUT}/voce-campione.mp3`;
+    sh('ffmpeg', ['-y', '-i', voceFile, '-t', '12', '-c:a', 'libmp3lame', '-b:a', '128k', camp]);
+    campione = await r2put(`video/${ID}/voce-campione.mp3`, camp, 'audio/mpeg');
+    console.log(`  campione voce su R2: video/${ID}/voce-campione.mp3 · ${campione} B`);
+  }
 
   // verifica finale sull'artefatto: durata, risoluzione e byte su R2
   const verticale = await r2size(`video/${ID}/vertical.mp4`);
