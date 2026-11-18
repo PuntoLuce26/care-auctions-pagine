@@ -45,6 +45,7 @@ async function main() {
   const meta = await (await scarica(RAW + '/feed/aste-indice/_meta.json')).json();
   const eta = Date.now() - Date.parse(meta.generato);
   const problemi = [];
+  const avvisi = [];
   const note = [];
 
   if (!Number.isFinite(eta)) problemi.push('generato illeggibile: ' + String(meta.generato));
@@ -126,6 +127,30 @@ async function main() {
       }
       if (chiave === chiaveFinta) falsoAssente = !lotti[fittizio];
     }
+    // 18/11/2026 — CANONICAL DELLA LEGACY (decisione del Lead, non ancora deployata): ogni URL legacy
+    // in sitemap deve dichiarare il canonical verso la pagina dell'app `/aste/<id>`. Se manca NON è un
+    // KO: il deployment è in corso e un rosso cronico sarebbe rumore. Si dichiara e si va avanti.
+    let conCanonical = 0;
+    let legacyProvate = 0;
+    for (const id of campione) {
+      if (!id) continue;
+      try {
+        const r = await fetch(`https://careauctions.co/asta-procedura/it/asta-${id}.html`, { headers: { 'User-Agent': UA } });
+        if (!r.ok) continue;
+        const html = await r.text();
+        legacyProvate += 1;
+        const m = html.match(/<link[^>]+rel=["']canonical["'][^>]*>/i);
+        const href = m ? (m[0].match(/href=["']([^"']+)["']/i) || [])[1] || '' : '';
+        if (href.replace(/\/$/, '') === `https://careauctions.co/aste/${id}`) conCanonical += 1;
+      } catch {
+        /* pagina legacy non leggibile: non si dichiara nulla */
+      }
+    }
+    if (legacyProvate > 0 && conCanonical < legacyProvate) {
+      avvisi.push(`canonical legacy: ${conCanonical}/${legacyProvate} verso /aste/<id> (mancano ${legacyProvate - conCanonical}) — pagina legacy in sitemap senza canonical all'app`);
+    }
+    note.push(`canonical: ${conCanonical}/${legacyProvate} verso /aste/<id>`);
+
     if (assenti.length) {
       problemi.push(`id ${assenti[0]} presente in sitemap e ASSENTE dall'indice: l'edge darebbe 404 su una scheda vera${assenti.length > 1 ? ' (+' + (assenti.length - 1) + ' altri)' : ''}`);
     }
@@ -136,10 +161,11 @@ async function main() {
   }
   note.push(campioneTxt);
 
-  const livello = problemi.length ? 'allarme' : eta >= SOGLIA_ERR ? 'allarme' : eta >= SOGLIA_WARN ? 'warn' : 'ok';
+  const livello = problemi.length ? 'allarme' : eta >= SOGLIA_ERR ? 'allarme' : avvisi.length ? 'warn' : eta >= SOGLIA_WARN ? 'warn' : 'ok';
   const messaggio =
     `aste-indice: eta meta ${ore(eta)} h · completo=${meta.completo} · totale=${meta.totale} · shardCount=${meta.shardCount}` +
     (problemi.length ? ' · PROBLEMI: ' + problemi.join('; ') : '') +
+    (avvisi.length ? ' · AVVISI: ' + avvisi.join('; ') : '') +
     (note.length ? ' · ' + note.join('; ') : '') +
     (eta >= SOGLIA_MAX ? ' · IL 404 VERO È GIÀ CADUTO (>24 h)' : '');
 
