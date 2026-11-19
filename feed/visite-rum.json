@@ -1,11 +1,11 @@
 {
- "aggiornato": "2026-11-18T18:47:37.195Z",
+ "aggiornato": "2026-11-19T17:10:17.650Z",
  "fonte": "Cloudflare Web Analytics (RUM)",
  "nota": "pagine viste (pv) e visite/sessioni (visite) per giorno; i visitatori unici esatti sono nel pannello Web Analytics",
  "totale": {
-  "giorni": 33,
-  "pv": 16930,
-  "visite": 16040
+  "giorni": 34,
+  "pv": 17490,
+  "visite": 16600
  },
  "giorni": {
   "2026-10-14": {
@@ -137,8 +137,12 @@
    "visite": 1320
   },
   "2026-11-18": {
-   "pv": 1360,
-   "visite": 1360
+   "pv": 1550,
+   "visite": 1550
+  },
+  "2026-11-19": {
+   "pv": 370,
+   "visite": 370
   }
  }
 }
