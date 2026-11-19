@@ -3,8 +3,8 @@
   "canary": "care-canary-d2c32afaa5d5",
   "canaryNota": "valore di riconoscimento della copia dei dati",
   "titolo": "NPL's — crediti in sofferenza e crediti in procedura (dati veri dal PVP)",
-  "generatoIl": "2026-11-18T13:13:08.801Z",
-  "aggiornato": "2026-11-18",
+  "generatoIl": "2026-11-19T13:30:52.706Z",
+  "aggiornato": "2026-11-19",
   "fonte": "PVP — Portale delle Vendite Pubbliche, Ministero della Giustizia (pvp.giustizia.it)",
   "query": "tipoLotto=VALORI-CREDITI",
   "licenza": "Dati pubblici del PVP (Portale delle Vendite Pubbliche, Ministero della Giustizia). Riuso consentito per finalità informative con citazione della fonte; nessun dato personale oltre a quanto già pubblico nel bando.",
@@ -12,9 +12,9 @@
   "totale": 256,
   "dichiaratoPVP": 1131,
   "esclusi": {
-   "non-credito": 22,
-   "titoli-e-quote": 438,
-   "credito-fiscale": 415
+   "titoli-e-quote": 437,
+   "credito-fiscale": 417,
+   "non-credito": 21
   },
   "copertura": {
    "importo": {
@@ -38,8 +38,8 @@
    "NPL": 4
   },
   "perStato": {
-   "conclusa-esito-non-pubblicato": 210,
-   "in-programma": 24,
+   "conclusa-esito-non-pubblicato": 211,
+   "in-programma": 23,
    "deserta": 17,
    "aggiudicata": 5
   },
@@ -61,7 +61,7 @@
   "province": 39,
   "sommaPrezzoBase": 377308994,
   "freschezza": {
-   "ultimaRaccolta": "2026-11-18",
+   "ultimaRaccolta": "2026-11-19",
    "dataLottoPiuRecente": "2027-01-14",
    "dataLottoPiuVecchio": "2024-01-12"
   },
