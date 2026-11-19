@@ -1,64 +1,64 @@
 {
-  "generato": "2026-11-18T23:57:47.931Z",
+  "generato": "2026-11-19T06:57:34.594Z",
   "esito": "PROBLEMI",
   "sintesi": "30 controlli eseguiti · 1 non passati (1 gravi, 0 avvisi) · 1 non verificabili",
-  "sito": "main.dd04e732.js",
-  "origine": "main.dd04e732.js",
-  "qaRun": "44420683677",
+  "sito": "main.235bf447.js",
+  "origine": "main.235bf447.js",
+  "qaRun": "44473945033",
   "controlli": [
     {
       "nome": "sito /",
       "ok": true,
-      "dettaglio": "HTTP 200 · 851 ms",
+      "dettaglio": "HTTP 200 · 582 ms",
       "gravita": "alta",
       "skip": false
     },
     {
       "nome": "sito /idati",
       "ok": true,
-      "dettaglio": "HTTP 200 · 369 ms",
+      "dettaglio": "HTTP 200 · 322 ms",
       "gravita": "alta",
       "skip": false
     },
     {
       "nome": "sito /osservatorio",
       "ok": true,
-      "dettaglio": "HTTP 200 · 168 ms",
+      "dettaglio": "HTTP 200 · 171 ms",
       "gravita": "alta",
       "skip": false
     },
     {
       "nome": "sito /aggiudicazioni",
       "ok": true,
-      "dettaglio": "HTTP 200 · 371 ms",
+      "dettaglio": "HTTP 200 · 148 ms",
       "gravita": "alta",
       "skip": false
     },
     {
       "nome": "sito /ilive",
       "ok": true,
-      "dettaglio": "HTTP 200 · 168 ms",
+      "dettaglio": "HTTP 200 · 159 ms",
       "gravita": "alta",
       "skip": false
     },
     {
       "nome": "build sito = origine",
       "ok": true,
-      "dettaglio": "main.dd04e732.js / main.dd04e732.js",
+      "dettaglio": "main.235bf447.js / main.235bf447.js",
       "gravita": "alta",
       "skip": false
     },
     {
       "nome": "qa/stato.json",
       "ok": true,
-      "dettaglio": "run 44420683677 · 0.5 h fa · 0C/0A",
+      "dettaglio": "run 44473945033 · 0.2 h fa · 0C/0A",
       "gravita": "alta",
       "skip": false
     },
     {
       "nome": "QA recente (<8 h)",
       "ok": true,
-      "dettaglio": "0.5 h",
+      "dettaglio": "0.2 h",
       "gravita": "media",
       "skip": false
     },
@@ -72,14 +72,14 @@
     {
       "nome": "registrazione QA (audit interno)",
       "ok": true,
-      "dettaglio": "registrato · 0 h fa · run 44420683677",
+      "dettaglio": "non verificabile · run 44473945033 · NON VERIFICABILE: nessun qa-sync dopo il run (ultimo 2026-11-19T05:40:16Z)",
       "gravita": "media",
-      "skip": false
+      "skip": true
     },
     {
       "nome": "feed statistiche",
       "ok": true,
-      "dettaglio": "320408 lotti · 0.1 h fa",
+      "dettaglio": "320433 lotti · 0.2 h fa",
       "gravita": "alta",
       "skip": false
     },
@@ -107,21 +107,21 @@
     {
       "nome": "AI/SEO /llms.txt",
       "ok": true,
-      "dettaglio": "HTTP 200 · 120 ms",
+      "dettaglio": "HTTP 200 · 111 ms",
       "gravita": "media",
       "skip": false
     },
     {
       "nome": "AI/SEO /robots.txt",
       "ok": true,
-      "dettaglio": "HTTP 200 · 32 ms",
+      "dettaglio": "HTTP 200 · 19 ms",
       "gravita": "media",
       "skip": false
     },
     {
       "nome": "AI/SEO /sitemap.xml",
       "ok": true,
-      "dettaglio": "HTTP 200 · 100 ms",
+      "dettaglio": "HTTP 200 · 160 ms",
       "gravita": "media",
       "skip": false
     },
@@ -170,21 +170,21 @@
     {
       "nome": "posta: ultima scansione (<6 h)",
       "ok": true,
-      "dettaglio": "0 h · 12 allarmi",
+      "dettaglio": "0.3 h · 22 allarmi",
       "gravita": "media",
       "skip": false
     },
     {
       "nome": "run QA cloud",
-      "ok": false,
-      "dettaglio": "in corso · 2026-11-18T23:55:48Z",
+      "ok": true,
+      "dettaglio": "success · 2026-11-19T06:40:58Z",
       "gravita": "bassa",
-      "skip": true
+      "skip": false
     },
     {
       "nome": "run feed-sync",
       "ok": true,
-      "dettaglio": "success · 2026-11-18T23:50:36Z",
+      "dettaglio": "success · 2026-11-19T06:51:36Z",
       "gravita": "bassa",
       "skip": false
     },
@@ -205,14 +205,14 @@
     {
       "nome": "run esiti-sync",
       "ok": true,
-      "dettaglio": "success · 2026-11-18T22:27:32Z",
+      "dettaglio": "success · 2026-11-19T03:50:19Z",
       "gravita": "bassa",
       "skip": false
     },
     {
       "nome": "app Emergent /idati",
       "ok": true,
-      "dettaglio": "HTTP 200 · main.dd04e732.js",
+      "dettaglio": "HTTP 200 · main.235bf447.js",
       "gravita": "alta",
       "skip": false
     },
