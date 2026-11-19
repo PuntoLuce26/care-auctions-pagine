@@ -1,5 +1,5 @@
 {
- "generato": "2026-11-18T21:36:00.413Z",
+ "generato": "2026-11-19T00:20:56.112Z",
  "semaforo": "rosso",
  "conteggi": {
   "ok": 17,
@@ -90,13 +90,13 @@
    "nome": "statistiche",
    "stato": "ok",
    "valore": "5 min",
-   "dettaglio": "320408 lotti"
+   "dettaglio": "320409 lotti"
   },
   {
    "sezione": "feed",
    "nome": "world",
    "stato": "rosso",
-   "valore": "8652 min",
+   "valore": "8817 min",
    "dettaglio": "33 paesi"
   },
   {
@@ -110,28 +110,28 @@
    "sezione": "feed",
    "nome": "san-pasquale-foto",
    "stato": "rosso",
-   "valore": "8890 min",
+   "valore": "9055 min",
    "dettaglio": "37 foto"
   },
   {
    "sezione": "build",
    "nome": "sito vs origine",
    "stato": "ok",
-   "valore": "main.7483c866.js / main.7483c866.js",
+   "valore": "main.dd04e732.js / main.dd04e732.js",
    "dettaglio": ""
   },
   {
    "sezione": "prerender",
    "nome": "snapshot vs vivo",
    "stato": "ok",
-   "valore": "main.7483c866.js / main.7483c866.js",
+   "valore": "main.dd04e732.js / main.dd04e732.js",
    "dettaglio": ""
   },
   {
    "sezione": "prerender",
    "nome": "bot allineato",
    "stato": "ok",
-   "valore": "main.7483c866.js",
+   "valore": "main.dd04e732.js",
    "dettaglio": ""
   },
   {
@@ -159,8 +159,8 @@
    "sezione": "mail",
    "nome": "allarmi",
    "stato": "giallo",
-   "valore": "13",
-   "dettaglio": "2026-11-18T21:26:03.162Z"
+   "valore": "12",
+   "dettaglio": "2026-11-18T23:55:45.442Z"
   },
   {
    "sezione": "sentinella",
@@ -180,8 +180,8 @@
    "sezione": "github",
    "nome": "run rossi (2h)",
    "stato": "ok",
-   "valore": "1 isolati",
-   "dettaglio": "qa-presidio (una volta sola: race nota)"
+   "valore": "0 isolati",
+   "dettaglio": ""
   }
  ]
 }
