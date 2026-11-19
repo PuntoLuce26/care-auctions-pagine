@@ -1,5 +1,5 @@
 {
- "generato": "2026-11-19T06:30:50.838Z",
+ "generato": "2026-11-19T08:46:53.299Z",
  "semaforo": "rosso",
  "conteggi": {
   "ok": 17,
@@ -89,14 +89,14 @@
    "sezione": "feed",
    "nome": "statistiche",
    "stato": "ok",
-   "valore": "10 min",
-   "dettaglio": "320432 lotti"
+   "valore": "58 min",
+   "dettaglio": "320435 lotti"
   },
   {
    "sezione": "feed",
    "nome": "world",
    "stato": "rosso",
-   "valore": "9187 min",
+   "valore": "9323 min",
    "dettaglio": "33 paesi"
   },
   {
@@ -110,7 +110,7 @@
    "sezione": "feed",
    "nome": "san-pasquale-foto",
    "stato": "rosso",
-   "valore": "9425 min",
+   "valore": "9561 min",
    "dettaglio": "37 foto"
   },
   {
@@ -159,8 +159,8 @@
    "sezione": "mail",
    "nome": "allarmi",
    "stato": "giallo",
-   "valore": "22",
-   "dettaglio": "2026-11-19T06:11:00.781Z"
+   "valore": "23",
+   "dettaglio": "2026-11-19T08:25:56.793Z"
   },
   {
    "sezione": "sentinella",
