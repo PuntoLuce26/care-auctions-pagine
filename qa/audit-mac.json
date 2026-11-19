@@ -1,9 +1,9 @@
 {
-  "generato": "2026-11-19T10:16:11.165Z",
+  "generato": "2026-11-19T22:15:53.092Z",
   "controlli": 7,
   "critici": 0,
   "alti": 0,
-  "medi": 0,
+  "medi": 1,
   "bassi": 0,
   "nonVerificabili": "0/7",
   "errori5xxEdge": 0,
