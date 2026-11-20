@@ -17,7 +17,7 @@ Comportamento verso il PVP: 1 download alla volta, pausa tra le richieste,
 nessun PDF conservato (si tiene solo il risultato), riprende da dove si era
 fermato (salta gli id già presenti in risultati.jsonl).
 """
-import json, os, re, subprocess, sys, tempfile, time, urllib.request
+import json, os, re, subprocess, sys, tempfile, time, urllib.parse, urllib.request
 from collections import Counter
 
 API = "https://careauctions.co/api/pvp-documenti/{}"
@@ -100,6 +100,10 @@ def scegli(perizia, avviso):
     return None, None, None
 
 def get(url, binario=False):
+    # 20/11/2026 — Sam: gli allegati del PVP hanno nomi con caratteri non ASCII (es. «°»).
+    # urllib non li accetta nel path e solleva «'ascii' codec can't encode character '\xb0'»:
+    # si percent-encoda solo ciò che serve, lasciando intatti schema, host e query.
+    url = urllib.parse.quote(url, safe=":/?#[]@!$&'()*+,;=%")
     req = urllib.request.Request(url, headers={"User-Agent": UA})
     with urllib.request.urlopen(req, timeout=120) as r:
         return r.read() if binario else r.read().decode()
