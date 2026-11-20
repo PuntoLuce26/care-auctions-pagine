@@ -54,6 +54,62 @@ PATS = {
     ],
 }
 
+# 20/11/2026 — IL VALORE STIMATO DAL PERITO (la CTU). È il dato che ci rende più forti di un
+# valutatore che parte dai prezzi degli annunci: qui la stima è di un professionista nominato dal
+# giudice, giurata, e riguarda proprio quell'immobile. Serve alla valutazione (specifica §10) per
+# tarare i correttivi zona per zona. Si conserva anche il pezzo di testo da cui è stato preso,
+# perché un numero senza la sua frase non è verificabile.
+VAL_PATS = [
+    re.compile(r'valore\s+(?:di\s+mercato|stimato|di\s+stima|complessivo|dell[ao]\s+immobile)[^0-9]{0,60}?([0-9][0-9.,]{3,15})', re.I),
+    re.compile(r'(?:valore|stima|prezzo)\s+(?:complessivo|totale)?\s*(?:pari\s+a|di|in)?[^0-9]{0,40}?(?:€|euro|EUR)\s*([0-9][0-9.,]{3,15})', re.I),
+    re.compile(r'(?:€|euro|EUR)\s*([0-9][0-9.,]{3,15})[^.]{0,40}?(?:valore\s+di\s+mercato|stima|valore\s+stimato)', re.I),
+    re.compile(r'si\s+(?:stima|valuta)[^0-9]{0,80}?([0-9][0-9.,]{3,15})', re.I),
+    re.compile(r'prezzo\s+(?:di\s+vendita|proposto)[^0-9]{0,50}?([0-9][0-9.,]{3,15})', re.I),
+    re.compile(r'valore\s+stimato[^0-9]{0,30}?([0-9][0-9.,]{3,15})', re.I),
+]
+
+def valore_da_numero(s):
+    """125.000,00 / 125000,00 / 125.000 -> float. Rifiuta i numeri senza senso per un immobile."""
+    t = str(s).strip().replace(' ', '')
+    if ',' in t:
+        t = t.replace('.', '').replace(',', '.')
+    elif t.count('.') > 1:
+        t = t.replace('.', '')
+    elif t.count('.') == 1 and len(t.split('.')[1]) == 3:
+        t = t.replace('.', '')
+    try:
+        v = float(t)
+    except ValueError:
+        return None
+    return v if 5000 <= v <= 50000000 else None
+
+def estrai_valore(testo):
+    """Ritorna (valore, frase). Sceglie il valore più citato: in una perizia lo stesso numero
+    compare più volte (valore di mercato, prezzo proposto, totale), gli altri sono i comparabili."""
+    t = re.sub(r'\s+', ' ', testo)
+    trovati = []
+    for rx in VAL_PATS:
+        for m in rx.finditer(t):
+            v = valore_da_numero(m.group(1))
+            if v:
+                a = max(0, m.start() - 40)
+                frase = re.sub(r'\s+', ' ', t[a:m.end() + 20]).strip()[:160]
+                trovati.append((v, frase))
+    if not trovati:
+        return None, None
+    # 20/11/2026 — DUE LIVELLI. Prima le formule che dicono esplicitamente «valore di mercato»,
+    # «stimato», «si stima»: sono la stima del perito. Solo se non ce n'è nessuna si guarda
+    # «prezzo di vendita proposto». Il «prezzo base d'asta» è escluso per costruzione: è il prezzo
+    # dell'asta, non una stima, e prenderlo per stima falserebbe ogni correttivo.
+    FORTI = re.compile(r'valore\s+(?:di\s+mercato|stimato|di\s+stima|complessivo|dell[ao]\s+immobile)|si\s+stima|stima\s+peritale', re.I)
+    forti = [(v, f) for v, f in trovati if FORTI.search(f)]
+    if forti:
+        trovati = forti
+    c = Counter(v for v, _ in trovati)
+    v = sorted(c.items(), key=lambda x: (-x[1], -x[0]))[0][0]
+    frase = next(f for vv, f in trovati if vv == v)
+    return v, frase
+
 def numero(s):
     if re.search(r'\d\.\d{3}(,|$)', s):
         s = s.replace('.', '')
@@ -153,10 +209,20 @@ def lotto(id_):
         avv = estrai(t)
         time.sleep(PAUSA_S)
     r["perizia"], r["avviso"] = per, avv
+    # valore stimato dal perito (CTU): solo dalla perizia, mai dall'avviso (l'avviso porta il prezzo
+    # base d'asta, che è un'altra cosa e non è una stima di mercato)
+    val, frase = estrai_valore(t) if p and p.get("s", 0) < MAX_MB * 1e6 else (None, None)
+    r["valore_stima_ctu"] = val
+    r["valore_stima_frase"] = frase
     v, tipo, fonte = scegli(per, avv)
     r.update({"mq_valore": v, "mq_tipo": tipo, "mq_fonte": fonte})
     # plausibilità minima per il residenziale; il controllo €/m² vs OMI lo fa la pipeline
     r["mq_da_rivedere"] = bool(v is not None and not (15 <= v <= 2000))
+    if val and v:
+        mq2 = val / v
+        r["valore_da_rivedere"] = bool(not (200 <= mq2 <= 25000))
+    else:
+        r["valore_da_rivedere"] = bool(val is not None and v is None)
     return r
 
 def main():
