@@ -1,10 +1,10 @@
-CARe — rapporto visite · 19/11/2026, 18:07:10
+CARe — rapporto visite · 20/11/2026, 02:41:40
 
-VISITE (Cloudflare RUM, 0 giorni misurati)
-- Ultimo giorno (null): 0 pagine viste · 0 visite
-- Doppia percentuale: vs giorno prima n/d · vs report precedente n/d
-- Totale cumulato: 0 pagine viste · 0 visite
-- Media ultimi 7 giorni: 0 pagine viste/giorno
+VISITE (Cloudflare RUM, 34 giorni misurati)
+- Ultimo giorno (2026-11-19): 440 pagine viste · 440 visite
+- Doppia percentuale: vs giorno prima -71,6% · vs report precedente n/d
+- Totale cumulato: 17.560 pagine viste · 16.670 visite
+- Media ultimi 7 giorni: 1597 pagine viste/giorno
 
 VALORE
 - Costruito (costo di ricostruzione): 81.000 EUR
