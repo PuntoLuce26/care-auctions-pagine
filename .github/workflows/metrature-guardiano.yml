@@ -1,0 +1,43 @@
+# 20/11/2026 — GUARDIANO DELLE METRATURE (Sam). Non estrae niente: controlla che l'estrazione non si
+# fermi e avvisa. Regola ferma: un run verde non prova niente — si guarda il NUMERO di lotti che
+# hanno davvero la metratura, e si giudica la COPERTURA, non il log.
+# Cosa fa, ogni 6 ore e a mano:
+#  1. legge il registro di copertura (dati/metrature/stato.json nel repo) e i run recenti;
+#  2. se l'ultimo giro riuscito è più vecchio di 12 ore -> ALLARME "fermo";
+#  3. se la copertura non cresce da 24 ore -> ALLARME "non avanza";
+#  4. se un giro ha più del 20% di lotti in errore -> ALLARME "errori";
+#  5. manda UNA email con l'esito (anche quando è tutto ok: così l'assenza di mail è un segnale).
+name: metrature-guardiano
+on:
+  schedule:
+    - cron: '15 */6 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: metrature-guardiano
+jobs:
+  controlla:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Leggi lo stato e giudica
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: node scripts/metrature/guardiano.mjs
+      - name: Avvisa
+        if: always()
+        env:
+          REGIA_KEY: ${{ secrets.REGIA_KEY }}
+        run: |
+          if [ -f guardiano-esito.txt ]; then
+            cat guardiano-esito.txt
+            # l'invio passa dal worker icare-ai: una sola strada per le email, già collaudata
+            node scripts/metrature/avvisa.mjs || echo "invio non riuscito (non blocca il giro)"
+          fi
