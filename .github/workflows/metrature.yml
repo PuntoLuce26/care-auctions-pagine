@@ -1,0 +1,78 @@
+# 20/11/2026 — METRATURE DI TUTTO IL PVP (Sam). Legge le perizie dei lotti residenziali che non
+# hanno i metri quadri nella descrizione e ne estrae la superficie commerciale.
+# Regola di Gianluca (20/11): i mq si prendono dalla PERIZIA (commerciale/convenzionale); la
+# calpestabile e la catastale si segnano a parte e non entrano nel confronto con l'OMI.
+# Perché in cloud: servono poppler-utils e tesseract-ocr-ita (Linux). Sul Mac non gira.
+# Rispetto della fonte: 1 richiesta al secondo per processo (PAUSA_S=1), nessun PDF conservato,
+# riprende da dove si era fermato. I risultati sono ARTEFATTI del run: il feed del sito non si tocca.
+name: metrature
+on:
+  workflow_dispatch:
+    inputs:
+      shards:
+        description: 'in quante fette dividere il lavoro'
+        required: true
+        default: '4'
+      limite:
+        description: 'quanti lotti per fetta'
+        required: true
+        default: '150'
+      pausa:
+        description: 'secondi fra una richiesta e la successiva (gentilezza verso il PVP)'
+        required: true
+        default: '1'
+permissions:
+  contents: read
+concurrency:
+  group: metrature
+  cancel-in-progress: false
+jobs:
+  prepara:
+    runs-on: ubuntu-latest
+    outputs:
+      matrice: ${{ steps.set.outputs.matrice }}
+    steps:
+      - id: set
+        run: |
+          n=${{ github.event.inputs.shards }}
+          python3 - "$n" <<'PY' >> "$GITHUB_OUTPUT"
+          import json, sys
+          n = int(sys.argv[1])
+          print('matrice=' + json.dumps(list(range(n))))
+          PY
+  estrai:
+    needs: prepara
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        shard: ${{ fromJSON(needs.prepara.outputs.matrice) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Strumenti per leggere i PDF
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq poppler-utils tesseract-ocr tesseract-ocr-ita
+      - name: Lista dei lotti di questa fetta
+        run: |
+          node scripts/metrature/lista-id.mjs --shard=${{ matrix.shard }} --shards=${{ github.event.inputs.shards }} --limite=${{ github.event.inputs.limite }} > ids.txt
+          echo "lotti in questa fetta: $(wc -l < ids.txt)"
+      - name: Estrazione
+        env:
+          PAUSA_S: ${{ github.event.inputs.pausa }}
+        run: |
+          python3 scripts/metrature/estrai_mq.py ids.txt "metrature-shard${{ matrix.shard }}.jsonl"
+          echo "righe prodotte: $(wc -l < metrature-shard${{ matrix.shard }}.jsonl || echo 0)"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: metrature-${{ matrix.shard }}
+          path: |
+            ids.txt
+            metrature-shard${{ matrix.shard }}.jsonl
+          retention-days: 30
