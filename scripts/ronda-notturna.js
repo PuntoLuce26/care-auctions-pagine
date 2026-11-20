@@ -113,7 +113,10 @@ function add(nome, livello, dettaglio) { C.push({ nome, livello, ok: livello ===
   add('feed aggiudicazioni', nAgg === 0 ? 'problemi' : (nAgg ? 'ok' : 'attenzione'), nAgg == null ? 'irraggiungibile' : nAgg + ' record');
 
   // ── 3. QA cloud e QA Orchestra ─────────────────────────────────────────────
-  const qa = await json('/qa/stato.json');
+  // 20/11/2026 — lo stato QA vive su R2 e la rotta pubblica risponde 410 DI PROPOSITO: leggerla
+  // dal sito faceva risultare «irraggiungibile» ogni notte (avviso falso nel digest). Si legge
+  // prima da R2, e la rotta pubblica resta solo come ripiego se R2 non risponde.
+  const qa = (await daR2('/qa/stato.json')) || (await json('/qa/stato.json'));
   const etaQa = qa && qa.generatedAt ? etaMin(qa.generatedAt) : null;
   add('QA cloud', etaQa == null ? 'problemi' : (etaQa > 360 ? 'problemi' : (etaQa > 120 ? 'attenzione' : 'ok')),
     qa ? ('run ' + (qa.runId || '?') + ' · ' + etaQa + ' min fa · ' + JSON.stringify(qa.summary || {})) : 'irraggiungibile');
