@@ -1,8 +1,8 @@
 {
-  "generato": "2026-11-20T22:41:23.008Z",
+  "generato": "2026-11-20T22:42:14.617Z",
   "controlli": 51,
   "critici": 0,
-  "alti": 0,
+  "alti": 1,
   "medi": 0,
   "bassi": 0,
   "qaRunRegistrato": true,
@@ -12,7 +12,7 @@
   "errori5xxEdge": 0,
   "qaRunDettaglio": "run 44828569589 · NON VERIFICABILE: nessun qa-sync dopo il run (ultimo 2026-11-20T21:22:35Z)",
   "cadenzaOre": 3,
-  "sitoBuild": "main.1e3e7f7e.js",
-  "prerenderAllineato": true,
+  "sitoBuild": "main.0b3c3a10.js",
+  "prerenderAllineato": false,
   "fonte": "presidio cloud (GitHub Actions, qa-presidio.yml)"
 }
