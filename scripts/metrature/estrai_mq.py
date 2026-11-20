@@ -59,14 +59,26 @@ PATS = {
 # giudice, giurata, e riguarda proprio quell'immobile. Serve alla valutazione (specifica §10) per
 # tarare i correttivi zona per zona. Si conserva anche il pezzo di testo da cui è stato preso,
 # perché un numero senza la sua frase non è verificabile.
-VAL_PATS = [
-    re.compile(r'valore\s+(?:di\s+mercato|stimato|di\s+stima|complessivo|dell[ao]\s+immobile)[^0-9]{0,60}?([0-9][0-9.,]{3,15})', re.I),
-    re.compile(r'(?:valore|stima|prezzo)\s+(?:complessivo|totale)?\s*(?:pari\s+a|di|in)?[^0-9]{0,40}?(?:€|euro|EUR)\s*([0-9][0-9.,]{3,15})', re.I),
-    re.compile(r'(?:€|euro|EUR)\s*([0-9][0-9.,]{3,15})[^.]{0,40}?(?:valore\s+di\s+mercato|stima|valore\s+stimato)', re.I),
-    re.compile(r'si\s+(?:stima|valuta)[^0-9]{0,80}?([0-9][0-9.,]{3,15})', re.I),
-    re.compile(r'prezzo\s+(?:di\s+vendita|proposto)[^0-9]{0,50}?([0-9][0-9.,]{3,15})', re.I),
-    re.compile(r'valore\s+stimato[^0-9]{0,30}?([0-9][0-9.,]{3,15})', re.I),
+# 20/11/2026 — IL VALORE STIMATO DAL PERITO (la CTU), riscritto dopo la prova su 10 lotti.
+# PRIMA VERSIONE SBAGLIATA: prendeva il «prezzo base d'asta» e lo spacciava per stima (6 estrazioni,
+# almeno 4 erano il prezzo d'asta). La causa: il livello «forte» era deciso dal pezzo di testo
+# conservato, non dal pattern che aveva trovato il numero. Ora il livello viene dal PATTERN, e ogni
+# numero che ha davanti «prezzo base» / «base d'asta» / «offerta minima» viene SCARTATO: quelli sono
+# prezzi dell'asta, non stime di mercato.
+VAL_FORTI = [
+    re.compile(r'valore\s+di\s+mercato[^0-9]{0,40}?(?:pari\s+a\s*)?(?:€|euro|EUR)?\s*([0-9][0-9.,]{3,15})', re.I),
+    re.compile(r'valore\s+stimato[^0-9]{0,30}?(?:€|euro|EUR)?\s*([0-9][0-9.,]{3,15})', re.I),
+    re.compile(r'stimato\s+(?:dal\s+perito|dall[\u2019\']?\s?esperto|in)[^0-9]{0,40}?(?:€|euro|EUR)?\s*([0-9][0-9.,]{3,15})', re.I),
+    re.compile(r'immobile[^0-9]{0,60}?stimato[^0-9]{0,40}?(?:€|euro|EUR)?\s*([0-9][0-9.,]{3,15})', re.I),
+    re.compile(r'valore\s+di\s+stima[^0-9]{0,30}?(?:€|euro|EUR)?\s*([0-9][0-9.,]{3,15})', re.I),
+    re.compile(r'(?:si\s+stima|si\s+valuta)[^0-9]{0,60}?(?:€|euro|EUR)?\s*([0-9][0-9.,]{3,15})', re.I),
+    re.compile(r'valore\s+(?:complessivo|dell[ao]\s+immobile)[^0-9]{0,40}?(?:€|euro|EUR)?\s*([0-9][0-9.,]{3,15})', re.I),
+    re.compile(r'(?:€|euro|EUR)\s*([0-9][0-9.,]{3,15})[^.]{0,50}?(?:valore\s+di\s+mercato|valore\s+stimato|stima\s+peritale)', re.I),
 ]
+VAL_DEBOLI = [
+    re.compile(r'prezzo\s+(?:di\s+vendita|proposto|di\s+stima)[^0-9]{0,50}?(?:€|euro|EUR)?\s*([0-9][0-9.,]{3,15})', re.I),
+]
+NON_STIMA = re.compile(r'prezzo\s*base|base\s*d[\u2019\']asta|offerta\s*minima|prezzo\s*a\s*base', re.I)
 
 def valore_da_numero(s):
     """125.000,00 / 125000,00 / 125.000 -> float. Rifiuta i numeri senza senso per un immobile."""
@@ -75,7 +87,7 @@ def valore_da_numero(s):
         t = t.replace('.', '').replace(',', '.')
     elif t.count('.') > 1:
         t = t.replace('.', '')
-    elif t.count('.') == 1 and len(t.split('.')[1]) == 3:
+    elif t.count('.') == 1 and len(t.split('.')[-1]) == 3:
         t = t.replace('.', '')
     try:
         v = float(t)
@@ -84,27 +96,25 @@ def valore_da_numero(s):
     return v if 5000 <= v <= 50000000 else None
 
 def estrai_valore(testo):
-    """Ritorna (valore, frase). Sceglie il valore più citato: in una perizia lo stesso numero
-    compare più volte (valore di mercato, prezzo proposto, totale), gli altri sono i comparabili."""
+    """Ritorna (valore, frase). Solo formule che dicono che è una STIMA; il prezzo base d'asta è escluso."""
     t = re.sub(r'\s+', ' ', testo)
-    trovati = []
-    for rx in VAL_PATS:
-        for m in rx.finditer(t):
-            v = valore_da_numero(m.group(1))
-            if v:
-                a = max(0, m.start() - 40)
-                frase = re.sub(r'\s+', ' ', t[a:m.end() + 20]).strip()[:160]
-                trovati.append((v, frase))
+    def raccogli(pats):
+        out = []
+        for rx in pats:
+            for m in rx.finditer(t):
+                prima = t[max(0, m.start(1) - 35):m.start(1)]
+                if NON_STIMA.search(prima):
+                    continue
+                v = valore_da_numero(m.group(1))
+                if not v:
+                    continue
+                a = max(0, m.start() - 30)
+                frase = re.sub(r'\s+', ' ', t[a:m.end() + 15]).strip()[:160]
+                out.append((v, frase))
+        return out
+    trovati = raccogli(VAL_FORTI) or raccogli(VAL_DEBOLI)
     if not trovati:
         return None, None
-    # 20/11/2026 — DUE LIVELLI. Prima le formule che dicono esplicitamente «valore di mercato»,
-    # «stimato», «si stima»: sono la stima del perito. Solo se non ce n'è nessuna si guarda
-    # «prezzo di vendita proposto». Il «prezzo base d'asta» è escluso per costruzione: è il prezzo
-    # dell'asta, non una stima, e prenderlo per stima falserebbe ogni correttivo.
-    FORTI = re.compile(r'valore\s+(?:di\s+mercato|stimato|di\s+stima|complessivo|dell[ao]\s+immobile)|si\s+stima|stima\s+peritale', re.I)
-    forti = [(v, f) for v, f in trovati if FORTI.search(f)]
-    if forti:
-        trovati = forti
     c = Counter(v for v, _ in trovati)
     v = sorted(c.items(), key=lambda x: (-x[1], -x[0]))[0][0]
     frase = next(f for vv, f in trovati if vv == v)
