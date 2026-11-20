@@ -224,6 +224,26 @@ def lotto(id_):
     val, frase = estrai_valore(t) if p and p.get("s", 0) < MAX_MB * 1e6 else (None, None)
     r["valore_stima_ctu"] = val
     r["valore_stima_frase"] = frase
+    # 20/11/2026 — DIAGNOSTICA per alzare il richiamo: se il valore non si trova, si conservano fino a
+    # 5 ritagli di testo intorno a «valore|stima|€». Serve a leggere le forme vere delle perizie che
+    # oggi non capiamo (tabelle, «a corpo», importi in lettere, OCR) invece di indovinarle.
+    if val is None and p and p.get("s", 0) < MAX_MB * 1e6:
+        try:
+            tD = re.sub(r'\s+', ' ', t)
+            ritagli = []
+            for rx in (r'valore', r'stima', r'€'):
+                for mm in re.finditer(rx, tD, re.I):
+                    a = max(0, mm.start() - 60); b = min(len(tD), mm.end() + 90)
+                    pezzo = tD[a:b].strip()
+                    if pezzo not in ritagli:
+                        ritagli.append(pezzo)
+                    if len(ritagli) >= 5:
+                        break
+                if len(ritagli) >= 5:
+                    break
+            r["ctu_debug"] = ritagli[:5]
+        except Exception:
+            r["ctu_debug"] = None
     v, tipo, fonte = scegli(per, avv)
     r.update({"mq_valore": v, "mq_tipo": tipo, "mq_fonte": fonte})
     # plausibilità minima per il residenziale; il controllo €/m² vs OMI lo fa la pipeline
