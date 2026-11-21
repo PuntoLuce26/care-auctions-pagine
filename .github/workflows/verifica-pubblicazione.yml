@@ -1,0 +1,61 @@
+name: verifica-pubblicazione
+# Verifica automatica del sito pubblicato (21/11/2026, richiesta di Gianluca).
+# Gira da sola: ogni 30 minuti, a ogni publish di Emergent (repository_dispatch che manda già
+# prerender.yml) e a mano. Misura il DOMINIO PUBBLICO e il file servito, mai il log.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/30 * * * *'
+  repository_dispatch:
+    types: [emergent-published]
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: verifica-pubblicazione
+  cancel-in-progress: true
+jobs:
+  verifica:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verifica l'artefatto pubblicato
+        id: v
+        run: node qa/verifica-pubblicazione.mjs
+        continue-on-error: true
+      - name: Pubblica lo stato nel repo
+        run: |
+          git config user.name "careauctions-bot"
+          git config user.email "info@puntoluce26.com"
+          git add qa/verifica-pubblicazione.json
+          git diff --staged --quiet || git commit -m "verifica pubblicazione: ${{ steps.v.outputs.esito }} $(date -u +%H:%MZ)"
+          git pull --rebase --autostash origin main || true
+          git push || true
+      - name: Issue se qualcosa non torna
+        if: steps.v.outputs.esito != ''
+        uses: actions/github-script@v7
+        env:
+          ESITO: ${{ steps.v.outputs.esito }}
+          GUASTI: ${{ steps.v.outputs.guasti }}
+        with:
+          script: |
+            const esito = process.env.ESITO;
+            const guasti = process.env.GUASTI || '';
+            const titolo = '[VERIFICA] il sito pubblicato non torna';
+            const corpo = `Esito **${esito}** sulla verifica automatica del ${new Date().toISOString()}\n\nNon tornano:\n${guasti.split(' | ').filter(Boolean).map(g => '- ' + g).join('\n') || '- nessuno'}\n\nRapporto: \`qa/verifica-pubblicazione.json\`. Regola: si corregge sulla causa, poi si rimisura l'artefatto.`;
+            const { data } = await github.rest.issues.listForRepo({ ...context.repo, state: 'open', labels: 'verifica' });
+            const esistente = data.find(i => i.title === titolo);
+            if (esito !== 'VERDE') {
+              if (esistente) await github.rest.issues.update({ ...context.repo, issue_number: esistente.number, body: corpo });
+              else await github.rest.issues.create({ ...context.repo, title: titolo, body: corpo, labels: ['verifica'] });
+            } else if (esistente) {
+              await github.rest.issues.createComment({ ...context.repo, issue_number: esistente.number, body: 'Rientrato: verifica verde.' });
+              await github.rest.issues.update({ ...context.repo, issue_number: esistente.number, state: 'closed' });
+            }
+      - name: Fallisci se rosso (dopo aver registrato)
+        if: steps.v.outputs.esito == 'ROSSO'
+        run: exit 1
