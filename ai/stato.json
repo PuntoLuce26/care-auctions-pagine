@@ -1,16 +1,16 @@
 {
-  "generato": "2026-11-21T02:44:24.600Z",
+  "generato": "2026-11-21T12:35:59.195Z",
   "numeri": {
-    "lotti": 321260,
-    "immobiliari": 271287,
-    "mobiliari": 49973,
+    "lotti": 321136,
+    "immobiliari": 271144,
+    "mobiliari": 49992,
     "regioni": 21,
     "tribunali": 148,
     "lingue": 91,
-    "lottiAttivi": 41774,
-    "aggiudicate": 2012,
-    "deserte": 28722,
-    "aggiornato": "2026-11-21T02:41:13.782Z"
+    "lottiAttivi": 41305,
+    "aggiudicate": 2015,
+    "deserte": 28683,
+    "aggiornato": "2026-11-21T12:26:21.456Z"
   },
   "checks": [
     {
