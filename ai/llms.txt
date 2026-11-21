@@ -19,9 +19,9 @@
 ## Domande frequenti
 Domande frequenti, con risposte verificabili: https://careauctions.co/feed/faq.json
 
-## Numeri aggiornati (2026-11-20)
-- Lotti: 321160 (immobiliari 271209, mobiliari 49951)
-- Lotti attivi in sitemap: 41385
+## Numeri aggiornati (2026-11-21)
+- Lotti: 321260 (immobiliari 271287, mobiliari 49973)
+- Lotti attivi in sitemap: 41774
 - Regioni: 21 · Tribunali: 148 · Lingue: 91
 - Esiti: 2012 aggiudicate, 28722 deserte
 

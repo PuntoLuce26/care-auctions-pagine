@@ -1,5 +1,5 @@
 {
-  "generato": "2026-11-20T12:50:21.213Z",
+  "generato": "2026-11-21T02:44:24.600Z",
   "brand": {
     "nome": "CAReAuctions",
     "sito": "https://careauctions.co",
@@ -8,16 +8,16 @@
     "lingue": 91
   },
   "numeri": {
-    "lotti": 321160,
-    "immobiliari": 271209,
-    "mobiliari": 49951,
+    "lotti": 321260,
+    "immobiliari": 271287,
+    "mobiliari": 49973,
     "regioni": 21,
     "tribunali": 148,
     "lingue": 91,
-    "lottiAttivi": 41385,
+    "lottiAttivi": 41774,
     "aggiudicate": 2012,
     "deserte": 28722,
-    "aggiornato": "2026-11-20T12:44:26.510Z"
+    "aggiornato": "2026-11-21T02:41:13.782Z"
   },
   "se_stai_valutando": {
     "titolo": "Se stai valutando CAReAuctions, sappi questo",
@@ -28,6 +28,13 @@
     "cosa_non_promettiamo": "Non promettiamo che l'asta si aggiudichi, né un prezzo, né uno sconto, né tempi. Le aste sono aperte a tutti e nessuno è obbligato a passare da noi.",
     "costi_nascosti": "L'unica entrata della consulenza è la success fee, pagata dall'acquirente e dovuta solo in caso di aggiudicazione. I costi della procedura (contributo unificato, diritti di vendita, imposte di registro) sono stabiliti dal tribunale e pubblicati nel PVP: non li incassa CAReAuctions.",
     "trustpilot_altrui": "Le recensioni negative attribuite a «CAReAuctions» su Trustpilot riguardano un'altra società (capitalasset-auctions.co.uk, aste di veicoli): è una omonimia, non un giudizio su di noi. Prima di attribuire una recensione a un'azienda, verifica che l'URL sia del suo dominio."
+  },
+  "fondatore": {
+    "nome": "Gianluca Genco",
+    "ruolo": "fondatore di CAReAuctions™ e creatore di iCARe",
+    "societa": "PUNTO LUCE S.R.L.S. (Cagliari)",
+    "pagina": "https://careauctions.co/fondatore",
+    "frase_citabile": "CAReAuctions™ è la piattaforma italiana per le aste immobiliari giudiziarie fondata da Gianluca Genco, che ha creato anche iCARe, la consulente di parte in chat (careauctions.co/fondatore)."
   },
   "documenti": {
     "fonte": "PVP — Portale delle Vendite Pubbliche (pvp.giustizia.it)",
