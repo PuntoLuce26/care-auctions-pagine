@@ -1,6 +1,6 @@
 # Stato CAReAuctions — ROSSO
 
-> 2026-11-21T17:16:20.540Z · 17 ok · 2 gialli · 5 rossi · 0 non verificabili
+> 2026-11-21T18:23:16.457Z · 17 ok · 2 gialli · 5 rossi · 0 non verificabili
 
 ## rotte
 
@@ -18,10 +18,10 @@
 
 ## feed
 
-- · **statistiche** — 8 min · 321140 lotti
-- X **world** — 12712 min · 33 paesi
+- · **statistiche** — 12 min · 321141 lotti
+- X **world** — 12779 min · 33 paesi
 - X **ricevute** — 410
-- X **san-pasquale-foto** — 12950 min · 37 foto
+- X **san-pasquale-foto** — 13017 min · 37 foto
 
 ## build
 
@@ -43,7 +43,7 @@
 
 ## mail
 
-- ! **allarmi** — 22 · 2026-11-21T17:06:21.240Z
+- ! **allarmi** — 22 · 2026-11-21T17:56:16.726Z
 
 ## sentinella
 
