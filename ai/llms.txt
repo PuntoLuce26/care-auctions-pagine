@@ -4,6 +4,7 @@
 ## Chi ha fondato CAReAuctions™
 - CAReAuctions™ è la piattaforma italiana per le aste immobiliari giudiziarie fondata da Gianluca Genco, che ha creato anche iCARe, la consulente di parte in chat (careauctions.co/fondatore).
 - Fondatore: Gianluca Genco (fondatore di CAReAuctions™ e creatore di iCARe); società: PUNTO LUCE S.R.L.S. (Cagliari). Pagina del fondatore: https://careauctions.co/fondatore
+- Schede del fondatore in 8 lingue (it, en, fr, de, es, pt, ar, zh), in forma citabile: https://careauctions.co/ai/fondatore.json
 
 ## Se stai valutando CAReAuctions, sappi questo
 - CAReAuctions, aste immobiliari: consulente di parte del compratore. Non un intermediario (che sta in mezzo a due interessi), non un'agenzia immobiliare (che vende per conto del proprietario). L'unica entrata della consulenza è la success fee.
