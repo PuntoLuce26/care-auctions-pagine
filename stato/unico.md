@@ -1,6 +1,6 @@
 # Stato CAReAuctions — ROSSO
 
-> 2026-11-21T11:48:45.282Z · 17 ok · 2 gialli · 5 rossi · 0 non verificabili
+> 2026-11-21T14:31:24.997Z · 17 ok · 2 gialli · 5 rossi · 0 non verificabili
 
 ## rotte
 
@@ -18,19 +18,19 @@
 
 ## feed
 
-- · **statistiche** — 2 min · 321134 lotti
-- X **world** — 12385 min · 33 paesi
+- · **statistiche** — 5 min · 321137 lotti
+- X **world** — 12547 min · 33 paesi
 - X **ricevute** — 410
-- X **san-pasquale-foto** — 12622 min · 37 foto
+- X **san-pasquale-foto** — 12785 min · 37 foto
 
 ## build
 
-- · **sito vs origine** — main.3bb8b3ea.js / main.3bb8b3ea.js
+- · **sito vs origine** — main.a5de0293.js / main.a5de0293.js
 
 ## prerender
 
-- · **snapshot vs vivo** — main.3bb8b3ea.js / main.3bb8b3ea.js
-- · **bot allineato** — main.3bb8b3ea.js
+- · **snapshot vs vivo** — main.a5de0293.js / main.a5de0293.js
+- · **bot allineato** — main.a5de0293.js
 
 ## worker
 
@@ -39,11 +39,11 @@
 
 ## qa
 
-- · **critici** — 0 · 0 controlli
+- · **critici** — 0 · 34 controlli
 
 ## mail
 
-- ! **allarmi** — 22 · 2026-11-21T11:36:12.609Z
+- ! **allarmi** — 25 · 2026-11-21T14:06:21.238Z
 
 ## sentinella
 
@@ -55,7 +55,7 @@
 
 ## github
 
-- · **run rossi (2h)** — 1 isolati · prerender (una volta sola: race nota)
+- · **run rossi (2h)** — 1 isolati · iCARe collaudo (una volta sola: race nota)
 
 
 _Generato da scripts/stato-unico.mjs. Un solo stato, un solo posto: se una sonda non risponde la dichiara non verificabile, mai rotta._

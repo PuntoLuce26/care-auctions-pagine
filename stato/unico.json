@@ -1,5 +1,5 @@
 {
- "generato": "2026-11-21T11:48:45.282Z",
+ "generato": "2026-11-21T14:31:24.997Z",
  "semaforo": "rosso",
  "conteggi": {
   "ok": 17,
@@ -89,14 +89,14 @@
    "sezione": "feed",
    "nome": "statistiche",
    "stato": "ok",
-   "valore": "2 min",
-   "dettaglio": "321134 lotti"
+   "valore": "5 min",
+   "dettaglio": "321137 lotti"
   },
   {
    "sezione": "feed",
    "nome": "world",
    "stato": "rosso",
-   "valore": "12385 min",
+   "valore": "12547 min",
    "dettaglio": "33 paesi"
   },
   {
@@ -110,28 +110,28 @@
    "sezione": "feed",
    "nome": "san-pasquale-foto",
    "stato": "rosso",
-   "valore": "12622 min",
+   "valore": "12785 min",
    "dettaglio": "37 foto"
   },
   {
    "sezione": "build",
    "nome": "sito vs origine",
    "stato": "ok",
-   "valore": "main.3bb8b3ea.js / main.3bb8b3ea.js",
+   "valore": "main.a5de0293.js / main.a5de0293.js",
    "dettaglio": ""
   },
   {
    "sezione": "prerender",
    "nome": "snapshot vs vivo",
    "stato": "ok",
-   "valore": "main.3bb8b3ea.js / main.3bb8b3ea.js",
+   "valore": "main.a5de0293.js / main.a5de0293.js",
    "dettaglio": ""
   },
   {
    "sezione": "prerender",
    "nome": "bot allineato",
    "stato": "ok",
-   "valore": "main.3bb8b3ea.js",
+   "valore": "main.a5de0293.js",
    "dettaglio": ""
   },
   {
@@ -153,14 +153,14 @@
    "nome": "critici",
    "stato": "ok",
    "valore": "0",
-   "dettaglio": "0 controlli"
+   "dettaglio": "34 controlli"
   },
   {
    "sezione": "mail",
    "nome": "allarmi",
    "stato": "giallo",
-   "valore": "22",
-   "dettaglio": "2026-11-21T11:36:12.609Z"
+   "valore": "25",
+   "dettaglio": "2026-11-21T14:06:21.238Z"
   },
   {
    "sezione": "sentinella",
@@ -181,7 +181,7 @@
    "nome": "run rossi (2h)",
    "stato": "ok",
    "valore": "1 isolati",
-   "dettaglio": "prerender (una volta sola: race nota)"
+   "dettaglio": "iCARe collaudo (una volta sola: race nota)"
   }
  ]
 }
