@@ -3,43 +3,43 @@
   "canary": "care-canary-d2c32afaa5d5",
   "canaryNota": "valore di riconoscimento della copia dei dati",
   "titolo": "NPL's — crediti in sofferenza e crediti in procedura (dati veri dal PVP)",
-  "generatoIl": "2026-11-20T13:12:45.587Z",
-  "aggiornato": "2026-11-20",
+  "generatoIl": "2026-11-21T12:49:17.785Z",
+  "aggiornato": "2026-11-21",
   "fonte": "PVP — Portale delle Vendite Pubbliche, Ministero della Giustizia (pvp.giustizia.it)",
   "query": "tipoLotto=VALORI-CREDITI",
   "licenza": "Dati pubblici del PVP (Portale delle Vendite Pubbliche, Ministero della Giustizia). Riuso consentito per finalità informative con citazione della fonte; nessun dato personale oltre a quanto già pubblico nel bando.",
   "metodo": "Classificazione conservativa dal testo pubblico del bando: NPL/sofferenza solo se dichiarati; crediti fiscali e titoli/quote esclusi (classi diverse, non NPL). Valore nominale solo se scritto nel bando.",
-  "totale": 258,
-  "dichiaratoPVP": 1133,
+  "totale": 259,
+  "dichiaratoPVP": 1134,
   "esclusi": {
-   "titoli-e-quote": 437,
-   "credito-fiscale": 417,
+   "titoli-e-quote": 436,
+   "credito-fiscale": 418,
    "non-credito": 21
   },
   "copertura": {
    "importo": {
     "con": 46,
-    "su": 258,
+    "su": 259,
     "pct": 17.8
    },
    "regione": {
-    "con": 190,
-    "su": 258,
-    "pct": 73.6
+    "con": 191,
+    "su": 259,
+    "pct": 73.7
    },
    "tribunale": {
-    "con": 256,
-    "su": 258,
+    "con": 257,
+    "su": 259,
     "pct": 99.2
    }
   },
   "perTipo": {
-   "credito": 254,
+   "credito": 255,
    "NPL": 4
   },
   "perStato": {
-   "conclusa-esito-non-pubblicato": 211,
-   "in-programma": 25,
+   "conclusa-esito-non-pubblicato": 214,
+   "in-programma": 23,
    "deserta": 17,
    "aggiudicata": 5
   },
@@ -58,10 +58,10 @@
    "oltre-1M": 23
   },
   "regioni": 16,
-  "province": 39,
+  "province": 40,
   "sommaPrezzoBase": 377555532,
   "freschezza": {
-   "ultimaRaccolta": "2026-11-20",
+   "ultimaRaccolta": "2026-11-21",
    "dataLottoPiuRecente": "2027-01-14",
    "dataLottoPiuVecchio": "2024-01-12"
   },
@@ -78,12 +78,12 @@
   "Veneto": 7,
   "Sardegna": 7,
   "Marche": 3,
+  "Campania": 2,
   "Liguria": 2,
   "Basilicata": 2,
   "Umbria": 2,
   "Puglia": 2,
-  "Abruzzo": 1,
-  "Campania": 1
+  "Abruzzo": 1
  },
  "perProvincia": {
   "Roma": 55,
@@ -107,6 +107,7 @@
   "Bergamo": 2,
   "Terni": 2,
   "Bari": 2,
+  "Salerno": 1,
   "L'Aquila": 1,
   "Padova": 1,
   "Alessandria": 1,
