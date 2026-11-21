@@ -18,6 +18,9 @@ on:
       - "!qa/orchestra.md"
       - "!qa/ronda-notturna.json"
       - "!qa/stato.json"
+      - "!qa/audit-interno.json"
+      - "!qa/audit-mac.json"
+      - "!qa/out/**"
   workflow_dispatch:
 permissions:
   contents: write
