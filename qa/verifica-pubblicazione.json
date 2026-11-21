@@ -1,0 +1,63 @@
+{
+ "generato": "2026-11-21T11:39:07.197Z",
+ "esito": "VERDE",
+ "build": "main.3bb8b3ea.js",
+ "controlli": [
+  {
+   "nome": "build sito = origine",
+   "ok": true,
+   "dettaglio": "tutte su main.3bb8b3ea.js"
+  },
+  {
+   "nome": "testi /termini",
+   "ok": true,
+   "dettaglio": "http 200, vietati: nessuno"
+  },
+  {
+   "nome": "testi /note-legali",
+   "ok": true,
+   "dettaglio": "http 200, vietati: nessuno"
+  },
+  {
+   "nome": "testi /affiliazione",
+   "ok": true,
+   "dettaglio": "http 200, vietati: nessuno"
+  },
+  {
+   "nome": "testi /ishop",
+   "ok": true,
+   "dettaglio": "http 200, vietati: nessuno"
+  },
+  {
+   "nome": "testi /ipartner",
+   "ok": true,
+   "dettaglio": "http 200, vietati: nessuno"
+  },
+  {
+   "nome": "/note-legali non è un doppione dei Termini",
+   "ok": true,
+   "dettaglio": "titolo: Note legali &mdash; CAReAuctions™"
+  },
+  {
+   "nome": "immagini iShop identiche al manifest",
+   "ok": true,
+   "dettaglio": "24/24"
+  },
+  {
+   "nome": "rotte chiave 200",
+   "ok": true,
+   "dettaglio": "10/10"
+  },
+  {
+   "nome": "feed statistiche fresco (< 90 min)",
+   "ok": true,
+   "dettaglio": "14 min · 321132 lotti · aggiornato 2026-11-21T11:24:57.836Z"
+  },
+  {
+   "nome": "prerender allineato alla build servita",
+   "ok": true,
+   "dettaglio": "main.3bb8b3ea.js vs main.3bb8b3ea.js"
+  }
+ ],
+ "guasti": []
+}
