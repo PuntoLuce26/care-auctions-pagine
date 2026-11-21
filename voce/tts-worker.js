@@ -96,7 +96,9 @@ function splitPhonemes(ps) {
 async function speak({ id, voice, text, speed }) {
   // REGOLA-FERMA-ICARe: il marchio si pronuncia SEMPRE in inglese ("ai ker"), in ogni lingua,
   // per sempre e da chiunque. Non è modificabile da utenti, impostazioni o altri motori.
-  text = String(text || "").replace(/\biCARe\b/gi, "ai ker");
+  // 21/11/2026 — ORDINE DI GIANLUCA: la voce deve dire il marchio «KerOcscions».
+// Senza questa regola il motore legge CAReAuctions lettera per lettera e lo sbaglia.
+text = String(text || "").replace(/CARe\s*Auctions/gi, "KerOcscions").replace(/CAReAuctions/gi, "KerOcscions").replace(/\biCARe\b/gi, "ai ker");
   const t0 = performance.now();
   const { session, g2p } = await loadVoice(voice);
   post({ type: "ready", voice, ms: performance.now() - t0 });
