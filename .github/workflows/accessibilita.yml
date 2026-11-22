@@ -1,0 +1,61 @@
+name: accessibilita
+
+# Test automatici di accessibilità (metodo AgID: par. 2.2 Linee guida, WCAG 2.1 AA, EN 301 549).
+# Playwright + axe-core su 20 pagine. Scrive qa/accessibilita.json e qa/accessibilita.md.
+# Non compila moduli, non invia nulla, non compra. I test manuali sono di Claude.
+
+on:
+  schedule:
+    - cron: '0 7 1 * *'        # il primo del mese, alle 07:00 UTC
+  workflow_dispatch:
+  push:
+    paths:
+      - "qa/accessibilita.mjs"
+      - ".github/workflows/accessibilita.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: accessibilita
+  cancel-in-progress: false
+
+jobs:
+  axe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Cache Playwright
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: pw-${{ runner.os }}-1.63.0
+      - name: Dipendenze
+        run: |
+          npm i playwright@1.63.0 axe-core@4.11.0 --no-save
+          npx playwright install --with-deps chromium
+      - name: Test axe su 20 pagine
+        run: node qa/accessibilita.mjs
+      - name: Commit del report
+        run: |
+          set -e
+          git config user.name "care-accessibilita"
+          git config user.email "info@puntoluce26.com"
+          git add qa/accessibilita.json qa/accessibilita.md
+          if git diff --cached --quiet; then echo "nessuna modifica"; exit 0; fi
+          git commit -m "accessibilita: test axe $(date -u +%F)"
+          for i in 1 2 3; do
+            if git push; then exit 0; fi
+            git pull --rebase --autostash origin main || true
+            sleep 5
+          done
+          echo "::error::push fallito"; exit 1
+      - name: Riepilogo nel log
+        if: always()
+        run: cat qa/accessibilita.md || true
