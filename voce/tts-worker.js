@@ -98,7 +98,29 @@ async function speak({ id, voice, text, speed }) {
   // per sempre e da chiunque. Non è modificabile da utenti, impostazioni o altri motori.
   // 21/11/2026 — ORDINE DI GIANLUCA: la voce deve dire il marchio «KerOcscions».
 // Senza questa regola il motore legge CAReAuctions lettera per lettera e lo sbaglia.
-text = String(text || "").replace(/CARe\s*Auctions/gi, "KerOcscions").replace(/CAReAuctions/gi, "KerOcscions").replace(/\biCARe\b/gi, "ai ker");
+  // 23/11/2026 — PULIZIA PER LA VOCE: il motore non deve leggere i simboli.
+  text = String(text || "")
+    .replace(/\*\*|\*|__|_|`|#/g, " ")
+    .replace(/\u2122|\u00ae|\u00a9/g, "")
+    .replace(/\u00b7|\u2014|\u2013/g, ", ")
+    .replace(/[\u00ab\u00bb\u201c\u201d\u2018\u2019"]/g, " ")
+    .replace(/\u20ac/g, " euro ")
+    .replace(/%/g, " per cento ")
+    .replace(/\s*\/\s*/g, " ")
+    .replace(/\|/g, " ")
+    .replace(/&/g, " e ")
+    .replace(/\+/g, " piu ")
+    .replace(/[()\[\]{}]/g, " ")
+    .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/gu, " ")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+  // REGOLA-FERMA-ICARe: CAReAuctions si dice «KerOcscions», iCARe «ai ker», in ogni lingua.
+  // Il dominio careauctions.co NON si tocca: la lookahead negativa lo lascia com'e'.
+  text = text.replace(/CARe\s*Auctions(?!\.co)/gi, "KerOcscions").replace(/CAReAuctions(?!\.co)/gi, "KerOcscions")
+    .replace(/\biCARe\b/gi, "ai ker").replace(/\biDream\b/gi, "ai drim").replace(/\biShop\b/gi, "ai sciop")
+    .replace(/\biCommunity\b/gi, "ai comiuniti").replace(/\biPartner\b/gi, "ai partner").replace(/\biHouse\b/gi, "ai haus")
+    .replace(/\biAuctions\b/gi, "ai oscion").replace(/\biAuction\b/gi, "ai oscion").replace(/\biLive\b/gi, "ai laiv")
+    .replace(/\biDati\b/gi, "ai dati").replace(/\bbuynow\b/gi, "bai nau").replace(/\bbuy now\b/gi, "bai nau");
   const t0 = performance.now();
   const { session, g2p } = await loadVoice(voice);
   post({ type: "ready", voice, ms: performance.now() - t0 });
