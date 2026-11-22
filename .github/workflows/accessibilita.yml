@@ -42,7 +42,17 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Test axe su 20 pagine
         run: node qa/accessibilita.mjs
+      - name: Artefatto del report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: accessibilita-report
+          path: |
+            qa/accessibilita.json
+            qa/accessibilita.md
+          if-no-files-found: warn
       - name: Commit del report
+        continue-on-error: true
         run: |
           set -e
           git config user.name "care-accessibilita"
@@ -50,7 +60,7 @@ jobs:
           git add qa/accessibilita.json qa/accessibilita.md
           if git diff --cached --quiet; then echo "nessuna modifica"; exit 0; fi
           git commit -m "accessibilita: test axe $(date -u +%F)"
-          for i in 1 2 3; do
+          for i in 1 2 3 4 5; do
             if git push; then exit 0; fi
             git pull --rebase --autostash origin main || true
             sleep 5
