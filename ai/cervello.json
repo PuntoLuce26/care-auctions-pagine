@@ -1,8 +1,8 @@
 {
-  "aggiornato": "2026-11-21T12:53:08.667Z",
+  "aggiornato": "2026-11-22T12:44:27.260Z",
   "pubblico": {
     "dati": {
-      "lotti_banca_dati": 321136,
+      "lotti_banca_dati": 320342,
       "esiti_immobiliari": 360,
       "mediana_esiti_immobiliari": 33375,
       "copertura": "[object Object]",
@@ -10,7 +10,7 @@
       "regioni": 14
     },
     "pvp": {
-      "foto_estratte": 1423
+      "foto_estratte": 1441
     }
   },
   "fonti": [
