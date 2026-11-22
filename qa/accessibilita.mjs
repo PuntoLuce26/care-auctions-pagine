@@ -42,9 +42,11 @@ for (const [nome, path] of PAGINE) {
   const pagina = await contesto.newPage();
   const r = { nome, path, stato: 0, titolo: '', violazioni: [], critical: 0, serious: 0, moderate: 0, minor: 0, totale: 0, errore: null };
   try {
-    const risposta = await pagina.goto(BASE + path, { waitUntil: 'networkidle', timeout: 45000 });
+    // domcontentloaded e non networkidle: la pagina lotto fa polling continuo (feed, pulse) e
+    // networkidle non arriva mai, pur rispondendo in 2,8-4,4 s. L'attesa vera è il render sotto.
+    const risposta = await pagina.goto(BASE + path, { waitUntil: 'domcontentloaded', timeout: 45000 });
     r.stato = risposta ? risposta.status() : 0;
-    await pagina.waitForTimeout(1500);
+    await pagina.waitForTimeout(3500);
     r.titolo = (await pagina.title()).slice(0, 90);
     if (r.stato >= 400) { risultati.push(r); await pagina.close(); continue; }
     await pagina.addScriptTag({ path: axePath });
