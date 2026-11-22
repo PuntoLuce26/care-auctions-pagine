@@ -1,16 +1,16 @@
 {
-  "generato": "2026-11-21T12:35:59.195Z",
+  "generato": "2026-11-22T12:32:08.174Z",
   "numeri": {
-    "lotti": 321136,
-    "immobiliari": 271144,
-    "mobiliari": 49992,
+    "lotti": 320342,
+    "immobiliari": 270598,
+    "mobiliari": 49744,
     "regioni": 21,
     "tribunali": 148,
     "lingue": 91,
-    "lottiAttivi": 41305,
-    "aggiudicate": 2015,
-    "deserte": 28683,
-    "aggiornato": "2026-11-21T12:26:21.456Z"
+    "lottiAttivi": 40771,
+    "aggiudicate": 1927,
+    "deserte": 28382,
+    "aggiornato": "2026-11-22T12:21:28.759Z"
   },
   "checks": [
     {
@@ -96,7 +96,7 @@
     {
       "nome": "IndexNow (feed/indexnow.json)",
       "ok": true,
-      "dettaglio": "inviati 250 · giorno 2026-11-21"
+      "dettaglio": "inviati 250 · giorno 2026-11-22"
     },
     {
       "nome": "query-educa 40 domande",
@@ -106,9 +106,9 @@
   ],
   "indexnow": {
     "inviati": 250,
-    "giorno": "2026-11-21",
-    "quando": "2026-11-21T00:10:36.271Z",
-    "prossimo": 21500,
+    "giorno": "2026-11-22",
+    "quando": "2026-11-22T00:16:43.353Z",
+    "prossimo": 21750,
     "stato": "letto",
     "fonte": "feed/indexnow.json",
     "inviatoDa": "scripts/idmap-sitemap.js (dentro il workflow feed-sync)",
