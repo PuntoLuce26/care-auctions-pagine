@@ -2,50 +2,50 @@
  "versione": "CAReIndex 2026-W47",
  "mese": "2026-11",
  "etichetta": "novembre 2026",
- "dataRiferimento": "2026-11-19",
- "generato": "2026-11-21T02:41:22.651Z",
+ "dataRiferimento": "2026-11-20",
+ "generato": "2026-11-22T02:16:11.821Z",
  "fonte": "PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia) · Agenzia delle Entrate — OMI",
  "metodo": "Aggiudicazioni: solo vendite aggiudicate con prezzo finale pubblicato, sommate per data di vendita; nessun prezzo ricostruito. Sconto: mediana del ribasso tra prezzo base e offerta minima pubblicati sul medesimo lotto. Esiti: stati dichiarati dal PVP.",
  "stimato": "nulla: ogni numero è un conteggio o un rapporto tra dati pubblicati",
  "copertura": {
-  "esitiNelMese": 1981,
-  "tribunaliNelMese": 92,
-  "giorniConEsiti": 16,
+  "esitiNelMese": 2147,
+  "tribunaliNelMese": 93,
+  "giorniConEsiti": 17,
   "tribunaliTotaliArchivio": 105,
   "coperturaArchivio": {
    "dal": "2026-09-29",
-   "al": "2026-11-19",
-   "giorni": 47
+   "al": "2026-11-20",
+   "giorni": 48
   },
   "esclusi": {
-   "prezzoBase": 466,
+   "prezzoBase": 481,
    "senzaData": 0,
    "senzaPrezzo": 0,
    "altreFonti": 13639
   },
-  "lottiAttivi": 321260,
+  "lottiAttivi": 321142,
   "esitiMercato": {
-   "aggiudicate": 2012,
-   "deserte": 28722,
-   "sospese": 752,
-   "nonPubblicato": 293989
+   "aggiudicate": 2015,
+   "deserte": 28683,
+   "sospese": 730,
+   "nonPubblicato": 294141
   },
   "scartoBaseMinimaNazionale": {
    "medio": 20.2,
    "mediano": 25,
-   "lotti": 301572
+   "lotti": 301454
   }
  },
  "kpi": {
-  "aggiudicazioni": 1981,
-  "incasso": 19824315,
-  "prezzoMedio": 10007,
-  "tribunali": 92
+  "aggiudicazioni": 2147,
+  "incasso": 22496910,
+  "prezzoMedio": 10478,
+  "tribunali": 93
  },
  "settimane": {
   "2026-W45": 742,
   "2026-W46": 738,
-  "2026-W47": 501
+  "2026-W47": 667
  },
  "topTribunali": [
   {
@@ -62,9 +62,9 @@
   },
   {
    "tribunale": "MODENA",
-   "esiti": 135,
-   "incasso": 2373943,
-   "medio": 17585
+   "esiti": 137,
+   "incasso": 2422139,
+   "medio": 17680
   },
   {
    "tribunale": "VARESE",
@@ -73,40 +73,40 @@
    "medio": 91332
   },
   {
+   "tribunale": "PISA",
+   "esiti": 52,
+   "incasso": 1064172,
+   "medio": 20465
+  },
+  {
+   "tribunale": "VELLETRI",
+   "esiti": 10,
+   "incasso": 1019828,
+   "medio": 101983
+  },
+  {
    "tribunale": "PARMA",
    "esiti": 40,
    "incasso": 1008067,
    "medio": 25202
   },
   {
-   "tribunale": "MILANO",
-   "esiti": 76,
-   "incasso": 871522,
-   "medio": 11467
+   "tribunale": "VENEZIA",
+   "esiti": 23,
+   "incasso": 950686,
+   "medio": 41334
   },
   {
-   "tribunale": "VENEZIA",
-   "esiti": 19,
-   "incasso": 855158,
-   "medio": 45008
+   "tribunale": "MILANO",
+   "esiti": 82,
+   "incasso": 898607,
+   "medio": 10959
   },
   {
    "tribunale": "PRATO",
-   "esiti": 20,
-   "incasso": 705637,
-   "medio": 35282
-  },
-  {
-   "tribunale": "ROMA",
-   "esiti": 198,
-   "incasso": 660619,
-   "medio": 3336
-  },
-  {
-   "tribunale": "Non indicato",
-   "esiti": 180,
-   "incasso": 556949,
-   "medio": 3094
+   "esiti": 22,
+   "incasso": 706449,
+   "medio": 32111
   }
  ],
  "giorni": [
@@ -173,6 +173,10 @@
   {
    "giorno": "2026-11-19",
    "esiti": 227
+  },
+  {
+   "giorno": "2026-11-20",
+   "esiti": 166
   }
  ]
 }
