@@ -1,13 +1,13 @@
 {
-  "generato": "2026-11-21T13:09:50.983Z",
+  "generato": "2026-11-22T12:56:41.259Z",
   "base": "https://careauctions.co",
   "concorrenza": 50,
   "durata": 10,
-  "richieste": 9730,
-  "rps": 948,
+  "richieste": 10582,
+  "rps": 1031,
   "p50": 24,
-  "p95": 192,
-  "p99": 319,
+  "p95": 167,
+  "p99": 296,
   "errorePct": 0,
   "budget": {
     "p95Ms": 1000,
