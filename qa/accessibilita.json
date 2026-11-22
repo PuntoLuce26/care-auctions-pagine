@@ -1,0 +1,326 @@
+{
+  "generato": "2026-11-22T19:25:59.979Z",
+  "metodo": "Playwright + axe-core, WCAG 2.1 AA (tag wcag2a, wcag2aa, wcag21a, wcag21aa)",
+  "pagine": 20,
+  "totali": {
+    "critical": 1,
+    "serious": 5,
+    "moderate": 0,
+    "minor": 0,
+    "violazioni": 6
+  },
+  "perPagina": [
+    {
+      "nome": "home",
+      "path": "/",
+      "stato": 200,
+      "titolo": "CAReAuctions™ — aste giudiziarie immobiliari in Italia | CAReAuctions™",
+      "violazioni": [],
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "totale": 0,
+      "errore": null
+    },
+    {
+      "nome": "aste",
+      "path": "/aste",
+      "stato": 200,
+      "titolo": "Aste immobiliari in tutta Italia · CAReAuctions (careauctions.co) · iCARe · Care House, Ca",
+      "violazioni": [
+        {
+          "id": "aria-input-field-name",
+          "impact": "serious",
+          "help": "ARIA input fields must have an accessible name",
+          "wcag": "wcag2a,wcag412",
+          "nodi": 25,
+          "esempio": "div[aria-valuetext=\"1° · 42.000 €\"]"
+        },
+        {
+          "id": "definition-list",
+          "impact": "serious",
+          "help": "<dl> elements must only directly contain properly-ordered <dt> and <dd> groups, <script>, <template> or <div> elements",
+          "wcag": "wcag2a,wcag131",
+          "nodi": 1,
+          "esempio": ".gap-y-4"
+        }
+      ],
+      "critical": 0,
+      "serious": 2,
+      "moderate": 0,
+      "minor": 0,
+      "totale": 2,
+      "errore": null
+    },
+    {
+      "nome": "lotto",
+      "path": "/aste/1822566",
+      "stato": 0,
+      "titolo": "",
+      "violazioni": [],
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "totale": 0,
+      "errore": "TimeoutError: page.goto: Timeout 45000ms exceeded.\nCall log:\n  - navigating to \"https://careauctions.co/aste/1822566\", waiting until \"networkidle\"\n"
+    },
+    {
+      "nome": "idati",
+      "path": "/idati",
+      "stato": 200,
+      "titolo": "iDati · i dati delle aste immobiliari dal vivo, con fonte e data · CAReAuctions (careaucti",
+      "violazioni": [],
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "totale": 0,
+      "errore": null
+    },
+    {
+      "nome": "osservatorio",
+      "path": "/osservatorio",
+      "stato": 200,
+      "titolo": "CAReOS · osservatorio delle aste immobiliari per tribunale · CAReAuctions (careauctions.co",
+      "violazioni": [
+        {
+          "id": "definition-list",
+          "impact": "serious",
+          "help": "<dl> elements must only directly contain properly-ordered <dt> and <dd> groups, <script>, <template> or <div> elements",
+          "wcag": "wcag2a,wcag131",
+          "nodi": 1,
+          "esempio": "dl"
+        }
+      ],
+      "critical": 0,
+      "serious": 1,
+      "moderate": 0,
+      "minor": 0,
+      "totale": 1,
+      "errore": null
+    },
+    {
+      "nome": "aggiudicazioni",
+      "path": "/aggiudicazioni",
+      "stato": 200,
+      "titolo": "Prezzi di aggiudicazione delle aste immobiliari · CAReAuctions (careauctions.co) · iCARe ·",
+      "violazioni": [],
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "totale": 0,
+      "errore": null
+    },
+    {
+      "nome": "buynow",
+      "path": "/buynow",
+      "stato": 200,
+      "titolo": "Case da comprare subito, fuori dalle aste immobiliari · CAReAuctions (careauctions.co) · i",
+      "violazioni": [
+        {
+          "id": "aria-input-field-name",
+          "impact": "serious",
+          "help": "ARIA input fields must have an accessible name",
+          "wcag": "wcag2a,wcag412",
+          "nodi": 25,
+          "esempio": "div[aria-valuetext=\"1° · 42.000 €\"]"
+        },
+        {
+          "id": "select-name",
+          "impact": "critical",
+          "help": "Select element must have an accessible name",
+          "wcag": "wcag2a,wcag412",
+          "nodi": 1,
+          "esempio": "select[data-testid=\"buynow-filter-tipo\"]"
+        }
+      ],
+      "critical": 1,
+      "serious": 1,
+      "moderate": 0,
+      "minor": 0,
+      "totale": 2,
+      "errore": null
+    },
+    {
+      "nome": "san-pasquale",
+      "path": "/buynow/san-pasquale",
+      "stato": 200,
+      "titolo": "Santa Teresa Gallura, San Pasquale — 259.000 € in BuyNow · CAReAuctions",
+      "violazioni": [],
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "totale": 0,
+      "errore": null
+    },
+    {
+      "nome": "segnala",
+      "path": "/buynow/segnala",
+      "stato": 200,
+      "titolo": "Segnalare un annuncio BuyNow · CAReAuctions™",
+      "violazioni": [],
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "totale": 0,
+      "errore": null
+    },
+    {
+      "nome": "ishop",
+      "path": "/ishop",
+      "stato": 200,
+      "titolo": "iShop per la casa · CAReAuctions (careauctions.co) · iCARe · Care House, Care Home",
+      "violazioni": [],
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "totale": 0,
+      "errore": null
+    },
+    {
+      "nome": "ipartner",
+      "path": "/ipartner",
+      "stato": 200,
+      "titolo": "iPartner per le aste immobiliari · CAReAuctions (careauctions.co) · iCARe · Care House, Ca",
+      "violazioni": [],
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "totale": 0,
+      "errore": null
+    },
+    {
+      "nome": "piani",
+      "path": "/piani",
+      "stato": 200,
+      "titolo": "Piani per le aste immobiliari · CAReAuctions (careauctions.co) · iCARe · Care House, Care ",
+      "violazioni": [],
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "totale": 0,
+      "errore": null
+    },
+    {
+      "nome": "termini",
+      "path": "/termini",
+      "stato": 200,
+      "titolo": "Termini e condizioni — CAReAuctions™ | CAReAuctions™",
+      "violazioni": [],
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "totale": 0,
+      "errore": null
+    },
+    {
+      "nome": "privacy",
+      "path": "/privacy",
+      "stato": 200,
+      "titolo": "Informativa privacy — CAReAuctions™ | CAReAuctions™",
+      "violazioni": [],
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "totale": 0,
+      "errore": null
+    },
+    {
+      "nome": "cookie",
+      "path": "/cookie",
+      "stato": 200,
+      "titolo": "Cookie policy — CAReAuctions™ | CAReAuctions™",
+      "violazioni": [],
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "totale": 0,
+      "errore": null
+    },
+    {
+      "nome": "accessibilita",
+      "path": "/accessibilita",
+      "stato": 200,
+      "titolo": "Dichiarazione di accessibilità | CAReAuctions™",
+      "violazioni": [],
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "totale": 0,
+      "errore": null
+    },
+    {
+      "nome": "chi-siamo",
+      "path": "/chi-siamo",
+      "stato": 200,
+      "titolo": "Chi siamo · CAReAuctions, aste immobiliari",
+      "violazioni": [],
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "totale": 0,
+      "errore": null
+    },
+    {
+      "nome": "fondatore",
+      "path": "/fondatore",
+      "stato": 200,
+      "titolo": "Gianluca Genco · CAReAuctions (careauctions.co) · iCARe · Care House, Care Home",
+      "violazioni": [],
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "totale": 0,
+      "errore": null
+    },
+    {
+      "nome": "metodo",
+      "path": "/metodo",
+      "stato": 200,
+      "titolo": "Metodo e copertura — CAReAuctions™ | CAReAuctions™",
+      "violazioni": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "wcag": "wcag2aa,wcag143",
+          "nodi": 2,
+          "esempio": ".nl-k"
+        }
+      ],
+      "critical": 0,
+      "serious": 1,
+      "moderate": 0,
+      "minor": 0,
+      "totale": 1,
+      "errore": null
+    },
+    {
+      "nome": "contatti",
+      "path": "/contatti",
+      "stato": 200,
+      "titolo": "Contatti · CAReAuctions, aste immobiliari",
+      "violazioni": [],
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "totale": 0,
+      "errore": null
+    }
+  ]
+}
