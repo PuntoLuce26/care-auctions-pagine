@@ -1,11 +1,11 @@
 {
- "generato": "2026-11-22T06:08:14.971Z",
- "totale": 321142,
+ "generato": "2026-11-22T19:20:34.518Z",
+ "totale": 320346,
  "shard": "hex2",
  "shardCount": 64,
  "fonte": "feed/*-imm-*.json",
  "completo": true,
  "minAsta": "2010-03-13",
  "maxAsta": "2029-02-28",
- "shardBytesMax": 682655
+ "shardBytesMax": 681604
 }
