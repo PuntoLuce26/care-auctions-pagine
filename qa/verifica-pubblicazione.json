@@ -1,12 +1,12 @@
 {
- "generato": "2026-11-22T05:33:20.953Z",
+ "generato": "2026-11-22T14:14:01.778Z",
  "esito": "VERDE",
- "build": "main.fa9c0e70.js",
+ "build": "main.6705b839.js",
  "controlli": [
   {
    "nome": "build sito = origine",
    "ok": true,
-   "dettaglio": "tutte su main.fa9c0e70.js"
+   "dettaglio": "tutte su main.6705b839.js"
   },
   {
    "nome": "testi /termini",
@@ -36,7 +36,7 @@
   {
    "nome": "/note-legali non è un doppione dei Termini",
    "ok": true,
-   "dettaglio": "titolo: Note legali &mdash; CAReAuctions™"
+   "dettaglio": "titolo: Note legali — CAReAuctions™ | CAReAuctions™"
   },
   {
    "nome": "immagini iShop identiche al manifest",
@@ -51,12 +51,12 @@
   {
    "nome": "feed statistiche fresco (< 90 min)",
    "ok": true,
-   "dettaglio": "10 min · 321142 lotti · aggiornato 2026-11-22T05:22:58.128Z"
+   "dettaglio": "4 min · 320342 lotti · aggiornato 2026-11-22T14:10:26.925Z"
   },
   {
    "nome": "prerender allineato alla build servita",
    "ok": true,
-   "dettaglio": "main.fa9c0e70.js vs main.fa9c0e70.js"
+   "dettaglio": "main.6705b839.js vs main.6705b839.js"
   }
  ],
  "guasti": []
