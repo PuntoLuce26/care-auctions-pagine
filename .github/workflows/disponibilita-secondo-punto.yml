@@ -1,0 +1,50 @@
+name: disponibilita-secondo-punto
+
+# Secondo punto di misura esterno (art. 4 del D.M. 31/10/2006): misura le cinque URL del sito
+# ogni 5 minuti e scrive il registro giornaliero in disponibilita/<AAAA-MM-GG>.json.
+# Il primo punto è il worker Cloudflare care-disponibilita (cron ogni minuto).
+# Fascia 05:00-24:00 Europe/Rome, feriali e festivi separati nel report.
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: disponibilita-punto2
+  cancel-in-progress: false
+
+jobs:
+  misura:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Misura e registra
+        run: node scripts/disponibilita-punto2.mjs
+      - name: Commit del registro
+        run: |
+          set -e
+          git config user.name "care-disponibilita"
+          git config user.email "info@puntoluce26.com"
+          git add disponibilita/ || true
+          if git diff --cached --quiet; then
+            echo "nessuna modifica"
+            exit 0
+          fi
+          git commit -m "disponibilita: misura punto 2 $(TZ=Europe/Rome date +%F\ %H:%M)"
+          for i in 1 2 3; do
+            if git push; then exit 0; fi
+            git pull --rebase --autostash origin main || true
+            sleep 5
+          done
+          echo "::error::push fallito dopo 3 tentativi"
+          exit 1

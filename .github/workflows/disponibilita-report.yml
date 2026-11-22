@@ -1,0 +1,55 @@
+name: disponibilita-report
+
+# Report mensile e quadrimestrale della disponibilità (art. 4 del D.M. 31/10/2006).
+# Unisce le due fonti esterne: worker Cloudflare (cron ogni minuto) e registro GitHub Actions (ogni 5 min).
+# Scrive disponibilita/report-<DA>_<A>.json e .md. Le soglie sono 99% feriali e 95% festivi, fascia 05-24.
+
+on:
+  schedule:
+    - cron: '0 6 1 * *'          # mensile: il primo del mese, alle 06:00 UTC
+    - cron: '0 6 1 1,5,9 *'      # quadrimestrale: gennaio, maggio, settembre
+  workflow_dispatch:
+    inputs:
+      da:
+        description: 'Data iniziale AAAA-MM-GG (default: primo giorno del mese scorso)'
+        required: false
+      a:
+        description: 'Data finale AAAA-MM-GG (default: ultimo giorno del mese scorso)'
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: disponibilita-report
+  cancel-in-progress: false
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Genera il report
+        env:
+          REGIA_KEY: ${{ secrets.REGIA_KEY }}
+        run: |
+          if [ -n "${{ inputs.da }}" ]; then
+            node scripts/disponibilita-report.mjs --da "${{ inputs.da }}" --a "${{ inputs.a }}"
+          else
+            node scripts/disponibilita-report.mjs
+          fi
+      - name: Commit del report
+        run: |
+          set -e
+          git config user.name "care-disponibilita"
+          git config user.email "info@puntoluce26.com"
+          git add disponibilita/ || true
+          if git diff --cached --quiet; then echo "nessuna modifica"; exit 0; fi
+          git commit -m "disponibilita: report $(date -u +%F)"
+          git push
