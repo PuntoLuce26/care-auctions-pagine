@@ -1,6 +1,6 @@
 # Accessibilità — test automatici (WCAG 2.1 AA, axe-core)
 
-Generato il 2026-11-22 19:25 UTC · 20 pagine · Playwright + axe-core, WCAG 2.1 AA (tag wcag2a, wcag2aa, wcag21a, wcag21aa)
+Generato il 2026-11-22 19:33 UTC · 20 pagine · Playwright + axe-core, WCAG 2.1 AA (tag wcag2a, wcag2aa, wcag21a, wcag21aa)
 
 **Totali**: critical 1 · serious 5 · moderate 0 · minor 0 · violazioni 6
 
