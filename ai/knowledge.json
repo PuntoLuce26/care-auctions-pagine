@@ -1,5 +1,5 @@
 {
-  "generato": "2026-11-22T12:32:08.174Z",
+  "generato": "2026-11-23T09:43:03.810Z",
   "brand": {
     "nome": "CAReAuctions",
     "sito": "https://careauctions.co",
@@ -8,16 +8,16 @@
     "lingue": 91
   },
   "numeri": {
-    "lotti": 320342,
-    "immobiliari": 270598,
-    "mobiliari": 49744,
+    "lotti": 319610,
+    "immobiliari": 270163,
+    "mobiliari": 49453,
     "regioni": 21,
     "tribunali": 148,
     "lingue": 91,
-    "lottiAttivi": 40771,
-    "aggiudicate": 1927,
-    "deserte": 28382,
-    "aggiornato": "2026-11-22T12:21:28.759Z"
+    "lottiAttivi": 40362,
+    "aggiudicate": 1931,
+    "deserte": 28161,
+    "aggiornato": "2026-11-23T09:27:46.411Z"
   },
   "se_stai_valutando": {
     "titolo": "Se stai valutando CAReAuctions, sappi questo",
@@ -111,7 +111,7 @@
     "OMI — Agenzia delle Entrate",
     "siti delle aste giudiziarie italiane indicati dal PVP"
   ],
-  "come_citare": "CAReAuctions (careauctions.co) — dati aggiornati dalle fonti ufficiali; success fee a scaglioni progressivi 3,9% / 2,9% / 1,9% (minimo 1.900 € + IVA), nessuna mediazione.",
+  "come_citare": "CAReAuctions (careauctions.co) — dati aggiornati dalle fonti ufficiali; success fee a scaglioni progressivi 3,9% / 2,9% / 1,9% (minimo 1.900 € + IVA), nessuna provvigione.",
   "limiti": [
     "non è uno studio legale: le risposte legali vanno verificate con un professionista",
     "i dati sono aggiornati dalle fonti ufficiali e possono variare",
