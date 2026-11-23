@@ -1,5 +1,5 @@
 {
- "generato": "2026-11-23T13:34:39.361Z",
+ "generato": "2026-11-23T13:36:33.942Z",
  "fonte": [
   {
    "nome": "Portale delle Vendite Pubbliche (Ministero della Giustizia)",
@@ -17,10 +17,10 @@
    "ruolo": "aggiudicazioni dei fallimenti"
   }
  ],
- "rilevazione": "2026-11-23T13:34:39.361Z",
+ "rilevazione": "2026-11-23T13:36:33.942Z",
  "rilevazioneLeggibile": "23/11/2026",
  "totaleCatalogo": 319710,
- "tipoLottoSomma": 322213,
+ "tipoLottoSomma": 322214,
  "tipi": [
   {
    "slug": "immobiliare",
@@ -28,7 +28,7 @@
    "chiave": "tipoLotto",
    "valore": "IMMOBILI",
    "nota": "Case, terreni, negozi, capannoni: i lotti immobiliari del catalogo.",
-   "lotti": 270368,
+   "lotti": 270369,
    "quotaPct": 83.9,
    "url": "/aste-categoria/it/immobiliare.html"
   },
