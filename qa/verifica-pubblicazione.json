@@ -1,12 +1,12 @@
 {
- "generato": "2026-11-23T12:38:57.616Z",
- "esito": "VERDE",
- "build": "main.be41d027.js",
+ "generato": "2026-11-23T15:42:41.572Z",
+ "esito": "GIALLO",
+ "build": "main.07476be4.js",
  "controlli": [
   {
    "nome": "build sito = origine",
-   "ok": true,
-   "dettaglio": "tutte su main.be41d027.js"
+   "ok": false,
+   "dettaglio": "/idati: sito main.be41d027.js ≠ origine main.07476be4.js"
   },
   {
    "nome": "testi /termini",
@@ -51,13 +51,15 @@
   {
    "nome": "feed statistiche fresco (< 90 min)",
    "ok": true,
-   "dettaglio": "3 min · 319700 lotti · aggiornato 2026-11-23T12:35:32.062Z"
+   "dettaglio": "6 min · 319782 lotti · aggiornato 2026-11-23T15:36:33.059Z"
   },
   {
    "nome": "prerender allineato alla build servita",
    "ok": true,
-   "dettaglio": "main.be41d027.js vs main.be41d027.js"
+   "dettaglio": "main.07476be4.js vs main.07476be4.js"
   }
  ],
- "guasti": []
+ "guasti": [
+  "build sito = origine"
+ ]
 }
