@@ -1,11 +1,11 @@
 {
- "aggiornato": "2026-11-22T00:00:11.234Z",
- "fonte": "contatore del sito (Cloudflare RUM non disponibile)",
+ "aggiornato": "2026-11-23T00:00:25.148Z",
+ "fonte": "Cloudflare Web Analytics (RUM)",
  "nota": "pagine viste (pv) e visite/sessioni (visite) per giorno; i visitatori unici esatti sono nel pannello Web Analytics",
  "totale": {
-  "giorni": 35,
-  "pv": 18180,
-  "visite": 17570
+  "giorni": 37,
+  "pv": 19890,
+  "visite": 19240
  },
  "giorni": {
   "2026-10-14": {
@@ -25,60 +25,60 @@
    "visite": 10
   },
   "2026-10-21": {
-   "pv": 160,
-   "visite": 60
+   "pv": 100,
+   "visite": 0
   },
   "2026-10-22": {
    "pv": 130,
    "visite": 80
   },
   "2026-10-23": {
-   "pv": 70,
-   "visite": 40
+   "pv": 100,
+   "visite": 100
   },
   "2026-10-24": {
-   "pv": 110,
-   "visite": 30
+   "pv": 100,
+   "visite": 0
   },
   "2026-10-25": {
-   "pv": 70,
-   "visite": 20
+   "pv": 100,
+   "visite": 0
   },
   "2026-10-26": {
-   "pv": 120,
-   "visite": 110
+   "pv": 200,
+   "visite": 200
   },
   "2026-10-27": {
    "pv": 70,
    "visite": 50
   },
   "2026-10-28": {
-   "pv": 40,
-   "visite": 30
+   "pv": 100,
+   "visite": 100
   },
   "2026-10-29": {
    "pv": 120,
    "visite": 100
   },
   "2026-10-30": {
-   "pv": 160,
-   "visite": 150
+   "pv": 100,
+   "visite": 100
   },
   "2026-10-31": {
-   "pv": 450,
-   "visite": 400
+   "pv": 300,
+   "visite": 300
   },
   "2026-11-01": {
-   "pv": 310,
-   "visite": 240
+   "pv": 300,
+   "visite": 100
   },
   "2026-11-02": {
-   "pv": 570,
-   "visite": 570
+   "pv": 400,
+   "visite": 400
   },
   "2026-11-03": {
-   "pv": 760,
-   "visite": 730
+   "pv": 900,
+   "visite": 900
   },
   "2026-11-04": {
    "pv": 160,
@@ -93,60 +93,68 @@
    "visite": 20
   },
   "2026-11-07": {
-   "pv": 190,
-   "visite": 190
+   "pv": 100,
+   "visite": 100
   },
   "2026-11-08": {
    "pv": 70,
    "visite": 70
   },
   "2026-11-09": {
-   "pv": 140,
-   "visite": 140
+   "pv": 200,
+   "visite": 200
   },
   "2026-11-10": {
-   "pv": 740,
-   "visite": 740
+   "pv": 700,
+   "visite": 700
   },
   "2026-11-11": {
-   "pv": 1030,
-   "visite": 1030
+   "pv": 1700,
+   "visite": 1700
   },
   "2026-11-12": {
-   "pv": 940,
-   "visite": 940
+   "pv": 700,
+   "visite": 700
   },
   "2026-11-13": {
-   "pv": 1510,
-   "visite": 1510
+   "pv": 1700,
+   "visite": 1700
   },
   "2026-11-14": {
-   "pv": 2610,
-   "visite": 2610
+   "pv": 3100,
+   "visite": 3100
   },
   "2026-11-15": {
-   "pv": 1980,
-   "visite": 1960
+   "pv": 2000,
+   "visite": 2000
   },
   "2026-11-16": {
-   "pv": 1660,
-   "visite": 1660
+   "pv": 1600,
+   "visite": 1600
   },
   "2026-11-17": {
-   "pv": 1580,
-   "visite": 1580
+   "pv": 1200,
+   "visite": 1200
   },
   "2026-11-18": {
-   "pv": 1530,
-   "visite": 1530
+   "pv": 1200,
+   "visite": 1200
   },
   "2026-11-19": {
-   "pv": 480,
-   "visite": 480
+   "pv": 1100,
+   "visite": 1100
   },
   "2026-11-20": {
-   "pv": 280,
-   "visite": 280
+   "pv": 500,
+   "visite": 500
+  },
+  "2026-11-21": {
+   "pv": 400,
+   "visite": 400
+  },
+  "2026-11-22": {
+   "pv": 300,
+   "visite": 300
   }
  }
 }
