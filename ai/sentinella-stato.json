@@ -1,8 +1,8 @@
 {
   "ok": false,
-  "aggiornato": "2026-11-23T09:51:54.997Z",
+  "aggiornato": "2026-11-23T17:41:42.574Z",
   "base": "https://careauctions.co",
-  "run": "45150736579",
+  "run": "45230294970",
   "checks": [
     {
       "id": "icare_success_fee",
@@ -22,12 +22,12 @@
     {
       "id": "cervello_json",
       "ok": false,
-      "det": "HTTP 200 · età 0.9g"
+      "det": "HTTP 200 · età 0.1g"
     },
     {
       "id": "ai_knowledge",
       "ok": true,
-      "det": "HTTP 200 · 6563B"
+      "det": "HTTP 200 · 6772B"
     },
     {
       "id": "ai_education_stato",
@@ -42,22 +42,22 @@
     {
       "id": "traduzioni_stato",
       "ok": true,
-      "det": "HTTP 200 · età 1.0g"
+      "det": "HTTP 200 · età 0.3g"
     },
     {
       "id": "qa_stato",
       "ok": true,
-      "det": "R2 · 0C/0A · 0.3h"
+      "det": "R2 · 0C/0A · 0.5h"
     },
     {
       "id": "mail_stato",
       "ok": true,
-      "det": "R2 · età 0.3h"
+      "det": "R2 · età 0.1h"
     },
     {
       "id": "perf_stato",
       "ok": true,
-      "det": "R2 · p95 0ms · età 0.2g"
+      "det": "R2 · p95 0ms · età 0.1g"
     },
     {
       "id": "worker_ai_stato",
@@ -87,14 +87,14 @@
     {
       "id": "qa_workflow",
       "ok": true,
-      "det": "HTTP 200 · success"
+      "det": "HTTP 200 · in_progress"
     }
   ],
   "anomalie": [
     {
       "componente": "ai",
       "gravita": "high",
-      "oggetto": "cervello_json: HTTP 200 · età 0.9g"
+      "oggetto": "cervello_json: HTTP 200 · età 0.1g"
     }
   ]
 }
