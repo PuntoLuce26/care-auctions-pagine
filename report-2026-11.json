@@ -2,20 +2,20 @@
  "versione": "CAReIndex 2026-W47",
  "mese": "2026-11",
  "etichetta": "novembre 2026",
- "dataRiferimento": "2026-11-20",
- "generato": "2026-11-22T02:48:01.787Z",
+ "dataRiferimento": "2026-11-22",
+ "generato": "2026-11-23T02:01:10.524Z",
  "fonte": "PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia) · Agenzia delle Entrate — OMI",
  "metodo": "Aggiudicazioni: solo vendite aggiudicate con prezzo finale pubblicato, sommate per data di vendita; nessun prezzo ricostruito. Sconto: mediana del ribasso tra prezzo base e offerta minima pubblicati sul medesimo lotto. Esiti: stati dichiarati dal PVP.",
  "stimato": "nulla: ogni numero è un conteggio o un rapporto tra dati pubblicati",
  "copertura": {
-  "esitiNelMese": 2147,
+  "esitiNelMese": 2164,
   "tribunaliNelMese": 93,
-  "giorniConEsiti": 17,
+  "giorniConEsiti": 19,
   "tribunaliTotaliArchivio": 105,
   "coperturaArchivio": {
    "dal": "2026-09-29",
-   "al": "2026-11-20",
-   "giorni": 48
+   "al": "2026-11-22",
+   "giorni": 50
   },
   "esclusi": {
    "prezzoBase": 481,
@@ -23,29 +23,29 @@
    "senzaPrezzo": 0,
    "altreFonti": 13639
   },
-  "lottiAttivi": 321142,
+  "lottiAttivi": 320356,
   "esitiMercato": {
-   "aggiudicate": 2015,
-   "deserte": 28683,
-   "sospese": 730,
-   "nonPubblicato": 294141
+   "aggiudicate": 1927,
+   "deserte": 28382,
+   "sospese": 718,
+   "nonPubblicato": 293708
   },
   "scartoBaseMinimaNazionale": {
    "medio": 20.2,
    "mediano": 25,
-   "lotti": 301454
+   "lotti": 300729
   }
  },
  "kpi": {
-  "aggiudicazioni": 2147,
-  "incasso": 22496910,
-  "prezzoMedio": 10478,
+  "aggiudicazioni": 2164,
+  "incasso": 22561544,
+  "prezzoMedio": 10426,
   "tribunali": 93
  },
  "settimane": {
   "2026-W45": 742,
   "2026-W46": 738,
-  "2026-W47": 667
+  "2026-W47": 684
  },
  "topTribunali": [
   {
@@ -177,6 +177,14 @@
   {
    "giorno": "2026-11-20",
    "esiti": 166
+  },
+  {
+   "giorno": "2026-11-21",
+   "esiti": 16
+  },
+  {
+   "giorno": "2026-11-22",
+   "esiti": 1
   }
  ]
 }
