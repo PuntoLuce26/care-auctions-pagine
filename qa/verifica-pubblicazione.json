@@ -1,5 +1,5 @@
 {
- "generato": "2026-11-23T23:12:56.599Z",
+ "generato": "2026-11-24T05:46:16.870Z",
  "esito": "VERDE",
  "build": "main.4427226a.js",
  "controlli": [
@@ -51,7 +51,7 @@
   {
    "nome": "feed statistiche fresco (< 90 min)",
    "ok": true,
-   "dettaglio": "11 min · 319852 lotti · aggiornato 2026-11-23T23:01:36.076Z"
+   "dettaglio": "11 min · 319871 lotti · aggiornato 2026-11-24T05:34:47.110Z"
   },
   {
    "nome": "prerender allineato alla build servita",
