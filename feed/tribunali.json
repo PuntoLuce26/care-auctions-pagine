@@ -1,126 +1,126 @@
 {
  "schema": 2,
- "aggiornato": "2026-11-24T15:58:50.595Z",
- "copertura": "150 tribunali · 150 con almeno un lotto aperto · 17502 lotti aperti (lotti immobiliari con asta non ancora svolta)",
+ "aggiornato": "2026-11-24T16:09:36.568Z",
+ "copertura": "149 tribunali · 149 con almeno un lotto aperto · 17235 lotti aperti (lotti immobiliari con asta non ancora svolta)",
  "tribunali": [
   {
    "tribunale": "COSENZA",
    "slug": "cosenza",
-   "lottiAperti": 441,
+   "lottiAperti": 438,
    "regione": "Calabria"
   },
   {
    "tribunale": "ROMA",
    "slug": "roma",
-   "lottiAperti": 432,
+   "lottiAperti": 433,
    "regione": "Lazio"
-  },
-  {
-   "tribunale": "CAGLIARI",
-   "slug": "cagliari",
-   "lottiAperti": 370,
-   "regione": "Sardegna"
   },
   {
    "tribunale": "PERUGIA",
    "slug": "perugia",
-   "lottiAperti": 362,
+   "lottiAperti": 363,
    "regione": "Umbria"
+  },
+  {
+   "tribunale": "CAGLIARI",
+   "slug": "cagliari",
+   "lottiAperti": 356,
+   "regione": "Sardegna"
   },
   {
    "tribunale": "FERMO",
    "slug": "fermo",
-   "lottiAperti": 353,
+   "lottiAperti": 351,
    "regione": "Marche"
   },
   {
    "tribunale": "CATANIA",
    "slug": "catania",
-   "lottiAperti": 329,
+   "lottiAperti": 334,
    "regione": "Sicilia"
-  },
-  {
-   "tribunale": "TORINO",
-   "slug": "torino",
-   "lottiAperti": 324,
-   "regione": "Piemonte"
   },
   {
    "tribunale": "BARI",
    "slug": "bari",
-   "lottiAperti": 319,
+   "lottiAperti": 315,
    "regione": "Puglia"
+  },
+  {
+   "tribunale": "TORINO",
+   "slug": "torino",
+   "lottiAperti": 303,
+   "regione": "Piemonte"
+  },
+  {
+   "tribunale": "MACERATA",
+   "slug": "macerata",
+   "lottiAperti": 297,
+   "regione": "Marche"
+  },
+  {
+   "tribunale": "SIRACUSA",
+   "slug": "siracusa",
+   "lottiAperti": 296,
+   "regione": "Sicilia"
   },
   {
    "tribunale": "FOGGIA",
    "slug": "foggia",
-   "lottiAperti": 314,
+   "lottiAperti": 289,
    "regione": "Puglia"
   },
   {
    "tribunale": "AGRIGENTO",
    "slug": "agrigento",
-   "lottiAperti": 289,
+   "lottiAperti": 286,
    "regione": "Sicilia"
-  },
-  {
-   "tribunale": "SIRACUSA",
-   "slug": "siracusa",
-   "lottiAperti": 287,
-   "regione": "Sicilia"
-  },
-  {
-   "tribunale": "MACERATA",
-   "slug": "macerata",
-   "lottiAperti": 277,
-   "regione": "Marche"
   },
   {
    "tribunale": "TARANTO",
    "slug": "taranto",
-   "lottiAperti": 270,
+   "lottiAperti": 263,
    "regione": "Puglia"
   },
   {
    "tribunale": "FIRENZE",
    "slug": "firenze",
-   "lottiAperti": 266,
+   "lottiAperti": 262,
    "regione": "Toscana"
   },
   {
    "tribunale": "TIVOLI",
    "slug": "tivoli",
-   "lottiAperti": 247,
-   "regione": "Lazio"
-  },
-  {
-   "tribunale": "ALESSANDRIA",
-   "slug": "alessandria",
    "lottiAperti": 245,
-   "regione": "Piemonte"
+   "regione": "Lazio"
   },
   {
    "tribunale": "ANCONA",
    "slug": "ancona",
-   "lottiAperti": 238,
+   "lottiAperti": 243,
    "regione": "Marche"
   },
   {
-   "tribunale": "MILANO",
-   "slug": "milano",
+   "tribunale": "ALESSANDRIA",
+   "slug": "alessandria",
    "lottiAperti": 226,
-   "regione": "Lombardia"
+   "regione": "Piemonte"
   },
   {
    "tribunale": "LECCE",
    "slug": "lecce",
-   "lottiAperti": 211,
+   "lottiAperti": 220,
    "regione": "Puglia"
+  },
+  {
+   "tribunale": "MILANO",
+   "slug": "milano",
+   "lottiAperti": 216,
+   "regione": "Lombardia"
   },
   {
    "tribunale": "ASTI",
    "slug": "asti",
-   "lottiAperti": 203,
+   "lottiAperti": 202,
    "regione": "Piemonte"
   },
   {
@@ -132,14 +132,8 @@
   {
    "tribunale": "IVREA",
    "slug": "ivrea",
-   "lottiAperti": 200,
+   "lottiAperti": 194,
    "regione": "Piemonte"
-  },
-  {
-   "tribunale": "PISA",
-   "slug": "pisa",
-   "lottiAperti": 191,
-   "regione": "Toscana"
   },
   {
    "tribunale": "TEMPIO PAUSANIA",
@@ -154,45 +148,57 @@
    "regione": "Lombardia"
   },
   {
-   "tribunale": "NAPOLI NORD IN AVERSA",
-   "slug": "napoli-nord-in-aversa",
-   "lottiAperti": 187
-  },
-  {
    "tribunale": "MONZA",
    "slug": "monza",
-   "lottiAperti": 185,
+   "lottiAperti": 186,
+   "regione": "Lombardia"
+  },
+  {
+   "tribunale": "PISA",
+   "slug": "pisa",
+   "lottiAperti": 186,
+   "regione": "Toscana"
+  },
+  {
+   "tribunale": "NAPOLI NORD IN AVERSA",
+   "slug": "napoli-nord-in-aversa",
+   "lottiAperti": 185
+  },
+  {
+   "tribunale": "PESCARA",
+   "slug": "pescara",
+   "lottiAperti": 181,
+   "regione": "Abruzzo"
+  },
+  {
+   "tribunale": "SPOLETO",
+   "slug": "spoleto",
+   "lottiAperti": 181,
+   "regione": "Umbria"
+  },
+  {
+   "tribunale": "VITERBO",
+   "slug": "viterbo",
+   "lottiAperti": 179,
+   "regione": "Lazio"
+  },
+  {
+   "tribunale": "BRESCIA",
+   "slug": "brescia",
+   "lottiAperti": 174,
    "regione": "Lombardia"
   },
   {
    "tribunale": "RAGUSA",
    "slug": "ragusa",
-   "lottiAperti": 183,
+   "lottiAperti": 173,
    "regione": "Sicilia"
   },
   {
-   "tribunale": "SPOLETO",
-   "slug": "spoleto",
-   "lottiAperti": 182,
-   "regione": "Umbria"
-  },
-  {
-   "tribunale": "LATINA",
-   "slug": "latina",
-   "lottiAperti": 176,
-   "regione": "Lazio"
-  },
-  {
-   "tribunale": "VITERBO",
-   "slug": "viterbo",
-   "lottiAperti": 176,
-   "regione": "Lazio"
-  },
-  {
-   "tribunale": "PESCARA",
-   "slug": "pescara",
-   "lottiAperti": 175,
-   "regione": "Abruzzo"
+   "tribunale": "SIENA",
+   "slug": "siena",
+   "lottiAperti": 173,
+   "regione": "Toscana"
   },
   {
    "tribunale": "CUNEO",
@@ -201,22 +207,16 @@
    "regione": "Piemonte"
   },
   {
-   "tribunale": "SIENA",
-   "slug": "siena",
-   "lottiAperti": 172,
-   "regione": "Toscana"
+   "tribunale": "LATINA",
+   "slug": "latina",
+   "lottiAperti": 168,
+   "regione": "Lazio"
   },
   {
    "tribunale": "MESSINA",
    "slug": "messina",
-   "lottiAperti": 169,
+   "lottiAperti": 168,
    "regione": "Sicilia"
-  },
-  {
-   "tribunale": "PAVIA",
-   "slug": "pavia",
-   "lottiAperti": 169,
-   "regione": "Lombardia"
   },
   {
    "tribunale": "BENEVENTO",
@@ -227,56 +227,56 @@
   {
    "tribunale": "CATANZARO",
    "slug": "catanzaro",
-   "lottiAperti": 165,
+   "lottiAperti": 162,
    "regione": "Calabria"
-  },
-  {
-   "tribunale": "BRESCIA",
-   "slug": "brescia",
-   "lottiAperti": 163,
-   "regione": "Lombardia"
   },
   {
    "tribunale": "POTENZA",
    "slug": "potenza",
-   "lottiAperti": 163,
+   "lottiAperti": 161,
    "regione": "Basilicata"
   },
   {
    "tribunale": "CALTAGIRONE",
    "slug": "caltagirone",
-   "lottiAperti": 158,
+   "lottiAperti": 156,
    "regione": "Sicilia"
+  },
+  {
+   "tribunale": "GENOVA",
+   "slug": "genova",
+   "lottiAperti": 156,
+   "regione": "Liguria"
+  },
+  {
+   "tribunale": "PAVIA",
+   "slug": "pavia",
+   "lottiAperti": 155,
+   "regione": "Lombardia"
+  },
+  {
+   "tribunale": "VERBANIA",
+   "slug": "verbania",
+   "lottiAperti": 155,
+   "regione": "Piemonte"
   },
   {
    "tribunale": "NAPOLI",
    "slug": "napoli",
-   "lottiAperti": 158,
+   "lottiAperti": 154,
    "regione": "Campania"
   },
   {
    "tribunale": "PALERMO",
    "slug": "palermo",
-   "lottiAperti": 156,
+   "lottiAperti": 151,
    "regione": "Sicilia"
-  },
-  {
-   "tribunale": "VERBANIA",
-   "slug": "verbania",
-   "lottiAperti": 156,
-   "regione": "Piemonte"
   },
   {
    "tribunale": "SALERNO",
    "slug": "salerno",
-   "lottiAperti": 153,
+   "lottiAperti": 146,
    "regione": "Campania"
-  },
-  {
-   "tribunale": "GENOVA",
-   "slug": "genova",
-   "lottiAperti": 152,
-   "regione": "Liguria"
   },
   {
    "tribunale": "PISTOIA",
@@ -287,20 +287,25 @@
   {
    "tribunale": "AVELLINO",
    "slug": "avellino",
-   "lottiAperti": 141,
+   "lottiAperti": 142,
    "regione": "Campania"
+  },
+  {
+   "tribunale": "FORLI'",
+   "slug": "forli",
+   "lottiAperti": 137
   },
   {
    "tribunale": "AREZZO",
    "slug": "arezzo",
-   "lottiAperti": 139,
+   "lottiAperti": 136,
    "regione": "Toscana"
   },
   {
-   "tribunale": "PALMI",
-   "slug": "palmi",
-   "lottiAperti": 135,
-   "regione": "Calabria"
+   "tribunale": "MATERA",
+   "slug": "matera",
+   "lottiAperti": 134,
+   "regione": "Basilicata"
   },
   {
    "tribunale": "TERMINI IMERESE",
@@ -311,103 +316,98 @@
   {
    "tribunale": "VICENZA",
    "slug": "vicenza",
-   "lottiAperti": 134,
+   "lottiAperti": 133,
    "regione": "Veneto"
   },
   {
-   "tribunale": "ENNA",
-   "slug": "enna",
+   "tribunale": "PALMI",
+   "slug": "palmi",
    "lottiAperti": 132,
-   "regione": "Sicilia"
-  },
-  {
-   "tribunale": "MODENA",
-   "slug": "modena",
-   "lottiAperti": 130,
-   "regione": "Emilia-Romagna"
-  },
-  {
-   "tribunale": "MATERA",
-   "slug": "matera",
-   "lottiAperti": 126,
-   "regione": "Basilicata"
-  },
-  {
-   "tribunale": "CREMONA",
-   "slug": "cremona",
-   "lottiAperti": 125,
-   "regione": "Lombardia"
-  },
-  {
-   "tribunale": "TERAMO",
-   "slug": "teramo",
-   "lottiAperti": 125,
-   "regione": "Abruzzo"
-  },
-  {
-   "tribunale": "FORLI'",
-   "slug": "forli",
-   "lottiAperti": 124
+   "regione": "Calabria"
   },
   {
    "tribunale": "FROSINONE",
    "slug": "frosinone",
-   "lottiAperti": 120,
+   "lottiAperti": 128,
    "regione": "Lazio"
+  },
+  {
+   "tribunale": "TERAMO",
+   "slug": "teramo",
+   "lottiAperti": 128,
+   "regione": "Abruzzo"
+  },
+  {
+   "tribunale": "CREMONA",
+   "slug": "cremona",
+   "lottiAperti": 124,
+   "regione": "Lombardia"
+  },
+  {
+   "tribunale": "MODENA",
+   "slug": "modena",
+   "lottiAperti": 121,
+   "regione": "Emilia-Romagna"
+  },
+  {
+   "tribunale": "MANTOVA",
+   "slug": "mantova",
+   "lottiAperti": 119,
+   "regione": "Lombardia"
+  },
+  {
+   "tribunale": "ENNA",
+   "slug": "enna",
+   "lottiAperti": 115,
+   "regione": "Sicilia"
   },
   {
    "tribunale": "PADOVA",
    "slug": "padova",
-   "lottiAperti": 120,
+   "lottiAperti": 114,
    "regione": "Veneto"
   },
   {
    "tribunale": "CHIETI",
    "slug": "chieti",
-   "lottiAperti": 113,
+   "lottiAperti": 112,
    "regione": "Abruzzo"
   },
   {
    "tribunale": "TRAPANI",
    "slug": "trapani",
-   "lottiAperti": 113,
-   "regione": "Sicilia"
-  },
-  {
-   "tribunale": "ROVIGO",
-   "slug": "rovigo",
-   "lottiAperti": 112,
-   "regione": "Veneto"
-  },
-  {
-   "tribunale": "MANTOVA",
-   "slug": "mantova",
    "lottiAperti": 110,
-   "regione": "Lombardia"
-  },
-  {
-   "tribunale": "GROSSETO",
-   "slug": "grosseto",
-   "lottiAperti": 109,
-   "regione": "Toscana"
+   "regione": "Sicilia"
   },
   {
    "tribunale": "VERCELLI",
    "slug": "vercelli",
-   "lottiAperti": 107,
+   "lottiAperti": 109,
    "regione": "Piemonte"
   },
   {
-   "tribunale": "CASSINO",
-   "slug": "cassino",
-   "lottiAperti": 100,
-   "regione": "Lazio"
+   "tribunale": "ROVIGO",
+   "slug": "rovigo",
+   "lottiAperti": 106,
+   "regione": "Veneto"
+  },
+  {
+   "tribunale": "GROSSETO",
+   "slug": "grosseto",
+   "lottiAperti": 101,
+   "regione": "Toscana"
   },
   {
    "tribunale": "SANTA MARIA CAPUA VETERE",
    "slug": "santa-maria-capua-vetere",
-   "lottiAperti": 100,
+   "lottiAperti": 101,
    "regione": "Campania"
+  },
+  {
+   "tribunale": "NOVARA",
+   "slug": "novara",
+   "lottiAperti": 98,
+   "regione": "Piemonte"
   },
   {
    "tribunale": "CIVITAVECCHIA",
@@ -416,52 +416,22 @@
    "regione": "Lazio"
   },
   {
-   "tribunale": "L'AQUILA",
-   "slug": "l-aquila",
-   "lottiAperti": 97,
-   "regione": "Abruzzo"
-  },
-  {
-   "tribunale": "NOVARA",
-   "slug": "novara",
-   "lottiAperti": 97,
-   "regione": "Piemonte"
-  },
-  {
    "tribunale": "BOLOGNA",
    "slug": "bologna",
    "lottiAperti": 92,
    "regione": "Emilia-Romagna"
   },
   {
-   "tribunale": "TREVISO",
-   "slug": "treviso",
-   "lottiAperti": 89,
-   "regione": "Veneto"
-  },
-  {
-   "tribunale": "URBINO",
-   "slug": "urbino",
-   "lottiAperti": 88,
-   "regione": "Marche"
-  },
-  {
    "tribunale": "LAMEZIA TERME",
    "slug": "lamezia-terme",
-   "lottiAperti": 87,
+   "lottiAperti": 90,
    "regione": "Calabria"
   },
   {
-   "tribunale": "REGGIO CALABRIA",
-   "slug": "reggio-calabria",
-   "lottiAperti": 86,
-   "regione": "Calabria"
-  },
-  {
-   "tribunale": "AVEZZANO",
-   "slug": "avezzano",
-   "lottiAperti": 85,
-   "regione": "Abruzzo"
+   "tribunale": "CASSINO",
+   "slug": "cassino",
+   "lottiAperti": 89,
+   "regione": "Lazio"
   },
   {
    "tribunale": "PIACENZA",
@@ -472,14 +442,20 @@
   {
    "tribunale": "RIETI",
    "slug": "rieti",
-   "lottiAperti": 84,
+   "lottiAperti": 85,
    "regione": "Lazio"
   },
   {
-   "tribunale": "VERONA",
-   "slug": "verona",
+   "tribunale": "AVEZZANO",
+   "slug": "avezzano",
    "lottiAperti": 84,
-   "regione": "Veneto"
+   "regione": "Abruzzo"
+  },
+  {
+   "tribunale": "REGGIO CALABRIA",
+   "slug": "reggio-calabria",
+   "lottiAperti": 84,
+   "regione": "Calabria"
   },
   {
    "tribunale": "TERNI",
@@ -494,52 +470,64 @@
    "regione": "Veneto"
   },
   {
-   "tribunale": "NOCERA INFERIORE",
-   "slug": "nocera-inferiore",
-   "lottiAperti": 80,
-   "regione": "Campania"
+   "tribunale": "VERONA",
+   "slug": "verona",
+   "lottiAperti": 83,
+   "regione": "Veneto"
   },
   {
-   "tribunale": "LAGONEGRO",
-   "slug": "lagonegro",
-   "lottiAperti": 79,
-   "regione": "Basilicata"
+   "tribunale": "URBINO",
+   "slug": "urbino",
+   "lottiAperti": 82,
+   "regione": "Marche"
   },
   {
    "tribunale": "PESARO",
    "slug": "pesaro",
-   "lottiAperti": 79,
-   "regione": "Marche"
-  },
-  {
-   "tribunale": "TRANI",
-   "slug": "trani",
-   "lottiAperti": 79,
-   "regione": "Puglia"
-  },
-  {
-   "tribunale": "ASCOLI PICENO",
-   "slug": "ascoli-piceno",
-   "lottiAperti": 78,
+   "lottiAperti": 81,
    "regione": "Marche"
   },
   {
    "tribunale": "BUSTO ARSIZIO",
    "slug": "busto-arsizio",
-   "lottiAperti": 77,
+   "lottiAperti": 78,
    "regione": "Lombardia"
   },
   {
    "tribunale": "LOCRI",
    "slug": "locri",
-   "lottiAperti": 77,
+   "lottiAperti": 78,
    "regione": "Calabria"
   },
   {
-   "tribunale": "GELA",
-   "slug": "gela",
+   "tribunale": "NUORO",
+   "slug": "nuoro",
+   "lottiAperti": 77,
+   "regione": "Sardegna"
+  },
+  {
+   "tribunale": "TRANI",
+   "slug": "trani",
+   "lottiAperti": 77,
+   "regione": "Puglia"
+  },
+  {
+   "tribunale": "NOCERA INFERIORE",
+   "slug": "nocera-inferiore",
+   "lottiAperti": 76,
+   "regione": "Campania"
+  },
+  {
+   "tribunale": "TREVISO",
+   "slug": "treviso",
+   "lottiAperti": 75,
+   "regione": "Veneto"
+  },
+  {
+   "tribunale": "ASCOLI PICENO",
+   "slug": "ascoli-piceno",
    "lottiAperti": 74,
-   "regione": "Sicilia"
+   "regione": "Marche"
   },
   {
    "tribunale": "LIVORNO",
@@ -548,46 +536,64 @@
    "regione": "Toscana"
   },
   {
+   "tribunale": "GELA",
+   "slug": "gela",
+   "lottiAperti": 72,
+   "regione": "Sicilia"
+  },
+  {
    "tribunale": "LODI",
    "slug": "lodi",
    "lottiAperti": 72,
    "regione": "Lombardia"
   },
   {
-   "tribunale": "NUORO",
-   "slug": "nuoro",
+   "tribunale": "LAGONEGRO",
+   "slug": "lagonegro",
    "lottiAperti": 71,
-   "regione": "Sardegna"
+   "regione": "Basilicata"
+  },
+  {
+   "tribunale": "CALTANISSETTA",
+   "slug": "caltanissetta",
+   "lottiAperti": 69,
+   "regione": "Sicilia"
   },
   {
    "tribunale": "CAMPOBASSO",
    "slug": "campobasso",
-   "lottiAperti": 70,
+   "lottiAperti": 69,
    "regione": "Molise"
   },
   {
    "tribunale": "BRINDISI",
    "slug": "brindisi",
-   "lottiAperti": 69,
-   "regione": "Puglia"
-  },
-  {
-   "tribunale": "CALTANISSETTA",
-   "slug": "caltanissetta",
    "lottiAperti": 68,
-   "regione": "Sicilia"
+   "regione": "Puglia"
   },
   {
    "tribunale": "LUCCA",
    "slug": "lucca",
-   "lottiAperti": 68,
+   "lottiAperti": 67,
    "regione": "Toscana"
   },
   {
    "tribunale": "CASTROVILLARI",
    "slug": "castrovillari",
-   "lottiAperti": 67,
+   "lottiAperti": 66,
    "regione": "Calabria"
+  },
+  {
+   "tribunale": "BARCELLONA POZZO DI GOTTO",
+   "slug": "barcellona-pozzo-di-gotto",
+   "lottiAperti": 64,
+   "regione": "Sicilia"
+  },
+  {
+   "tribunale": "FERRARA",
+   "slug": "ferrara",
+   "lottiAperti": 64,
+   "regione": "Emilia-Romagna"
   },
   {
    "tribunale": "LECCO",
@@ -596,16 +602,10 @@
    "regione": "Lombardia"
   },
   {
-   "tribunale": "BARCELLONA POZZO DI GOTTO",
-   "slug": "barcellona-pozzo-di-gotto",
+   "tribunale": "SASSARI",
+   "slug": "sassari",
    "lottiAperti": 63,
-   "regione": "Sicilia"
-  },
-  {
-   "tribunale": "PATTI",
-   "slug": "patti",
-   "lottiAperti": 63,
-   "regione": "Sicilia"
+   "regione": "Sardegna"
   },
   {
    "tribunale": "CROTONE",
@@ -614,39 +614,21 @@
    "regione": "Calabria"
   },
   {
-   "tribunale": "FERRARA",
-   "slug": "ferrara",
-   "lottiAperti": 61,
-   "regione": "Emilia-Romagna"
-  },
-  {
-   "tribunale": "RAVENNA",
-   "slug": "ravenna",
-   "lottiAperti": 61,
-   "regione": "Emilia-Romagna"
-  },
-  {
-   "tribunale": "SULMONA",
-   "slug": "sulmona",
-   "lottiAperti": 61,
-   "regione": "Abruzzo"
+   "tribunale": "PATTI",
+   "slug": "patti",
+   "lottiAperti": 62,
+   "regione": "Sicilia"
   },
   {
    "tribunale": "VARESE",
    "slug": "varese",
-   "lottiAperti": 61,
+   "lottiAperti": 62,
    "regione": "Lombardia"
-  },
-  {
-   "tribunale": "SASSARI",
-   "slug": "sassari",
-   "lottiAperti": 60,
-   "regione": "Sardegna"
   },
   {
    "tribunale": "COMO",
    "slug": "como",
-   "lottiAperti": 58,
+   "lottiAperti": 57,
    "regione": "Lombardia"
   },
   {
@@ -656,22 +638,16 @@
    "regione": "Friuli-Venezia Giulia"
   },
   {
+   "tribunale": "SCIACCA",
+   "slug": "sciacca",
+   "lottiAperti": 50,
+   "regione": "Sicilia"
+  },
+  {
    "tribunale": "NOLA",
    "slug": "nola",
-   "lottiAperti": 55,
+   "lottiAperti": 49,
    "regione": "Campania"
-  },
-  {
-   "tribunale": "ORISTANO",
-   "slug": "oristano",
-   "lottiAperti": 53,
-   "regione": "Sardegna"
-  },
-  {
-   "tribunale": "TRENTO",
-   "slug": "trento",
-   "lottiAperti": 51,
-   "regione": "Trentino-Alto Adige"
   },
   {
    "tribunale": "RIMINI",
@@ -680,10 +656,10 @@
    "regione": "Emilia-Romagna"
   },
   {
-   "tribunale": "SCIACCA",
-   "slug": "sciacca",
-   "lottiAperti": 49,
-   "regione": "Sicilia"
+   "tribunale": "ORISTANO",
+   "slug": "oristano",
+   "lottiAperti": 48,
+   "regione": "Sardegna"
   },
   {
    "tribunale": "SONDRIO",
@@ -692,10 +668,28 @@
    "regione": "Lombardia"
   },
   {
-   "tribunale": "SAVONA",
-   "slug": "savona",
+   "tribunale": "TRENTO",
+   "slug": "trento",
+   "lottiAperti": 48,
+   "regione": "Trentino-Alto Adige"
+  },
+  {
+   "tribunale": "PAOLA",
+   "slug": "paola",
    "lottiAperti": 47,
-   "regione": "Liguria"
+   "regione": "Calabria"
+  },
+  {
+   "tribunale": "RAVENNA",
+   "slug": "ravenna",
+   "lottiAperti": 47,
+   "regione": "Emilia-Romagna"
+  },
+  {
+   "tribunale": "SULMONA",
+   "slug": "sulmona",
+   "lottiAperti": 47,
+   "regione": "Abruzzo"
   },
   {
    "tribunale": "VIBO VALENTIA",
@@ -704,21 +698,9 @@
    "regione": "Calabria"
   },
   {
-   "tribunale": "PAOLA",
-   "slug": "paola",
+   "tribunale": "SAVONA",
+   "slug": "savona",
    "lottiAperti": 46,
-   "regione": "Calabria"
-  },
-  {
-   "tribunale": "VASTO",
-   "slug": "vasto",
-   "lottiAperti": 45,
-   "regione": "Abruzzo"
-  },
-  {
-   "tribunale": "IMPERIA",
-   "slug": "imperia",
-   "lottiAperti": 44,
    "regione": "Liguria"
   },
   {
@@ -728,22 +710,28 @@
    "regione": "Abruzzo"
   },
   {
+   "tribunale": "VASTO",
+   "slug": "vasto",
+   "lottiAperti": 44,
+   "regione": "Abruzzo"
+  },
+  {
    "tribunale": "PORDENONE",
    "slug": "pordenone",
-   "lottiAperti": 44,
+   "lottiAperti": 43,
    "regione": "Friuli-Venezia Giulia"
+  },
+  {
+   "tribunale": "IMPERIA",
+   "slug": "imperia",
+   "lottiAperti": 42,
+   "regione": "Liguria"
   },
   {
    "tribunale": "VALLO DELLA LUCANIA",
    "slug": "vallo-della-lucania",
    "lottiAperti": 41,
    "regione": "Campania"
-  },
-  {
-   "tribunale": "ISERNIA",
-   "slug": "isernia",
-   "lottiAperti": 39,
-   "regione": "Molise"
   },
   {
    "tribunale": "MARSALA",
@@ -758,6 +746,18 @@
    "regione": "Piemonte"
   },
   {
+   "tribunale": "ISERNIA",
+   "slug": "isernia",
+   "lottiAperti": 36,
+   "regione": "Molise"
+  },
+  {
+   "tribunale": "L'AQUILA",
+   "slug": "l-aquila",
+   "lottiAperti": 36,
+   "regione": "Abruzzo"
+  },
+  {
    "tribunale": "LA SPEZIA",
    "slug": "la-spezia",
    "lottiAperti": 36,
@@ -766,14 +766,8 @@
   {
    "tribunale": "PRATO",
    "slug": "prato",
-   "lottiAperti": 36,
+   "lottiAperti": 34,
    "regione": "Toscana"
-  },
-  {
-   "tribunale": "BELLUNO",
-   "slug": "belluno",
-   "lottiAperti": 35,
-   "regione": "Veneto"
   },
   {
    "tribunale": "ENNA EX TRIBUNALE DI NICOSIA",
@@ -790,8 +784,20 @@
   {
    "tribunale": "REGGIO EMILIA",
    "slug": "reggio-emilia",
-   "lottiAperti": 31,
+   "lottiAperti": 30,
    "regione": "Emilia-Romagna"
+  },
+  {
+   "tribunale": "ROVERETO",
+   "slug": "rovereto",
+   "lottiAperti": 29,
+   "regione": "Trentino-Alto Adige"
+  },
+  {
+   "tribunale": "BELLUNO",
+   "slug": "belluno",
+   "lottiAperti": 28,
+   "regione": "Veneto"
   },
   {
    "tribunale": "AOSTA",
@@ -800,9 +806,15 @@
    "regione": "Valle d'Aosta"
   },
   {
+   "tribunale": "MASSA",
+   "slug": "massa",
+   "lottiAperti": 26,
+   "regione": "Toscana"
+  },
+  {
    "tribunale": "PARMA",
    "slug": "parma",
-   "lottiAperti": 24,
+   "lottiAperti": 25,
    "regione": "Emilia-Romagna"
   },
   {
@@ -818,22 +830,10 @@
    "regione": "Campania"
   },
   {
-   "tribunale": "ROVERETO",
-   "slug": "rovereto",
-   "lottiAperti": 19,
-   "regione": "Trentino-Alto Adige"
-  },
-  {
    "tribunale": "BOLZANO",
    "slug": "bolzano",
    "lottiAperti": 18,
    "regione": "Trentino-Alto Adige"
-  },
-  {
-   "tribunale": "MASSA",
-   "slug": "massa",
-   "lottiAperti": 18,
-   "regione": "Toscana"
   },
   {
    "tribunale": "POTENZA EX TRIBUNALE DI MELFI",
@@ -842,16 +842,16 @@
    "regione": "Basilicata"
   },
   {
-   "tribunale": "GORIZIA",
-   "slug": "gorizia",
-   "lottiAperti": 15,
-   "regione": "Friuli-Venezia Giulia"
-  },
-  {
    "tribunale": "LANUSEI",
    "slug": "lanusei",
    "lottiAperti": 14,
    "regione": "Sardegna"
+  },
+  {
+   "tribunale": "GORIZIA",
+   "slug": "gorizia",
+   "lottiAperti": 12,
+   "regione": "Friuli-Venezia Giulia"
   },
   {
    "tribunale": "AVELLINO EX TRIBUNALE DI SANT'ANGELO DEI LOMBARDI",
@@ -862,7 +862,7 @@
   {
    "tribunale": "PAVIA EX TRIBUNALE DI VIGEVANO",
    "slug": "pavia-ex-tribunale-di-vigevano",
-   "lottiAperti": 9,
+   "lottiAperti": 8,
    "regione": "Lombardia"
   },
   {
@@ -877,21 +877,15 @@
    "regione": "Friuli-Venezia Giulia"
   },
   {
-   "tribunale": "CORTE D'APPELLO - BOLOGNA",
-   "slug": "corte-d-appello-bologna",
-   "lottiAperti": 3
-  },
-  {
    "tribunale": "TRIESTE",
    "slug": "trieste",
    "lottiAperti": 3,
    "regione": "Friuli-Venezia Giulia"
   },
   {
-   "tribunale": "FOGGIA EX TRIBUNALE DI LUCERA",
-   "slug": "foggia-ex-tribunale-di-lucera",
-   "lottiAperti": 2,
-   "regione": "Puglia"
+   "tribunale": "CORTE D'APPELLO - BOLOGNA",
+   "slug": "corte-d-appello-bologna",
+   "lottiAperti": 2
   },
   {
    "tribunale": "BENEVENTO EX TRIBUNALE DI ARIANO IRPINO",
