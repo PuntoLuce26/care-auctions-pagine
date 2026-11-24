@@ -1,21 +1,21 @@
 {
- "versione": "CAReIndex 2026-W47",
+ "versione": "CAReIndex 2026-W48",
  "mese": "2026-11",
  "etichetta": "novembre 2026",
- "dataRiferimento": "2026-11-22",
- "generato": "2026-11-23T02:55:06.046Z",
+ "dataRiferimento": "2026-11-23",
+ "generato": "2026-11-24T02:11:39.958Z",
  "fonte": "PVP — Portale delle Vendite Pubbliche (Ministero della Giustizia) · Agenzia delle Entrate — OMI",
  "metodo": "Aggiudicazioni: solo vendite aggiudicate con prezzo finale pubblicato, sommate per data di vendita; nessun prezzo ricostruito. Sconto: mediana del ribasso tra prezzo base e offerta minima pubblicati sul medesimo lotto. Esiti: stati dichiarati dal PVP.",
  "stimato": "nulla: ogni numero è un conteggio o un rapporto tra dati pubblicati",
  "copertura": {
-  "esitiNelMese": 2164,
+  "esitiNelMese": 2168,
   "tribunaliNelMese": 93,
-  "giorniConEsiti": 19,
+  "giorniConEsiti": 20,
   "tribunaliTotaliArchivio": 105,
   "coperturaArchivio": {
    "dal": "2026-09-29",
-   "al": "2026-11-22",
-   "giorni": 50
+   "al": "2026-11-23",
+   "giorni": 51
   },
   "esclusi": {
    "prezzoBase": 481,
@@ -23,29 +23,30 @@
    "senzaPrezzo": 0,
    "altreFonti": 13639
   },
-  "lottiAttivi": 320356,
+  "lottiAttivi": 319871,
   "esitiMercato": {
-   "aggiudicate": 1927,
-   "deserte": 28382,
-   "sospese": 718,
-   "nonPubblicato": 293708
+   "aggiudicate": 1931,
+   "deserte": 28161,
+   "sospese": 706,
+   "nonPubblicato": 293176
   },
   "scartoBaseMinimaNazionale": {
    "medio": 20.2,
    "mediano": 25,
-   "lotti": 300729
+   "lotti": 300252
   }
  },
  "kpi": {
-  "aggiudicazioni": 2164,
-  "incasso": 22561544,
-  "prezzoMedio": 10426,
+  "aggiudicazioni": 2168,
+  "incasso": 22591174,
+  "prezzoMedio": 10420,
   "tribunali": 93
  },
  "settimane": {
   "2026-W45": 742,
   "2026-W46": 738,
-  "2026-W47": 684
+  "2026-W47": 684,
+  "2026-W48": 4
  },
  "topTribunali": [
   {
@@ -68,9 +69,9 @@
   },
   {
    "tribunale": "VARESE",
-   "esiti": 18,
-   "incasso": 1643983,
-   "medio": 91332
+   "esiti": 19,
+   "incasso": 1645563,
+   "medio": 86609
   },
   {
    "tribunale": "PISA",
@@ -185,6 +186,10 @@
   {
    "giorno": "2026-11-22",
    "esiti": 1
+  },
+  {
+   "giorno": "2026-11-23",
+   "esiti": 4
   }
  ]
 }
