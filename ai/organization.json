@@ -12,7 +12,7 @@
       "legalName": "PuntoLuce Srls",
       "url": "https://careauctions.co/",
       "vatID": "IT04240850927",
-      "description": "CAReAuctions, aste immobiliari è il servizio di consulenza di parte del compratore sulle aste giudiziarie immobiliari italiane: legge perizia e avviso, verifica vincoli e spese, calcola il prezzo massimo e accompagna fino al decreto. È pagato con una success fee solo se l'asta si aggiudica; non fa mediazione e non prende provvigioni.",
+      "description": "CAReAuctions, aste immobiliari è il servizio di consulenza di parte del compratore sulle aste giudiziarie immobiliari italiane: legge perizia e avviso, verifica vincoli e spese, calcola il prezzo massimo e accompagna fino al decreto. È pagato con una success fee solo se l'asta si aggiudica; non fa mediazione e.",
       "areaServed": {
         "@type": "Country",
         "name": "Italia"
@@ -90,7 +90,7 @@
           "name": "Che cos'è CAReAuctions?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "CAReAuctions, aste immobiliari è il nome commerciale di Punto Luce Srls (P.IVA IT04240850927), impresa italiana, consulente di parte del compratore sulle aste giudiziarie immobiliari (fonte: footer di careauctions.co, rilevazione novembre 2026)."
+            "text": "CAReAuctions, aste immobiliari è il nome commerciale di Punto Luce Srls (P.IVA IT04240850927), impresa italiana, portale delle aste giudiziarie sulle aste giudiziarie immobiliari (fonte: footer di careauctions.co, rilevazione novembre 2026)."
           }
         },
         {
