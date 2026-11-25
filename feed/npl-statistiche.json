@@ -3,43 +3,43 @@
   "canary": "care-canary-d2c32afaa5d5",
   "canaryNota": "valore di riconoscimento della copia dei dati",
   "titolo": "NPL's — crediti in sofferenza e crediti in procedura (dati veri dal PVP)",
-  "generatoIl": "2026-11-24T15:00:13.427Z",
-  "aggiornato": "2026-11-24",
+  "generatoIl": "2026-11-25T14:38:15.759Z",
+  "aggiornato": "2026-11-25",
   "fonte": "PVP — Portale delle Vendite Pubbliche, Ministero della Giustizia (pvp.giustizia.it)",
   "query": "tipoLotto=VALORI-CREDITI",
   "licenza": "Dati pubblici del PVP (Portale delle Vendite Pubbliche, Ministero della Giustizia). Riuso consentito per finalità informative con citazione della fonte; nessun dato personale oltre a quanto già pubblico nel bando.",
   "metodo": "Classificazione conservativa dal testo pubblico del bando: NPL/sofferenza solo se dichiarati; crediti fiscali e titoli/quote esclusi (classi diverse, non NPL). Valore nominale solo se scritto nel bando.",
-  "totale": 260,
-  "dichiaratoPVP": 1099,
+  "totale": 259,
+  "dichiaratoPVP": 1098,
   "esclusi": {
    "credito-fiscale": 384,
-   "titoli-e-quote": 435,
-   "non-credito": 20
+   "non-credito": 21,
+   "titoli-e-quote": 434
   },
   "copertura": {
    "importo": {
     "con": 46,
-    "su": 260,
-    "pct": 17.7
+    "su": 259,
+    "pct": 17.8
    },
    "regione": {
     "con": 192,
-    "su": 260,
-    "pct": 73.8
+    "su": 259,
+    "pct": 74.1
    },
    "tribunale": {
-    "con": 258,
-    "su": 260,
+    "con": 257,
+    "su": 259,
     "pct": 99.2
    }
   },
   "perTipo": {
-   "credito": 256,
+   "credito": 255,
    "NPL": 4
   },
   "perStato": {
-   "conclusa-esito-non-pubblicato": 215,
-   "in-programma": 23,
+   "conclusa-esito-non-pubblicato": 217,
+   "in-programma": 20,
    "deserta": 17,
    "aggiudicata": 5
   },
@@ -52,16 +52,16 @@
   },
   "fascePrezzoBase": {
    "10k-50k": 84,
-   "fino-10k": 70,
+   "fino-10k": 69,
    "50k-250k": 33,
    "250k-1M": 29,
    "oltre-1M": 23
   },
   "regioni": 16,
   "province": 40,
-  "sommaPrezzoBase": 377567055,
+  "sommaPrezzoBase": 377562055,
   "freschezza": {
-   "ultimaRaccolta": "2026-11-24",
+   "ultimaRaccolta": "2026-11-25",
    "dataLottoPiuRecente": "2027-01-14",
    "dataLottoPiuVecchio": "2024-01-12"
   },
