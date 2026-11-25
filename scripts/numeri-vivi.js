@@ -59,7 +59,7 @@ const pagine = {};
 pagine['care-index'] = {
   numeri: {
     lotti: n(stat.totale, 'lotti', NOME_PVP, stat.aggiornato || null, OK),
-    prezzoMedioImm: n(stat.prezzoMedioImm, '€', NOME_PVP, stat.aggiornato || null, OK, { nota: 'media dei prezzi base d asta del catalogo' }),
+    prezzoMedioImm: n(stat.prezzoMedioImm, '€', NOME_PVP, stat.aggiornato || null, OK, { nota: 'media dei prezzi base d’asta del catalogo' }),
     bande: n(indice.bandePrezzo || null, 'fasce', NOME_PVP, indice.data || null, OK),
   },
 };
