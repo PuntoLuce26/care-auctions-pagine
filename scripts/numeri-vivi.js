@@ -15,6 +15,7 @@ const { FONTI_PUBBLICHE } = require('./feed-regole');
 const stat = leggi('statistiche.json') || {};
 const indice = leggi('indice-completo.json') || {};
 const confronto = leggi('confronto-mercato.json') || {};
+const trib = leggi('tribunali.json') || {};
 const aggiud = leggi('aggiudicazioni.json') || [];
 const monitor = leggi('esiti-monitor.json') || {};
 const andEsiti = leggi('andamento-esiti.json') || {};
@@ -67,6 +68,7 @@ pagine['care-index'] = {
 pagine['osservatorio'] = {
   numeri: {
     lotti: n(stat.totale, 'lotti', NOME_PVP, stat.aggiornato || null, OK),
+    tribunali: n((trib.tribunali || []).length || null, 'tribunali con almeno un lotto aperto', NOME_PVP, trib.aggiornato || null, OK),
     lottiComparabiliOmi: n((confronto.nazionale || {}).lotti, 'lotti', NOME_PVP_OMI, (confronto.meta || {}).generatoIl || null, OK, { copertura: ((confronto.meta || {}).copertura || {}) }),
     scontoOmiMediano: n((confronto.nazionale || {}).scontoMedianoPct, '%', NOME_PVP_OMI, (confronto.meta || {}).generatoIl || null, OK, { nota: 'sconto di mercato = 1 − (prezzo base/mq) / valore OMI; mediana su ' + ((confronto.meta || {}).copertura || {}).lottiConMq + ' lotti confrontabili in ' + ((confronto.meta || {}).copertura || {}).comuniPubblicati + ' comuni; P25 ' + ((confronto.nazionale || {}).scontoP25Pct) + '% · P75 ' + ((confronto.nazionale || {}).scontoP75Pct) + '%' }),
     // catalogo foto costruito da più portali (FallcoAste, AstaGiudiziaria, IVG) + perizie PVP:
