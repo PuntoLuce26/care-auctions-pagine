@@ -1,5 +1,5 @@
 {
-  "eseguito": "2026-11-24T14:42:21.023Z",
+  "eseguito": "2026-11-25T14:02:55.808Z",
   "cadenza": "giornaliera (schedule 0 4 * * *) + workflow_dispatch",
   "lavoro": "testsrc-320x240-25fps-1s-frame0.5s-rgb24",
   "confronto": "sha256 dei byte RGB24 del frame a 0,5 s (320x240x3 = 230.400 byte)",
@@ -9,7 +9,7 @@
     "esecutore": "github-actions",
     "sha": "43afc86dac5fa12a1ee9f1a7ccc6d1f7ef3e00e29d46e41b69d3cde7e8d6a1f4",
     "versione": "ffmpeg version n8.1.3-35-gf1acb0a266-20261114 Copyright (c) 2000-2026 the FFmpeg developers",
-    "durataMs": 58,
+    "durataMs": 133,
     "frameBytes": 230400,
     "job": "testsrc-320x240-25fps-1s-frame0.5s-rgb24"
   },
