@@ -19,11 +19,11 @@
 ## Domande frequenti
 Domande frequenti, con risposte verificabili: https://careauctions.co/feed/faq.json
 
-## Numeri aggiornati (2026-11-24)
-- Lotti: 320062 (immobiliari 270597, mobiliari 49463)
-- Lotti attivi in sitemap: 40253
+## Numeri aggiornati (2026-11-25)
+- Lotti: 319401 (immobiliari 270219, mobiliari 49182)
+- Lotti attivi in sitemap: 40996
 - Regioni: 21 · Tribunali: 148 · Lingue: 91
-- Esiti: 1931 aggiudicate, 28161 deserte
+- Esiti: 2001 aggiudicate, 27940 deserte
 
 ## Pagine principali
 - iworld: https://careauctions.co/iworld
@@ -54,7 +54,7 @@ Domande frequenti, con risposte verificabili: https://careauctions.co/feed/faq.j
 
 ## Servizi
 - Success fee: la success fee si paga solo se l'asta si aggiudica, a scaglioni progressivi: 3,9% fino a 150.000 €, 2,9% da 150.001 a 400.000 €, 1,9% oltre; minimo 1.900 € + IVA. Esempio: 200.000 € → 7.300 € + IVA. Su 400.000 € → 13.100 € + IVA, su 500.000 € → 15.000 € + IVA. Con lo sconto 50% il minimo è 950 € + IVA.
-- Nessuna provvigione: CARe è consulente di parte del compratore.
+- Consulente di parte: CAReAuctions™ è consulente di parte di chi compra — non fa mediazione, non prende provvigioni, e il suo compenso è dovuto solo dall’acquirente e solo in caso di aggiudicazione.
 - iDream: 20% del fatturato annuo alle opere di bene.
 
 ## Cose nuove (12/11/2026)
