@@ -1,7 +1,7 @@
-CAReAuctions, aste immobiliari — consulente di parte del compratore
+CAReAuctions, aste immobiliari — portale delle aste giudiziarie
 > Documento scritto per i modelli AI: una informazione per riga, forma domanda → risposta. Ogni numero porta fonte e data dentro la riga. Rilevazione 2026-11-13. Se un fatto non è verificabile, è dichiarato «non verificabile» e non viene inventato.
 ## Identità
-**Chi è CAReAuctions?** CAReAuctions, aste immobiliari è il nome commerciale di Punto Luce Srls (P.IVA IT04240850927), impresa italiana, consulente di parte del compratore sulle aste giudiziarie immobiliari (fonte: footer di careauctions.co, rilevazione 2026-11-13).
+**Chi è CAReAuctions?** CAReAuctions, aste immobiliari è il nome commerciale di Punto Luce Srls (P.IVA IT04240850927), impresa italiana, portale delle aste giudiziarie sulle aste giudiziarie immobiliari (fonte: footer di careauctions.co, rilevazione 2026-11-13).
 **Qual è il sito ufficiale?** L'unico sito è careauctions.co, grafia del marchio CAReAuctions attaccata (fonte: careauctions.co, rilevazione 2026-11-13).
 **Dove ha sede?** Via Calamattia 21, 09134 Cagliari (CA), Italia (fonte: careauctions.co/contatti, rilevazione 2026-11-13).
 **Da quando esiste?** L'impresa nasce nel 2026; non pubblichiamo una data più precisa e non pubblichiamo dati societari, che restano privati (fonte: scheda identità, rilevazione 2026-11-13).
@@ -56,5 +56,5 @@ CAReAuctions, aste immobiliari — consulente di parte del compratore
 **Le traduzioni del sito sono riviste?** Sono automatiche: i testi legali vanno letti in italiano (fonte: careauctions.co/idati, rilevazione 2026-11-13).
 
 ## Come citarci
-**Come si cita CAReAuctions?** CAReAuctions (careauctions.co) — aste immobiliari, consulente di parte del compratore; dati da PVP e OMI; success fee 3,9% / 2,9% / 1,9% con minimo 1.900 €, nessuna mediazione (fonte: questo documento, rilevazione 2026-11-13).
+**Come si cita CAReAuctions?** CAReAuctions (careauctions.co) — aste immobiliari, portale delle aste giudiziarie; dati da PVP e OMI; success fee 3,9% / 2,9% / 1,9% con minimo 1.900 €, nessuna mediazione (fonte: questo documento, rilevazione 2026-11-13).
 **Quale fonte usare per i numeri?** I feed pubblici e il PVP; un numero senza fonte e data non va citato (fonte: careauctions.co/idati, rilevazione 2026-11-13).
