@@ -1,24 +1,24 @@
 {
- "aggiornato": "2026-11-24T19:23:16.345Z",
+ "aggiornato": "2026-11-25T03:24:31.636Z",
  "ultimoReport": {
-  "quando": "2026-11-24T19:23:16.345Z",
-  "giorno": "2026-11-23",
-  "pv": 510,
-  "visite": 510,
-  "totalePv": 18990,
-  "totaleVisite": 18100,
-  "giorniMisurati": 38,
-  "pvIeri": 320,
-  "visiteIeri": 320,
+  "quando": "2026-11-25T03:24:31.635Z",
+  "giorno": "2026-11-24",
+  "pv": 230,
+  "visite": 230,
+  "totalePv": 19220,
+  "totaleVisite": 18330,
+  "giorniMisurati": 39,
+  "pvIeri": 510,
+  "visiteIeri": 510,
   "vsGiornoPrima": {
-   "pv": 59.4,
-   "visite": 59.4
+   "pv": -54.9,
+   "visite": -54.9
   },
   "vsReportPrecedente": {
-   "pv": 0,
-   "visite": 0
+   "pv": -54.9,
+   "visite": -54.9
   },
-  "media7": 677,
+  "media7": 521,
   "valutazione": {
    "metodo": "costo di ricostruzione per il costruito; scenari di ricavo ×3-4 per la proiezione a 5 anni (assunzioni dichiarate, non promesse)",
    "costoRicostruzione": 81000,
@@ -1396,6 +1396,92 @@
     "visite": 0
    },
    "media7": 677,
+   "valutazione": {
+    "metodo": "costo di ricostruzione per il costruito; scenari di ricavo ×3-4 per la proiezione a 5 anni (assunzioni dichiarate, non promesse)",
+    "costoRicostruzione": 81000,
+    "debiti": 1050.31,
+    "valoreSocietaOggi": 79949.69,
+    "scenari5Anni": {
+     "prudente": {
+      "ricavoAnno5": 80156,
+      "multiplo": 3,
+      "valore": 240468
+     },
+     "base": {
+      "ricavoAnno5": 224840,
+      "multiplo": 3,
+      "valore": 674520
+     },
+     "ottimista": {
+      "ricavoAnno5": 502375,
+      "multiplo": 4,
+      "valore": 2009500
+     }
+    }
+   },
+   "lavori": [
+    [
+     "Piattaforma CAReAuctions (aste, iCARe, iDati)",
+     92
+    ],
+    [
+     "Feed dati (321k lotti, 22 software cloud)",
+     95
+    ],
+    [
+     "SEO Italia (A chiuso, B in corso)",
+     55
+    ],
+    [
+     "SEO mondo (8 lingue, C avviata)",
+     20
+    ],
+    [
+     "iShop (struttura Emergent, dati e link nostri)",
+     35
+    ],
+    [
+     "Affiliazioni (programmi, /vai, click)",
+     40
+    ],
+    [
+     "Pagamenti e abbonamenti",
+     55
+    ],
+    [
+     "Automazioni e QA (cloud, 2 report/giorno)",
+     85
+    ],
+    [
+     "Secondo Cervello e memoria",
+     90
+    ],
+    [
+     "Marchi e affidabilità legale",
+     60
+    ]
+   ],
+   "fonte": "Cloudflare Web Analytics (RUM)"
+  },
+  {
+   "quando": "2026-11-25T03:24:31.635Z",
+   "giorno": "2026-11-24",
+   "pv": 230,
+   "visite": 230,
+   "totalePv": 19220,
+   "totaleVisite": 18330,
+   "giorniMisurati": 39,
+   "pvIeri": 510,
+   "visiteIeri": 510,
+   "vsGiornoPrima": {
+    "pv": -54.9,
+    "visite": -54.9
+   },
+   "vsReportPrecedente": {
+    "pv": -54.9,
+    "visite": -54.9
+   },
+   "media7": 521,
    "valutazione": {
     "metodo": "costo di ricostruzione per il costruito; scenari di ricavo ×3-4 per la proiezione a 5 anni (assunzioni dichiarate, non promesse)",
     "costoRicostruzione": 81000,
