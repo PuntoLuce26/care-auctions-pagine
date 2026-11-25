@@ -1,16 +1,16 @@
 {
-  "generato": "2026-11-25T13:20:55.608Z",
+  "generato": "2026-11-25T13:46:27.188Z",
   "numeri": {
-    "lotti": 319401,
-    "immobiliari": 270219,
+    "lotti": 319407,
+    "immobiliari": 270225,
     "mobiliari": 49182,
     "regioni": 21,
     "tribunali": 148,
     "lingue": 91,
-    "lottiAttivi": 40996,
+    "lottiAttivi": 41002,
     "aggiudicate": 2001,
     "deserte": 27940,
-    "aggiornato": "2026-11-25T13:10:34.539Z"
+    "aggiornato": "2026-11-25T13:41:35.621Z"
   },
   "checks": [
     {
@@ -50,7 +50,7 @@
     },
     {
       "nome": "ai chi-siamo",
-      "ok": true,
+      "ok": false,
       "dettaglio": "HTTP 200"
     },
     {
@@ -114,7 +114,7 @@
     "inviatoDa": "scripts/idmap-sitemap.js (dentro il workflow feed-sync)",
     "nota": "unico invio IndexNow del progetto: 10.000 URL al giorno a rotazione sulle pagine asta"
   },
-  "ok": true,
+  "ok": false,
   "chat": {
     "risposta": "Su 200.000 euro la success fee è **7.300 euro + IVA** (a **scaglioni progressivi**: 0-150.000 euro al 3,9%, da 150.001 a 400.000 al 2,9%, oltre 400.000 al 1,9%, con le aliquote che si sommano per fascia; minimo 1.900 euro + IVA, che si applica fino a 48.718 euro di aggiudicazione). CAReAuctions **non fa mediazione** e non prende provvigioni: è **consulente di parte** del compratore. Si paga una **success fee solo se l’asta si aggiudica**: **3,9%** fino a 150.000 euro, **2,9%** da 150.001 a 400.0"
   }
