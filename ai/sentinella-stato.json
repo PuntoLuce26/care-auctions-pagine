@@ -1,8 +1,8 @@
 {
   "ok": false,
-  "aggiornato": "2026-11-25T10:31:40.523Z",
+  "aggiornato": "2026-11-25T14:14:19.666Z",
   "base": "https://careauctions.co",
-  "run": "45595701173",
+  "run": "45631695290",
   "checks": [
     {
       "id": "icare_success_fee",
@@ -22,16 +22,16 @@
     {
       "id": "cervello_json",
       "ok": false,
-      "det": "HTTP 200 · età 0.8g"
+      "det": "HTTP 200 · età 1.0g"
     },
     {
       "id": "ai_knowledge",
       "ok": true,
-      "det": "HTTP 200 · 6772B"
+      "det": "HTTP 200 · 6736B"
     },
     {
       "id": "ai_education_stato",
-      "ok": true,
+      "ok": false,
       "det": "HTTP 200"
     },
     {
@@ -42,22 +42,22 @@
     {
       "id": "traduzioni_stato",
       "ok": true,
-      "det": "HTTP 200 · età 0.9g"
+      "det": "HTTP 200 · età 0.1g"
     },
     {
       "id": "qa_stato",
       "ok": true,
-      "det": "R2 · 0C/0A · 0.2h"
+      "det": "R2 · 0C/0A · 0.1h"
     },
     {
       "id": "mail_stato",
       "ok": true,
-      "det": "R2 · età 0.4h"
+      "det": "R2 · età 0.1h"
     },
     {
       "id": "perf_stato",
       "ok": true,
-      "det": "R2 · p95 0ms · età 0.2g"
+      "det": "R2 · p95 0ms · età 0.4g"
     },
     {
       "id": "worker_ai_stato",
@@ -94,7 +94,12 @@
     {
       "componente": "ai",
       "gravita": "high",
-      "oggetto": "cervello_json: HTTP 200 · età 0.8g"
+      "oggetto": "cervello_json: HTTP 200 · età 1.0g"
+    },
+    {
+      "componente": "ai",
+      "gravita": "high",
+      "oggetto": "ai_education_stato: HTTP 200"
     }
   ]
 }
