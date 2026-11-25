@@ -1,12 +1,12 @@
 {
- "generato": "2026-11-24T17:06:47.327Z",
- "esito": "VERDE",
- "build": "main.f9ec64ff.js",
+ "generato": "2026-11-25T01:30:46.801Z",
+ "esito": "GIALLO",
+ "build": "main.6b8bb78a.js",
  "controlli": [
   {
    "nome": "build sito = origine",
-   "ok": true,
-   "dettaglio": "tutte su main.f9ec64ff.js"
+   "ok": false,
+   "dettaglio": "/idati: sito main.3f7132cb.js ≠ origine main.6b8bb78a.js · /fondatore: sito main.3f7132cb.js ≠ origine main.6b8bb78a.js"
   },
   {
    "nome": "testi /termini",
@@ -51,13 +51,16 @@
   {
    "nome": "feed statistiche fresco (< 90 min)",
    "ok": true,
-   "dettaglio": "10 min · 320093 lotti · aggiornato 2026-11-24T16:56:46.010Z"
+   "dettaglio": "10 min · 320124 lotti · aggiornato 2026-11-25T01:20:35.414Z"
   },
   {
    "nome": "prerender allineato alla build servita",
-   "ok": true,
-   "dettaglio": "main.f9ec64ff.js vs main.f9ec64ff.js"
+   "ok": false,
+   "dettaglio": "main.3f7132cb.js vs main.6b8bb78a.js"
   }
  ],
- "guasti": []
+ "guasti": [
+  "build sito = origine",
+  "prerender allineato alla build servita"
+ ]
 }
