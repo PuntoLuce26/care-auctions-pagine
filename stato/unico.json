@@ -1,5 +1,5 @@
 {
- "generato": "2026-11-26T10:25:59.514Z",
+ "generato": "2026-11-26T11:08:10.918Z",
  "semaforo": "rosso",
  "conteggi": {
   "ok": 17,
@@ -89,14 +89,14 @@
    "sezione": "feed",
    "nome": "statistiche",
    "stato": "ok",
-   "valore": "3 min",
-   "dettaglio": "319710 lotti"
+   "valore": "8 min",
+   "dettaglio": "319730 lotti"
   },
   {
    "sezione": "feed",
    "nome": "world",
    "stato": "rosso",
-   "valore": "19502 min",
+   "valore": "19544 min",
    "dettaglio": "33 paesi"
   },
   {
@@ -110,7 +110,7 @@
    "sezione": "feed",
    "nome": "san-pasquale-foto",
    "stato": "rosso",
-   "valore": "19740 min",
+   "valore": "19782 min",
    "dettaglio": "37 foto"
   },
   {
@@ -159,8 +159,8 @@
    "sezione": "mail",
    "nome": "allarmi",
    "stato": "giallo",
-   "valore": "8",
-   "dettaglio": "2026-11-26T10:10:57.987Z"
+   "valore": "7",
+   "dettaglio": "2026-11-26T10:40:53.136Z"
   },
   {
    "sezione": "sentinella",
@@ -180,8 +180,8 @@
    "sezione": "github",
    "nome": "run rossi (2h)",
    "stato": "ok",
-   "valore": "0 isolati",
-   "dettaglio": ""
+   "valore": "1 isolati",
+   "dettaglio": "ronda-notturna (una volta sola: race nota)"
   }
  ]
 }
