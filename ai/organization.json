@@ -25,7 +25,10 @@
         "https://www.linkedin.com/company/careauctions",
         "https://www.facebook.com/profile.php?id=61596248282937",
         "https://x.com/careauctions",
-        "https://whatsapp.com/channel/0029Vb96iJM2P59gRvbXG605"
+        "https://whatsapp.com/channel/0029Vb96iJM2P59gRvbXG605",
+        "https://www.threads.com/@careauctions.co",
+        "https://medium.com/@careauctions",
+        "https://linktr.ee/careauctions"
       ],
       "address": {
         "@type": "PostalAddress",
@@ -172,10 +175,5 @@
         }
       ]
     }
-  ],
-  "sameAs": [
-    "https://www.threads.com/@careauctions.co",
-    "https://medium.com/@careauctions",
-    "https://linktr.ee/careauctions"
   ]
 }
