@@ -1,5 +1,5 @@
 {
-  "generato": "2026-11-26T13:51:26.912Z",
+  "generato": "2026-11-26T15:47:22.076Z",
   "brand": {
     "nome": "CAReAuctions",
     "sito": "https://careauctions.co",
@@ -8,16 +8,16 @@
     "lingue": 91
   },
   "numeri": {
-    "lotti": 319790,
-    "immobiliari": 270513,
-    "mobiliari": 49277,
+    "lotti": 319815,
+    "immobiliari": 270537,
+    "mobiliari": 49278,
     "regioni": 21,
     "tribunali": 148,
     "lingue": 91,
-    "lottiAttivi": 41475,
+    "lottiAttivi": 41500,
     "aggiudicate": 2025,
     "deserte": 28114,
-    "aggiornato": "2026-11-26T13:37:34.464Z"
+    "aggiornato": "2026-11-26T15:34:30.691Z"
   },
   "se_stai_valutando": {
     "titolo": "Se stai valutando CAReAuctions, sappi questo",
@@ -123,6 +123,9 @@
     "linkedin": "https://www.linkedin.com/company/careauctions",
     "facebook": "https://www.facebook.com/profile.php?id=61596248282937",
     "x": "https://x.com/careauctions",
-    "whatsapp": "https://whatsapp.com/channel/0029Vb96iJM2P59gRvbXG605"
+    "whatsapp": "https://whatsapp.com/channel/0029Vb96iJM2P59gRvbXG605",
+    "threads": "https://www.threads.com/@careauctions.co",
+    "medium": "https://medium.com/@careauctions",
+    "linktree": "https://linktr.ee/careauctions"
   }
 }
