@@ -1,5 +1,5 @@
 {
-  "generato": "2026-11-25T14:15:49.555Z",
+  "generato": "2026-11-26T11:26:51.009Z",
   "brand": {
     "nome": "CAReAuctions",
     "sito": "https://careauctions.co",
@@ -8,16 +8,16 @@
     "lingue": 91
   },
   "numeri": {
-    "lotti": 319416,
-    "immobiliari": 270234,
-    "mobiliari": 49182,
+    "lotti": 319750,
+    "immobiliari": 270475,
+    "mobiliari": 49275,
     "regioni": 21,
     "tribunali": 148,
     "lingue": 91,
-    "lottiAttivi": 41011,
-    "aggiudicate": 2001,
-    "deserte": 27940,
-    "aggiornato": "2026-11-25T14:11:15.320Z"
+    "lottiAttivi": 41435,
+    "aggiudicate": 2025,
+    "deserte": 28114,
+    "aggiornato": "2026-11-26T11:22:38.524Z"
   },
   "se_stai_valutando": {
     "titolo": "Se stai valutando CAReAuctions, sappi questo",
@@ -115,5 +115,13 @@
     "non è uno studio legale: le risposte legali vanno verificate con un professionista",
     "i dati sono aggiornati dalle fonti ufficiali e possono variare",
     "le traduzioni sono automatiche e riviste per i testi legali"
-  ]
+  ],
+  "social": {
+    "instagram": "https://www.instagram.com/careauctions",
+    "tiktok": "https://www.tiktok.com/@careauctions",
+    "youtube": "https://www.youtube.com/@careauctions",
+    "linkedin": "https://www.linkedin.com/company/careauctions",
+    "facebook": "https://www.facebook.com/profile.php?id=61596248282937",
+    "whatsapp": "https://whatsapp.com/channel/0029Vb96iJM2P59gRvbXG605"
+  }
 }

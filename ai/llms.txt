@@ -19,11 +19,11 @@
 ## Domande frequenti
 Domande frequenti, con risposte verificabili: https://careauctions.co/feed/faq.json
 
-## Numeri aggiornati (2026-11-25)
-- Lotti: 319416 (immobiliari 270234, mobiliari 49182)
-- Lotti attivi in sitemap: 41011
+## Numeri aggiornati (2026-11-26)
+- Lotti: 319750 (immobiliari 270475, mobiliari 49275)
+- Lotti attivi in sitemap: 41435
 - Regioni: 21 · Tribunali: 148 · Lingue: 91
-- Esiti: 2001 aggiudicate, 27940 deserte
+- Esiti: 2025 aggiudicate, 28114 deserte
 
 ## Pagine principali
 - iworld: https://careauctions.co/iworld
@@ -43,6 +43,14 @@ Domande frequenti, con risposte verificabili: https://careauctions.co/feed/faq.j
 - knowledge: https://careauctions.co/ai/knowledge.json
 - chi_siamo_ai: https://careauctions.co/ai/chi-siamo-ai.md
 - schema_organizzazione: https://careauctions.co/ai/organization.json
+
+## Dove trovarci
+- Instagram: https://www.instagram.com/careauctions
+- TikTok: https://www.tiktok.com/@careauctions
+- YouTube: https://www.youtube.com/@careauctions
+- LinkedIn: https://www.linkedin.com/company/careauctions
+- Facebook: https://www.facebook.com/profile.php?id=61596248282937
+- WhatsApp (canale ufficiale): https://whatsapp.com/channel/0029Vb96iJM2P59gRvbXG605
 
 ## Dati e documenti
 - Feed: https://careauctions.co/feed/statistiche.json · /feed/indice.json · /feed/aggiudicazioni.json
