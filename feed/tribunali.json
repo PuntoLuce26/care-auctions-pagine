@@ -1,6 +1,6 @@
 {
  "schema": 2,
- "aggiornato": "2026-11-26T08:27:51.570Z",
+ "aggiornato": "2026-11-26T08:38:59.876Z",
  "copertura": "148 tribunali · 148 con almeno un lotto aperto · 17043 lotti aperti (lotti immobiliari con asta non ancora svolta)",
  "tribunali": [
   {
@@ -162,7 +162,8 @@
   {
    "tribunale": "NAPOLI NORD IN AVERSA",
    "slug": "napoli-nord-in-aversa",
-   "lottiAperti": 180
+   "lottiAperti": 180,
+   "regione": "Campania"
   },
   {
    "tribunale": "BRESCIA",
@@ -293,7 +294,8 @@
   {
    "tribunale": "FORLI'",
    "slug": "forli",
-   "lottiAperti": 142
+   "lottiAperti": 142,
+   "regione": "Emilia-Romagna"
   },
   {
    "tribunale": "VICENZA",
@@ -880,7 +882,8 @@
   {
    "tribunale": "CORTE D'APPELLO - BOLOGNA",
    "slug": "corte-d-appello-bologna",
-   "lottiAperti": 2
+   "lottiAperti": 2,
+   "regione": "Emilia-Romagna"
   },
   {
    "tribunale": "BENEVENTO EX TRIBUNALE DI ARIANO IRPINO",
