@@ -67,6 +67,10 @@ const per = new Map();
 // oggi non ha una fonte, la CHIAVE NON SI SCRIVE (meglio assente che null: un null dove prima c'era
 // un valore è una regressione silenziosa per chi legge).
 const norm = (s) => String(s || '').toUpperCase().trim();
+
+// 26/11/2026 — la regione si EREDITAVA dal file precedente: se mancava una volta restava
+// mancante per sempre (3 voci in «Altri tribunali»). Fallback esplicito per slug.
+const REGIONE_FALLBACK = { 'napoli-nord-in-aversa': 'Campania', 'forli': 'Emilia-Romagna', 'corte-d-appello-bologna': 'Emilia-Romagna' };
 const vecchi = new Map(((precedente && precedente.tribunali) || []).map((x) => [norm(x.tribunale), x]));
 const tribunali = [...per.entries()]
   .map(([tribunale, e]) => {
@@ -76,7 +80,7 @@ const tribunali = [...per.entries()]
     // `totale`, `prezzoBaseMedio`, `aggiudicazioni`, `prezzoAggMedio` sono FUORI CONTRATTO: non si
     // scrivono finché non c'è un valore vero (e se torneranno, si riportano CON I VALORI e `schema` sale).
     const rec = { tribunale: norm(tribunale), slug: v.slug || slug(tribunale), lottiAperti: Number(e.lottiAperti) || 0 };
-    if (v.regione) rec.regione = v.regione;
+    if (v.regione) rec.regione = v.regione; else if (REGIONE_FALLBACK[slug(tribunale)]) rec.regione = REGIONE_FALLBACK[slug(tribunale)];
     return rec;
   })
   .sort((a, b) => b.lottiAperti - a.lottiAperti || a.tribunale.localeCompare(b.tribunale));
