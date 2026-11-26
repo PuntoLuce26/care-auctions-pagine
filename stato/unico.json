@@ -1,5 +1,5 @@
 {
- "generato": "2026-11-26T13:51:07.266Z",
+ "generato": "2026-11-26T16:36:00.869Z",
  "semaforo": "rosso",
  "conteggi": {
   "ok": 17,
@@ -89,14 +89,14 @@
    "sezione": "feed",
    "nome": "statistiche",
    "stato": "ok",
-   "valore": "13 min",
-   "dettaglio": "319790 lotti"
+   "valore": "11 min",
+   "dettaglio": "319834 lotti"
   },
   {
    "sezione": "feed",
    "nome": "world",
    "stato": "rosso",
-   "valore": "19707 min",
+   "valore": "19872 min",
    "dettaglio": "33 paesi"
   },
   {
@@ -110,28 +110,28 @@
    "sezione": "feed",
    "nome": "san-pasquale-foto",
    "stato": "rosso",
-   "valore": "19945 min",
+   "valore": "20110 min",
    "dettaglio": "37 foto"
   },
   {
    "sezione": "build",
    "nome": "sito vs origine",
    "stato": "ok",
-   "valore": "main.11388d2e.js / main.11388d2e.js",
+   "valore": "main.b6cfb81b.js / main.b6cfb81b.js",
    "dettaglio": ""
   },
   {
    "sezione": "prerender",
    "nome": "snapshot vs vivo",
    "stato": "ok",
-   "valore": "main.11388d2e.js / main.11388d2e.js",
+   "valore": "main.b6cfb81b.js / main.b6cfb81b.js",
    "dettaglio": ""
   },
   {
    "sezione": "prerender",
    "nome": "bot allineato",
    "stato": "ok",
-   "valore": "main.11388d2e.js",
+   "valore": "main.b6cfb81b.js",
    "dettaglio": ""
   },
   {
@@ -159,8 +159,8 @@
    "sezione": "mail",
    "nome": "allarmi",
    "stato": "giallo",
-   "valore": "6",
-   "dettaglio": "2026-11-26T13:40:53.302Z"
+   "valore": "10",
+   "dettaglio": "2026-11-26T16:10:56.520Z"
   },
   {
    "sezione": "sentinella",
