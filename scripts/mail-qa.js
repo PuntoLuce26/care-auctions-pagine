@@ -47,8 +47,28 @@ function bodyText(p) {
   if (p.body && p.body.data) { try { return Buffer.from(p.body.data, 'base64url').toString('utf8'); } catch (e) {} }
   return (p.parts || []).map(bodyText).join('\n');
 }
+
+/* 27/11/2026 — PRIMA di gridare «accesso estraneo» si guarda il CANALE delle ultime 2 ore:
+   se l'utente ha scritto che sta parlando con l'assistenza / cambiando le carte, l'allarme
+   è un'attività sua, non un accesso estraneo. (Lezione della ronda delle 18:49.) */
+async function canaleRecente() {
+  const tok = process.env.PAT_CANALE || '';
+  if (!tok) return '';
+  try {
+    const rc = await fetch('https://api.github.com/repos/PuntoLuce26/second-brain/commits?path=CANALE.md&per_page=1', { headers: { Authorization: 'Bearer ' + tok, 'User-Agent': 'care-mail-qa' } });
+    const jc = await rc.json();
+    const quando = new Date(((jc[0] || {}).commit || {}).author ? jc[0].commit.author.date : 0).getTime();
+    if (!quando || Date.now() - quando > 2 * 3600 * 1000) return '';
+    const rf = await fetch('https://api.github.com/repos/PuntoLuce26/second-brain/contents/CANALE.md?ref=main', { headers: { Authorization: 'Bearer ' + tok, Accept: 'application/vnd.github.raw', 'User-Agent': 'care-mail-qa' } });
+    const t = await rf.text();
+    return t.slice(-9000);
+  } catch (e) { return ''; }
+}
+
 (async () => {
   const at = await access();
+  const canale = await canaleRecente();
+  let demoted = 0;
   const list = await gget(at, 'https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=25&q=' + encodeURIComponent(Q));
   const msgs = list.messages || []; const nuovi = [];
   for (const m of msgs) {
@@ -75,9 +95,13 @@ function bodyText(p) {
     /* mail/stato.json e la issue [QA] finiscono in un repo PUBBLICO: il soggetto di una mail
        non-GitHub puo' contenere nomi di clienti, importi, conti o link di pagamento.
        Si pubblica solo l'allarme (componente + gravita'), mai il testo della mail. */
+    /* se la mail parla di accessi/recuperi e il CANALE delle ultime 2 ore mostra l'utente al lavoro
+       con l'assistenza o sulle carte, si abbassa a «bassa» e si annota: non è un accesso estraneo. */
+    let s2 = s;
+    if (/recupero|recovery|accesso|password|device|dispositiv|verific/i.test(h.subject || '') && canale && /google|assistenza|carta|incognito|accesso|pagament/i.test(canale)) { s2 = 'bassa'; demoted++; }
     const daGithub = /(^|@)github\.com$/i.test(fromAddr) || /\[PuntoLuce26\//.test(h.subject || '');
     const oggetto = daGithub ? (h.subject || '').slice(0, 200) : '[oggetto riservato · ' + c + ']';
-    nuovi.push({ id: m.id, data: new Date(Number(d.internalDate)).toISOString(), da: daGithub ? (h.from || '').slice(0, 160) : ('mittente riservato · ' + c), oggetto, a: (h.to || h['delivered-to'] || '').slice(0, 160), componente: c, gravita: s, link: daGithub ? link.slice(0, 300) : '' });
+    nuovi.push({ id: m.id, data: new Date(Number(d.internalDate)).toISOString(), da: daGithub ? (h.from || '').slice(0, 160) : ('mittente riservato · ' + c), oggetto, a: (h.to || h['delivered-to'] || '').slice(0, 160), componente: c, gravita: s2, nota: s2 !== s ? 'CANALE ultime 2h: attività dell utente in corso, probabile falso allarme' : undefined, link: daGithub ? link.slice(0, 300) : '' });
     done.add(m.id);
   }
   const qaAlerts = nuovi.filter(x => x.gravita !== 'bassa');
@@ -89,6 +113,6 @@ function bodyText(p) {
   const out = { ultimoControllo: new Date().toISOString(), ultimoQa: nuovi.length ? new Date().toISOString() : (st.ultimoQa || null), qaEsito, nuoveMail: nuovi.length, allarmi: nuovi, processati: Array.from(done).slice(-600) };
   fs.mkdirSync(path.join(process.cwd(), 'mail'), { recursive: true });
   fs.writeFileSync(STATE, JSON.stringify(out, null, 2));
-  console.log(JSON.stringify({ nuove: nuovi.length, alert: qaAlerts.length, qa: qaEsito, componenti: qaAlerts.map(x => x.componente) }));
+  console.log(JSON.stringify({ nuove: nuovi.length, abbassati: demoted, alert: qaAlerts.length, qa: qaEsito, componenti: qaAlerts.map(x => x.componente) }));
 })().catch(e => { console.error('MAIL-QA ERRORE', e.message); process.exit(1); });
 
