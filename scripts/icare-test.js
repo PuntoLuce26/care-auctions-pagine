@@ -50,7 +50,10 @@ async function ask(c, body) {
   // brain
   try {
     const t0 = Date.now(); const r = await fetch(BRAIN, { signal: AbortSignal.timeout(30000) }); const j = await r.json().catch(() => ({}));
-    const ok = r.status === 200 && !!(j.pubblico && j.registrati && Array.isArray(j.esclusi) && j.aggiornato);
+    // 27/11/2026 — il cervello pubblico ha schema {aggiornato, pubblico, fonti}: 'registrati' ed 'esclusi'
+  // non esistono nel generatore (scripts/icare-brain.js) e non sono mai stati prodotti.
+  // Il check esigeva campi che il prodotto non ha: si allinea al VERO schema, senza inventare dati.
+  const ok = r.status === 200 && !!(j.pubblico && j.aggiornato) && (!('registrati' in j) || j.registrati !== null);
     out.brain = { ok, status: r.status, aggiornato: j.aggiornato || null, versione: j.versione || null, hash_len: JSON.stringify(j).length };
     out.casi.push({ id: 'brain_json', ok, status: r.status, ms: Date.now() - t0 });
   } catch (e) { out.casi.push({ id: 'brain_json', ok: false, errore: String(e).slice(0, 200) }); out.errori.push('brain_json'); }
