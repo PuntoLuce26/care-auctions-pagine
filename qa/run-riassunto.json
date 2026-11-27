@@ -1,162 +1,232 @@
 {
- "generato": "2026-11-27T16:25:24.614Z",
+ "generato": "2026-11-27T17:36:40.309Z",
  "repos": {
   "care-auctions-pagine": {
    "runs": [
     {
+     "workflow": "feed-sync",
+     "id": 46043188045,
+     "quando": "2026-11-27T17:36:36Z",
+     "esito": "queued"
+    },
+    {
      "workflow": "Run GitHub - riassunto redatto",
-     "id": 46033376171,
-     "quando": "2026-11-27T16:24:42Z",
+     "id": 46043098990,
+     "quando": "2026-11-27T17:35:55Z",
      "esito": "in_progress"
     },
     {
      "workflow": "pages build and deployment",
-     "id": 46033367547,
-     "quando": "2026-11-27T16:24:38Z",
+     "id": 46043083057,
+     "quando": "2026-11-27T17:35:48Z",
      "esito": "in_progress"
     },
     {
      "workflow": "guardiano-workflow",
-     "id": 46033366970,
-     "quando": "2026-11-27T16:24:38Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "gate",
-     "id": 46033366947,
-     "quando": "2026-11-27T16:24:38Z",
-     "esito": "in_progress"
-    },
-    {
-     "workflow": "guardiano-proprieta",
-     "id": 46033366945,
-     "quando": "2026-11-27T16:24:38Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "guardiano-proprieta",
-     "id": 46033363213,
-     "quando": "2026-11-27T16:24:36Z",
-     "esito": "cancelled"
-    },
-    {
-     "workflow": "gate",
-     "id": 46033363018,
-     "quando": "2026-11-27T16:24:36Z",
-     "esito": "cancelled"
-    },
-    {
-     "workflow": "pages build and deployment",
-     "id": 46033362516,
-     "quando": "2026-11-27T16:24:36Z",
-     "esito": "cancelled"
-    },
-    {
-     "workflow": "pages build and deployment",
-     "id": 46033021629,
-     "quando": "2026-11-27T16:22:13Z",
-     "esito": "cancelled"
-    },
-    {
-     "workflow": "feed-sync",
-     "id": 46032935789,
-     "quando": "2026-11-27T16:21:36Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "gate",
-     "id": 46032770807,
-     "quando": "2026-11-27T16:20:28Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "guardiano-proprieta",
-     "id": 46032770782,
-     "quando": "2026-11-27T16:20:28Z",
+     "id": 46042963346,
+     "quando": "2026-11-27T17:34:56Z",
      "esito": "success"
     },
     {
      "workflow": "pages build and deployment",
-     "id": 46032770583,
-     "quando": "2026-11-27T16:20:28Z",
+     "id": 46042963106,
+     "quando": "2026-11-27T17:34:56Z",
      "esito": "cancelled"
     },
     {
-     "workflow": "prerender",
-     "id": 46032503404,
-     "quando": "2026-11-27T16:18:36Z",
+     "workflow": "gate",
+     "id": 46042963099,
+     "quando": "2026-11-27T17:34:56Z",
      "esito": "success"
     },
     {
-     "workflow": "feed-sync",
-     "id": 46032500313,
-     "quando": "2026-11-27T16:18:35Z",
+     "workflow": "guardiano-proprieta",
+     "id": 46042963084,
+     "quando": "2026-11-27T17:34:55Z",
      "esito": "success"
     },
     {
+     "workflow": "rete-emergent",
+     "id": 46042842285,
+     "quando": "2026-11-27T17:34:00Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "guardiano-proprieta",
+     "id": 46042835671,
+     "quando": "2026-11-27T17:33:57Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "pages build and deployment",
+     "id": 46042835291,
+     "quando": "2026-11-27T17:33:56Z",
+     "esito": "cancelled"
+    },
+    {
+     "workflow": "pages build and deployment",
+     "id": 46042831470,
+     "quando": "2026-11-27T17:33:54Z",
+     "esito": "cancelled"
+    },
+    {
+     "workflow": "guardiano-proprieta",
+     "id": 46042831423,
+     "quando": "2026-11-27T17:33:54Z",
+     "esito": "cancelled"
+    },
+    {
      "workflow": "feed-sync",
-     "id": 46032220307,
-     "quando": "2026-11-27T16:16:37Z",
+     "id": 46042798150,
+     "quando": "2026-11-27T17:33:39Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "pages build and deployment",
+     "id": 46042473078,
+     "quando": "2026-11-27T17:31:11Z",
      "esito": "success"
     },
     {
      "workflow": "qa",
-     "id": 46032151676,
-     "quando": "2026-11-27T16:16:07Z",
+     "id": 46042449177,
+     "quando": "2026-11-27T17:31:01Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "esiti-sync",
+     "id": 46042347987,
+     "quando": "2026-11-27T17:30:18Z",
+     "esito": "in_progress"
+    },
+    {
+     "workflow": "stato-unico",
+     "id": 46042340362,
+     "quando": "2026-11-27T17:30:16Z",
      "esito": "success"
     },
     {
      "workflow": "mail-qa",
-     "id": 46032025350,
-     "quando": "2026-11-27T16:15:17Z",
+     "id": 46042334262,
+     "quando": "2026-11-27T17:30:13Z",
      "esito": "success"
     },
     {
      "workflow": "pages build and deployment",
-     "id": 46031966004,
-     "quando": "2026-11-27T16:14:54Z",
+     "id": 46041891631,
+     "quando": "2026-11-27T17:26:45Z",
      "esito": "success"
     },
     {
      "workflow": "feed-sync",
-     "id": 46031772840,
-     "quando": "2026-11-27T16:13:34Z",
+     "id": 46041736563,
+     "quando": "2026-11-27T17:25:34Z",
      "esito": "success"
     },
     {
      "workflow": "feed-sync",
-     "id": 46031191136,
-     "quando": "2026-11-27T16:09:34Z",
+     "id": 46041198819,
+     "quando": "2026-11-27T17:21:34Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "feed-sync",
+     "id": 46041074370,
+     "quando": "2026-11-27T17:20:39Z",
      "esito": "success"
     },
     {
      "workflow": "pages build and deployment",
-     "id": 46030878922,
-     "quando": "2026-11-27T16:07:22Z",
+     "id": 46040321072,
+     "quando": "2026-11-27T17:15:01Z",
      "esito": "success"
     },
     {
      "workflow": "feed-sync",
-     "id": 46030626364,
-     "quando": "2026-11-27T16:05:38Z",
+     "id": 46040129164,
+     "quando": "2026-11-27T17:13:36Z",
      "esito": "success"
     },
     {
-     "workflow": "ocr-perizie",
-     "id": 46030561146,
-     "quando": "2026-11-27T16:05:13Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "guardiano-proprieta",
-     "id": 46030407644,
-     "quando": "2026-11-27T16:04:12Z",
+     "workflow": "pages build and deployment",
+     "id": 46039383168,
+     "quando": "2026-11-27T17:08:09Z",
      "esito": "success"
     }
    ]
   },
   "green": {
    "runs": [
+    {
+     "workflow": "team",
+     "id": 46042969568,
+     "quando": "2026-11-27T17:34:58Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "team",
+     "id": 46037893118,
+     "quando": "2026-11-27T16:57:20Z",
+     "esito": "failure",
+     "passi_caduti": [
+      "Verifica il team"
+     ],
+     "errore": [
+      "\"ºl;b¶o09ïû¸Örñ²\u0002(ÕË}]`\u001b1Á\u0014æØb\u0005kGs\f³ÕpäÚk!x¬à.v)³Är³<\u0000g\u0011÷.\"Üx³íÃ\u001dø.bB|ÿ<§­P}à\\ßCÄ_æ.¢\u0007÷1FRº\\Ú[L÷U\f>Ü}p\u001eºq\u001b%-§,\u00039~> \u0011÷aê\u0016¯pð¸mí5¶7aNß\u0003øôâä°¢ÔK«ãLiI¼4Ü\u0010m«vËMc¤Û*­b=\\\u00141AµyYò\tÓ¼ßÁãôÂZÎÑIfLë°uF\tæ)\u001aá¶ç[ía0ò|z¦\u0014'Þ¿bû\u001e\u0013ÂÏ¡Ñ\rXAB7¼ú;\u0000\u0000ÿÿPK\u0007\bªIÅh%\u0003\u0000\u0000á\u0007\u0000\u0000PK\u0003\u0004\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\"\u0000\u0000\u0000team/2_Run [email]¼XÝn\u001b¹\u0015¾î>ÅA®4\u001c\r9?\u0011E³Ùî&@\u0014\u001b/",
+      "¨}M&!_*\u0000¸¸Ê.\u001fÎ\u001f³Ûëtã8BÄäÿ\u0015jÃ£¤8T¥«\u001bXm6é:K\u0001\u0017\u0011\u0017á¡iLg¶w¦Ód-è®ék\u001a¨·j(Þ«\u0001ôßAîÍ~\u0003\u0000\u0000ÿÿPK\u0007\bqºÀíö\u0000\u0000\u0000·\u0001\u0000\u0000PK\u0003\u0004\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000'\u0000\u0000\u0000team/8_Post Run [email]¼Ïn0\u0010ïyQ\u000eÙ\u0001\u001b0°R\u000fUU©=Tí!§-meÌ\u0000nÀ^Ù&ÉJy³\u001eúH}jÙÒ?°ÙôÐÅaæû}3Ø?¾}g\u0011ãRÂ²kÊ×i¶f<\u00198ÙÀ\u0007ã<|5\u0015È\u001e\u001e·ÁÅ\\y\u0012\u0015)Ëé\u0006>J3\fB×ÂÑÙ°R:l[´N\u0019=ßJ3Îh\u0003¿\u0014\u0002\u000bR\u001eÐùz\u0016å<6pÃÖXaU¿\u0003sÖªZé\u0016Þ¼÷úÅ*ìÌ¡\u001dµF\u001bÞ\u0019{\u0013~ñ8lÃ8NhÔð4µà$ÉXC*Ä4\"Ï\u0012Wµ¤ñ",
+      "¢X¯Ç\u0017pf¬ÙÝäá(x$^\u0001\u0019\bPÐFßwÎÛË«ÉLy¦>æU[Ö­©²)sS\u0017'ø¿åG+®eXU\u001cyO~÷Y²¨«ü\u0004ûýÃÕêæ>ÞKOÉ\u0007Áì¡§UÉÙ@}\u0002Ç`eëÖa]=\u0004«#\u0005ø¥u1U6n\u0010uÔC\u0010ÐÈ üC\u0016í-$u\u0013¹gáp)þ}?=¸\"KOKÀ(E\tf\u001eDÏvÀ\u0013µ0°ú6MÇ9L±KºEÆÔMGÚ.\u0012³\u0006ó\u0006okfaá#\u001aMÂø©âW5jd&õéî=\u0000\u0000ÿÿPK\u0007\b#t\u0001\u0001\u0000\u0000s\u0001\u0000\u0000PK\u0001\u0002\u0014\u0000\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000ÁQÝ>¹\f\u0000\u0000+\u0000\u0000"
+     ]
+    },
+    {
+     "workflow": "green-sicurezza",
+     "id": 46037306981,
+     "quando": "2026-11-27T16:52:59Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "green-sicurezza",
+     "id": 46037300745,
+     "quando": "2026-11-27T16:52:56Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "green2-ponte",
+     "id": 46036954760,
+     "quando": "2026-11-27T16:50:22Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "green-sicurezza",
+     "id": 46035126823,
+     "quando": "2026-11-27T16:37:07Z",
+     "esito": "failure",
+     "passi_caduti": [
+      "Porte rosse"
+     ],
+     "errore": [
+      "ÍLçY¡\u0005Êre\f\u001eÒÝ2ÁÏ±Áo©uâ¿\u0003\u0000\u0000ÿÿPK\u0007\b·\u001a3ñ]\u0003\u0000\u0000f\b\u0000\u0000PK\u0003\u0004\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\"\u0000\u0000\u0000giro/2_Run [email]¼XooÜ¸ÑýÜ§\u0018äðÜ\u0002i¨\u0015%\u0016Í¡¹¤w\tÐ&ÅÅ\u0002\u001b§\u0005W]±H¤ì¸¸oÖ\u0017ýHý",
+      "kÊ_ò-fÐ?sW9g\u001a\fSª±:\rºÚÅãj×\u000e\u0001\u000bÆ»ù\u0018}x_¸KO>v×¤/\u001dUTT\rnp÷\b`ìúú\u0015UÑíçaC8s×\u0003.-¼t\fZN~\u0002\u0000\u0000ÿÿPK\u0007\b³5ü.ñ\u0000\u0000\u0000(\u0002\u0000\u0000PK\u0003\u0004\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000(\u0000\u0000\u0000giro/14_Post Run [email]¬ÏnÔ<\u0014Å÷}«.:+çã8ÉHßâ\u0013B\u0005EWC\u00009ÎMbØ#Ûi;Rß\u0005Ä+ É(ÐN)({~çÜãûíËW\u001aQNâÐì2æë¤XGið8gnàq\u001e>",
+      "y\u0003\u0000\u0000¯\u0007\u0000\u0000\u0014\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000£!\u0000\u0000giro/6_Artefatto.txtPK\u0001\u0002\u0014\u0000\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000³5ü.ñ\u0000\u0000\u0000(\u0002\u0000\u0000\u0016\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000^%\u0000\u0000giro/7_Porte rosse.txtPK\u0001\u0002\u0014\u0000\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000ÅÌÈb'\u0002\u0000\u0000©\u0006\u0000\u0000(\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000&\u0000\u0000giro/14_Post Run [email]\u0001\u0002\u0014\u0000\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000PðÈ\r\u0001\u0000\u0000\u0001\u0000\u0000\u0018\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0010)\u0000\u0000giro/15_Complete job.txtPK\u0005\u0006\u0000\u0000\u0000\u0000\u000b\u0000\u000b\u0000\b\u0003\u0000\u0000c*\u0000\u0000\u0000\u0000"
+     ]
+    },
+    {
+     "workflow": "green-sicurezza",
+     "id": 46035102480,
+     "quando": "2026-11-27T16:36:56Z",
+     "esito": "failure",
+     "passi_caduti": [
+      "Porte rosse"
+     ],
+     "errore": [
+      "ãjÜáßcÀÖmo§%\u0011ý°§¾çS(S×\u0003®-<·\u0004½ü\u0004\u0000\u0000ÿÿPK\u0007\bµñ\u0000\u0000\u0000(\u0002\u0000\u0000PK\u0003\u0004\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000(\u0000\u0000\u0000giro/14_Post Run [email]¼ÏnÔ0\u0010Æï}Q\u000fÝ\u0013ç¬Ä\u0001!$8 8ô´\u0004ãÌ&¦½²¶+õÍ8ðH¼\u0002Jv¥ò'Y¶ªÄÅÊaæ÷}óeì\u001fß¾Ç4f$HÌ¯#¶Nò5¥\u0001c4¢nàq\u001e¾"
+     ]
+    },
+    {
+     "workflow": "green-query",
+     "id": 46034647011,
+     "quando": "2026-11-27T16:33:41Z",
+     "esito": "success"
+    },
     {
      "workflow": "indicizzazione",
      "id": 46023889792,
@@ -269,18 +339,6 @@
      "workflow": "Posta SAM bidirezionale",
      "id": 45810343370,
      "quando": "2026-11-26T11:24:42Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "green",
-     "id": 45777307697,
-     "quando": "2026-11-26T07:42:20Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "green-azione",
-     "id": 45760227171,
-     "quando": "2026-11-26T05:13:58Z",
      "esito": "success"
     }
    ]
@@ -446,10 +504,28 @@
   "second-brain": {
    "runs": [
     {
+     "workflow": "monitor-claude",
+     "id": 46043087171,
+     "quando": "2026-11-27T17:35:50Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "posta",
+     "id": 46040360133,
+     "quando": "2026-11-27T17:15:17Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "posta",
+     "id": 46036936526,
+     "quando": "2026-11-27T16:50:15Z",
+     "esito": "success"
+    },
+    {
      "workflow": "posta",
      "id": 46033456716,
      "quando": "2026-11-27T16:25:15Z",
-     "esito": "in_progress"
+     "esito": "success"
     },
     {
      "workflow": "posta",
@@ -576,24 +652,6 @@
      "id": 45996388424,
      "quando": "2026-11-27T12:10:13Z",
      "esito": "success"
-    },
-    {
-     "workflow": "posta",
-     "id": 45993704478,
-     "quando": "2026-11-27T11:50:15Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "posta",
-     "id": 45990655029,
-     "quando": "2026-11-27T11:27:41Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "monitor-claude",
-     "id": 45990272048,
-     "quando": "2026-11-27T11:24:50Z",
-     "esito": "success"
     }
    ]
   }
@@ -601,11 +659,11 @@
  "numeri": {
   "url": "https://careauctions.co/numeri.json",
   "stato": 200,
-  "generato": "2026-11-27T16:25:32.646Z",
-  "aggiornato": "2026-11-27T16:14:38.923Z",
-  "lotti": 320153,
+  "generato": "2026-11-27T17:36:49.186Z",
+  "aggiornato": "2026-11-27T17:26:32.064Z",
+  "lotti": 320180,
   "asteOggi": 733,
-  "asteFuture": 22130,
+  "asteFuture": 22157,
   "lottiAperti": 16921,
   "tribunali": 148
  },
