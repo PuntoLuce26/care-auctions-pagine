@@ -17,9 +17,9 @@ try {
   let attivato = false;
   for (let i = 0; i < await b4.count(); i++) { if (await b4.nth(i).isVisible().catch(() => false)) { await b4.nth(i).click(); attivato = true; break; } }
   await p.waitForTimeout(900);
-  const cta = p.locator('a').filter({ hasText: /^Vai al negozio$/ }).first();
+  const cta = p.locator('a').filter({ hasText: /^Entra in iShop$/ }).first();
   checks.push({ nome: 'home: Banner 4 attivabile', ok: attivato });
-  checks.push({ nome: 'home: CTA «Vai al negozio» visibile', ok: await cta.isVisible().catch(() => false) });
+  checks.push({ nome: 'home: CTA «Entra in iShop» visibile', ok: await cta.isVisible().catch(() => false) });
   checks.push({ nome: 'home: link /buynow visibile', ok: await p.locator('a[href="/buynow"]').first().isVisible().catch(() => false) });
   checks.push({ nome: 'home: nessun errore JS/console', ok: errs.length === 0, errori: errs.slice(0, 3) });
   const overflow = await p.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1);
@@ -34,7 +34,7 @@ try {
   const i = await ctx.newPage();
   await i.goto(BASE + '/ishop?dom=' + Date.now(), { waitUntil: 'networkidle', timeout: 60000 });
   await i.waitForTimeout(700);
-  checks.push({ nome: '/ishop: CTA «Vai al negozio» visibile', ok: await i.locator('a').filter({ hasText: /^Vai al negozio$/ }).first().isVisible().catch(() => false) });
+  checks.push({ nome: '/ishop: CTA «Entra in iShop» visibile', ok: await i.locator('a').filter({ hasText: /^Entra in iShop$/ }).first().isVisible().catch(() => false) });
 
   const b = await ctx.newPage();
   await b.goto(BASE + '/buynow?dom=' + Date.now(), { waitUntil: 'networkidle', timeout: 60000 });
