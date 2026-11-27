@@ -23,6 +23,7 @@ jobs:
           node-version: "22"
       - name: Leggi mail e lancia il QA
         env:
+          PAT_CANALE: ${{ secrets.PAT_GITHUB }}
           GMAIL_CREDENTIALS: ${{ secrets.GMAIL_CREDENTIALS }}
           GMAIL_TOKEN: ${{ secrets.GMAIL_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
