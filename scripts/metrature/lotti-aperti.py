@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Elenca i lotti immobiliari con asta futura e la loro perizia (trasporto, non estrazione)."""
+"""Elenca i lotti immobiliari con asta futura (trasporto, nessuna estrazione)."""
 import json, sys, re, urllib.request, datetime
 UA = "Mozilla/5.0 (compatible; CARe-mq/1.0; +https://careauctions.co)"
 
@@ -10,10 +10,11 @@ def get(u):
 def main():
     quanti = int(sys.argv[1]) if len(sys.argv) > 1 else 200
     oggi = datetime.date.today().isoformat()
-    visti, lotti, off = set(), [], 0
-    while len(lotti) < quanti and off < 3000:
+    visti, lotti, off, giri = set(), [], 0, 0
+    while len(lotti) < quanti and giri < 200:
+        giri += 1
         try:
-            d = get(f'https://careauctions.co/api/aste?limit=100&offset={off}')
+            d = get('https://careauctions.co/api/aste?limit=100&offset=%d' % off)
         except Exception:
             break
         aste = d.get('aste') or []
@@ -27,15 +28,12 @@ def main():
                 continue
             if re.search(r'Veicol|Autovettur|Macchin|Moto|Ciclomot|Imbarcaz|Aereo', str(a.get('titolo') or ''), re.I):
                 continue
-            per = None
-            for doc in (a.get('documenti') or []):
-                nm = str(doc.get('nome', '')).lower()
-                if 'periz' in nm or 'elaborato peritale' in nm:
-                    per = doc.get('link'); break
-            lotti.append({'id': a['id'], 'titolo': a.get('titolo'), 'perizia': per})
+            lotti.append({'id': a['id'], 'titolo': a.get('titolo')})
+            if len(lotti) >= quanti:
+                break
         off += len(aste)
-    json.dump(lotti[:quanti], open(sys.argv[2], 'w'), ensure_ascii=False, indent=0)
-    print('lotti', len(lotti[:quanti]), '| con perizia', sum(1 for x in lotti[:quanti] if x['perizia']))
+    json.dump(lotti, open(sys.argv[2], 'w'), ensure_ascii=False, indent=0)
+    print('lotti', len(lotti), '| giri', giri)
 
 if __name__ == '__main__':
     main()
