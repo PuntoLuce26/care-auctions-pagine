@@ -1,32 +1,32 @@
 {
  "data": "2026-11-27",
  "feriale": true,
- "campioni": 1,
- "misure": 5,
- "ok": 5,
+ "campioni": 2,
+ "misure": 10,
+ "ok": 10,
  "ko": 0,
- "giriCompleti": 1,
+ "giriCompleti": 2,
  "per": {
   "home": {
-   "ok": 1,
+   "ok": 2,
    "ko": 0
   },
   "lotto": {
-   "ok": 1,
+   "ok": 2,
    "ko": 0
   },
   "idati": {
-   "ok": 1,
+   "ok": 2,
    "ko": 0
   },
   "feed": {
-   "ok": 1,
+   "ok": 2,
    "ko": 0
   },
   "buynow": {
-   "ok": 1,
+   "ok": 2,
    "ko": 0
   }
  },
- "ultimo": "2026-11-27T11:25:24.719Z"
+ "ultimo": "2026-11-27T20:11:42.112Z"
 }
