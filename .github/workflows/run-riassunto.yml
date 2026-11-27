@@ -1,0 +1,28 @@
+name: "Run GitHub - riassunto redatto"
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  riassunto:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Genera il riassunto
+        env:
+          GH_TOKEN: ${{ secrets.PAT_GITHUB }}
+        run: node scripts/stato-run.mjs
+      - name: Commit (solo qa/)
+        run: |
+          git config user.name "careauctions-bot"
+          git config user.email "info@puntoluce26.com"
+          git add qa/run-riassunto.json qa/RUN.md
+          git diff --staged --quiet || git commit -m "run: riassunto redatto $(date -u +%FT%TZ)"
+          git pull -q --rebase --autostash origin main || true
+          git push -q origin HEAD:main
