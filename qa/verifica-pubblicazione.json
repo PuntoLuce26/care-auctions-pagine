@@ -1,12 +1,12 @@
 {
- "generato": "2026-11-27T16:37:28.227Z",
- "esito": "GIALLO",
- "build": "main.3dd87f0f.js",
+ "generato": "2026-11-27T20:08:57.391Z",
+ "esito": "VERDE",
+ "build": "main.10dc2403.js",
  "controlli": [
   {
    "nome": "build sito = origine",
    "ok": true,
-   "dettaglio": "tutte su main.3dd87f0f.js"
+   "dettaglio": "tutte su main.10dc2403.js"
   },
   {
    "nome": "testi /termini",
@@ -30,8 +30,8 @@
   },
   {
    "nome": "testi /ipartner",
-   "ok": false,
-   "dettaglio": "http 200, vietati: coming soon"
+   "ok": true,
+   "dettaglio": "http 200, vietati: nessuno"
   },
   {
    "nome": "/note-legali non è un doppione dei Termini",
@@ -51,15 +51,13 @@
   {
    "nome": "feed statistiche fresco (< 90 min)",
    "ok": true,
-   "dettaglio": "8 min · 320159 lotti · aggiornato 2026-11-27T16:29:37.631Z"
+   "dettaglio": "17 min · 320207 lotti · aggiornato 2026-11-27T19:51:35.885Z"
   },
   {
    "nome": "prerender allineato alla build servita",
    "ok": true,
-   "dettaglio": "main.3dd87f0f.js vs main.3dd87f0f.js"
+   "dettaglio": "main.10dc2403.js vs main.10dc2403.js"
   }
  ],
- "guasti": [
-  "testi /ipartner"
- ]
+ "guasti": []
 }
