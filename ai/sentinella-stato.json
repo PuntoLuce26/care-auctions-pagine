@@ -1,8 +1,8 @@
 {
   "ok": false,
-  "aggiornato": "2026-11-26T21:37:32.969Z",
+  "aggiornato": "2026-11-27T03:49:37.877Z",
   "base": "https://careauctions.co",
-  "run": "45899323123",
+  "run": "45936322656",
   "checks": [
     {
       "id": "icare_success_fee",
@@ -22,7 +22,7 @@
     {
       "id": "cervello_json",
       "ok": false,
-      "det": "HTTP 200 · età 0.3g"
+      "det": "HTTP 200 · età 0.6g"
     },
     {
       "id": "ai_knowledge",
@@ -42,7 +42,7 @@
     {
       "id": "traduzioni_stato",
       "ok": true,
-      "det": "HTTP 200 · età 0.4g"
+      "det": "HTTP 200 · età 0.7g"
     },
     {
       "id": "qa_stato",
@@ -57,7 +57,7 @@
     {
       "id": "perf_stato",
       "ok": true,
-      "det": "R2 · p95 0ms · età 0.2g"
+      "det": "R2 · p95 0ms · età 0.1g"
     },
     {
       "id": "worker_ai_stato",
@@ -94,7 +94,7 @@
     {
       "componente": "ai",
       "gravita": "high",
-      "oggetto": "cervello_json: HTTP 200 · età 0.3g"
+      "oggetto": "cervello_json: HTTP 200 · età 0.6g"
     },
     {
       "componente": "ai",
