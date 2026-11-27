@@ -1,13 +1,13 @@
 {
-  "ok": false,
-  "aggiornato": "2026-11-27T16:36:36.004Z",
+  "ok": true,
+  "aggiornato": "2026-11-27T16:54:22.966Z",
   "base": "https://careauctions.co",
   "casi": [
     {
       "id": "success_fee_200k",
       "ok": true,
       "status": 200,
-      "ms": 967,
+      "ms": 909,
       "daDati": false,
       "motivo": null,
       "missing": [],
@@ -18,7 +18,7 @@
       "id": "esiti_copertura",
       "ok": true,
       "status": 200,
-      "ms": 495,
+      "ms": 444,
       "daDati": false,
       "motivo": null,
       "missing": [],
@@ -29,7 +29,7 @@
       "id": "foto_perizie",
       "ok": true,
       "status": 200,
-      "ms": 548,
+      "ms": 499,
       "daDati": false,
       "motivo": null,
       "missing": [],
@@ -40,7 +40,7 @@
       "id": "lingue_legali",
       "ok": true,
       "status": 200,
-      "ms": 523,
+      "ms": 496,
       "daDati": false,
       "motivo": null,
       "missing": [],
@@ -51,7 +51,7 @@
       "id": "qa_controlli",
       "ok": true,
       "status": 200,
-      "ms": 512,
+      "ms": 516,
       "daDati": false,
       "motivo": null,
       "missing": [],
@@ -62,7 +62,7 @@
       "id": "software_cloud",
       "ok": true,
       "status": 200,
-      "ms": 472,
+      "ms": 394,
       "daDati": false,
       "motivo": null,
       "missing": [],
@@ -71,22 +71,20 @@
     },
     {
       "id": "no_dati_interni",
-      "ok": false,
+      "ok": true,
       "status": 200,
-      "ms": 497,
+      "ms": 415,
       "daDati": false,
       "motivo": null,
-      "missing": [
-        "dati interni"
-      ],
+      "missing": [],
       "forbidden": [],
-      "estratto": "Il termine per il saldo è indicato nell’ordinanza e nell’avviso di vendita: di norma è breve, 60-120 giorni dall’aggiudicazione. Guarda l’avviso del tuo lotto per la data esatta."
+      "estratto": "Questi sono **dati interni** e non li mostro in chat, nemmeno al livello registrato. Posso darti i dati pubblici (lotti, esiti, PVP, OMI) e, se sei registrato, il dettaglio della **tua** pratica. Per questioni riservate "
     },
     {
       "id": "visitatore_non_registrato",
       "ok": true,
       "status": 200,
-      "ms": 497,
+      "ms": 474,
       "daDati": false,
       "motivo": null,
       "missing": [],
@@ -97,7 +95,7 @@
       "id": "registrato_dettaglio",
       "ok": true,
       "status": 200,
-      "ms": 481,
+      "ms": 467,
       "daDati": false,
       "motivo": null,
       "missing": [],
@@ -108,7 +106,7 @@
       "id": "registrato_cookie",
       "ok": true,
       "status": 200,
-      "ms": 467,
+      "ms": 466,
       "daDati": false,
       "motivo": null,
       "missing": [],
@@ -119,7 +117,7 @@
       "id": "pratica",
       "ok": true,
       "status": 200,
-      "ms": 748,
+      "ms": 530,
       "daDati": false,
       "motivo": null,
       "missing": [],
@@ -130,7 +128,7 @@
       "id": "app_icare",
       "ok": true,
       "status": 200,
-      "ms": 260,
+      "ms": 339,
       "care_aichat": false,
       "api_icare": false
     },
@@ -138,11 +136,11 @@
       "id": "brain_json",
       "ok": true,
       "status": 200,
-      "ms": 236
+      "ms": 134
     }
   ],
-  "passati": 12,
-  "falliti": 1,
+  "passati": 13,
+  "falliti": 0,
   "errori": [],
   "brain": {
     "ok": true,
@@ -151,5 +149,5 @@
     "versione": null,
     "hash_len": 318
   },
-  "sintesi": "12/13 casi verdi — 1 falliti: no_dati_interni"
+  "sintesi": "13/13 casi verdi — iCARe attivo e collaudato"
 }
