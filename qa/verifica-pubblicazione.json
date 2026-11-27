@@ -1,12 +1,12 @@
 {
- "generato": "2026-11-27T03:58:31.964Z",
+ "generato": "2026-11-27T13:41:59.369Z",
  "esito": "GIALLO",
- "build": "main.f47fbbfc.js",
+ "build": "main.db7e2d32.js",
  "controlli": [
   {
    "nome": "build sito = origine",
    "ok": true,
-   "dettaglio": "tutte su main.f47fbbfc.js"
+   "dettaglio": "tutte su main.db7e2d32.js"
   },
   {
    "nome": "testi /termini",
@@ -51,12 +51,12 @@
   {
    "nome": "feed statistiche fresco (< 90 min)",
    "ok": true,
-   "dettaglio": "10 min · 319879 lotti · aggiornato 2026-11-27T03:48:47.088Z"
+   "dettaglio": "16 min · 320058 lotti · aggiornato 2026-11-27T13:26:02.653Z"
   },
   {
    "nome": "prerender allineato alla build servita",
    "ok": true,
-   "dettaglio": "main.f47fbbfc.js vs main.f47fbbfc.js"
+   "dettaglio": "main.db7e2d32.js vs main.db7e2d32.js"
   }
  ],
  "guasti": [
