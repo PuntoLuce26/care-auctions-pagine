@@ -34,6 +34,18 @@ def testo_pdf(p):
     except Exception as e:
         return ''
 
+def perizia_da_api(lid):
+    try:
+        req = urllib.request.Request('https://careauctions.co/api/pvp-documenti/' + str(lid),
+                                     headers={'User-Agent': UA, 'Accept': 'application/json'})
+        d = json.load(urllib.request.urlopen(req, timeout=30))
+        for a in d.get('allegati') or []:
+            if str(a.get('t') or '').upper() == 'PERIZ' and a.get('u'):
+                return a['u']
+    except Exception:
+        pass
+    return None
+
 def confronta(txt):
     a = mio.estrai(txt); mine = (a.get('commerciale') or {}).get('v')
     b = suo.estrai(txt); cl = b.get('mq_commerciali'); aff = b.get('affidabilita')
@@ -49,7 +61,7 @@ def main():
     lista = json.load(open(sys.argv[1])); outpath = sys.argv[2]
     out = open(outpath, 'a', encoding='utf-8')
     for i, lot in enumerate(lista):
-        lid = str(lot['id']); purl = lot.get('perizia')
+        lid = str(lot['id']); purl = perizia_da_api(lid) or lot.get('perizia')
         rec = {'id': lid, 'titolo': lot.get('titolo'), 'perizia': purl}
         if not purl:
             rec['stato'] = 'senza-perizia'
