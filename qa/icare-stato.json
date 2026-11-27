@@ -1,13 +1,13 @@
 {
   "ok": false,
-  "aggiornato": "2026-11-26T15:36:35.472Z",
+  "aggiornato": "2026-11-27T15:28:32.114Z",
   "base": "https://careauctions.co",
   "casi": [
     {
       "id": "success_fee_200k",
       "ok": true,
       "status": 200,
-      "ms": 998,
+      "ms": 1044,
       "daDati": false,
       "motivo": null,
       "missing": [],
@@ -18,7 +18,7 @@
       "id": "esiti_copertura",
       "ok": true,
       "status": 200,
-      "ms": 461,
+      "ms": 593,
       "daDati": false,
       "motivo": null,
       "missing": [],
@@ -29,7 +29,7 @@
       "id": "foto_perizie",
       "ok": true,
       "status": 200,
-      "ms": 421,
+      "ms": 589,
       "daDati": false,
       "motivo": null,
       "missing": [],
@@ -40,7 +40,7 @@
       "id": "lingue_legali",
       "ok": true,
       "status": 200,
-      "ms": 417,
+      "ms": 623,
       "daDati": false,
       "motivo": null,
       "missing": [],
@@ -51,7 +51,7 @@
       "id": "qa_controlli",
       "ok": true,
       "status": 200,
-      "ms": 545,
+      "ms": 507,
       "daDati": false,
       "motivo": null,
       "missing": [],
@@ -62,7 +62,7 @@
       "id": "software_cloud",
       "ok": true,
       "status": 200,
-      "ms": 458,
+      "ms": 573,
       "daDati": false,
       "motivo": null,
       "missing": [],
@@ -71,20 +71,22 @@
     },
     {
       "id": "no_dati_interni",
-      "ok": true,
+      "ok": false,
       "status": 200,
-      "ms": 460,
+      "ms": 456,
       "daDati": false,
       "motivo": null,
-      "missing": [],
+      "missing": [
+        "dati interni"
+      ],
       "forbidden": [],
-      "estratto": "Questi sono **dati interni** e non li mostro in chat, nemmeno al livello registrato. Posso darti i dati pubblici (lotti, esiti, PVP, OMI) e, se sei registrato, il dettaglio della **tua** pratica. Per questioni riservate "
+      "estratto": "Il termine per il saldo è indicato nell’ordinanza e nell’avviso di vendita: di norma è breve, 60-120 giorni dall’aggiudicazione. Guarda l’avviso del tuo lotto per la data esatta."
     },
     {
       "id": "visitatore_non_registrato",
       "ok": true,
       "status": 200,
-      "ms": 464,
+      "ms": 468,
       "daDati": false,
       "motivo": null,
       "missing": [],
@@ -95,7 +97,7 @@
       "id": "registrato_dettaglio",
       "ok": true,
       "status": 200,
-      "ms": 418,
+      "ms": 516,
       "daDati": false,
       "motivo": null,
       "missing": [],
@@ -106,7 +108,7 @@
       "id": "registrato_cookie",
       "ok": true,
       "status": 200,
-      "ms": 495,
+      "ms": 497,
       "daDati": false,
       "motivo": null,
       "missing": [],
@@ -117,7 +119,7 @@
       "id": "pratica",
       "ok": true,
       "status": 200,
-      "ms": 524,
+      "ms": 570,
       "daDati": false,
       "motivo": null,
       "missing": [],
@@ -128,7 +130,7 @@
       "id": "app_icare",
       "ok": true,
       "status": 200,
-      "ms": 551,
+      "ms": 135,
       "care_aichat": false,
       "api_icare": false
     },
@@ -136,18 +138,18 @@
       "id": "brain_json",
       "ok": false,
       "status": 200,
-      "ms": 154
+      "ms": 92
     }
   ],
-  "passati": 12,
-  "falliti": 1,
+  "passati": 11,
+  "falliti": 2,
   "errori": [],
   "brain": {
     "ok": false,
     "status": 200,
-    "aggiornato": "2026-11-26T14:06:32.251Z",
+    "aggiornato": "2026-11-27T14:04:43.312Z",
     "versione": null,
     "hash_len": 318
   },
-  "sintesi": "12/13 casi verdi — 1 falliti: brain_json"
+  "sintesi": "11/13 casi verdi — 2 falliti: no_dati_interni, brain_json"
 }
