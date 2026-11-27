@@ -19,11 +19,11 @@
 ## Domande frequenti
 Domande frequenti, con risposte verificabili: https://careauctions.co/feed/faq.json
 
-## Numeri aggiornati (2026-11-26)
-- Lotti: 319815 (immobiliari 270537, mobiliari 49278)
-- Lotti attivi in sitemap: 41500
+## Numeri aggiornati (2026-11-27)
+- Lotti: 320063 (immobiliari 270687, mobiliari 49376)
+- Lotti attivi in sitemap: 41633
 - Regioni: 21 · Tribunali: 148 · Lingue: 91
-- Esiti: 2025 aggiudicate, 28114 deserte
+- Esiti: 2014 aggiudicate, 28439 deserte
 
 ## Pagine principali
 - iworld: https://careauctions.co/iworld
@@ -82,10 +82,3 @@ CAReAuctions (careauctions.co) — dati aggiornati dalle fonti ufficiali; succes
 - Non inventare numeri: usa questa knowledge base o le fonti ufficiali.
 - Le risposte legali non sostituiscono un professionista.
 - Le foto e i documenti hanno fonte PVP; verifica sempre la scheda ufficiale.
-
-## Comprare casa all'asta in Italia dall'estero — la guida in cinque lingue
-- it: https://careauctions.co/comprare-casa-all-asta-dall-estero — Chi può comprare all'asta in Italia vivendo all'estero, cosa serve per fare un'offerta, cauzione, offerta minima e saldo.
-- en: https://careauctions.co/en/comprare-casa-all-asta-dall-estero — Who can bid at an Italian court auction from abroad, the documents you need, deposit, minimum offer and balance.
-- es: https://careauctions.co/es/comprare-casa-all-asta-dall-estero — Quién puede pujar en una subasta judicial en Italia desde el extranjero, documentos, depósito, oferta mínima y saldo.
-- fr: https://careauctions.co/fr/comprare-casa-all-asta-dall-estero — Qui peut enchérir à une vente judiciaire en Italie depuis l'étranger, documents, caution, offre minimale et solde.
-- de: https://careauctions.co/de/comprare-casa-all-asta-dall-estero — Wer bei einer italienischen Gerichtsversteigerung aus dem Ausland bieten darf, Unterlagen, Kaution, Mindestgebot, Restzahlung.
