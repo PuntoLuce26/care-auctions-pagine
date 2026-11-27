@@ -1,5 +1,5 @@
 {
- "generato": "2026-11-27T14:24:05.108Z",
+ "generato": "2026-11-27T16:37:28.227Z",
  "esito": "GIALLO",
  "build": "main.3dd87f0f.js",
  "controlli": [
@@ -51,7 +51,7 @@
   {
    "nome": "feed statistiche fresco (< 90 min)",
    "ok": true,
-   "dettaglio": "15 min · 320075 lotti · aggiornato 2026-11-27T14:09:02.522Z"
+   "dettaglio": "8 min · 320159 lotti · aggiornato 2026-11-27T16:29:37.631Z"
   },
   {
    "nome": "prerender allineato alla build servita",
