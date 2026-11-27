@@ -1,0 +1,613 @@
+{
+ "generato": "2026-11-27T16:25:24.614Z",
+ "repos": {
+  "care-auctions-pagine": {
+   "runs": [
+    {
+     "workflow": "Run GitHub - riassunto redatto",
+     "id": 46033376171,
+     "quando": "2026-11-27T16:24:42Z",
+     "esito": "in_progress"
+    },
+    {
+     "workflow": "pages build and deployment",
+     "id": 46033367547,
+     "quando": "2026-11-27T16:24:38Z",
+     "esito": "in_progress"
+    },
+    {
+     "workflow": "guardiano-workflow",
+     "id": 46033366970,
+     "quando": "2026-11-27T16:24:38Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "gate",
+     "id": 46033366947,
+     "quando": "2026-11-27T16:24:38Z",
+     "esito": "in_progress"
+    },
+    {
+     "workflow": "guardiano-proprieta",
+     "id": 46033366945,
+     "quando": "2026-11-27T16:24:38Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "guardiano-proprieta",
+     "id": 46033363213,
+     "quando": "2026-11-27T16:24:36Z",
+     "esito": "cancelled"
+    },
+    {
+     "workflow": "gate",
+     "id": 46033363018,
+     "quando": "2026-11-27T16:24:36Z",
+     "esito": "cancelled"
+    },
+    {
+     "workflow": "pages build and deployment",
+     "id": 46033362516,
+     "quando": "2026-11-27T16:24:36Z",
+     "esito": "cancelled"
+    },
+    {
+     "workflow": "pages build and deployment",
+     "id": 46033021629,
+     "quando": "2026-11-27T16:22:13Z",
+     "esito": "cancelled"
+    },
+    {
+     "workflow": "feed-sync",
+     "id": 46032935789,
+     "quando": "2026-11-27T16:21:36Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "gate",
+     "id": 46032770807,
+     "quando": "2026-11-27T16:20:28Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "guardiano-proprieta",
+     "id": 46032770782,
+     "quando": "2026-11-27T16:20:28Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "pages build and deployment",
+     "id": 46032770583,
+     "quando": "2026-11-27T16:20:28Z",
+     "esito": "cancelled"
+    },
+    {
+     "workflow": "prerender",
+     "id": 46032503404,
+     "quando": "2026-11-27T16:18:36Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "feed-sync",
+     "id": 46032500313,
+     "quando": "2026-11-27T16:18:35Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "feed-sync",
+     "id": 46032220307,
+     "quando": "2026-11-27T16:16:37Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "qa",
+     "id": 46032151676,
+     "quando": "2026-11-27T16:16:07Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "mail-qa",
+     "id": 46032025350,
+     "quando": "2026-11-27T16:15:17Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "pages build and deployment",
+     "id": 46031966004,
+     "quando": "2026-11-27T16:14:54Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "feed-sync",
+     "id": 46031772840,
+     "quando": "2026-11-27T16:13:34Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "feed-sync",
+     "id": 46031191136,
+     "quando": "2026-11-27T16:09:34Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "pages build and deployment",
+     "id": 46030878922,
+     "quando": "2026-11-27T16:07:22Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "feed-sync",
+     "id": 46030626364,
+     "quando": "2026-11-27T16:05:38Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "ocr-perizie",
+     "id": 46030561146,
+     "quando": "2026-11-27T16:05:13Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "guardiano-proprieta",
+     "id": 46030407644,
+     "quando": "2026-11-27T16:04:12Z",
+     "esito": "success"
+    }
+   ]
+  },
+  "green": {
+   "runs": [
+    {
+     "workflow": "indicizzazione",
+     "id": 46023889792,
+     "quando": "2026-11-27T15:19:33Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "green-sicurezza",
+     "id": 46021923828,
+     "quando": "2026-11-27T15:06:37Z",
+     "esito": "failure",
+     "passi_caduti": [
+      "Porte rosse"
+     ],
+     "errore": []
+    },
+    {
+     "workflow": "Posta SAM bidirezionale",
+     "id": 45997810214,
+     "quando": "2026-11-27T12:20:26Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "green-azione",
+     "id": 45963586566,
+     "quando": "2026-11-27T08:10:04Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "green",
+     "id": 45960144486,
+     "quando": "2026-11-27T07:40:58Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "Posta SAM bidirezionale",
+     "id": 45932008025,
+     "quando": "2026-11-27T03:04:24Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "green2-ponte",
+     "id": 45924654247,
+     "quando": "2026-11-27T01:48:17Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "green-azione",
+     "id": 45914095984,
+     "quando": "2026-11-26T23:59:33Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "green",
+     "id": 45896611086,
+     "quando": "2026-11-26T21:13:19Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "Posta SAM bidirezionale",
+     "id": 45890782162,
+     "quando": "2026-11-26T20:24:16Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "team",
+     "id": 45866325633,
+     "quando": "2026-11-26T17:16:30Z",
+     "esito": "failure",
+     "passi_caduti": [
+      "Verifica il team"
+     ],
+     "errore": []
+    },
+    {
+     "workflow": "green2-ponte",
+     "id": 45864780110,
+     "quando": "2026-11-26T17:06:09Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "green-query",
+     "id": 45862103675,
+     "quando": "2026-11-26T16:48:12Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "indicizzazione",
+     "id": 45849430495,
+     "quando": "2026-11-26T15:28:24Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "green-azione",
+     "id": 45849325902,
+     "quando": "2026-11-26T15:27:45Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "green-sicurezza",
+     "id": 45847777790,
+     "quando": "2026-11-26T15:18:34Z",
+     "esito": "failure",
+     "passi_caduti": [
+      "Porte rosse"
+     ],
+     "errore": []
+    },
+    {
+     "workflow": "Posta SAM bidirezionale",
+     "id": 45810343370,
+     "quando": "2026-11-26T11:24:42Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "green",
+     "id": 45777307697,
+     "quando": "2026-11-26T07:42:20Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "green-azione",
+     "id": 45760227171,
+     "quando": "2026-11-26T05:13:58Z",
+     "esito": "success"
+    }
+   ]
+  },
+  "care-workers": {
+   "runs": [
+    {
+     "workflow": "edge-smoke",
+     "id": 45996477854,
+     "quando": "2026-11-27T12:10:49Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "fee-test",
+     "id": 45996467945,
+     "quando": "2026-11-27T12:10:45Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "deploy-worker",
+     "id": 45996391484,
+     "quando": "2026-11-27T12:10:14Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "edge-smoke",
+     "id": 45995890042,
+     "quando": "2026-11-27T12:06:36Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "deploy-worker",
+     "id": 45995813148,
+     "quando": "2026-11-27T12:06:02Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "edge-smoke",
+     "id": 45995466069,
+     "quando": "2026-11-27T12:03:30Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "deploy-worker",
+     "id": 45995390007,
+     "quando": "2026-11-27T12:02:56Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "veglia-append",
+     "id": 45993058780,
+     "quando": "2026-11-27T11:45:25Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "edge-smoke",
+     "id": 45949687078,
+     "quando": "2026-11-27T06:05:54Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "deploy-worker",
+     "id": 45949617912,
+     "quando": "2026-11-27T06:05:15Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "veglia-append",
+     "id": 45931469788,
+     "quando": "2026-11-27T02:58:58Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "edge-smoke",
+     "id": 45914716347,
+     "quando": "2026-11-27T00:05:49Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "deploy-worker",
+     "id": 45914657237,
+     "quando": "2026-11-27T00:05:14Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "veglia-append",
+     "id": 45890429723,
+     "quando": "2026-11-26T20:21:19Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "edge-smoke",
+     "id": 45887351628,
+     "quando": "2026-11-26T19:56:30Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "deploy-worker",
+     "id": 45887269499,
+     "quando": "2026-11-26T19:55:48Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "edge-smoke",
+     "id": 45872468113,
+     "quando": "2026-11-26T18:00:49Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "deploy-worker",
+     "id": 45872384594,
+     "quando": "2026-11-26T18:00:16Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "edge-smoke",
+     "id": 45853666744,
+     "quando": "2026-11-26T15:54:23Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "deploy-worker",
+     "id": 45853572517,
+     "quando": "2026-11-26T15:53:48Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "edge-smoke",
+     "id": 45853351842,
+     "quando": "2026-11-26T15:52:24Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "deploy-worker",
+     "id": 45853221874,
+     "quando": "2026-11-26T15:51:35Z",
+     "esito": "failure",
+     "passi_caduti": [
+      "4. Verifica sull'artefatto (+ rollback automatico)"
+     ],
+     "errore": []
+    },
+    {
+     "workflow": "edge-smoke",
+     "id": 45851202599,
+     "quando": "2026-11-26T15:39:05Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "deploy-worker",
+     "id": 45851093484,
+     "quando": "2026-11-26T15:38:24Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "edge-smoke",
+     "id": 45850769701,
+     "quando": "2026-11-26T15:36:26Z",
+     "esito": "success"
+    }
+   ]
+  },
+  "second-brain": {
+   "runs": [
+    {
+     "workflow": "posta",
+     "id": 46033456716,
+     "quando": "2026-11-27T16:25:15Z",
+     "esito": "in_progress"
+    },
+    {
+     "workflow": "posta",
+     "id": 46029820797,
+     "quando": "2026-11-27T16:00:15Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "posta",
+     "id": 46026231941,
+     "quando": "2026-11-27T15:35:18Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "memoria",
+     "id": 46025075386,
+     "quando": "2026-11-27T15:27:27Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "posta",
+     "id": 46022473450,
+     "quando": "2026-11-27T15:10:15Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "posta",
+     "id": 46018751494,
+     "quando": "2026-11-27T14:45:20Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "peso",
+     "id": 46018632199,
+     "quando": "2026-11-27T14:44:33Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "posta",
+     "id": 46015011209,
+     "quando": "2026-11-27T14:20:18Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "posta",
+     "id": 46011274711,
+     "quando": "2026-11-27T13:55:19Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "quadro-scribe",
+     "id": 46008186249,
+     "quando": "2026-11-27T13:33:50Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "qa-sync",
+     "id": 46008145881,
+     "quando": "2026-11-27T13:33:33Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "posta",
+     "id": 46007650930,
+     "quando": "2026-11-27T13:30:15Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "backup-posta",
+     "id": 46007418329,
+     "quando": "2026-11-27T13:28:35Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "monitor-claude",
+     "id": 46006673068,
+     "quando": "2026-11-27T13:23:19Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "posta",
+     "id": 46004070406,
+     "quando": "2026-11-27T13:05:16Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "guardiano-run",
+     "id": 46003134430,
+     "quando": "2026-11-27T12:58:46Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "monitor-claude",
+     "id": 46002375437,
+     "quando": "2026-11-27T12:53:09Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "posta",
+     "id": 46000576684,
+     "quando": "2026-11-27T12:40:16Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "monitor-claude",
+     "id": 45998306526,
+     "quando": "2026-11-27T12:23:58Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "posta",
+     "id": 45997095811,
+     "quando": "2026-11-27T12:15:17Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "memoria",
+     "id": 45996565249,
+     "quando": "2026-11-27T12:11:28Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "memoria",
+     "id": 45996388424,
+     "quando": "2026-11-27T12:10:13Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "posta",
+     "id": 45993704478,
+     "quando": "2026-11-27T11:50:15Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "posta",
+     "id": 45990655029,
+     "quando": "2026-11-27T11:27:41Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "monitor-claude",
+     "id": 45990272048,
+     "quando": "2026-11-27T11:24:50Z",
+     "esito": "success"
+    }
+   ]
+  }
+ },
+ "numeri": {
+  "url": "https://careauctions.co/numeri.json",
+  "stato": 200,
+  "generato": "2026-11-27T16:25:32.646Z",
+  "aggiornato": "2026-11-27T16:14:38.923Z",
+  "lotti": 320153,
+  "asteOggi": 733,
+  "asteFuture": 22130,
+  "lottiAperti": 16921,
+  "tribunali": 148
+ },
+ "nota": "Riassunto redatto: nessun token, email, IBAN o percorso locale."
+}
