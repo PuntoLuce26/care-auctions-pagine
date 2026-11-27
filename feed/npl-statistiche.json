@@ -3,43 +3,43 @@
   "canary": "care-canary-d2c32afaa5d5",
   "canaryNota": "valore di riconoscimento della copia dei dati",
   "titolo": "NPL's — crediti in sofferenza e crediti in procedura (dati veri dal PVP)",
-  "generatoIl": "2026-11-26T14:02:26.006Z",
-  "aggiornato": "2026-11-26",
+  "generatoIl": "2026-11-27T14:01:13.101Z",
+  "aggiornato": "2026-11-27",
   "fonte": "PVP — Portale delle Vendite Pubbliche, Ministero della Giustizia (pvp.giustizia.it)",
   "query": "tipoLotto=VALORI-CREDITI",
   "licenza": "Dati pubblici del PVP (Portale delle Vendite Pubbliche, Ministero della Giustizia). Riuso consentito per finalità informative con citazione della fonte; nessun dato personale oltre a quanto già pubblico nel bando.",
   "metodo": "Classificazione conservativa dal testo pubblico del bando: NPL/sofferenza solo se dichiarati; crediti fiscali e titoli/quote esclusi (classi diverse, non NPL). Valore nominale solo se scritto nel bando.",
-  "totale": 259,
-  "dichiaratoPVP": 1101,
+  "totale": 260,
+  "dichiaratoPVP": 1105,
   "esclusi": {
-   "credito-fiscale": 385,
+   "credito-fiscale": 387,
    "non-credito": 22,
-   "titoli-e-quote": 435
+   "titoli-e-quote": 436
   },
   "copertura": {
    "importo": {
     "con": 46,
-    "su": 259,
-    "pct": 17.8
+    "su": 260,
+    "pct": 17.7
    },
    "regione": {
-    "con": 192,
-    "su": 259,
-    "pct": 74.1
+    "con": 193,
+    "su": 260,
+    "pct": 74.2
    },
    "tribunale": {
-    "con": 257,
-    "su": 259,
+    "con": 258,
+    "su": 260,
     "pct": 99.2
    }
   },
   "perTipo": {
-   "credito": 255,
+   "credito": 256,
    "NPL": 4
   },
   "perStato": {
    "conclusa-esito-non-pubblicato": 215,
-   "in-programma": 20,
+   "in-programma": 21,
    "deserta": 18,
    "aggiudicata": 6
   },
@@ -53,15 +53,15 @@
   "fascePrezzoBase": {
    "10k-50k": 84,
    "fino-10k": 69,
-   "50k-250k": 33,
+   "50k-250k": 34,
    "250k-1M": 29,
    "oltre-1M": 23
   },
   "regioni": 16,
   "province": 40,
-  "sommaPrezzoBase": 377562055,
+  "sommaPrezzoBase": 377612055,
   "freschezza": {
-   "ultimaRaccolta": "2026-11-26",
+   "ultimaRaccolta": "2026-11-27",
    "dataLottoPiuRecente": "2027-01-14",
    "dataLottoPiuVecchio": "2024-01-12"
   },
@@ -70,7 +70,7 @@
  "perRegione": {
   "Lazio": 55,
   "Sicilia": 33,
-  "Toscana": 26,
+  "Toscana": 27,
   "Lombardia": 17,
   "Calabria": 13,
   "Emilia-Romagna": 11,
@@ -99,6 +99,7 @@
   "Lucca": 4,
   "Firenze": 3,
   "Vibo Valentia": 3,
+  "Prato": 2,
   "Cuneo": 2,
   "Treviso": 2,
   "Macerata": 2,
@@ -121,7 +122,6 @@
   "Varese": 1,
   "Pisa": 1,
   "Verona": 1,
-  "Prato": 1,
   "Ancona": 1,
   "Potenza": 1,
   "Arezzo": 1,
