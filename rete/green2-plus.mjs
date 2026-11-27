@@ -20,7 +20,10 @@ for (const [i, c] of claims.entries()) {
 }
 checks.push({ nome: 'non_misurate dichiarate', ok: Array.isArray(d.nonMisurate) });
 // Anti-invenzione: una fonte dichiarata deve rispondere (HEAD o GET), non basta il testo.
-for (const c of claims.slice(0, 5)) {
+// 27/11/2026 — se la fixture dichiara `senzaRete: true` il controllo di raggiungibilità si SALTA:
+// una fixture deve essere deterministica e non dipendere da un URL vivo che nel frattempo cambia.
+if (d.senzaRete === true) checks.push({ nome: 'fonte raggiungibile: saltato (fixture senza rete)', ok: true });
+for (const c of (d.senzaRete === true ? [] : claims.slice(0, 5))) {
   if (!/^https:\/\//i.test(String(c.fonte || ''))) continue;
   try {
     const r = await fetch(c.fonte, { method: 'GET', headers: { 'User-Agent': 'CARe-GREEN2/1.0', Range: 'bytes=0-200' }, signal: AbortSignal.timeout(10000) });
