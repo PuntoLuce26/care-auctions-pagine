@@ -1,8 +1,8 @@
 {
  "supervisore": "rete-green2",
- "ultimoGiro": "2026-11-27T16:43:16.450Z",
- "runId": 46035860788,
- "esito": "failure",
+ "ultimoGiro": "2026-11-27T17:52:35.956Z",
+ "runId": 46045107769,
+ "esito": "success",
  "ok": null,
  "controlli": null
 }
