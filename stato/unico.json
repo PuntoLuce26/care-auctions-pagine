@@ -1,5 +1,5 @@
 {
- "generato": "2026-11-27T17:31:07.246Z",
+ "generato": "2026-11-27T20:16:06.411Z",
  "semaforo": "rosso",
  "conteggi": {
   "ok": 17,
@@ -89,14 +89,14 @@
    "sezione": "feed",
    "nome": "statistiche",
    "stato": "ok",
-   "valore": "4 min",
-   "dettaglio": "320180 lotti"
+   "valore": "2 min",
+   "dettaglio": "320208 lotti"
   },
   {
    "sezione": "feed",
    "nome": "world",
    "stato": "rosso",
-   "valore": "21367 min",
+   "valore": "21532 min",
    "dettaglio": "33 paesi"
   },
   {
@@ -110,28 +110,28 @@
    "sezione": "feed",
    "nome": "san-pasquale-foto",
    "stato": "rosso",
-   "valore": "21605 min",
+   "valore": "21770 min",
    "dettaglio": "37 foto"
   },
   {
    "sezione": "build",
    "nome": "sito vs origine",
    "stato": "ok",
-   "valore": "main.3dd87f0f.js / main.3dd87f0f.js",
+   "valore": "main.10dc2403.js / main.10dc2403.js",
    "dettaglio": ""
   },
   {
    "sezione": "prerender",
    "nome": "snapshot vs vivo",
    "stato": "ok",
-   "valore": "main.3dd87f0f.js / main.3dd87f0f.js",
+   "valore": "main.10dc2403.js / main.10dc2403.js",
    "dettaglio": ""
   },
   {
    "sezione": "prerender",
    "nome": "bot allineato",
    "stato": "ok",
-   "valore": "main.3dd87f0f.js",
+   "valore": "main.10dc2403.js",
    "dettaglio": ""
   },
   {
@@ -159,8 +159,8 @@
    "sezione": "mail",
    "nome": "allarmi",
    "stato": "giallo",
-   "valore": "12",
-   "dettaglio": "2026-11-27T17:30:57.744Z"
+   "valore": "8",
+   "dettaglio": "2026-11-27T20:00:56.897Z"
   },
   {
    "sezione": "sentinella",
@@ -180,8 +180,8 @@
    "sezione": "github",
    "nome": "run rossi (2h)",
    "stato": "ok",
-   "valore": "1 isolati",
-   "dettaglio": "rete-emergent (una volta sola: race nota)"
+   "valore": "0 isolati",
+   "dettaglio": ""
   }
  ]
 }
