@@ -1,8 +1,8 @@
 {
  "supervisore": "rete-emergent",
- "ultimoGiro": "2026-11-27T16:57:53.436Z",
- "runId": 46037842229,
- "esito": "failure",
+ "ultimoGiro": "2026-11-27T17:35:45.383Z",
+ "runId": 46042842285,
+ "esito": "success",
  "ok": null,
  "controlli": null
 }
