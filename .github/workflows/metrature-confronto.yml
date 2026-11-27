@@ -1,0 +1,37 @@
+name: Confronto mq commerciali (due estrattori, sola lettura)
+
+on:
+  workflow_dispatch:
+    inputs:
+      quanti:
+        description: "quanti lotti immobiliari aperti"
+        default: "200"
+
+permissions:
+  contents: read
+
+jobs:
+  confronto:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Installa poppler (pdftotext)
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+      - name: Elenca i lotti aperti con perizia
+        run: python3 scripts/metrature/lotti-aperti.py "${{ inputs.quanti || 200 }}" lotti.json
+      - name: Confronta i due estrattori sulla stessa perizia
+        run: python3 scripts/metrature/confronta_mq.py lotti.json confronto.jsonl
+      - name: Riepilogo + campione di 50
+        run: |
+          python3 scripts/metrature/riepiloga-confronto.py confronto.jsonl campione-50.json | tee riepilogo.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mq-confronto
+          path: |
+            confronto.jsonl
+            campione-50.json
+            riepilogo.json
+            lotti.json
+          retention-days: 30
