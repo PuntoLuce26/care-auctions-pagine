@@ -1,14 +1,14 @@
 {
-  "eseguito": "2026-11-27T16:41:48.842Z",
+  "eseguito": "2026-11-27T19:19:32.610Z",
   "host": "careauctions.co",
   "endpoint": "https://api.indexnow.org/indexnow",
   "keyLocation": "https://careauctions.co/b2c9e4a7f3d15e6b8a0c4d2f6e8a1c3d.txt",
   "totale": 224,
   "verificate": 178,
   "selezionate": 178,
-  "inviate": 178,
+  "inviate": 0,
   "inviateOggi": 178,
-  "giaInviateOggi": 0,
+  "giaInviateOggi": 178,
   "storicoInvii": [
     {
       "eseguito": "2026-11-21T14:41:21.675Z",
@@ -67,23 +67,8 @@
       "scartate": 46
     }
   ],
-  "httpStatus": 200,
-  "risposte": [
-    {
-      "da": 1,
-      "a": 100,
-      "url": 100,
-      "status": 200,
-      "risposta": ""
-    },
-    {
-      "da": 101,
-      "a": 178,
-      "url": 78,
-      "status": 200,
-      "risposta": ""
-    }
-  ],
+  "httpStatus": null,
+  "risposte": [],
   "scartate": [
     {
       "url": "https://careauctions.co/aste-roma",
