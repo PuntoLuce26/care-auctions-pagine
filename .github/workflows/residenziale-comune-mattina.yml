@@ -1,0 +1,50 @@
+name: residenziale-comune-mattina
+# 27/11/2026 — il cron "30 5 * * *" di residenziale-comune.yml viene eseguito da GitHub
+# con 8-10 ore di ritardo (misurato: cron 05:30Z, run create 13:28-16:14Z per 8 giorni di fila).
+# Questa copia si innesca sulla fine di feed-sync (che gira ogni ~12-20 minuti) e lavora
+# SOLO la mattina, SOLO se il file del giorno non è ancora quello di oggi: così il dato
+# delle aste aperte è pronto prima delle 07:30 di Roma.
+on:
+  workflow_run:
+    workflows: ["feed-sync"]
+    types: [completed]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: residenziale-comune
+  cancel-in-progress: false
+jobs:
+  mattina:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Decide se serve (solo mattina, solo se il dato non è di oggi)
+        id: serve
+        run: |
+          ORA=$(date -u +%H)
+          OGGI=$(date -u +%Y-%m-%d)
+          FATTO=$(node -e "try{const d=require('./feed/residenziale-comune.json');const g=(d.meta&&d.meta.generatoIl)||'';console.log(String(g).slice(0,10))}catch(e){console.log('assente')}")
+          echo "ora UTC=$ORA · file del=$FATTO · oggi=$OGGI"
+          if [ "$ORA" -ge 4 ] && [ "$ORA" -le 8 ] && [ "$FATTO" != "$OGGI" ]; then
+            echo "esegui=si" >> $GITHUB_OUTPUT
+          else
+            echo "esegui=no" >> $GITHUB_OUTPUT
+          fi
+      - name: Conta i lotti attivi per comune (solo se serve)
+        if: steps.serve.outputs.esegui == 'si'
+        run: node scripts/residenziale-comune.js
+      - name: Commit (solo se serve)
+        if: steps.serve.outputs.esegui == 'si'
+        run: |
+          git config user.name "CARe Cloud"
+          git config user.email "cloud@careauctions.co"
+          git add feed/residenziale-comune.json feed/comune-tribunale.json
+          if git diff --cached --quiet; then echo "nessuna modifica"; else
+            git commit -m "residenziale-comune: mattina del $(date -u +%Y-%m-%d)"
+            for i in 1 2 3; do git pull --rebase --autostash && git push && break || sleep 10; done
+          fi
