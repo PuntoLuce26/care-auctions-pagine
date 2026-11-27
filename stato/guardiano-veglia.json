@@ -1,16 +1,16 @@
 {
- "ultimoGiro": "2026-11-27T04:14:56.044Z",
+ "ultimoGiro": "2026-11-27T13:54:09.727Z",
  "sogliaMin": 30,
- "runId": 45938739967,
+ "runId": 46011008869,
  "stato": "ok",
  "motivo": "",
  "veglia": {
   "ok": true,
-  "ultimoGiro": "2026-11-27T04:10:09.827Z",
-  "etaMin": 4.8,
+  "ultimoGiro": "2026-11-27T13:50:09.861Z",
+  "etaMin": 4,
   "sogliaMin": 30,
   "processi": 29,
-  "dispatchOggi": 23,
+  "dispatchOggi": 81,
   "totali": {
    "vivi": 10,
    "soloVerde": 0,
@@ -25,7 +25,7 @@
    {
     "nome": "sam-plus",
     "stato": "vivo",
-    "etaMin": 16.2,
+    "etaMin": 27,
     "sogliaMin": 420,
     "sveglieOggi": 0,
     "ultimoEsito": "repository_dispatch sam-plus-giro · HTTP 204"
@@ -33,7 +33,7 @@
    {
     "nome": "sam-plus-v2",
     "stato": "vivo",
-    "etaMin": 21.9,
+    "etaMin": 601.9,
     "sogliaMin": 1728,
     "sveglieOggi": 0,
     "ultimoEsito": null
@@ -41,7 +41,7 @@
    {
     "nome": "anti-bugie",
     "stato": "vivo",
-    "etaMin": 692.5,
+    "etaMin": 1272.5,
     "sogliaMin": 1800,
     "sveglieOggi": 0,
     "ultimoEsito": null
@@ -49,7 +49,7 @@
    {
     "nome": "rete-vids",
     "stato": "vivo",
-    "etaMin": 683.6,
+    "etaMin": 1263.6,
     "sogliaMin": 1800,
     "sveglieOggi": 0,
     "ultimoEsito": null
@@ -57,7 +57,7 @@
    {
     "nome": "rete-einstein",
     "stato": "vivo",
-    "etaMin": 681.8,
+    "etaMin": 1261.8,
     "sogliaMin": 1800,
     "sveglieOggi": 0,
     "ultimoEsito": null
@@ -65,7 +65,7 @@
    {
     "nome": "rete-green2",
     "stato": "vivo",
-    "etaMin": 672.8,
+    "etaMin": 1252.8,
     "sogliaMin": 1800,
     "sveglieOggi": 0,
     "ultimoEsito": null
@@ -73,7 +73,7 @@
    {
     "nome": "rete-emergent",
     "stato": "vivo",
-    "etaMin": 653,
+    "etaMin": 1233,
     "sogliaMin": 1800,
     "sveglieOggi": 0,
     "ultimoEsito": null
@@ -81,7 +81,7 @@
    {
     "nome": "emergent-watch",
     "stato": "vivo",
-    "etaMin": 195.5,
+    "etaMin": 270.4,
     "sogliaMin": 720,
     "sveglieOggi": 0,
     "ultimoEsito": null
@@ -89,7 +89,7 @@
    {
     "nome": "verifica-playwright",
     "stato": "vivo",
-    "etaMin": 48.9,
+    "etaMin": 57.8,
     "sogliaMin": 720,
     "sveglieOggi": 0,
     "ultimoEsito": null
@@ -97,15 +97,15 @@
    {
     "nome": "verifica-canonical",
     "stato": "vivo",
-    "etaMin": 43.3,
+    "etaMin": 137,
     "sogliaMin": 480,
-    "sveglieOggi": 0,
+    "sveglieOggi": 1,
     "ultimoEsito": "HTTP 204"
    },
    {
     "nome": "guardiano-veglia",
     "stato": "stantio",
-    "etaMin": 400.1,
+    "etaMin": 575.2,
     "sogliaMin": 150,
     "sveglieOggi": 0,
     "ultimoEsito": "HTTP 204"
