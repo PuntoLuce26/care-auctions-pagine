@@ -1,5 +1,5 @@
 {
- "generato": "2026-11-27T14:46:09.373Z",
+ "generato": "2026-11-27T17:31:07.246Z",
  "semaforo": "rosso",
  "conteggi": {
   "ok": 17,
@@ -89,14 +89,14 @@
    "sezione": "feed",
    "nome": "statistiche",
    "stato": "ok",
-   "valore": "8 min",
-   "dettaglio": "320095 lotti"
+   "valore": "4 min",
+   "dettaglio": "320180 lotti"
   },
   {
    "sezione": "feed",
    "nome": "world",
    "stato": "rosso",
-   "valore": "21202 min",
+   "valore": "21367 min",
    "dettaglio": "33 paesi"
   },
   {
@@ -110,7 +110,7 @@
    "sezione": "feed",
    "nome": "san-pasquale-foto",
    "stato": "rosso",
-   "valore": "21440 min",
+   "valore": "21605 min",
    "dettaglio": "37 foto"
   },
   {
@@ -159,15 +159,15 @@
    "sezione": "mail",
    "nome": "allarmi",
    "stato": "giallo",
-   "valore": "4",
-   "dettaglio": "2026-11-27T14:45:59.523Z"
+   "valore": "12",
+   "dettaglio": "2026-11-27T17:30:57.744Z"
   },
   {
    "sezione": "sentinella",
    "nome": "ok",
    "stato": "giallo",
    "valore": "2 anomalie vere",
-   "dettaglio": "1 note dichiarate, ignorate"
+   "dettaglio": ""
   },
   {
    "sezione": "perf",
@@ -180,8 +180,8 @@
    "sezione": "github",
    "nome": "run rossi (2h)",
    "stato": "ok",
-   "valore": "0 isolati",
-   "dettaglio": ""
+   "valore": "1 isolati",
+   "dettaglio": "rete-emergent (una volta sola: race nota)"
   }
  ]
 }
