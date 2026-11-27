@@ -3,6 +3,11 @@ on:
   schedule:
     - cron: "*/30 * * * *"
   workflow_dispatch:
+  # 27/11/2026 — il cron di GitHub viene diradato (misurato: 1 solo run in 90 minuti):
+  # si rigenera anche alla fine dei workflow che contano, cosi' il file non resta fermo.
+  workflow_run:
+    workflows: ["qa", "verifica-pubblicazione", "icare-test", "rete-emergent"]
+    types: [completed]
 permissions:
   contents: write
 jobs:
