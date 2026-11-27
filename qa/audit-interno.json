@@ -1,5 +1,5 @@
 {
-  "generato": "2026-11-27T03:28:18.241Z",
+  "generato": "2026-11-27T16:03:46.536Z",
   "controlli": 51,
   "critici": 0,
   "alti": 2,
@@ -7,12 +7,12 @@
   "bassi": 0,
   "qaRunRegistrato": true,
   "qaRunVerificabile": false,
-  "qaRunMotivo": "run 45931208534 · NON VERIFICABILE: nessun qa-sync dopo il run (ultimo 2026-11-27T02:25:14Z)",
+  "qaRunMotivo": "run 46027804536 · NON VERIFICABILE: nessun qa-sync dopo il run (ultimo 2026-11-27T13:33:33Z)",
   "nonVerificabili": "4/51",
   "errori5xxEdge": 0,
-  "qaRunDettaglio": "run 45931208534 · NON VERIFICABILE: nessun qa-sync dopo il run (ultimo 2026-11-27T02:25:14Z)",
+  "qaRunDettaglio": "run 46027804536 · NON VERIFICABILE: nessun qa-sync dopo il run (ultimo 2026-11-27T13:33:33Z)",
   "cadenzaOre": 3,
-  "sitoBuild": "main.f47fbbfc.js",
+  "sitoBuild": "main.3dd87f0f.js",
   "prerenderAllineato": true,
   "fonte": "presidio cloud (GitHub Actions, qa-presidio.yml)"
 }
