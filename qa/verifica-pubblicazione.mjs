@@ -35,16 +35,14 @@ add('build sito = origine', disallineate.length === 0,
                       : `tutte su ${buildSito}`);
 
 // 2. TESTI: le promesse false non devono tornare
-// 27/11/2026 — «COMING SOON» sulle foto iShop in inglese è VOLUTO (ordine di Gianluca, giro G):
-// il divieto di quella frase vale SOLO su /ipartner. Gli altri divieti restano su tutte le rotte.
-const divieti = ['30%', '40%', 'prezzo riservato', 'reserved price'];
-const divietiSoloPartner = ['coming soon'];
+// 27/11/2026 (17:49) — CORREZIONE: «coming soon» NON è voluto da Gianluca (la dicitura è «In arrivo»
+// in ogni lingua). Il divieto vale su TUTTE le rotte, /ishop compresa.
+const divieti = ['30%', '40%', 'prezzo riservato', 'reserved price', 'coming soon'];
 for (const p of ['/termini', '/note-legali', '/affiliazione', '/ishop', '/ipartner']) {
   const r = await get(SITO + p);
   const t = testo(r.body);
   const trovati = divieti.filter(d => t.toLowerCase().includes(d.toLowerCase()));
-  const lista = p === '/ipartner' ? divieti.concat(divietiSoloPartner) : divieti;
-  const trovatiP = lista.filter((d) => r.body.toLowerCase().includes(d));
+  const trovatiP = divieti.filter((d) => r.body.toLowerCase().includes(d));
   add(`testi ${p}`, r.status === 200 && trovatiP.length === 0, `http ${r.status}, vietati: ${trovatiP.join(', ') || 'nessuno'}`);
 }
 // /note-legali non deve servire i Termini
