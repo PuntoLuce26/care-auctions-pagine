@@ -31,7 +31,8 @@
     "https://linktr.ee/careauctions",
     "https://t.me/careauctions",
     "https://maps.google.com/?cid=1736545516548354075",
-    "https://vimeo.com/careauctions"
+    "https://vimeo.com/careauctions",
+    "https://www.wikidata.org/wiki/Q141826879"
    ],
    "address": {
     "@type": "PostalAddress",
@@ -66,6 +67,9 @@
     "name": "Gianluca Genco",
     "jobTitle": "Fondatore",
     "url": "https://careauctions.co/fondatore",
+    "sameAs": [
+     "https://www.wikidata.org/wiki/Q142320046"
+    ],
     "worksFor": {
      "@id": "https://careauctions.co/#organizzazione"
     }
