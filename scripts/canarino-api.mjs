@@ -3,6 +3,7 @@
 // Distinzione che conta: 403 {"detail":"Forbidden"} = origin guard, 200 = catena sana.
 // Il canarino non giudica i pagamenti, solo che l'edge arrivi all'app.
 const ROTTE = [
+  ['/', 'GET', 200],
   ['/api/battito', 'GET', 200],
   ['/api/aste/item/1822566', 'GET', 200],
   ['/api/payments/config', 'GET', 200],
@@ -50,6 +51,13 @@ const stato = {
 };
 fs.mkdirSync('qa', { recursive: true });
 fs.writeFileSync('qa/canarino-api.json', JSON.stringify(stato, null, 1) + '\n');
+// CSV datato: una riga per giro, per il rapporto di disponibilita (art. 4)
+const csv = 'qa/uptime.csv';
+const intestazione = 'ts_utc\tesito\tfallimenti_consecutivi\trotte\n';
+if (!fs.existsSync(csv)) fs.writeFileSync(csv, intestazione);
+const riga = [stato.generato, stato.esito, String(consecutivi),
+  esiti.map((x) => x.rotta + '=' + x.codice).join(' ')].join('\t') + '\n';
+fs.appendFileSync(csv, riga);
 console.log(JSON.stringify(stato, null, 1));
 
 if (process.env.GITHUB_OUTPUT) {
