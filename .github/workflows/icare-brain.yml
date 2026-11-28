@@ -3,6 +3,9 @@ on:
   schedule:
     - cron: '30 4 * * *'
   workflow_dispatch:
+  workflow_run:
+    workflows: ["feed-sync"]
+    types: [completed]
 permissions:
   contents: write
 concurrency:
