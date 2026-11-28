@@ -5,6 +5,11 @@ name: canarino-api
 on:
   schedule:
     - cron: "*/5 * * * *"
+  # 28/11/2026 — GitHub dirada le schedulazioni (misurato: 1 giro in 2 ore con */5).
+  # Quindi il canarino si innesca anche alla fine di feed-sync, che gira ogni ~12-20 minuti.
+  workflow_run:
+    workflows: ["feed-sync"]
+    types: [completed]
   workflow_dispatch:
 permissions:
   contents: write
