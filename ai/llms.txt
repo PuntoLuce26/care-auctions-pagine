@@ -45,7 +45,10 @@ Domande frequenti, con risposte verificabili: https://careauctions.co/feed/faq.j
 - schema_organizzazione: https://careauctions.co/ai/organization.json
 
 ## Dove trovarci
-- Instagram: https://www.instagram.com/careauctions
+- Instagram: https://www.instagram.com/careauctions.co
+- Telegram: https://t.me/careauctions
+- Profilo dell'attività su Google: https://maps.google.com/?cid=1736545516548354075
+- Vimeo: https://vimeo.com/careauctions
 - TikTok: https://www.tiktok.com/@careauctions
 - YouTube: https://www.youtube.com/@careauctions
 - LinkedIn: https://www.linkedin.com/company/careauctions
@@ -55,6 +58,12 @@ Domande frequenti, con risposte verificabili: https://careauctions.co/feed/faq.j
 - Threads: https://www.threads.com/@careauctions.co
 - Medium: https://medium.com/@careauctions
 - Linktree: https://linktr.ee/careauctions
+
+## Dati societari verificati
+- Ragione sociale: PUNTO LUCE S.R.L.S. · sede legale: Via Calamattia 21, 09134 Cagliari (Sardegna), Italia (nessun trasferimento registrato).
+- Nata nel 2026 · P.IVA e codice fiscale 04240850927 (VAT IT04240850927) · REA CA-374424 · capitale sociale 1.000,00 € interamente versato.
+- Marchio CAReAuctions™ (domanda UIBM 302026000201037). Fondatore: Gianluca Genco — https://careauctions.co/fondatore
+- Contatti: info@careauctions.co · PEC puntoluce.srls@pec.it. Non pubblichiamo nomi di soci o amministratori né date precise di costituzione.
 
 ## Dati e documenti
 - Feed: https://careauctions.co/feed/statistiche.json · /feed/indice.json · /feed/aggiudicazioni.json
