@@ -1,1 +1,40 @@
-{"ultimo":"2026-11-28T01:30:14Z","esito":"no","dettaglio":"[]"}
+{
+ "generato": "2026-11-28T03:36:53.712Z",
+ "esito": "ok",
+ "fallimentiConsecutivi": 0,
+ "rollback": false,
+ "rotte": [
+  {
+   "rotta": "/api/battito",
+   "metodo": "GET",
+   "atteso": 200,
+   "codice": 200,
+   "ok": true,
+   "corpo": "{\"messaggi\":[{\"id\":\"B1795534214504\",\"nome\":\"iCARe\",\"nazione\":\"IT\",\"citta\":\"\",\"da"
+  },
+  {
+   "rotta": "/api/aste/item/1822566",
+   "metodo": "GET",
+   "atteso": 200,
+   "codice": 200,
+   "ok": true,
+   "corpo": "{\"id\":\"1822566\",\"titolo\":\"Abitazione Tipo Sign · Itri (Latina)\",\"prezzoBase\":108"
+  },
+  {
+   "rotta": "/api/payments/config",
+   "metodo": "GET",
+   "atteso": 200,
+   "codice": 200,
+   "ok": true,
+   "corpo": "[corpo non conservato]"
+  },
+  {
+   "rotta": "/api/pulse/w",
+   "metodo": "POST",
+   "atteso": 400,
+   "codice": 400,
+   "ok": true,
+   "corpo": "{\"errore\":\"azione non consentita\"}"
+  }
+ ]
+}
