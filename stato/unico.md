@@ -1,6 +1,6 @@
 # Stato CAReAuctions — ROSSO
 
-> 2026-11-28T12:14:28.719Z · 16 ok · 3 gialli · 5 rossi · 0 non verificabili
+> 2026-11-28T14:55:51.360Z · 18 ok · 1 gialli · 5 rossi · 0 non verificabili
 
 ## rotte
 
@@ -18,19 +18,19 @@
 
 ## feed
 
-- · **statistiche** — 7 min · 320233 lotti
-- X **world** — 22490 min · 33 paesi
+- · **statistiche** — 20 min · 320235 lotti
+- X **world** — 22652 min · 33 paesi
 - X **ricevute** — 410
-- X **san-pasquale-foto** — 22728 min · 37 foto
+- X **san-pasquale-foto** — 22890 min · 37 foto
 
 ## build
 
-- · **sito vs origine** — main.01eb79fb.js / main.01eb79fb.js
+- · **sito vs origine** — main.1e536cbb.js / main.1e536cbb.js
 
 ## prerender
 
-- · **snapshot vs vivo** — main.01eb79fb.js / main.01eb79fb.js
-- · **bot allineato** — main.01eb79fb.js
+- · **snapshot vs vivo** — main.1e536cbb.js / main.1e536cbb.js
+- · **bot allineato** — main.1e536cbb.js
 
 ## worker
 
@@ -43,11 +43,11 @@
 
 ## mail
 
-- ! **allarmi** — 8 · 2026-11-28T11:51:01.155Z
+- ! **allarmi** — 8 · 2026-11-28T14:50:54.339Z
 
 ## sentinella
 
-- ! **ok** — 2 anomalie vere
+- · **ok** — nessuna anomalia vera
 
 ## perf
 
@@ -55,7 +55,7 @@
 
 ## github
 
-- ! **run rossi (2h)** — 1 workflow con 2+ fallimenti · ronda-notturna
+- · **run rossi (2h)** — 0 isolati
 
 
 _Generato da scripts/stato-unico.mjs. Un solo stato, un solo posto: se una sonda non risponde la dichiara non verificabile, mai rotta._
