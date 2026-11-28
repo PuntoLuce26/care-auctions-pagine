@@ -1,7 +1,7 @@
 {
  "schema": 2,
- "aggiornato": "2026-11-28T14:12:42.727Z",
- "copertura": "148 tribunali · 148 con almeno un lotto aperto · 17028 lotti aperti (lotti immobiliari con asta non ancora svolta)",
+ "aggiornato": "2026-11-28T14:36:11.015Z",
+ "copertura": "148 tribunali · 148 con almeno un lotto aperto · 17042 lotti aperti (lotti immobiliari con asta non ancora svolta)",
  "tribunali": [
   {
    "tribunale": "ROMA",
@@ -24,20 +24,20 @@
   {
    "tribunale": "FERMO",
    "slug": "fermo",
-   "lottiAperti": 336,
+   "lottiAperti": 338,
    "regione": "Marche"
+  },
+  {
+   "tribunale": "CATANIA",
+   "slug": "catania",
+   "lottiAperti": 331,
+   "regione": "Sicilia"
   },
   {
    "tribunale": "PERUGIA",
    "slug": "perugia",
    "lottiAperti": 331,
    "regione": "Umbria"
-  },
-  {
-   "tribunale": "CATANIA",
-   "slug": "catania",
-   "lottiAperti": 329,
-   "regione": "Sicilia"
   },
   {
    "tribunale": "TORINO",
@@ -130,6 +130,12 @@
    "regione": "Campania"
   },
   {
+   "tribunale": "BERGAMO",
+   "slug": "bergamo",
+   "lottiAperti": 192,
+   "regione": "Lombardia"
+  },
+  {
    "tribunale": "MILANO",
    "slug": "milano",
    "lottiAperti": 192,
@@ -140,12 +146,6 @@
    "slug": "velletri",
    "lottiAperti": 192,
    "regione": "Lazio"
-  },
-  {
-   "tribunale": "BERGAMO",
-   "slug": "bergamo",
-   "lottiAperti": 191,
-   "regione": "Lombardia"
   },
   {
    "tribunale": "ASTI",
@@ -214,6 +214,12 @@
    "regione": "Toscana"
   },
   {
+   "tribunale": "CALTAGIRONE",
+   "slug": "caltagirone",
+   "lottiAperti": 166,
+   "regione": "Sicilia"
+  },
+  {
    "tribunale": "PAVIA",
    "slug": "pavia",
    "lottiAperti": 166,
@@ -224,12 +230,6 @@
    "slug": "brescia",
    "lottiAperti": 165,
    "regione": "Lombardia"
-  },
-  {
-   "tribunale": "CALTAGIRONE",
-   "slug": "caltagirone",
-   "lottiAperti": 165,
-   "regione": "Sicilia"
   },
   {
    "tribunale": "POTENZA",
@@ -306,7 +306,7 @@
   {
    "tribunale": "TERMINI IMERESE",
    "slug": "termini-imerese",
-   "lottiAperti": 133,
+   "lottiAperti": 134,
    "regione": "Sicilia"
   },
   {
@@ -400,6 +400,12 @@
    "regione": "Lazio"
   },
   {
+   "tribunale": "URBINO",
+   "slug": "urbino",
+   "lottiAperti": 100,
+   "regione": "Marche"
+  },
+  {
    "tribunale": "ROVIGO",
    "slug": "rovigo",
    "lottiAperti": 98,
@@ -416,12 +422,6 @@
    "slug": "nocera-inferiore",
    "lottiAperti": 96,
    "regione": "Campania"
-  },
-  {
-   "tribunale": "URBINO",
-   "slug": "urbino",
-   "lottiAperti": 96,
-   "regione": "Marche"
   },
   {
    "tribunale": "RIETI",
@@ -838,6 +838,12 @@
    "regione": "Trentino-Alto Adige"
   },
   {
+   "tribunale": "POTENZA EX TRIBUNALE DI MELFI",
+   "slug": "potenza-ex-tribunale-di-melfi",
+   "lottiAperti": 16,
+   "regione": "Basilicata"
+  },
+  {
    "tribunale": "LANUSEI",
    "slug": "lanusei",
    "lottiAperti": 14,
@@ -848,12 +854,6 @@
    "slug": "gorizia",
    "lottiAperti": 13,
    "regione": "Friuli-Venezia Giulia"
-  },
-  {
-   "tribunale": "POTENZA EX TRIBUNALE DI MELFI",
-   "slug": "potenza-ex-tribunale-di-melfi",
-   "lottiAperti": 13,
-   "regione": "Basilicata"
   },
   {
    "tribunale": "PAVIA EX TRIBUNALE DI VIGEVANO",
