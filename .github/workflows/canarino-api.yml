@@ -67,7 +67,7 @@ jobs:
         if: always()
         run: |
           git config user.name "CARe Cloud"; git config user.email "cloud@careauctions.co"
-          git add qa/canarino-api.json
+          git add qa/canarino-api.json qa/uptime.csv
           git diff --cached --quiet && exit 0
           git commit -m "canarino api: ${{ steps.canarino.outputs.guasto }} (consecutivi ${{ steps.canarino.outputs.consecutivi }})"
           for i in 1 2 3; do git pull --rebase --autostash && git push && break || sleep 10; done
