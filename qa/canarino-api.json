@@ -1,9 +1,17 @@
 {
- "generato": "2026-11-28T10:18:13.394Z",
+ "generato": "2026-11-28T10:27:07.576Z",
  "esito": "ok",
  "fallimentiConsecutivi": 0,
  "rollback": false,
  "rotte": [
+  {
+   "rotta": "/",
+   "metodo": "GET",
+   "atteso": 200,
+   "codice": 200,
+   "ok": true,
+   "corpo": "<!doctype html><html lang=\"it\"><head><script id=\"care-api-fast\">(function(){try{"
+  },
   {
    "rotta": "/api/battito",
    "metodo": "GET",
