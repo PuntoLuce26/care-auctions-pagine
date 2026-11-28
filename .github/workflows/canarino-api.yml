@@ -1,0 +1,53 @@
+name: canarino-api
+# 28/11/2026 — il 403 dell'origin guard e' tornato due volte stanotte e ce ne siamo accorti
+# dal browser di Claude, non da noi. Questo canarino chiama le API dell'app attraverso
+# il nostro edge ogni 5 minuti e avvisa quando il codice non e' quello atteso.
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: canarino-api
+  cancel-in-progress: true
+jobs:
+  canarino:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Chiama le API
+        id: canarino
+        run: node scripts/canarino-api.mjs
+      - name: Avvisa (solo se guasto)
+        if: steps.canarino.outputs.eGuasto == 'si'
+        env:
+          REGIA_KEY: ${{ secrets.REGIA_KEY }}
+          DETTAGLIO: ${{ steps.canarino.outputs.dettaglio }}
+        run: |
+          echo "GUASTO: ${{ steps.canarino.outputs.dettaglio }}"
+          python3 - <<'PY2'
+          import json,os,urllib.request
+          k=os.environ.get('REGIA_KEY','')
+          det=os.environ.get('DETTAGLIO','')
+          body=json.dumps({'azione':'invia-email','chiave':k,'a':'info@puntoluce26.com','oggetto':'CARe attenzione — API dell app non rispondono','testo':'Il canarino ha trovato codici diversi dall atteso: '+det+'. Se compare 403 il segreto condiviso non coincide: controllare ORIGIN_AUTH e ICARE_ORIGIN_AUTH di careauctions-edge.'}).encode()
+          req=urllib.request.Request('https://icare-ai.misty-mode-1cbc.workers.dev',data=body,headers={'Content-Type':'application/json'})
+          print(urllib.request.urlopen(req,timeout=30).read().decode()[:200])
+          PY2
+            -d "{\"azione\":\"invia-email\",\"chiave\":\"$REGIA_KEY\",\"a\":\"info@puntoluce26.com\",\"oggetto\":\"CARe ⚠️ API dell app non rispondono\",\"testo\":\"Il canarino ha trovato codici diversi dall atteso: ${{ steps.canarino.outputs.dettaglio }}. Il 403 dell origin guard indica che il segreto condiviso non coincide: controllare ORIGIN_AUTH e ICARE_ORIGIN_AUTH di careauctions-edge.\"}" \
+            https://icare-ai.misty-mode-1cbc.workers.dev || true
+      - name: Registra lo stato (solo se guasto cambiato)
+        if: always()
+        run: |
+          mkdir -p stato
+          echo '${{ steps.canarino.outputs.eGuasto }}' > /dev/null
+          git config user.name "CARe Cloud"; git config user.email "cloud@careauctions.co"
+          echo "{\"ultimo\":\"$(date -u +%FT%TZ)\",\"esito\":\"${{ steps.canarino.outputs.eGuasto }}\",\"dettaglio\":\"${{ steps.canarino.outputs.dettaglio }}\"}" > qa/canarino-api.json
+          git add qa/canarino-api.json
+          git diff --cached --quiet && exit 0
+          git commit -m "canarino api: ${{ steps.canarino.outputs.eGuasto }}"
+          for i in 1 2 3; do git pull --rebase --autostash && git push && break || sleep 10; done
