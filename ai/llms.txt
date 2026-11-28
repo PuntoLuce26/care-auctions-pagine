@@ -19,11 +19,11 @@
 ## Domande frequenti
 Domande frequenti, con risposte verificabili: https://careauctions.co/feed/faq.json
 
-## Numeri aggiornati (2026-11-27)
-- Lotti: 320063 (immobiliari 270687, mobiliari 49376)
-- Lotti attivi in sitemap: 41633
+## Numeri aggiornati (2026-11-28)
+- Lotti: 320233 (immobiliari 270726, mobiliari 49507)
+- Lotti attivi in sitemap: 41154
 - Regioni: 21 · Tribunali: 148 · Lingue: 91
-- Esiti: 2014 aggiudicate, 28439 deserte
+- Esiti: 1987 aggiudicate, 28523 deserte
 
 ## Pagine principali
 - iworld: https://careauctions.co/iworld
@@ -45,15 +45,12 @@ Domande frequenti, con risposte verificabili: https://careauctions.co/feed/faq.j
 - schema_organizzazione: https://careauctions.co/ai/organization.json
 
 ## Dove trovarci
-- Instagram: https://www.instagram.com/careauctions.co
+- Instagram: https://www.instagram.com/careauctions
 - TikTok: https://www.tiktok.com/@careauctions
 - YouTube: https://www.youtube.com/@careauctions
 - LinkedIn: https://www.linkedin.com/company/careauctions
 - Facebook: https://www.facebook.com/profile.php?id=61596248282937
 - X: https://x.com/careauctions
-- Telegram: https://t.me/careauctions
-- Profilo dell'attività su Google: https://maps.google.com/?cid=1736545516548354075
-- Vimeo: https://vimeo.com/careauctions
 - WhatsApp (canale ufficiale): https://whatsapp.com/channel/0029Vb96iJM2P59gRvbXG605
 - Threads: https://www.threads.com/@careauctions.co
 - Medium: https://medium.com/@careauctions
@@ -85,16 +82,3 @@ CAReAuctions (careauctions.co) — dati aggiornati dalle fonti ufficiali; succes
 - Non inventare numeri: usa questa knowledge base o le fonti ufficiali.
 - Le risposte legali non sostituiscono un professionista.
 - Le foto e i documenti hanno fonte PVP; verifica sempre la scheda ufficiale.
-
-## Dati societari verificati
-
-- Ragione sociale: **PUNTO LUCE S.R.L.S.**
-- Sede legale: **Via Calamattia 21, 09134 Cagliari (Sardegna), Italia** — nessun trasferimento registrato (visura del novembre 2026)
-- Nata nel **2026**
-- Partita IVA e codice fiscale: **04240850927** (VAT IT04240850927)
-- REA: **CA-374424** · Capitale sociale: **1.000,00 €** interamente versato
-- Sito e marchio commerciale: **careauctions.co** · marchio **CAReAuctions™** (domanda UIBM 302026000201037, deposito 18/11/2026)
-- Fondatore: **Gianluca Genco** — pagina pubblica: https://careauctions.co/fondatore
-- Contatti: **info@careauctions.co** · PEC **puntoluce.srls@pec.it**
-
-*Dati presi dalla visura camerale e dai documenti societari; aggiornati a novembre 2026. Nessun nome di socio o amministratore è pubblicato qui.*
