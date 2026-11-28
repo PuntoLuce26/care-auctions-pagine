@@ -1,6 +1,6 @@
 # Run GitHub — riassunto redatto
 
-> generato 2026-11-27T23:15:35.354Z · nessun segreto: filtro su token, email, IBAN, hash, percorsi.
+> generato 2026-11-28T00:09:43.227Z · nessun segreto: filtro su token, email, IBAN, hash, percorsi.
 
 ## care-auctions-pagine
 

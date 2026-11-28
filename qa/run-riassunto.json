@@ -1,157 +1,157 @@
 {
- "generato": "2026-11-27T23:15:35.354Z",
+ "generato": "2026-11-28T00:09:43.227Z",
  "repos": {
   "care-auctions-pagine": {
    "runs": [
     {
-     "workflow": "qa-orchestra",
-     "id": 46081402622,
-     "quando": "2026-11-27T23:14:52Z",
-     "esito": "in_progress"
-    },
-    {
-     "workflow": "Iscritti - solo numeri (redatto)",
-     "id": 46081402577,
-     "quando": "2026-11-27T23:14:52Z",
-     "esito": "in_progress"
-    },
-    {
      "workflow": "Run GitHub - riassunto redatto",
-     "id": 46081402493,
-     "quando": "2026-11-27T23:14:52Z",
-     "esito": "in_progress"
-    },
-    {
-     "workflow": "shell-refresh",
-     "id": 46081348661,
-     "quando": "2026-11-27T23:14:19Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "qa",
-     "id": 46081135750,
-     "quando": "2026-11-27T23:12:09Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "esiti-sync",
-     "id": 46081038598,
-     "quando": "2026-11-27T23:11:07Z",
+     "id": 46086340787,
+     "quando": "2026-11-28T00:09:08Z",
      "esito": "in_progress"
     },
     {
      "workflow": "residenziale-comune-mattina",
-     "id": 46080508004,
-     "quando": "2026-11-27T23:05:41Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "prerender-guardiano",
-     "id": 46080406734,
-     "quando": "2026-11-27T23:04:42Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "feed-sync",
-     "id": 46080392384,
-     "quando": "2026-11-27T23:04:34Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "residenziale-comune-mattina",
-     "id": 46080158329,
-     "quando": "2026-11-27T23:02:12Z",
+     "id": 46086230692,
+     "quando": "2026-11-28T00:07:53Z",
      "esito": "success"
     },
     {
      "workflow": "pages build and deployment",
-     "id": 46080147602,
-     "quando": "2026-11-27T23:02:05Z",
+     "id": 46086220063,
+     "quando": "2026-11-28T00:07:46Z",
+     "esito": "in_progress"
+    },
+    {
+     "workflow": "feed-sync",
+     "id": 46086112285,
+     "quando": "2026-11-28T00:06:35Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "guardiano-proprieta",
+     "id": 46085709436,
+     "quando": "2026-11-28T00:02:11Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "pages build and deployment",
+     "id": 46085709192,
+     "quando": "2026-11-28T00:02:11Z",
      "esito": "success"
     },
     {
      "workflow": "qa",
-     "id": 46080049867,
-     "quando": "2026-11-27T23:01:07Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "feed-sync",
-     "id": 46079990759,
-     "quando": "2026-11-27T23:00:35Z",
+     "id": 46085612049,
+     "quando": "2026-11-28T00:01:08Z",
      "esito": "success"
     },
     {
      "workflow": "mail-qa",
-     "id": 46079956709,
-     "quando": "2026-11-27T23:00:17Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "uptime-probe",
-     "id": 46079238447,
-     "quando": "2026-11-27T22:52:36Z",
+     "id": 46085519235,
+     "quando": "2026-11-28T00:00:14Z",
      "esito": "success"
     },
     {
      "workflow": "pages build and deployment",
-     "id": 46079052946,
-     "quando": "2026-11-27T22:50:41Z",
+     "id": 46085427508,
+     "quando": "2026-11-27T23:59:10Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "pages build and deployment",
+     "id": 46085186933,
+     "quando": "2026-11-27T23:56:12Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "stato-unico",
+     "id": 46085108522,
+     "quando": "2026-11-27T23:55:17Z",
      "esito": "success"
     },
     {
      "workflow": "residenziale-comune-mattina",
-     "id": 46078986237,
-     "quando": "2026-11-27T22:49:59Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "aziende-sync",
-     "id": 46078953636,
-     "quando": "2026-11-27T22:49:36Z",
+     "id": 46084811113,
+     "quando": "2026-11-27T23:51:52Z",
      "esito": "success"
     },
     {
      "workflow": "feed-sync",
-     "id": 46078857225,
-     "quando": "2026-11-27T22:48:36Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "pages build and deployment",
-     "id": 46078234839,
-     "quando": "2026-11-27T22:42:17Z",
+     "id": 46084701823,
+     "quando": "2026-11-27T23:50:35Z",
      "esito": "success"
     },
     {
      "workflow": "residenziale-comune-mattina",
-     "id": 46078173217,
-     "quando": "2026-11-27T22:41:38Z",
+     "id": 46084344245,
+     "quando": "2026-11-27T23:46:32Z",
      "esito": "success"
     },
     {
      "workflow": "pages build and deployment",
-     "id": 46078164272,
-     "quando": "2026-11-27T22:41:32Z",
-     "esito": "cancelled"
-    },
-    {
-     "workflow": "guardiano-veglia",
-     "id": 46078158860,
-     "quando": "2026-11-27T22:41:29Z",
+     "id": 46084338882,
+     "quando": "2026-11-27T23:46:28Z",
      "esito": "success"
     },
     {
      "workflow": "feed-sync",
-     "id": 46078030468,
-     "quando": "2026-11-27T22:40:11Z",
+     "id": 46084221937,
+     "quando": "2026-11-27T23:45:11Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "aste-indice-watchdog",
+     "id": 46083705856,
+     "quando": "2026-11-27T23:39:31Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "residenziale-comune-mattina",
+     "id": 46083467030,
+     "quando": "2026-11-27T23:36:48Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "feed-sync",
+     "id": 46083354708,
+     "quando": "2026-11-27T23:35:35Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "esiti-sync",
+     "id": 46083327679,
+     "quando": "2026-11-27T23:35:17Z",
      "esito": "success"
     },
     {
      "workflow": "pages build and deployment",
-     "id": 46077989177,
-     "quando": "2026-11-27T22:39:47Z",
-     "esito": "cancelled"
+     "id": 46083317249,
+     "quando": "2026-11-27T23:35:11Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "qa",
+     "id": 46082934071,
+     "quando": "2026-11-27T23:31:07Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "mail-qa",
+     "id": 46082840450,
+     "quando": "2026-11-27T23:30:12Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "pages build and deployment",
+     "id": 46082736304,
+     "quando": "2026-11-27T23:29:05Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "residenziale-comune-mattina",
+     "id": 46081966187,
+     "quando": "2026-11-27T23:20:42Z",
+     "esito": "success"
     }
    ]
   },
@@ -490,6 +490,60 @@
   "second-brain": {
    "runs": [
     {
+     "workflow": "monitor-claude",
+     "id": 46085685421,
+     "quando": "2026-11-28T00:01:54Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "monitor-claude",
+     "id": 46085683061,
+     "quando": "2026-11-28T00:01:53Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "posta",
+     "id": 46085115814,
+     "quando": "2026-11-27T23:55:21Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "monitor-claude",
+     "id": 46084362522,
+     "quando": "2026-11-27T23:46:45Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "monitor-claude",
+     "id": 46084360768,
+     "quando": "2026-11-27T23:46:44Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "memoria",
+     "id": 46083729897,
+     "quando": "2026-11-27T23:39:48Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "monitor-claude",
+     "id": 46082979375,
+     "quando": "2026-11-27T23:31:35Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "monitor-claude",
+     "id": 46082976560,
+     "quando": "2026-11-27T23:31:33Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "posta",
+     "id": 46082845845,
+     "quando": "2026-11-27T23:30:16Z",
+     "esito": "success"
+    },
+    {
      "workflow": "posta",
      "id": 46080462971,
      "quando": "2026-11-27T23:05:14Z",
@@ -584,60 +638,6 @@
      "id": 46072849894,
      "quando": "2026-11-27T21:50:17Z",
      "esito": "success"
-    },
-    {
-     "workflow": "monitor-claude",
-     "id": 46071823070,
-     "quando": "2026-11-27T21:40:30Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "monitor-claude",
-     "id": 46071820457,
-     "quando": "2026-11-27T21:40:29Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "posta",
-     "id": 46070188592,
-     "quando": "2026-11-27T21:25:14Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "monitor-claude",
-     "id": 46069045823,
-     "quando": "2026-11-27T21:15:00Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "monitor-claude",
-     "id": 46069042056,
-     "quando": "2026-11-27T21:14:58Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "posta",
-     "id": 46067380395,
-     "quando": "2026-11-27T21:00:17Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "monitor-claude",
-     "id": 46065971377,
-     "quando": "2026-11-27T20:47:07Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "monitor-claude",
-     "id": 46065966585,
-     "quando": "2026-11-27T20:47:05Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "monitor-claude",
-     "id": 46065015867,
-     "quando": "2026-11-27T20:38:32Z",
-     "esito": "success"
     }
    ]
   }
@@ -645,11 +645,11 @@
  "numeri": {
   "url": "https://careauctions.co/numeri.json",
   "stato": 200,
-  "generato": "2026-11-27T23:15:43.420Z",
-  "aggiornato": "2026-11-27T23:01:50.084Z",
+  "generato": "2026-11-28T00:09:52.074Z",
+  "aggiornato": "2026-11-28T00:07:33.547Z",
   "lotti": 320209,
-  "asteOggi": 733,
-  "asteFuture": 22186,
+  "asteOggi": 33,
+  "asteFuture": 22153,
   "lottiAperti": 16921,
   "tribunali": 148
  },
