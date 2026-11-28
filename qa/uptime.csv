@@ -22,3 +22,4 @@ ts_utc	esito	fallimenti_consecutivi	rotte
 2026-11-28T13:53:22.957Z	ok	0	/=200 /api/battito=200 /api/aste/item/1822566=200 /api/payments/config=200 /api/pulse/w=400
 2026-11-28T13:57:22.386Z	ok	0	/=200 /api/battito=200 /api/aste/item/1822566=200 /api/payments/config=200 /api/pulse/w=400
 2026-11-28T14:13:28.727Z	ok	0	/=200 /api/battito=200 /api/aste/item/1822566=200 /api/payments/config=200 /api/pulse/w=400
+2026-11-28T14:28:16.775Z	ok	0	/=200 /api/battito=200 /api/aste/item/1822566=200 /api/payments/config=200 /api/pulse/w=400
