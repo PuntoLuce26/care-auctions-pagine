@@ -1,0 +1,72 @@
+{
+ "generato": "2026-11-28T00:10:00Z",
+ "fonte": "feed/tribunali.json (ultimo commit di ogni giorno)",
+ "giorni": [
+  {
+   "giorno": "2026-11-12",
+   "lottiAperti": 16853,
+   "tribunali": 153,
+   "ora": "2026-11-12T15:13:25Z"
+  },
+  {
+   "giorno": "2026-11-18",
+   "lottiAperti": 17086,
+   "tribunali": 149,
+   "ora": "2026-11-18T23:51:11Z"
+  },
+  {
+   "giorno": "2026-11-19",
+   "lottiAperti": 17082,
+   "tribunali": 149,
+   "ora": "2026-11-19T23:46:11Z"
+  },
+  {
+   "giorno": "2026-11-20",
+   "lottiAperti": 17108,
+   "tribunali": 150,
+   "ora": "2026-11-20T23:46:10Z"
+  },
+  {
+   "giorno": "2026-11-21",
+   "lottiAperti": 17220,
+   "tribunali": 150,
+   "ora": "2026-11-21T23:53:57Z"
+  },
+  {
+   "giorno": "2026-11-22",
+   "lottiAperti": 17234,
+   "tribunali": 150,
+   "ora": "2026-11-22T23:50:50Z"
+  },
+  {
+   "giorno": "2026-11-23",
+   "lottiAperti": 17502,
+   "tribunali": 150,
+   "ora": "2026-11-23T23:50:06Z"
+  },
+  {
+   "giorno": "2026-11-24",
+   "lottiAperti": 17235,
+   "tribunali": 149,
+   "ora": "2026-11-24T23:46:34Z"
+  },
+  {
+   "giorno": "2026-11-25",
+   "lottiAperti": 17043,
+   "tribunali": 148,
+   "ora": "2026-11-25T23:51:47Z"
+  },
+  {
+   "giorno": "2026-11-26",
+   "lottiAperti": 16938,
+   "tribunali": 148,
+   "ora": "2026-11-26T23:55:51Z"
+  },
+  {
+   "giorno": "2026-11-27",
+   "lottiAperti": 16921,
+   "tribunali": 148,
+   "ora": "2026-11-27T23:46:23Z"
+  }
+ ]
+}
