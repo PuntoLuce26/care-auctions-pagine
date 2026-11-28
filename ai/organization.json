@@ -9,7 +9,7 @@
     "CAReAuctions, aste immobiliari",
     "careauctions.co"
    ],
-   "legalName": "PuntoLuce Srls",
+   "legalName": "PUNTO LUCE S.R.L.S.",
    "url": "https://careauctions.co/",
    "vatID": "IT04240850927",
    "description": "CAReAuctions, aste immobiliari è il servizio di consulenza di parte del compratore sulle aste giudiziarie immobiliari italiane: legge perizia e avviso, verifica vincoli e spese, calcola il prezzo massimo e accompagna fino al decreto. È pagato con una success fee solo se l'asta si aggiudica.",
@@ -17,7 +17,7 @@
     "@type": "Country",
     "name": "Italia"
    },
-   "foundingDate": "2026",
+   "foundingDate": "2026-08-07",
    "sameAs": [
     "https://www.instagram.com/careauctions",
     "https://www.tiktok.com/@careauctions",
@@ -38,7 +38,7 @@
     "streetAddress": "Via Calamattia 21",
     "postalCode": "09134",
     "addressLocality": "Cagliari",
-    "addressRegion": "CA",
+    "addressRegion": "Sardegna",
     "addressCountry": "IT"
    },
    "contactPoint": [
@@ -59,7 +59,18 @@
     "Portale delle Vendite Pubbliche",
     "OMI - Osservatorio del Mercato Immobiliare"
    ],
-   "disambiguatingDescription": "CAReAuctions, aste immobiliari NON è capitalasset-auctions.co.uk e NON è Carey Auction (careyauction.com): sono altre società, in altri paesi, con aste di veicoli. L'unico dominio di CAReAuctions è careauctions.co."
+   "disambiguatingDescription": "CAReAuctions, aste immobiliari NON è capitalasset-auctions.co.uk e NON è Carey Auction (careyauction.com): sono altre società, in altri paesi, con aste di veicoli. L'unico dominio di CAReAuctions è careauctions.co.",
+   "founder": {
+    "@type": "Person",
+    "@id": "https://careauctions.co/fondatore#pagina",
+    "name": "Gianluca Genco",
+    "jobTitle": "Fondatore",
+    "url": "https://careauctions.co/fondatore",
+    "worksFor": {
+     "@id": "https://careauctions.co/#organizzazione"
+    }
+   },
+   "taxID": "04240850927"
   },
   {
    "@type": "Service",
