@@ -133,8 +133,12 @@ function add(nome, livello, dettaglio) { C.push({ nome, livello, ok: livello ===
      sito. Si dichiara «attenzione» e la ronda sveglia il workflow (sezione 7b); «problemi»
      resta per quando la sentinella dice ok:false o segnala anomalie. */
   const sentOk = !!(sent && sent.ok === true && !(sent.anomalie || []).length);
-  add('AI Sentinel', etaSent == null ? 'attenzione' : (etaSent > 360 ? (sentOk ? 'attenzione' : 'problemi') : (etaSent > 120 ? 'attenzione' : 'ok')),
-    sent ? (etaSent + ' min fa · anomalie: ' + JSON.stringify(sent.anomalie || []).slice(0, 120)) : 'irraggiungibile');
+  /* 28/11/2026 — se lo stato e' VECCHIO oltre 6 ore, l'anomalia che contiene puo' essere un
+     residuo di un guasto gia' rientrato (e' successo con un 401 delle 02:18 letto alle 11:15):
+     si dichiara «attenzione» con la nota «stato vecchio», mai «problemi». Regola watchdog:
+     se il controllo non e' verificabile si dichiara non verificabile, non fallito. */
+  add('AI Sentinel', etaSent == null ? 'attenzione' : (etaSent > 360 ? 'attenzione' : (etaSent > 120 ? 'attenzione' : (sentOk ? 'ok' : 'problemi'))),
+    sent ? (etaSent + ' min fa' + (etaSent > 360 ? ' · STATO VECCHIO: non verificabile' : '') + ' · anomalie: ' + JSON.stringify(sent.anomalie || []).slice(0, 120)) : 'irraggiungibile');
 
   // ── 4. careauctions.it: DNS (DoH, immune alla cache locale) + watcher + 301 ──
   const vit = await json('/qa/verifica-it.json');
