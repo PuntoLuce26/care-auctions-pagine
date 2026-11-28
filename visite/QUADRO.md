@@ -1,4 +1,4 @@
-CARe — rapporto visite · 27/11/2026, 18:52:56
+CARe — rapporto visite · 28/11/2026, 03:31:14
 
 VISITE (Cloudflare RUM, 41 giorni misurati)
 - Ultimo giorno (2026-11-26): 350 pagine viste · 350 visite
