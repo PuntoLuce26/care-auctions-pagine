@@ -1,10 +1,11 @@
 # Run GitHub — riassunto redatto
 
-> generato 2026-11-28T08:14:45.842Z · nessun segreto: filtro su token, email, IBAN, hash, percorsi.
+> generato 2026-11-28T10:19:23.314Z · nessun segreto: filtro su token, email, IBAN, hash, percorsi.
 
 ## care-auctions-pagine
 
-- run nelle ultime 36 h: **25** · falliti: **0**
+- run nelle ultime 36 h: **25** · falliti: **1**
+- **ronda-notturna** (2026-11-28T10:15:55Z) — passi caduti: Ronda
 
 ## green
 
@@ -16,7 +17,7 @@
 
 ## care-workers
 
-- run nelle ultime 36 h: **16** · falliti: **0**
+- run nelle ultime 36 h: **15** · falliti: **0**
 
 ## second-brain
 
