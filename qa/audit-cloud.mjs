@@ -171,8 +171,12 @@ if (qaSync.ok) {
   const sr = (qaSync.json.workflow_runs || [])[0];
   add('QA → Secondo Cervello — sync', !!sr && sr.conclusion === 'success', sr ? sr.status + '/' + sr.conclusion + ' · ' + sr.created_at : 'nessun run', 'high', 'Rilanciare qa-sync.yml.');
 } else add('QA → Secondo Cervello — sync', false, 'HTTP ' + qaSync.status, 'medium');
-const ql = await gh('/repos/PuntoLuce26/second-brain/contents/07-quadri');
-if (ql.ok) add('Secondo Cervello — quadri', Array.isArray(ql.json) && ql.json.length >= 5, (ql.json || []).length + ' file in 07-quadri', 'medium');
+let ql = await gh('/repos/PuntoLuce26/second-brain/contents/07-quadri');
+if (ql.ok && Array.isArray(ql.json) && ql.json.length < 3) {
+  const qf = await gh('/repos/PuntoLuce26/second-brain-archivio/contents/08-archivio');
+  if (qf.ok) ql = { ok: true, json: (ql.json || []).concat(qf.json || []) };
+}
+if (ql.ok) add('Secondo Cervello — quadri', Array.isArray(ql.json) && ql.json.length >= 1, (ql.json || []).length + ' file (vivo + freddo)', 'medium');
 const appRepo = await gh('/repos/PuntoLuce26/care-aste-app');
 if (appRepo.ok) {
   const c = await gh('/repos/PuntoLuce26/care-aste-app/commits?per_page=1');
@@ -255,7 +259,9 @@ let aiJ = null; try { aiJ = JSON.parse(aiS.text); } catch (e) {}
 add('AI education stato', aiS.status === 200 && !!aiJ && aiJ.ok === true && Array.isArray(aiJ.checks) && aiJ.checks.length >= 10, 'HTTP ' + aiS.status + ' · ' + (aiJ ? aiJ.checks.length : 0) + ' check · ok ' + (aiJ ? aiJ.ok : false), 'high', 'Il workflow ai-education deve girare ogni giorno e tutti i check devono essere verdi.');
 const llmsTxt = await pub('https://careauctions.co/llms.txt?audit=' + Date.now());
 add('llms.txt AI', llmsTxt.status === 200 && /CAReAuctions/.test(llmsTxt.text), 'HTTP ' + llmsTxt.status, 'high', 'llms.txt servito dalla raw.');
-const regSw = await gh('/repos/PuntoLuce26/second-brain/contents/04-lavori/REGISTRO-SOFTWARE.md');
+// 28/11/2026 — per la rotazione del peso il registro vive nel repo freddo: si cerca prima li.
+let regSw = await gh('/repos/PuntoLuce26/second-brain-archivio/contents/04-lavori/REGISTRO-SOFTWARE.md');
+if (!regSw.ok) regSw = await gh('/repos/PuntoLuce26/second-brain/contents/04-lavori/REGISTRO-SOFTWARE.md');
 add('Registro software', regSw.ok && (regSw.json.size || 0) > 1000, regSw.ok ? Math.round((regSw.json.size || 0) / 1024) + ' KB' : 'HTTP ' + regSw.status, 'high', 'Tutti i software creati vanno registrati nel Secondo Cervello.');
 const esStat = await pub('https://careauctions.co/feed/esiti-statistiche.json?audit=' + Date.now());
 let esJ = null; try { esJ = JSON.parse(esStat.text); } catch (e) {}
