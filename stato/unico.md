@@ -1,6 +1,6 @@
 # Stato CAReAuctions — ROSSO
 
-> 2026-11-28T11:35:55.798Z · 17 ok · 2 gialli · 5 rossi · 0 non verificabili
+> 2026-11-28T12:14:28.719Z · 16 ok · 3 gialli · 5 rossi · 0 non verificabili
 
 ## rotte
 
@@ -18,10 +18,10 @@
 
 ## feed
 
-- · **statistiche** — 10 min · 320233 lotti
-- X **world** — 22452 min · 33 paesi
+- · **statistiche** — 7 min · 320233 lotti
+- X **world** — 22490 min · 33 paesi
 - X **ricevute** — 410
-- X **san-pasquale-foto** — 22690 min · 37 foto
+- X **san-pasquale-foto** — 22728 min · 37 foto
 
 ## build
 
@@ -43,7 +43,7 @@
 
 ## mail
 
-- ! **allarmi** — 11 · 2026-11-28T11:20:50.828Z
+- ! **allarmi** — 8 · 2026-11-28T11:51:01.155Z
 
 ## sentinella
 
@@ -55,7 +55,7 @@
 
 ## github
 
-- · **run rossi (2h)** — 0 isolati
+- ! **run rossi (2h)** — 1 workflow con 2+ fallimenti · ronda-notturna
 
 
 _Generato da scripts/stato-unico.mjs. Un solo stato, un solo posto: se una sonda non risponde la dichiara non verificabile, mai rotta._

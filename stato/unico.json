@@ -1,9 +1,9 @@
 {
- "generato": "2026-11-28T11:35:55.798Z",
+ "generato": "2026-11-28T12:14:28.719Z",
  "semaforo": "rosso",
  "conteggi": {
-  "ok": 17,
-  "giallo": 2,
+  "ok": 16,
+  "giallo": 3,
   "rosso": 5,
   "non_verificabile": 0
  },
@@ -89,14 +89,14 @@
    "sezione": "feed",
    "nome": "statistiche",
    "stato": "ok",
-   "valore": "10 min",
+   "valore": "7 min",
    "dettaglio": "320233 lotti"
   },
   {
    "sezione": "feed",
    "nome": "world",
    "stato": "rosso",
-   "valore": "22452 min",
+   "valore": "22490 min",
    "dettaglio": "33 paesi"
   },
   {
@@ -110,7 +110,7 @@
    "sezione": "feed",
    "nome": "san-pasquale-foto",
    "stato": "rosso",
-   "valore": "22690 min",
+   "valore": "22728 min",
    "dettaglio": "37 foto"
   },
   {
@@ -159,8 +159,8 @@
    "sezione": "mail",
    "nome": "allarmi",
    "stato": "giallo",
-   "valore": "11",
-   "dettaglio": "2026-11-28T11:20:50.828Z"
+   "valore": "8",
+   "dettaglio": "2026-11-28T11:51:01.155Z"
   },
   {
    "sezione": "sentinella",
@@ -179,9 +179,9 @@
   {
    "sezione": "github",
    "nome": "run rossi (2h)",
-   "stato": "ok",
-   "valore": "0 isolati",
-   "dettaglio": ""
+   "stato": "giallo",
+   "valore": "1 workflow con 2+ fallimenti",
+   "dettaglio": "ronda-notturna"
   }
  ]
 }
