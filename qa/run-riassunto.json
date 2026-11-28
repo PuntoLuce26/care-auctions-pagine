@@ -1,162 +1,188 @@
 {
- "generato": "2026-11-28T00:09:43.227Z",
+ "generato": "2026-11-28T04:54:08.294Z",
  "repos": {
   "care-auctions-pagine": {
    "runs": [
     {
+     "workflow": "Iscritti - solo numeri (redatto)",
+     "id": 46109604744,
+     "quando": "2026-11-28T04:53:29Z",
+     "esito": "in_progress"
+    },
+    {
+     "workflow": "qa-orchestra",
+     "id": 46109604741,
+     "quando": "2026-11-28T04:53:29Z",
+     "esito": "in_progress"
+    },
+    {
      "workflow": "Run GitHub - riassunto redatto",
-     "id": 46086340787,
-     "quando": "2026-11-28T00:09:08Z",
+     "id": 46109604733,
+     "quando": "2026-11-28T04:53:29Z",
      "esito": "in_progress"
     },
     {
-     "workflow": "residenziale-comune-mattina",
-     "id": 46086230692,
-     "quando": "2026-11-28T00:07:53Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "pages build and deployment",
-     "id": 46086220063,
-     "quando": "2026-11-28T00:07:46Z",
-     "esito": "in_progress"
-    },
-    {
-     "workflow": "feed-sync",
-     "id": 46086112285,
-     "quando": "2026-11-28T00:06:35Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "guardiano-proprieta",
-     "id": 46085709436,
-     "quando": "2026-11-28T00:02:11Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "pages build and deployment",
-     "id": 46085709192,
-     "quando": "2026-11-28T00:02:11Z",
+     "workflow": "shell-refresh",
+     "id": 46109534202,
+     "quando": "2026-11-28T04:52:29Z",
      "esito": "success"
     },
     {
      "workflow": "qa",
-     "id": 46085612049,
-     "quando": "2026-11-28T00:01:08Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "mail-qa",
-     "id": 46085519235,
-     "quando": "2026-11-28T00:00:14Z",
+     "id": 46109409174,
+     "quando": "2026-11-28T04:50:48Z",
      "esito": "success"
     },
     {
      "workflow": "pages build and deployment",
-     "id": 46085427508,
-     "quando": "2026-11-27T23:59:10Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "pages build and deployment",
-     "id": 46085186933,
-     "quando": "2026-11-27T23:56:12Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "stato-unico",
-     "id": 46085108522,
-     "quando": "2026-11-27T23:55:17Z",
+     "id": 46109237946,
+     "quando": "2026-11-28T04:48:32Z",
      "esito": "success"
     },
     {
      "workflow": "residenziale-comune-mattina",
-     "id": 46084811113,
-     "quando": "2026-11-27T23:51:52Z",
+     "id": 46109178185,
+     "quando": "2026-11-28T04:47:43Z",
      "esito": "success"
+    },
+    {
+     "workflow": "canarino-api",
+     "id": 46109178140,
+     "quando": "2026-11-28T04:47:43Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "pages build and deployment",
+     "id": 46109172996,
+     "quando": "2026-11-28T04:47:38Z",
+     "esito": "cancelled"
     },
     {
      "workflow": "feed-sync",
-     "id": 46084701823,
-     "quando": "2026-11-27T23:50:35Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "residenziale-comune-mattina",
-     "id": 46084344245,
-     "quando": "2026-11-27T23:46:32Z",
+     "id": 46109093614,
+     "quando": "2026-11-28T04:46:35Z",
      "esito": "success"
     },
     {
      "workflow": "pages build and deployment",
-     "id": 46084338882,
-     "quando": "2026-11-27T23:46:28Z",
+     "id": 46108889747,
+     "quando": "2026-11-28T04:43:55Z",
      "esito": "success"
     },
     {
-     "workflow": "feed-sync",
-     "id": 46084221937,
-     "quando": "2026-11-27T23:45:11Z",
+     "workflow": "prerender-guardiano",
+     "id": 46108820795,
+     "quando": "2026-11-28T04:42:56Z",
      "esito": "success"
     },
     {
-     "workflow": "aste-indice-watchdog",
-     "id": 46083705856,
-     "quando": "2026-11-27T23:39:31Z",
+     "workflow": "prerender",
+     "id": 46108616095,
+     "quando": "2026-11-28T04:40:13Z",
      "esito": "success"
     },
     {
-     "workflow": "residenziale-comune-mattina",
-     "id": 46083467030,
-     "quando": "2026-11-27T23:36:48Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "feed-sync",
-     "id": 46083354708,
-     "quando": "2026-11-27T23:35:35Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "esiti-sync",
-     "id": 46083327679,
-     "quando": "2026-11-27T23:35:17Z",
+     "workflow": "uptime-probe",
+     "id": 46108507502,
+     "quando": "2026-11-28T04:38:44Z",
      "esito": "success"
     },
     {
      "workflow": "pages build and deployment",
-     "id": 46083317249,
-     "quando": "2026-11-27T23:35:11Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "qa",
-     "id": 46082934071,
-     "quando": "2026-11-27T23:31:07Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "mail-qa",
-     "id": 46082840450,
-     "quando": "2026-11-27T23:30:12Z",
+     "id": 46108326829,
+     "quando": "2026-11-28T04:36:20Z",
      "esito": "success"
     },
     {
      "workflow": "pages build and deployment",
-     "id": 46082736304,
-     "quando": "2026-11-27T23:29:05Z",
+     "id": 46108321198,
+     "quando": "2026-11-28T04:36:16Z",
+     "esito": "cancelled"
+    },
+    {
+     "workflow": "qa-orchestra",
+     "id": 46108260897,
+     "quando": "2026-11-28T04:35:30Z",
+     "esito": "failure",
+     "passi_caduti": [
+      "Interpella tutti i software"
+     ],
+     "errore": []
+    },
+    {
+     "workflow": "Iscritti - solo numeri (redatto)",
+     "id": 46108260771,
+     "quando": "2026-11-28T04:35:30Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "Run GitHub - riassunto redatto",
+     "id": 46108260749,
+     "quando": "2026-11-28T04:35:30Z",
+     "esito": "failure",
+     "passi_caduti": [
+      "Commit (solo qa/)"
+     ],
+     "errore": []
+    },
+    {
+     "workflow": "pages build and deployment",
+     "id": 46108252234,
+     "quando": "2026-11-28T04:35:23Z",
+     "esito": "cancelled"
+    },
+    {
+     "workflow": "verifica-pubblicazione",
+     "id": 46108191863,
+     "quando": "2026-11-28T04:34:38Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "pages build and deployment",
+     "id": 46108119378,
+     "quando": "2026-11-28T04:33:41Z",
+     "esito": "cancelled"
+    },
+    {
+     "workflow": "canarino-api",
+     "id": 46108057789,
+     "quando": "2026-11-28T04:32:55Z",
      "esito": "success"
     },
     {
      "workflow": "residenziale-comune-mattina",
-     "id": 46081966187,
-     "quando": "2026-11-27T23:20:42Z",
+     "id": 46108057779,
+     "quando": "2026-11-28T04:32:55Z",
      "esito": "success"
+    },
+    {
+     "workflow": "pages build and deployment",
+     "id": 46108049695,
+     "quando": "2026-11-28T04:32:48Z",
+     "esito": "cancelled"
     }
    ]
   },
   "green": {
    "runs": [
+    {
+     "workflow": "Posta SAM bidirezionale",
+     "id": 46103332688,
+     "quando": "2026-11-28T03:32:19Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "green-azione",
+     "id": 46093455379,
+     "quando": "2026-11-28T01:30:38Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "green2-ponte",
+     "id": 46093415896,
+     "quando": "2026-11-28T01:30:12Z",
+     "esito": "success"
+    },
     {
      "workflow": "Posta SAM bidirezionale",
      "id": 46070932531,
@@ -304,33 +330,17 @@
      "id": 45890782162,
      "quando": "2026-11-26T20:24:16Z",
      "esito": "success"
-    },
-    {
-     "workflow": "team",
-     "id": 45866325633,
-     "quando": "2026-11-26T17:16:30Z",
-     "esito": "failure",
-     "passi_caduti": [
-      "Verifica il team"
-     ],
-     "errore": []
-    },
-    {
-     "workflow": "green2-ponte",
-     "id": 45864780110,
-     "quando": "2026-11-26T17:06:09Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "green-query",
-     "id": 45862103675,
-     "quando": "2026-11-26T16:48:12Z",
-     "esito": "success"
     }
    ]
   },
   "care-workers": {
    "runs": [
+    {
+     "workflow": "veglia-append",
+     "id": 46099669294,
+     "quando": "2026-11-28T02:46:07Z",
+     "esito": "success"
+    },
     {
      "workflow": "veglia-append",
      "id": 46062842635,
@@ -444,199 +454,159 @@
      "id": 45872384594,
      "quando": "2026-11-26T18:00:16Z",
      "esito": "success"
-    },
-    {
-     "workflow": "edge-smoke",
-     "id": 45853666744,
-     "quando": "2026-11-26T15:54:23Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "deploy-worker",
-     "id": 45853572517,
-     "quando": "2026-11-26T15:53:48Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "edge-smoke",
-     "id": 45853351842,
-     "quando": "2026-11-26T15:52:24Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "deploy-worker",
-     "id": 45853221874,
-     "quando": "2026-11-26T15:51:35Z",
-     "esito": "failure",
-     "passi_caduti": [
-      "4. Verifica sull'artefatto (+ rollback automatico)"
-     ],
-     "errore": []
-    },
-    {
-     "workflow": "edge-smoke",
-     "id": 45851202599,
-     "quando": "2026-11-26T15:39:05Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "deploy-worker",
-     "id": 45851093484,
-     "quando": "2026-11-26T15:38:24Z",
-     "esito": "success"
     }
    ]
   },
   "second-brain": {
    "runs": [
     {
-     "workflow": "monitor-claude",
-     "id": 46085685421,
-     "quando": "2026-11-28T00:01:54Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "monitor-claude",
-     "id": 46085683061,
-     "quando": "2026-11-28T00:01:53Z",
-     "esito": "success"
-    },
-    {
      "workflow": "posta",
-     "id": 46085115814,
-     "quando": "2026-11-27T23:55:21Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "monitor-claude",
-     "id": 46084362522,
-     "quando": "2026-11-27T23:46:45Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "monitor-claude",
-     "id": 46084360768,
-     "quando": "2026-11-27T23:46:44Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "memoria",
-     "id": 46083729897,
-     "quando": "2026-11-27T23:39:48Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "monitor-claude",
-     "id": 46082979375,
-     "quando": "2026-11-27T23:31:35Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "monitor-claude",
-     "id": 46082976560,
-     "quando": "2026-11-27T23:31:33Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "posta",
-     "id": 46082845845,
-     "quando": "2026-11-27T23:30:16Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "posta",
-     "id": 46080462971,
-     "quando": "2026-11-27T23:05:14Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "monitor-claude",
-     "id": 46080317306,
-     "quando": "2026-11-27T23:03:48Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "monitor-claude",
-     "id": 46080313054,
-     "quando": "2026-11-27T23:03:45Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "monitor-claude",
-     "id": 46079251227,
-     "quando": "2026-11-27T22:52:44Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "memoria",
-     "id": 46079249517,
-     "quando": "2026-11-27T22:52:43Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "memoria",
-     "id": 46079247746,
-     "quando": "2026-11-27T22:52:42Z",
-     "esito": "cancelled"
-    },
-    {
-     "workflow": "memoria",
-     "id": 46079246518,
-     "quando": "2026-11-27T22:52:41Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "posta",
-     "id": 46078039090,
-     "quando": "2026-11-27T22:40:16Z",
+     "id": 46108990070,
+     "quando": "2026-11-28T04:45:15Z",
      "esito": "success"
     },
     {
      "workflow": "quadro-scribe",
-     "id": 46077255083,
-     "quando": "2026-11-27T22:32:24Z",
+     "id": 46108318973,
+     "quando": "2026-11-28T04:36:14Z",
      "esito": "success"
     },
     {
      "workflow": "qa-sync",
-     "id": 46077232531,
-     "quando": "2026-11-27T22:32:11Z",
+     "id": 46108297074,
+     "quando": "2026-11-28T04:35:57Z",
      "esito": "success"
     },
     {
      "workflow": "backup-posta",
-     "id": 46076883476,
-     "quando": "2026-11-27T22:28:52Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "memoria",
-     "id": 46075655747,
-     "quando": "2026-11-27T22:16:54Z",
-     "esito": "success"
-    },
-    {
-     "workflow": "memoria",
-     "id": 46075560629,
-     "quando": "2026-11-27T22:15:55Z",
+     "id": 46107872260,
+     "quando": "2026-11-28T04:30:38Z",
      "esito": "success"
     },
     {
      "workflow": "posta",
-     "id": 46075487025,
-     "quando": "2026-11-27T22:15:16Z",
+     "id": 46107057730,
+     "quando": "2026-11-28T04:20:15Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "posta",
+     "id": 46105104986,
+     "quando": "2026-11-28T03:55:13Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "monitor-claude",
+     "id": 46104314942,
+     "quando": "2026-11-28T03:44:55Z",
      "esito": "success"
     },
     {
      "workflow": "guardiano-run",
-     "id": 46073094901,
-     "quando": "2026-11-27T21:52:40Z",
+     "id": 46104073541,
+     "quando": "2026-11-28T03:41:43Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "memoria",
+     "id": 46103866805,
+     "quando": "2026-11-28T03:39:02Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "memoria",
+     "id": 46103855402,
+     "quando": "2026-11-28T03:38:52Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "memoria",
+     "id": 46103804537,
+     "quando": "2026-11-28T03:38:12Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "quadro-scribe",
+     "id": 46103602840,
+     "quando": "2026-11-28T03:35:35Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "qa-sync",
+     "id": 46103573325,
+     "quando": "2026-11-28T03:35:14Z",
      "esito": "success"
     },
     {
      "workflow": "posta",
-     "id": 46072849894,
-     "quando": "2026-11-27T21:50:17Z",
+     "id": 46103160978,
+     "quando": "2026-11-28T03:30:18Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "posta",
+     "id": 46101153508,
+     "quando": "2026-11-28T03:05:16Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "posta",
+     "id": 46099554423,
+     "quando": "2026-11-28T02:44:42Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "posta",
+     "id": 46097986967,
+     "quando": "2026-11-28T02:25:20Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "canale-mail",
+     "id": 46096429399,
+     "quando": "2026-11-28T02:06:36Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "posta",
+     "id": 46095883519,
+     "quando": "2026-11-28T02:00:18Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "quadro-scribe",
+     "id": 46095199263,
+     "quando": "2026-11-28T01:51:31Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "posta",
+     "id": 46093846395,
+     "quando": "2026-11-28T01:35:14Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "posta",
+     "id": 46091729818,
+     "quando": "2026-11-28T01:10:15Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "posta",
+     "id": 46089576062,
+     "quando": "2026-11-28T00:45:20Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "monitor-claude",
+     "id": 46089216746,
+     "quando": "2026-11-28T00:41:16Z",
+     "esito": "success"
+    },
+    {
+     "workflow": "posta",
+     "id": 46087334871,
+     "quando": "2026-11-28T00:20:15Z",
      "esito": "success"
     }
    ]
@@ -645,12 +615,12 @@
  "numeri": {
   "url": "https://careauctions.co/numeri.json",
   "stato": 200,
-  "generato": "2026-11-28T00:09:52.074Z",
-  "aggiornato": "2026-11-28T00:07:33.547Z",
-  "lotti": 320209,
+  "generato": "2026-11-28T04:54:15.434Z",
+  "aggiornato": "2026-11-28T04:47:27.588Z",
+  "lotti": 320217,
   "asteOggi": 33,
-  "asteFuture": 22153,
-  "lottiAperti": 16921,
+  "asteFuture": 22161,
+  "lottiAperti": 17028,
   "tribunali": 148
  },
  "nota": "Riassunto redatto: nessun token, email, IBAN o percorso locale."
