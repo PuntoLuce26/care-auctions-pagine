@@ -1,6 +1,6 @@
 {
- "generato": "2026-11-28T10:19:17.515Z",
- "ora_roma": "28/11/2026, 11:19:17",
+ "generato": "2026-11-28T10:45:15.723Z",
+ "ora_roma": "28/11/2026, 11:45:15",
  "nota": "Solo numeri. Nessun dato personale, nessun token. Rigenerato a ogni attività e almeno ogni 30 minuti.",
  "voci": {
   "pionieri_icare": {
@@ -41,10 +41,10 @@
    "stato": "non leggibile da qui"
   },
   "allarmi_attivi": {
-   "numero": 10,
+   "numero": 11,
    "fonte": "R2 care-stato · stato/mail/stato.json",
    "misurato": true,
-   "ultimoControllo": "2026-11-28T09:50:54.477Z"
+   "ultimoControllo": "2026-11-28T10:20:55.302Z"
   },
   "chat_icare_24h": {
    "numero": null,
