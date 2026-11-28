@@ -30,5 +30,11 @@ jobs:
           git config user.email "info@puntoluce26.com"
           git add qa/iscritti.json qa/RUN.md
           git diff --staged --quiet || git commit -m "iscritti: numeri redatti $(date -u +%FT%TZ)"
-          git pull -q --rebase --autostash origin main || true
-          git push -q origin HEAD:main
+          # 28/11/2026 — il remoto si muove ogni pochi minuti (feed-sync): pull --rebase e 5 tentativi,
+          # altrimenti il push viene rifiutato con "fetch first" e il file non entra (run rossi del 27/11).
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase --autostash origin main || git rebase --abort || true
+            git push -q origin HEAD:main && exit 0
+            sleep 5
+          done
+          echo "::error::push rifiutato cinque volte: il file resta nel runner"; exit 1
