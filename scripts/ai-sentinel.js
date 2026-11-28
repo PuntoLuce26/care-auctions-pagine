@@ -49,7 +49,11 @@ const post = (body) => req(BASE + '/api/icare', { method: 'POST', headers: { 'Co
   const br = await req(BASE + '/ai/cervello.json');
   const bj = br.json || {};
   const etaG = bj.aggiornato ? (Date.now() - Date.parse(bj.aggiornato)) / 86400000 : 999;
-  ck('cervello_json', br.status === 200 && bj.pubblico && bj.registrati && Array.isArray(bj.esclusi) && etaG <= 8, 'HTTP ' + br.status + ' · età ' + etaG.toFixed(1) + 'g');
+  /* 28/11/2026 — il generatore (scripts/icare-brain.js) scrive aggiornato + pubblico{dati,pvp} + fonti,
+     NON scrive «registrati» né «esclusi» (quei dati sono interni e non si pubblicano). Il controllo
+     chiedeva campi che il generatore non ha mai prodotto: era un KO per costruzione, che teneva rossa
+     la ronda ogni giorno (stessa diagnosi del 24/11). Si verifica ciò che il file deve garantire. */
+  ck('cervello_json', br.status === 200 && !!bj.pubblico && !!bj.pubblico.dati && !bj.registrati && !bj.esclusi && etaG <= 8, 'HTTP ' + br.status + ' · età ' + etaG.toFixed(1) + 'g');
   // 5. knowledge
   const kn = await req(BASE + '/ai/knowledge.json');
   ck('ai_knowledge', kn.status === 200 && kn.text.length > 200, 'HTTP ' + kn.status + ' · ' + kn.text.length + 'B');
