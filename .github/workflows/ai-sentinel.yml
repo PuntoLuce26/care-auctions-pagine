@@ -3,6 +3,11 @@ on:
   schedule:
     - cron: "*/15 * * * *"
   workflow_dispatch:
+  # 28/11/2026 — GitHub dirada le schedulazioni: lo stato della sentinella invecchiava di 6 ore
+  # e la ronda lo leggeva come guasto (AI Sentinel KO alle 11:15). Si innesca anche su feed-sync.
+  workflow_run:
+    workflows: ["feed-sync"]
+    types: [completed]
 permissions:
   contents: write
   issues: write
