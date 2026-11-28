@@ -45,7 +45,7 @@ Domande frequenti, con risposte verificabili: https://careauctions.co/feed/faq.j
 - schema_organizzazione: https://careauctions.co/ai/organization.json
 
 ## Dove trovarci
-- Instagram: https://www.instagram.com/careauctions
+- Instagram: https://www.instagram.com/careauctions.co
 - TikTok: https://www.tiktok.com/@careauctions
 - YouTube: https://www.youtube.com/@careauctions
 - LinkedIn: https://www.linkedin.com/company/careauctions
