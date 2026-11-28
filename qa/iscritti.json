@@ -1,6 +1,6 @@
 {
- "generato": "2026-11-27T22:19:30.975Z",
- "ora_roma": "27/11/2026, 23:19:30",
+ "generato": "2026-11-28T02:06:41.723Z",
+ "ora_roma": "28/11/2026, 03:06:41",
  "nota": "Solo numeri. Nessun dato personale, nessun token. Rigenerato a ogni attività e almeno ogni 30 minuti.",
  "voci": {
   "pionieri_icare": {
@@ -44,12 +44,12 @@
    "numero": 7,
    "fonte": "R2 care-stato · stato/mail/stato.json",
    "misurato": true,
-   "ultimoControllo": "2026-11-27T22:01:03.405Z"
+   "ultimoControllo": "2026-11-28T02:01:01.580Z"
   },
   "chat_icare_24h": {
-   "numero": 33,
+   "numero": null,
    "fonte": "KV TRAFFICO · icare:ai:<data>",
-   "misurato": true
+   "misurato": false
   },
   "chat_icare_7g": {
    "numero": 50,
