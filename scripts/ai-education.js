@@ -106,7 +106,7 @@ const fetched = async (u, opt) => { try { const r = await fetch(u, { headers: { 
   /* 28/11/2026 — il test cercava «portale italiano delle aste», frase che il documento non contiene più
      (il testo ora dice «portale delle aste giudiziarie» e «nome commerciale di Punto Luce Srls»).
      Si verifica ciò che il documento deve garantire: identità, sede, marchio attaccato, nessun dato societario. */
-  add('ai chi-siamo', chi.ok && /CAReAuctions/.test(chi.text) && /Punto Luce Srls/.test(chi.text) && /careauctions\.co/.test(chi.text) && /consulenza di parte/.test(chi.text), 'HTTP ' + chi.status);
+  add('ai chi-siamo', chi.ok && /CAReAuctions/.test(chi.text) && /Punto Luce Srls/.test(chi.text) && /careauctions\.co/.test(chi.text) && /consulenza di parte/i.test(chi.text), 'HTTP ' + chi.status);
   const org = await fetched('https://careauctions.co/ai/organization.json');
   let orgj = null; try { orgj = JSON.parse(org.text); } catch (e) { orgj = null; }
   const orgTxt = orgj ? JSON.stringify(orgj) : '';
